@@ -10,7 +10,7 @@ import SwiftUI
 struct BigSongItem: View {
   let coverImage: Image
   let title: String
-  let artist: String
+  var artist: String = ""
   var isArtistProfile = false
   var isPodcast = false
 
