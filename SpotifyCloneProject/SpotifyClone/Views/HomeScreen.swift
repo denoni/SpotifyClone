@@ -20,6 +20,8 @@ struct HomeScreen: View {
           .padding(.bottom, 50)
         RecentlyPlayedScrollView()
           .padding(.bottom, 50)
+        TopPodcastsScrollView()
+          .padding(.bottom, 50)
       }.padding(.vertical, 25)
     }
   }
@@ -99,6 +101,57 @@ struct RecentlyPlayedScrollView: View {
                         title: "Sweetener")
           SmallSongItem(coverImage: Image("viral-hits-cover"),
                         title: "Viral Hits")
+        }
+      }
+    }
+  }
+}
+
+struct TopPodcastsScrollView: View {
+  var body: some View {
+    VStack(spacing: 12) {
+      Text("Top Podcasts").font(.avenir(.heavy, size: 26))
+        .frame(maxWidth: .infinity, alignment: .topLeading)
+        .padding(.leading, 25)
+      ScrollView(.horizontal, showsIndicators: false) {
+        HStack(alignment: .top,spacing: 20) {
+          Spacer(minLength: 5)
+          BigSongItem(coverImage: Image("joe-rogan-cover"),
+                        title: "Joe Rogan Experience",
+                        artist: "Joe Rogan",
+                        isPodcast: true)
+          BigSongItem(coverImage: Image("the-daily-cover"),
+                        title: "The Daily",
+                        artist: "The New York Times",
+                        isPodcast: true)
+          BigSongItem(coverImage: Image("dateline-cover"),
+                        title: "Dateline",
+                        artist: "NBC News",
+                        isPodcast: true)
+          BigSongItem(coverImage: Image("distractable-cover"),
+                        title: "Distractable",
+                        artist: "Wood Elf",
+                        isPodcast: true)
+          BigSongItem(coverImage: Image("ted-talks-daily-cover"),
+                        title: "Ted Talks Daily",
+                        artist: "TED",
+                        isPodcast: true)
+          BigSongItem(coverImage: Image("smartless-cover"),
+                        title: "Smartless",
+                        artist: "Jason Bateman, Sean Hayes, Will Arnett",
+                        isPodcast: true)
+          BigSongItem(coverImage: Image("lex-fridman-cover"),
+                        title: "Lex Fridman Podcast",
+                        artist: "Lex Fridman",
+                        isPodcast: true)
+          BigSongItem(coverImage: Image("youre-wrong-cover"),
+                        title: "You're Wrong About",
+                        artist: "Michael Hobbes & Sarah Marshall",
+                        isPodcast: true)
+          BigSongItem(coverImage: Image("need-a-friend-cover"),
+                        title: "Conan O'Brien Need a Friend",
+                        artist: "Team Coco & Earwolf",
+                        isPodcast: true)
         }
       }
     }
