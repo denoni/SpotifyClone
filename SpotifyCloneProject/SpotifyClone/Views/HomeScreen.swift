@@ -22,6 +22,8 @@ struct HomeScreen: View {
           .padding(.bottom, 50)
         TopPodcastsScrollView()
           .padding(.bottom, 50)
+        RecommendedArtistScrollView()
+          .padding(.bottom, 50)
       }.padding(.vertical, 25)
     }
   }
@@ -152,6 +154,50 @@ struct TopPodcastsScrollView: View {
                         title: "Conan O'Brien Need a Friend",
                         artist: "Team Coco & Earwolf",
                         isPodcast: true)
+        }
+      }
+    }
+  }
+}
+
+struct RecommendedArtistScrollView: View {
+  var body: some View {
+    VStack(spacing: 12) {
+      HStack(alignment: .top, spacing: 12) {
+        Circle()
+          .overlay(Image("david-guetta").resizable())
+          .aspectRatio(1/1, contentMode: .fit)
+          .mask(Circle())
+          .padding(3)
+        VStack(alignment: .center) {
+          Spacer()
+          Text("FOR THE FANS OF").font(.avenir(.book, size: 14))
+            .opacity(0.7)
+            .frame(maxWidth: .infinity, alignment: .leading)
+          Text("David Guetta").font(.avenir(.heavy, size: 26))
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }.frame(maxWidth: .infinity, alignment: .topLeading)
+      }
+      .frame(height: 60)
+      .aspectRatio(contentMode: .fit)
+      .padding(.leading, 25)
+      ScrollView(.horizontal, showsIndicators: false) {
+        HStack(alignment: .top,spacing: 20) {
+          Spacer(minLength: 5)
+          BigSongItem(coverImage: Image("nothing-but-the-beat-cover"),
+                        title: "Nothing But The Beat")
+          BigSongItem(coverImage: Image("bed-cover"),
+                        title: "BED")
+          BigSongItem(coverImage: Image("this-is-david-guetta-cover"),
+                        title: "This is David Guetta")
+          BigSongItem(coverImage: Image("hero-cover"),
+                        title: "Hero")
+          BigSongItem(coverImage: Image("memories-cover"),
+                        title: "Memories")
+          BigSongItem(coverImage: Image("heartbreak-anthem-cover"),
+                        title: "Heartbreak Anthem")
+          BigSongItem(coverImage: Image("titanium-cover"),
+                        title: "Titanium")
         }
       }
     }
