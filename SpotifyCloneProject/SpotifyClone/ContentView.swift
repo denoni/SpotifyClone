@@ -15,6 +15,7 @@ struct ContentView: View {
   var body: some View {
       ZStack {
         Color.spotifyDarkGray.ignoresSafeArea()
+        HomeScreen()
       }
     }
   }
