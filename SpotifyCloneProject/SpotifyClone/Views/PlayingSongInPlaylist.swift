@@ -25,7 +25,7 @@ struct PlayingSongInPlaylist: View {
                             isLike: true)
       SpotifySlider()
       PlayerControllerBar()
-      BottomBar()
+      BottomSmallBar()
   }.padding(25)
   }
 }
@@ -77,7 +77,7 @@ struct AlbumCover: View {
   }
 }
 
-struct BottomBar: View {
+struct BottomSmallBar: View {
   var body: some View {
     HStack {
       Image("devices")
