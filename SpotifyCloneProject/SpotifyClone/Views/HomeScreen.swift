@@ -24,6 +24,8 @@ struct HomeScreen: View {
           .padding(.bottom, 50)
         RecommendedArtistScrollView()
           .padding(.bottom, 50)
+        BigSongCoversScrollView()
+          .padding(.bottom, 135)
       }.padding(.vertical, 25)
     }
   }
@@ -198,6 +200,48 @@ struct RecommendedArtistScrollView: View {
                         title: "Heartbreak Anthem")
           BigSongItem(coverImage: Image("titanium-cover"),
                         title: "Titanium")
+        }
+      }
+    }
+  }
+}
+
+struct BigSongCoversScrollView: View {
+  var body: some View {
+    VStack(spacing: 12) {
+      Text("Rock Classics").font(.avenir(.heavy, size: 26))
+        .frame(maxWidth: .infinity, alignment: .topLeading)
+        .padding(.leading, 25)
+      ScrollView(.horizontal, showsIndicators: false) {
+        HStack(alignment: .top,spacing: 20) {
+          Spacer(minLength: 5)
+          BigSongItem(coverImage: Image("bohemian-rhapsody-cover"),
+                        title: "Bohemian Rhapsody",
+                        artist: "Queen")
+          BigSongItem(coverImage: Image("back-in-black-cover"),
+                        title: "Back in Black",
+                        artist: "AC/DC")
+          BigSongItem(coverImage: Image("born-in-the-usa-cover"),
+                        title: "Born in The USA",
+                        artist: "Bruce Springsteen")
+          BigSongItem(coverImage: Image("fortunate-son-cover"),
+                        title: "Fortunate Son",
+                        artist: "Creedence Clearwater Revival")
+          BigSongItem(coverImage: Image("hotel-california-cover"),
+                        title: "Hotel California",
+                        artist: "Eagles")
+          BigSongItem(coverImage: Image("sweet-home-alabama-cover"),
+                        title: "Sweet Home Alabama",
+                        artist: "Lynyrd Skynyrd")
+          BigSongItem(coverImage: Image("come-as-you-are-cover"),
+                        title: "Comer as You Are",
+                        artist: "Nirvana")
+          BigSongItem(coverImage: Image("final-countdown-cover"),
+                        title: "Final Countdown",
+                        artist: "Europe")
+          BigSongItem(coverImage: Image("november-rain-cover"),
+                      title: "November Rain",
+                      artist: "Guns N' Roses")
         }
       }
     }
