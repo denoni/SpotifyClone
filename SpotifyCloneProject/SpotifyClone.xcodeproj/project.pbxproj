@@ -13,7 +13,7 @@
 		C088F23A26DEE0F800C4BCA2 /* SmallSongCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F23926DEE0F800C4BCA2 /* SmallSongCard.swift */; };
 		C088F23C26DEE48E00C4BCA2 /* SmallSongItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F23B26DEE48E00C4BCA2 /* SmallSongItem.swift */; };
 		C088F23E26DEE61B00C4BCA2 /* BigSongItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F23D26DEE61B00C4BCA2 /* BigSongItem.swift */; };
-		C09FD8FB26E031F40069CEAE /* BottomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09FD8FA26E031F40069CEAE /* BottomNavigationBar.swift */; };
+		C09FD8FF26E03D6E0069CEAE /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09FD8FE26E03D6E0069CEAE /* BottomBar.swift */; };
 		C0C63C5E26DD144E00532792 /* SpotifyCloneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C63C5D26DD144E00532792 /* SpotifyCloneApp.swift */; };
 		C0C63C6026DD144E00532792 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C63C5F26DD144E00532792 /* ContentView.swift */; };
 		C0C63C6226DD145000532792 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0C63C6126DD145000532792 /* Assets.xcassets */; };
@@ -48,7 +48,7 @@
 		C088F23926DEE0F800C4BCA2 /* SmallSongCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallSongCard.swift; sourceTree = "<group>"; };
 		C088F23B26DEE48E00C4BCA2 /* SmallSongItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallSongItem.swift; sourceTree = "<group>"; };
 		C088F23D26DEE61B00C4BCA2 /* BigSongItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigSongItem.swift; sourceTree = "<group>"; };
-		C09FD8FA26E031F40069CEAE /* BottomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavigationBar.swift; sourceTree = "<group>"; };
+		C09FD8FE26E03D6E0069CEAE /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
 		C0C63C5A26DD144E00532792 /* SpotifyClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpotifyClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0C63C5D26DD144E00532792 /* SpotifyCloneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyCloneApp.swift; sourceTree = "<group>"; };
 		C0C63C5F26DD144E00532792 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -95,7 +95,7 @@
 			children = (
 				C07DA12D26DDCCEA0086EEAB /* PlayingSongInPlaylist.swift */,
 				C088F23626DEDE5600C4BCA2 /* HomeScreen.swift */,
-				C09FD8FA26E031F40069CEAE /* BottomNavigationBar.swift */,
+				C09FD8FE26E03D6E0069CEAE /* BottomBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -335,11 +335,11 @@
 				C0C63C6026DD144E00532792 /* ContentView.swift in Sources */,
 				C088F23E26DEE61B00C4BCA2 /* BigSongItem.swift in Sources */,
 				C088F23C26DEE48E00C4BCA2 /* SmallSongItem.swift in Sources */,
-				C09FD8FB26E031F40069CEAE /* BottomNavigationBar.swift in Sources */,
 				C0C63C9C26DD3CD700532792 /* CustomFonts.swift in Sources */,
 				C088F23726DEDE5600C4BCA2 /* HomeScreen.swift in Sources */,
 				C0C63C5E26DD144E00532792 /* SpotifyCloneApp.swift in Sources */,
 				C07DA13026DDD6F20086EEAB /* View+RoundedSpecificSide.swift in Sources */,
+				C09FD8FF26E03D6E0069CEAE /* BottomBar.swift in Sources */,
 				C07DA12E26DDCCEA0086EEAB /* PlayingSongInPlaylist.swift in Sources */,
 				C0C63C9A26DD35D900532792 /* ColorPalette.swift in Sources */,
 			);

@@ -13,7 +13,7 @@ struct ContentView: View {
       ZStack {
         Color.spotifyDarkGray.ignoresSafeArea()
         HomeScreen()
-        BottomNavigationBar()
+        BottomBar(showMediaPlayer: true)
       }
     }
   }
