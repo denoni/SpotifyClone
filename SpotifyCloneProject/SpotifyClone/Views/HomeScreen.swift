@@ -7,6 +7,7 @@
 
 // TODO: Reduce duplicated code
 // TODO: Convert to arrays and render using ForEach
+// TODO: Separate into different items
 
 import SwiftUI
 
@@ -16,17 +17,17 @@ struct HomeScreen: View {
     ScrollView(showsIndicators: false) {
       VStack(alignment: .leading) {
         SmallSongCardsGrid()
-          .padding(.horizontal, 25)
-          .padding(.bottom, 50)
+          .padding(.horizontal, lateralPadding)
+          .padding(.bottom, paddingSectionSeparation)
         RecentlyPlayedScrollView()
-          .padding(.bottom, 50)
+          .padding(.bottom, paddingSectionSeparation)
         TopPodcastsScrollView()
-          .padding(.bottom, 50)
+          .padding(.bottom, paddingSectionSeparation)
         RecommendedArtistScrollView()
-          .padding(.bottom, 50)
+          .padding(.bottom, paddingSectionSeparation)
         BigSongCoversScrollView()
-          .padding(.bottom, 135)
-      }.padding(.vertical, 25)
+          .padding(.bottom, paddingBottomSection)
+      }.padding(.vertical, lateralPadding)
     }
   }
 }
@@ -45,29 +46,28 @@ struct RadialGradientBackground: View {
 
 struct SmallSongCardsGrid: View {
   var body: some View {
-    VStack(spacing: 12) {
+    VStack(spacing: spacingSmallItems) {
       HStack {
-        Text("Good Evening").font(.avenir(.heavy, size: 26))
-          .frame(maxWidth: .infinity, alignment: .topLeading)
+        Text("Good Evening")
+          .spotifyTitle(withPadding: true)
         Image("settings")
-          .resizable()
-          .aspectRatio(1/1, contentMode: .fit)
+          .resizeToFit()
           .padding(5)
       }.frame(height: 30)
-      VStack(spacing: 12) {
-        HStack(spacing: 12) {
+      VStack(spacing: spacingSmallItems) {
+        HStack(spacing: spacingSmallItems) {
           SmallSongCard(image: Image("shape-of-you-cover"),
                         title: "Shape of You")
           SmallSongCard(image: Image("prayer-in-c-cover"),
                         title: "Prayer in C")
         }
-        HStack(spacing: 12) {
+        HStack(spacing: spacingSmallItems) {
           SmallSongCard(image: Image("la-casa-de-papel-cover"),
                         title: "La Casa de Papel Soundtrack")
           SmallSongCard(image: Image("this-is-logic-cover"),
                         title: "This is Logic")
         }
-        HStack(spacing: 12) {
+        HStack(spacing: spacingSmallItems) {
           SmallSongCard(image: Image("your-mix-1-cover"),
                         title: "Your Mix 1")
           SmallSongCard(image: Image("bohemian-rhapsody-cover"),
@@ -80,12 +80,11 @@ struct SmallSongCardsGrid: View {
 
 struct RecentlyPlayedScrollView: View {
   var body: some View {
-    VStack(spacing: 12) {
-      Text("Recently Played").font(.avenir(.heavy, size: 26))
-        .frame(maxWidth: .infinity, alignment: .topLeading)
-        .padding(.leading, 25)
+    VStack(spacing: spacingSmallItems) {
+      Text("Recently Played")
+        .spotifyTitle(withPadding: true)
       ScrollView(.horizontal, showsIndicators: false) {
-        HStack(alignment: .top,spacing: 20) {
+        HStack(alignment: .top, spacing: spacingBigItems) {
           Spacer(minLength: 5)
           SmallSongItem(coverImage: Image("hip-hop-controller-cover"),
                         title: "Hip Hop Controller")
@@ -113,12 +112,11 @@ struct RecentlyPlayedScrollView: View {
 
 struct TopPodcastsScrollView: View {
   var body: some View {
-    VStack(spacing: 12) {
-      Text("Top Podcasts").font(.avenir(.heavy, size: 26))
-        .frame(maxWidth: .infinity, alignment: .topLeading)
-        .padding(.leading, 25)
+    VStack(spacing: spacingSmallItems) {
+      Text("Top Podcasts")
+        .spotifyTitle(withPadding: true)
       ScrollView(.horizontal, showsIndicators: false) {
-        HStack(alignment: .top,spacing: 20) {
+        HStack(alignment: .top,spacing: spacingBigItems) {
           Spacer(minLength: 5)
           BigSongItem(coverImage: Image("joe-rogan-cover"),
                         title: "Joe Rogan Experience",
@@ -164,11 +162,10 @@ struct TopPodcastsScrollView: View {
 
 struct RecommendedArtistScrollView: View {
   var body: some View {
-    VStack(spacing: 12) {
-      HStack(alignment: .top, spacing: 12) {
+    VStack(spacing: spacingSmallItems) {
+      HStack(alignment: .top, spacing: spacingSmallItems) {
         Circle()
-          .overlay(Image("david-guetta").resizable())
-          .aspectRatio(1/1, contentMode: .fit)
+          .overlay(Image("david-guetta").resizeToFit())
           .mask(Circle())
           .padding(3)
         VStack(alignment: .center) {
@@ -176,15 +173,15 @@ struct RecommendedArtistScrollView: View {
           Text("FOR THE FANS OF").font(.avenir(.book, size: 14))
             .opacity(0.7)
             .frame(maxWidth: .infinity, alignment: .leading)
-          Text("David Guetta").font(.avenir(.heavy, size: 26))
-            .frame(maxWidth: .infinity, alignment: .leading)
+          Text("David Guetta")
+            .spotifyTitle()
         }.frame(maxWidth: .infinity, alignment: .topLeading)
       }
       .frame(height: 60)
       .aspectRatio(contentMode: .fit)
-      .padding(.leading, 25)
+      .padding(.leading, lateralPadding)
       ScrollView(.horizontal, showsIndicators: false) {
-        HStack(alignment: .top,spacing: 20) {
+        HStack(alignment: .top,spacing: spacingBigItems) {
           Spacer(minLength: 5)
           BigSongItem(coverImage: Image("nothing-but-the-beat-cover"),
                         title: "Nothing But The Beat")
@@ -208,12 +205,11 @@ struct RecommendedArtistScrollView: View {
 
 struct BigSongCoversScrollView: View {
   var body: some View {
-    VStack(spacing: 12) {
-      Text("Rock Classics").font(.avenir(.heavy, size: 26))
-        .frame(maxWidth: .infinity, alignment: .topLeading)
-        .padding(.leading, 25)
+    VStack(spacing: spacingSmallItems) {
+      Text("Rock Classics")
+        .spotifyTitle(withPadding: true)
       ScrollView(.horizontal, showsIndicators: false) {
-        HStack(alignment: .top,spacing: 20) {
+        HStack(alignment: .top,spacing: spacingBigItems) {
           Spacer(minLength: 5)
           BigSongItem(coverImage: Image("bohemian-rhapsody-cover"),
                         title: "Bohemian Rhapsody",
@@ -247,3 +243,14 @@ struct BigSongCoversScrollView: View {
     }
   }
 }
+
+
+
+// MARK: - Constants
+
+var lateralPadding: CGFloat = 25
+var titleFontSize: CGFloat = 26
+var spacingSmallItems: CGFloat = 12
+var spacingBigItems: CGFloat = 20
+var paddingSectionSeparation: CGFloat = 50
+var paddingBottomSection: CGFloat = 135

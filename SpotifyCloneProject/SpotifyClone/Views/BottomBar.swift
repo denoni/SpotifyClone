@@ -15,7 +15,9 @@ struct BottomBar: View {
       Spacer()
       Group {
         if showMediaPlayer {
-          BottomMediaPlayerBar()
+          BottomMediaPlayerBar(songName: "Shape of You",
+                               artist: "Ed Sheeran",
+                               cover: Image("shape-of-you-cover"))
         }
         BottomNavigationBar()
       }
@@ -24,31 +26,26 @@ struct BottomBar: View {
   }
 }
 
-
-
-private let grayLighter = Color(red: 0.196, green: 0.196, blue: 0.196)
-private let grayDarker = Color(red: 0.153, green: 0.153, blue: 0.153)
-private let grayHeavyLight = Color(red: 0.325, green: 0.325, blue: 0.325)
-
-
-
 private struct BottomMediaPlayerBar: View {
+  var songName: String
+  var artist: String
+  var cover: Image
+
   var body: some View {
     ZStack {
       VStack(spacing: 0) {
         Rectangle()
-          .fill(grayHeavyLight)
+          .fill(grayReallyLight)
           .frame(height: 3)
         HStack {
           HStack {
-            Image("shape-of-you-cover")
-              .resizable()
+            cover
+              .resizeToFit()
               .frame(width: 80)
-              .aspectRatio(1/1, contentMode: .fit)
             VStack(alignment: .leading) {
-              Text("Shape of You").font(.avenir(.heavy, size: 18))
+              Text(songName).font(.avenir(.heavy, size: 18))
                 .frame(maxWidth: .infinity, alignment: .topLeading)
-              Text("Ed Sheeran").font(.avenir(.medium, size: 16))
+              Text(artist).font(.avenir(.medium, size: 16))
                 .frame(maxWidth: .infinity, alignment: .topLeading)
                 .opacity(0.7)
             }
@@ -56,18 +53,16 @@ private struct BottomMediaPlayerBar: View {
           Spacer()
           HStack(spacing: 30) {
             Image("devices")
-              .resizable()
-              .aspectRatio(1/1, contentMode: .fit)
+              .resizeToFit()
               .padding(.vertical, 25)
             Image("play")
-              .resizable()
-              .aspectRatio(1/1, contentMode: .fit)
+              .resizeToFit()
               .padding(.vertical, 30)
               .padding(.trailing, 25)
           }
         }
         .frame(height: 80)
-        .background(Color(red: 0.157, green: 0.157, blue: 0.157))
+        .background(Color.spotifyLightGray)
         Rectangle()
           .fill(Color.black)
           .frame(height: 0.5)
@@ -79,51 +74,48 @@ private struct BottomMediaPlayerBar: View {
 
 
 private struct BottomNavigationBar: View {
+
   var body: some View {
     ZStack {
       VStack(spacing: 0) {
         HStack {
-          Spacer()
-          VStack(alignment: .center, spacing: 5) {
-            Spacer()
-            Image("home-selected")
-              .resizable()
-              .aspectRatio(1/1, contentMode: .fit)
-              .frame(width: 25)
-            Text("Home").font(.avenir(.medium, size: 12))
-          }.frame(width: 100, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-
-          Spacer()
-
-          VStack(alignment: .center, spacing: 5) {
-            Spacer()
-            Image("search-unselected")
-              .resizable()
-              .aspectRatio(1/1, contentMode: .fit)
-              .frame(width: 25)
-            Text("Search").font(.avenir(.medium, size: 12))
-          }.frame(width: 100, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-
-          Spacer()
-
-          VStack(alignment: .center, spacing: 5) {
-            Spacer()
-            Image("library-unselected")
-              .resizable()
-              .aspectRatio(1/1, contentMode: .fit)
-              .frame(width: 25)
-            Text("Your Library").font(.avenir(.medium, size: 12))
-          }.frame(width: 100, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-
-          Spacer()
+          BottomNavigationItem(itemName: "Home",
+                               itemIcon: Image("home-selected"))
+          BottomNavigationItem(itemName: "Search",
+                               itemIcon: Image("search-unselected"))
+          BottomNavigationItem(itemName: "Your Library",
+                               itemIcon: Image("library-unselected"))
         }
         .frame(height: 60)
-        .background(Color(red: 0.157, green: 0.157, blue: 0.157))
+        .background(Color.spotifyLightGray)
         Rectangle()
-          .fill(Color(red: 0.157, green: 0.157, blue: 0.157))
+          .fill(Color.spotifyLightGray)
           .ignoresSafeArea()
           .frame(height: 0)
       }
     }
   }
+
+  private struct BottomNavigationItem: View {
+    var itemName: String
+    var itemIcon: Image
+
+    var body: some View {
+      Spacer()
+      VStack(alignment: .center, spacing: 5) {
+        Spacer()
+        itemIcon
+          .resizeToFit()
+          .frame(width: 25)
+        Text(itemName).font(.avenir(.medium, size: 12))
+      }.frame(width: 100, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+      Spacer()
+    }
+  }
+
 }
+
+// MARK: - Constants
+
+private let grayReallyLight = Color(red: 0.325, green: 0.325, blue: 0.325)
+
