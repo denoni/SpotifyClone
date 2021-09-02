@@ -166,6 +166,7 @@ struct RecommendedArtistScrollView: View {
       HStack(alignment: .top, spacing: spacingSmallItems) {
         Circle()
           .overlay(Image("david-guetta").resizeToFit())
+          .aspectRatio(contentMode: .fit)
           .mask(Circle())
           .padding(3)
         VStack(alignment: .center) {
