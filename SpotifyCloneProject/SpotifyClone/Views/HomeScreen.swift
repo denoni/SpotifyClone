@@ -251,7 +251,9 @@ struct BigSongCoversScrollView: View {
 
 var lateralPadding: CGFloat = 25
 var titleFontSize: CGFloat = 26
-var spacingSmallItems: CGFloat = 12
-var spacingBigItems: CGFloat = 20
-var paddingSectionSeparation: CGFloat = 50
 var paddingBottomSection: CGFloat = 135
+
+fileprivate var spacingSmallItems: CGFloat = 12
+fileprivate var spacingBigItems: CGFloat = 20
+fileprivate var paddingSectionSeparation: CGFloat = 50
+

@@ -15,7 +15,7 @@ struct SmallSongItem: View {
 
   let coverImageWidth: CGFloat = 130
   let coverTextWidth: CGFloat = 130 * 0.85
-  let smallSongItemHeigth: CGFloat = 200
+  let smallSongItemHeight: CGFloat = 200
 
   @ViewBuilder
   func buildCoverShape() -> some View {
@@ -36,6 +36,6 @@ struct SmallSongItem: View {
       Text(title).font(.avenir(.heavy, size: 16))
         .frame(maxWidth: coverTextWidth, alignment: .leading)
       Spacer()
-    }.frame(height: smallSongItemHeigth)
+    }.frame(height: smallSongItemHeight)
   }
 }

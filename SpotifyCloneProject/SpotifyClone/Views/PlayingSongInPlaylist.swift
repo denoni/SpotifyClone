@@ -8,7 +8,7 @@
 import SwiftUI
 
 // TODO: Make frame min and max size so the layout
-// stays right with differet screen sizes
+// stays right with different screen sizes
 
 struct PlayingSongInPlaylist: View {
   @State var time: Double = 0
