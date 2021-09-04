@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
+  @State private var currentPage = 0
+
 
   var body: some View {
-      ZStack {
-        Color.spotifyDarkGray.ignoresSafeArea()
-        SearchScreen()
-        BottomBar(showMediaPlayer: false)
-      }
-    }
+    ZStack {
+            Color.spotifyDarkGray.ignoresSafeArea()
+            HomeScreen()
+            BottomBar(showMediaPlayer: false)
+          }
   }
-
+}
 
 // MARK: - Previews
 
