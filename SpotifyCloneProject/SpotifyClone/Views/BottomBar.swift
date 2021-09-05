@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BottomBar: View {
+  @StateObject var viewRouter: ViewRouter
   var showMediaPlayer = false
 
   var body: some View {
@@ -19,9 +20,8 @@ struct BottomBar: View {
                                artist: "Ed Sheeran",
                                cover: Image("shape-of-you-cover"))
         }
-        BottomNavigationBar()
+        BottomNavigationBar(viewRouter: viewRouter)
       }
-
     }
   }
 }
@@ -41,13 +41,13 @@ private struct BottomMediaPlayerBar: View {
           HStack {
             cover
               .resizeToFit()
-              .frame(width: 80)
+              .frame(width: coverImageSize)
             VStack(alignment: .leading) {
-              Text(songName).font(.avenir(.heavy, size: 18))
+              Text(songName).font(.avenir(.heavy, size: mediaTitleSize))
                 .frame(maxWidth: .infinity, alignment: .topLeading)
-              Text(artist).font(.avenir(.medium, size: 16))
+              Text(artist).font(.avenir(.medium, size: mediaAuthorSize))
                 .frame(maxWidth: .infinity, alignment: .topLeading)
-                .opacity(0.7)
+                .opacity(0.6)
             }
           }
           Spacer()
@@ -61,7 +61,7 @@ private struct BottomMediaPlayerBar: View {
               .padding(.trailing, 25)
           }
         }
-        .frame(height: 80)
+        .frame(height: bottomMediaPlayerBarSize)
         .background(Color.spotifyLightGray)
         Rectangle()
           .fill(Color.black)
@@ -72,21 +72,30 @@ private struct BottomMediaPlayerBar: View {
 }
 
 
-
 private struct BottomNavigationBar: View {
+  @StateObject var viewRouter: ViewRouter
 
   var body: some View {
     ZStack {
       VStack(spacing: 0) {
         HStack {
-          BottomNavigationItem(itemName: "Home",
-                               itemIcon: Image("home-selected"))
-          BottomNavigationItem(itemName: "Search",
-                               itemIcon: Image("search-unselected"))
-          BottomNavigationItem(itemName: "Your Library",
-                               itemIcon: Image("library-unselected"))
+          BottomNavigationItem(viewRouter: viewRouter,
+                               assignedPage: .home,
+                               itemName: "Home",
+                               iconWhenUnselected: Image("home-unselected"),
+                               iconWhenSelected: Image("home-selected"))
+          BottomNavigationItem(viewRouter: viewRouter,
+                               assignedPage: .search,
+                               itemName: "Search",
+                               iconWhenUnselected: Image("search-unselected"),
+                               iconWhenSelected: Image("search-selected"))
+          BottomNavigationItem(viewRouter: viewRouter,
+                               assignedPage: .myLibrary,
+                               itemName: "My Library",
+                               iconWhenUnselected: Image("library-unselected"),
+                               iconWhenSelected: Image("library-selected"))
         }
-        .frame(height: 60)
+        .frame(height: bottomNavigationBarSize)
         .background(Color.spotifyLightGray)
         Rectangle()
           .fill(Color.spotifyLightGray)
@@ -96,20 +105,41 @@ private struct BottomNavigationBar: View {
     }
   }
 
+  // TODO: Call this struct in a clever way
   private struct BottomNavigationItem: View {
+    @StateObject var viewRouter: ViewRouter
+    var assignedPage: Page
+
     var itemName: String
-    var itemIcon: Image
+    var iconWhenUnselected: Image
+    var iconWhenSelected: Image
+
+    var thisPageIsTheCurrentPage: Bool {
+      viewRouter.currentPage == assignedPage
+    }
 
     var body: some View {
-      Spacer()
       VStack(alignment: .center, spacing: 5) {
         Spacer()
-        itemIcon
-          .resizeToFit()
-          .frame(width: 25)
-        Text(itemName).font(.avenir(.medium, size: 12))
-      }.frame(width: 100, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-      Spacer()
+        buildIcon()
+        Text(itemName).font(.avenir(.medium, size: bottomBarFontSize))
+      }.frame(maxWidth: .infinity, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+      .onTapGesture { viewRouter.currentPage = assignedPage }
+      .foregroundColor(thisPageIsTheCurrentPage ? selectedItemColor : unselectedItemColor)
+    }
+
+    func buildIcon() -> some View {
+      var icon: Image
+
+      if thisPageIsTheCurrentPage {
+        icon = iconWhenSelected
+      } else {
+        icon = iconWhenUnselected
+      }
+
+      return icon.resizeToFit()
+        .colorMultiply(thisPageIsTheCurrentPage ? selectedItemColor : unselectedItemColor)
+        .frame(width: bottomBarIconSize)
     }
   }
 
@@ -118,4 +148,22 @@ private struct BottomNavigationBar: View {
 // MARK: - Constants
 
 private let grayReallyLight = Color(red: 0.325, green: 0.325, blue: 0.325)
+
+
+// MARK: BottomNavigationItem Constants
+private let selectedItemColor = Color.white
+private let unselectedItemColor = selectedItemColor.opacity(0.5)
+private let bottomBarIconSize: CGFloat = 25
+private let bottomBarFontSize: CGFloat = 12
+
+// MARK: BottomNavigationBar Constants
+private let bottomNavigationBarSize: CGFloat = 60
+
+// MARK: BottomMediaPlayerBar Constants
+private let bottomMediaPlayerBarSize: CGFloat = 80
+private let coverImageSize: CGFloat = bottomMediaPlayerBarSize
+private let mediaTitleSize: CGFloat = 18
+private let mediaAuthorSize: CGFloat = 16
+
+
 

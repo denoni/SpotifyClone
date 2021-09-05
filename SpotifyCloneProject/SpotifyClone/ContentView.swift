@@ -8,14 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
-  @State private var currentPage = 0
-
+  @StateObject var viewRouter: ViewRouter
 
   var body: some View {
     ZStack {
             Color.spotifyDarkGray.ignoresSafeArea()
-            HomeScreen()
-            BottomBar(showMediaPlayer: false)
+            switch viewRouter.currentPage {
+            case .home:
+              HomeScreen()
+            case .search:
+              SearchScreen()
+            case .myLibrary:
+              Text("To be done 🛠").font(.title)
+            }
+            BottomBar(viewRouter: viewRouter, showMediaPlayer: true)
           }
   }
 }
@@ -24,6 +30,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentView()
+    ContentView(viewRouter: ViewRouter())
   }
 }
