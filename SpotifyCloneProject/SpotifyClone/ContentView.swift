@@ -9,13 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
   @StateObject var viewRouter: ViewRouter
+  @ObservedObject var homeViewModel = HomeViewModel()
 
   var body: some View {
     ZStack {
             Color.spotifyDarkGray.ignoresSafeArea()
             switch viewRouter.currentPage {
             case .home:
-              HomeScreen()
+              HomeScreen(homeViewModel: homeViewModel)
             case .search:
               SearchScreen()
             case .myLibrary:

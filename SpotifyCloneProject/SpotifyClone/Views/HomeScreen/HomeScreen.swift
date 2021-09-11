@@ -12,6 +12,8 @@
 import SwiftUI
 
 struct HomeScreen: View {
+  @ObservedObject private(set) var homeViewModel: HomeViewModel
+
   var body: some View {
     RadialGradientBackground()
     ScrollView(showsIndicators: false) {
@@ -25,7 +27,7 @@ struct HomeScreen: View {
           .padding(.bottom, paddingSectionSeparation)
         RecommendedArtistScrollView()
           .padding(.bottom, paddingSectionSeparation)
-        BigSongCoversScrollView()
+        BigSongCoversScrollView(homeViewModel: homeViewModel)
           .padding(.bottom, paddingBottomSection)
       }.padding(.vertical, lateralPadding)
     }
