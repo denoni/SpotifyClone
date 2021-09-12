@@ -13,6 +13,9 @@ class HomeViewModel: ObservableObject {
   private static func getData() -> SpotifyModel<SpotifyMediaContent> {
     var allMediaSet = [String:[SpotifyMediaContent]]()
 
+// TODO: The sections below should be added in a non-manual way
+
+    // Rock Classics
     var rockClassicsSection = [SpotifyMediaContent]()
     for (title, author, coverImage) in rockClassics {
       rockClassicsSection.append(SpotifyMediaContent(title: title,
@@ -21,34 +24,48 @@ class HomeViewModel: ObservableObject {
     }
     allMediaSet["Rock Classics"] = rockClassicsSection
 
+    // Recently Played
     var recentlyPlayedSection = [SpotifyMediaContent]()
     for (title, coverImage, isPodcast, isArtist) in recentlyPlayed {
-      recentlyPlayedSection.append(SpotifyMediaContent(title: title, author: "",
-                                                coverImage: coverImage,
-                                                isPodcast: isPodcast,
-                                                isArtist: isArtist))
+      recentlyPlayedSection.append(SpotifyMediaContent(title: title,
+                                                       author: "",
+                                                       coverImage: coverImage,
+                                                       isPodcast: isPodcast,
+                                                       isArtist: isArtist))
     }
     allMediaSet["Recently Played"] = recentlyPlayedSection
 
+    // SmallSongCardItems
+    var smallSongCardSection = [SpotifyMediaContent]()
+    for (title, coverImage) in smallSongCardItems {
+      smallSongCardSection.append(SpotifyMediaContent(title: title,
+                                                      author: "",
+                                                      coverImage: coverImage))
+    }
+    allMediaSet["Small Song Card Items"] = smallSongCardSection
+
     return SpotifyModel<SpotifyMediaContent>(collectionOfMedia: allMediaSet)
   }
+
+
 
   // MARK: - X
 
   var mediaCollection: [String:[SpotifyModel<SpotifyMediaContent>.SpotifyMedia]] { homeViewModel.homeScreenMediaCollection }
 
+
+
   // MARK: - Y
 
-  func getItems(fromSection sectionTitle: String, in viewModel: HomeViewModel) -> [SpotifyModel<SpotifyMediaContent>.SpotifyMedia] {
+  func getItems(fromSection sectionTitle: String) -> [SpotifyModel<SpotifyMediaContent>.SpotifyMedia] {
 
-    guard viewModel.mediaCollection.keys.contains(sectionTitle) else {
+    guard self.mediaCollection.keys.contains(sectionTitle) else {
       fatalError("Provided section title does not exist.")
     }
 
-    return viewModel.mediaCollection[sectionTitle]!
+    return self.mediaCollection[sectionTitle]!
   }
 }
-
 
 
 
@@ -78,4 +95,13 @@ var recentlyPlayed: [(String, Image, Bool, Bool)] = [
   ("AVICII", Image("avicii-cover"), true, false),
   ("Sweetener", Image("sweetener-cover"), false, false),
   ("Viral Hits", Image("viral-hits-cover"), false, false),
+]
+                     // (title, coverImage)
+var smallSongCardItems: [(String, Image)] = [
+  ("Shape of You", Image("shape-of-you-cover")),
+  ("Prayer in C", Image("prayer-in-c-cover")),
+  ("La Casa de Papel Soundtrack", Image("la-casa-de-papel-cover")),
+  ("This is Logic", Image("this-is-logic-cover")),
+  ("Your Mix 1", Image("your-mix-1-cover")),
+  ("Bohemian Rhapsody", Image("bohemian-rhapsody-cover")),
 ]

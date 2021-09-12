@@ -20,7 +20,7 @@ struct BigSongCoversScrollView: View {
       ScrollView(.horizontal, showsIndicators: false) {
         HStack(alignment: .top,spacing: spacingBigItems) {
           Spacer(minLength: 5)
-          ForEach(homeViewModel.getItems(fromSection: sectionTitle, in: homeViewModel)) { media in
+          ForEach(homeViewModel.getItems(fromSection: sectionTitle)) { media in
             BigSongItem(coverImage: media.content.coverImage,
                         title: media.content.title,
                         artist: media.content.author)

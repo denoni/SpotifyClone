@@ -18,7 +18,7 @@ struct HomeScreen: View {
     RadialGradientBackground()
     ScrollView(showsIndicators: false) {
       VStack(alignment: .leading) {
-        SmallSongCardsGrid()
+        SmallSongCardsGrid(homeViewModel: homeViewModel)
           .padding(.horizontal, lateralPadding)
           .padding(.bottom, paddingSectionSeparation)
         RecentlyPlayedScrollView(homeViewModel: homeViewModel)
