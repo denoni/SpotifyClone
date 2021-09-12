@@ -44,7 +44,7 @@ class HomeViewModel: ObservableObject {
     }
     allMediaSet["Small Song Card Items"] = smallSongCardSection
 
-    // Rock Classics
+    // Top Podcasts
     var topPodcastsSection = [SpotifyMediaContent]()
     for (title, author, coverImage, isPodcast) in topPodcasts {
       topPodcastsSection.append(SpotifyMediaContent(title: title,
@@ -53,6 +53,15 @@ class HomeViewModel: ObservableObject {
                                               isPodcast: isPodcast))
     }
     allMediaSet["Top Podcasts"] = topPodcastsSection
+
+    // For The Fans Of David Guetta
+    var forTheFansOfDavidGuettaSection = [SpotifyMediaContent]()
+    for (title, coverImage) in forTheFansOfDavidGuetta {
+      forTheFansOfDavidGuettaSection.append(SpotifyMediaContent(title: title,
+                                                                author: "",
+                                                                coverImage: coverImage))
+    }
+    allMediaSet["For The Fans Of David Guetta"] = forTheFansOfDavidGuettaSection
 
 
     return SpotifyModel<SpotifyMediaContent>(collectionOfMedia: allMediaSet)
@@ -116,15 +125,28 @@ var smallSongCardItems: [(String, Image)] = [
   ("Your Mix 1", Image("your-mix-1-cover")),
   ("Bohemian Rhapsody", Image("bohemian-rhapsody-cover")),
 ]
-             // (title, author, image, isPodcast)
+             // (title, author, coverImage, isPodcast)
 var topPodcasts: [(String, String, Image, Bool)] = [
   ("Joe Rogan Experience", "Joe Rogan", Image("joe-rogan-cover"), true),
   ("The Daily", "The New York Times", Image("the-daily-cover"), true),
   ("Dateline", "NBC News", Image("dateline-cover"), true),
-  ("Districtable", "Wood Elf", Image("distractible-cover"), true),
+  ("Distractible", "Wood Elf", Image("distractible-cover"), true),
   ("Ted Talks Daily", "TED", Image("ted-talks-daily-cover"), true),
   ("Smartless", "Jason Bateman, Sean Hayes, Will Arnett", Image("smartless-cover"), true),
   ("Lex Fridman Podcast", "Lex Fridman", Image("lex-fridman-cover"), true),
   ("You're Wrong About", "Michael Hobbes & Sarah Marshall", Image("youre-wrong-cover"), true),
   ("Conan O'Brien Need a Friend", "Team Coco & Earwolf", Image("need-a-friend-cover"), true),
+]
+
+// (title, coverImage)
+var forTheFansOfDavidGuetta: [(String, Image)] = [
+  // ITEM 0 = Artist from the collection
+  ("David Guetta", Image("david-guetta")),
+  ("Nothing But The Beat", Image("nothing-but-the-beat-cover")),
+  ("BED", Image("bed-cover")),
+  ("This is David Guetta", Image("this-is-david-guetta-cover")),
+  ("Hero", Image("hero-cover")),
+  ("Memories", Image("memories-cover")),
+  ("Heartbreak Anthem", Image("heartbreak-anthem-cover")),
+  ("Titanium", Image("titanium-cover")),
 ]

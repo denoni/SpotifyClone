@@ -25,7 +25,7 @@ struct HomeScreen: View {
           .padding(.bottom, paddingSectionSeparation)
         TopPodcastScrollView(homeViewModel: homeViewModel)
           .padding(.bottom, paddingSectionSeparation)
-        RecommendedArtistScrollView()
+        RecommendedArtistScrollView(homeViewModel: homeViewModel)
           .padding(.bottom, paddingSectionSeparation)
         BigSongCoversScrollView(homeViewModel: homeViewModel)
           .padding(.bottom, paddingBottomSection)

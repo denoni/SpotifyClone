@@ -8,11 +8,22 @@
 import SwiftUI
 
 struct RecommendedArtistScrollView: View {
+  @ObservedObject private(set) var homeViewModel: HomeViewModel
+
+  let sectionTitle: String
+  let newRecommendedArtist: RecommendedArtist
+
+  init(homeViewModel: HomeViewModel) {
+    self.homeViewModel = homeViewModel
+    sectionTitle = "For The Fans Of David Guetta"
+    newRecommendedArtist = RecommendedArtist.createNewRecommendedArtist(forItems: homeViewModel.getItems(fromSection: sectionTitle))
+  }
+  
   var body: some View {
     VStack(spacing: spacingSmallItems) {
       HStack(alignment: .top, spacing: spacingSmallItems) {
         Circle()
-          .overlay(Image("david-guetta").resizeToFit())
+          .overlay(newRecommendedArtist.image.resizeToFit())
           .aspectRatio(contentMode: .fit)
           .mask(Circle())
           .padding(3)
@@ -21,7 +32,7 @@ struct RecommendedArtistScrollView: View {
           Text("FOR THE FANS OF").font(.avenir(.book, size: 14))
             .opacity(0.7)
             .frame(maxWidth: .infinity, alignment: .leading)
-          Text("David Guetta")
+          Text(newRecommendedArtist.name)
             .spotifyTitle()
         }.frame(maxWidth: .infinity, alignment: .topLeading)
       }
@@ -31,22 +42,43 @@ struct RecommendedArtistScrollView: View {
       ScrollView(.horizontal, showsIndicators: false) {
         HStack(alignment: .top,spacing: spacingBigItems) {
           Spacer(minLength: 5)
-          BigSongItem(coverImage: Image("nothing-but-the-beat-cover"),
-                        title: "Nothing But The Beat")
-          BigSongItem(coverImage: Image("bed-cover"),
-                        title: "BED")
-          BigSongItem(coverImage: Image("this-is-david-guetta-cover"),
-                        title: "This is David Guetta")
-          BigSongItem(coverImage: Image("hero-cover"),
-                        title: "Hero")
-          BigSongItem(coverImage: Image("memories-cover"),
-                        title: "Memories")
-          BigSongItem(coverImage: Image("heartbreak-anthem-cover"),
-                        title: "Heartbreak Anthem")
-          BigSongItem(coverImage: Image("titanium-cover"),
-                        title: "Titanium")
+          ForEach(newRecommendedArtist.items) { media in
+            BigSongItem(coverImage: media.content.coverImage,
+                        title: media.content.title,
+                        artist: "",
+                        isPodcast: media.content.isPodcast)
+          }
         }
       }
     }
   }
+
+  struct RecommendedArtist {
+    var name: String
+    var image: Image
+    var items: [SpotifyModel<SpotifyMediaContent>.SpotifyMedia]
+
+    static func createNewRecommendedArtist(forItems items: [SpotifyModel<SpotifyMediaContent>.SpotifyMedia]) -> RecommendedArtist {
+
+        var items = items
+        var contentFromItems = [SpotifyMediaContent]()
+        for index in items.indices {
+          contentFromItems.append(items[index].content)
+        }
+
+        // First Item == (recommendedArtistName, recommendedArtistImage)
+        let firstItem = contentFromItems.removeFirst()
+        items.removeFirst()
+
+        let artistName = firstItem.title
+        let artistImage = firstItem.coverImage
+
+
+      return RecommendedArtist(name: artistName, image: artistImage, items: items)
+    }
+  }
+
 }
+
+
+
