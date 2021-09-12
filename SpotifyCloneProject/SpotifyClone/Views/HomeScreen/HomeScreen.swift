@@ -23,7 +23,7 @@ struct HomeScreen: View {
           .padding(.bottom, paddingSectionSeparation)
         RecentlyPlayedScrollView(homeViewModel: homeViewModel)
           .padding(.bottom, paddingSectionSeparation)
-        TopPodcastScrollView()
+        TopPodcastScrollView(homeViewModel: homeViewModel)
           .padding(.bottom, paddingSectionSeparation)
         RecommendedArtistScrollView()
           .padding(.bottom, paddingSectionSeparation)

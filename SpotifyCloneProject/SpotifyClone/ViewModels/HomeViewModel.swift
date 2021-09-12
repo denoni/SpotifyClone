@@ -44,6 +44,17 @@ class HomeViewModel: ObservableObject {
     }
     allMediaSet["Small Song Card Items"] = smallSongCardSection
 
+    // Rock Classics
+    var topPodcastsSection = [SpotifyMediaContent]()
+    for (title, author, coverImage, isPodcast) in topPodcasts {
+      topPodcastsSection.append(SpotifyMediaContent(title: title,
+                                              author: author,
+                                              coverImage: coverImage,
+                                              isPodcast: isPodcast))
+    }
+    allMediaSet["Top Podcasts"] = topPodcastsSection
+
+
     return SpotifyModel<SpotifyMediaContent>(collectionOfMedia: allMediaSet)
   }
 
@@ -104,4 +115,16 @@ var smallSongCardItems: [(String, Image)] = [
   ("This is Logic", Image("this-is-logic-cover")),
   ("Your Mix 1", Image("your-mix-1-cover")),
   ("Bohemian Rhapsody", Image("bohemian-rhapsody-cover")),
+]
+             // (title, author, image, isPodcast)
+var topPodcasts: [(String, String, Image, Bool)] = [
+  ("Joe Rogan Experience", "Joe Rogan", Image("joe-rogan-cover"), true),
+  ("The Daily", "The New York Times", Image("the-daily-cover"), true),
+  ("Dateline", "NBC News", Image("dateline-cover"), true),
+  ("Districtable", "Wood Elf", Image("distractible-cover"), true),
+  ("Ted Talks Daily", "TED", Image("ted-talks-daily-cover"), true),
+  ("Smartless", "Jason Bateman, Sean Hayes, Will Arnett", Image("smartless-cover"), true),
+  ("Lex Fridman Podcast", "Lex Fridman", Image("lex-fridman-cover"), true),
+  ("You're Wrong About", "Michael Hobbes & Sarah Marshall", Image("youre-wrong-cover"), true),
+  ("Conan O'Brien Need a Friend", "Team Coco & Earwolf", Image("need-a-friend-cover"), true),
 ]
