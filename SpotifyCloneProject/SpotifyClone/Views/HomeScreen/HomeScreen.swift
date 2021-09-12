@@ -21,7 +21,7 @@ struct HomeScreen: View {
         SmallSongCardsGrid()
           .padding(.horizontal, lateralPadding)
           .padding(.bottom, paddingSectionSeparation)
-        RecentlyPlayedScrollView()
+        RecentlyPlayedScrollView(homeViewModel: homeViewModel)
           .padding(.bottom, paddingSectionSeparation)
         TopPodcastScrollView()
           .padding(.bottom, paddingSectionSeparation)

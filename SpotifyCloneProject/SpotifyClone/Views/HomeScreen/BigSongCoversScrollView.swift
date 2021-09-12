@@ -10,14 +10,17 @@ import SwiftUI
 struct BigSongCoversScrollView: View {
   @ObservedObject private(set) var homeViewModel: HomeViewModel
 
+  let sectionTitle = "Rock Classics"
+
+
   var body: some View {
     VStack(spacing: spacingSmallItems) {
-      Text("Rock Classics")
+      Text(sectionTitle)
         .spotifyTitle(withPadding: true)
       ScrollView(.horizontal, showsIndicators: false) {
         HStack(alignment: .top,spacing: spacingBigItems) {
           Spacer(minLength: 5)
-          ForEach(homeViewModel.mediaCollection) { media in
+          ForEach(homeViewModel.getItems(fromSection: sectionTitle, in: homeViewModel)) { media in
             BigSongItem(coverImage: media.content.coverImage,
                         title: media.content.title,
                         artist: media.content.author)

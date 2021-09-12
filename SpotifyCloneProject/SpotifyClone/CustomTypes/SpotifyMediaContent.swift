@@ -12,14 +12,17 @@ struct SpotifyMediaContent {
   var author: String
   var coverImage: Image
   var isPodcast: Bool = false
+  var isArtist: Bool = false
 
   init(title: String,
        author: String,
        coverImage: Image,
-       isPodcast: Bool = false) {
+       isPodcast: Bool = false,
+       isArtist: Bool = false) {
     self.title = title
     self.author = author
     self.coverImage = coverImage
     self.isPodcast = isPodcast
+    self.isArtist = isArtist
   }
 }

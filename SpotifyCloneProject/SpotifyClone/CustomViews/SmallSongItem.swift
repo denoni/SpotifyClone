@@ -10,7 +10,7 @@ import SwiftUI
 struct SmallSongItem: View {
   let coverImage: Image
   let title: String
-  var isArtistProfile = false
+  var isArtist = false
   var isPodcast = false
 
   let coverImageWidth: CGFloat = 130
@@ -20,7 +20,7 @@ struct SmallSongItem: View {
   @ViewBuilder
   func buildCoverShape() -> some View {
     Group {
-      if isArtistProfile { Circle() }
+      if isArtist { Circle() }
       else if isPodcast { RoundedRectangle(cornerRadius: 10) }
       else { Rectangle() }
     }
