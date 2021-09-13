@@ -3,69 +3,185 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		084E9E07E1EB3C5C04B2C028E86203EE /* Pods-SpotifyClone-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B66AA6EA5447D7663BA47CC18D281263 /* Pods-SpotifyClone-dummy.m */; };
-		12FE91B6AEE82BC2B87BF08F9A873EA4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		A3C0364354FBCBC9B20BF33302035F6B /* Pods-SpotifyCloneTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E42F9381439244DA1AE5780A9B1220F /* Pods-SpotifyCloneTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B367276CD86D89E9D9915F946BBE208E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		BECEAFEEB5548154F39E73A8B02D0512 /* Pods-SpotifyClone-SpotifyCloneUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F00B784222B11580BA29CC69171F1913 /* Pods-SpotifyClone-SpotifyCloneUITests-dummy.m */; };
-		CADC6D628F22308D3AD26B1C3950ABC8 /* Pods-SpotifyCloneTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 32472913F333D2305D21C3DB5FE2B144 /* Pods-SpotifyCloneTests-dummy.m */; };
-		CF49CE89872A9609F0E649B365957D1B /* Pods-SpotifyClone-SpotifyCloneUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F7A4D8490A68DA0B90E2A89CEE711558 /* Pods-SpotifyClone-SpotifyCloneUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DA2A5A3219537C303A93AA4766F9771D /* Pods-SpotifyClone-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C3EC9446EA0BDD1D84ABD09A3D4013C2 /* Pods-SpotifyClone-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F664460B051A1BC8CF62FB14468BE19D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		02621C4B82398D0657F474E21493A3A2 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4388F96485F322CF010F9CA6AF089C46 /* HTTPMethod.swift */; };
+		02DB462B121245593CE653B9B377F970 /* Protected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D45A2AF061C99B2355F19EC47243D9 /* Protected.swift */; };
+		0B399DCF32F8FE4F09B03B6E7B65E0D1 /* Alamofire-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 845043F6DD76EF451A61A8C4EEB3BF6C /* Alamofire-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		12FE91B6AEE82BC2B87BF08F9A873EA4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0CE05D5D076B1B5190EE5DF97FD54E /* Foundation.framework */; };
+		139D431B27F5BA98DD180A85E7C859D9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0CE05D5D076B1B5190EE5DF97FD54E /* Foundation.framework */; };
+		13E62623092B680C6A5C349D48B8A4FD /* CachedResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D233027C8491F55B2473FCDA12389 /* CachedResponseHandler.swift */; };
+		1773084DECF68CADD45567FBEC56036D /* Alamofire-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DFC11D87B8E53578044EA373E7DE6642 /* Alamofire-dummy.m */; };
+		1D17B83410DC98911D539F2BD5254C05 /* RequestTaskMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B8687B00F57762F34D3282826817C5 /* RequestTaskMap.swift */; };
+		2550F0D474DE846FEC5C76CBE85F927E /* OperationQueue+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876F4F5D5DA538F51C4D4F27C9F64377 /* OperationQueue+Alamofire.swift */; };
+		30A331CD9286145E92DB11D671664C63 /* MultipartUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BB5063650D66E661FD979273F90078 /* MultipartUpload.swift */; };
+		33F86FAB918B148A63A1575667F9B570 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D3D57353834825F7B52B816066B7789 /* CFNetwork.framework */; };
+		4634BA717BFCE522E5B42304C6A78B5D /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998E57E5CB536D68D4A97BC1B56E62B8 /* ParameterEncoding.swift */; };
+		471611F482CDC15BF464E3BA9CB83968 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EBC286A9BAE2611EFC71F7C9FB60B8 /* Notifications.swift */; };
+		4AA1B61E20040483D648CD77A97CD7E0 /* Pods-SpotifyClone-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 381D4C0FE49D9368B3913A22F692BE2E /* Pods-SpotifyClone-dummy.m */; };
+		512FAFBD71830F126224C033B6C45F4E /* RetryPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C44EFF4AE1CC95C361F6A007EDBD6E7 /* RetryPolicy.swift */; };
+		52BE6F747C26DF2A24532458E55DC10F /* HTTPHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333DAB6EC98A071AAD9A29C41818F346 /* HTTPHeaders.swift */; };
+		5E594FA3290D3D70F500572D0AC100DB /* URLConvertible+URLRequestConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC350EEADBAF761D20138C94C4A0086 /* URLConvertible+URLRequestConvertible.swift */; };
+		688337B18659C4BF722F87AFC4FEEF81 /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF72312136F76CCB5AC50BCDD37ED4A2 /* SessionDelegate.swift */; };
+		6D6259BF45FF93AF1BC5F576A562EA2B /* Pods-SpotifyClone-SpotifyCloneUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DED9FFA0B3FBDA2D64C722F354352B3D /* Pods-SpotifyClone-SpotifyCloneUITests-dummy.m */; };
+		8531BF20C551594DC119127FE8CD9046 /* Pods-SpotifyClone-SpotifyCloneUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DE3BA92C8C5C705AB947F815F8722D69 /* Pods-SpotifyClone-SpotifyCloneUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B9CDBE3FFD712120CD66DD8B06C44E4 /* ParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26220434118FCFC30E4850800AC3068 /* ParameterEncoder.swift */; };
+		8F9E1EEF2FE52E3231A769722D5C4148 /* ServerTrustEvaluation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24B13480173106997D3F6538CDE3CD /* ServerTrustEvaluation.swift */; };
+		941822CDF68EB8F4D49F150457A82616 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7197951AB8559109A9F40B71A85C843E /* ResponseSerialization.swift */; };
+		97584BC08D2B494417BDEE268CFF38C9 /* Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EBFC4256A48F45E26B860D38479E52 /* Combine.swift */; };
+		9C0BE8FA0030B2BC1DF7C159FA059389 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0CE05D5D076B1B5190EE5DF97FD54E /* Foundation.framework */; };
+		9CFDA7C92E0EEA31F709663B0E727ABA /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC45C560942C5BCAB401419728808D3 /* EventMonitor.swift */; };
+		A3153333FC136836B0028E6AB2A56BEE /* AlamofireExtended.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43DFB0A067881554C0CF2E83093E1D6 /* AlamofireExtended.swift */; };
+		A3C0364354FBCBC9B20BF33302035F6B /* Pods-SpotifyCloneTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D72543C8516F0436AEBB0F7ED95116D5 /* Pods-SpotifyCloneTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A4F1202CE5BBE79F3BBCAE3D2B16BC03 /* Result+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673CB7AF23C7E1475678C8CCC286CF41 /* Result+Alamofire.swift */; };
+		A664924D6CCE2922A3F81EC932F4D476 /* AFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349B2325F6647FEE3C9209201FF5D4C2 /* AFError.swift */; };
+		ACDF188F606DD516D720F010647787F8 /* Pods-SpotifyClone-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F4A30C1C3A71FCA67437268536479185 /* Pods-SpotifyClone-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AEC9541401A8303DF6B9AAE898A737F4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0CE05D5D076B1B5190EE5DF97FD54E /* Foundation.framework */; };
+		B6473B8E8353317F75D6800D4F7054CB /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401A0C3C3516540407583753D10DEB2B /* NetworkReachabilityManager.swift */; };
+		B89D1C69742F61878115334A1D2DFFE7 /* URLRequest+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062C7841BFC1EEBD8A094A3CA60AEADA /* URLRequest+Alamofire.swift */; };
+		C16A047C4E8D856309A486182A490993 /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0440F4381D065FED6264EFBCDB7960 /* MultipartFormData.swift */; };
+		C7F66519CE6148F21D7DB11423F1D34D /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F2B77F50C8E86FDD27C5A573013C07 /* Response.swift */; };
+		CADC6D628F22308D3AD26B1C3950ABC8 /* Pods-SpotifyCloneTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D22DD8E7ADA0DC6AE5BAFDA33CE41519 /* Pods-SpotifyCloneTests-dummy.m */; };
+		D15FEA31AA9625BBF041FB91E48A9995 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20097F794E1A1791AB97EBE230264E61 /* Validation.swift */; };
+		DCD0C33A2B50811D53CF68F021284B47 /* DispatchQueue+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABD9F54297FF27309F1F8A34F99417C /* DispatchQueue+Alamofire.swift */; };
+		DD58A00EACBEE274C381B491519C6B8C /* RedirectHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EB40D0E4136A2EBA646F9A9D0DA652 /* RedirectHandler.swift */; };
+		E0C65E16219718869CD2AFCA2C5465CB /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B14ACFFB6A91762B582B46A3466A3F /* Request.swift */; };
+		E1769C267E82B0C24FE0FFBF949F0A6E /* StringEncoding+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A51515830AB9FE94E01DF6F48146153 /* StringEncoding+Alamofire.swift */; };
+		E857ADCAD7B647883D5B2AEC3F16D1D5 /* URLSessionConfiguration+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970C386BD824FE4AD000560950399556 /* URLSessionConfiguration+Alamofire.swift */; };
+		EC11B17DA78F7EEBEBC3EFAF68C6DF9F /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4591D5844289F02F52985F30FFDA6BB5 /* Session.swift */; };
+		F36D96A4346C90A2D11CB3B6A2ECF4CF /* AuthenticationInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DA36ADD8B0E94CE139C28448821E13 /* AuthenticationInterceptor.swift */; };
+		F5D2A31C7EB1DE010771140B6E7ABAD8 /* URLEncodedFormEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F2B90B6F80D8F30747B3E178F5528F /* URLEncodedFormEncoder.swift */; };
+		F63BE0585331CAA3482EF736803F8243 /* RequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1741D7ACD43E5D0E9DBE557F396581 /* RequestInterceptor.swift */; };
+		FEDBAD32E2EDA85AD6E362B82892A74A /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF4837C47DFB74B73C8B82A591E94C /* Alamofire.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7F3008B853A27561613DD094F8790121 /* PBXContainerItemProxy */ = {
+		3E680B2E9E1A60D168D3904CE89CF814 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 48EF543B3AE525B902EBD2495136E156;
 			remoteInfo = "Pods-SpotifyClone";
 		};
+		AE6FA7CC16453EF838EB1E705457FAF6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EAAA1AD3A8A1B59AB91319EE40752C6D;
+			remoteInfo = Alamofire;
+		};
+		B136CE6BD0279B0976049FF71D663512 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EAAA1AD3A8A1B59AB91319EE40752C6D;
+			remoteInfo = Alamofire;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		026232FEA5276199F26D577176096615 /* Pods-SpotifyClone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SpotifyClone.release.xcconfig"; sourceTree = "<group>"; };
+		004D6932C479C674A14963422050F6DE /* Pods-SpotifyCloneTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SpotifyCloneTests.modulemap"; sourceTree = "<group>"; };
+		046847B315FB03CAC1725B93AD223AD8 /* Pods-SpotifyCloneTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SpotifyCloneTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		062C7841BFC1EEBD8A094A3CA60AEADA /* URLRequest+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URLRequest+Alamofire.swift"; path = "Source/URLRequest+Alamofire.swift"; sourceTree = "<group>"; };
 		08B2EDA4376D4B5D12FA50278A978C42 /* Pods-SpotifyClone */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SpotifyClone"; path = Pods_SpotifyClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		09B2DE1EB76591BC23A04EF68FCC81C6 /* Pods-SpotifyClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SpotifyClone.debug.xcconfig"; sourceTree = "<group>"; };
+		0B5A351EC87A35269CDF49C79C044EA0 /* Pods-SpotifyClone-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SpotifyClone-acknowledgements.plist"; sourceTree = "<group>"; };
+		0E0440F4381D065FED6264EFBCDB7960 /* MultipartFormData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartFormData.swift; path = Source/MultipartFormData.swift; sourceTree = "<group>"; };
+		0EC45C560942C5BCAB401419728808D3 /* EventMonitor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EventMonitor.swift; path = Source/EventMonitor.swift; sourceTree = "<group>"; };
 		1E0DB88D67A5A185DB2DEBFA73AD400C /* Pods-SpotifyClone-SpotifyCloneUITests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SpotifyClone-SpotifyCloneUITests"; path = Pods_SpotifyClone_SpotifyCloneUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2F89C26D22B6EE14EE83A2A34BD3D61D /* Pods-SpotifyClone-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SpotifyClone-acknowledgements.markdown"; sourceTree = "<group>"; };
-		32472913F333D2305D21C3DB5FE2B144 /* Pods-SpotifyCloneTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SpotifyCloneTests-dummy.m"; sourceTree = "<group>"; };
-		35D977A259F7E921EDF3E3632D39A63B /* Pods-SpotifyClone-SpotifyCloneUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SpotifyClone-SpotifyCloneUITests-Info.plist"; sourceTree = "<group>"; };
+		20097F794E1A1791AB97EBE230264E61 /* Validation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Source/Validation.swift; sourceTree = "<group>"; };
+		2573D9E1D998AF3AFF4B2756EAA32A02 /* Pods-SpotifyClone-SpotifyCloneUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SpotifyClone-SpotifyCloneUITests.release.xcconfig"; sourceTree = "<group>"; };
+		29EBC286A9BAE2611EFC71F7C9FB60B8 /* Notifications.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = Source/Notifications.swift; sourceTree = "<group>"; };
+		2B0F05A3DBDE8E8AD6A8511F035D63D3 /* Alamofire-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-prefix.pch"; sourceTree = "<group>"; };
+		333DAB6EC98A071AAD9A29C41818F346 /* HTTPHeaders.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HTTPHeaders.swift; path = Source/HTTPHeaders.swift; sourceTree = "<group>"; };
+		33F44C05CB6C34D078585840A1B2D1F6 /* Pods-SpotifyCloneTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SpotifyCloneTests.release.xcconfig"; sourceTree = "<group>"; };
+		349B2325F6647FEE3C9209201FF5D4C2 /* AFError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AFError.swift; path = Source/AFError.swift; sourceTree = "<group>"; };
+		381D4C0FE49D9368B3913A22F692BE2E /* Pods-SpotifyClone-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SpotifyClone-dummy.m"; sourceTree = "<group>"; };
+		3A819BD7A8AEC9ECDC15C9D177B80B3C /* Pods-SpotifyClone-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SpotifyClone-acknowledgements.markdown"; sourceTree = "<group>"; };
+		3D7225C58523CDF7DD56D8480818CE36 /* Pods-SpotifyClone-SpotifyCloneUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SpotifyClone-SpotifyCloneUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		3ED6A970AD3A04A89237B04A658FE920 /* Pods-SpotifyCloneTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SpotifyCloneTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		401A0C3C3516540407583753D10DEB2B /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkReachabilityManager.swift; path = Source/NetworkReachabilityManager.swift; sourceTree = "<group>"; };
+		4388F96485F322CF010F9CA6AF089C46 /* HTTPMethod.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HTTPMethod.swift; path = Source/HTTPMethod.swift; sourceTree = "<group>"; };
+		4591D5844289F02F52985F30FFDA6BB5 /* Session.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Session.swift; path = Source/Session.swift; sourceTree = "<group>"; };
 		45BDBA6E7A8AD6E499AC0FC37277B251 /* Pods-SpotifyCloneTests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SpotifyCloneTests"; path = Pods_SpotifyCloneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		47FEDA4F587E8FBE26D5BB9B0055997B /* Pods-SpotifyClone.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SpotifyClone.modulemap"; sourceTree = "<group>"; };
-		5E31BE0F1013D9C0CD1B7E990E604D69 /* Pods-SpotifyCloneTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SpotifyCloneTests.modulemap"; sourceTree = "<group>"; };
-		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		8517ADCDD98E6A925812EE16EE8C3E8A /* Pods-SpotifyCloneTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SpotifyCloneTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		89CBD09BE69BC25222D218D7A331A09F /* Pods-SpotifyClone-SpotifyCloneUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SpotifyClone-SpotifyCloneUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		8A202CCF531C8621A86EFA41341046EC /* Pods-SpotifyClone-SpotifyCloneUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SpotifyClone-SpotifyCloneUITests.release.xcconfig"; sourceTree = "<group>"; };
-		8E42F9381439244DA1AE5780A9B1220F /* Pods-SpotifyCloneTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SpotifyCloneTests-umbrella.h"; sourceTree = "<group>"; };
+		4A4EA772BF28F2A38617376534867BA8 /* Pods-SpotifyClone.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SpotifyClone.modulemap"; sourceTree = "<group>"; };
+		4ABD9F54297FF27309F1F8A34F99417C /* DispatchQueue+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DispatchQueue+Alamofire.swift"; path = "Source/DispatchQueue+Alamofire.swift"; sourceTree = "<group>"; };
+		4D3E0E1E34DD4394C6023B622C262222 /* Alamofire.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Alamofire.debug.xcconfig; sourceTree = "<group>"; };
+		51BB5063650D66E661FD979273F90078 /* MultipartUpload.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartUpload.swift; path = Source/MultipartUpload.swift; sourceTree = "<group>"; };
+		51D45A2AF061C99B2355F19EC47243D9 /* Protected.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Protected.swift; path = Source/Protected.swift; sourceTree = "<group>"; };
+		5A51515830AB9FE94E01DF6F48146153 /* StringEncoding+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "StringEncoding+Alamofire.swift"; path = "Source/StringEncoding+Alamofire.swift"; sourceTree = "<group>"; };
+		5BEF4837C47DFB74B73C8B82A591E94C /* Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Source/Alamofire.swift; sourceTree = "<group>"; };
+		5D797E9A5C5782CE845840781FA1CC81 /* Alamofire */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Alamofire; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		61F2B90B6F80D8F30747B3E178F5528F /* URLEncodedFormEncoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = URLEncodedFormEncoder.swift; path = Source/URLEncodedFormEncoder.swift; sourceTree = "<group>"; };
+		63118EA69B9C23C039EC7BC291709082 /* Pods-SpotifyClone-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SpotifyClone-Info.plist"; sourceTree = "<group>"; };
+		673CB7AF23C7E1475678C8CCC286CF41 /* Result+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Result+Alamofire.swift"; path = "Source/Result+Alamofire.swift"; sourceTree = "<group>"; };
+		7197951AB8559109A9F40B71A85C843E /* ResponseSerialization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResponseSerialization.swift; path = Source/ResponseSerialization.swift; sourceTree = "<group>"; };
+		7260AEB3C11E4980758502FF0957618B /* Pods-SpotifyCloneTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SpotifyCloneTests-Info.plist"; sourceTree = "<group>"; };
+		79BFAE4F0928F95479DE70C637654FC5 /* Alamofire.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Alamofire.modulemap; sourceTree = "<group>"; };
+		79EB40D0E4136A2EBA646F9A9D0DA652 /* RedirectHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RedirectHandler.swift; path = Source/RedirectHandler.swift; sourceTree = "<group>"; };
+		845043F6DD76EF451A61A8C4EEB3BF6C /* Alamofire-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-umbrella.h"; sourceTree = "<group>"; };
+		84B14ACFFB6A91762B582B46A3466A3F /* Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Source/Request.swift; sourceTree = "<group>"; };
+		876F4F5D5DA538F51C4D4F27C9F64377 /* OperationQueue+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "OperationQueue+Alamofire.swift"; path = "Source/OperationQueue+Alamofire.swift"; sourceTree = "<group>"; };
+		8D3D57353834825F7B52B816066B7789 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
+		9207D5C00E4876154565722DBCBD8FA8 /* Pods-SpotifyCloneTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SpotifyCloneTests.debug.xcconfig"; sourceTree = "<group>"; };
+		948B299C1B8EAF9FDDC429B4A75509F8 /* Pods-SpotifyClone-SpotifyCloneUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SpotifyClone-SpotifyCloneUITests-frameworks.sh"; sourceTree = "<group>"; };
+		970C386BD824FE4AD000560950399556 /* URLSessionConfiguration+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URLSessionConfiguration+Alamofire.swift"; path = "Source/URLSessionConfiguration+Alamofire.swift"; sourceTree = "<group>"; };
+		998E57E5CB536D68D4A97BC1B56E62B8 /* ParameterEncoding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParameterEncoding.swift; path = Source/ParameterEncoding.swift; sourceTree = "<group>"; };
+		9C1741D7ACD43E5D0E9DBE557F396581 /* RequestInterceptor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RequestInterceptor.swift; path = Source/RequestInterceptor.swift; sourceTree = "<group>"; };
+		9C44EFF4AE1CC95C361F6A007EDBD6E7 /* RetryPolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RetryPolicy.swift; path = Source/RetryPolicy.swift; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A381EC4807D4EA017FB1AB200166422B /* Pods-SpotifyCloneTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SpotifyCloneTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		A6E19F81D5402085D414A91FECD9AE84 /* Pods-SpotifyCloneTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SpotifyCloneTests.release.xcconfig"; sourceTree = "<group>"; };
-		B66AA6EA5447D7663BA47CC18D281263 /* Pods-SpotifyClone-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SpotifyClone-dummy.m"; sourceTree = "<group>"; };
-		C3EC9446EA0BDD1D84ABD09A3D4013C2 /* Pods-SpotifyClone-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SpotifyClone-umbrella.h"; sourceTree = "<group>"; };
-		C8B060A28EE2FC3A635AF9222DE3577F /* Pods-SpotifyClone-SpotifyCloneUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SpotifyClone-SpotifyCloneUITests.modulemap"; sourceTree = "<group>"; };
-		D1461FE66CB7815F41D65884E058FDA3 /* Pods-SpotifyClone-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SpotifyClone-Info.plist"; sourceTree = "<group>"; };
-		E0FB0F60905F7B8C6D7192587CEED80F /* Pods-SpotifyCloneTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SpotifyCloneTests-Info.plist"; sourceTree = "<group>"; };
-		E62E91083A9C0FEDDC5E471176E40E4D /* Pods-SpotifyClone-SpotifyCloneUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SpotifyClone-SpotifyCloneUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		F00B784222B11580BA29CC69171F1913 /* Pods-SpotifyClone-SpotifyCloneUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SpotifyClone-SpotifyCloneUITests-dummy.m"; sourceTree = "<group>"; };
-		F1AF76A1094D334D0A07773648D2698E /* Pods-SpotifyClone-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SpotifyClone-acknowledgements.plist"; sourceTree = "<group>"; };
-		F7A4D8490A68DA0B90E2A89CEE711558 /* Pods-SpotifyClone-SpotifyCloneUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SpotifyClone-SpotifyCloneUITests-umbrella.h"; sourceTree = "<group>"; };
-		F7BD7574573E49E7A84D5ADD9C56582E /* Pods-SpotifyClone-SpotifyCloneUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SpotifyClone-SpotifyCloneUITests-acknowledgements.plist"; sourceTree = "<group>"; };
-		F8F017DE29D4593573F0964F921A4BB7 /* Pods-SpotifyCloneTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SpotifyCloneTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A4153404C4C0A47E701390CEDAB4A093 /* Alamofire.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Alamofire.release.xcconfig; sourceTree = "<group>"; };
+		A6B48502ECB0DBC4D26FD073264EA761 /* Pods-SpotifyClone-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SpotifyClone-frameworks.sh"; sourceTree = "<group>"; };
+		A6F2B77F50C8E86FDD27C5A573013C07 /* Response.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Response.swift; path = Source/Response.swift; sourceTree = "<group>"; };
+		AFAA07C508A54A4F5BC9202C55980AD0 /* Pods-SpotifyClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SpotifyClone.debug.xcconfig"; sourceTree = "<group>"; };
+		B0EBFC4256A48F45E26B860D38479E52 /* Combine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Combine.swift; path = Source/Combine.swift; sourceTree = "<group>"; };
+		B4B8687B00F57762F34D3282826817C5 /* RequestTaskMap.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RequestTaskMap.swift; path = Source/RequestTaskMap.swift; sourceTree = "<group>"; };
+		B5DA36ADD8B0E94CE139C28448821E13 /* AuthenticationInterceptor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AuthenticationInterceptor.swift; path = Source/AuthenticationInterceptor.swift; sourceTree = "<group>"; };
+		BCC350EEADBAF761D20138C94C4A0086 /* URLConvertible+URLRequestConvertible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URLConvertible+URLRequestConvertible.swift"; path = "Source/URLConvertible+URLRequestConvertible.swift"; sourceTree = "<group>"; };
+		CE7CEB3C81C49F21F6647A1F6FBBB187 /* Pods-SpotifyClone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SpotifyClone.release.xcconfig"; sourceTree = "<group>"; };
+		D1319005C09F51D19C129FF8088745CE /* Pods-SpotifyClone-SpotifyCloneUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SpotifyClone-SpotifyCloneUITests-Info.plist"; sourceTree = "<group>"; };
+		D22DD8E7ADA0DC6AE5BAFDA33CE41519 /* Pods-SpotifyCloneTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SpotifyCloneTests-dummy.m"; sourceTree = "<group>"; };
+		D26220434118FCFC30E4850800AC3068 /* ParameterEncoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParameterEncoder.swift; path = Source/ParameterEncoder.swift; sourceTree = "<group>"; };
+		D72543C8516F0436AEBB0F7ED95116D5 /* Pods-SpotifyCloneTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SpotifyCloneTests-umbrella.h"; sourceTree = "<group>"; };
+		DA4D233027C8491F55B2473FCDA12389 /* CachedResponseHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CachedResponseHandler.swift; path = Source/CachedResponseHandler.swift; sourceTree = "<group>"; };
+		DE3BA92C8C5C705AB947F815F8722D69 /* Pods-SpotifyClone-SpotifyCloneUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SpotifyClone-SpotifyCloneUITests-umbrella.h"; sourceTree = "<group>"; };
+		DED9FFA0B3FBDA2D64C722F354352B3D /* Pods-SpotifyClone-SpotifyCloneUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SpotifyClone-SpotifyCloneUITests-dummy.m"; sourceTree = "<group>"; };
+		DFC11D87B8E53578044EA373E7DE6642 /* Alamofire-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Alamofire-dummy.m"; sourceTree = "<group>"; };
+		E80C79F2370E0D6B8CAE245397FF1799 /* Pods-SpotifyClone-SpotifyCloneUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SpotifyClone-SpotifyCloneUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		EEBCA5C233CC991170D691DB24ADA429 /* Pods-SpotifyClone-SpotifyCloneUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SpotifyClone-SpotifyCloneUITests-acknowledgements.plist"; sourceTree = "<group>"; };
+		F14A6C106FABCB5322A9362C31347EF2 /* Pods-SpotifyClone-SpotifyCloneUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SpotifyClone-SpotifyCloneUITests.modulemap"; sourceTree = "<group>"; };
+		F43DFB0A067881554C0CF2E83093E1D6 /* AlamofireExtended.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AlamofireExtended.swift; path = Source/AlamofireExtended.swift; sourceTree = "<group>"; };
+		F4A30C1C3A71FCA67437268536479185 /* Pods-SpotifyClone-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SpotifyClone-umbrella.h"; sourceTree = "<group>"; };
+		F71BBCEF1586B8C48F6C090283FD70AA /* Alamofire-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Alamofire-Info.plist"; sourceTree = "<group>"; };
+		FA24B13480173106997D3F6538CDE3CD /* ServerTrustEvaluation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServerTrustEvaluation.swift; path = Source/ServerTrustEvaluation.swift; sourceTree = "<group>"; };
+		FD0CE05D5D076B1B5190EE5DF97FD54E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		FF72312136F76CCB5AC50BCDD37ED4A2 /* SessionDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionDelegate.swift; path = Source/SessionDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		8EF99ABC27508588814D6705803B0240 /* Frameworks */ = {
+		39D530C2A3085A1033683EC9AE0BC313 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F664460B051A1BC8CF62FB14468BE19D /* Foundation.framework in Frameworks */,
+				33F86FAB918B148A63A1575667F9B570 /* CFNetwork.framework in Frameworks */,
+				9C0BE8FA0030B2BC1DF7C159FA059389 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B9142622D9C66232B603A22A48D4EDA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				139D431B27F5BA98DD180A85E7C859D9 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A0490A7C66AF13026197C2299844ADDD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AEC9541401A8303DF6B9AAE898A737F4 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,20 +193,122 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EC54A91CDEDCFD9FB699EBBA9FAF91C0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B367276CD86D89E9D9915F946BBE208E /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1A1EC2D6D174341EE9B068404A046E6E /* Products */ = {
+		0C1EA4635411EBDE281922ED77FDD165 /* Pods-SpotifyCloneTests */ = {
 			isa = PBXGroup;
 			children = (
+				004D6932C479C674A14963422050F6DE /* Pods-SpotifyCloneTests.modulemap */,
+				046847B315FB03CAC1725B93AD223AD8 /* Pods-SpotifyCloneTests-acknowledgements.markdown */,
+				3ED6A970AD3A04A89237B04A658FE920 /* Pods-SpotifyCloneTests-acknowledgements.plist */,
+				D22DD8E7ADA0DC6AE5BAFDA33CE41519 /* Pods-SpotifyCloneTests-dummy.m */,
+				7260AEB3C11E4980758502FF0957618B /* Pods-SpotifyCloneTests-Info.plist */,
+				D72543C8516F0436AEBB0F7ED95116D5 /* Pods-SpotifyCloneTests-umbrella.h */,
+				9207D5C00E4876154565722DBCBD8FA8 /* Pods-SpotifyCloneTests.debug.xcconfig */,
+				33F44C05CB6C34D078585840A1B2D1F6 /* Pods-SpotifyCloneTests.release.xcconfig */,
+			);
+			name = "Pods-SpotifyCloneTests";
+			path = "Target Support Files/Pods-SpotifyCloneTests";
+			sourceTree = "<group>";
+		};
+		1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				61C8CC330A5CA84DA2F5F1D32AB07069 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5A6F22EC0F5633257B85B6E660A2165F /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				79BFAE4F0928F95479DE70C637654FC5 /* Alamofire.modulemap */,
+				DFC11D87B8E53578044EA373E7DE6642 /* Alamofire-dummy.m */,
+				F71BBCEF1586B8C48F6C090283FD70AA /* Alamofire-Info.plist */,
+				2B0F05A3DBDE8E8AD6A8511F035D63D3 /* Alamofire-prefix.pch */,
+				845043F6DD76EF451A61A8C4EEB3BF6C /* Alamofire-umbrella.h */,
+				4D3E0E1E34DD4394C6023B622C262222 /* Alamofire.debug.xcconfig */,
+				A4153404C4C0A47E701390CEDAB4A093 /* Alamofire.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Alamofire";
+			sourceTree = "<group>";
+		};
+		5C25D41E090E3650D0D53085400F1711 /* Pods-SpotifyClone */ = {
+			isa = PBXGroup;
+			children = (
+				4A4EA772BF28F2A38617376534867BA8 /* Pods-SpotifyClone.modulemap */,
+				3A819BD7A8AEC9ECDC15C9D177B80B3C /* Pods-SpotifyClone-acknowledgements.markdown */,
+				0B5A351EC87A35269CDF49C79C044EA0 /* Pods-SpotifyClone-acknowledgements.plist */,
+				381D4C0FE49D9368B3913A22F692BE2E /* Pods-SpotifyClone-dummy.m */,
+				A6B48502ECB0DBC4D26FD073264EA761 /* Pods-SpotifyClone-frameworks.sh */,
+				63118EA69B9C23C039EC7BC291709082 /* Pods-SpotifyClone-Info.plist */,
+				F4A30C1C3A71FCA67437268536479185 /* Pods-SpotifyClone-umbrella.h */,
+				AFAA07C508A54A4F5BC9202C55980AD0 /* Pods-SpotifyClone.debug.xcconfig */,
+				CE7CEB3C81C49F21F6647A1F6FBBB187 /* Pods-SpotifyClone.release.xcconfig */,
+			);
+			name = "Pods-SpotifyClone";
+			path = "Target Support Files/Pods-SpotifyClone";
+			sourceTree = "<group>";
+		};
+		61C8CC330A5CA84DA2F5F1D32AB07069 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				8D3D57353834825F7B52B816066B7789 /* CFNetwork.framework */,
+				FD0CE05D5D076B1B5190EE5DF97FD54E /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		6FF97FACCA57A9A7BC9912B94BE14E47 /* Alamofire */ = {
+			isa = PBXGroup;
+			children = (
+				349B2325F6647FEE3C9209201FF5D4C2 /* AFError.swift */,
+				5BEF4837C47DFB74B73C8B82A591E94C /* Alamofire.swift */,
+				F43DFB0A067881554C0CF2E83093E1D6 /* AlamofireExtended.swift */,
+				B5DA36ADD8B0E94CE139C28448821E13 /* AuthenticationInterceptor.swift */,
+				DA4D233027C8491F55B2473FCDA12389 /* CachedResponseHandler.swift */,
+				B0EBFC4256A48F45E26B860D38479E52 /* Combine.swift */,
+				4ABD9F54297FF27309F1F8A34F99417C /* DispatchQueue+Alamofire.swift */,
+				0EC45C560942C5BCAB401419728808D3 /* EventMonitor.swift */,
+				333DAB6EC98A071AAD9A29C41818F346 /* HTTPHeaders.swift */,
+				4388F96485F322CF010F9CA6AF089C46 /* HTTPMethod.swift */,
+				0E0440F4381D065FED6264EFBCDB7960 /* MultipartFormData.swift */,
+				51BB5063650D66E661FD979273F90078 /* MultipartUpload.swift */,
+				401A0C3C3516540407583753D10DEB2B /* NetworkReachabilityManager.swift */,
+				29EBC286A9BAE2611EFC71F7C9FB60B8 /* Notifications.swift */,
+				876F4F5D5DA538F51C4D4F27C9F64377 /* OperationQueue+Alamofire.swift */,
+				D26220434118FCFC30E4850800AC3068 /* ParameterEncoder.swift */,
+				998E57E5CB536D68D4A97BC1B56E62B8 /* ParameterEncoding.swift */,
+				51D45A2AF061C99B2355F19EC47243D9 /* Protected.swift */,
+				79EB40D0E4136A2EBA646F9A9D0DA652 /* RedirectHandler.swift */,
+				84B14ACFFB6A91762B582B46A3466A3F /* Request.swift */,
+				9C1741D7ACD43E5D0E9DBE557F396581 /* RequestInterceptor.swift */,
+				B4B8687B00F57762F34D3282826817C5 /* RequestTaskMap.swift */,
+				A6F2B77F50C8E86FDD27C5A573013C07 /* Response.swift */,
+				7197951AB8559109A9F40B71A85C843E /* ResponseSerialization.swift */,
+				673CB7AF23C7E1475678C8CCC286CF41 /* Result+Alamofire.swift */,
+				9C44EFF4AE1CC95C361F6A007EDBD6E7 /* RetryPolicy.swift */,
+				FA24B13480173106997D3F6538CDE3CD /* ServerTrustEvaluation.swift */,
+				4591D5844289F02F52985F30FFDA6BB5 /* Session.swift */,
+				FF72312136F76CCB5AC50BCDD37ED4A2 /* SessionDelegate.swift */,
+				5A51515830AB9FE94E01DF6F48146153 /* StringEncoding+Alamofire.swift */,
+				BCC350EEADBAF761D20138C94C4A0086 /* URLConvertible+URLRequestConvertible.swift */,
+				61F2B90B6F80D8F30747B3E178F5528F /* URLEncodedFormEncoder.swift */,
+				062C7841BFC1EEBD8A094A3CA60AEADA /* URLRequest+Alamofire.swift */,
+				970C386BD824FE4AD000560950399556 /* URLSessionConfiguration+Alamofire.swift */,
+				20097F794E1A1791AB97EBE230264E61 /* Validation.swift */,
+				5A6F22EC0F5633257B85B6E660A2165F /* Support Files */,
+			);
+			name = Alamofire;
+			path = Alamofire;
+			sourceTree = "<group>";
+		};
+		81731574C0C69E97BA3FF68A5D105220 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5D797E9A5C5782CE845840781FA1CC81 /* Alamofire */,
 				08B2EDA4376D4B5D12FA50278A978C42 /* Pods-SpotifyClone */,
 				1E0DB88D67A5A185DB2DEBFA73AD400C /* Pods-SpotifyClone-SpotifyCloneUITests */,
 				45BDBA6E7A8AD6E499AC0FC37277B251 /* Pods-SpotifyCloneTests */,
@@ -98,41 +316,28 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		50A0FBA8CBDC39188AA2A264E6C63A81 /* Pods-SpotifyCloneTests */ = {
+		93AAA52288D163837A63BE689AFBDB2C /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				5E31BE0F1013D9C0CD1B7E990E604D69 /* Pods-SpotifyCloneTests.modulemap */,
-				A381EC4807D4EA017FB1AB200166422B /* Pods-SpotifyCloneTests-acknowledgements.markdown */,
-				8517ADCDD98E6A925812EE16EE8C3E8A /* Pods-SpotifyCloneTests-acknowledgements.plist */,
-				32472913F333D2305D21C3DB5FE2B144 /* Pods-SpotifyCloneTests-dummy.m */,
-				E0FB0F60905F7B8C6D7192587CEED80F /* Pods-SpotifyCloneTests-Info.plist */,
-				8E42F9381439244DA1AE5780A9B1220F /* Pods-SpotifyCloneTests-umbrella.h */,
-				F8F017DE29D4593573F0964F921A4BB7 /* Pods-SpotifyCloneTests.debug.xcconfig */,
-				A6E19F81D5402085D414A91FECD9AE84 /* Pods-SpotifyCloneTests.release.xcconfig */,
+				5C25D41E090E3650D0D53085400F1711 /* Pods-SpotifyClone */,
+				B377041FB4E915E308EB622BB7436BA2 /* Pods-SpotifyClone-SpotifyCloneUITests */,
+				0C1EA4635411EBDE281922ED77FDD165 /* Pods-SpotifyCloneTests */,
 			);
-			name = "Pods-SpotifyCloneTests";
-			path = "Target Support Files/Pods-SpotifyCloneTests";
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
+		B377041FB4E915E308EB622BB7436BA2 /* Pods-SpotifyClone-SpotifyCloneUITests */ = {
 			isa = PBXGroup;
 			children = (
-				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		BCBFDE1BE4483260ABB048EAD26E2861 /* Pods-SpotifyClone-SpotifyCloneUITests */ = {
-			isa = PBXGroup;
-			children = (
-				C8B060A28EE2FC3A635AF9222DE3577F /* Pods-SpotifyClone-SpotifyCloneUITests.modulemap */,
-				E62E91083A9C0FEDDC5E471176E40E4D /* Pods-SpotifyClone-SpotifyCloneUITests-acknowledgements.markdown */,
-				F7BD7574573E49E7A84D5ADD9C56582E /* Pods-SpotifyClone-SpotifyCloneUITests-acknowledgements.plist */,
-				F00B784222B11580BA29CC69171F1913 /* Pods-SpotifyClone-SpotifyCloneUITests-dummy.m */,
-				35D977A259F7E921EDF3E3632D39A63B /* Pods-SpotifyClone-SpotifyCloneUITests-Info.plist */,
-				F7A4D8490A68DA0B90E2A89CEE711558 /* Pods-SpotifyClone-SpotifyCloneUITests-umbrella.h */,
-				89CBD09BE69BC25222D218D7A331A09F /* Pods-SpotifyClone-SpotifyCloneUITests.debug.xcconfig */,
-				8A202CCF531C8621A86EFA41341046EC /* Pods-SpotifyClone-SpotifyCloneUITests.release.xcconfig */,
+				F14A6C106FABCB5322A9362C31347EF2 /* Pods-SpotifyClone-SpotifyCloneUITests.modulemap */,
+				3D7225C58523CDF7DD56D8480818CE36 /* Pods-SpotifyClone-SpotifyCloneUITests-acknowledgements.markdown */,
+				EEBCA5C233CC991170D691DB24ADA429 /* Pods-SpotifyClone-SpotifyCloneUITests-acknowledgements.plist */,
+				DED9FFA0B3FBDA2D64C722F354352B3D /* Pods-SpotifyClone-SpotifyCloneUITests-dummy.m */,
+				948B299C1B8EAF9FDDC429B4A75509F8 /* Pods-SpotifyClone-SpotifyCloneUITests-frameworks.sh */,
+				D1319005C09F51D19C129FF8088745CE /* Pods-SpotifyClone-SpotifyCloneUITests-Info.plist */,
+				DE3BA92C8C5C705AB947F815F8722D69 /* Pods-SpotifyClone-SpotifyCloneUITests-umbrella.h */,
+				E80C79F2370E0D6B8CAE245397FF1799 /* Pods-SpotifyClone-SpotifyCloneUITests.debug.xcconfig */,
+				2573D9E1D998AF3AFF4B2756EAA32A02 /* Pods-SpotifyClone-SpotifyCloneUITests.release.xcconfig */,
 			);
 			name = "Pods-SpotifyClone-SpotifyCloneUITests";
 			path = "Target Support Files/Pods-SpotifyClone-SpotifyCloneUITests";
@@ -142,62 +347,45 @@
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				1A1EC2D6D174341EE9B068404A046E6E /* Products */,
-				D285001BFB60446D3CC5390332F1282F /* Targets Support Files */,
+				1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */,
+				D6535AE6278B88B90F3A376D1347504F /* Pods */,
+				81731574C0C69E97BA3FF68A5D105220 /* Products */,
+				93AAA52288D163837A63BE689AFBDB2C /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+		D6535AE6278B88B90F3A376D1347504F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				578452D2E740E91742655AC8F1636D1F /* iOS */,
+				6FF97FACCA57A9A7BC9912B94BE14E47 /* Alamofire */,
 			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		D285001BFB60446D3CC5390332F1282F /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				EBCE64306479E1E1404A7F425B1F3DCC /* Pods-SpotifyClone */,
-				BCBFDE1BE4483260ABB048EAD26E2861 /* Pods-SpotifyClone-SpotifyCloneUITests */,
-				50A0FBA8CBDC39188AA2A264E6C63A81 /* Pods-SpotifyCloneTests */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		EBCE64306479E1E1404A7F425B1F3DCC /* Pods-SpotifyClone */ = {
-			isa = PBXGroup;
-			children = (
-				47FEDA4F587E8FBE26D5BB9B0055997B /* Pods-SpotifyClone.modulemap */,
-				2F89C26D22B6EE14EE83A2A34BD3D61D /* Pods-SpotifyClone-acknowledgements.markdown */,
-				F1AF76A1094D334D0A07773648D2698E /* Pods-SpotifyClone-acknowledgements.plist */,
-				B66AA6EA5447D7663BA47CC18D281263 /* Pods-SpotifyClone-dummy.m */,
-				D1461FE66CB7815F41D65884E058FDA3 /* Pods-SpotifyClone-Info.plist */,
-				C3EC9446EA0BDD1D84ABD09A3D4013C2 /* Pods-SpotifyClone-umbrella.h */,
-				09B2DE1EB76591BC23A04EF68FCC81C6 /* Pods-SpotifyClone.debug.xcconfig */,
-				026232FEA5276199F26D577176096615 /* Pods-SpotifyClone.release.xcconfig */,
-			);
-			name = "Pods-SpotifyClone";
-			path = "Target Support Files/Pods-SpotifyClone";
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		2C2956D8A901A800EC019BFA5C70A9B6 /* Headers */ = {
+		14FF1799C5ADBC71E1DB963F2AF8853D /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA2A5A3219537C303A93AA4766F9771D /* Pods-SpotifyClone-umbrella.h in Headers */,
+				0B399DCF32F8FE4F09B03B6E7B65E0D1 /* Alamofire-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		863D9F8296E02792669FD5D158757230 /* Headers */ = {
+		257E87E5C3F386A18DE066AC9711BDE6 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF49CE89872A9609F0E649B365957D1B /* Pods-SpotifyClone-SpotifyCloneUITests-umbrella.h in Headers */,
+				ACDF188F606DD516D720F010647787F8 /* Pods-SpotifyClone-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2FC5E05E313D88F9F4BEF9ABEB36A1F5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8531BF20C551594DC119127FE8CD9046 /* Pods-SpotifyClone-SpotifyCloneUITests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,7 +412,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				58DF42091D3EF709DD5FFF73402F5E35 /* PBXTargetDependency */,
+				6957C30016A2ABEBE172753E58FE7F96 /* PBXTargetDependency */,
 			);
 			name = "Pods-SpotifyCloneTests";
 			productName = Pods_SpotifyCloneTests;
@@ -233,16 +421,17 @@
 		};
 		48EF543B3AE525B902EBD2495136E156 /* Pods-SpotifyClone */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A2C69FEAA7600533D6C459734368CBB6 /* Build configuration list for PBXNativeTarget "Pods-SpotifyClone" */;
+			buildConfigurationList = 572B6027660C711CCD1E9DE89DD0F8CF /* Build configuration list for PBXNativeTarget "Pods-SpotifyClone" */;
 			buildPhases = (
-				2C2956D8A901A800EC019BFA5C70A9B6 /* Headers */,
-				49D74DC7EBBF9696573183F10023B9FB /* Sources */,
-				8EF99ABC27508588814D6705803B0240 /* Frameworks */,
-				143BB6191AF5862EDBB0BA30E05B7382 /* Resources */,
+				257E87E5C3F386A18DE066AC9711BDE6 /* Headers */,
+				7DDF571AEA17328984460D81D4D78361 /* Sources */,
+				5B9142622D9C66232B603A22A48D4EDA /* Frameworks */,
+				DF43906EF2CD5B33DF1C6AE628FA5731 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				63BCFE5B86785711537F527BC3BCFC60 /* PBXTargetDependency */,
 			);
 			name = "Pods-SpotifyClone";
 			productName = Pods_SpotifyClone;
@@ -251,20 +440,39 @@
 		};
 		C2AE4AC206EFF880E08F83A227A03FE9 /* Pods-SpotifyClone-SpotifyCloneUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 78DF306FE29CFF7EC0C233EF209636C1 /* Build configuration list for PBXNativeTarget "Pods-SpotifyClone-SpotifyCloneUITests" */;
+			buildConfigurationList = 22471E7951A94468546F58648683E417 /* Build configuration list for PBXNativeTarget "Pods-SpotifyClone-SpotifyCloneUITests" */;
 			buildPhases = (
-				863D9F8296E02792669FD5D158757230 /* Headers */,
-				FD3BA2CAAE962EBAB6ED369CC799A6B7 /* Sources */,
-				EC54A91CDEDCFD9FB699EBBA9FAF91C0 /* Frameworks */,
-				7B292B4C5BC1BBC2135EEBA161938377 /* Resources */,
+				2FC5E05E313D88F9F4BEF9ABEB36A1F5 /* Headers */,
+				72C294A0E1F56ED3836A8D5592514A19 /* Sources */,
+				A0490A7C66AF13026197C2299844ADDD /* Frameworks */,
+				61048043059002DE6350C5BA15CBEFB5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				78C44F322A4DF9481857BB014E07F566 /* PBXTargetDependency */,
+			);
+			name = "Pods-SpotifyClone-SpotifyCloneUITests";
+			productName = Pods_SpotifyClone_SpotifyCloneUITests;
+			productReference = 1E0DB88D67A5A185DB2DEBFA73AD400C /* Pods-SpotifyClone-SpotifyCloneUITests */;
+			productType = "com.apple.product-type.framework";
+		};
+		EAAA1AD3A8A1B59AB91319EE40752C6D /* Alamofire */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C98220D3187BF01A20E296DC128BED4 /* Build configuration list for PBXNativeTarget "Alamofire" */;
+			buildPhases = (
+				14FF1799C5ADBC71E1DB963F2AF8853D /* Headers */,
+				5FE9836A67EA3E51CA889A1AB95BC874 /* Sources */,
+				39D530C2A3085A1033683EC9AE0BC313 /* Frameworks */,
+				93ECA2D9F79614966DFA76280ABFEF67 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Pods-SpotifyClone-SpotifyCloneUITests";
-			productName = Pods_SpotifyClone_SpotifyCloneUITests;
-			productReference = 1E0DB88D67A5A185DB2DEBFA73AD400C /* Pods-SpotifyClone-SpotifyCloneUITests */;
+			name = Alamofire;
+			productName = Alamofire;
+			productReference = 5D797E9A5C5782CE845840781FA1CC81 /* Alamofire */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -277,7 +485,7 @@
 				LastUpgradeCheck = 1240;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -285,10 +493,11 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 1A1EC2D6D174341EE9B068404A046E6E /* Products */;
+			productRefGroup = 81731574C0C69E97BA3FF68A5D105220 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				EAAA1AD3A8A1B59AB91319EE40752C6D /* Alamofire */,
 				48EF543B3AE525B902EBD2495136E156 /* Pods-SpotifyClone */,
 				C2AE4AC206EFF880E08F83A227A03FE9 /* Pods-SpotifyClone-SpotifyCloneUITests */,
 				46F174255A27B1E016D163E7C4A0B16A /* Pods-SpotifyCloneTests */,
@@ -297,14 +506,14 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		143BB6191AF5862EDBB0BA30E05B7382 /* Resources */ = {
+		61048043059002DE6350C5BA15CBEFB5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7B292B4C5BC1BBC2135EEBA161938377 /* Resources */ = {
+		93ECA2D9F79614966DFA76280ABFEF67 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -318,14 +527,72 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DF43906EF2CD5B33DF1C6AE628FA5731 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		49D74DC7EBBF9696573183F10023B9FB /* Sources */ = {
+		5FE9836A67EA3E51CA889A1AB95BC874 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				084E9E07E1EB3C5C04B2C028E86203EE /* Pods-SpotifyClone-dummy.m in Sources */,
+				A664924D6CCE2922A3F81EC932F4D476 /* AFError.swift in Sources */,
+				FEDBAD32E2EDA85AD6E362B82892A74A /* Alamofire.swift in Sources */,
+				1773084DECF68CADD45567FBEC56036D /* Alamofire-dummy.m in Sources */,
+				A3153333FC136836B0028E6AB2A56BEE /* AlamofireExtended.swift in Sources */,
+				F36D96A4346C90A2D11CB3B6A2ECF4CF /* AuthenticationInterceptor.swift in Sources */,
+				13E62623092B680C6A5C349D48B8A4FD /* CachedResponseHandler.swift in Sources */,
+				97584BC08D2B494417BDEE268CFF38C9 /* Combine.swift in Sources */,
+				DCD0C33A2B50811D53CF68F021284B47 /* DispatchQueue+Alamofire.swift in Sources */,
+				9CFDA7C92E0EEA31F709663B0E727ABA /* EventMonitor.swift in Sources */,
+				52BE6F747C26DF2A24532458E55DC10F /* HTTPHeaders.swift in Sources */,
+				02621C4B82398D0657F474E21493A3A2 /* HTTPMethod.swift in Sources */,
+				C16A047C4E8D856309A486182A490993 /* MultipartFormData.swift in Sources */,
+				30A331CD9286145E92DB11D671664C63 /* MultipartUpload.swift in Sources */,
+				B6473B8E8353317F75D6800D4F7054CB /* NetworkReachabilityManager.swift in Sources */,
+				471611F482CDC15BF464E3BA9CB83968 /* Notifications.swift in Sources */,
+				2550F0D474DE846FEC5C76CBE85F927E /* OperationQueue+Alamofire.swift in Sources */,
+				8B9CDBE3FFD712120CD66DD8B06C44E4 /* ParameterEncoder.swift in Sources */,
+				4634BA717BFCE522E5B42304C6A78B5D /* ParameterEncoding.swift in Sources */,
+				02DB462B121245593CE653B9B377F970 /* Protected.swift in Sources */,
+				DD58A00EACBEE274C381B491519C6B8C /* RedirectHandler.swift in Sources */,
+				E0C65E16219718869CD2AFCA2C5465CB /* Request.swift in Sources */,
+				F63BE0585331CAA3482EF736803F8243 /* RequestInterceptor.swift in Sources */,
+				1D17B83410DC98911D539F2BD5254C05 /* RequestTaskMap.swift in Sources */,
+				C7F66519CE6148F21D7DB11423F1D34D /* Response.swift in Sources */,
+				941822CDF68EB8F4D49F150457A82616 /* ResponseSerialization.swift in Sources */,
+				A4F1202CE5BBE79F3BBCAE3D2B16BC03 /* Result+Alamofire.swift in Sources */,
+				512FAFBD71830F126224C033B6C45F4E /* RetryPolicy.swift in Sources */,
+				8F9E1EEF2FE52E3231A769722D5C4148 /* ServerTrustEvaluation.swift in Sources */,
+				EC11B17DA78F7EEBEBC3EFAF68C6DF9F /* Session.swift in Sources */,
+				688337B18659C4BF722F87AFC4FEEF81 /* SessionDelegate.swift in Sources */,
+				E1769C267E82B0C24FE0FFBF949F0A6E /* StringEncoding+Alamofire.swift in Sources */,
+				5E594FA3290D3D70F500572D0AC100DB /* URLConvertible+URLRequestConvertible.swift in Sources */,
+				F5D2A31C7EB1DE010771140B6E7ABAD8 /* URLEncodedFormEncoder.swift in Sources */,
+				B89D1C69742F61878115334A1D2DFFE7 /* URLRequest+Alamofire.swift in Sources */,
+				E857ADCAD7B647883D5B2AEC3F16D1D5 /* URLSessionConfiguration+Alamofire.swift in Sources */,
+				D15FEA31AA9625BBF041FB91E48A9995 /* Validation.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		72C294A0E1F56ED3836A8D5592514A19 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D6259BF45FF93AF1BC5F576A562EA2B /* Pods-SpotifyClone-SpotifyCloneUITests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7DDF571AEA17328984460D81D4D78361 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AA1B61E20040483D648CD77A97CD7E0 /* Pods-SpotifyClone-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,31 +604,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FD3BA2CAAE962EBAB6ED369CC799A6B7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BECEAFEEB5548154F39E73A8B02D0512 /* Pods-SpotifyClone-SpotifyCloneUITests-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		58DF42091D3EF709DD5FFF73402F5E35 /* PBXTargetDependency */ = {
+		63BCFE5B86785711537F527BC3BCFC60 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Alamofire;
+			target = EAAA1AD3A8A1B59AB91319EE40752C6D /* Alamofire */;
+			targetProxy = B136CE6BD0279B0976049FF71D663512 /* PBXContainerItemProxy */;
+		};
+		6957C30016A2ABEBE172753E58FE7F96 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-SpotifyClone";
 			target = 48EF543B3AE525B902EBD2495136E156 /* Pods-SpotifyClone */;
-			targetProxy = 7F3008B853A27561613DD094F8790121 /* PBXContainerItemProxy */;
+			targetProxy = 3E680B2E9E1A60D168D3904CE89CF814 /* PBXContainerItemProxy */;
+		};
+		78C44F322A4DF9481857BB014E07F566 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Alamofire;
+			target = EAAA1AD3A8A1B59AB91319EE40752C6D /* Alamofire */;
+			targetProxy = AE6FA7CC16453EF838EB1E705457FAF6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		36993917666997551D47324765087BD1 /* Debug */ = {
+		2A7DA26AF0A7C5162BE1469DC8E89D03 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89CBD09BE69BC25222D218D7A331A09F /* Pods-SpotifyClone-SpotifyCloneUITests.debug.xcconfig */;
+			baseConfigurationReference = A4153404C4C0A47E701390CEDAB4A093 /* Alamofire.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -371,32 +641,32 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-SpotifyClone-SpotifyCloneUITests/Pods-SpotifyClone-SpotifyCloneUITests-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/Alamofire/Alamofire-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Alamofire/Alamofire-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SpotifyClone-SpotifyCloneUITests/Pods-SpotifyClone-SpotifyCloneUITests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				MODULEMAP_FILE = "Target Support Files/Alamofire/Alamofire.modulemap";
+				PRODUCT_MODULE_NAME = Alamofire;
+				PRODUCT_NAME = Alamofire;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		406AF728E403AE9D37C91800E496BA54 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A6E19F81D5402085D414A91FECD9AE84 /* Pods-SpotifyCloneTests.release.xcconfig */;
+			baseConfigurationReference = 33F44C05CB6C34D078585840A1B2D1F6 /* Pods-SpotifyCloneTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -418,44 +688,6 @@
 				);
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-SpotifyCloneTests/Pods-SpotifyCloneTests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		40955D4E82333082C523C8A5A7A24C33 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 026232FEA5276199F26D577176096615 /* Pods-SpotifyClone.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-SpotifyClone/Pods-SpotifyClone-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SpotifyClone/Pods-SpotifyClone.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -536,9 +768,9 @@
 			};
 			name = Debug;
 		};
-		8849C528220F664DBF824A3671B22A17 /* Debug */ = {
+		602027E53E052E55A42D2CD083EB30CD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 09B2DE1EB76591BC23A04EF68FCC81C6 /* Pods-SpotifyClone.debug.xcconfig */;
+			baseConfigurationReference = 2573D9E1D998AF3AFF4B2756EAA32A02 /* Pods-SpotifyClone-SpotifyCloneUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -550,7 +782,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-SpotifyClone/Pods-SpotifyClone-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-SpotifyClone-SpotifyCloneUITests/Pods-SpotifyClone-SpotifyCloneUITests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -559,7 +791,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SpotifyClone/Pods-SpotifyClone.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-SpotifyClone-SpotifyCloneUITests/Pods-SpotifyClone-SpotifyCloneUITests.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -567,6 +799,79 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		6DC89DD2DF016A99E3E60990154E1DB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E80C79F2370E0D6B8CAE245397FF1799 /* Pods-SpotifyClone-SpotifyCloneUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-SpotifyClone-SpotifyCloneUITests/Pods-SpotifyClone-SpotifyCloneUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SpotifyClone-SpotifyCloneUITests/Pods-SpotifyClone-SpotifyCloneUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		79CAC264ADFE5B001A5B7C3B7E3C344F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4D3E0E1E34DD4394C6023B622C262222 /* Alamofire.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Alamofire/Alamofire-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Alamofire/Alamofire-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/Alamofire/Alamofire.modulemap";
+				PRODUCT_MODULE_NAME = Alamofire;
+				PRODUCT_NAME = Alamofire;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -635,9 +940,9 @@
 			};
 			name = Release;
 		};
-		F69B8943C62191564A74CA1D6FBC2F9C /* Release */ = {
+		904719FA85F4B352ED550D8F75788ED3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8A202CCF531C8621A86EFA41341046EC /* Pods-SpotifyClone-SpotifyCloneUITests.release.xcconfig */;
+			baseConfigurationReference = CE7CEB3C81C49F21F6647A1F6FBBB187 /* Pods-SpotifyClone.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -649,7 +954,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-SpotifyClone-SpotifyCloneUITests/Pods-SpotifyClone-SpotifyCloneUITests-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-SpotifyClone/Pods-SpotifyClone-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -658,7 +963,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SpotifyClone-SpotifyCloneUITests/Pods-SpotifyClone-SpotifyCloneUITests.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-SpotifyClone/Pods-SpotifyClone.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -675,7 +980,7 @@
 		};
 		F9F6D72624CEBD413A4AA8BEAB38C946 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F8F017DE29D4593573F0964F921A4BB7 /* Pods-SpotifyCloneTests.debug.xcconfig */;
+			baseConfigurationReference = 9207D5C00E4876154565722DBCBD8FA8 /* Pods-SpotifyCloneTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -710,9 +1015,55 @@
 			};
 			name = Debug;
 		};
+		FF42BF400292547E8308E732F66B11BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AFAA07C508A54A4F5BC9202C55980AD0 /* Pods-SpotifyClone.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-SpotifyClone/Pods-SpotifyClone-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SpotifyClone/Pods-SpotifyClone.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		22471E7951A94468546F58648683E417 /* Build configuration list for PBXNativeTarget "Pods-SpotifyClone-SpotifyCloneUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DC89DD2DF016A99E3E60990154E1DB7 /* Debug */,
+				602027E53E052E55A42D2CD083EB30CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		41A786222DE5BD2D335B225F33B1E732 /* Build configuration list for PBXNativeTarget "Pods-SpotifyCloneTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -731,20 +1082,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		78DF306FE29CFF7EC0C233EF209636C1 /* Build configuration list for PBXNativeTarget "Pods-SpotifyClone-SpotifyCloneUITests" */ = {
+		572B6027660C711CCD1E9DE89DD0F8CF /* Build configuration list for PBXNativeTarget "Pods-SpotifyClone" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				36993917666997551D47324765087BD1 /* Debug */,
-				F69B8943C62191564A74CA1D6FBC2F9C /* Release */,
+				FF42BF400292547E8308E732F66B11BE /* Debug */,
+				904719FA85F4B352ED550D8F75788ED3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A2C69FEAA7600533D6C459734368CBB6 /* Build configuration list for PBXNativeTarget "Pods-SpotifyClone" */ = {
+		9C98220D3187BF01A20E296DC128BED4 /* Build configuration list for PBXNativeTarget "Alamofire" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8849C528220F664DBF824A3671B22A17 /* Debug */,
-				40955D4E82333082C523C8A5A7A24C33 /* Release */,
+				79CAC264ADFE5B001A5B7C3B7E3C344F /* Debug */,
+				2A7DA26AF0A7C5162BE1469DC8E89D03 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

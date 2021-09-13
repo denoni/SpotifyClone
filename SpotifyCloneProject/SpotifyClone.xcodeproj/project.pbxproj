@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -157,7 +157,6 @@
 				5F4C1A6C59B345B85DC7AC22 /* Pods-SpotifyCloneTests.debug.xcconfig */,
 				20B3099CA990A6EB28639B67 /* Pods-SpotifyCloneTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -353,6 +352,7 @@
 				C0C63C5726DD144E00532792 /* Frameworks */,
 				C0C63C5826DD144E00532792 /* Resources */,
 				C0C63C8926DD14FD00532792 /* ShellScript */,
+				5A5B11BBC923B9AC32881F31 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -390,6 +390,7 @@
 				C0C63C7226DD145000532792 /* Sources */,
 				C0C63C7326DD145000532792 /* Frameworks */,
 				C0C63C7426DD145000532792 /* Resources */,
+				63597D7859EE9C34604AC54F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -490,6 +491,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5A5B11BBC923B9AC32881F31 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SpotifyClone/Pods-SpotifyClone-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SpotifyClone/Pods-SpotifyClone-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SpotifyClone/Pods-SpotifyClone-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		63597D7859EE9C34604AC54F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SpotifyClone-SpotifyCloneUITests/Pods-SpotifyClone-SpotifyCloneUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SpotifyClone-SpotifyCloneUITests/Pods-SpotifyClone-SpotifyCloneUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SpotifyClone-SpotifyCloneUITests/Pods-SpotifyClone-SpotifyCloneUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8461ABA074370353AD940D68 /* [CP] Check Pods Manifest.lock */ = {
@@ -793,7 +828,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5F4C1A6C59B345B85DC7AC22 /* Pods-SpotifyCloneTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YXP9U88588;
@@ -816,7 +850,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 20B3099CA990A6EB28639B67 /* Pods-SpotifyCloneTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YXP9U88588;
@@ -839,7 +872,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 512CD52A8B5E5FF24C64D696 /* Pods-SpotifyClone-SpotifyCloneUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YXP9U88588;
 				INFOPLIST_FILE = SpotifyCloneUITests/Info.plist;
@@ -860,7 +892,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 90F935BC104E5E279A07CDC2 /* Pods-SpotifyClone-SpotifyCloneUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YXP9U88588;
 				INFOPLIST_FILE = SpotifyCloneUITests/Info.plist;
