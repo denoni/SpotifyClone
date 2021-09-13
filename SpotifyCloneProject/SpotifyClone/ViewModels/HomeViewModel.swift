@@ -26,7 +26,7 @@ class HomeViewModel: ObservableObject {
 
     // Recently Played
     var recentlyPlayedSection = [SpotifyMediaContent]()
-    for (title, coverImage, isPodcast, isArtist) in recentlyPlayed {
+    for (title, coverImage, isArtist, isPodcast) in recentlyPlayed {
       recentlyPlayedSection.append(SpotifyMediaContent(title: title,
                                                        author: "",
                                                        coverImage: coverImage,
