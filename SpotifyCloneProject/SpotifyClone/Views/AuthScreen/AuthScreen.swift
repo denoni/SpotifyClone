@@ -10,9 +10,10 @@ import SwiftUI
 
 struct AuthScreen: View {
   @State var isShowingAuthWebView = false
+  @State var spotifyCode = ""
 
-  var scope = "streaming"
-  var clientID = <YOUR ID>
+  var scope = "playlist-modify-private"
+  var clientID = "28343fa78d8f458c8feb35e53398ecd9" //<YOUR_ID>
   var redirectURI = "https://www.github.com"
 
   var apiAuth = APIAuthentication()
@@ -27,10 +28,13 @@ struct AuthScreen: View {
           .background(Capsule().fill(Color.spotifyGreen))
       })
 
-    }.sheet(isPresented: $isShowingAuthWebView, content: {
-      AuthScreenWebView(url: apiAuth.getAuthURL(clientID: clientID,
-                                                scope: scope,
-                                                redirectURI: redirectURI))
+    }
+    .sheet(isPresented: $isShowingAuthWebView, content: {
+      AuthSheetView(webViewModel: WebViewModel(url: apiAuth.getAuthURL(clientID: clientID,
+                                                                       scope: scope,
+                                                                       redirectURI: redirectURI)),
+                    showView: self.$isShowingAuthWebView,
+                    spotifyCode: $spotifyCode)
     })
   }
 
