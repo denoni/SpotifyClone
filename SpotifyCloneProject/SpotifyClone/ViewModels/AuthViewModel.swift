@@ -8,39 +8,61 @@
 import Foundation
 import WebKit
 
-class WebViewModel: ObservableObject {
-  @Published var url: String
-  @Published var isLoading: Bool = true
-  @Published var exit: Bool = false
-  @Published var spotifyCode = ""
+class AuthViewModel: ObservableObject {
+  @Published var isLoading = true
+  @Published var exit = false
+  @Published var authKeyIsAvailable = false
 
-  init (url: String) {
-    self.url = url
-  }
+  static var apiAuth = APIAuthentication()
+
+  static var scope = "playlist-modify-private"
+  static var clientID = <YOUR_ID>
+  static var clientSecret = <YOUR_SECRET>
+  static var redirectURI = "https://www.github.com"
+  static var url = apiAuth.getAuthURL(clientID: clientID, scope: scope, redirectURI: redirectURI)
+
+  var authKey: AuthKey?
 
   func isSpotifyResponseCode(url: String) {
+    DispatchQueue.main.async {
+      let spotifyCode = url.replacingOccurrences(of: "\(AuthViewModel.redirectURI)/?code=", with: "")
+      self.exit = true
 
-    let authScreen = AuthScreen()
-    let spotifyCode = url.replacingOccurrences(of: "\(authScreen.redirectURI)/?code=", with: "")
+      guard spotifyCode.count > 1 else {
+        fatalError("Error getting spotify code.")
+      }
 
-    self.spotifyCode = spotifyCode
-    exit = true
+      AuthViewModel.apiAuth.getAccessKey(code: spotifyCode,
+                                         redirectURI: AuthViewModel.redirectURI,
+                                         clientID: AuthViewModel.clientID,
+                                         clientSecret: AuthViewModel.clientSecret) { authKey in
+        self.authKeyIsAvailable = true
+        self.authKey = authKey
+      }
+    }
+  }
 
-    print("\n\n CODE: \(spotifyCode) \n\n")
+  func getAuthKey(_ authKey: AuthKey) -> (String, String, String) {
+
+    let accessToken = authKey.accessToken
+    let refreshToken = authKey.refreshToken
+    let scope = authKey.scope
+
+    return (accessToken, refreshToken, scope)
   }
 
 }
 
 class AuthCoordinator: NSObject, WKNavigationDelegate {
-  private var viewModel: WebViewModel
+  private var authViewModel: AuthViewModel
 
-  init(_ viewModel: WebViewModel) {
-    self.viewModel = viewModel
+  init(_ viewModel: AuthViewModel) {
+    self.authViewModel = viewModel
   }
 
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-              viewModel.isLoading = false
-          }
+    authViewModel.isLoading = false
+  }
 
   func webView(_ webView: WKWebView,
                decidePolicyFor navigationAction: WKNavigationAction,
@@ -52,7 +74,7 @@ class AuthCoordinator: NSObject, WKNavigationDelegate {
       decisionHandler(.allow)
       return
     } else {
-      viewModel.isSpotifyResponseCode(url: newlyRequestedURL)
+      authViewModel.isSpotifyResponseCode(url: newlyRequestedURL)
       decisionHandler(.cancel)
       webView.stopLoading()
       return

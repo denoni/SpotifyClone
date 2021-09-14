@@ -9,14 +9,8 @@
 import SwiftUI
 
 struct AuthScreen: View {
+  @ObservedObject private(set) var authViewModel: AuthViewModel
   @State var isShowingAuthWebView = false
-  @State var spotifyCode = ""
-
-  var scope = "playlist-modify-private"
-  var clientID = "28343fa78d8f458c8feb35e53398ecd9" //<YOUR_ID>
-  var redirectURI = "https://www.github.com"
-
-  var apiAuth = APIAuthentication()
 
   var body: some View {
     NavigationView {
@@ -27,15 +21,20 @@ struct AuthScreen: View {
           .padding()
           .background(Capsule().fill(Color.spotifyGreen))
       })
-
     }
-    .sheet(isPresented: $isShowingAuthWebView, content: {
-      AuthSheetView(webViewModel: WebViewModel(url: apiAuth.getAuthURL(clientID: clientID,
-                                                                       scope: scope,
-                                                                       redirectURI: redirectURI)),
-                    showView: self.$isShowingAuthWebView,
-                    spotifyCode: $spotifyCode)
+    .sheet(isPresented: $isShowingAuthWebView , content: {
+      AuthSheetView(authViewModel: authViewModel,
+                    isShowingSheetView: $isShowingAuthWebView)
     })
-  }
 
+    VStack(alignment: .center) {
+      Text(authViewModel.authKeyIsAvailable ? "Auth key:" : "Auth key not ready." )
+        .foregroundColor(Color.spotifyGreen)
+        .bold()
+        .font(.title)
+      Text(authViewModel.authKeyIsAvailable ? authViewModel.authKey!.accessToken : "")
+        .font(.footnote)
+        .multilineTextAlignment(.center)
+    }
+  }
 }

@@ -9,25 +9,21 @@ import SwiftUI
 import WebKit
 
 struct AuthSheetView: View {
-  @ObservedObject var webViewModel: WebViewModel
-  @Binding var showView: Bool
-  @Binding var spotifyCode: String
+  @ObservedObject var authViewModel: AuthViewModel
+  @Binding var isShowingSheetView: Bool
   
   var body: some View {
-    Group {
-      if !webViewModel.exit {
-        LoadingView(isLoading: self.$webViewModel.isLoading) {
-          WebView(viewModel: self.webViewModel)
-            .opacity(webViewModel.isLoading ? 0 : 1)
+      if !authViewModel.exit {
+        LoadingView(isLoading: $authViewModel.isLoading) {
+          WebView(authViewModel: authViewModel)
+            .opacity(authViewModel.isLoading ? 0 : 1)
         }
       } else {
         ProgressView()
           .onAppear {
-            showView = false
-            spotifyCode = webViewModel.spotifyCode
+            isShowingSheetView = false
           }
       }
-    }.edgesIgnoringSafeArea(.bottom)
   }
   
 }
@@ -37,11 +33,11 @@ struct WebView: UIViewRepresentable {
   // a lot of errors will appear on terminal.
   // From what I've searched, the errors are
   // originated by a bug and won't affect the app.
-  @ObservedObject var viewModel: WebViewModel
+  @ObservedObject var authViewModel: AuthViewModel
   let webView = WKWebView()
   
   func makeCoordinator() -> AuthCoordinator {
-    AuthCoordinator(self.viewModel)
+    AuthCoordinator(authViewModel)
   }
   
   func updateUIView(_ uiView: UIView,
@@ -50,7 +46,7 @@ struct WebView: UIViewRepresentable {
   func makeUIView(context: Context) -> UIView {
     self.webView.navigationDelegate = context.coordinator
     
-    if let url = URL(string: self.viewModel.url) {
+    if let url = URL(string: AuthViewModel.url) {
       self.webView.load(URLRequest(url: url))
     }
     

@@ -12,7 +12,7 @@ struct SpotifyCloneApp: App {
   @StateObject var viewRouter = ViewRouter()
     var body: some Scene {
         WindowGroup {
-          AuthScreen()
+          AuthScreen(authViewModel: AuthViewModel())
 //            ContentView(viewRouter: viewRouter)
         }
     }

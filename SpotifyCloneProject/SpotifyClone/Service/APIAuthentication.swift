@@ -16,7 +16,10 @@ struct APIAuthentication {
   // CLIENT_ID = Get yours on https://developer.spotify.com/dashboard/applications
   // REDIRECT_URI = A random website to redirect(we'll cut the connection before loading this site into the user screen) - IMPORTANT: This should be exactly equal to what you typed on your api project on spotify developer website.
 
-  func getAuthURL(clientID: String, scope: String, redirectURI: String) -> String {
+  func getAuthURL(clientID: String,
+                  scope: String,
+                  redirectURI: String) -> String {
+
     var url = baseURL
     url += "\(path)?"
 
@@ -26,5 +29,40 @@ struct APIAuthentication {
     url += "&response_type=code"
 
     return url
+  }
+
+  func getAccessKey(code: String,
+                    redirectURI: String,
+                    clientID: String,
+                    clientSecret: String,
+                    completionHandler: @escaping (AuthKey) -> Void) {
+
+    let baseUrl = "https://accounts.spotify.com/api/token"
+
+    let headers: HTTPHeaders = [
+      "Content-Type": "application/x-www-form-urlencoded"
+    ]
+
+    let parameters = [
+      "grant_type": "authorization_code",
+      "code": code,
+      "redirect_uri": redirectURI,
+      "client_id": clientID,
+      "client_secret": clientSecret,
+    ]
+
+    let encoder = URLEncodedFormParameterEncoder(encoder: URLEncodedFormEncoder(spaceEncoding: .percentEscaped))
+
+    AF.request(baseUrl,
+               method: .post,
+               parameters: parameters,
+               encoder: encoder,
+               headers: headers)
+      .responseDecodable(of: AuthKey.self) { response in
+        guard let key = response.value else {
+          fatalError("Error receiving access keys from API.")
+        }
+        completionHandler(key)
+      }
   }
 }
