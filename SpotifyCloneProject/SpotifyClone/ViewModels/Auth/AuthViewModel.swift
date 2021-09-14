@@ -15,9 +15,13 @@ class AuthViewModel: ObservableObject {
   static var apiAuth = APIAuthentication()
   var authKey: AuthKey?
 
+  // Put your API id and secret inside YourSensitiveData and add it to .gitignore
+  // How do I do I generate new api keys? Check APIAuthentication.swift
+  static var clientID = YourSensitiveData.clientID
+  static var clientSecret = YourSensitiveData.clientSecret
+
+  // To know more about what all those variables are, check APIAuthentication.swift
   static var scope = "user-top-read"
-  static var clientID = <YOUR_ID>
-  static var clientSecret = <YOUR_SECRET>
   static var redirectURI = "https://www.github.com"
   static var url = apiAuth.getAuthURL(clientID: clientID, scope: scope, redirectURI: redirectURI)
 
