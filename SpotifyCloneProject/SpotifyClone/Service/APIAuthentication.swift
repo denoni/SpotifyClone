@@ -65,4 +65,5 @@ struct APIAuthentication {
         completionHandler(key)
       }
   }
+
 }

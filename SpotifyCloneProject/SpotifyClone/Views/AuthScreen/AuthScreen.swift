@@ -27,14 +27,38 @@ struct AuthScreen: View {
                     isShowingSheetView: $isShowingAuthWebView)
     })
 
-    VStack(alignment: .center) {
-      Text(authViewModel.authKeyIsAvailable ? "Auth key:" : "Auth key not ready." )
-        .foregroundColor(Color.spotifyGreen)
-        .bold()
-        .font(.title)
-      Text(authViewModel.authKeyIsAvailable ? authViewModel.authKey!.accessToken : "")
-        .font(.footnote)
-        .multilineTextAlignment(.center)
+    // -----------------------------------------------------------------
+    // TODO : -- TEMPORARY --
+    VStack(alignment: .center, spacing: 50) {
+
+      // Shows Track Item that was fetched from API
+      Group {
+        if authViewModel.trackItemIsAvailable {
+          VStack(alignment: .center) {
+
+
+            Text(authViewModel.trackItem!.name)
+              .bold()
+              .font(.title2)
+
+            Text(authViewModel.trackItem!.artist)
+              .opacity(0.6)
+          }
+        }
+      }
+
+
+      // Shows Auth Key fetched from API
+      VStack(alignment: .center) {
+        Text(authViewModel.authKeyIsAvailable ? "Auth key:" : "Auth key not ready." )
+          .foregroundColor(Color.spotifyGreen)
+          .bold()
+          .font(.title)
+        Text(authViewModel.authKeyIsAvailable ? authViewModel.authKey!.accessToken : "")
+          .font(.footnote)
+          .multilineTextAlignment(.center)
+      }
     }
+    // -----------------------------------------------------------------
   }
 }
