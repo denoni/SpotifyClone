@@ -25,7 +25,7 @@ class AuthCoordinator: NSObject, WKNavigationDelegate {
 
     let newlyRequestedURL = navigationAction.request.url!.absoluteString
 
-    // The response conde from the Spotify auth API comes as a url.
+    // The response code from the Spotify auth API comes as a url.
     // If we see `?error=` in the response, we got an error instead of the code.
     guard newlyRequestedURL.contains("?error=") == false else {
       fatalError("Received an error from SpotifyAuth API, instead of the auth code.")

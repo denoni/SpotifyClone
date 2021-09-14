@@ -16,8 +16,8 @@ class AuthViewModel: ObservableObject {
   var authKey: AuthKey?
 
   static var scope = "user-top-read"
-  static var clientID = "28343fa78d8f458c8feb35e53398ecd9" //<YOUR_ID>
-  static var clientSecret = "2793e785fb6045cd8def012c76075058" //<YOUR_SECRET>
+  static var clientID = <YOUR_ID>
+  static var clientSecret = <YOUR_SECRET>
   static var redirectURI = "https://www.github.com"
   static var url = apiAuth.getAuthURL(clientID: clientID, scope: scope, redirectURI: redirectURI)
 
