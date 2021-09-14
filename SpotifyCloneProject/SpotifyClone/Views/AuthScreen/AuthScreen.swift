@@ -36,6 +36,9 @@ struct AuthScreen: View {
         if authViewModel.trackItemIsAvailable {
           VStack(alignment: .center) {
 
+            RemoteImage(url: authViewModel.trackItem!.imageURL)
+              .aspectRatio(1/1, contentMode: .fill)
+              .padding(20)
 
             Text(authViewModel.trackItem!.name)
               .bold()
