@@ -8,9 +8,14 @@
 import Foundation
 
 class AuthViewModel: ObservableObject {
+  @Published var mainViewModel: MainViewModel
   @Published var isLoading = true
   @Published var exit = false
   @Published var authKeyIsAvailable = false
+
+  init(mainViewModel: MainViewModel) {
+    self.mainViewModel = mainViewModel
+  }
 
   static var apiAuth = APIAuthentication()
   var authKey: AuthKey?
@@ -35,8 +40,6 @@ class AuthViewModel: ObservableObject {
   func isSpotifyResponseCode(url: String) {
     DispatchQueue.main.async {
       let spotifyCode = url.replacingOccurrences(of: "\(AuthViewModel.redirectURI)/?code=", with: "")
-      self.exit = true
-
       guard spotifyCode.count > 1 else {
         fatalError("Error getting spotify code.")
       }
@@ -53,9 +56,10 @@ class AuthViewModel: ObservableObject {
 
         print("\n\n\nAUTH_KEY: \(self.authKey!)")
 
-        self.getTopTracksFromArtist(accessToken: self.authKey!.accessToken)
+//        self.getTopTracksFromArtist(accessToken: self.authKey!.accessToken)
+        self.exit = true
+        self.mainViewModel.finishedAuthentication(authKey: self.authKey!)
       }
-
     }
   }
 

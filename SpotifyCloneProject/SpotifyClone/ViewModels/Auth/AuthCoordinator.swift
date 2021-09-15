@@ -9,7 +9,7 @@ import Foundation
 import WebKit
 
 class AuthCoordinator: NSObject, WKNavigationDelegate {
-  private var authViewModel: AuthViewModel
+  @Published private var authViewModel: AuthViewModel
 
   init(_ viewModel: AuthViewModel) {
     self.authViewModel = viewModel

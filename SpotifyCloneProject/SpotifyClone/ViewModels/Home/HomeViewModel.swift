@@ -8,7 +8,12 @@
 import SwiftUI
 
 class HomeViewModel: ObservableObject {
+  @Published var mainViewMonel: MainViewModel
   @Published private var homeViewModel: SpotifyModel<SpotifyMediaContent> = HomeViewModel.getData()
+
+  init(mainViewModel: MainViewModel) {
+    self.mainViewMonel = mainViewModel
+  }
 
   private static func getData() -> SpotifyModel<SpotifyMediaContent> {
     var allMediaSet = [String:[SpotifyMediaContent]]()
