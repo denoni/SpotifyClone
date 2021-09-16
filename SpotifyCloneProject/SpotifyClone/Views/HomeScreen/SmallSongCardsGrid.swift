@@ -36,7 +36,7 @@ struct SmallSongCardsGrid: View {
       }
 
       HStack(spacing: spacingSmallItems) {
-        SmallSongCard(imageURL: tracks.count <= 2 ? "https://s3-us-west-2.amazonaws.com/jmiller-projects/playedmost/spotify-placeholder-trimmable.png" : tracks[5].imageURL,
+        SmallSongCard(imageURL: tracks.count <= 2 ? "https://s3-us-west-2.amazonaws.com/jmiller-projects/playedmost/spotify-placeholder-trimmable.png" : tracks[2].imageURL,
                       title: tracks.count <= 2 ? "Loading" : tracks[2].name)
         SmallSongCard(imageURL: tracks.count <= 3 ? "https://s3-us-west-2.amazonaws.com/jmiller-projects/playedmost/spotify-placeholder-trimmable.png" : tracks[3].imageURL,
                       title: tracks.count <= 3 ? "Loading" : tracks[3].name)

@@ -25,6 +25,7 @@ struct RecentlyPlayedScrollView: View {
             SmallSongItem(imageURL: track.imageURL,
                           title: track.name)
           }
+          Spacer(minLength: 5)
         }
       }
     }
