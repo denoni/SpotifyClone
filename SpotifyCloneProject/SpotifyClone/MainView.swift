@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  MainView.swift
 //  SpotifyClone
 //
 //  Created by Gabriel on 8/30/21.
@@ -7,33 +7,35 @@
 
 import SwiftUI
 
-struct ContentView: View {
-  @ObservedObject var mainViewModel: MainViewModel
-  @ObservedObject var homeViewModel: HomeViewModel
-  @ObservedObject var authViewModel: AuthViewModel
+struct MainView: View {
+  @StateObject var mainViewModel: MainViewModel
+  @StateObject var authViewModel: AuthViewModel
+  @StateObject var homeViewModel: HomeViewModel
 
   init(mainViewModel: MainViewModel) {
-    self.mainViewModel = mainViewModel
-    self.homeViewModel = HomeViewModel(mainViewModel: mainViewModel)
-    self.authViewModel = AuthViewModel(mainViewModel: mainViewModel)
+    _mainViewModel = StateObject(wrappedValue: mainViewModel)
+    _authViewModel = StateObject(wrappedValue: AuthViewModel(mainViewModel: mainViewModel))
+    _homeViewModel = StateObject(wrappedValue: HomeViewModel(mainViewModel: mainViewModel))
   }
 
 
 
   var body: some View {
-    ZStack {
-      Color.spotifyDarkGray.ignoresSafeArea()
-      switch mainViewModel.currentPage {
-      case .auth:
-        AuthScreen(authViewModel: authViewModel)
-      case .home:
-        HomeScreen(homeViewModel: homeViewModel)
-      case .search:
-        SearchScreen()
-      case .myLibrary:
-        Text("To be done 🛠").font(.title)
+    if mainViewModel.homeScreenIsReady {
+      ZStack {
+        Color.spotifyDarkGray.ignoresSafeArea()
+        switch mainViewModel.currentPage {
+        case .home:
+          HomeScreen(homeViewModel: homeViewModel)
+        case .search:
+          SearchScreen()
+        case .myLibrary:
+          Text("To be done 🛠").font(.title)
+        }
+        BottomBar(mainViewModel: mainViewModel, showMediaPlayer: true)
       }
-      BottomBar(mainViewModel: mainViewModel, showMediaPlayer: true)
+    } else {
+      AuthScreen(authViewModel: AuthViewModel(mainViewModel: mainViewModel))
     }
   }
 }
@@ -42,7 +44,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentView(mainViewModel: MainViewModel())
+    MainView(mainViewModel: MainViewModel())
   }
 }
 

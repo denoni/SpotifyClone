@@ -9,15 +9,11 @@ import SwiftUI
 
 @main
 struct SpotifyCloneApp: App {
-  let mainViewModel: MainViewModel
-
-  init() {
-    self.mainViewModel = MainViewModel()
-  }
-
     var body: some Scene {
+      let mainViewModel = MainViewModel()
+
         WindowGroup {
-            ContentView(mainViewModel: mainViewModel)
+          MainView(mainViewModel: mainViewModel)
         }
     }
 }

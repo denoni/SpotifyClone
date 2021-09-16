@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SmallSongCard: View {
-  let image: Image
+  let imageURL: String
   let title: String
 
   let grayLighter = Color(red: 0.196, green: 0.196, blue: 0.196)
@@ -21,7 +21,7 @@ struct SmallSongCard: View {
         .fill(LinearGradient(gradient: Gradient(colors: [grayLighter, grayDarker]), startPoint: .top, endPoint: .bottom))
       HStack {
         Rectangle()
-          .overlay(image.resizable())
+          .overlay(RemoteImage(url: imageURL))
           .foregroundColor(grayHeavyDark)
           .cornerRadius(5, corners: [.topLeft, .bottomLeft])
           .aspectRatio(1/1, contentMode: .fit)

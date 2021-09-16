@@ -12,24 +12,32 @@
 import SwiftUI
 
 struct HomeScreen: View {
-  @ObservedObject private(set) var homeViewModel: HomeViewModel
+  @StateObject var homeViewModel: HomeViewModel
+
 
   var body: some View {
     RadialGradientBackground()
-    ScrollView(showsIndicators: false) {
-      VStack(alignment: .leading) {
-        SmallSongCardsGrid(homeViewModel: homeViewModel)
-          .padding(.horizontal, lateralPadding)
-          .padding(.bottom, paddingSectionSeparation)
-        RecentlyPlayedScrollView(homeViewModel: homeViewModel)
-          .padding(.bottom, paddingSectionSeparation)
-        TopPodcastScrollView(homeViewModel: homeViewModel)
-          .padding(.bottom, paddingSectionSeparation)
-        RecommendedArtistScrollView(homeViewModel: homeViewModel)
-          .padding(.bottom, paddingSectionSeparation)
-        BigSongCoversScrollView(homeViewModel: homeViewModel)
-          .padding(.bottom, paddingBottomSection)
-      }.padding(.vertical, lateralPadding)
+    if homeViewModel.isLoading {
+      ProgressView().onAppear {
+        homeViewModel.fetchHomeData()
+      }
+    } else {
+      ScrollView(showsIndicators: false) {
+        VStack(alignment: .leading) {
+          SmallSongCardsGrid(tracks: !homeViewModel.isLoading ? homeViewModel.medias["Small Song Card Items"]! : [])
+            .padding(.horizontal, lateralPadding)
+            .padding(.bottom, paddingSectionSeparation)
+
+  //        RecentlyPlayedScrollView(homeViewModel: homeViewModel)
+  //          .padding(.bottom, paddingSectionSeparation)
+  //        TopPodcastScrollView(homeViewModel: homeViewModel)
+  //          .padding(.bottom, paddingSectionSeparation)
+  //        RecommendedArtistScrollView(homeViewModel: homeViewModel)
+  //          .padding(.bottom, paddingSectionSeparation)
+  //        BigSongCoversScrollView(homeViewModel: homeViewModel)
+  //          .padding(.bottom, paddingBottomSection)
+        }.padding(.vertical, lateralPadding)
+      }
     }
   }
 }

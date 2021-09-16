@@ -13,7 +13,7 @@ struct AuthSheetView: View {
   @Binding var isShowingSheetView: Bool
   
   var body: some View {
-      if !authViewModel.exit {
+      if !authViewModel.finishedAuthentication {
         LoadingView(isLoading: $authViewModel.isLoading) {
           WebView(authViewModel: authViewModel)
             .opacity(authViewModel.isLoading ? 0 : 1)

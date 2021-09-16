@@ -10,18 +10,18 @@ import SwiftUI
 struct SpotifyMediaContent {
   var title: String
   var author: String
-  var coverImage: Image
+  var imageURL: String
   var isPodcast: Bool = false
   var isArtist: Bool = false
 
   init(title: String,
        author: String,
-       coverImage: Image,
+       imageURL: String,
        isPodcast: Bool = false,
        isArtist: Bool = false) {
     self.title = title
     self.author = author
-    self.coverImage = coverImage
+    self.imageURL = imageURL
     self.isPodcast = isPodcast
     self.isArtist = isArtist
   }

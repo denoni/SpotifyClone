@@ -8,21 +8,7 @@
 import SwiftUI
 
 struct SmallSongCardsGrid: View {
-  @ObservedObject private(set) var homeViewModel: HomeViewModel
-
-  let sectionTitle = "Small Song Card Items"
-
-  var sectionItems: [SpotifyMediaContent] {
-
-    let items = homeViewModel.getItems(fromSection: sectionTitle)
-    var contentFromItems = [SpotifyMediaContent]()
-
-    for index in items.indices {
-      contentFromItems.append(items[index].content)
-    }
-
-    return contentFromItems
-  }
+  @State var tracks: [SpotifyModel.TrackItem]
 
   var body: some View {
     VStack(spacing: spacingSmallItems) {
@@ -33,32 +19,35 @@ struct SmallSongCardsGrid: View {
           .resizeToFit()
           .padding(5)
       }.frame(height: 30)
-      buildGrid(sectionItems: sectionItems)
+      buildGrid(tracks: tracks)
     }
   }
 
-  @ViewBuilder private func buildGrid(sectionItems: [SpotifyMediaContent]) -> some View {
+  @ViewBuilder private func buildGrid(tracks: [SpotifyModel.TrackItem]) -> some View {
 
     VStack(spacing: spacingSmallItems) {
       HStack(spacing: spacingSmallItems) {
-        SmallSongCard(image: sectionItems[0].coverImage,
-                      title: sectionItems[0].title)
-        SmallSongCard(image: sectionItems[1].coverImage,
-                      title: sectionItems[1].title)
+        SmallSongCard(imageURL: tracks.count == 0 ? "https://s3-us-west-2.amazonaws.com/jmiller-projects/playedmost/spotify-placeholder-trimmable.png" : tracks[0].imageURL,
+                      title: tracks.count == 0 ? "Loading" : tracks[0].name)
+          .onTapGesture {
+            print(tracks.debugDescription)
+          }
+        SmallSongCard(imageURL: tracks.count <= 1 ? "https://s3-us-west-2.amazonaws.com/jmiller-projects/playedmost/spotify-placeholder-trimmable.png" : tracks[1].imageURL,
+                      title: tracks.count <= 1 ? "Loading" : tracks[1].name)
       }
 
       HStack(spacing: spacingSmallItems) {
-        SmallSongCard(image: sectionItems[2].coverImage,
-                      title: sectionItems[2].title)
-        SmallSongCard(image: sectionItems[3].coverImage,
-                      title: sectionItems[3].title)
+        SmallSongCard(imageURL: tracks.count <= 2 ? "https://s3-us-west-2.amazonaws.com/jmiller-projects/playedmost/spotify-placeholder-trimmable.png" : tracks[5].imageURL,
+                      title: tracks.count <= 2 ? "Loading" : tracks[2].name)
+        SmallSongCard(imageURL: tracks.count <= 3 ? "https://s3-us-west-2.amazonaws.com/jmiller-projects/playedmost/spotify-placeholder-trimmable.png" : tracks[3].imageURL,
+                      title: tracks.count <= 3 ? "Loading" : tracks[3].name)
       }
 
       HStack(spacing: spacingSmallItems) {
-        SmallSongCard(image: sectionItems[4].coverImage,
-                      title: sectionItems[4].title)
-        SmallSongCard(image: sectionItems[5].coverImage,
-                      title: sectionItems[5].title)
+        SmallSongCard(imageURL: tracks.count <= 4 ? "https://s3-us-west-2.amazonaws.com/jmiller-projects/playedmost/spotify-placeholder-trimmable.png" : tracks[4].imageURL,
+                      title: tracks.count <= 4 ? "Loading" : tracks[4].name)
+        SmallSongCard(imageURL: tracks.count <= 5 ? "https://s3-us-west-2.amazonaws.com/jmiller-projects/playedmost/spotify-placeholder-trimmable.png" : tracks[5].imageURL,
+                      title: tracks.count <= 5 ? "Loading" : tracks[5].name)
       }
     }
   }

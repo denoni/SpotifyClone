@@ -14,15 +14,13 @@ struct BottomBar: View {
   var body: some View {
     VStack(spacing: 0) {
       Spacer()
-      if mainViewModel.currentPage != .auth {
-        Group {
-          if showMediaPlayer {
-            BottomMediaPlayerBar(songName: "Shape of You",
-                                 artist: "Ed Sheeran",
-                                 cover: Image("shape-of-you-cover"))
-          }
-          BottomNavigationBar(mainViewModel: mainViewModel)
+      Group {
+        if showMediaPlayer {
+          BottomMediaPlayerBar(songName: "Shape of You",
+                               artist: "Ed Sheeran",
+                               cover: Image("shape-of-you-cover"))
         }
+        BottomNavigationBar(mainViewModel: mainViewModel)
       }
     }
   }

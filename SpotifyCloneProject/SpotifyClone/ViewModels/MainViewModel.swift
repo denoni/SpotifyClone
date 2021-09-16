@@ -5,20 +5,25 @@
 //  Created by Gabriel on 9/14/21.
 //
 
-import Foundation
+import SwiftUI
 
 class MainViewModel: ObservableObject {
   @Published private(set) var authKey: AuthKey?
-  @Published var currentPage: Page = .auth
-
-  func finishedAuthentication(authKey: AuthKey) {
+  @Published var currentPage: Page = .home
+  @Published var homeScreenIsReady = false
+  
+  func finishAuthentication(authKey: AuthKey) {
     self.authKey = authKey
-    currentPage = .home
+    
+    guard self.authKey != nil else {
+      fatalError("HomeScreen would be initiated without authKey.")
+    }
+
+    homeScreenIsReady = true
   }
 }
 
 enum Page {
-  case auth
   case home
   case search
   case myLibrary

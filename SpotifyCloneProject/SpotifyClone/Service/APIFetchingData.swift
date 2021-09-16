@@ -10,12 +10,13 @@ import Alamofire
 
 // TODO: Error handling for calls
 
-struct APIFetchingData {
+class APIFetchingData: ObservableObject {
+  @Published var topArtistDataHasLoaded = false
 
-  static func getTopTracksFromArtist(accessToken: String,
+  func getTopTracksFromArtist(accessToken: String,
                               country: String,
                               id: String,
-                              completionHandler: @escaping (TrackItem) -> Void) {
+                              completionHandler: @escaping ([SpotifyModel.TrackItem]) -> Void) {
 
     let baseUrl = "https://api.spotify.com/v1/artists/\(id)/top-tracks?market=\(country)"
 
@@ -26,29 +27,36 @@ struct APIFetchingData {
     AF.request(baseUrl,
                method: .get,
                headers: headers)
-      .responseDecodable(of: Tracks.self) { response in
+      .responseDecodable(of: TracksResponse.self) { response in
         guard let data = response.value else {
-          fatalError("Error receiving access keys from API.")
+          fatalError("Error receiving tracks from API.")
         }
 
-        let firstTrack = data.tracks[0]
+        let numberOfTracks = data.tracks.count
+        print(numberOfTracks)
 
+        var trackItems = [SpotifyModel.TrackItem]()
 
-        let name = firstTrack.name
-        let previewURL = firstTrack.preview_url
-        let imageURL = firstTrack.album.images[0].url
-        let artist = firstTrack.artists[0].name
-        let type = firstTrack.type
-        let id = firstTrack.id
+        for trackIndex in 0 ..< numberOfTracks {
+          let name = data.tracks[trackIndex].name
+          let previewURL = data.tracks[trackIndex].preview_url
+          let imageURL = data.tracks[trackIndex].album.images[0].url
+          let artist = data.tracks[trackIndex].artists[0].name
+          let type = data.tracks[trackIndex].type
+          let id = data.tracks[trackIndex].id
 
-        let trackItem = TrackItem(name: name,
-                                  previewURL: previewURL,
-                                  imageURL: imageURL,
-                                  artist: artist,
-                                  type: type,
-                                  id: id)
+          print(imageURL)
 
-        completionHandler(trackItem)
+          let trackItem = SpotifyModel.TrackItem(name: name,
+                                                 previewURL: previewURL ?? "",
+                                                 imageURL: imageURL,
+                                                 artist: artist,
+                                                 type: type,
+                                                 id: id)
+          trackItems.append(trackItem)
+          completionHandler(trackItems)
+        }
       }
+    topArtistDataHasLoaded = true
   }
 }

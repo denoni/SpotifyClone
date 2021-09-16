@@ -8,17 +8,52 @@
 import SwiftUI
 
 class HomeViewModel: ObservableObject {
-  @Published var mainViewMonel: MainViewModel
-  @Published private var homeViewModel: SpotifyModel<SpotifyMediaContent> = HomeViewModel.getData()
+  @ObservedObject var api = APIFetchingData()
+  @Published var mainViewModel: MainViewModel
+  @Published var isLoading = true
+
+  @Published var medias = [String:[SpotifyModel.TrackItem]]()
 
   init(mainViewModel: MainViewModel) {
-    self.mainViewMonel = mainViewModel
+    self.mainViewModel = mainViewModel
+    fetchHomeData()
   }
 
-  private static func getData() -> SpotifyModel<SpotifyMediaContent> {
-    var allMediaSet = [String:[SpotifyMediaContent]]()
+
+  func fetchHomeData() {
+    isLoading = true
+    if mainViewModel.authKey != nil {
+      getTopTracksFromArtist(accessToken: mainViewModel.authKey!.accessToken)
+    }
+  }
+
+  func getTopTracksFromArtist(accessToken: String) {
+      let arianGrandeID = "66CXWjxzNUsdJxJ2JdwvnR"
+
+    DispatchQueue.main.async {
+      self.api.getTopTracksFromArtist(accessToken: accessToken,
+                                             country: "US",
+                                             id: arianGrandeID) { [unowned self] trackItems in
+
+        self.medias["Small Song Card Items"] = trackItems
+        self.isLoading = false
+      }
+    }
+
+}
 
 // TODO: The sections below should be added in a non-manual way
+
+/*
+    // SmallSongCardItems
+    var smallSongCardSection = [SpotifyMediaContent]()
+    
+    for (title, imageURL) in mainViewModel.smallSongCardItems {
+      smallSongCardSection.append(SpotifyMediaContent(title: title,
+                                                      author: "",
+                                                      imageURL: imageURL))
+    }
+    allMediaSet["Small Song Card Items"] = smallSongCardSection
 
     // Rock Classics
     var rockClassicsSection = [SpotifyMediaContent]()
@@ -39,16 +74,6 @@ class HomeViewModel: ObservableObject {
                                                        isArtist: isArtist))
     }
     allMediaSet["Recently Played"] = recentlyPlayedSection
-
-    // SmallSongCardItems
-    var smallSongCardSection = [SpotifyMediaContent]()
-    for (title, coverImage) in smallSongCardItems {
-      smallSongCardSection.append(SpotifyMediaContent(title: title,
-                                                      author: "",
-                                                      coverImage: coverImage))
-    }
-    allMediaSet["Small Song Card Items"] = smallSongCardSection
-
     // Top Podcasts
     var topPodcastsSection = [SpotifyMediaContent]()
     for (title, author, coverImage, isPodcast) in topPodcasts {
@@ -67,29 +92,26 @@ class HomeViewModel: ObservableObject {
                                                                 coverImage: coverImage))
     }
     allMediaSet["For The Fans Of David Guetta"] = forTheFansOfDavidGuettaSection
-
-
-    return SpotifyModel<SpotifyMediaContent>(collectionOfMedia: allMediaSet)
-  }
+*/
 
 
 
   // MARK: - X
 
-  var mediaCollection: [String:[SpotifyModel<SpotifyMediaContent>.SpotifyMedia]] { homeViewModel.homeScreenMediaCollection }
+//  var mediaCollection: [String:[SpotifyModel.TrackItem]] { homeViewModel.homeScreenMediaCollection }
 
 
 
   // MARK: - Y
 
-  func getItems(fromSection sectionTitle: String) -> [SpotifyModel<SpotifyMediaContent>.SpotifyMedia] {
-
-    guard self.mediaCollection.keys.contains(sectionTitle) else {
-      fatalError("Provided section title does not exist.")
-    }
-
-    return self.mediaCollection[sectionTitle]!
-  }
+//  func getItems(fromSection sectionTitle: String) -> [SpotifyModel.TrackItem] {
+//
+//    guard self.mediaCollection.keys.contains(sectionTitle) else {
+//      fatalError("Provided section title does not exist.")
+//    }
+//
+//    return self.mediaCollection[sectionTitle]!
+//  }
 }
 
 

@@ -9,26 +9,22 @@
 import SwiftUI
 
 struct AuthScreen: View {
-  @ObservedObject private(set) var authViewModel: AuthViewModel
+  @StateObject var authViewModel: AuthViewModel
   @State var isShowingAuthWebView = false
-
+  
   var body: some View {
     NavigationView {
-      VStack {
-        VStack {
-          Button(action: { isShowingAuthWebView = true }, label: {
-            Text("Authenticate with API")
-              .bold()
-              .foregroundColor(.white)
-              .padding()
-              .background(Capsule().fill(Color.spotifyGreen))
-          })
-        }
-
-        Spacer()
+      Button(action: { isShowingAuthWebView = true }, label: {
+        Text("Authenticate with API")
+          .bold()
+          .foregroundColor(.white)
+          .padding()
+          .background(Capsule().fill(Color.spotifyGreen))
+      }).onLongPressGesture {
+        print(authViewModel.finishedAuthentication)
       }
     }
-    .sheet(isPresented: $isShowingAuthWebView , content: {
+    .sheet(isPresented: $isShowingAuthWebView, content: {
       AuthSheetView(authViewModel: authViewModel,
                     isShowingSheetView: $isShowingAuthWebView)
     })
