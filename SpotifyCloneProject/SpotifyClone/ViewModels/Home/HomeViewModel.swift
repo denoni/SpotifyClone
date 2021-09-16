@@ -10,37 +10,77 @@ import SwiftUI
 class HomeViewModel: ObservableObject {
   @ObservedObject var api = APIFetchingData()
   @Published var mainViewModel: MainViewModel
-  @Published var isLoading = true
+  @Published var isLoading = [String:Bool]()
 
   @Published var medias = [String:[SpotifyModel.TrackItem]]()
 
+
   init(mainViewModel: MainViewModel) {
     self.mainViewModel = mainViewModel
+
+    // Populate isLoading and medias with all possible section keys
+    for section in Sections.allCases {
+      print(" >>> \(section)")
+      isLoading[section.rawValue] = true
+      medias[section.rawValue] = []
+    }
     fetchHomeData()
   }
 
+  enum Sections: String, CaseIterable {
+    case userTopTracks = "Small Song Card Items"
+    case recentlyPlayed = "Recently Played"
+//    case artistTopTracks = "Artist Top Tracks"
+  }
 
+  // Load data dynamically to show the homeScreen faster
   func fetchHomeData() {
-    isLoading = true
+    for key in isLoading.keys { isLoading[key] = true }
+
     if mainViewModel.authKey != nil {
-      getTopTracksFromArtist(accessToken: mainViewModel.authKey!.accessToken)
+      getUserFavoriteTracks(accessToken: mainViewModel.authKey!.accessToken)
+      getUserRecentlyPlayed(accessToken: mainViewModel.authKey!.accessToken)
     }
   }
 
-  func getTopTracksFromArtist(accessToken: String) {
-      let arianGrandeID = "66CXWjxzNUsdJxJ2JdwvnR"
+//  func getTopTracksFromArtist(accessToken: String) {
+//    let sectionTitle = Sections.artistTopTracks.rawValue
+//      let arianaGrandeID = "66CXWjxzNUsdJxJ2JdwvnR"
+//
+//    DispatchQueue.main.async {
+//      self.api.getTopTracksFromArtist(accessToken: accessToken,
+//                                             country: "US",
+//                                             id: arianaGrandeID) { [unowned self] trackItems in
+//
+//        self.medias[sectionTitle] = trackItems
+//        self.isLoading[sectionTitle] = false
+//      }
+//    }
+//  }
+
+  func getUserRecentlyPlayed(accessToken: String) {
+    let sectionTitle = Sections.recentlyPlayed.rawValue
 
     DispatchQueue.main.async {
-      self.api.getTopTracksFromArtist(accessToken: accessToken,
-                                             country: "US",
-                                             id: arianGrandeID) { [unowned self] trackItems in
+      self.api.getUserRecentlyPlayed(accessToken: accessToken) { [unowned self] trackItems in
 
-        self.medias["Small Song Card Items"] = trackItems
-        self.isLoading = false
+        self.medias[sectionTitle] = trackItems
+        self.isLoading[sectionTitle] = false
       }
     }
+  }
 
-}
+  func getUserFavoriteTracks(accessToken: String) {
+    let sectionTitle = Sections.userTopTracks.rawValue
+
+    DispatchQueue.main.async {
+      self.api.getUserFavoriteTracks(accessToken: accessToken) { [unowned self] trackItems in
+
+        self.medias[sectionTitle] = trackItems
+        self.isLoading[sectionTitle] = false
+      }
+    }
+  }
 
 // TODO: The sections below should be added in a non-manual way
 

@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// TODO: Add cache
+
 struct RemoteImage: View {
 
   private class Loader: ObservableObject {

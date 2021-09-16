@@ -14,22 +14,22 @@ import SwiftUI
 struct HomeScreen: View {
   @StateObject var homeViewModel: HomeViewModel
 
-
   var body: some View {
     RadialGradientBackground()
-    if homeViewModel.isLoading {
+
+    if didEverySectionLoaded() == false {
       ProgressView().onAppear {
         homeViewModel.fetchHomeData()
       }
     } else {
       ScrollView(showsIndicators: false) {
         VStack(alignment: .leading) {
-          SmallSongCardsGrid(tracks: !homeViewModel.isLoading ? homeViewModel.medias["Small Song Card Items"]! : [])
+          SmallSongCardsGrid(tracks: getTracksFor(.userTopTracks, homeViewModel: homeViewModel))
             .padding(.horizontal, lateralPadding)
             .padding(.bottom, paddingSectionSeparation)
 
-  //        RecentlyPlayedScrollView(homeViewModel: homeViewModel)
-  //          .padding(.bottom, paddingSectionSeparation)
+          RecentlyPlayedScrollView(tracks: getTracksFor(.recentlyPlayed, homeViewModel: homeViewModel))
+            .padding(.bottom, paddingSectionSeparation)
   //        TopPodcastScrollView(homeViewModel: homeViewModel)
   //          .padding(.bottom, paddingSectionSeparation)
   //        RecommendedArtistScrollView(homeViewModel: homeViewModel)
@@ -39,6 +39,22 @@ struct HomeScreen: View {
         }.padding(.vertical, lateralPadding)
       }
     }
+  }
+
+  func didEverySectionLoaded() -> Bool {
+    for key in homeViewModel.isLoading.keys {
+      print("KEY > \(key)")
+      // If any section still loading, return false
+      guard homeViewModel.isLoading[key] != true else {
+        return false
+      }
+    }
+    // else, return true
+    return true
+  }
+
+  func getTracksFor(_ section: HomeViewModel.Sections, homeViewModel: HomeViewModel) -> [SpotifyModel.TrackItem] {
+    return !homeViewModel.isLoading[section.rawValue]! ? homeViewModel.medias[section.rawValue]! : []
   }
 }
 

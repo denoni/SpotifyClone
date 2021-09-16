@@ -5,43 +5,54 @@
 //  Created by Gabriel on 9/14/21.
 //
 
-// TODO: Improve and test structs
-
 import Foundation
 
-// MARK: - Structs used to display data outside the API call.
-
-
+// TODO: Improve and test structs
+// TODO: Use less structs by trimming the data right away
 
 // MARK: - Structs used to get data from the API
 
-struct TracksResponse: Decodable {
-  var tracks: [TrackResponse]
+struct MixedResponse: Decodable {
+  var items: [GeneralItem]
 }
 
-struct TrackResponse: Decodable {
+struct GeneralItem: Decodable {
+  var track: Track
+}
+
+struct GeneralResponse: Decodable {
+  var items: [Track]
+}
+
+// When the responses are just tracks
+
+struct TracksResponse: Decodable {
+  var tracks: [Track]
+}
+
+struct Track: Decodable {
   var name: String
   var preview_url: String?
-  var album: AlbumResponse
-  var artists: [ArtistResponse]
+  var album: Album
+  var artists: [Artist]
   var type: String
   var id: String
 }
 
-struct AlbumResponse: Decodable {
+struct Album: Decodable {
   var name: String
-  var images: [CoverImageResponse]
+  var images: [CoverImage]
   var album_type: String
   var id: String
-  var artists: [ArtistResponse]
+  var artists: [Artist]
 }
 
-struct ArtistResponse: Decodable {
+struct Artist: Decodable {
   var name: String
   var id: String
 }
 
-struct CoverImageResponse: Decodable {
+struct CoverImage: Decodable {
   var height: Int
   var url: String
 }

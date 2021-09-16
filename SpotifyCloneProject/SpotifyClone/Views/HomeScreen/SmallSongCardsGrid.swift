@@ -25,13 +25,12 @@ struct SmallSongCardsGrid: View {
 
   @ViewBuilder private func buildGrid(tracks: [SpotifyModel.TrackItem]) -> some View {
 
+    // TODO: Stop populating manually
+
     VStack(spacing: spacingSmallItems) {
       HStack(spacing: spacingSmallItems) {
         SmallSongCard(imageURL: tracks.count == 0 ? "https://s3-us-west-2.amazonaws.com/jmiller-projects/playedmost/spotify-placeholder-trimmable.png" : tracks[0].imageURL,
                       title: tracks.count == 0 ? "Loading" : tracks[0].name)
-          .onTapGesture {
-            print(tracks.debugDescription)
-          }
         SmallSongCard(imageURL: tracks.count <= 1 ? "https://s3-us-west-2.amazonaws.com/jmiller-projects/playedmost/spotify-placeholder-trimmable.png" : tracks[1].imageURL,
                       title: tracks.count <= 1 ? "Loading" : tracks[1].name)
       }

@@ -10,6 +10,7 @@
 		05776DD17531AE4F13C053F1 /* Pods_SpotifyClone_SpotifyCloneUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6E0A4C3B34E520C39ADB989 /* Pods_SpotifyClone_SpotifyCloneUITests.framework */; };
 		76AA60019401CBE4BC1DCE1F /* Pods_SpotifyCloneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A25E39009EAB848647A176B /* Pods_SpotifyCloneTests.framework */; };
 		C06A4A5026E1BB6C00D2CA90 /* SpotifyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06A4A4F26E1BB6C00D2CA90 /* SpotifyTextField.swift */; };
+		C077D4A526F3A45400EF6ADA /* AuthScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = C077D4A426F3A45400EF6ADA /* AuthScope.swift */; };
 		C07DA12E26DDCCEA0086EEAB /* PlayingSongInPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07DA12D26DDCCEA0086EEAB /* PlayingSongInPlaylist.swift */; };
 		C07DA13026DDD6F20086EEAB /* View+RoundedSpecificSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07DA12F26DDD6F20086EEAB /* View+RoundedSpecificSide.swift */; };
 		C081873226EF728100AB19E9 /* APIAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081873126EF728100AB19E9 /* APIAuthentication.swift */; };
@@ -84,6 +85,7 @@
 		90F935BC104E5E279A07CDC2 /* Pods-SpotifyClone-SpotifyCloneUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotifyClone-SpotifyCloneUITests.release.xcconfig"; path = "Target Support Files/Pods-SpotifyClone-SpotifyCloneUITests/Pods-SpotifyClone-SpotifyCloneUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B75A3140099F8C9F0EBC8917 /* Pods_SpotifyClone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpotifyClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C06A4A4F26E1BB6C00D2CA90 /* SpotifyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyTextField.swift; sourceTree = "<group>"; };
+		C077D4A426F3A45400EF6ADA /* AuthScope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScope.swift; sourceTree = "<group>"; };
 		C07DA12D26DDCCEA0086EEAB /* PlayingSongInPlaylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingSongInPlaylist.swift; sourceTree = "<group>"; };
 		C07DA12F26DDD6F20086EEAB /* View+RoundedSpecificSide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+RoundedSpecificSide.swift"; sourceTree = "<group>"; };
 		C081873126EF728100AB19E9 /* APIAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAuthentication.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				C081873C26F0168700AB19E9 /* AuthKey.swift */,
 				C084267B26F0EFD2000ACAEE /* APIResponseTypes.swift */,
 				C087B0ED26E660F800A72A13 /* SpotifyMediaContent.swift */,
+				C077D4A426F3A45400EF6ADA /* AuthScope.swift */,
 			);
 			path = CustomTypes;
 			sourceTree = "<group>";
@@ -685,6 +688,7 @@
 				C081873D26F0168700AB19E9 /* AuthKey.swift in Sources */,
 				C09FD8FF26E03D6E0069CEAE /* BottomBar.swift in Sources */,
 				C084267E26F10BBD000ACAEE /* APIFetchingData.swift in Sources */,
+				C077D4A526F3A45400EF6ADA /* AuthScope.swift in Sources */,
 				C084268626F14A7E000ACAEE /* RemoteView.swift in Sources */,
 				C0883A0F26E270A300E1ADFA /* PopularPodcastSection.swift in Sources */,
 				C07DA12E26DDCCEA0086EEAB /* PlayingSongInPlaylist.swift in Sources */,
