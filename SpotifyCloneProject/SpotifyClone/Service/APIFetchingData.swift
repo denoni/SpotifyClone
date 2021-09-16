@@ -103,6 +103,53 @@ class APIFetchingData: ObservableObject {
       }
   }
 
+  func getNewReleases(accessToken: String,
+                             completionHandler: @escaping ([SpotifyModel.TrackItem]) -> Void) {
+
+    let country = "US"
+
+    let baseUrl = "https://api.spotify.com/v1/browse/new-releases?country=\(country)"
+
+    let headers: HTTPHeaders = [
+      "Authorization": "Bearer \(accessToken)"
+    ]
+
+    AF.request(baseUrl,
+               method: .get,
+               headers: headers)
+      .responseDecodable(of: AlbumResponse.self) { response in
+
+        guard let data = response.value else {
+          fatalError("Error receiving tracks from API.")
+        }
+
+        let numberOfItems = data.albums.items.count
+
+        guard numberOfItems != 0 else {
+          fatalError("The API response was corrects but empty. We don't have a way to handle this yet.")
+        }
+
+        var trackItems = [SpotifyModel.TrackItem]()
+
+        for itemIndex in 0 ..< numberOfItems {
+          let name = data.albums.items[itemIndex].name
+          let imageURL = data.albums.items[itemIndex].images[0].url
+          let artist = data.albums.items[itemIndex].artists[0].name
+          let type = data.albums.items[itemIndex].album_type
+          let id = data.albums.items[itemIndex].id
+
+          let trackItem = SpotifyModel.TrackItem(name: name,
+                                                 previewURL: "",
+                                                 imageURL: imageURL,
+                                                 artist: artist,
+                                                 type: type,
+                                                 id: id)
+          trackItems.append(trackItem)
+          completionHandler(trackItems)
+        }
+      }
+  }
+
   func getTopTracksFromArtist(accessToken: String,
                               country: String,
                               id: String,

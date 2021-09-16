@@ -24,18 +24,22 @@ struct HomeScreen: View {
     } else {
       ScrollView(showsIndicators: false) {
         VStack(alignment: .leading) {
-          SmallSongCardsGrid(tracks: getTracksFor(.userTopTracks, homeViewModel: homeViewModel))
+          SmallSongCardsGrid(tracks: getTracksFor(.userFavoriteTracks))
             .padding(.horizontal, lateralPadding)
             .padding(.bottom, paddingSectionSeparation)
-
-          RecentlyPlayedScrollView(tracks: getTracksFor(.recentlyPlayed, homeViewModel: homeViewModel))
+          RecentlyPlayedScrollView(tracks: getTracksFor(.recentlyPlayed))
             .padding(.bottom, paddingSectionSeparation)
+          BigSongCoversScrollView(tracks: getTracksFor(.newReleases),
+                                  sectionTitle: HomeViewModel.Section.newReleases.rawValue)
+            .padding(.bottom, paddingSectionSeparation)
+          
   //        TopPodcastScrollView(homeViewModel: homeViewModel)
   //          .padding(.bottom, paddingSectionSeparation)
   //        RecommendedArtistScrollView(homeViewModel: homeViewModel)
   //          .padding(.bottom, paddingSectionSeparation)
   //        BigSongCoversScrollView(homeViewModel: homeViewModel)
   //          .padding(.bottom, paddingBottomSection)
+          Spacer(minLength: paddingBottomSection)
         }.padding(.vertical, lateralPadding)
       }
     }
@@ -53,9 +57,10 @@ struct HomeScreen: View {
     return true
   }
 
-  func getTracksFor(_ section: HomeViewModel.Sections, homeViewModel: HomeViewModel) -> [SpotifyModel.TrackItem] {
+  func getTracksFor(_ section: HomeViewModel.Section) -> [SpotifyModel.TrackItem] {
     return !homeViewModel.isLoading[section.rawValue]! ? homeViewModel.medias[section.rawValue]! : []
   }
+
 }
 
 

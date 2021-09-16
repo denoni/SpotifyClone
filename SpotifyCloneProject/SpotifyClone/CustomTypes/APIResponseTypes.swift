@@ -24,6 +24,14 @@ struct GeneralResponse: Decodable {
   var items: [Track]
 }
 
+struct AlbumResponse: Decodable {
+  var albums: AlbumItem
+}
+
+struct AlbumItem: Decodable {
+  var items: [Album]
+}
+
 // When the responses are just tracks
 
 struct TracksResponse: Decodable {
