@@ -12,7 +12,7 @@ class HomeViewModel: ObservableObject {
   @Published var mainViewModel: MainViewModel
   @Published var isLoading = [String:Bool]()
 
-  @Published var medias = [String:[SpotifyModel.TrackItem]]()
+  @Published var medias = [String:[SpotifyModel.MediaItem]]()
 
 
   init(mainViewModel: MainViewModel) {
@@ -31,7 +31,8 @@ class HomeViewModel: ObservableObject {
     case userFavoriteTracks = "Small Song Card Items"
     case recentlyPlayed = "Recently Played"
     case newReleases = "New Releases"
-//    case artistTopTracks = "Artist Top Tracks"
+    case topPodcasts = "Top Podcasts"
+    //    case artistTopTracks = "Artist Top Tracks"
   }
 
   // Load data dynamically to show the homeScreen faster
@@ -42,26 +43,31 @@ class HomeViewModel: ObservableObject {
       getUserFavoriteTracks(accessToken: mainViewModel.authKey!.accessToken)
       getUserRecentlyPlayed(accessToken: mainViewModel.authKey!.accessToken)
       getNewReleases(accessToken: mainViewModel.authKey!.accessToken)
+      getTopPodcasts(accessToken: mainViewModel.authKey!.accessToken)
     }
   }
 
-//  func getTopTracksFromArtist(accessToken: String) {
-//    let sectionTitle = Section.artistTopTracks.rawValue
-//      let arianaGrandeID = "66CXWjxzNUsdJxJ2JdwvnR"
-//
-//    DispatchQueue.main.async {
-//      self.api.getTopTracksFromArtist(accessToken: accessToken,
-//                                             country: "US",
-//                                             id: arianaGrandeID) { [unowned self] trackItems in
-//
-//        self.medias[sectionTitle] = trackItems
-//        self.isLoading[sectionTitle] = false
-//      }
-//    }
-//  }
+  //  func getTopTracksFromArtist(accessToken: String) {
+  //    let sectionTitle = Section.artistTopTracks.rawValue
+  //      let arianaGrandeID = "66CXWjxzNUsdJxJ2JdwvnR"
+  //
+  //    DispatchQueue.main.async {
+  //      self.api.getTopTracksFromArtist(accessToken: accessToken,
+  //                                             country: "US",
+  //                                             id: arianaGrandeID) { [unowned self] trackItems in
+  //
+  //        self.medias[sectionTitle] = trackItems
+  //        self.isLoading[sectionTitle] = false
+  //      }
+  //    }
+  //  }
 
   func getNewReleases(accessToken: String) {
     fetchDataFor(Section.newReleases, with: accessToken)
+  }
+
+  func getTopPodcasts(accessToken: String) {
+    fetchDataFor(Section.topPodcasts, with: accessToken)
   }
 
   func getUserRecentlyPlayed(accessToken: String) {
@@ -81,48 +87,29 @@ class HomeViewModel: ObservableObject {
     DispatchQueue.main.async {
       switch section {
       case .newReleases:
-        self.api.getNewReleases(accessToken: accessToken) { [unowned self] trackItems in
-          self.medias[sectionTitle] = trackItems
+        self.api.getNewReleases(accessToken: accessToken) { [unowned self] mediaItems in
+          self.medias[sectionTitle] = mediaItems
           self.isLoading[sectionTitle] = false
         }
       case .recentlyPlayed:
-        self.api.getUserRecentlyPlayed(accessToken: accessToken) { [unowned self] trackItems in
-          self.medias[sectionTitle] = trackItems
+        self.api.getUserRecentlyPlayed(accessToken: accessToken) { [unowned self] mediaItems in
+          self.medias[sectionTitle] = mediaItems
           self.isLoading[sectionTitle] = false
         }
       case .userFavoriteTracks:
-        self.api.getUserFavoriteTracks(accessToken: accessToken) { [unowned self] trackItems in
-          self.medias[sectionTitle] = trackItems
+        self.api.getUserFavoriteTracks(accessToken: accessToken) { [unowned self] mediaItems in
+          self.medias[sectionTitle] = mediaItems
           self.isLoading[sectionTitle] = false
         }
+      case .topPodcasts:
+        self.api.getTopPodcasts(accessToken: accessToken) { [unowned self] mediaItems in
+          self.medias[sectionTitle] = mediaItems
+          self.isLoading[sectionTitle] = false
+        }
+      default:
+        fatalError("Tried to fetch data for a type not specified in the function declaration(fetchDataFor).")
       }
     }
   }
-
-}
-
   
-/*
-    allMediaSet["Rock Classics"] = rockClassicsSection
-
-    // Recently Played
-    var recentlyPlayedSection = [SpotifyMediaContent]()
-    for (title, coverImage, isArtist, isPodcast) in recentlyPlayed {
-      recentlyPlayedSection.append(SpotifyMediaContent(title: title,
-                                                       author: "",
-                                                       coverImage: coverImage,
-                                                       isPodcast: isPodcast,
-                                                       isArtist: isArtist))
-    }
-
-    allMediaSet["Top Podcasts"] = topPodcastsSection
-
-    // For The Fans Of David Guetta
-    var forTheFansOfDavidGuettaSection = [SpotifyMediaContent]()
-    for (title, coverImage) in forTheFansOfDavidGuetta {
-      forTheFansOfDavidGuettaSection.append(SpotifyMediaContent(title: title,
-                                                                author: "",
-                                                                coverImage: coverImage))
-    }
-    allMediaSet["For The Fans Of David Guetta"] = forTheFansOfDavidGuettaSection
-*/
+}

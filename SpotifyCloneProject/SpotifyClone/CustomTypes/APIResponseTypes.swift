@@ -24,6 +24,8 @@ struct GeneralResponse: Decodable {
   var items: [Track]
 }
 
+// -----
+
 struct AlbumResponse: Decodable {
   var albums: AlbumItem
 }
@@ -31,6 +33,26 @@ struct AlbumResponse: Decodable {
 struct AlbumItem: Decodable {
   var items: [Album]
 }
+
+// -----
+
+struct PodcastsResponse: Decodable {
+  var shows: ShowItem
+}
+
+struct ShowItem: Decodable {
+  var items: [Show]
+}
+
+struct Show: Decodable {
+  var name: String
+  var publisher: String
+  var images: [CoverImage]
+  var type: String
+  var id: String
+}
+
+// -----
 
 // When the responses are just tracks
 

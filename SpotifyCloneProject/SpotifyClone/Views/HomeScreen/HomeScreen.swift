@@ -32,13 +32,11 @@ struct HomeScreen: View {
           BigSongCoversScrollView(tracks: getTracksFor(.newReleases),
                                   sectionTitle: HomeViewModel.Section.newReleases.rawValue)
             .padding(.bottom, paddingSectionSeparation)
-          
-  //        TopPodcastScrollView(homeViewModel: homeViewModel)
-  //          .padding(.bottom, paddingSectionSeparation)
+          BigSongCoversScrollView(tracks: getTracksFor(.topPodcasts),
+                                  sectionTitle: HomeViewModel.Section.topPodcasts.rawValue)
   //        RecommendedArtistScrollView(homeViewModel: homeViewModel)
   //          .padding(.bottom, paddingSectionSeparation)
-  //        BigSongCoversScrollView(homeViewModel: homeViewModel)
-  //          .padding(.bottom, paddingBottomSection)
+
           Spacer(minLength: paddingBottomSection)
         }.padding(.vertical, lateralPadding)
       }
@@ -57,7 +55,7 @@ struct HomeScreen: View {
     return true
   }
 
-  func getTracksFor(_ section: HomeViewModel.Section) -> [SpotifyModel.TrackItem] {
+  func getTracksFor(_ section: HomeViewModel.Section) -> [SpotifyModel.MediaItem] {
     return !homeViewModel.isLoading[section.rawValue]! ? homeViewModel.medias[section.rawValue]! : []
   }
 

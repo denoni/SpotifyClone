@@ -12,19 +12,15 @@ struct SpotifyModel {
   init() {
   }
 
-
-
-  enum SpotifyMedia {
-    // TODO: Create an enum to support other types of medias
-  }
-
   // Currently just supports track
-  struct TrackItem: Identifiable {
-    var name: String
+  struct MediaItem: Identifiable {
+    var title: String
     var previewURL: String
     var imageURL: String
-    var artist: String
+    var author: String
     var type: String
+    var isPodcast: Bool
+    var isArtist: Bool
     var id: String
   }
 

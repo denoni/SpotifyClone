@@ -33,7 +33,6 @@
 		C08839FF26E26E8400E1ADFA /* BigSongCoversScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08839FE26E26E8400E1ADFA /* BigSongCoversScrollView.swift */; };
 		C0883A0126E26F1500E1ADFA /* SmallSongCardsGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0883A0026E26F1500E1ADFA /* SmallSongCardsGrid.swift */; };
 		C0883A0326E26F8900E1ADFA /* RecommendedArtistScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0883A0226E26F8900E1ADFA /* RecommendedArtistScrollView.swift */; };
-		C0883A0526E26FC600E1ADFA /* TopPodcastScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0883A0426E26FC600E1ADFA /* TopPodcastScrollView.swift */; };
 		C0883A0726E26FF200E1ADFA /* RecentlyPlayedScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0883A0626E26FF200E1ADFA /* RecentlyPlayedScrollView.swift */; };
 		C0883A0926E2703D00E1ADFA /* SearchSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0883A0826E2703D00E1ADFA /* SearchSection.swift */; };
 		C0883A0B26E2705B00E1ADFA /* ColorfulCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0883A0A26E2705B00E1ADFA /* ColorfulCard.swift */; };
@@ -108,7 +107,6 @@
 		C08839FE26E26E8400E1ADFA /* BigSongCoversScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigSongCoversScrollView.swift; sourceTree = "<group>"; };
 		C0883A0026E26F1500E1ADFA /* SmallSongCardsGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallSongCardsGrid.swift; sourceTree = "<group>"; };
 		C0883A0226E26F8900E1ADFA /* RecommendedArtistScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedArtistScrollView.swift; sourceTree = "<group>"; };
-		C0883A0426E26FC600E1ADFA /* TopPodcastScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPodcastScrollView.swift; sourceTree = "<group>"; };
 		C0883A0626E26FF200E1ADFA /* RecentlyPlayedScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyPlayedScrollView.swift; sourceTree = "<group>"; };
 		C0883A0826E2703D00E1ADFA /* SearchSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSection.swift; sourceTree = "<group>"; };
 		C0883A0A26E2705B00E1ADFA /* ColorfulCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorfulCard.swift; sourceTree = "<group>"; };
@@ -263,7 +261,6 @@
 				C08839FE26E26E8400E1ADFA /* BigSongCoversScrollView.swift */,
 				C0883A0026E26F1500E1ADFA /* SmallSongCardsGrid.swift */,
 				C0883A0226E26F8900E1ADFA /* RecommendedArtistScrollView.swift */,
-				C0883A0426E26FC600E1ADFA /* TopPodcastScrollView.swift */,
 				C0883A0626E26FF200E1ADFA /* RecentlyPlayedScrollView.swift */,
 			);
 			path = HomeScreen;
@@ -666,7 +663,6 @@
 				C081873926EFBABF00AB19E9 /* AuthViewModel.swift in Sources */,
 				C084268426F11CF7000ACAEE /* YourSensitiveData.swift in Sources */,
 				C087B0EE26E660F800A72A13 /* SpotifyMediaContent.swift in Sources */,
-				C0883A0526E26FC600E1ADFA /* TopPodcastScrollView.swift in Sources */,
 				C088F23C26DEE48E00C4BCA2 /* SmallSongItem.swift in Sources */,
 				C081873226EF728100AB19E9 /* APIAuthentication.swift in Sources */,
 				C081873B26EFC72B00AB19E9 /* AuthAuxiliaryViews.swift in Sources */,
