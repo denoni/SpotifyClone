@@ -23,7 +23,7 @@ struct SmallSongItem: View {
       if isArtist { Circle() }
       else if isPodcast { RoundedRectangle(cornerRadius: 10) }
       else { Rectangle() }
-    }
+    }.foregroundColor(Color.spotifyDarkGray)
   }
 
   var body: some View {

@@ -24,7 +24,7 @@ struct BigSongItem: View {
       if isArtistProfile { Circle() }
       else if isPodcast { RoundedRectangle(cornerRadius: 10) }
       else { Rectangle() }
-    }
+    }.foregroundColor(Color.spotifyDarkGray)
   }
 
   var body: some View {
