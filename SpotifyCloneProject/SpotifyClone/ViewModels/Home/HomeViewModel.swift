@@ -32,7 +32,7 @@ class HomeViewModel: ObservableObject {
     case recentlyPlayed = "Recently Played"
     case newReleases = "New Releases"
     case topPodcasts = "Top Podcasts"
-    //    case artistTopTracks = "Artist Top Tracks"
+    case artistTopTracks = "Artist Top Tracks"
   }
 
   // Load data dynamically to show the homeScreen faster
@@ -44,23 +44,30 @@ class HomeViewModel: ObservableObject {
       getUserRecentlyPlayed(accessToken: mainViewModel.authKey!.accessToken)
       getNewReleases(accessToken: mainViewModel.authKey!.accessToken)
       getTopPodcasts(accessToken: mainViewModel.authKey!.accessToken)
+      getTopTracksFromArtist(accessToken: mainViewModel.authKey!.accessToken,
+                             artistID: "66CXWjxzNUsdJxJ2JdwvnR" /* arianaGrandeID */)
     }
   }
 
-  //  func getTopTracksFromArtist(accessToken: String) {
-  //    let sectionTitle = Section.artistTopTracks.rawValue
-  //      let arianaGrandeID = "66CXWjxzNUsdJxJ2JdwvnR"
-  //
-  //    DispatchQueue.main.async {
-  //      self.api.getTopTracksFromArtist(accessToken: accessToken,
-  //                                             country: "US",
-  //                                             id: arianaGrandeID) { [unowned self] trackItems in
-  //
-  //        self.medias[sectionTitle] = trackItems
-  //        self.isLoading[sectionTitle] = false
-  //      }
-  //    }
-  //  }
+  func getTopTracksFromArtist(accessToken: String, artistID: String) {
+
+    let sectionTitle = Section.artistTopTracks.rawValue
+
+    DispatchQueue.main.async {
+      // Insert the artist info in the first element
+      self.api.getArtist(accessToken: accessToken, artistID: artistID) { artist in
+        self.medias[sectionTitle]!.insert(contentsOf: artist, at: 0)
+      }
+
+      // Add the artist's top songs
+      self.api.getTopTracksFromArtist(accessToken: accessToken,
+                                      country: "US",
+                                      id: artistID) { [unowned self] trackItems in
+        self.medias[sectionTitle]!.append(contentsOf: trackItems)
+        self.isLoading[sectionTitle] = false
+      }
+    }
+  }
 
   func getNewReleases(accessToken: String) {
     fetchDataFor(Section.newReleases, with: accessToken)
@@ -88,6 +95,7 @@ class HomeViewModel: ObservableObject {
       switch section {
       case .newReleases:
         self.api.getNewReleases(accessToken: accessToken) { [unowned self] mediaItems in
+          print("\(mediaItems)")
           self.medias[sectionTitle] = mediaItems
           self.isLoading[sectionTitle] = false
         }

@@ -15,8 +15,13 @@ struct RemoteImage: View {
     var data = Data()
 
     init(url: String) {
-      guard let parsedURL = URL(string: url) else {
-        fatalError("Invalid URL: \(url)")
+
+      // Set parsedURL to a placeholder image url,
+      // in case the url passed by the api is invalid.
+      var parsedURL = URL(string: "https://bit.ly/3lx16mQ")!
+
+      if let urlSendByAPI = URL(string: url) {
+        parsedURL = urlSendByAPI
       }
 
       URLSession.shared.dataTask(with: parsedURL) { data, response, error in

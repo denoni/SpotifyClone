@@ -10,7 +10,7 @@
 import SwiftUI
 
 struct RecentlyPlayedScrollView: View {
-  @State var tracks: [SpotifyModel.MediaItem]
+  @State var medias: [SpotifyModel.MediaItem]
 
   var sectionTitle = "Recently Played"
 
@@ -21,9 +21,9 @@ struct RecentlyPlayedScrollView: View {
       ScrollView(.horizontal, showsIndicators: false) {
         HStack(alignment: .top, spacing: spacingBigItems) {
           Spacer(minLength: 5)
-          ForEach(tracks) { track in
-            SmallSongItem(imageURL: track.imageURL,
-                          title: track.title)
+          ForEach(medias) { media in
+            SmallSongItem(imageURL: media.imageURL,
+                          title: media.title)
           }
           Spacer(minLength: 5)
         }

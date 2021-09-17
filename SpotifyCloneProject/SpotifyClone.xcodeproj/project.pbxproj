@@ -180,6 +180,18 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		C07B761026F5001700B8EEC6 /* HomeScreenViews */ = {
+			isa = PBXGroup;
+			children = (
+				C08839FC26E26E2000E1ADFA /* RadialGradientBackground.swift */,
+				C08839FE26E26E8400E1ADFA /* BigSongCoversScrollView.swift */,
+				C0883A0026E26F1500E1ADFA /* SmallSongCardsGrid.swift */,
+				C0883A0626E26FF200E1ADFA /* RecentlyPlayedScrollView.swift */,
+				C0883A0226E26F8900E1ADFA /* RecommendedArtistScrollView.swift */,
+			);
+			path = HomeScreenViews;
+			sourceTree = "<group>";
+		};
 		C081873026EF725700AB19E9 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,11 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				C088F23626DEDE5600C4BCA2 /* HomeScreen.swift */,
-				C08839FC26E26E2000E1ADFA /* RadialGradientBackground.swift */,
-				C08839FE26E26E8400E1ADFA /* BigSongCoversScrollView.swift */,
-				C0883A0026E26F1500E1ADFA /* SmallSongCardsGrid.swift */,
-				C0883A0226E26F8900E1ADFA /* RecommendedArtistScrollView.swift */,
-				C0883A0626E26FF200E1ADFA /* RecentlyPlayedScrollView.swift */,
+				C07B761026F5001700B8EEC6 /* HomeScreenViews */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";

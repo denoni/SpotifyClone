@@ -17,9 +17,7 @@ struct MainView: View {
     _authViewModel = StateObject(wrappedValue: AuthViewModel(mainViewModel: mainViewModel))
     _homeViewModel = StateObject(wrappedValue: HomeViewModel(mainViewModel: mainViewModel))
   }
-
-
-
+  
   var body: some View {
     if mainViewModel.homeScreenIsReady {
       ZStack {

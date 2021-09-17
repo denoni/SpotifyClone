@@ -71,7 +71,7 @@ struct Track: Decodable {
 
 struct Album: Decodable {
   var name: String
-  var images: [CoverImage]
+  var images: [CoverImage]?
   var album_type: String
   var id: String
   var artists: [Artist]
@@ -79,6 +79,7 @@ struct Album: Decodable {
 
 struct Artist: Decodable {
   var name: String
+  var images: [CoverImage]?
   var id: String
 }
 

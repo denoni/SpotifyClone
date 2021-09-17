@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BigSongCoversScrollView: View {
-  @State var tracks: [SpotifyModel.MediaItem]
+  @State var medias: [SpotifyModel.MediaItem]
   var sectionTitle: String
 
   var body: some View {
@@ -18,12 +18,12 @@ struct BigSongCoversScrollView: View {
       ScrollView(.horizontal, showsIndicators: false) {
         HStack(alignment: .top,spacing: spacingBigItems) {
           Spacer(minLength: 5)
-          ForEach(tracks) { track in
-            BigSongItem(imageURL: track.imageURL,
-                        title: track.title,
-                        artist: track.author,
-                        isArtistProfile: track.isArtist,
-                        isPodcast: track.isPodcast)
+          ForEach(medias) { media in
+            BigSongItem(imageURL: media.imageURL,
+                        title: media.title,
+                        artist: media.author,
+                        isArtistProfile: media.isArtist,
+                        isPodcast: media.isPodcast)
           }
           Spacer(minLength: 5)
         }

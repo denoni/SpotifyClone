@@ -24,18 +24,24 @@ struct HomeScreen: View {
     } else {
       ScrollView(showsIndicators: false) {
         VStack(alignment: .leading) {
-          SmallSongCardsGrid(tracks: getTracksFor(.userFavoriteTracks))
+          SmallSongCardsGrid(medias: getTracksFor(.userFavoriteTracks))
             .padding(.horizontal, lateralPadding)
             .padding(.bottom, paddingSectionSeparation)
-          RecentlyPlayedScrollView(tracks: getTracksFor(.recentlyPlayed))
+
+          RecentlyPlayedScrollView(medias: getTracksFor(.recentlyPlayed))
             .padding(.bottom, paddingSectionSeparation)
-          BigSongCoversScrollView(tracks: getTracksFor(.newReleases),
+
+          BigSongCoversScrollView(medias: getTracksFor(.newReleases),
                                   sectionTitle: HomeViewModel.Section.newReleases.rawValue)
             .padding(.bottom, paddingSectionSeparation)
-          BigSongCoversScrollView(tracks: getTracksFor(.topPodcasts),
+
+          BigSongCoversScrollView(medias: getTracksFor(.topPodcasts),
                                   sectionTitle: HomeViewModel.Section.topPodcasts.rawValue)
-  //        RecommendedArtistScrollView(homeViewModel: homeViewModel)
-  //          .padding(.bottom, paddingSectionSeparation)
+            .padding(.bottom, paddingSectionSeparation)
+
+          RecommendedArtistScrollView(medias: getTracksFor(.artistTopTracks),
+                                      sectionTitle: HomeViewModel.Section.artistTopTracks.rawValue)
+            .padding(.bottom, paddingSectionSeparation)
 
           Spacer(minLength: paddingBottomSection)
         }.padding(.vertical, lateralPadding)

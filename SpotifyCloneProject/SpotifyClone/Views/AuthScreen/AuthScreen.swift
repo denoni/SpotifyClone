@@ -20,9 +20,7 @@ struct AuthScreen: View {
           .foregroundColor(.white)
           .padding()
           .background(Capsule().fill(Color.spotifyGreen))
-      }).onLongPressGesture {
-        print(authViewModel.finishedAuthentication)
-      }
+      })
     }
     .sheet(isPresented: $isShowingAuthWebView, content: {
       AuthSheetView(authViewModel: authViewModel,
