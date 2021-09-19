@@ -20,7 +20,6 @@ class HomeViewModel: ObservableObject {
 
     // Populate isLoading and medias with all possible section keys
     for section in Section.allCases {
-      print(" >>> \(section)")
       isLoading[section.rawValue] = true
       medias[section.rawValue] = []
     }
@@ -95,7 +94,6 @@ class HomeViewModel: ObservableObject {
       switch section {
       case .newReleases:
         self.api.getNewReleases(accessToken: accessToken) { [unowned self] mediaItems in
-          print("\(mediaItems)")
           self.medias[sectionTitle] = mediaItems
           self.isLoading[sectionTitle] = false
         }

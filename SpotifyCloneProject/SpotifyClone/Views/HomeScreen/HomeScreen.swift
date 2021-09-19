@@ -51,7 +51,6 @@ struct HomeScreen: View {
 
   func didEverySectionLoaded() -> Bool {
     for key in homeViewModel.isLoading.keys {
-      print("KEY > \(key)")
       // If any section still loading, return false
       guard homeViewModel.isLoading[key] != true else {
         return false

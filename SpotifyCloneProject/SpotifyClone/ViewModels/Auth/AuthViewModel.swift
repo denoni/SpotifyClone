@@ -46,8 +46,6 @@ class AuthViewModel: ObservableObject {
         self.authKey = authKey
         self.authKeyIsAvailable = true
 
-        print("\n\n\nAUTH_KEY: \(self.authKey!)")
-
         self.finishedAuthentication = true
         self.mainViewModel.finishAuthentication(authKey: self.authKey!)
       }
