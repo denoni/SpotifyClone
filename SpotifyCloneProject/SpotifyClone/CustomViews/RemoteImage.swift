@@ -7,73 +7,93 @@
 
 import SwiftUI
 
-// TODO: Add cache
-
 struct RemoteImage: View {
-  @StateObject private var loader: Loader
+  @ObservedObject var remoteImageModel: RemoteImageModel
 
-  init(url: String) {
-    _loader = StateObject(wrappedValue: Loader(urlSendByAPI: url))
+  init(urlString: String) {
+    remoteImageModel = RemoteImageModel(urlString: urlString)
   }
 
   var body: some View {
-    if let image = fetchedImage() {
-      image
-        .resizable()
-    } else {
+    if remoteImageModel.image == nil {
       ProgressView()
-        .padding(10)
+        .padding()
+    } else {
+      Image(uiImage: remoteImageModel.image!)
+        .resizable()
     }
   }
+}
+class RemoteImageModel: ObservableObject {
+  @Published var image: UIImage?
+  var urlString: String?
+  var imageCache = ImageCache.getImageCache()
 
-  private func fetchedImage() -> Image? {
-    if let image = UIImage(data: loader.data) {
-      return Image(uiImage: image)
-    } else { return nil }
+  init(urlString: String) {
+    self.urlString = urlString
+    loadImage()
   }
 
-  private class Loader: ObservableObject {
-    var data = Data()
-    var cacheImage = ImageCache.getImageCache()
+  func loadImage() {
+    if loadImageFromCache() {
+      return
+    }
+    loadImageFromUrl()
+  }
 
-    init(urlSendByAPI: String) {
+  func loadImageFromCache() -> Bool {
+    guard let urlString = urlString else {
+      return false
+    }
 
-      // Set parsedURL to a placeholder image url,
-      // in case the url passed by the api is invalid.
-      var url = "https://bit.ly/3lx16mQ"
+    guard let cacheImage = imageCache.get(forKey: urlString) else {
+      return false
+    }
 
-      if !urlSendByAPI.isEmpty { url = urlSendByAPI }
+    image = cacheImage
+    return true
+  }
 
-      let cacheImageData = cacheImage.get(forKey: url)
+  func loadImageFromUrl() {
+    guard let urlString = urlString else {
+      return
+    }
 
-      guard cacheImageData == nil else {
-        print(">>> HAVE CACHE")
-        self.data = Data(referencing: cacheImageData!)
-        DispatchQueue.main.async { self.objectWillChange.send() }
+    let task = URLSession.shared.dataTask(with: URL(string: urlString)!,
+                                          completionHandler: getImageFromResponse(data:response:error:))
+    task.resume()
+  }
+
+
+  func getImageFromResponse(data: Data?, response: URLResponse?, error: Error?) {
+    guard error == nil else {
+      print("Error: \(error!)")
+      return
+    }
+    guard let data = data else {
+      print("No data found")
+      return
+    }
+
+    DispatchQueue.main.async {
+      guard let loadedImage = UIImage(data: data) else {
         return
       }
-
-      URLSession.shared.dataTask(with: URL(string: url)!) { data, response, error in
-        if let data = data, data.count > 0 {
-          self.data = data
-          self.cacheImage.set(forKey: url, imageData: NSData(data: data))
-        }
-        DispatchQueue.main.async { self.objectWillChange.send() }
-      }.resume()
+      self.imageCache.set(forKey: self.urlString!, image: loadedImage)
+      self.image = loadedImage
     }
   }
-
 }
 
 class ImageCache {
-  var cache = NSCache<NSString, NSData>()
+  var cache = NSCache<NSString, UIImage>()
 
-  func get(forKey key: String) -> NSData? {
+  func get(forKey key: String) -> UIImage? {
     return cache.object(forKey: NSString(string: key))
   }
 
-  func set(forKey key: String, imageData: NSData) {
-    cache.setObject(imageData, forKey: NSString(string: key))
+  func set(forKey key: String, image: UIImage) {
+    cache.setObject(image, forKey: NSString(string: key))
   }
 }
 

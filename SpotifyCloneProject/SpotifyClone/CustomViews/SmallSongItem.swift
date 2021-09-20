@@ -29,7 +29,7 @@ struct SmallSongItem: View {
   var body: some View {
     VStack(alignment: .leading) {
       buildCoverShape()
-        .overlay(RemoteImage(url: imageURL))
+        .overlay(RemoteImage(urlString: imageURL))
         .mask(buildCoverShape())
         .aspectRatio(1/1, contentMode: .fit)
         .frame(height: coverImageWidth)

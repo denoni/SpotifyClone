@@ -21,7 +21,7 @@ struct SmallSongCard: View {
         .fill(LinearGradient(gradient: Gradient(colors: [grayLighter, grayDarker]), startPoint: .top, endPoint: .bottom))
       HStack {
         Rectangle()
-          .overlay(RemoteImage(url: imageURL))
+          .overlay(RemoteImage(urlString: imageURL))
           .foregroundColor(grayHeavyDark)
           .cornerRadius(5, corners: [.topLeft, .bottomLeft])
           .aspectRatio(1/1, contentMode: .fit)

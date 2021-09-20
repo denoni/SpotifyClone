@@ -29,7 +29,7 @@ struct RecommendedArtistScrollView: View {
     VStack(spacing: spacingSmallItems) {
       HStack(alignment: .top, spacing: spacingSmallItems) {
         Circle()
-          .overlay(RemoteImage(url: getArtistInfo().imageURL))
+          .overlay(RemoteImage(urlString: getArtistInfo().imageURL))
           .aspectRatio(contentMode: .fit)
           .mask(Circle())
           .padding(3)
