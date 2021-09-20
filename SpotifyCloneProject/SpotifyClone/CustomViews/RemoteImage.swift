@@ -9,15 +9,22 @@ import SwiftUI
 
 struct RemoteImage: View {
   @ObservedObject var remoteImageModel: RemoteImageModel
+  var placeholderImage: String
 
-  init(urlString: String) {
+  init(urlString: String,
+       withPlaceholderURL placeholderURL: String = "https://bit.ly/3lx16mQ") {
     remoteImageModel = RemoteImageModel(urlString: urlString)
+    placeholderImage = placeholderURL
   }
 
   var body: some View {
     if remoteImageModel.image == nil {
-      ProgressView()
-        .padding()
+      if remoteImageModel.noImageFound == true {
+        RemoteImage(urlString: placeholderImage)
+      } else {
+        ProgressView()
+          .padding()
+      }
     } else {
       Image(uiImage: remoteImageModel.image!)
         .resizable()
@@ -26,6 +33,7 @@ struct RemoteImage: View {
 }
 class RemoteImageModel: ObservableObject {
   @Published var image: UIImage?
+  @Published var noImageFound = false
   var urlString: String?
   var imageCache = ImageCache.getImageCache()
 
@@ -68,11 +76,19 @@ class RemoteImageModel: ObservableObject {
   func getImageFromResponse(data: Data?, response: URLResponse?, error: Error?) {
     guard error == nil else {
       print("Error: \(error!)")
+      DispatchQueue.main.async { self.noImageFound = true }
       return
     }
     guard let data = data else {
       print("No data found")
+      DispatchQueue.main.async { self.noImageFound = true }
       return
+    }
+
+    if let response = response as? HTTPURLResponse {
+      if response.statusCode != 200 {
+        DispatchQueue.main.async { self.noImageFound = true }
+      }
     }
 
     DispatchQueue.main.async {

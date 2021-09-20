@@ -231,7 +231,7 @@ class APIFetchingData: ObservableObject {
 
           let trackItem = SpotifyModel.MediaItem(title: title,
                                                  previewURL: previewURL ?? "",
-                                                 imageURL: imageURL ?? "",
+                                                 imageURL: "https://bit.ly/3lx16mQa",
                                                  author: author,
                                                  type: type,
                                                  isPodcast: false,
