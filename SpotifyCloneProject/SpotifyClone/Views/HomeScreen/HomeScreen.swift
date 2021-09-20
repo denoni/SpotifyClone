@@ -12,7 +12,7 @@
 import SwiftUI
 
 struct HomeScreen: View {
-  @StateObject var homeViewModel: HomeViewModel
+  @ObservedObject var homeViewModel: HomeViewModel
 
   var body: some View {
     RadialGradientBackground()
@@ -31,20 +31,19 @@ struct HomeScreen: View {
           RecentlyPlayedScrollView(medias: getTracksFor(.recentlyPlayed))
             .padding(.bottom, paddingSectionSeparation)
 
-          BigSongCoversScrollView(medias: getTracksFor(.newReleases),
-                                  sectionTitle: HomeViewModel.Section.newReleases.rawValue)
+          BigSongCoversScrollView(homeViewModel: homeViewModel)
             .padding(.bottom, paddingSectionSeparation)
 
-          BigSongCoversScrollView(medias: getTracksFor(.topPodcasts),
-                                  sectionTitle: HomeViewModel.Section.topPodcasts.rawValue)
-            .padding(.bottom, paddingSectionSeparation)
+//          BigSongCoversScrollView(homeViewModel: homeViewModel,
+//                                  sectionTitle: HomeViewModel.Section.topPodcasts.rawValue)
+//            .padding(.bottom, paddingSectionSeparation)
 
           RecommendedArtistScrollView(medias: getTracksFor(.artistTopTracks),
                                       sectionTitle: HomeViewModel.Section.artistTopTracks.rawValue)
             .padding(.bottom, paddingSectionSeparation)
-
-          Spacer(minLength: paddingBottomSection)
-        }.padding(.vertical, lateralPadding)
+        }
+        .padding(.vertical, lateralPadding)
+        .padding(.bottom, paddingBottomSection)
       }
     }
   }
@@ -76,5 +75,5 @@ var paddingBottomSection: CGFloat = 135
 var spacingSmallItems: CGFloat = 12
 var spacingBigItems: CGFloat = 20
 
-fileprivate var paddingSectionSeparation: CGFloat = 50
+fileprivate var paddingSectionSeparation: CGFloat = 25
 

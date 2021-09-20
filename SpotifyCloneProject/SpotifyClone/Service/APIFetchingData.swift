@@ -146,11 +146,13 @@ class APIFetchingData: ObservableObject {
   }
 
   func getNewReleases(accessToken: String,
+                      limit: Int = 10,
+                      offset: Int = 0,
                       completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
 
     let country = "US"
 
-    let baseUrl = "https://api.spotify.com/v1/browse/new-releases?country=\(country)"
+    let baseUrl = "https://api.spotify.com/v1/browse/new-releases?country=\(country)&limit=\(limit)&offset=\(offset)"
 
     var urlRequest = URLRequest(url: URL(string: baseUrl)!)
     urlRequest.httpMethod = "GET"
@@ -192,6 +194,7 @@ class APIFetchingData: ObservableObject {
         }
         completionHandler(trackItems)
       }
+
   }
 
   func getTopTracksFromArtist(accessToken: String,
@@ -231,7 +234,7 @@ class APIFetchingData: ObservableObject {
 
           let trackItem = SpotifyModel.MediaItem(title: title,
                                                  previewURL: previewURL ?? "",
-                                                 imageURL: "https://bit.ly/3lx16mQa",
+                                                 imageURL: imageURL ?? "",
                                                  author: author,
                                                  type: type,
                                                  isPodcast: false,

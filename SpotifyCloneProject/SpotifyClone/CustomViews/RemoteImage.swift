@@ -64,6 +64,11 @@ class RemoteImageModel: ObservableObject {
 
   func loadImageFromUrl() {
     guard let urlString = urlString else {
+      DispatchQueue.main.async { self.noImageFound = true }
+      return
+    }
+    guard urlString != "" else {
+      DispatchQueue.main.async { self.noImageFound = true }
       return
     }
 
