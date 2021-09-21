@@ -18,10 +18,10 @@ struct TopGenresSection: View {
       VStack(spacing: lateralPadding) {
         HStack(spacing: lateralPadding) {
           ColorfulCard(text: "Rock",
-                       image: Image("bohemian-rhapsody-cover"),
+                       imageURL: "",
                        color: Color(#colorLiteral(red: 0.5476108789, green: 0.1544825733, blue: 0.5206049085, alpha: 1)))
           ColorfulCard(text: "Pop",
-                       image: Image("shape-of-you-cover"),
+                       imageURL: "",
                        color: Color(#colorLiteral(red: 0.16175375, green: 0.503838925, blue: 1, alpha: 1)))
         }
       }

@@ -11,9 +11,7 @@ import Alamofire
 // TODO: Handle empty responses and errors
 // TODO: The data received after decoding should be easier to access
 
-class APIFetchingData: ObservableObject {
-
-  let placeholderImageURL = "https://bit.ly/3lx16mQ"
+class APIFetchingDataHomePage: ObservableObject {
 
   func getUserRecentlyPlayed(accessToken: String,
                              completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
@@ -297,4 +295,5 @@ class APIFetchingData: ObservableObject {
         completionHandler(podcastItems)
       }
   }
+
 }

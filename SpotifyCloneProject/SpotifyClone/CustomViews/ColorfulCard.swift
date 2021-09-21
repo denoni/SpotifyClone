@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ColorfulCard: View {
   var text: String
-  var image: Image
+  var imageURL: String
   var color: Color
 
   var isPodcast = false
@@ -33,7 +33,7 @@ struct ColorfulCard: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
       RoundedRectangle(cornerRadius: getCornerRadius)
         .frame(width: 80, height: 80)
-        .overlay(image.resizeToFit().mask(RoundedRectangle(cornerRadius: getCornerRadius)))
+        .overlay(RemoteImage(urlString: imageURL).mask(RoundedRectangle(cornerRadius: getCornerRadius)))
         .rotationEffect(Angle(degrees: 25))
         .shadow(radius: 10)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)

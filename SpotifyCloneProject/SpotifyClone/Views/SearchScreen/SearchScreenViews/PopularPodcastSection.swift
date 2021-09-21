@@ -18,11 +18,11 @@ struct PopularPodcastSection: View {
       VStack(spacing: lateralPadding) {
         HStack(spacing: lateralPadding) {
           ColorfulCard(text: "Interviews",
-                       image: Image("joe-rogan-cover"),
+                       imageURL: "",
                        color: Color(#colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1)),
                        isPodcast: true)
           ColorfulCard(text: "News",
-                       image: Image("the-daily-cover"),
+                       imageURL: "",
                        color: Color(#colorLiteral(red: 0.2064540572, green: 0.9083342805, blue: 0.6514125017, alpha: 1)),
                        isPodcast: true)
         }

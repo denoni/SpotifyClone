@@ -20,7 +20,7 @@
 		C081873B26EFC72B00AB19E9 /* AuthAuxiliaryViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081873A26EFC72B00AB19E9 /* AuthAuxiliaryViews.swift */; };
 		C081873D26F0168700AB19E9 /* AuthKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081873C26F0168700AB19E9 /* AuthKey.swift */; };
 		C084267C26F0EFD2000ACAEE /* APIResponseTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084267B26F0EFD2000ACAEE /* APIResponseTypes.swift */; };
-		C084267E26F10BBD000ACAEE /* APIFetchingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084267D26F10BBD000ACAEE /* APIFetchingData.swift */; };
+		C084267E26F10BBD000ACAEE /* APIFetchingDataHomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084267D26F10BBD000ACAEE /* APIFetchingDataHomePage.swift */; };
 		C084268026F10DC8000ACAEE /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084267F26F10DC8000ACAEE /* AuthCoordinator.swift */; };
 		C084268426F11CF7000ACAEE /* YourSensitiveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084268326F11CF7000ACAEE /* YourSensitiveData.swift */; };
 		C084268626F14A7E000ACAEE /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084268526F14A7E000ACAEE /* RemoteImage.swift */; };
@@ -43,6 +43,9 @@
 		C088F23A26DEE0F800C4BCA2 /* SmallSongCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F23926DEE0F800C4BCA2 /* SmallSongCard.swift */; };
 		C088F23C26DEE48E00C4BCA2 /* SmallSongItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F23B26DEE48E00C4BCA2 /* SmallSongItem.swift */; };
 		C088F23E26DEE61B00C4BCA2 /* BigSongItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F23D26DEE61B00C4BCA2 /* BigSongItem.swift */; };
+		C089135D26F97E8C00CA1A69 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C089135C26F97E8C00CA1A69 /* SearchViewModel.swift */; };
+		C089135F26F9816F00CA1A69 /* APIFetchingDataSearchPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C089135E26F9816F00CA1A69 /* APIFetchingDataSearchPage.swift */; };
+		C089136226F986E600CA1A69 /* ColorfulCardPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = C089136126F986E600CA1A69 /* ColorfulCardPair.swift */; };
 		C09FD8FF26E03D6E0069CEAE /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09FD8FE26E03D6E0069CEAE /* BottomBar.swift */; };
 		C09FD90126E049BE0069CEAE /* Image+ResizeToFit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09FD90026E049BE0069CEAE /* Image+ResizeToFit.swift */; };
 		C09FD90326E04E470069CEAE /* Text+SpotifySizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09FD90226E04E470069CEAE /* Text+SpotifySizes.swift */; };
@@ -94,7 +97,7 @@
 		C081873A26EFC72B00AB19E9 /* AuthAuxiliaryViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAuxiliaryViews.swift; sourceTree = "<group>"; };
 		C081873C26F0168700AB19E9 /* AuthKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthKey.swift; sourceTree = "<group>"; };
 		C084267B26F0EFD2000ACAEE /* APIResponseTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponseTypes.swift; sourceTree = "<group>"; };
-		C084267D26F10BBD000ACAEE /* APIFetchingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFetchingData.swift; sourceTree = "<group>"; };
+		C084267D26F10BBD000ACAEE /* APIFetchingDataHomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFetchingDataHomePage.swift; sourceTree = "<group>"; };
 		C084267F26F10DC8000ACAEE /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		C084268326F11CF7000ACAEE /* YourSensitiveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourSensitiveData.swift; sourceTree = "<group>"; };
 		C084268526F14A7E000ACAEE /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
@@ -117,6 +120,9 @@
 		C088F23926DEE0F800C4BCA2 /* SmallSongCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallSongCard.swift; sourceTree = "<group>"; };
 		C088F23B26DEE48E00C4BCA2 /* SmallSongItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallSongItem.swift; sourceTree = "<group>"; };
 		C088F23D26DEE61B00C4BCA2 /* BigSongItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigSongItem.swift; sourceTree = "<group>"; };
+		C089135C26F97E8C00CA1A69 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		C089135E26F9816F00CA1A69 /* APIFetchingDataSearchPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFetchingDataSearchPage.swift; sourceTree = "<group>"; };
+		C089136126F986E600CA1A69 /* ColorfulCardPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorfulCardPair.swift; sourceTree = "<group>"; };
 		C09FD8FE26E03D6E0069CEAE /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
 		C09FD90026E049BE0069CEAE /* Image+ResizeToFit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+ResizeToFit.swift"; sourceTree = "<group>"; };
 		C09FD90226E04E470069CEAE /* Text+SpotifySizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+SpotifySizes.swift"; sourceTree = "<group>"; };
@@ -196,7 +202,8 @@
 			isa = PBXGroup;
 			children = (
 				C081873126EF728100AB19E9 /* APIAuthentication.swift */,
-				C084267D26F10BBD000ACAEE /* APIFetchingData.swift */,
+				C084267D26F10BBD000ACAEE /* APIFetchingDataHomePage.swift */,
+				C089135E26F9816F00CA1A69 /* APIFetchingDataSearchPage.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -234,6 +241,7 @@
 				C084268726F1588B000ACAEE /* MainViewModel.swift */,
 				C084268126F10DF3000ACAEE /* Auth */,
 				C084268226F10DFF000ACAEE /* Home */,
+				C089135B26F97E6900CA1A69 /* Search */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -278,10 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				C0A06A7B26E18A6F00E85DD4 /* SearchScreen.swift */,
-				C0883A0826E2703D00E1ADFA /* SearchSection.swift */,
-				C0883A0E26E270A300E1ADFA /* PopularPodcastSection.swift */,
-				C0883A0C26E2708C00E1ADFA /* TopGenresSection.swift */,
-				C0883A1026E270CB00E1ADFA /* BrowseAllSection.swift */,
+				C089136026F981E500CA1A69 /* SearchScreenViews */,
 			);
 			path = SearchScreen;
 			sourceTree = "<group>";
@@ -306,9 +311,29 @@
 				C088F23D26DEE61B00C4BCA2 /* BigSongItem.swift */,
 				C06A4A4F26E1BB6C00D2CA90 /* SpotifyTextField.swift */,
 				C0883A0A26E2705B00E1ADFA /* ColorfulCard.swift */,
+				C089136126F986E600CA1A69 /* ColorfulCardPair.swift */,
 				C084268526F14A7E000ACAEE /* RemoteImage.swift */,
 			);
 			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		C089135B26F97E6900CA1A69 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				C089135C26F97E8C00CA1A69 /* SearchViewModel.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		C089136026F981E500CA1A69 /* SearchScreenViews */ = {
+			isa = PBXGroup;
+			children = (
+				C0883A0826E2703D00E1ADFA /* SearchSection.swift */,
+				C0883A0E26E270A300E1ADFA /* PopularPodcastSection.swift */,
+				C0883A0C26E2708C00E1ADFA /* TopGenresSection.swift */,
+				C0883A1026E270CB00E1ADFA /* BrowseAllSection.swift */,
+			);
+			path = SearchScreenViews;
 			sourceTree = "<group>";
 		};
 		C0C63C5126DD144E00532792 = {
@@ -658,6 +683,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0883A0726E26FF200E1ADFA /* RecentlyPlayedScrollView.swift in Sources */,
+				C089135F26F9816F00CA1A69 /* APIFetchingDataSearchPage.swift in Sources */,
 				C0883A0926E2703D00E1ADFA /* SearchSection.swift in Sources */,
 				C081873526EF97DF00AB19E9 /* AuthScreen.swift in Sources */,
 				C0883A0126E26F1500E1ADFA /* SmallSongCardsGrid.swift in Sources */,
@@ -688,10 +714,12 @@
 				C07DA13026DDD6F20086EEAB /* View+RoundedSpecificSide.swift in Sources */,
 				C0A06A7C26E18A6F00E85DD4 /* SearchScreen.swift in Sources */,
 				C084268026F10DC8000ACAEE /* AuthCoordinator.swift in Sources */,
+				C089135D26F97E8C00CA1A69 /* SearchViewModel.swift in Sources */,
 				C09FD90126E049BE0069CEAE /* Image+ResizeToFit.swift in Sources */,
 				C081873D26F0168700AB19E9 /* AuthKey.swift in Sources */,
 				C09FD8FF26E03D6E0069CEAE /* BottomBar.swift in Sources */,
-				C084267E26F10BBD000ACAEE /* APIFetchingData.swift in Sources */,
+				C084267E26F10BBD000ACAEE /* APIFetchingDataHomePage.swift in Sources */,
+				C089136226F986E600CA1A69 /* ColorfulCardPair.swift in Sources */,
 				C077D4A526F3A45400EF6ADA /* AuthScope.swift in Sources */,
 				C084268626F14A7E000ACAEE /* RemoteImage.swift in Sources */,
 				C0883A0F26E270A300E1ADFA /* PopularPodcastSection.swift in Sources */,

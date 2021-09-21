@@ -12,7 +12,13 @@ struct SpotifyModel {
   init() {
   }
 
-  // Currently just supports track
+  struct PlaylistItem: Identifiable {
+    var sectionTitle: String
+    var name: String
+    var imageURL: String
+    var id: String
+  }
+  
   struct MediaItem: Identifiable {
     var title: String
     var previewURL: String

@@ -10,7 +10,47 @@ import Foundation
 // TODO: Improve and test structs
 // TODO: Use less structs by trimming the data right away
 
-// MARK: - Structs used to get data from the API
+
+// MARK: - API End Results
+
+struct Track: Decodable {
+  var name: String
+  var preview_url: String?
+  var album: Album
+  var artists: [Artist]
+  var type: String
+  var id: String
+}
+
+struct Album: Decodable {
+  var name: String
+  var images: [CoverImage]?
+  var album_type: String
+  var id: String
+  var artists: [Artist]
+}
+
+struct Show: Decodable {
+  var name: String
+  var publisher: String
+  var images: [CoverImage]
+  var type: String
+  var id: String
+}
+
+struct Artist: Decodable {
+  var name: String
+  var images: [CoverImage]?
+  var id: String
+}
+
+struct CoverImage: Decodable {
+  var url: String
+}
+
+
+
+// MARK: - Home Screen API Response Structs
 
 struct MixedResponse: Decodable {
   var items: [GeneralItem]
@@ -44,46 +84,27 @@ struct ShowItem: Decodable {
   var items: [Show]
 }
 
-struct Show: Decodable {
-  var name: String
-  var publisher: String
-  var images: [CoverImage]
-  var type: String
-  var id: String
-}
-
 // -----
-
-// When the responses are just tracks
 
 struct TracksResponse: Decodable {
   var tracks: [Track]
 }
 
-struct Track: Decodable {
-  var name: String
-  var preview_url: String?
-  var album: Album
-  var artists: [Artist]
-  var type: String
-  var id: String
+
+
+// MARK: - Search Screen API Response Structs
+
+struct FeaturedPlaylistsResponse: Decodable {
+  var message: String
+  var playlists: FeaturedPlaylists
 }
 
-struct Album: Decodable {
-  var name: String
-  var images: [CoverImage]?
-  var album_type: String
-  var id: String
-  var artists: [Artist]
+struct FeaturedPlaylists: Decodable {
+  var items: [Playlist]
 }
 
-struct Artist: Decodable {
+struct Playlist: Decodable {
   var name: String
-  var images: [CoverImage]?
+  var images: [CoverImage]
   var id: String
-}
-
-struct CoverImage: Decodable {
-  var height: Int
-  var url: String
 }

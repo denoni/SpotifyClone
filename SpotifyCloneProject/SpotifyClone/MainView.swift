@@ -11,11 +11,13 @@ struct MainView: View {
   @StateObject var mainViewModel: MainViewModel
   @StateObject var authViewModel: AuthViewModel
   @StateObject var homeViewModel: HomeViewModel
+  @StateObject var searchViewModel: SearchViewModel
 
   init(mainViewModel: MainViewModel) {
     _mainViewModel = StateObject(wrappedValue: mainViewModel)
     _authViewModel = StateObject(wrappedValue: AuthViewModel(mainViewModel: mainViewModel))
     _homeViewModel = StateObject(wrappedValue: HomeViewModel(mainViewModel: mainViewModel))
+    _searchViewModel = StateObject(wrappedValue: SearchViewModel(mainViewModel: mainViewModel))
   }
   
   var body: some View {
@@ -26,7 +28,7 @@ struct MainView: View {
         case .home:
           HomeScreen(homeViewModel: homeViewModel)
         case .search:
-          SearchScreen()
+          SearchScreen(searchViewModel: searchViewModel)
         case .myLibrary:
           Text("To be done 🛠").font(.title)
         }

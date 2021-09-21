@@ -10,10 +10,10 @@
 /// - Top Podcasts
 /// - New Releases
 
-import SwiftUI
+import Foundation
 
 class HomeViewModel: ObservableObject {
-  var api = APIFetchingData()
+  var api = APIFetchingDataHomePage()
   var mainViewModel: MainViewModel
   @Published var isLoading = [String:Bool]()
   @Published var medias = [String:[SpotifyModel.MediaItem]]()
