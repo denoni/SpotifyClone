@@ -102,42 +102,42 @@ class HomeViewModel: ObservableObject {
     guard numberOfLoadedItemsInSection[section]! <= 50 else {
       return
     }
-    DispatchQueue.main.async {
+    DispatchQueue.main.async { [unowned self] in
       switch section {
       // MARK: - Recently Played
       case .recentlyPlayed:
-        self.api.getUserRecentlyPlayed(accessToken: accessToken) { [unowned self] medias in
-          self.mediaCollection[section] = medias
-          self.isLoading[section] = false
+        api.getUserRecentlyPlayed(accessToken: accessToken) { medias in
+          mediaCollection[section] = medias
+          isLoading[section] = false
         }
 
       // MARK: - User Favorite Tracks
       case .userFavoriteTracks:
-        self.api.getUserFavoriteTracks(accessToken: accessToken) { [unowned self] medias in
-          self.mediaCollection[section] = medias
-          self.isLoading[section] = false
+        self.api.getUserFavoriteTracks(accessToken: accessToken) { medias in
+          mediaCollection[section] = medias
+          isLoading[section] = false
         }
 
       // MARK: - User Favorite Artists
       case .userFavoriteArtists:
-        self.api.getUserFavoriteArtists(accessToken: accessToken) { [unowned self] artists in
-          self.mediaCollection[section] = artists
-          self.isLoading[section] = false
+        api.getUserFavoriteArtists(accessToken: accessToken) { artists in
+          mediaCollection[section] = artists
+          isLoading[section] = false
         }
 
       // MARK: - New Releases
       case .newReleases:
         if loadingMore {
-          self.api.getNewReleases(accessToken: accessToken,
+          api.getNewReleases(accessToken: accessToken,
                                   limit: numberOfItemsInEachLoad,
-                                  offset: currentNumberOfLoadedItems) { [unowned self] tracks in
-            self.mediaCollection[section]! += tracks
+                                  offset: currentNumberOfLoadedItems) { tracks in
+            mediaCollection[section]! += tracks
 
           }
         } else {
-          self.api.getNewReleases(accessToken: accessToken) { [unowned self] tracks in
-            self.mediaCollection[section] = tracks
-            self.isLoading[section] = false
+          api.getNewReleases(accessToken: accessToken) { tracks in
+            mediaCollection[section] = tracks
+            isLoading[section] = false
 
           }
         }
@@ -145,24 +145,24 @@ class HomeViewModel: ObservableObject {
       // MARK: - Top Podcasts
       case .topPodcasts:
         if loadingMore {
-          self.api.getTopPodcasts(accessToken: accessToken,
+          api.getTopPodcasts(accessToken: accessToken,
                                   limit: numberOfItemsInEachLoad,
-                                  offset: currentNumberOfLoadedItems) { [unowned self] podcasts in
-            self.mediaCollection[section]! += podcasts
+                                  offset: currentNumberOfLoadedItems) { podcasts in
+            mediaCollection[section]! += podcasts
           }
         } else {
-          self.api.getTopPodcasts(accessToken: accessToken) { [unowned self] podcasts in
-            self.mediaCollection[section] = podcasts
-            self.isLoading[section] = false
+          api.getTopPodcasts(accessToken: accessToken) { podcasts in
+            mediaCollection[section] = podcasts
+            isLoading[section] = false
 
           }
         }
 
       // MARK: - Featured Playlists
       case .featuredPlaylists:
-          self.api.getPlaylists(accessToken: accessToken) { [unowned self] playlists in
-            self.mediaCollection[section] = playlists
-            self.isLoading[section] = false
+          api.getPlaylists(accessToken: accessToken) { playlists in
+            mediaCollection[section] = playlists
+            isLoading[section] = false
           }
 
       // MARK: - Artist's Top Tracks
@@ -170,25 +170,25 @@ class HomeViewModel: ObservableObject {
 
         var artistID = ""
 
-        self.api.getUserFavoriteArtists(accessToken: accessToken) { artists in
-          let userMostFavoriteArtist = artists[0]
+        api.getUserFavoriteArtists(accessToken: accessToken) { artists in
+          let userMostFavoriteArtist = artists[2]
           artistID = userMostFavoriteArtist.id
 
           print("executed")
 
           // Insert the artist info in the first element
-          self.api.getArtist(accessToken: accessToken, artistID: artistID) { [unowned self] artist in
+          api.getArtist(accessToken: accessToken, artistID: artistID) { artist in
             mediaCollection[section]!.insert(contentsOf: artist, at: 0)
           }
 
           // Add the artist's top songs
-          self.api.getTopTracksFromArtist(accessToken: accessToken,
+          api.getTopTracksFromArtist(accessToken: accessToken,
                                           country: "US",
-                                          id: artistID) { [unowned self] trackItems in
+                                          id: artistID) { trackItems in
             mediaCollection[section]!.append(contentsOf: trackItems)
             isLoading[section] = false
           }
-        }        
+        }
       default:
         fatalError("Tried to fetch data for a type not specified in the function declaration(fetchDataFor).")
 
