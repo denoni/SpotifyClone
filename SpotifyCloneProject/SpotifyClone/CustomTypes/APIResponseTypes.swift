@@ -40,6 +40,7 @@ struct Show: Decodable {
 
 struct Artist: Decodable {
   var name: String
+  var genres: [String]?
   var images: [CoverImage]?
   var id: String
 }
@@ -105,4 +106,10 @@ struct Playlist: Decodable {
   var name: String
   var images: [CoverImage]
   var id: String
+}
+
+// -----
+
+struct ArtistResponse: Decodable {
+  var items: [Artist]
 }

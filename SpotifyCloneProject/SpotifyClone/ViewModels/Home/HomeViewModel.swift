@@ -34,6 +34,7 @@ class HomeViewModel: ObservableObject {
 
   enum Section: String, CaseIterable {
     case userFavoriteTracks = "Small Song Card Items"
+    case userFavoriteArtists = "Your Artists"
     case recentlyPlayed = "Recently Played"
     case newReleases = "New Releases"
     case topPodcasts = "Top Podcasts"
@@ -45,6 +46,7 @@ class HomeViewModel: ObservableObject {
     for key in isLoading.keys { isLoading[key] = true }
 
     if mainViewModel.authKey != nil {
+      
       getUserFavoriteTracks(accessToken: mainViewModel.authKey!.accessToken)
       getUserRecentlyPlayed(accessToken: mainViewModel.authKey!.accessToken)
       getNewReleases(accessToken: mainViewModel.authKey!.accessToken)
@@ -52,6 +54,7 @@ class HomeViewModel: ObservableObject {
       getTopTracksFromArtist(accessToken: mainViewModel.authKey!.accessToken,
                              artistID: "66CXWjxzNUsdJxJ2JdwvnR" /* arianaGrandeID */)
       getFeaturedPlaylists(accessToken: mainViewModel.authKey!.accessToken)
+      getUserFavoriteArtists(accessToken: mainViewModel.authKey!.accessToken)
     }
   }
 
@@ -72,6 +75,10 @@ class HomeViewModel: ObservableObject {
 
   private func getUserFavoriteTracks(accessToken: String) {
     fetchDataFor(Section.userFavoriteTracks, with: accessToken)
+  }
+
+  private func getUserFavoriteArtists(accessToken: String) {
+    fetchDataFor(Section.userFavoriteArtists, with: accessToken)
   }
 
   private func getFeaturedPlaylists(accessToken: String) {
@@ -122,6 +129,13 @@ class HomeViewModel: ObservableObject {
       // MARK: - User Favorite Tracks
       case .userFavoriteTracks:
         self.api.getUserFavoriteTracks(accessToken: accessToken) { [unowned self] mediaItems in
+          self.medias[section] = mediaItems
+          self.isLoading[section] = false
+        }
+
+      // MARK: - User Favorite Artists
+      case .userFavoriteArtists:
+        self.api.getUserFavoriteArtists(accessToken: accessToken) { [unowned self] mediaItems in
           self.medias[section] = mediaItems
           self.isLoading[section] = false
         }
