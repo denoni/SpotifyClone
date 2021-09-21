@@ -11,8 +11,15 @@ struct ColorfulCard: View {
   var text: String
   var imageURL: String
   var color: Color
-
   var isPodcast = false
+
+  var textHasMoreThanOneWord: Bool {
+    if text.contains(" ") {
+      return true
+    } else {
+      return false
+    }
+  }
 
   var getCornerRadius: CGFloat {
     isPodcast ? 10 : 0
@@ -28,9 +35,10 @@ struct ColorfulCard: View {
         .font(.avenir(.black, size: 18))
         .padding(.vertical, 8)
         .padding(.horizontal, 12)
-        .padding(.trailing, 60)
+        .padding(.trailing, 50)
         .padding(.bottom, 25)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .lineLimit(textHasMoreThanOneWord ? 2 : 1)
       RoundedRectangle(cornerRadius: getCornerRadius)
         .frame(width: 80, height: 80)
         .overlay(RemoteImage(urlString: imageURL).mask(RoundedRectangle(cornerRadius: getCornerRadius)))
