@@ -40,6 +40,7 @@ struct ColorfulCard: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .lineLimit(textHasMoreThanOneWord ? 2 : 1)
       RoundedRectangle(cornerRadius: getCornerRadius)
+        .foregroundColor(Color.spotifyMediumGray)
         .frame(width: 80, height: 80)
         .overlay(RemoteImage(urlString: imageURL).mask(RoundedRectangle(cornerRadius: getCornerRadius)))
         .rotationEffect(Angle(degrees: 25))
