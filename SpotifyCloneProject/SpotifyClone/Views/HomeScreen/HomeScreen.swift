@@ -23,7 +23,7 @@ struct HomeScreen: View {
       }
     } else {
       ScrollView(showsIndicators: false) {
-        VStack(alignment: .leading) {
+        LazyVStack(alignment: .leading) {
           SmallSongCardsGrid(medias: getTracksFor(.userFavoriteTracks))
             .padding(.horizontal, lateralPadding)
             .padding(.bottom, paddingSectionSeparation)

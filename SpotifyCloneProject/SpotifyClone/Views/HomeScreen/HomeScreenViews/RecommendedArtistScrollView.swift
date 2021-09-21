@@ -46,7 +46,7 @@ struct RecommendedArtistScrollView: View {
       .aspectRatio(contentMode: .fit)
       .padding(.leading, lateralPadding)
       ScrollView(.horizontal, showsIndicators: false) {
-        HStack(alignment: .top,spacing: spacingBigItems) {
+        LazyHStack(alignment: .top,spacing: spacingBigItems) {
           ForEach(getArtistSongs()) { media in
             BigSongItem(imageURL: media.imageURL,
                         title: media.title)

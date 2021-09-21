@@ -5,8 +5,6 @@
 //  Created by Gabriel on 9/3/21.
 //
 
-// TODO: Should accept artists and podcasts too
-
 import SwiftUI
 
 struct RecentlyPlayedScrollView: View {
@@ -36,14 +34,3 @@ struct RecentlyPlayedScrollView: View {
     }
   }
 }
-
-//.onAppear {
-//  scrolledUntilItem += 1
-//  print(scrolledUntilItem)
-//
-//  if medias.count > 5 {
-//    if scrolledUntilItem == (medias.count - 3) {
-//      print("Load more")
-//    }
-//  }
-//}
