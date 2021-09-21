@@ -47,12 +47,12 @@ struct RecommendedArtistScrollView: View {
       .padding(.leading, lateralPadding)
       ScrollView(.horizontal, showsIndicators: false) {
         HStack(alignment: .top,spacing: spacingBigItems) {
-          Spacer(minLength: 5)
           ForEach(getArtistSongs()) { media in
             BigSongItem(imageURL: media.imageURL,
                         title: media.title)
           }
         }
+        .padding(.horizontal, 25)
       }
     }
   }
