@@ -7,7 +7,6 @@
 
 // TODO: Reduce duplicated code
 // TODO: Convert to arrays and render using ForEach
-// TODO: Separate into different items
 
 import SwiftUI
 
@@ -56,6 +55,10 @@ struct HomeScreen: View {
       }
     }
   }
+
+
+
+  // MARK: - Auxiliary Functions
 
   func didEverySectionLoaded() -> Bool {
     for key in homeViewModel.isLoading.keys {

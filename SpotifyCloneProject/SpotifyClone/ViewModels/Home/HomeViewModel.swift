@@ -53,8 +53,7 @@ class HomeViewModel: ObservableObject {
       getUserRecentlyPlayed(accessToken: accessToken)
       getNewReleases(accessToken: accessToken)
       getTopPodcasts(accessToken: accessToken)
-      getTopTracksFromArtist(accessToken: accessToken,
-                             artistID: "66CXWjxzNUsdJxJ2JdwvnR" /* arianaGrandeID */)
+      getTopTracksFromArtist(accessToken: accessToken)
       getFeaturedPlaylists(accessToken: accessToken)
       getUserFavoriteArtists(accessToken: accessToken)
     }
@@ -88,24 +87,8 @@ class HomeViewModel: ObservableObject {
   }
 
   // MARK: - Top Tracks From Artist
-  private func getTopTracksFromArtist(accessToken: String, artistID: String) {
-
-    let section = Section.artistTopTracks
-
-    DispatchQueue.main.async {
-      // Insert the artist info in the first element
-      self.api.getArtist(accessToken: accessToken, artistID: artistID) { artist in
-        self.mediaCollection[section]!.insert(contentsOf: artist, at: 0)
-      }
-
-      // Add the artist's top songs
-      self.api.getTopTracksFromArtist(accessToken: accessToken,
-                                      country: "US",
-                                      id: artistID) { [unowned self] trackItems in
-        self.mediaCollection[section]!.append(contentsOf: trackItems)
-        self.isLoading[section] = false
-      }
-    }
+  private func getTopTracksFromArtist(accessToken: String) {
+    fetchDataFor(Section.artistTopTracks, with: accessToken)
   }
 
 
@@ -181,7 +164,31 @@ class HomeViewModel: ObservableObject {
             self.mediaCollection[section] = playlists
             self.isLoading[section] = false
           }
-        
+
+      // MARK: - Artist's Top Tracks
+      case .artistTopTracks:
+
+        var artistID = ""
+
+        self.api.getUserFavoriteArtists(accessToken: accessToken) { artists in
+          let userMostFavoriteArtist = artists[0]
+          artistID = userMostFavoriteArtist.id
+
+          print("executed")
+
+          // Insert the artist info in the first element
+          self.api.getArtist(accessToken: accessToken, artistID: artistID) { [unowned self] artist in
+            mediaCollection[section]!.insert(contentsOf: artist, at: 0)
+          }
+
+          // Add the artist's top songs
+          self.api.getTopTracksFromArtist(accessToken: accessToken,
+                                          country: "US",
+                                          id: artistID) { [unowned self] trackItems in
+            mediaCollection[section]!.append(contentsOf: trackItems)
+            isLoading[section] = false
+          }
+        }        
       default:
         fatalError("Tried to fetch data for a type not specified in the function declaration(fetchDataFor).")
 
