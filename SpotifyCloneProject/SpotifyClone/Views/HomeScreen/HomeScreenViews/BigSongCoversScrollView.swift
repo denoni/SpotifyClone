@@ -10,6 +10,7 @@ import SwiftUI
 struct BigSongCoversScrollView: View {
   @StateObject var homeViewModel: HomeViewModel
   let section: HomeViewModel.Section
+  var sectionTitle = ""
   var medias: [SpotifyModel.MediaItem] {
     homeViewModel.medias[section.rawValue]!
   }
@@ -17,14 +18,14 @@ struct BigSongCoversScrollView: View {
   
   var body: some View {
     VStack(spacing: spacingSmallItems) {
-      Text(section.rawValue)
+      Text(sectionTitle.isEmpty ? section.rawValue : sectionTitle)
         .spotifyTitle(withPadding: true)
       ScrollView(.horizontal, showsIndicators: false) {
         LazyHStack(alignment: .top,spacing: spacingBigItems) {
           ForEach(medias) { media in
             BigSongItem(imageURL: media.imageURL,
                         title: media.title,
-                        artist: media.author,
+                        artist: "",
                         isArtistProfile: media.isArtist,
                         isPodcast: media.isPodcast)
               .onAppear {

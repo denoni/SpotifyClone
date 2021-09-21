@@ -38,6 +38,7 @@ class HomeViewModel: ObservableObject {
     case newReleases = "New Releases"
     case topPodcasts = "Top Podcasts"
     case artistTopTracks = "Artist Top Tracks"
+    case featuredPlaylists = "Featured Playlists"
   }
 
   func fetchHomeData() {
@@ -50,13 +51,14 @@ class HomeViewModel: ObservableObject {
       getTopPodcasts(accessToken: mainViewModel.authKey!.accessToken)
       getTopTracksFromArtist(accessToken: mainViewModel.authKey!.accessToken,
                              artistID: "66CXWjxzNUsdJxJ2JdwvnR" /* arianaGrandeID */)
+      getFeaturedPlaylists(accessToken: mainViewModel.authKey!.accessToken)
     }
   }
 
 
 
   // MARK: - Calls to fetch data
-  func getNewReleases(accessToken: String, loadingMore: Bool = false) {
+  private func getNewReleases(accessToken: String, loadingMore: Bool = false) {
     fetchDataFor(Section.newReleases, with: accessToken, loadingMore: loadingMore)
   }
 
@@ -70,6 +72,10 @@ class HomeViewModel: ObservableObject {
 
   private func getUserFavoriteTracks(accessToken: String) {
     fetchDataFor(Section.userFavoriteTracks, with: accessToken)
+  }
+
+  private func getFeaturedPlaylists(accessToken: String) {
+    fetchDataFor(Section.featuredPlaylists, with: accessToken)
   }
 
   // MARK: - Top Tracks From Artist
@@ -153,6 +159,13 @@ class HomeViewModel: ObservableObject {
 
           }
         }
+
+      // MARK: - Featured Playlists
+      case .featuredPlaylists:
+          self.api.getPlaylists(accessToken: accessToken) { [unowned self] mediaItems in
+            self.medias[section.rawValue] = mediaItems
+            self.isLoading[section.rawValue] = false
+          }
         
       default:
         fatalError("Tried to fetch data for a type not specified in the function declaration(fetchDataFor).")

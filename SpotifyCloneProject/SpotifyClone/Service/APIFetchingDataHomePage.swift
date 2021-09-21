@@ -296,4 +296,53 @@ class APIFetchingDataHomePage: ObservableObject {
       }
   }
 
+  func getPlaylists(accessToken: String,
+                    limit: Int = 20,
+                    offset: Int = 0,
+                    completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
+
+    let country = "US"
+    let baseUrl = "https://api.spotify.com/v1/browse/featured-playlists?country=\(country)&limit=\(limit)&offset=\(offset)"
+
+    var urlRequest = URLRequest(url: URL(string: baseUrl)!)
+    urlRequest.httpMethod = "GET"
+    urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+    urlRequest.cachePolicy = NSURLRequest.CachePolicy.returnCacheDataElseLoad
+
+    AF.request(urlRequest)
+      .validate()
+      .responseDecodable(of: FeaturedPlaylistsResponse.self) { response in
+        guard let data = response.value else {
+          fatalError("Error receiving playlists from API.")
+        }
+
+        let numberOfPlaylists = data.playlists.items.count
+
+        var playlists = [SpotifyModel.MediaItem]()
+
+        guard numberOfPlaylists != 0 else {
+          fatalError("The API response was corrects but empty. We don't have a way to handle this yet.")
+        }
+
+        for index in 0 ..< numberOfPlaylists {
+          let sectionTitle = data.message
+          let title = data.playlists.items[index].name
+          let imageURL = data.playlists.items[index].images[0].url
+          let id = data.playlists.items[index].id
+
+          let playlistItem = SpotifyModel.MediaItem(title: title,
+                                                    previewURL: "",
+                                                    imageURL: imageURL,
+                                                    author: sectionTitle,
+                                                    type: "",
+                                                    isPodcast: false,
+                                                    isArtist: false,
+                                                    id: id)
+          playlists.append(playlistItem)
+        }
+        completionHandler(playlists)
+      }
+  }
+
+
 }

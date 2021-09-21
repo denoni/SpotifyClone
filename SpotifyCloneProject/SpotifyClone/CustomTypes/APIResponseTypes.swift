@@ -50,7 +50,7 @@ struct CoverImage: Decodable {
 
 
 
-// MARK: - Home Screen API Response Structs
+// MARK: - API Response Structs
 
 struct MixedResponse: Decodable {
   var items: [GeneralItem]
@@ -90,9 +90,7 @@ struct TracksResponse: Decodable {
   var tracks: [Track]
 }
 
-
-
-// MARK: - Search Screen API Response Structs
+// -----
 
 struct FeaturedPlaylistsResponse: Decodable {
   var message: String

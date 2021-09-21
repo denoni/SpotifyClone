@@ -39,6 +39,11 @@ struct HomeScreen: View {
                                   section: .topPodcasts)
             .padding(.bottom, paddingSectionSeparation)
 
+          BigSongCoversScrollView(homeViewModel: homeViewModel,
+                                  section: .featuredPlaylists,
+                                  sectionTitle: homeViewModel.medias[HomeViewModel.Section.featuredPlaylists.rawValue]!.first!.author)
+            .padding(.bottom, paddingSectionSeparation)
+
           RecommendedArtistScrollView(medias: getTracksFor(.artistTopTracks),
                                       sectionTitle: HomeViewModel.Section.artistTopTracks.rawValue)
             .padding(.bottom, paddingSectionSeparation)
