@@ -28,6 +28,7 @@ struct SmallSongCard: View {
         Text(title)
           .font(.avenir(.heavy, size: 16))
           .frame(maxWidth: .infinity, alignment: .topLeading)
+          .padding(.trailing, 15)
       }
     }.aspectRatio(3/1, contentMode: .fit)
   }
