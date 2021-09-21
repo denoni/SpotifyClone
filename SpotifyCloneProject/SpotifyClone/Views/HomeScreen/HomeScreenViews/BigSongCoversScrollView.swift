@@ -12,7 +12,7 @@ struct BigSongCoversScrollView: View {
   let section: HomeViewModel.Section
   var sectionTitle = ""
   var medias: [SpotifyModel.MediaItem] {
-    homeViewModel.medias[section.rawValue]!
+    homeViewModel.medias[section]!
   }
 
   

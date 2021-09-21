@@ -41,7 +41,7 @@ struct HomeScreen: View {
 
           BigSongCoversScrollView(homeViewModel: homeViewModel,
                                   section: .featuredPlaylists,
-                                  sectionTitle: homeViewModel.medias[HomeViewModel.Section.featuredPlaylists.rawValue]!.first!.author)
+                                  sectionTitle: homeViewModel.medias[.featuredPlaylists]!.first!.author)
             .padding(.bottom, paddingSectionSeparation)
 
           RecommendedArtistScrollView(medias: getTracksFor(.artistTopTracks),
@@ -66,7 +66,7 @@ struct HomeScreen: View {
   }
 
   func getTracksFor(_ section: HomeViewModel.Section) -> [SpotifyModel.MediaItem] {
-    return !homeViewModel.isLoading[section.rawValue]! ? homeViewModel.medias[section.rawValue]! : []
+    return !homeViewModel.isLoading[section]! ? homeViewModel.medias[section]! : []
   }
 
 }
