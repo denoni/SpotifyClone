@@ -29,7 +29,9 @@ struct SearchScreen: View {
             .padding(.bottom, 10)
           PopularPodcastSection(title: "Popular Podcast Categories")
             .padding(.bottom, 10)
-          BrowseAllSection(title: "Browse All", playlists: searchViewModel.playlists)
+          BrowseAllSection(title: "Browse All",
+                           playlists: searchViewModel.playlists,
+                           colors: searchViewModel.colors)
             .padding(.bottom, paddingBottomSection)
         }.padding(.vertical, lateralPadding)
       }
