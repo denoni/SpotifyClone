@@ -16,7 +16,7 @@ class HomeViewModel: ObservableObject {
   var api = APIFetchingDataHomePage()
   var mainViewModel: MainViewModel
   @Published var isLoading = [Section:Bool]()
-  @Published var medias = [Section:[SpotifyModel.MediaItem]]()
+  @Published var mediaCollection = [Section:[SpotifyModel.MediaItem]]()
   @Published var numberOfLoadedItemsInSection = [Section:Int]()
 
 
@@ -26,7 +26,7 @@ class HomeViewModel: ObservableObject {
     // Populate isLoading and medias with all possible section keys
     for section in Section.allCases {
       isLoading[section] = true
-      medias[section] = []
+      mediaCollection[section] = []
       numberOfLoadedItemsInSection[section] = 0
     }
     fetchHomeData()
@@ -43,18 +43,20 @@ class HomeViewModel: ObservableObject {
   }
 
   func fetchHomeData() {
-    for key in isLoading.keys { isLoading[key] = true }
+    for dictKey in isLoading.keys { isLoading[dictKey] = true }
 
     if mainViewModel.authKey != nil {
-      
-      getUserFavoriteTracks(accessToken: mainViewModel.authKey!.accessToken)
-      getUserRecentlyPlayed(accessToken: mainViewModel.authKey!.accessToken)
-      getNewReleases(accessToken: mainViewModel.authKey!.accessToken)
-      getTopPodcasts(accessToken: mainViewModel.authKey!.accessToken)
-      getTopTracksFromArtist(accessToken: mainViewModel.authKey!.accessToken,
+
+      let accessToken = mainViewModel.authKey!.accessToken
+
+      getUserFavoriteTracks(accessToken: accessToken)
+      getUserRecentlyPlayed(accessToken: accessToken)
+      getNewReleases(accessToken: accessToken)
+      getTopPodcasts(accessToken: accessToken)
+      getTopTracksFromArtist(accessToken: accessToken,
                              artistID: "66CXWjxzNUsdJxJ2JdwvnR" /* arianaGrandeID */)
-      getFeaturedPlaylists(accessToken: mainViewModel.authKey!.accessToken)
-      getUserFavoriteArtists(accessToken: mainViewModel.authKey!.accessToken)
+      getFeaturedPlaylists(accessToken: accessToken)
+      getUserFavoriteArtists(accessToken: accessToken)
     }
   }
 
@@ -93,14 +95,14 @@ class HomeViewModel: ObservableObject {
     DispatchQueue.main.async {
       // Insert the artist info in the first element
       self.api.getArtist(accessToken: accessToken, artistID: artistID) { artist in
-        self.medias[section]!.insert(contentsOf: artist, at: 0)
+        self.mediaCollection[section]!.insert(contentsOf: artist, at: 0)
       }
 
       // Add the artist's top songs
       self.api.getTopTracksFromArtist(accessToken: accessToken,
                                       country: "US",
                                       id: artistID) { [unowned self] trackItems in
-        self.medias[section]!.append(contentsOf: trackItems)
+        self.mediaCollection[section]!.append(contentsOf: trackItems)
         self.isLoading[section] = false
       }
     }
@@ -121,22 +123,22 @@ class HomeViewModel: ObservableObject {
       switch section {
       // MARK: - Recently Played
       case .recentlyPlayed:
-        self.api.getUserRecentlyPlayed(accessToken: accessToken) { [unowned self] mediaItems in
-          self.medias[section] = mediaItems
+        self.api.getUserRecentlyPlayed(accessToken: accessToken) { [unowned self] medias in
+          self.mediaCollection[section] = medias
           self.isLoading[section] = false
         }
 
       // MARK: - User Favorite Tracks
       case .userFavoriteTracks:
-        self.api.getUserFavoriteTracks(accessToken: accessToken) { [unowned self] mediaItems in
-          self.medias[section] = mediaItems
+        self.api.getUserFavoriteTracks(accessToken: accessToken) { [unowned self] medias in
+          self.mediaCollection[section] = medias
           self.isLoading[section] = false
         }
 
       // MARK: - User Favorite Artists
       case .userFavoriteArtists:
-        self.api.getUserFavoriteArtists(accessToken: accessToken) { [unowned self] mediaItems in
-          self.medias[section] = mediaItems
+        self.api.getUserFavoriteArtists(accessToken: accessToken) { [unowned self] artists in
+          self.mediaCollection[section] = artists
           self.isLoading[section] = false
         }
 
@@ -145,13 +147,13 @@ class HomeViewModel: ObservableObject {
         if loadingMore {
           self.api.getNewReleases(accessToken: accessToken,
                                   limit: numberOfItemsInEachLoad,
-                                  offset: currentNumberOfLoadedItems) { [unowned self] newItems in
-            self.medias[section]! += newItems
+                                  offset: currentNumberOfLoadedItems) { [unowned self] tracks in
+            self.mediaCollection[section]! += tracks
 
           }
         } else {
-          self.api.getNewReleases(accessToken: accessToken) { [unowned self] mediaItems in
-            self.medias[section] = mediaItems
+          self.api.getNewReleases(accessToken: accessToken) { [unowned self] tracks in
+            self.mediaCollection[section] = tracks
             self.isLoading[section] = false
 
           }
@@ -162,12 +164,12 @@ class HomeViewModel: ObservableObject {
         if loadingMore {
           self.api.getTopPodcasts(accessToken: accessToken,
                                   limit: numberOfItemsInEachLoad,
-                                  offset: currentNumberOfLoadedItems) { [unowned self] newItems in
-            self.medias[section]! += newItems
+                                  offset: currentNumberOfLoadedItems) { [unowned self] podcasts in
+            self.mediaCollection[section]! += podcasts
           }
         } else {
-          self.api.getTopPodcasts(accessToken: accessToken) { [unowned self] mediaItems in
-            self.medias[section] = mediaItems
+          self.api.getTopPodcasts(accessToken: accessToken) { [unowned self] podcasts in
+            self.mediaCollection[section] = podcasts
             self.isLoading[section] = false
 
           }
@@ -175,8 +177,8 @@ class HomeViewModel: ObservableObject {
 
       // MARK: - Featured Playlists
       case .featuredPlaylists:
-          self.api.getPlaylists(accessToken: accessToken) { [unowned self] mediaItems in
-            self.medias[section] = mediaItems
+          self.api.getPlaylists(accessToken: accessToken) { [unowned self] playlists in
+            self.mediaCollection[section] = playlists
             self.isLoading[section] = false
           }
         
@@ -188,6 +190,8 @@ class HomeViewModel: ObservableObject {
   }
 
 
+
+  // MARK: - Auxiliary functions
 
   func getNumberOfLoadedItems(for section: Section) -> Int {
     return numberOfLoadedItemsInSection[section]!
