@@ -247,13 +247,15 @@ class APIFetchingData: ObservableObject {
   }
 
   func getTopPodcasts(accessToken: String,
+                      limit: Int = 10,
+                      offset: Int = 0,
                       completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
 
-    let termSearch = "podcast"
+    let termSearch = "spotify+exclusive"
     let type = "show"
     let market = "US"
 
-    let baseUrl = "https://api.spotify.com/v1/search?q=\(termSearch)&type=\(type)&market=\(market)"
+    let baseUrl = "https://api.spotify.com/v1/search?q=\(termSearch)&type=\(type)&market=\(market)&limit=\(limit)&offset=\(offset)"
 
     var urlRequest = URLRequest(url: URL(string: baseUrl)!)
     urlRequest.httpMethod = "GET"

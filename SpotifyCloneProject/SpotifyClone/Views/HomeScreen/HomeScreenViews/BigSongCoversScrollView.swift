@@ -9,9 +9,9 @@ import SwiftUI
 
 struct BigSongCoversScrollView: View {
   @StateObject var homeViewModel: HomeViewModel
-  let section = HomeViewModel.Section.newReleases
+  let section: HomeViewModel.Section
   var medias: [SpotifyModel.MediaItem] {
-    homeViewModel.medias[HomeViewModel.Section.newReleases.rawValue]!
+    homeViewModel.medias[section.rawValue]!
   }
 
   
@@ -30,8 +30,9 @@ struct BigSongCoversScrollView: View {
               .onAppear {
                 if medias.count > 6 {
                   if media.id == medias[medias.count - 4].id {
-                    homeViewModel.getNewReleases(accessToken: homeViewModel.mainViewModel.authKey!.accessToken,
-                                                 loadingMore: true)
+                    homeViewModel.fetchDataFor(section,
+                                               with: homeViewModel.mainViewModel.authKey!.accessToken,
+                                               loadingMore: true)
                   }
                 }
               }

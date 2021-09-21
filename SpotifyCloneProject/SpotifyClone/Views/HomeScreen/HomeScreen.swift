@@ -31,12 +31,13 @@ struct HomeScreen: View {
           RecentlyPlayedScrollView(medias: getTracksFor(.recentlyPlayed))
             .padding(.bottom, paddingSectionSeparation)
 
-          BigSongCoversScrollView(homeViewModel: homeViewModel)
+          BigSongCoversScrollView(homeViewModel: homeViewModel,
+                                  section: .newReleases)
             .padding(.bottom, paddingSectionSeparation)
 
-//          BigSongCoversScrollView(homeViewModel: homeViewModel,
-//                                  sectionTitle: HomeViewModel.Section.topPodcasts.rawValue)
-//            .padding(.bottom, paddingSectionSeparation)
+          BigSongCoversScrollView(homeViewModel: homeViewModel,
+                                  section: .topPodcasts)
+            .padding(.bottom, paddingSectionSeparation)
 
           RecommendedArtistScrollView(medias: getTracksFor(.artistTopTracks),
                                       sectionTitle: HomeViewModel.Section.artistTopTracks.rawValue)
