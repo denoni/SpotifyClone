@@ -20,6 +20,7 @@ struct AuthSheetView: View {
         }
       } else {
         ProgressView()
+          .withSpotifyStyle()
           .onAppear {
             isShowingSheetView = false
           }

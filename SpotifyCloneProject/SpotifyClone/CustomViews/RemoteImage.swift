@@ -23,6 +23,7 @@ struct RemoteImage: View {
         RemoteImage(urlString: placeholderImage)
       } else {
         ProgressView()
+          .withSpotifyStyle()
           .padding()
       }
     } else {

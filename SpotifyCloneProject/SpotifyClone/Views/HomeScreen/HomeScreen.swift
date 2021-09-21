@@ -17,9 +17,11 @@ struct HomeScreen: View {
     RadialGradientBackground()
 
     if didEverySectionLoaded() == false {
-      ProgressView().onAppear {
-        homeViewModel.fetchHomeData()
-      }
+      ProgressView()
+        .withSpotifyStyle()
+        .onAppear {
+          homeViewModel.fetchHomeData()
+        }
     } else {
       ScrollView(showsIndicators: false) {
         LazyVStack(alignment: .leading) {
