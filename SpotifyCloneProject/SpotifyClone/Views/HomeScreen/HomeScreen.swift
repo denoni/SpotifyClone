@@ -23,32 +23,47 @@ struct HomeScreen: View {
     } else {
       ScrollView(showsIndicators: false) {
         LazyVStack(alignment: .leading) {
-          SmallSongCardsGrid(medias: getTracksFor(.userFavoriteTracks))
+
+          // MARK: Small Song Cards
+          SmallSongCardsGrid(medias: getTracksFor(.smallSongCards))
             .padding(.horizontal, lateralPadding)
             .padding(.bottom, paddingSectionSeparation)
 
+          // MARK: Recently Played
           RecentlyPlayedScrollView(medias: getTracksFor(.recentlyPlayed))
             .padding(.bottom, paddingSectionSeparation)
 
+          // MARK: New Releases
           BigSongCoversScrollView(homeViewModel: homeViewModel,
                                   section: .newReleases)
             .padding(.bottom, paddingSectionSeparation)
 
+          // MARK: User Favorite Tracks
+          BigSongCoversScrollView(homeViewModel: homeViewModel,
+                                  section: .userFavoriteTracks)
+            .padding(.bottom, paddingSectionSeparation)
+
+          // MARK: Top Podcasts
           BigSongCoversScrollView(homeViewModel: homeViewModel,
                                   section: .topPodcasts)
             .padding(.bottom, paddingSectionSeparation)
 
+          // MARK: Featured Playlists
           BigSongCoversScrollView(homeViewModel: homeViewModel,
                                   section: .featuredPlaylists,
                                   sectionTitle: homeViewModel.mediaCollection[.featuredPlaylists]!.first!.author)
             .padding(.bottom, paddingSectionSeparation)
 
+          // MARK: Artist's Top Tracks
           RecommendedArtistScrollView(medias: getTracksFor(.artistTopTracks),
                                       sectionTitle: HomeViewModel.Section.artistTopTracks.rawValue)
             .padding(.bottom, paddingSectionSeparation)
+
+          // MARK: User Favorite Artists
           BigSongCoversScrollView(homeViewModel: homeViewModel,
                                   section: .userFavoriteArtists)
             .padding(.bottom, paddingSectionSeparation)
+          
         }
         .padding(.vertical, lateralPadding)
         .padding(.bottom, paddingBottomSection)

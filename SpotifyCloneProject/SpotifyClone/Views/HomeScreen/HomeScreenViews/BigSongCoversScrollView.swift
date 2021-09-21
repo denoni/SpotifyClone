@@ -29,16 +29,20 @@ struct BigSongCoversScrollView: View {
                         isArtistProfile: media.isArtist,
                         isPodcast: media.isPodcast)
               .onAppear {
-                if medias.count > 6 {
-                  if media.id == medias[medias.count - 4].id {
-                    homeViewModel.fetchDataFor(section,
-                                               with: homeViewModel.mainViewModel.authKey!.accessToken,
-                                               loadingMore: true)
-                  }
-                }
+                testIfShouldFetchMoreData(basedOn: media)
               }
           }
         }.padding(.horizontal, 25)
+      }
+    }
+  }
+
+  func testIfShouldFetchMoreData(basedOn media: SpotifyModel.MediaItem) {
+    if medias.count > 5 {
+      if media.id == medias[medias.count - 4].id {
+        homeViewModel.fetchDataFor(section,
+                                   with: homeViewModel.mainViewModel.authKey!.accessToken,
+                                   loadingMore: true)
       }
     }
   }

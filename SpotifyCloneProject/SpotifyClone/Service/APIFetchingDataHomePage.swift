@@ -62,9 +62,11 @@ class APIFetchingDataHomePage: ObservableObject {
   }
 
   func getUserFavoriteTracks(accessToken: String,
+                             limit: Int = 6,
+                             offset: Int = 0,
                              completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
 
-    let baseUrl = "https://api.spotify.com/v1/me/top/tracks"
+    let baseUrl = "https://api.spotify.com/v1/me/top/tracks?limit=\(limit)&offset=\(offset)"
 
     var urlRequest = URLRequest(url: URL(string: baseUrl)!)
     urlRequest.httpMethod = "GET"

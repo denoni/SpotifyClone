@@ -33,7 +33,8 @@ class HomeViewModel: ObservableObject {
   }
 
   enum Section: String, CaseIterable {
-    case userFavoriteTracks = "Small Song Card Items"
+    case smallSongCards = "Small Song Card Items"
+    case userFavoriteTracks = "Songs You Love"
     case userFavoriteArtists = "Your Artists"
     case recentlyPlayed = "Recently Played"
     case newReleases = "New Releases"
@@ -49,6 +50,7 @@ class HomeViewModel: ObservableObject {
 
       let accessToken = mainViewModel.authKey!.accessToken
 
+      getSmallSongCardItems(accessToken: accessToken)
       getUserFavoriteTracks(accessToken: accessToken)
       getUserRecentlyPlayed(accessToken: accessToken)
       getNewReleases(accessToken: accessToken)
@@ -62,6 +64,11 @@ class HomeViewModel: ObservableObject {
 
 
   // MARK: - Calls to fetch data
+
+  private func getSmallSongCardItems(accessToken: String, loadingMore: Bool = false) {
+    fetchDataFor(Section.smallSongCards, with: accessToken, loadingMore: loadingMore)
+  }
+
   private func getNewReleases(accessToken: String, loadingMore: Bool = false) {
     fetchDataFor(Section.newReleases, with: accessToken, loadingMore: loadingMore)
   }
@@ -104,6 +111,13 @@ class HomeViewModel: ObservableObject {
     }
     DispatchQueue.main.async { [unowned self] in
       switch section {
+      // MARK: - Small Song Card Items
+      case .smallSongCards:
+        api.getUserFavoriteTracks(accessToken: accessToken) { tracks in
+          mediaCollection[section] = tracks
+          isLoading[section] = false
+        }
+
       // MARK: - Recently Played
       case .recentlyPlayed:
         api.getUserRecentlyPlayed(accessToken: accessToken) { medias in
@@ -113,9 +127,18 @@ class HomeViewModel: ObservableObject {
 
       // MARK: - User Favorite Tracks
       case .userFavoriteTracks:
-        self.api.getUserFavoriteTracks(accessToken: accessToken) { medias in
-          mediaCollection[section] = medias
-          isLoading[section] = false
+        if loadingMore {
+          api.getUserFavoriteTracks(accessToken: accessToken,
+                                  limit: numberOfItemsInEachLoad,
+                                  offset: currentNumberOfLoadedItems) { tracks in
+            mediaCollection[section]! += tracks
+          }
+        } else {
+          api.getUserFavoriteTracks(accessToken: accessToken) { tracks in
+            mediaCollection[section] = tracks
+            isLoading[section] = false
+
+          }
         }
 
       // MARK: - User Favorite Artists
@@ -170,11 +193,10 @@ class HomeViewModel: ObservableObject {
 
         var artistID = ""
 
+        // Get the user's most favorite artist
         api.getUserFavoriteArtists(accessToken: accessToken) { artists in
-          let userMostFavoriteArtist = artists[2]
+          let userMostFavoriteArtist = artists[0]
           artistID = userMostFavoriteArtist.id
-
-          print("executed")
 
           // Insert the artist info in the first element
           api.getArtist(accessToken: accessToken, artistID: artistID) { artist in
@@ -189,6 +211,7 @@ class HomeViewModel: ObservableObject {
             isLoading[section] = false
           }
         }
+
       default:
         fatalError("Tried to fetch data for a type not specified in the function declaration(fetchDataFor).")
 
