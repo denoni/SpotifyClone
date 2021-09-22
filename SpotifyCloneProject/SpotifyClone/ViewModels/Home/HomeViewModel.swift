@@ -41,7 +41,7 @@ class HomeViewModel: ObservableObject {
     case topPodcasts = "Top Podcasts"
     case artistTopTracks = "Artist Top Tracks"
     case featuredPlaylists = "Featured Playlists"
-    case playlistTopHits = "Top Hits"
+    case playlistRewindTheNineties = "Rewind the 90s"
     case playlistThisIsX = "This Is..."
   }
 
@@ -60,7 +60,7 @@ class HomeViewModel: ObservableObject {
       getTopTracksFromArtist(accessToken: accessToken)
       getFeaturedPlaylists(accessToken: accessToken)
       getUserFavoriteArtists(accessToken: accessToken)
-      getPlaylistTopHits(accessToken: accessToken)
+      getPlaylistRewindTheNineties(accessToken: accessToken)
       getPlaylistThisIsX(accessToken: accessToken)
     }
   }
@@ -97,8 +97,8 @@ class HomeViewModel: ObservableObject {
     fetchDataFor(Section.featuredPlaylists, with: accessToken)
   }
 
-  private func getPlaylistTopHits(accessToken: String) {
-    fetchDataFor(Section.playlistTopHits, with: accessToken)
+  private func getPlaylistRewindTheNineties(accessToken: String) {
+    fetchDataFor(Section.playlistRewindTheNineties, with: accessToken)
   }
 
   private func getPlaylistThisIsX(accessToken: String) {
@@ -199,24 +199,15 @@ class HomeViewModel: ObservableObject {
             isLoading[section] = false
           }
 
-      // MARK: - Playlist Top Hits
-      case .playlistTopHits:
-        let keyWord = "top hits"
-        if loadingMore {
-          api.getPlaylistsWith(keyWord: keyWord, accessToken: accessToken,
-                                  limit: numberOfItemsInEachLoad,
-                                  offset: currentNumberOfLoadedItems) { podcasts in
-            mediaCollection[section]! += podcasts
-          }
-        } else {
-          api.getPlaylistsWith(keyWord: keyWord, accessToken: accessToken) { podcasts in
-            mediaCollection[section] = podcasts
-            isLoading[section] = false
-
-          }
+      // MARK: - Playlist Rewind the 90s
+      case .playlistRewindTheNineties:
+        let keyWord = "top hits of 199_"
+        api.getPlaylistsWith(keyWord: keyWord, accessToken: accessToken) { podcasts in
+          mediaCollection[section]! = podcasts
+          isLoading[section] = false
         }
 
-      // MARK: - Playlist Year Rewinds
+      // MARK: - Playlist This is X
       case .playlistThisIsX:
         let keyWord = "this is"
         if loadingMore {

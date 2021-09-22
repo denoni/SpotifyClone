@@ -68,9 +68,10 @@ struct HomeScreen: View {
 
           // MARK: Playlist Top Hits
           BigSongCoversScrollView(homeViewModel: homeViewModel,
-                                  section: .playlistTopHits)
+                                  section: .playlistRewindTheNineties)
             .padding(.bottom, paddingSectionSeparation)
 
+          
           // MARK: Playlist This Is X
           BigSongCoversScrollView(homeViewModel: homeViewModel,
                                   section: .playlistThisIsX)
