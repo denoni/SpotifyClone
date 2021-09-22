@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "black-facebook-f-logo-png-11574792338wy681p6sr8.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -316,6 +316,7 @@ class APIFetchingDataHomePage: ObservableObject {
 
         let numberOfItems = data.shows.items.count
 
+
         guard numberOfItems != 0 else {
           fatalError("The API response was corrects but empty. We don't have a way to handle this yet.")
         }
@@ -328,6 +329,9 @@ class APIFetchingDataHomePage: ObservableObject {
           let author = data.shows.items[itemIndex].publisher
           let type = data.shows.items[itemIndex].type
           let id = data.shows.items[itemIndex].id
+
+
+
 
           let podcastItem = SpotifyModel.MediaItem(title: title,
                                                    previewURL: "",

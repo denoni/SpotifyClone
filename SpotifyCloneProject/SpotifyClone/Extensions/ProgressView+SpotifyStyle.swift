@@ -26,7 +26,7 @@ struct SpotifyProgressViewStyle: ProgressViewStyle {
       Group {
         Circle()
           .fill(Color.white.opacity(0))
-          .overlay(Image("spotify-logo-white")
+          .overlay(Image("spotify-small-logo")
                     .resizeToFit()
                     .frame(width: size * 0.15 * centralScale, height: size * 15 * centralScale))
           .onAppear {
