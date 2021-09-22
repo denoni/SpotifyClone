@@ -28,9 +28,7 @@ struct BigSongCoversScrollView: View {
                         artist: "",
                         isArtistProfile: media.isArtist,
                         isPodcast: media.isPodcast)
-              .onAppear {
-                testIfShouldFetchMoreData(basedOn: media)
-              }
+              .onAppear { testIfShouldFetchMoreData(basedOn: media) }
           }
         }.padding(.horizontal, 25)
       }
@@ -41,8 +39,7 @@ struct BigSongCoversScrollView: View {
     if medias.count > 5 {
       if media.id == medias[medias.count - 4].id {
         homeViewModel.fetchDataFor(section,
-                                   with: homeViewModel.mainViewModel.authKey!.accessToken,
-                                   loadingMore: true)
+                                   with: homeViewModel.mainViewModel.authKey!.accessToken)
       }
     }
   }

@@ -66,12 +66,11 @@ struct HomeScreen: View {
                                   section: .userFavoriteArtists)
             .padding(.bottom, paddingSectionSeparation)
 
-          // MARK: Playlist Top Hits
+          // MARK: Playlist Rewind the 90s
           BigSongCoversScrollView(homeViewModel: homeViewModel,
                                   section: .playlistRewindTheNineties)
             .padding(.bottom, paddingSectionSeparation)
 
-          
           // MARK: Playlist This Is X
           BigSongCoversScrollView(homeViewModel: homeViewModel,
                                   section: .playlistThisIsX)

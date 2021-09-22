@@ -70,11 +70,11 @@ class HomeViewModel: ObservableObject {
   // MARK: - Calls to fetch data
 
   private func getSmallSongCardItems(accessToken: String, loadingMore: Bool = false) {
-    fetchDataFor(Section.smallSongCards, with: accessToken, loadingMore: loadingMore)
+    fetchDataFor(Section.smallSongCards, with: accessToken)
   }
 
   private func getNewReleases(accessToken: String, loadingMore: Bool = false) {
-    fetchDataFor(Section.newReleases, with: accessToken, loadingMore: loadingMore)
+    fetchDataFor(Section.newReleases, with: accessToken)
   }
 
   private func getTopPodcasts(accessToken: String) {
@@ -111,8 +111,9 @@ class HomeViewModel: ObservableObject {
 
 
 
+  // MARK: - Fetch Data From API
 
-  func fetchDataFor(_ section: Section, with accessToken: String, loadingMore: Bool = false) {
+  func fetchDataFor(_ section: Section, with accessToken: String) {
     let numberOfItemsInEachLoad = 10
     let currentNumberOfLoadedItems = getNumberOfLoadedItems(for: section)
     increaseNumberOfLoadedItems(for: section, by: numberOfItemsInEachLoad)
@@ -120,111 +121,85 @@ class HomeViewModel: ObservableObject {
     guard numberOfLoadedItemsInSection[section]! <= 50 else {
       return
     }
+
     DispatchQueue.main.async { [unowned self] in
       switch section {
-      // MARK: - Small Song Card Items
+
+      // MARK: Small Song Card Items
       case .smallSongCards:
         api.getUserFavoriteTracks(accessToken: accessToken) { tracks in
           mediaCollection[section] = tracks
           isLoading[section] = false
         }
 
-      // MARK: - Recently Played
+      // MARK: Recently Played
       case .recentlyPlayed:
         api.getUserRecentlyPlayed(accessToken: accessToken) { medias in
           mediaCollection[section] = medias
           isLoading[section] = false
         }
 
-      // MARK: - User Favorite Tracks
+      // MARK: User Favorite Tracks
       case .userFavoriteTracks:
-        if loadingMore {
-          api.getUserFavoriteTracks(accessToken: accessToken,
+        api.getUserFavoriteTracks(accessToken: accessToken,
                                   limit: numberOfItemsInEachLoad,
                                   offset: currentNumberOfLoadedItems) { tracks in
-            mediaCollection[section]! += tracks
-          }
-        } else {
-          api.getUserFavoriteTracks(accessToken: accessToken) { tracks in
-            mediaCollection[section] = tracks
-            isLoading[section] = false
-
-          }
+          mediaCollection[section]! += tracks
+          isLoading[section] = false
         }
 
-      // MARK: - User Favorite Artists
+      // MARK: User Favorite Artists
       case .userFavoriteArtists:
         api.getUserFavoriteArtists(accessToken: accessToken) { artists in
           mediaCollection[section] = artists
           isLoading[section] = false
         }
 
-      // MARK: - New Releases
+      // MARK: New Releases
       case .newReleases:
-        if loadingMore {
-          api.getNewReleases(accessToken: accessToken,
-                                  limit: numberOfItemsInEachLoad,
-                                  offset: currentNumberOfLoadedItems) { tracks in
-            mediaCollection[section]! += tracks
+        api.getNewReleases(accessToken: accessToken,
+                           limit: numberOfItemsInEachLoad,
+                           offset: currentNumberOfLoadedItems) { tracks in
+          mediaCollection[section]! += tracks
+          isLoading[section] = false
 
-          }
-        } else {
-          api.getNewReleases(accessToken: accessToken) { tracks in
-            mediaCollection[section] = tracks
-            isLoading[section] = false
-
-          }
         }
 
-      // MARK: - Top Podcasts
+      // MARK: Top Podcasts
       case .topPodcasts:
-        if loadingMore {
-          api.getTopPodcasts(accessToken: accessToken,
-                                  limit: numberOfItemsInEachLoad,
-                                  offset: currentNumberOfLoadedItems) { podcasts in
-            mediaCollection[section]! += podcasts
-          }
-        } else {
-          api.getTopPodcasts(accessToken: accessToken) { podcasts in
-            mediaCollection[section] = podcasts
-            isLoading[section] = false
-
-          }
-        }
-
-      // MARK: - Featured Playlists
-      case .featuredPlaylists:
-          api.getFeaturedPlaylists(accessToken: accessToken) { playlists in
-            mediaCollection[section] = playlists
-            isLoading[section] = false
-          }
-
-      // MARK: - Playlist Rewind the 90s
-      case .playlistRewindTheNineties:
-        let keyWord = "top hits of 199_"
-        api.getPlaylistsWith(keyWord: keyWord, accessToken: accessToken) { podcasts in
-          mediaCollection[section]! = podcasts
+        api.getTopPodcasts(accessToken: accessToken,
+                           limit: numberOfItemsInEachLoad,
+                           offset: currentNumberOfLoadedItems) { podcasts in
+          mediaCollection[section]! += podcasts
           isLoading[section] = false
         }
 
-      // MARK: - Playlist This is X
-      case .playlistThisIsX:
-        let keyWord = "this is"
-        if loadingMore {
-          api.getPlaylistsWith(keyWord: keyWord, accessToken: accessToken,
-                                  limit: numberOfItemsInEachLoad,
-                                  offset: currentNumberOfLoadedItems) { podcasts in
-            mediaCollection[section]! += podcasts
-          }
-        } else {
-          api.getPlaylistsWith(keyWord: keyWord, accessToken: accessToken) { podcasts in
-            mediaCollection[section] = podcasts
-            isLoading[section] = false
-
-          }
+      // MARK: Featured Playlists
+      case .featuredPlaylists:
+        api.getFeaturedPlaylists(accessToken: accessToken) { playlists in
+          mediaCollection[section] = playlists
+          isLoading[section] = false
         }
 
-      // MARK: - Artist's Top Tracks
+      // MARK: Playlist Rewind the 90s
+      case .playlistRewindTheNineties:
+        let keyWord = "top hits of 199_"
+        api.getPlaylistsWith(keyWord: keyWord, accessToken: accessToken) { playlists in
+          mediaCollection[section]! = playlists
+          isLoading[section] = false
+        }
+
+      // MARK: Playlist This is X
+      case .playlistThisIsX:
+        let keyWord = "this is"
+        api.getPlaylistsWith(keyWord: keyWord, accessToken: accessToken,
+                             limit: numberOfItemsInEachLoad,
+                             offset: currentNumberOfLoadedItems) { playlists in
+          mediaCollection[section]! += playlists
+          isLoading[section] = false
+        }
+
+      // MARK: Artist's Top Tracks
       case .artistTopTracks:
 
         var artistID = ""
@@ -241,8 +216,8 @@ class HomeViewModel: ObservableObject {
 
           // Add the artist's top songs
           api.getTopTracksFromArtist(accessToken: accessToken,
-                                          country: "US",
-                                          id: artistID) { trackItems in
+                                     country: "US",
+                                     id: artistID) { trackItems in
             mediaCollection[section]!.append(contentsOf: trackItems)
             isLoading[section] = false
           }
