@@ -71,6 +71,11 @@ struct HomeScreen: View {
                                   section: .playlistTopHits)
             .padding(.bottom, paddingSectionSeparation)
 
+          // MARK: Playlist This Is X
+          BigSongCoversScrollView(homeViewModel: homeViewModel,
+                                  section: .playlistThisIsX)
+            .padding(.bottom, paddingSectionSeparation)
+
         }
         .padding(.vertical, lateralPadding)
         .padding(.bottom, paddingBottomSection)

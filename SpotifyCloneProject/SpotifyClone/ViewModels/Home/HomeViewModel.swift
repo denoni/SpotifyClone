@@ -42,6 +42,7 @@ class HomeViewModel: ObservableObject {
     case artistTopTracks = "Artist Top Tracks"
     case featuredPlaylists = "Featured Playlists"
     case playlistTopHits = "Top Hits"
+    case playlistThisIsX = "This Is..."
   }
 
   func fetchHomeData() {
@@ -60,6 +61,7 @@ class HomeViewModel: ObservableObject {
       getFeaturedPlaylists(accessToken: accessToken)
       getUserFavoriteArtists(accessToken: accessToken)
       getPlaylistTopHits(accessToken: accessToken)
+      getPlaylistThisIsX(accessToken: accessToken)
     }
   }
 
@@ -97,6 +99,10 @@ class HomeViewModel: ObservableObject {
 
   private func getPlaylistTopHits(accessToken: String) {
     fetchDataFor(Section.playlistTopHits, with: accessToken)
+  }
+
+  private func getPlaylistThisIsX(accessToken: String) {
+    fetchDataFor(Section.playlistThisIsX, with: accessToken)
   }
 
   private func getTopTracksFromArtist(accessToken: String) {
@@ -195,14 +201,32 @@ class HomeViewModel: ObservableObject {
 
       // MARK: - Playlist Top Hits
       case .playlistTopHits:
+        let keyWord = "top hits"
         if loadingMore {
-          api.getPlaylistsWith(keyWord: "top hits", accessToken: accessToken,
+          api.getPlaylistsWith(keyWord: keyWord, accessToken: accessToken,
                                   limit: numberOfItemsInEachLoad,
                                   offset: currentNumberOfLoadedItems) { podcasts in
             mediaCollection[section]! += podcasts
           }
         } else {
-          api.getPlaylistsWith(keyWord: "top hits", accessToken: accessToken) { podcasts in
+          api.getPlaylistsWith(keyWord: keyWord, accessToken: accessToken) { podcasts in
+            mediaCollection[section] = podcasts
+            isLoading[section] = false
+
+          }
+        }
+
+      // MARK: - Playlist Year Rewinds
+      case .playlistThisIsX:
+        let keyWord = "this is"
+        if loadingMore {
+          api.getPlaylistsWith(keyWord: keyWord, accessToken: accessToken,
+                                  limit: numberOfItemsInEachLoad,
+                                  offset: currentNumberOfLoadedItems) { podcasts in
+            mediaCollection[section]! += podcasts
+          }
+        } else {
+          api.getPlaylistsWith(keyWord: keyWord, accessToken: accessToken) { podcasts in
             mediaCollection[section] = podcasts
             isLoading[section] = false
 
