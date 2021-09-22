@@ -17,7 +17,7 @@ struct SearchScreen: View {
     RadialGradientBackground()
     if searchViewModel.isLoading == true {
       ProgressView()
-        .withSpotifyStyle()
+        .withSpotifyStyle(useDiscreetColors: true)
         .onAppear {
           searchViewModel.getCategoriesData()
         }
