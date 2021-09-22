@@ -41,6 +41,7 @@ class HomeViewModel: ObservableObject {
     case topPodcasts = "Top Podcasts"
     case artistTopTracks = "Artist Top Tracks"
     case featuredPlaylists = "Featured Playlists"
+    case playlistTopHits = "Top Hits"
   }
 
   func fetchHomeData() {
@@ -58,6 +59,7 @@ class HomeViewModel: ObservableObject {
       getTopTracksFromArtist(accessToken: accessToken)
       getFeaturedPlaylists(accessToken: accessToken)
       getUserFavoriteArtists(accessToken: accessToken)
+      getPlaylistTopHits(accessToken: accessToken)
     }
   }
 
@@ -93,7 +95,10 @@ class HomeViewModel: ObservableObject {
     fetchDataFor(Section.featuredPlaylists, with: accessToken)
   }
 
-  // MARK: - Top Tracks From Artist
+  private func getPlaylistTopHits(accessToken: String) {
+    fetchDataFor(Section.playlistTopHits, with: accessToken)
+  }
+
   private func getTopTracksFromArtist(accessToken: String) {
     fetchDataFor(Section.artistTopTracks, with: accessToken)
   }
@@ -183,10 +188,26 @@ class HomeViewModel: ObservableObject {
 
       // MARK: - Featured Playlists
       case .featuredPlaylists:
-          api.getPlaylists(accessToken: accessToken) { playlists in
+          api.getFeaturedPlaylists(accessToken: accessToken) { playlists in
             mediaCollection[section] = playlists
             isLoading[section] = false
           }
+
+      // MARK: - Playlist Top Hits
+      case .playlistTopHits:
+        if loadingMore {
+          api.getPlaylistsWith(keyWord: "top hits", accessToken: accessToken,
+                                  limit: numberOfItemsInEachLoad,
+                                  offset: currentNumberOfLoadedItems) { podcasts in
+            mediaCollection[section]! += podcasts
+          }
+        } else {
+          api.getPlaylistsWith(keyWord: "top hits", accessToken: accessToken) { podcasts in
+            mediaCollection[section] = podcasts
+            isLoading[section] = false
+
+          }
+        }
 
       // MARK: - Artist's Top Tracks
       case .artistTopTracks:

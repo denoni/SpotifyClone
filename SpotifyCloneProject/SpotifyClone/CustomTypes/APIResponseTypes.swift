@@ -93,6 +93,10 @@ struct TracksResponse: Decodable {
 
 // -----
 
+struct PlaylistsResponse: Decodable {
+  var playlists: FeaturedPlaylists
+}
+
 struct FeaturedPlaylistsResponse: Decodable {
   var message: String
   var playlists: FeaturedPlaylists

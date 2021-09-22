@@ -347,7 +347,7 @@ class APIFetchingDataHomePage: ObservableObject {
       }
   }
 
-  func getPlaylists(accessToken: String,
+  func getFeaturedPlaylists(accessToken: String,
                     limit: Int = 20,
                     offset: Int = 0,
                     completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
@@ -395,5 +395,55 @@ class APIFetchingDataHomePage: ObservableObject {
       }
   }
 
+  func getPlaylistsWith(keyWord: String,
+                        accessToken: String,
+                        limit: Int = 10,
+                        offset: Int = 0,
+                        completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
+
+    let keyWord = keyWord.replacingOccurrences(of: " ", with: "+")
+    let type = "playlist"
+    let market = "US"
+
+    let baseUrl = "https://api.spotify.com/v1/search?q=\(keyWord)&type=\(type)&market=\(market)&limit=\(limit)&offset=\(offset)"
+
+    var urlRequest = URLRequest(url: URL(string: baseUrl)!)
+    urlRequest.httpMethod = "GET"
+    urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+    urlRequest.cachePolicy = NSURLRequest.CachePolicy.returnCacheDataElseLoad
+
+    AF.request(urlRequest)
+      .validate()
+      .responseDecodable(of: PlaylistsResponse.self) { response in
+        guard let data = response.value else {
+          fatalError("Error receiving tracks from API.")
+        }
+
+        let numberOfPlaylists = data.playlists.items.count
+
+        guard numberOfPlaylists != 0 else {
+          fatalError("The API response was corrects but empty. We don't have a way to handle this yet.")
+        }
+
+        var playlists = [SpotifyModel.MediaItem]()
+
+        for itemIndex in 0 ..< numberOfPlaylists {
+          let title = data.playlists.items[itemIndex].name
+          let imageURL = data.playlists.items[itemIndex].images[0].url
+          let id = data.playlists.items[itemIndex].id
+
+          let playlistItem = SpotifyModel.MediaItem(title: title,
+                                                    previewURL: "",
+                                                    imageURL: imageURL,
+                                                    author: "",
+                                                    type: type,
+                                                    isPodcast: false,
+                                                    isArtist: false,
+                                                    id: id)
+          playlists.append(playlistItem)
+        }
+        completionHandler(playlists)
+      }
+  }
 
 }
