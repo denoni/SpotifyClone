@@ -29,6 +29,10 @@ struct BigSongCoversScrollView: View {
                         isArtistProfile: media.isArtist,
                         isPodcast: media.isPodcast)
               .onAppear { testIfShouldFetchMoreData(basedOn: media) }
+              .onTapGesture {
+                MediaDetailScreen()
+              }
+            .buttonStyle(PlainButtonStyle())
           }
         }.padding(.horizontal, 25)
       }

@@ -16,7 +16,7 @@ struct LoadingView<Content>: View where Content: View {
       ZStack {
         self.content()
         Group {
-          Color.spotifyDarkGray
+          Color.spotifyDarkerGray
             ProgressView()
               .withSpotifyStyle()
               .scaleEffect(2)

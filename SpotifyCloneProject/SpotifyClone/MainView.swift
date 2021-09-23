@@ -23,7 +23,7 @@ struct MainView: View {
   var body: some View {
     if mainViewModel.homeScreenIsReady {
       ZStack {
-        Color.spotifyDarkGray.ignoresSafeArea()
+        Color.spotifyDarkerGray.ignoresSafeArea()
         switch mainViewModel.currentPage {
         case .home:
           HomeScreen(homeViewModel: homeViewModel)
@@ -34,8 +34,12 @@ struct MainView: View {
         }
         BottomBar(mainViewModel: mainViewModel, showMediaPlayer: true)
       }
+      .navigationBarTitle("")
+      .navigationBarHidden(true)
     } else {
       AuthScreen(authViewModel: AuthViewModel(mainViewModel: mainViewModel))
+        .navigationBarTitle("")
+        .navigationBarHidden(true)
     }
   }
 }
@@ -47,41 +51,3 @@ struct ContentView_Previews: PreviewProvider {
     MainView(mainViewModel: MainViewModel())
   }
 }
-
-
-//// -----------------------------------------------------------------
-//// TODO : -- TEMPORARY --
-//VStack(alignment: .center, spacing: 50) {
-//
-//  // Shows Track Item that was fetched from API
-//  Group {
-//    if authViewModel.trackItemIsAvailable {
-//      VStack(alignment: .center) {
-//
-//        RemoteImage(url: authViewModel.trackItem!.imageURL)
-//          .aspectRatio(1/1, contentMode: .fill)
-//          .padding(.horizontal, 50)
-//          .padding(.vertical, 20)
-//
-//        Text(authViewModel.trackItem!.name)
-//          .bold()
-//          .font(.title2)
-//
-//        Text(authViewModel.trackItem!.artist)
-//          .opacity(0.6)
-//      }
-//    }
-//  }
-//
-//  // Shows Auth Key fetched from API
-//  VStack(alignment: .center) {
-//    Text(authViewModel.authKeyIsAvailable ? "Auth key:" : "Auth key not ready." )
-//      .foregroundColor(Color.spotifyGreen)
-//      .bold()
-//      .font(.title)
-//    Text(authViewModel.authKeyIsAvailable ? authViewModel.authKey!.accessToken : "")
-//      .font(.footnote)
-//      .multilineTextAlignment(.center)
-//  }
-//}
-//// -----------------------------------------------------------------

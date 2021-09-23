@@ -27,6 +27,8 @@
 		C084268426F11CF7000ACAEE /* YourSensitiveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084268326F11CF7000ACAEE /* YourSensitiveData.swift */; };
 		C084268626F14A7E000ACAEE /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084268526F14A7E000ACAEE /* RemoteImage.swift */; };
 		C084268826F1588B000ACAEE /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084268726F1588B000ACAEE /* MainViewModel.swift */; };
+		C087873226FCCCA70013924E /* MediaDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C087873126FCCCA70013924E /* MediaDetailScreen.swift */; };
+		C087873426FCF6EF0013924E /* ScrollView+NoBouncing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C087873326FCF6EF0013924E /* ScrollView+NoBouncing.swift */; };
 		C087B0E826E6556F00A72A13 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C087B0E726E6556F00A72A13 /* HomeViewModel.swift */; };
 		C087B0EB26E65FFA00A72A13 /* SpotifyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C087B0EA26E65FFA00A72A13 /* SpotifyModel.swift */; };
 		C087B0EE26E660F800A72A13 /* SpotifyMediaContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C087B0ED26E660F800A72A13 /* SpotifyMediaContent.swift */; };
@@ -106,6 +108,8 @@
 		C084268326F11CF7000ACAEE /* YourSensitiveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourSensitiveData.swift; sourceTree = "<group>"; };
 		C084268526F14A7E000ACAEE /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
 		C084268726F1588B000ACAEE /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		C087873126FCCCA70013924E /* MediaDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDetailScreen.swift; sourceTree = "<group>"; };
+		C087873326FCF6EF0013924E /* ScrollView+NoBouncing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollView+NoBouncing.swift"; sourceTree = "<group>"; };
 		C087B0E726E6556F00A72A13 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		C087B0EA26E65FFA00A72A13 /* SpotifyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyModel.swift; sourceTree = "<group>"; };
 		C087B0ED26E660F800A72A13 /* SpotifyMediaContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyMediaContent.swift; sourceTree = "<group>"; };
@@ -193,7 +197,6 @@
 		C07B761026F5001700B8EEC6 /* HomeScreenViews */ = {
 			isa = PBXGroup;
 			children = (
-				C08839FC26E26E2000E1ADFA /* RadialGradientBackground.swift */,
 				C08839FE26E26E8400E1ADFA /* BigSongCoversScrollView.swift */,
 				C0883A0026E26F1500E1ADFA /* SmallSongCardsGrid.swift */,
 				C0883A0626E26FF200E1ADFA /* RecentlyPlayedScrollView.swift */,
@@ -237,6 +240,14 @@
 				C087B0E726E6556F00A72A13 /* HomeViewModel.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		C087873026FCCC6A0013924E /* MediaDetailScreen */ = {
+			isa = PBXGroup;
+			children = (
+				C087873126FCCCA70013924E /* MediaDetailScreen.swift */,
+			);
+			path = MediaDetailScreen;
 			sourceTree = "<group>";
 		};
 		C087B0E126E6546300A72A13 /* ViewModels */ = {
@@ -301,6 +312,7 @@
 				C081873326EF97D000AB19E9 /* AuthScreen */,
 				C08839FA26E26DD000E1ADFA /* HomeScreen */,
 				C08839FB26E26DD900E1ADFA /* SearchScreen */,
+				C087873026FCCC6A0013924E /* MediaDetailScreen */,
 				C09FD8FE26E03D6E0069CEAE /* BottomBar.swift */,
 				C07DA12D26DDCCEA0086EEAB /* PlayingSongInPlaylist.swift */,
 			);
@@ -310,6 +322,7 @@
 		C088F23826DEE0B400C4BCA2 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				C08839FC26E26E2000E1ADFA /* RadialGradientBackground.swift */,
 				C088F23926DEE0F800C4BCA2 /* SmallSongCard.swift */,
 				C088F23B26DEE48E00C4BCA2 /* SmallSongItem.swift */,
 				C088F23D26DEE61B00C4BCA2 /* BigSongItem.swift */,
@@ -419,6 +432,7 @@
 				C09FD90226E04E470069CEAE /* Text+SpotifySizes.swift */,
 				C06AB91326FA07B000F46356 /* Color+Random.swift */,
 				C06AB93026FA85F600F46356 /* ProgressView+SpotifyStyle.swift */,
+				C087873326FCF6EF0013924E /* ScrollView+NoBouncing.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -710,6 +724,7 @@
 				C08839FD26E26E2000E1ADFA /* RadialGradientBackground.swift in Sources */,
 				C0C63C9C26DD3CD700532792 /* CustomFonts.swift in Sources */,
 				C087B0F226E664DF00A72A13 /* SpotifyMediaContentProtocol.swift in Sources */,
+				C087873426FCF6EF0013924E /* ScrollView+NoBouncing.swift in Sources */,
 				C088F23726DEDE5600C4BCA2 /* HomeScreen.swift in Sources */,
 				C0883A0B26E2705B00E1ADFA /* ColorfulCard.swift in Sources */,
 				C06AB93126FA85F600F46356 /* ProgressView+SpotifyStyle.swift in Sources */,
@@ -725,6 +740,7 @@
 				C089135D26F97E8C00CA1A69 /* SearchViewModel.swift in Sources */,
 				C09FD90126E049BE0069CEAE /* Image+ResizeToFit.swift in Sources */,
 				C081873D26F0168700AB19E9 /* AuthKey.swift in Sources */,
+				C087873226FCCCA70013924E /* MediaDetailScreen.swift in Sources */,
 				C09FD8FF26E03D6E0069CEAE /* BottomBar.swift in Sources */,
 				C084267E26F10BBD000ACAEE /* APIFetchingDataHomePage.swift in Sources */,
 				C089136226F986E600CA1A69 /* ColorfulCardPair.swift in Sources */,
