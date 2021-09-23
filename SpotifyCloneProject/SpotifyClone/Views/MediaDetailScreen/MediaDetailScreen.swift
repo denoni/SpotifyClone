@@ -14,7 +14,7 @@ struct MediaDetailScreen: View {
     GeometryReader { geometry in
       ZStack {
         Color.spotifyDarkerGray
-        ScrollView {
+        ScrollView(showsIndicators: false) {
           VStack {
             TopGradient(height: geometry.size.height / 1.8)
             DetailContent(homeViewModel: homeViewModel)
@@ -23,12 +23,42 @@ struct MediaDetailScreen: View {
           }
         }
         .disabledBouncing()
+
       }.ignoresSafeArea()
     }
   }
 }
 
 
+
+fileprivate struct DetailContent: View {
+  var homeViewModel: HomeViewModel
+
+  var body: some View {
+    VStack(alignment: .leading, spacing: 15) {
+      ZStack {
+        BackButton(homeViewModel: homeViewModel)
+        BigMediaCover()
+      }
+      .padding(.top, 25)
+
+      MediaDescription()
+      PlaylistAuthor()
+
+      HStack {
+        VStack(alignment: .leading) {
+          MediaLikesAndDuration()
+          LikeAndThreeDotsIcons()
+        }
+        BigPlayButton()
+      }.frame(height: 65)
+
+      MediasScrollView()
+    }
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .padding(25)
+  }
+}
 
 struct TopGradient: View {
   var height: CGFloat
@@ -137,61 +167,48 @@ fileprivate struct BigPlayButton: View {
   }
 }
 
-fileprivate struct DetailContent: View {
-  var homeViewModel: HomeViewModel
-
+fileprivate struct MediasScrollView: View {
+  let arr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
   var body: some View {
-    VStack(alignment: .leading, spacing: 15) {
-      ZStack {
-        BackButton(homeViewModel: homeViewModel)
-        BigMediaCover()
-      }
-      .padding(.top, 25)
-
-      MediaDescription()
-      PlaylistAuthor()
-
-      HStack {
-        VStack(alignment: .leading) {
-          MediaLikesAndDuration()
-          LikeAndThreeDotsIcons()
-        }
-        BigPlayButton()
-      }.frame(height: 65)
-
-      let arr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
-
-      LazyVStack {
-        ForEach(arr, id: \.self) { _ in
-          HStack(spacing: 12) {
-            Rectangle()
-              .foregroundColor(.spotifyMediumGray)
-              .overlay(Image("come-as-you-are-cover")
-                        .resizeToFit())
-              .frame(width: 60, height: 60)
-            VStack(alignment: .leading) {
-              Text("Sweetener (Studio Mix)")
-                .font(.avenir(.medium, size: 20))
-              Text("Ariana Grande")
-                .font(.avenir(.medium, size: 16))
-                .opacity(0.7)
-            }
-            Spacer()
-            Image("three-dots")
-              .resizeToFit()
-              .padding(.vertical, 16)
+    LazyVStack {
+      ForEach(arr, id: \.self) { _ in
+        HStack(spacing: 12) {
+          Rectangle()
+            .foregroundColor(.spotifyMediumGray)
+            .overlay(Image("come-as-you-are-cover")
+                      .resizeToFit())
+            .frame(width: 60, height: 60)
+          VStack(alignment: .leading) {
+            Text("Sweetener (Studio Mix)")
+              .font(.avenir(.medium, size: 20))
+            Text("Ariana Grande")
+              .font(.avenir(.medium, size: 16))
+              .opacity(0.7)
           }
-          .frame(height: 60)
+          Spacer()
+          Image("three-dots")
+            .resizeToFit()
+            .padding(.vertical, 16)
         }
+        .frame(height: 60)
       }
     }
-    .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .padding(25)
+    .padding(.top, 15)
   }
 }
 
+
+
 struct MediaDetailScreen_Previews: PreviewProvider {
+  static var mainViewModel = MainViewModel()
+
   static var previews: some View {
-    MediaDetailScreen(homeViewModel: HomeViewModel(mainViewModel: MainViewModel()))
+    ZStack {
+      MediaDetailScreen(homeViewModel: HomeViewModel(mainViewModel: mainViewModel))
+      VStack {
+        Spacer()
+        BottomBar(mainViewModel: mainViewModel, showMediaPlayer: true)
+      }
+    }
   }
 }
