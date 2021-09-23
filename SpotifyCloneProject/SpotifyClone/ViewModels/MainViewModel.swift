@@ -5,7 +5,7 @@
 //  Created by Gabriel on 9/14/21.
 //
 
-import SwiftUI
+import Foundation
 
 class MainViewModel: ObservableObject {
   @Published private(set) var authKey: AuthKey?
@@ -20,7 +20,7 @@ class MainViewModel: ObservableObject {
     }
 
     homeScreenIsReady = true
-  }
+  }  
 }
 
 enum Page {

@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct MediaDetailScreen: View {
-  var body: some View {
+  var homeViewModel: HomeViewModel
 
+  var body: some View {
     GeometryReader { geometry in
       ZStack {
         Color.spotifyDarkerGray
         ScrollView {
           VStack {
             TopGradient(height: geometry.size.height / 1.8)
-            DetailContent()
+            DetailContent(homeViewModel: homeViewModel)
               .padding(.top, -geometry.size.height / 1.8)
+              .padding(.bottom, 180)
           }
         }
         .disabledBouncing()
@@ -25,6 +27,8 @@ struct MediaDetailScreen: View {
     }
   }
 }
+
+
 
 struct TopGradient: View {
   var height: CGFloat
@@ -41,11 +45,109 @@ struct TopGradient: View {
   }
 }
 
-struct DetailContent: View {
+fileprivate struct BackButton: View {
+  var homeViewModel: HomeViewModel
+
+  var body: some View {
+    VStack {
+      HStack {
+        Image("down-arrow")
+          .resizeToFit()
+          .rotationEffect(Angle.degrees(90))
+        Spacer()
+      }
+      .frame(height: 20)
+      .onTapGesture {
+        homeViewModel.changeSubpageTo(.none)
+      }
+
+      Spacer()
+    }
+  }
+}
+
+fileprivate struct BigMediaCover: View {
+  var body: some View {
+    HStack {
+      Spacer()
+      Rectangle()
+        .foregroundColor(.spotifyMediumGray)
+        .overlay(Image("come-as-you-are-cover").resizable())
+        .frame(width: 250, height: 250)
+        .shadow(color: .spotifyDarkerGray.opacity(0.3), radius: 15)
+      Spacer()
+    }
+    .padding(.bottom, 10)
+  }
+}
+
+fileprivate struct MediaDescription: View {
+  var body: some View {
+    Text("The most iconic songs of the year in just one playlist. Listen and remember the vibes.")
+      .opacity(0.9)
+  }
+}
+
+fileprivate struct PlaylistAuthor: View {
+  var body: some View {
+    HStack {
+      Circle()
+        .foregroundColor(.black)
+        .overlay(Image("spotify-small-logo")
+                  .resizable()
+                  .scaledToFit()
+                  .colorMultiply(.spotifyGreen))
+        .frame(width: 25, height: 25)
+      Text("Spotify")
+        .font(.avenir(.heavy, size: 16))
+      Spacer()
+    }
+  }
+}
+
+fileprivate struct MediaLikesAndDuration: View {
+  var body: some View {
+    Text("400,000 likes • 1h 22m")
+      .opacity(0.6)
+  }
+}
+
+fileprivate struct LikeAndThreeDotsIcons: View {
+  var body: some View {
+    HStack(spacing: 30) {
+      Image("heart-stroked")
+        .resizable()
+        .scaledToFit()
+      Image("three-dots")
+        .resizable()
+        .scaledToFit()
+      Spacer()
+    }
+    .frame(height: 25)
+    .frame(maxWidth: .infinity)
+  }
+}
+
+fileprivate struct BigPlayButton: View {
+  var body: some View {
+    Circle()
+      .scaledToFit()
+      .foregroundColor(.spotifyGreen)
+      .overlay(Image("play").resizeToFit().padding(20).padding(.leading, 3))
+  }
+}
+
+fileprivate struct DetailContent: View {
+  var homeViewModel: HomeViewModel
+
   var body: some View {
     VStack(alignment: .leading, spacing: 15) {
-      BigMediaCover()
-        .padding(.top, 25)
+      ZStack {
+        BackButton(homeViewModel: homeViewModel)
+        BigMediaCover()
+      }
+      .padding(.top, 25)
+
       MediaDescription()
       PlaylistAuthor()
 
@@ -85,83 +187,11 @@ struct DetailContent: View {
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .padding(25)
-    .padding(.bottom, 100)
-  }
-}
-
-struct BigMediaCover: View {
-  var body: some View {
-    HStack {
-      Spacer()
-      Rectangle()
-        .foregroundColor(.spotifyMediumGray)
-        .overlay(Image("come-as-you-are-cover").resizable())
-        .frame(width: 250, height: 250)
-        .shadow(color: .spotifyDarkerGray.opacity(0.3), radius: 15)
-      Spacer()
-    }
-    .padding(.bottom, 10)
-  }
-}
-
-struct MediaDescription: View {
-  var body: some View {
-    Text("The most iconic songs of the year in just one playlist. Listen and remember the vibes.")
-      .opacity(0.9)
-  }
-}
-
-struct PlaylistAuthor: View {
-  var body: some View {
-    HStack {
-      Circle()
-        .foregroundColor(.black)
-        .overlay(Image("spotify-small-logo")
-                  .resizable()
-                  .scaledToFit()
-                  .colorMultiply(.spotifyGreen))
-        .frame(width: 25, height: 25)
-      Text("Spotify")
-        .font(.avenir(.heavy, size: 16))
-      Spacer()
-    }
-  }
-}
-
-struct MediaLikesAndDuration: View {
-  var body: some View {
-    Text("400,000 likes • 1h 22m")
-      .opacity(0.6)
-  }
-}
-
-struct LikeAndThreeDotsIcons: View {
-  var body: some View {
-    HStack(spacing: 30) {
-      Image("heart-stroked")
-        .resizable()
-        .scaledToFit()
-      Image("three-dots")
-        .resizable()
-        .scaledToFit()
-      Spacer()
-    }
-    .frame(height: 25)
-    .frame(maxWidth: .infinity)
-  }
-}
-
-struct BigPlayButton: View {
-  var body: some View {
-    Circle()
-      .scaledToFit()
-      .foregroundColor(.spotifyGreen)
-      .overlay(Image("play").resizeToFit().padding(20).padding(.leading, 3))
   }
 }
 
 struct MediaDetailScreen_Previews: PreviewProvider {
   static var previews: some View {
-    MediaDetailScreen()
+    MediaDetailScreen(homeViewModel: HomeViewModel(mainViewModel: MainViewModel()))
   }
 }

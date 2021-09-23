@@ -11,15 +11,23 @@
 /// - New Releases
 /// - Playlist This is X
 
-import Foundation
+// TODO: Separate api related and non-api related into different files
+
+import SwiftUI
 
 class HomeViewModel: ObservableObject {
   var api = APIFetchingDataHomePage()
-  var mainViewModel: MainViewModel
+  @ObservedObject var mainViewModel: MainViewModel
   @Published var isLoading = [Section:Bool]()
   @Published var mediaCollection = [Section:[SpotifyModel.MediaItem]]()
   @Published var numberOfLoadedItemsInSection = [Section:Int]()
 
+  @Published var currentSubPage: HomeSubPage = .none
+
+  enum HomeSubPage {
+    case none
+    case mediaDetail
+  }
 
   init(mainViewModel: MainViewModel) {
     self.mainViewModel = mainViewModel
@@ -258,7 +266,7 @@ class HomeViewModel: ObservableObject {
 
 
 
-  // MARK: - Auxiliary functions
+  // MARK: - Auxiliary Functions
 
   func getNumberOfLoadedItems(for section: Section) -> Int {
     return numberOfLoadedItemsInSection[section]!
@@ -268,6 +276,15 @@ class HomeViewModel: ObservableObject {
     if numberOfLoadedItemsInSection[section]! <= 50 {
       numberOfLoadedItemsInSection[section]! += amount
     }
+  }
+
+
+
+  // MARK: - Non-api Related Functions
+
+  func changeSubpageTo(_ subPage: HomeSubPage) {
+    print("bbb")
+    currentSubPage = subPage
   }
 
   
