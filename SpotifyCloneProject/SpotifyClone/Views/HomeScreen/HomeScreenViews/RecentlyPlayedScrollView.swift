@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RecentlyPlayedScrollView: View {
+  @StateObject var homeViewModel: HomeViewModel
   @State var medias: [SpotifyModel.MediaItem]
   
   var sectionTitle = "Recently Played"
@@ -21,12 +22,8 @@ struct RecentlyPlayedScrollView: View {
           ForEach(medias) { media in
             SmallSongItem(imageURL: media.imageURL,
                           title: media.title)
-              .onAppear{
-                if medias.count > 5 {
-                  if media.id == medias[medias.count - 3].id {
-
-                  }
-                }
+              .onTapGesture {
+                homeViewModel.changeSubpageTo(.mediaDetail)
               }
           }
         }.padding(.horizontal, 25)

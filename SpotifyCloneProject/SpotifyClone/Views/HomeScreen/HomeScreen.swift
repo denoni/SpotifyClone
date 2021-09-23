@@ -48,7 +48,8 @@ struct HomeScreen: View {
                   .padding(.bottom, paddingSectionSeparation)
 
                 // MARK: Recently Played
-                RecentlyPlayedScrollView(medias: getTracksFor(.recentlyPlayed))
+                RecentlyPlayedScrollView(homeViewModel: homeViewModel,
+                                         medias: getTracksFor(.recentlyPlayed))
                   .padding(.bottom, paddingSectionSeparation)
 
                 // MARK: New Releases
@@ -73,7 +74,8 @@ struct HomeScreen: View {
                   .padding(.bottom, paddingSectionSeparation)
 
                 // MARK: Artist's Top Tracks
-                RecommendedArtistScrollView(medias: getTracksFor(.artistTopTracks),
+                RecommendedArtistScrollView(homeViewModel: homeViewModel,
+                                            medias: getTracksFor(.artistTopTracks),
                                             sectionTitle: HomeViewModel.Section.artistTopTracks.rawValue)
                   .padding(.bottom, paddingSectionSeparation)
 

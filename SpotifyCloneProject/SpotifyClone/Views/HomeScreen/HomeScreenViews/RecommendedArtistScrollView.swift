@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RecommendedArtistScrollView: View {
+  @StateObject var homeViewModel: HomeViewModel
   @State var medias: [SpotifyModel.MediaItem]
   // The first item of the array is the artist info
 
@@ -50,6 +51,9 @@ struct RecommendedArtistScrollView: View {
           ForEach(getArtistSongs()) { media in
             BigSongItem(imageURL: media.imageURL,
                         title: media.title)
+          }
+          .onTapGesture {
+            homeViewModel.changeSubpageTo(.mediaDetail)
           }
         }
         .padding(.horizontal, 25)
