@@ -9,6 +9,7 @@
 /// **Sections that support that:**
 /// - Top Podcasts
 /// - New Releases
+/// - Playlist This is X
 
 import Foundation
 
@@ -47,7 +48,6 @@ class HomeViewModel: ObservableObject {
     case playlistRewind70s = "Rewind the 70s"
     case playlistRewind2000s = "2000s Rewind"
     case playlistRewind2010s = "2010s Rewind"
-
   }
 
   func fetchHomeData() {
@@ -65,11 +65,11 @@ class HomeViewModel: ObservableObject {
       getTopTracksFromArtist(accessToken: accessToken)
       getFeaturedPlaylists(accessToken: accessToken)
       getUserFavoriteArtists(accessToken: accessToken)
-      getPlaylistRewind90s(accessToken: accessToken)
-      getPlaylistRewind80s(accessToken: accessToken)
-      getPlaylistRewind70s(accessToken: accessToken)
-      getPlaylistRewind2000s(accessToken: accessToken)
-      getPlaylistRewind2010s(accessToken: accessToken)
+      getPlaylistYearRewinds(accessToken: accessToken, year: .playlistRewind2010s)
+      getPlaylistYearRewinds(accessToken: accessToken, year: .playlistRewind2000s)
+      getPlaylistYearRewinds(accessToken: accessToken, year: .playlistRewind90s)
+      getPlaylistYearRewinds(accessToken: accessToken, year: .playlistRewind80s)
+      getPlaylistYearRewinds(accessToken: accessToken, year: .playlistRewind70s)
       getPlaylistThisIsX(accessToken: accessToken)
     }
   }
@@ -106,24 +106,8 @@ class HomeViewModel: ObservableObject {
     fetchDataFor(Section.featuredPlaylists, with: accessToken)
   }
 
-  private func getPlaylistRewind2010s(accessToken: String) {
-    fetchDataFor(Section.playlistRewind2010s, with: accessToken)
-  }
-
-  private func getPlaylistRewind2000s(accessToken: String) {
-    fetchDataFor(Section.playlistRewind2000s, with: accessToken)
-  }
-
-  private func getPlaylistRewind90s(accessToken: String) {
-    fetchDataFor(Section.playlistRewind90s, with: accessToken)
-  }
-
-  private func getPlaylistRewind80s(accessToken: String) {
-    fetchDataFor(Section.playlistRewind80s, with: accessToken)
-  }
-
-  private func getPlaylistRewind70s(accessToken: String) {
-    fetchDataFor(Section.playlistRewind70s, with: accessToken)
+  private func getPlaylistYearRewinds(accessToken: String, year: Section) {
+    fetchDataFor(year, with: accessToken)
   }
 
   private func getPlaylistThisIsX(accessToken: String) {
@@ -206,46 +190,6 @@ class HomeViewModel: ObservableObject {
           isLoading[section] = false
         }
 
-      // MARK: Playlist Rewind the 2010s
-      case .playlistRewind2010s:
-        let keyWord = "top hits of 201_"
-        api.getPlaylistsWith(keyWord: keyWord, accessToken: accessToken) { playlists in
-          mediaCollection[section]! = playlists
-          isLoading[section] = false
-        }
-
-      // MARK: Playlist Rewind the 2000s
-      case .playlistRewind2000s:
-        let keyWord = "top hits of 200_"
-        api.getPlaylistsWith(keyWord: keyWord, accessToken: accessToken) { playlists in
-          mediaCollection[section]! = playlists
-          isLoading[section] = false
-        }
-
-      // MARK: Playlist Rewind the 90s
-      case .playlistRewind90s:
-        let keyWord = "top hits of 199_"
-        api.getPlaylistsWith(keyWord: keyWord, accessToken: accessToken) { playlists in
-          mediaCollection[section]! = playlists
-          isLoading[section] = false
-        }
-
-      // MARK: Playlist Rewind the 80s
-      case .playlistRewind80s:
-        let keyWord = "top hits of 198_"
-        api.getPlaylistsWith(keyWord: keyWord, accessToken: accessToken) { playlists in
-          mediaCollection[section]! = playlists
-          isLoading[section] = false
-        }
-
-      // MARK: Playlist Rewind the 70s
-      case .playlistRewind70s:
-        let keyWord = "top hits of 197_"
-        api.getPlaylistsWith(keyWord: keyWord, accessToken: accessToken) { playlists in
-          mediaCollection[section]! = playlists
-          isLoading[section] = false
-        }
-
       // MARK: Playlist This is X
       case .playlistThisIsX:
         let keyWord = "this is"
@@ -253,6 +197,31 @@ class HomeViewModel: ObservableObject {
                              limit: numberOfItemsInEachLoad,
                              offset: currentNumberOfLoadedItems) { playlists in
           mediaCollection[section]! += playlists
+          isLoading[section] = false
+        }
+
+      // MARK: Playlist Year Rewinds
+      case .playlistRewind2010s, .playlistRewind2000s, .playlistRewind90s,
+           .playlistRewind80s, .playlistRewind70s :
+
+        var keyWord = "top hits of "
+        switch section {
+        case .playlistRewind2010s:
+          keyWord += "201_"
+        case .playlistRewind2000s:
+          keyWord += "200_"
+        case .playlistRewind90s:
+          keyWord += "199_"
+        case .playlistRewind80s:
+          keyWord += "198_"
+        case .playlistRewind70s:
+          keyWord += "197_"
+        default:
+          fatalError("Year not defined or the section is not a year.")
+        }
+
+        api.getPlaylistsWith(keyWord: keyWord, accessToken: accessToken) { playlists in
+          mediaCollection[section]! = playlists
           isLoading[section] = false
         }
 
