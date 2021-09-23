@@ -32,7 +32,6 @@
 		C087B0E826E6556F00A72A13 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C087B0E726E6556F00A72A13 /* HomeViewModel.swift */; };
 		C087B0EB26E65FFA00A72A13 /* SpotifyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C087B0EA26E65FFA00A72A13 /* SpotifyModel.swift */; };
 		C087B0EE26E660F800A72A13 /* SpotifyMediaContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C087B0ED26E660F800A72A13 /* SpotifyMediaContent.swift */; };
-		C087B0F226E664DF00A72A13 /* SpotifyMediaContentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C087B0F126E664DF00A72A13 /* SpotifyMediaContentProtocol.swift */; };
 		C08839FD26E26E2000E1ADFA /* RadialGradientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08839FC26E26E2000E1ADFA /* RadialGradientBackground.swift */; };
 		C08839FF26E26E8400E1ADFA /* BigSongCoversScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08839FE26E26E8400E1ADFA /* BigSongCoversScrollView.swift */; };
 		C0883A0126E26F1500E1ADFA /* SmallSongCardsGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0883A0026E26F1500E1ADFA /* SmallSongCardsGrid.swift */; };
@@ -113,7 +112,6 @@
 		C087B0E726E6556F00A72A13 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		C087B0EA26E65FFA00A72A13 /* SpotifyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyModel.swift; sourceTree = "<group>"; };
 		C087B0ED26E660F800A72A13 /* SpotifyMediaContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyMediaContent.swift; sourceTree = "<group>"; };
-		C087B0F126E664DF00A72A13 /* SpotifyMediaContentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyMediaContentProtocol.swift; sourceTree = "<group>"; };
 		C08839FC26E26E2000E1ADFA /* RadialGradientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadialGradientBackground.swift; sourceTree = "<group>"; };
 		C08839FE26E26E8400E1ADFA /* BigSongCoversScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigSongCoversScrollView.swift; sourceTree = "<group>"; };
 		C0883A0026E26F1500E1ADFA /* SmallSongCardsGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallSongCardsGrid.swift; sourceTree = "<group>"; };
@@ -283,7 +281,6 @@
 		C087B0EF26E664BC00A72A13 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				C087B0F126E664DF00A72A13 /* SpotifyMediaContentProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -723,7 +720,6 @@
 				C081873B26EFC72B00AB19E9 /* AuthAuxiliaryViews.swift in Sources */,
 				C08839FD26E26E2000E1ADFA /* RadialGradientBackground.swift in Sources */,
 				C0C63C9C26DD3CD700532792 /* CustomFonts.swift in Sources */,
-				C087B0F226E664DF00A72A13 /* SpotifyMediaContentProtocol.swift in Sources */,
 				C087873426FCF6EF0013924E /* ScrollView+NoBouncing.swift in Sources */,
 				C088F23726DEDE5600C4BCA2 /* HomeScreen.swift in Sources */,
 				C0883A0B26E2705B00E1ADFA /* ColorfulCard.swift in Sources */,
