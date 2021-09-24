@@ -17,28 +17,31 @@ import SwiftUI
 
 class HomeViewModel: ObservableObject {
   var api = APIFetchingDataHomePage()
-  @ObservedObject var mainViewModel: MainViewModel
+  @Published var mainViewModel: MainViewModel
+
   @Published var isLoading = [Section:Bool]()
   @Published var mediaCollection = [Section:[SpotifyModel.MediaItem]]()
   @Published var numberOfLoadedItemsInSection = [Section:Int]()
-  @Published var currentSubPage: HomeSubPage = .none
+
+  @Published var mediaDetailViewModel = MediaDetailViewModel()
+  @Published var currentSubPage: HomeSubpage = .none
 
   @Published var veryFirstImageInfo = RemoteImageModel(urlString: "")
 
-  enum HomeSubPage {
+  enum HomeSubpage {
     case none
     case mediaDetail
   }
 
   init(mainViewModel: MainViewModel) {
     self.mainViewModel = mainViewModel
-
     // Populate isLoading and medias with all possible section keys
     for section in Section.allCases {
       isLoading[section] = true
       mediaCollection[section] = []
       numberOfLoadedItemsInSection[section] = 0
     }
+
     fetchHomeData()
   }
 
@@ -284,8 +287,15 @@ class HomeViewModel: ObservableObject {
 
   // MARK: - Non-api Related Functions
 
-  func changeSubpageTo(_ subPage: HomeSubPage) {
+  func goToNoneSubpage() {
+    currentSubPage = .none
+  }
+
+  func changeSubpageTo(_ subPage: HomeSubpage,
+                       mediaDetailViewModel: MediaDetailViewModel,
+                       withData data: SpotifyModel.MediaItem) {
     currentSubPage = subPage
+    mediaDetailViewModel.media = data
   }
 
   func setVeryFirstImageInfoBasedOn(_ firstImageURL: String) {

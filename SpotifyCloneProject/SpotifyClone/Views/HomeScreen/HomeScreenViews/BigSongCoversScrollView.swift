@@ -30,7 +30,9 @@ struct BigSongCoversScrollView: View {
                         isPodcast: media.isPodcast)
               .onAppear { testIfShouldFetchMoreData(basedOn: media) }
               .onTapGesture {
-                homeViewModel.changeSubpageTo(.mediaDetail)
+                homeViewModel.changeSubpageTo(.mediaDetail,
+                                              mediaDetailViewModel: homeViewModel.mediaDetailViewModel,
+                                              withData: media)
               }
             .buttonStyle(PlainButtonStyle())
           }

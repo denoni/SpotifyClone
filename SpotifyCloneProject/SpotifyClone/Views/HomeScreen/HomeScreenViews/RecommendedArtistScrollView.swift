@@ -51,9 +51,11 @@ struct RecommendedArtistScrollView: View {
           ForEach(getArtistSongs()) { media in
             BigSongItem(imageURL: media.imageURL,
                         title: media.title)
-          }
-          .onTapGesture {
-            homeViewModel.changeSubpageTo(.mediaDetail)
+              .onTapGesture {
+                homeViewModel.changeSubpageTo(.mediaDetail,
+                                              mediaDetailViewModel: homeViewModel.mediaDetailViewModel,
+                                              withData: media)
+              }
           }
         }
         .padding(.horizontal, 25)

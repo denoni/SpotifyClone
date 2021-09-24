@@ -16,7 +16,8 @@ struct MediaDetailScreen: View {
         Color.spotifyDarkerGray
         ScrollView(showsIndicators: false) {
           VStack {
-            TopGradient(height: geometry.size.height / 1.8)
+            TopGradient(mediaDetailViewModel: homeViewModel.mediaDetailViewModel,
+                        height: geometry.size.height / 1.8)
             DetailContent(homeViewModel: homeViewModel)
               .padding(.top, -geometry.size.height / 1.8)
               .padding(.bottom, 180)
@@ -38,7 +39,7 @@ fileprivate struct DetailContent: View {
     VStack(alignment: .leading, spacing: 15) {
       ZStack {
         BackButton(homeViewModel: homeViewModel)
-        BigMediaCover()
+        BigMediaCover(mediaDetailViewModel: homeViewModel.mediaDetailViewModel)
       }
       .padding(.top, 25)
 
@@ -61,13 +62,22 @@ fileprivate struct DetailContent: View {
 }
 
 struct TopGradient: View {
+  @ObservedObject var mediaDetailViewModel: MediaDetailViewModel
+
   var height: CGFloat
-  var color: Color = Color(#colorLiteral(red: 0.05098039216, green: 0.6078431373, blue: 0.7843137255, alpha: 1))
+  @State var color: Color
+
+  init(mediaDetailViewModel: MediaDetailViewModel, height: CGFloat) {
+    self.mediaDetailViewModel = mediaDetailViewModel
+    self.height = height
+    mediaDetailViewModel.imageColorModel = RemoteImageModel(urlString: mediaDetailViewModel.media!.imageURL)
+    color = Color(mediaDetailViewModel.imageColorModel.image?.averageColor! ?? .clear)
+  }
 
   var body: some View {
     Rectangle()
-      .fill(LinearGradient(gradient: Gradient(colors: [color.opacity(0.6),
-                                                       color.opacity(0.30),
+      .fill(LinearGradient(gradient: Gradient(colors: [color.opacity(0.8),
+                                                       color.opacity(0.4),
                                                        color.opacity(0.0)]),
                            startPoint: .top,
                            endPoint: .bottom))
@@ -88,21 +98,22 @@ fileprivate struct BackButton: View {
       }
       .frame(height: 20)
       .onTapGesture {
-        homeViewModel.changeSubpageTo(.none)
+        homeViewModel.goToNoneSubpage()
       }
-
       Spacer()
     }
   }
 }
 
 fileprivate struct BigMediaCover: View {
+  var mediaDetailViewModel: MediaDetailViewModel
+
   var body: some View {
     HStack {
       Spacer()
       Rectangle()
         .foregroundColor(.spotifyMediumGray)
-        .overlay(Image("come-as-you-are-cover").resizable())
+        .overlay(RemoteImage(urlString: mediaDetailViewModel.media!.imageURL))
         .frame(width: 250, height: 250)
         .shadow(color: .spotifyDarkerGray.opacity(0.3), radius: 15)
       Spacer()

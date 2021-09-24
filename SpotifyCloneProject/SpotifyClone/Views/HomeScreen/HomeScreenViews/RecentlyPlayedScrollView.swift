@@ -23,7 +23,9 @@ struct RecentlyPlayedScrollView: View {
             SmallSongItem(imageURL: media.imageURL,
                           title: media.title)
               .onTapGesture {
-                homeViewModel.changeSubpageTo(.mediaDetail)
+                homeViewModel.changeSubpageTo(.mediaDetail,
+                                              mediaDetailViewModel: homeViewModel.mediaDetailViewModel,
+                                              withData: media)
               }
           }
         }.padding(.horizontal, 25)

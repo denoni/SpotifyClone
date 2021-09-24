@@ -62,6 +62,7 @@
 		C0C63C7B26DD145000532792 /* SpotifyCloneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C63C7A26DD145000532792 /* SpotifyCloneUITests.swift */; };
 		C0C63C9A26DD35D900532792 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C63C9926DD35D900532792 /* ColorPalette.swift */; };
 		C0C63C9C26DD3CD700532792 /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C63C9B26DD3CD700532792 /* CustomFonts.swift */; };
+		C0F8198926FE3802000F5FEE /* MediaDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F8198826FE3802000F5FEE /* MediaDetailViewModel.swift */; };
 		E814D7692793EF526E835DE5 /* Pods_SpotifyClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B75A3140099F8C9F0EBC8917 /* Pods_SpotifyClone.framework */; };
 /* End PBXBuildFile section */
 
@@ -149,6 +150,7 @@
 		C0C63C7C26DD145000532792 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C0C63C9926DD35D900532792 /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		C0C63C9B26DD3CD700532792 /* CustomFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFonts.swift; sourceTree = "<group>"; };
+		C0F8198826FE3802000F5FEE /* MediaDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDetailViewModel.swift; sourceTree = "<group>"; };
 		CD37E65E9CE3A48F333D478C /* Pods-SpotifyClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotifyClone.debug.xcconfig"; path = "Target Support Files/Pods-SpotifyClone/Pods-SpotifyClone.debug.xcconfig"; sourceTree = "<group>"; };
 		D6E0A4C3B34E520C39ADB989 /* Pods_SpotifyClone_SpotifyCloneUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpotifyClone_SpotifyCloneUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -238,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				C087B0E726E6556F00A72A13 /* HomeViewModel.swift */,
+				C0F8198A26FE3805000F5FEE /* Subpages */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -435,6 +438,14 @@
 				C087873726FD481D0013924E /* UIImage+AverageColor.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C0F8198A26FE3805000F5FEE /* Subpages */ = {
+			isa = PBXGroup;
+			children = (
+				C0F8198826FE3802000F5FEE /* MediaDetailViewModel.swift */,
+			);
+			path = Subpages;
 			sourceTree = "<group>";
 		};
 		C1B051469A676817097FE5BB /* Frameworks */ = {
@@ -718,6 +729,7 @@
 				C084268826F1588B000ACAEE /* MainViewModel.swift in Sources */,
 				C081873926EFBABF00AB19E9 /* AuthViewModel.swift in Sources */,
 				C084268426F11CF7000ACAEE /* YourSensitiveData.swift in Sources */,
+				C0F8198926FE3802000F5FEE /* MediaDetailViewModel.swift in Sources */,
 				C087B0EE26E660F800A72A13 /* SpotifyMediaContent.swift in Sources */,
 				C088F23C26DEE48E00C4BCA2 /* SmallSongItem.swift in Sources */,
 				C081873226EF728100AB19E9 /* APIAuthentication.swift in Sources */,
