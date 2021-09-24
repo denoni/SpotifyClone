@@ -6,6 +6,7 @@
 //
 
 // TODO: Extract the custom views
+// TODO: Support all media types
 
 import SwiftUI
 
@@ -130,7 +131,7 @@ fileprivate struct MediaDescription: View {
   var body: some View {
     // TODO: Description is only implemented in `rewindPlaylists`, implement in all home medias
     // (Will crash if you clicked in a media that is not a `rewindPlaylist`)
-    Text(mediaDetailViewModel.media!.details!.description)
+    Text(mediaDetailViewModel.media!.details.description)
       .opacity(0.9)
   }
 }
@@ -159,7 +160,7 @@ fileprivate struct MediaLikesAndDuration: View {
   @ObservedObject var mediaDetailViewModel: MediaDetailViewModel
 
   var body: some View {
-    Text("\(mediaDetailViewModel.media!.details!.tracks.numberOfSongs) songs • 1h 22m")
+    Text("\(mediaDetailViewModel.media!.details.tracks.numberOfSongs) songs • 1h 22m")
       .opacity(0.6)
   }
 }

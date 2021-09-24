@@ -70,7 +70,7 @@ struct HomeScreen: View {
               // MARK: Featured Playlists
               BigSongCoversScrollView(homeViewModel: homeViewModel,
                                       section: .featuredPlaylists,
-                                      sectionTitle: homeViewModel.mediaCollection[.featuredPlaylists]!.first!.author)
+                                      sectionTitle: homeViewModel.mediaCollection[.featuredPlaylists]!.first!.type)
                 .padding(.bottom, paddingSectionSeparation)
               
               // MARK: Artist's Top Tracks

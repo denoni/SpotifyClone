@@ -46,6 +46,10 @@ class APIFetchingDataHomePage: ObservableObject {
           let type = data.items[itemIndex].track.type
           let id = data.items[itemIndex].track.id
 
+          let trackHref = data.items[itemIndex].track.href
+          let albumHref = data.items[itemIndex].track.album.href
+          let numberOfSongs = data.items[itemIndex].track.album.total_tracks
+
           let trackItem = SpotifyModel.MediaItem(title: title,
                                                  previewURL: previewURL ?? "",
                                                  imageURL: imageURL ?? "",
@@ -53,7 +57,11 @@ class APIFetchingDataHomePage: ObservableObject {
                                                  type: type,
                                                  isPodcast: false,
                                                  isArtist: false,
-                                                 id: id)
+                                                 id: id,
+                                                 details: SpotifyModel.Details(description: "CAN'T HANDLE SINGLE TRACKS YET",
+                                                                               href: trackHref,
+                                                                               tracks: SpotifyModel.TracksDetails(href: albumHref,
+                                                                                                                  numberOfSongs: numberOfSongs)))
           trackItems.append(trackItem)
         }
         completionHandler(trackItems)
@@ -96,6 +104,10 @@ class APIFetchingDataHomePage: ObservableObject {
           let type = data.items[itemIndex].type
           let id = data.items[itemIndex].id
 
+          let trackHref = data.items[itemIndex].href
+          let albumHref = data.items[itemIndex].album.href
+          let numberOfSongs = data.items[itemIndex].album.total_tracks
+
           let trackItem = SpotifyModel.MediaItem(title: title,
                                                  previewURL: previewURL ?? "",
                                                  imageURL: imageURL ?? "",
@@ -103,7 +115,11 @@ class APIFetchingDataHomePage: ObservableObject {
                                                  type: type,
                                                  isPodcast: false,
                                                  isArtist: false,
-                                                 id: id)
+                                                 id: id,
+                                                 details: SpotifyModel.Details(description: "CAN'T HANDLE SINGLE TRACKS YET",
+                                                                               href: trackHref,
+                                                                               tracks: SpotifyModel.TracksDetails(href: albumHref,
+                                                                                                                  numberOfSongs: numberOfSongs)))
           trackItems.append(trackItem)
         }
         completionHandler(trackItems)
@@ -147,7 +163,11 @@ class APIFetchingDataHomePage: ObservableObject {
                                                   type: "",
                                                   isPodcast: false,
                                                   isArtist: true,
-                                                  id: id)
+                                                  id: id,
+                                                  details: SpotifyModel.Details(description: "CAN'T HANDLE ARTISTS YET",
+                                                                                href: "",
+                                                                                tracks: SpotifyModel.TracksDetails(href: "",
+                                                                                                                   numberOfSongs: 0)))
           artists.append(artistItem)
         }
         completionHandler(artists)
@@ -185,7 +205,10 @@ class APIFetchingDataHomePage: ObservableObject {
                                                 type: "",
                                                 isPodcast: false,
                                                 isArtist: true,
-                                                id: id)
+                                                id: id, details: SpotifyModel.Details(description: "CAN'T HANDLE ARTISTS YET",
+                                                                                      href: "",
+                                                                                      tracks: SpotifyModel.TracksDetails(href: "",
+                                                                                                                         numberOfSongs: 0)))
         completionHandler([artistItem])
       }
   }
@@ -223,9 +246,12 @@ class APIFetchingDataHomePage: ObservableObject {
         for itemIndex in 0 ..< numberOfItems {
           let title = data.albums.items[itemIndex].name
           let imageURL = data.albums.items[itemIndex].images?[0].url
-          let author = data.albums.items[itemIndex].artists[0].name
+          let author = data.albums.items[itemIndex].artists[0].name // TODO: Support multiple artists
           let type = data.albums.items[itemIndex].album_type
           let id = data.albums.items[itemIndex].id
+
+          let albumHref = data.albums.items[itemIndex].href
+          let numberOfTracks = data.albums.items[itemIndex].total_tracks
 
           let trackItem = SpotifyModel.MediaItem(title: title,
                                                  previewURL: "",
@@ -234,7 +260,9 @@ class APIFetchingDataHomePage: ObservableObject {
                                                  type: type,
                                                  isPodcast: false,
                                                  isArtist: false,
-                                                 id: id)
+                                                 id: id, details: SpotifyModel.Details(description: "CAN'T HANDLE ALBUMS YET",
+                                                                                       href: albumHref,
+                                                                                       tracks: SpotifyModel.TracksDetails(href: "", numberOfSongs: numberOfTracks)))
           trackItems.append(trackItem)
         }
         completionHandler(trackItems)
@@ -277,6 +305,10 @@ class APIFetchingDataHomePage: ObservableObject {
           let type = data.tracks[trackIndex].type
           let id = data.tracks[trackIndex].id
 
+          let trackHref = data.tracks[trackIndex].href
+          let albumHref = data.tracks[trackIndex].album.href
+          let numberOfSongs = data.tracks[trackIndex].album.total_tracks
+
           let trackItem = SpotifyModel.MediaItem(title: title,
                                                  previewURL: previewURL ?? "",
                                                  imageURL: imageURL ?? "",
@@ -284,7 +316,11 @@ class APIFetchingDataHomePage: ObservableObject {
                                                  type: type,
                                                  isPodcast: false,
                                                  isArtist: false,
-                                                 id: id)
+                                                 id: id,
+                                                 details: SpotifyModel.Details(description: "CAN'T HANDLE SINGLE TRACKS YET",
+                                                                               href: trackHref,
+                                                                               tracks: SpotifyModel.TracksDetails(href: albumHref,
+                                                                                                                  numberOfSongs: numberOfSongs)))
           trackItems.append(trackItem)
         }
         completionHandler(trackItems)
@@ -330,8 +366,9 @@ class APIFetchingDataHomePage: ObservableObject {
           let type = data.shows.items[itemIndex].type
           let id = data.shows.items[itemIndex].id
 
-
-
+          let description = data.shows.items[itemIndex].description
+          let showHref = data.shows.items[itemIndex].href
+          let numberOfEpisodes = data.shows.items[itemIndex].total_episodes
 
           let podcastItem = SpotifyModel.MediaItem(title: title,
                                                    previewURL: "",
@@ -340,7 +377,11 @@ class APIFetchingDataHomePage: ObservableObject {
                                                    type: type,
                                                    isPodcast: true,
                                                    isArtist: false,
-                                                   id: id)
+                                                   id: id,
+                                                   details: SpotifyModel.Details(description: "WILL BE HANDLED BETTER - \(description)",
+                                                                                 href: showHref,
+                                                                                 tracks: SpotifyModel.TracksDetails(href: "",
+                                                                                                                    numberOfSongs: numberOfEpisodes)))
           podcastItems.append(podcastItem)
         }
         completionHandler(podcastItems)
@@ -375,20 +416,29 @@ class APIFetchingDataHomePage: ObservableObject {
           fatalError("The API response was corrects but empty. We don't have a way to handle this yet.")
         }
 
-        for index in 0 ..< numberOfPlaylists {
+        for itemIndex in 0 ..< numberOfPlaylists {
           let sectionTitle = data.message
-          let title = data.playlists.items[index].name
-          let imageURL = data.playlists.items[index].images[0].url
-          let id = data.playlists.items[index].id
+          let title = data.playlists.items[itemIndex].name
+          let imageURL = data.playlists.items[itemIndex].images[0].url
+          let id = data.playlists.items[itemIndex].id
+
+          let description = data.playlists.items[itemIndex].description
+          let trackInfo = data.playlists.items[itemIndex].tracks
+          let mediaOwner = data.playlists.items[itemIndex].owner
+          let href = data.playlists.items[itemIndex].href
 
           let playlistItem = SpotifyModel.MediaItem(title: title,
                                                     previewURL: "",
                                                     imageURL: imageURL,
-                                                    author: sectionTitle,
-                                                    type: "",
+                                                    author: mediaOwner.display_name,
+                                                    type: sectionTitle,
                                                     isPodcast: false,
                                                     isArtist: false,
-                                                    id: id)
+                                                    id: id,
+                                                    details: SpotifyModel.Details(description: description,
+                                                                                  href: href,
+                                                                                  tracks: SpotifyModel.TracksDetails(href: trackInfo.href,
+                                                                                                                     numberOfSongs: trackInfo.total)))
           playlists.append(playlistItem)
         }
         completionHandler(playlists)
@@ -430,12 +480,12 @@ class APIFetchingDataHomePage: ObservableObject {
         for itemIndex in 0 ..< numberOfPlaylists {
           let title = data.playlists.items[itemIndex].name
           let imageURL = data.playlists.items[itemIndex].images[0].url
+          let id = data.playlists.items[itemIndex].id
+
           let description = data.playlists.items[itemIndex].description
           let trackInfo = data.playlists.items[itemIndex].tracks
           let mediaOwner = data.playlists.items[itemIndex].owner
           let href = data.playlists.items[itemIndex].href
-          let id = data.playlists.items[itemIndex].id
-
 
           let playlistItem = SpotifyModel.MediaItem(title: title,
                                                     previewURL: "",

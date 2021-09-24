@@ -29,12 +29,14 @@ struct SpotifyModel {
     var isPodcast: Bool
     var isArtist: Bool
     var id: String
-    var details: Details?
+    var details: Details
   }
 
 
 
   // MARK: - Sub structs
+
+  // TODO: Support all media types
   struct Details {
     var description: String
     var href: String
