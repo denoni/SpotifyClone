@@ -256,7 +256,7 @@ class APIFetchingDataHomePage: ObservableObject {
 
     AF.request(urlRequest)
       .validate()
-      .responseDecodable(of: TracksResponse.self) { response in
+      .responseDecodable(of: TrackResponse.self) { response in
         guard let data = response.value else {
           fatalError("Error receiving tracks from API.")
         }
@@ -309,7 +309,7 @@ class APIFetchingDataHomePage: ObservableObject {
 
     AF.request(urlRequest)
       .validate()
-      .responseDecodable(of: PodcastsResponse.self) { response in
+      .responseDecodable(of: ShowResponse.self) { response in
         guard let data = response.value else {
           fatalError("Error receiving tracks from API.")
         }
@@ -414,7 +414,7 @@ class APIFetchingDataHomePage: ObservableObject {
 
     AF.request(urlRequest)
       .validate()
-      .responseDecodable(of: PlaylistsResponse.self) { response in
+      .responseDecodable(of: PlaylistResponse.self) { response in
         guard let data = response.value else {
           fatalError("Error receiving tracks from API.")
         }
