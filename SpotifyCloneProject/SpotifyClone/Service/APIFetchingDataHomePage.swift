@@ -430,16 +430,26 @@ class APIFetchingDataHomePage: ObservableObject {
         for itemIndex in 0 ..< numberOfPlaylists {
           let title = data.playlists.items[itemIndex].name
           let imageURL = data.playlists.items[itemIndex].images[0].url
+          let description = data.playlists.items[itemIndex].description
+          let trackInfo = data.playlists.items[itemIndex].tracks
+          let mediaOwner = data.playlists.items[itemIndex].owner
+          let href = data.playlists.items[itemIndex].href
           let id = data.playlists.items[itemIndex].id
+
 
           let playlistItem = SpotifyModel.MediaItem(title: title,
                                                     previewURL: "",
                                                     imageURL: imageURL,
-                                                    author: "",
+                                                    author: mediaOwner.display_name,
                                                     type: type,
                                                     isPodcast: false,
                                                     isArtist: false,
-                                                    id: id)
+                                                    id: id,
+                                                    details: SpotifyModel.Details(description: description,
+                                                                                  href: href,
+                                                                                  tracks: SpotifyModel.TracksDetails(href: trackInfo.href,
+                                                                                                                     numberOfSongs: trackInfo.total)))
+
           playlists.append(playlistItem)
         }
         completionHandler(playlists)

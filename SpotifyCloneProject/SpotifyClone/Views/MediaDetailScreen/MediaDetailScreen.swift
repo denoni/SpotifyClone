@@ -5,6 +5,8 @@
 //  Created by Gabriel on 9/23/21.
 //
 
+// TODO: Extract the custom views
+
 import SwiftUI
 
 struct MediaDetailScreen: View {
@@ -43,12 +45,12 @@ fileprivate struct DetailContent: View {
       }
       .padding(.top, 25)
 
-      MediaDescription()
-      PlaylistAuthor()
+      MediaDescription(mediaDetailViewModel: homeViewModel.mediaDetailViewModel)
+      PlaylistAuthor(mediaDetailViewModel: homeViewModel.mediaDetailViewModel)
 
       HStack {
         VStack(alignment: .leading) {
-          MediaLikesAndDuration()
+          MediaLikesAndDuration(mediaDetailViewModel: homeViewModel.mediaDetailViewModel)
           LikeAndThreeDotsIcons()
         }
         BigPlayButton()
@@ -106,7 +108,7 @@ fileprivate struct BackButton: View {
 }
 
 fileprivate struct BigMediaCover: View {
-  var mediaDetailViewModel: MediaDetailViewModel
+  @ObservedObject var mediaDetailViewModel: MediaDetailViewModel
 
   var body: some View {
     HStack {
@@ -123,23 +125,30 @@ fileprivate struct BigMediaCover: View {
 }
 
 fileprivate struct MediaDescription: View {
+  @ObservedObject var mediaDetailViewModel: MediaDetailViewModel
+
   var body: some View {
-    Text("The most iconic songs of the year in just one playlist. Listen and remember the vibes.")
+    // TODO: Description is only implemented in `rewindPlaylists`, implement in all home medias
+    // (Will crash if you clicked in a media that is not a `rewindPlaylist`)
+    Text(mediaDetailViewModel.media!.details!.description)
       .opacity(0.9)
   }
 }
 
 fileprivate struct PlaylistAuthor: View {
+  @ObservedObject var mediaDetailViewModel: MediaDetailViewModel
+
   var body: some View {
     HStack {
       Circle()
         .foregroundColor(.black)
+        // TODO: Get image from api.
         .overlay(Image("spotify-small-logo")
                   .resizable()
                   .scaledToFit()
                   .colorMultiply(.spotifyGreen))
         .frame(width: 25, height: 25)
-      Text("Spotify")
+      Text(mediaDetailViewModel.media!.author)
         .font(.avenir(.heavy, size: 16))
       Spacer()
     }
@@ -147,8 +156,10 @@ fileprivate struct PlaylistAuthor: View {
 }
 
 fileprivate struct MediaLikesAndDuration: View {
+  @ObservedObject var mediaDetailViewModel: MediaDetailViewModel
+
   var body: some View {
-    Text("400,000 likes • 1h 22m")
+    Text("\(mediaDetailViewModel.media!.details!.tracks.numberOfSongs) songs • 1h 22m")
       .opacity(0.6)
   }
 }

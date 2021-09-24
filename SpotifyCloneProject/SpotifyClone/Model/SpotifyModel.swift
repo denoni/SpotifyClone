@@ -12,6 +12,7 @@ struct SpotifyModel {
   init() {
   }
 
+  // This struct will be modified
   struct PlaylistItem: Identifiable {
     var sectionTitle: String
     var name: String
@@ -28,6 +29,21 @@ struct SpotifyModel {
     var isPodcast: Bool
     var isArtist: Bool
     var id: String
+    var details: Details?
+  }
+
+
+
+  // MARK: - Sub structs
+  struct Details {
+    var description: String
+    var href: String
+    var tracks: TracksDetails
+  }
+
+  struct TracksDetails {
+    var href: String
+    var numberOfSongs: Int
   }
 
 }

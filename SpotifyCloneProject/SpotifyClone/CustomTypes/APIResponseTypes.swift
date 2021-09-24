@@ -94,22 +94,36 @@ struct TracksResponse: Decodable {
 // -----
 
 struct PlaylistsResponse: Decodable {
-  var playlists: FeaturedPlaylists
+  var playlists: PlaylistItems
 }
 
 struct FeaturedPlaylistsResponse: Decodable {
   var message: String
-  var playlists: FeaturedPlaylists
+  var playlists: PlaylistItems
 }
 
-struct FeaturedPlaylists: Decodable {
+struct PlaylistItems: Decodable {
   var items: [Playlist]
 }
 
 struct Playlist: Decodable {
   var name: String
   var images: [CoverImage]
+  var description: String
+  var tracks: TracksInfo
+  var owner: MediaOwner
+  var href: String
   var id: String
+}
+
+struct TracksInfo: Decodable {
+  var href: String
+  var total: Int
+}
+
+struct MediaOwner: Decodable {
+  var display_name: String
+  var href: String
 }
 
 // -----
