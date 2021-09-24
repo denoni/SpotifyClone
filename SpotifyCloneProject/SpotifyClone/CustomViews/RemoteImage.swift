@@ -32,6 +32,7 @@ struct RemoteImage: View {
     }
   }
 }
+
 class RemoteImageModel: ObservableObject {
   @Published var image: UIImage?
   @Published var noImageFound = false

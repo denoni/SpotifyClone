@@ -21,8 +21,9 @@ class HomeViewModel: ObservableObject {
   @Published var isLoading = [Section:Bool]()
   @Published var mediaCollection = [Section:[SpotifyModel.MediaItem]]()
   @Published var numberOfLoadedItemsInSection = [Section:Int]()
-
   @Published var currentSubPage: HomeSubPage = .none
+
+  @Published var veryFirstImageInfo = RemoteImageModel(urlString: "")
 
   enum HomeSubPage {
     case none
@@ -62,7 +63,6 @@ class HomeViewModel: ObservableObject {
     for dictKey in isLoading.keys { isLoading[dictKey] = true }
 
     if mainViewModel.authKey != nil {
-
       let accessToken = mainViewModel.authKey!.accessToken
 
       getSmallSongCardItems(accessToken: accessToken)
@@ -147,6 +147,8 @@ class HomeViewModel: ObservableObject {
         api.getUserFavoriteTracks(accessToken: accessToken) { tracks in
           mediaCollection[section] = tracks
           isLoading[section] = false
+
+          setVeryFirstImageInfoBasedOn(tracks[0].imageURL)
         }
 
       // MARK: Recently Played
@@ -283,8 +285,11 @@ class HomeViewModel: ObservableObject {
   // MARK: - Non-api Related Functions
 
   func changeSubpageTo(_ subPage: HomeSubPage) {
-    print("bbb")
     currentSubPage = subPage
+  }
+
+  func setVeryFirstImageInfoBasedOn(_ firstImageURL: String) {
+    veryFirstImageInfo = RemoteImageModel(urlString: firstImageURL)
   }
 
   
