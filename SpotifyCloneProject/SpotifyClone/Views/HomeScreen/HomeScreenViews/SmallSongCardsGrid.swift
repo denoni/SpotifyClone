@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SmallSongCardsGrid: View {
   @State var medias: [SpotifyModel.MediaItem]
+  var numberOfItems: Range<Int> { 0 ..< medias.count / 2 }
 
   var body: some View {
     VStack(spacing: spacingSmallItems) {
@@ -26,28 +27,30 @@ struct SmallSongCardsGrid: View {
 
   @ViewBuilder private func buildGrid(medias: [SpotifyModel.MediaItem]) -> some View {
 
-    // TODO: Stop populating manually
-
     VStack(spacing: spacingSmallItems) {
-      HStack(spacing: spacingSmallItems) {
-        SmallSongCard(imageURL: medias.count == 0 ? "" : medias[0].imageURL,
-                      title: medias.count == 0 ? "Loading" : medias[0].title)
-        SmallSongCard(imageURL: medias.count <= 1 ? "" : medias[1].imageURL,
-                      title: medias.count <= 1 ? "Loading" : medias[1].title)
+      ForEach(numberOfItems) { pairIndex in
+        if medias.count >= 2 {
+          SmallSongCardPair(imagesURL: [medias[pairIndex * 2].imageURL,
+                                        medias[pairIndex * 2 + 1].imageURL],
+                            titles: [medias[pairIndex * 2].title,
+                                     medias[pairIndex * 2 + 1].title])
+        }
       }
+    }
+  }
 
-      HStack(spacing: spacingSmallItems) {
-        SmallSongCard(imageURL: medias.count <= 2 ? "" : medias[2].imageURL,
-                      title: medias.count <= 2 ? "Loading" : medias[2].title)
-        SmallSongCard(imageURL: medias.count <= 3 ? "" : medias[3].imageURL,
-                      title: medias.count <= 3 ? "Loading" : medias[3].title)
-      }
+  struct SmallSongCardPair: View {
+    var imagesURL: [String]
+    var titles: [String]
 
-      HStack(spacing: spacingSmallItems) {
-        SmallSongCard(imageURL: medias.count <= 4 ? "" : medias[4].imageURL,
-                      title: medias.count <= 4 ? "Loading" : medias[4].title)
-        SmallSongCard(imageURL: medias.count <= 5 ? "" : medias[5].imageURL,
-                      title: medias.count <= 5 ? "Loading" : medias[5].title)
+    var body: some View {
+      if imagesURL.count == 2 && titles.count == 2 {
+        HStack(spacing: spacingSmallItems) {
+          SmallSongCard(imageURL: imagesURL[0],
+                        title: titles[0])
+          SmallSongCard(imageURL: imagesURL[1],
+                        title: titles[1])
+        }
       }
     }
   }
