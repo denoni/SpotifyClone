@@ -15,12 +15,12 @@ struct Track: Decodable {
   var album: Album
   var artists: [Artist]
   var type: String
+  var id: String
 
   var popularity: Int
   var explicit: Bool
   var duration_ms: Int
   var href: String
-  var id: String
 }
 
 struct Album: Decodable {
@@ -28,10 +28,10 @@ struct Album: Decodable {
   var images: [CoverImage]?
   var album_type: String
   var artists: [Artist]
+  var id: String
   
   var href: String
   var total_tracks: Int
-  var id: String
 }
 
 struct Show: Decodable {
@@ -39,33 +39,35 @@ struct Show: Decodable {
   var publisher: String
   var images: [CoverImage]
   var type: String
+  var id: String
 
   var description: String
   var explicit: Bool
   var href: String
   var total_episodes: Int
-  var id: String
 }
 
 struct Artist: Decodable {
   var name: String
   var images: [CoverImage]?
+  var id: String
 
   var followers: Followers?
   var genres: [String]?
   var popularity: Int?
   var href: String
-  var id: String
+
 }
 
 struct Playlist: Decodable {
   var name: String
   var images: [CoverImage]
+  var id: String
+
   var description: String
   var tracks: TracksInfo
   var owner: MediaOwner
   var href: String
-  var id: String
 }
 
 struct CoverImage: Decodable {

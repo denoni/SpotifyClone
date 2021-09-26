@@ -1,5 +1,5 @@
 //
-//  MediaDetailScreen.swift
+//  PlaylistDetailScreen.swift
 //  SpotifyClone
 //
 //  Created by Gabriel on 9/23/21.
@@ -10,7 +10,7 @@
 
 import SwiftUI
 
-struct MediaDetailScreen: View {
+struct PlaylistDetailScreen: View {
   var homeViewModel: HomeViewModel
 
   var body: some View {
@@ -37,21 +37,37 @@ struct MediaDetailScreen: View {
 
 fileprivate struct DetailContent: View {
   var homeViewModel: HomeViewModel
+  var details: SpotifyModel.PlaylistDetails
+
+  init(homeViewModel: HomeViewModel) {
+    self.homeViewModel = homeViewModel
+
+    let detailsTypes = homeViewModel.mediaDetailViewModel.media!.getDetails()
+    switch detailsTypes {
+    case .playlists(let playlistDetails):
+      details = SpotifyModel.PlaylistDetails(description: playlistDetails.description,
+                                             playlistTracks: playlistDetails.playlistTracks,
+                                             owner: playlistDetails.owner,
+                                             href: playlistDetails.href)
+    default:
+      fatalError("Wrong type for PlaylistDetailScreen")
+    }
+  }
 
   var body: some View {
     VStack(alignment: .leading, spacing: 15) {
       ZStack {
         BackButton(homeViewModel: homeViewModel)
-        BigMediaCover(mediaDetailViewModel: homeViewModel.mediaDetailViewModel)
+        BigMediaCover(imageURL: homeViewModel.mediaDetailViewModel.media!.imageURL)
       }
       .padding(.top, 25)
 
-      MediaDescription(mediaDetailViewModel: homeViewModel.mediaDetailViewModel)
-      PlaylistAuthor(mediaDetailViewModel: homeViewModel.mediaDetailViewModel)
+      MediaDescription(description: details.description)
+      PlaylistAuthor(mediaOwner: details.owner)
 
       HStack {
         VStack(alignment: .leading) {
-          MediaLikesAndDuration(mediaDetailViewModel: homeViewModel.mediaDetailViewModel)
+          MediaLikesAndDuration(playlistTracks: details.playlistTracks)
           LikeAndThreeDotsIcons()
         }
         BigPlayButton()
@@ -109,14 +125,14 @@ fileprivate struct BackButton: View {
 }
 
 fileprivate struct BigMediaCover: View {
-  @ObservedObject var mediaDetailViewModel: MediaDetailViewModel
+  @State var imageURL: String
 
   var body: some View {
     HStack {
       Spacer()
       Rectangle()
         .foregroundColor(.spotifyMediumGray)
-        .overlay(RemoteImage(urlString: mediaDetailViewModel.media!.imageURL))
+        .overlay(RemoteImage(urlString: imageURL))
         .frame(width: 250, height: 250)
         .shadow(color: .spotifyDarkerGray.opacity(0.3), radius: 15)
       Spacer()
@@ -126,18 +142,18 @@ fileprivate struct BigMediaCover: View {
 }
 
 fileprivate struct MediaDescription: View {
-  @ObservedObject var mediaDetailViewModel: MediaDetailViewModel
+  @State var description: String
 
   var body: some View {
     // TODO: Description is only implemented in `rewindPlaylists`, implement in all home medias
     // (Will crash if you clicked in a media that is not a `rewindPlaylist`)
-    Text(mediaDetailViewModel.media!.details.description)
+    Text(description)
       .opacity(0.9)
   }
 }
 
 fileprivate struct PlaylistAuthor: View {
-  @ObservedObject var mediaDetailViewModel: MediaDetailViewModel
+  @State var mediaOwner: SpotifyModel.MediaOwner
 
   var body: some View {
     HStack {
@@ -149,7 +165,7 @@ fileprivate struct PlaylistAuthor: View {
                   .scaledToFit()
                   .colorMultiply(.spotifyGreen))
         .frame(width: 25, height: 25)
-      Text(mediaDetailViewModel.media!.author)
+      Text(mediaOwner.displayName)
         .font(.avenir(.heavy, size: 16))
       Spacer()
     }
@@ -157,10 +173,10 @@ fileprivate struct PlaylistAuthor: View {
 }
 
 fileprivate struct MediaLikesAndDuration: View {
-  @ObservedObject var mediaDetailViewModel: MediaDetailViewModel
+  @State var playlistTracks: SpotifyModel.PlaylistTracks
 
   var body: some View {
-    Text("\(mediaDetailViewModel.media!.details.tracks.numberOfSongs) songs • 1h 22m")
+    Text("\(playlistTracks.numberOfSongs) songs • 1h 22m")
       .opacity(0.6)
   }
 }
@@ -227,7 +243,7 @@ struct MediaDetailScreen_Previews: PreviewProvider {
 
   static var previews: some View {
     ZStack {
-      MediaDetailScreen(homeViewModel: HomeViewModel(mainViewModel: mainViewModel))
+      PlaylistDetailScreen(homeViewModel: HomeViewModel(mainViewModel: mainViewModel))
       VStack {
         Spacer()
         BottomBar(mainViewModel: mainViewModel, showMediaPlayer: true)

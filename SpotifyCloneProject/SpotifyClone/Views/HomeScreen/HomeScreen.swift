@@ -18,7 +18,7 @@ struct HomeScreen: View {
     case .none:
       HomeScreenDefault(homeViewModel: homeViewModel)
     case .mediaDetail:
-      MediaDetailScreen(homeViewModel: homeViewModel)
+      PlaylistDetailScreen(homeViewModel: homeViewModel)
     }
   }
   
