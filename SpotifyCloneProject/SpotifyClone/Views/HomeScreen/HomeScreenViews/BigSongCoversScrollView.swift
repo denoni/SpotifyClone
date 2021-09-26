@@ -16,10 +16,10 @@ struct BigSongCoversScrollView: View {
   }
 
   var detailType: HomeViewModel.HomeSubpage {
-    switch medias.first!.type {
-    case "playlist":
+    switch medias.first!.mediaType {
+    case .playlist:
       return HomeViewModel.HomeSubpage.playlistDetail
-    case "track":
+    case .track:
       return HomeViewModel.HomeSubpage.trackDetail
     default:
       fatalError("Didn't implement other media types yet")
@@ -37,8 +37,7 @@ struct BigSongCoversScrollView: View {
             BigSongItem(imageURL: media.imageURL,
                         title: media.title,
                         artist: "",
-                        isArtistProfile: media.isArtist,
-                        isPodcast: media.isPodcast)
+                        mediaType: media.mediaType)
               .onAppear { testIfShouldFetchMoreData(basedOn: media) }
               .onTapGesture {
                 homeViewModel.changeSubpageTo(detailType,

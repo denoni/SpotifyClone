@@ -74,7 +74,8 @@ struct HomeScreen: View {
               // MARK: Featured Playlists
               BigSongCoversScrollView(homeViewModel: homeViewModel,
                                       section: .featuredPlaylists,
-                                      sectionTitle: homeViewModel.mediaCollection[.featuredPlaylists]!.first!.type)
+                                      // TODO: Stop using previewURL to store the featured playlist title
+                                      sectionTitle: homeViewModel.mediaCollection[.featuredPlaylists]!.first!.previewURL)
                 .padding(.bottom, paddingSectionSeparation)
               
               // MARK: Artist's Top Tracks

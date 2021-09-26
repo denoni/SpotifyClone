@@ -9,9 +9,6 @@ import Foundation
 
 struct SpotifyModel {
 
-  init() {
-  }
-
   enum MediaTypes {
     case track
     case album
@@ -33,9 +30,7 @@ struct SpotifyModel {
     var previewURL: String
     var imageURL: String
     var author: String
-    var type: String
-    var isPodcast: Bool
-    var isArtist: Bool
+    var mediaType: MediaTypes
     var id: String
     var details: DetailTypes
 

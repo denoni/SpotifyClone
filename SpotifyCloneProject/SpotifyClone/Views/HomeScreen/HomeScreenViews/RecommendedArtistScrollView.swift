@@ -50,7 +50,8 @@ struct RecommendedArtistScrollView: View {
         LazyHStack(alignment: .top,spacing: spacingBigItems) {
           ForEach(getArtistSongs()) { media in
             BigSongItem(imageURL: media.imageURL,
-                        title: media.title)
+                        title: media.title,
+                        mediaType: media.mediaType)
               .onTapGesture {
                 homeViewModel.changeSubpageTo(.stillToBeMade,
                                               mediaDetailViewModel: homeViewModel.mediaDetailViewModel,

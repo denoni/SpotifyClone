@@ -57,9 +57,7 @@ class APIFetchingDataHomePage: ObservableObject {
                                                  previewURL: previewURL ?? "",
                                                  imageURL: imageURL ?? "",
                                                  author: author,
-                                                 type: "track",
-                                                 isPodcast: false,
-                                                 isArtist: false,
+                                                 mediaType: .track,
                                                  id: id,
                                                  details: SpotifyModel.DetailTypes.tracks(
                                                   trackDetails: SpotifyModel.TrackDetails(popularity: popularity,
@@ -121,9 +119,7 @@ class APIFetchingDataHomePage: ObservableObject {
                                                  previewURL: previewURL ?? "",
                                                  imageURL: imageURL ?? "",
                                                  author: author,
-                                                 type: "track",
-                                                 isPodcast: false,
-                                                 isArtist: false,
+                                                 mediaType: .track,
                                                  id: id,
                                                  details: SpotifyModel.DetailTypes.tracks(
                                                   trackDetails: SpotifyModel.TrackDetails(popularity: popularity,
@@ -172,9 +168,7 @@ class APIFetchingDataHomePage: ObservableObject {
                                                   previewURL: "",
                                                   imageURL: imageURL ?? "",
                                                   author: "",
-                                                  type: "artist",
-                                                  isPodcast: false,
-                                                  isArtist: true,
+                                                  mediaType: .artist,
                                                   id: id,
 
                                                   // TODO: Put real data from api
@@ -217,9 +211,7 @@ class APIFetchingDataHomePage: ObservableObject {
                                                 previewURL: "",
                                                 imageURL: imageURL ?? "",
                                                 author: name,
-                                                type: "artist",
-                                                isPodcast: false,
-                                                isArtist: true,
+                                                mediaType: .artist,
                                                 id: id,
 
                                                 // TODO: Put real data from api
@@ -275,9 +267,7 @@ class APIFetchingDataHomePage: ObservableObject {
                                                  previewURL: "",
                                                  imageURL: imageURL ?? "",
                                                  author: author,
-                                                 type: "album",
-                                                 isPodcast: false,
-                                                 isArtist: false,
+                                                 mediaType: .album,
                                                  id: id,
 
                                                  // TODO: Put real data from api
@@ -338,9 +328,7 @@ class APIFetchingDataHomePage: ObservableObject {
                                                  previewURL: previewURL ?? "",
                                                  imageURL: imageURL ?? "",
                                                  author: author,
-                                                 type: "track",
-                                                 isPodcast: false,
-                                                 isArtist: false,
+                                                 mediaType: .track,
                                                  id: id,
                                                  details: SpotifyModel.DetailTypes.tracks(
                                                   trackDetails: SpotifyModel.TrackDetails(popularity: popularity,
@@ -402,9 +390,7 @@ class APIFetchingDataHomePage: ObservableObject {
                                                    previewURL: "",
                                                    imageURL: imageURL,
                                                    author: author,
-                                                   type: "podcast",
-                                                   isPodcast: true,
-                                                   isArtist: false,
+                                                   mediaType: .show,
                                                    id: id,
 
                                                    // TODO: Put real data from api
@@ -462,9 +448,7 @@ class APIFetchingDataHomePage: ObservableObject {
                                                     previewURL: sectionTitle,
                                                     imageURL: imageURL,
                                                     author: mediaOwner.display_name,
-                                                    type: "playlist",
-                                                    isPodcast: false,
-                                                    isArtist: false,
+                                                    mediaType: .show,
                                                     id: id,
                                                     details: SpotifyModel.DetailTypes.playlists(
                                                       playlistDetails: SpotifyModel.PlaylistDetails(description: description,
@@ -526,9 +510,7 @@ class APIFetchingDataHomePage: ObservableObject {
                                                     previewURL: "",
                                                     imageURL: imageURL,
                                                     author: mediaOwner.display_name,
-                                                    type: "playlist",
-                                                    isPodcast: false,
-                                                    isArtist: false,
+                                                    mediaType: .playlist,
                                                     id: id,
                                                     details: SpotifyModel.DetailTypes.playlists(
                                                       playlistDetails: SpotifyModel.PlaylistDetails(description: description,

@@ -11,8 +11,7 @@ struct BigSongItem: View {
   let imageURL: String
   let title: String
   var artist: String = ""
-  var isArtistProfile = false
-  var isPodcast = false
+  var mediaType: SpotifyModel.MediaTypes
 
   let coverImageWidth: CGFloat = 160
   let coverTextWidth: CGFloat = 160 * 0.85
@@ -21,8 +20,8 @@ struct BigSongItem: View {
   @ViewBuilder
   func buildCoverShape() -> some View {
     Group {
-      if isArtistProfile { Circle() }
-      else if isPodcast { RoundedRectangle(cornerRadius: 10) }
+      if mediaType == .artist { Circle() }
+      else if mediaType == .show { RoundedRectangle(cornerRadius: 10) }
       else { Rectangle() }
     }.foregroundColor(Color.spotifyDarkGray)
   }
