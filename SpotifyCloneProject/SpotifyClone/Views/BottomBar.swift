@@ -43,29 +43,31 @@ private struct BottomMediaPlayerBar: View {
               .resizeToFit()
               .frame(width: coverImageSize)
             VStack(alignment: .leading) {
-              Text(songName).font(.avenir(.heavy, size: mediaTitleSize))
+              Text(songName).font(.avenir(.medium, size: mediaTitleSize))
                 .frame(maxWidth: .infinity, alignment: .topLeading)
               Text(artist).font(.avenir(.medium, size: mediaAuthorSize))
                 .frame(maxWidth: .infinity, alignment: .topLeading)
                 .opacity(0.6)
             }
+            .padding(.vertical, 10)
           }
           Spacer()
           HStack(spacing: 30) {
             Image("devices")
               .resizeToFit()
-              .padding(.vertical, 25)
+              .padding(.vertical, 16)
+              .opacity(0.7)
             Image("play")
               .resizeToFit()
-              .padding(.vertical, 30)
+              .padding(.vertical, 18)
               .padding(.trailing, 25)
           }
         }
         .frame(height: bottomMediaPlayerBarSize)
         .background(Color.spotifyLightGray)
         Rectangle()
-          .fill(Color.black)
-          .frame(height: 0.5)
+          .fill(Color.spotifyDarkGray)
+          .frame(height: 0.3)
       }
     }
   }
@@ -160,10 +162,10 @@ private let bottomBarFontSize: CGFloat = 12
 private let bottomNavigationBarSize: CGFloat = 60
 
 // MARK: BottomMediaPlayerBar Constants
-private let bottomMediaPlayerBarSize: CGFloat = 80
+private let bottomMediaPlayerBarSize: CGFloat = 60
 private let coverImageSize: CGFloat = bottomMediaPlayerBarSize
-private let mediaTitleSize: CGFloat = 18
-private let mediaAuthorSize: CGFloat = 16
+private let mediaTitleSize: CGFloat = 16
+private let mediaAuthorSize: CGFloat = 14
 
 
 

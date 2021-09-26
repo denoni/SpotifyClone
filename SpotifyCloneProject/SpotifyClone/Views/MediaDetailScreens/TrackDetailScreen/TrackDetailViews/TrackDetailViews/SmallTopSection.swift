@@ -18,7 +18,11 @@ struct SmallTopSection: View {
         .rotationEffect(Angle.degrees(90))
         .padding(.vertical, 3)
         .padding(.horizontal, -5)
-        .onTapGesture { homeViewModel.goToNoneSubpage() }
+        .onTapGesture {
+          homeViewModel.goToNoneSubpage()
+          // When the trackDetailsScreen is closed, reopen the mediaPlayer.
+          homeViewModel.mainViewModel.showBottomMediaPlayer = true
+        }
       Spacer()
       VStack {
         Text(albumName)
