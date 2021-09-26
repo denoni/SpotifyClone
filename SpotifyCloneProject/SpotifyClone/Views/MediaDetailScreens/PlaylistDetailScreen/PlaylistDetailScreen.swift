@@ -13,7 +13,7 @@ struct PlaylistDetailScreen: View {
   var body: some View {
     GeometryReader { geometry in
       ZStack {
-        Color.spotifyDarkerGray
+        Color.spotifyDarkGray
         ScrollView(showsIndicators: false) {
           VStack {
             TopGradient(mediaDetailViewModel: homeViewModel.mediaDetailViewModel,

@@ -13,7 +13,7 @@ struct TrackDetailScreen: View {
   var body: some View {
     GeometryReader { _ in
       ZStack(alignment: .center) {
-        Color.spotifyDarkerGray
+        Color.spotifyDarkGray
         BigGradient(mediaDetailViewModel: homeViewModel.mediaDetailViewModel)
         TrackDetailContent(homeViewModel: homeViewModel)
           .padding(.bottom, 120)

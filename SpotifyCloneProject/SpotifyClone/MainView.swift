@@ -23,7 +23,7 @@ struct MainView: View {
   var body: some View {
     if mainViewModel.homeScreenIsReady {
       ZStack {
-        Color.spotifyDarkerGray.ignoresSafeArea()
+        Color.spotifyDarkGray.ignoresSafeArea()
         switch mainViewModel.currentPage {
         case .home:
           HomeScreen(homeViewModel: homeViewModel)
