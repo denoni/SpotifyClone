@@ -15,6 +15,17 @@ struct BigSongCoversScrollView: View {
     homeViewModel.mediaCollection[section]!
   }
 
+  var detailType: HomeViewModel.HomeSubpage {
+    switch medias.first!.type {
+    case "playlist":
+      return HomeViewModel.HomeSubpage.playlistDetail
+    case "track":
+      return HomeViewModel.HomeSubpage.trackDetail
+    default:
+      fatalError("Didn't implement other media types yet")
+    }
+  }
+
   
   var body: some View {
     VStack(spacing: spacingSmallItems) {
@@ -30,7 +41,7 @@ struct BigSongCoversScrollView: View {
                         isPodcast: media.isPodcast)
               .onAppear { testIfShouldFetchMoreData(basedOn: media) }
               .onTapGesture {
-                homeViewModel.changeSubpageTo(.mediaDetail,
+                homeViewModel.changeSubpageTo(detailType,
                                               mediaDetailViewModel: homeViewModel.mediaDetailViewModel,
                                               withData: media)
               }

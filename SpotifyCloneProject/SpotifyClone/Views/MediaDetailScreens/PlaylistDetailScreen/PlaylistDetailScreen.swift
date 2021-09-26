@@ -5,9 +5,6 @@
 //  Created by Gabriel on 9/23/21.
 //
 
-// TODO: Extract the custom views
-// TODO: Support all media types
-
 import SwiftUI
 
 struct PlaylistDetailScreen: View {
@@ -21,7 +18,7 @@ struct PlaylistDetailScreen: View {
           VStack {
             TopGradient(mediaDetailViewModel: homeViewModel.mediaDetailViewModel,
                         height: geometry.size.height / 1.8)
-            DetailContent(homeViewModel: homeViewModel)
+            PlaylistDetailContent(homeViewModel: homeViewModel)
               .padding(.top, -geometry.size.height / 1.8)
               .padding(.bottom, 180)
           }
@@ -35,7 +32,7 @@ struct PlaylistDetailScreen: View {
 
 
 
-struct DetailContent: View {
+struct PlaylistDetailContent: View {
   var homeViewModel: HomeViewModel
   var details: SpotifyModel.PlaylistDetails
 

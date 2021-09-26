@@ -52,7 +52,7 @@ struct RecommendedArtistScrollView: View {
             BigSongItem(imageURL: media.imageURL,
                         title: media.title)
               .onTapGesture {
-                homeViewModel.changeSubpageTo(.mediaDetail,
+                homeViewModel.changeSubpageTo(.stillToBeMade,
                                               mediaDetailViewModel: homeViewModel.mediaDetailViewModel,
                                               withData: media)
               }

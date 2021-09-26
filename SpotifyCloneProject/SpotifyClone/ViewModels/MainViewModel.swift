@@ -11,6 +11,7 @@ class MainViewModel: ObservableObject {
   @Published private(set) var authKey: AuthKey?
   @Published var currentPage: Page = .home
   @Published var homeScreenIsReady = false
+  @Published var showBottomMediaPlayer = true
   
   func finishAuthentication(authKey: AuthKey) {
     self.authKey = authKey

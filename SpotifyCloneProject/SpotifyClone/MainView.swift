@@ -32,7 +32,7 @@ struct MainView: View {
         case .myLibrary:
           Text("To be done 🛠").font(.title)
         }
-        BottomBar(mainViewModel: mainViewModel, showMediaPlayer: true)
+        BottomBar(mainViewModel: mainViewModel, showMediaPlayer: mainViewModel.showBottomMediaPlayer)
       }
       .navigationBarTitle("")
       .navigationBarHidden(true)

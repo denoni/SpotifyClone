@@ -17,8 +17,12 @@ struct HomeScreen: View {
     switch homeViewModel.currentSubPage {
     case .none:
       HomeScreenDefault(homeViewModel: homeViewModel)
-    case .mediaDetail:
+    case .playlistDetail:
       PlaylistDetailScreen(homeViewModel: homeViewModel)
+    case .trackDetail:
+      TrackDetailScreen(homeViewModel: homeViewModel)
+    default:
+      fatalError("Didn't support other media types yet")
     }
   }
   

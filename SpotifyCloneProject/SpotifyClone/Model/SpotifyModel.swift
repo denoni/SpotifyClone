@@ -12,6 +12,14 @@ struct SpotifyModel {
   init() {
   }
 
+  enum MediaTypes {
+    case track
+    case album
+    case playlist
+    case show
+    case artist
+  }
+
   // This struct will be modified
   struct PlaylistItem: Identifiable {
     var sectionTitle: String
@@ -53,37 +61,7 @@ struct SpotifyModel {
 
 
 
-
-//  case .shows(let description, let explicit, let totalEpisodes, let href):
-//    return DetailTypes.shows(description: description,
-//                             explicit: explicit,
-//                             numberOfEpisodes:
-//                             totalEpisodes,
-//                             href: href)
-//
-//  case .tracks(let popularity, let explicit, let durationInMs, let href):
-//    return DetailTypes.tracks(popularity: popularity,
-//                              explicit: explicit,
-//                              durationInMs: durationInMs,
-//                              href: href)
-//
-//  case .playlists(let description, let playlistTracks, let mediaOwner, let href):
-//    return DetailTypes.playlists(description: description,
-//                                 playlistTracks: playlistTracks,
-//                                 mediaOwner: mediaOwner,
-//                                 href: href)
-//
-//  case .artists(let followers, let genres, let popularity, let href):
-//    return DetailTypes.artists(followers: followers,
-//                               genres: genres,
-//                               popularity: popularity,
-//                               href: href)
-//  case .album(let numberOfTracks, let href):
-//    return DetailTypes.album(numberOfTracks: numberOfTracks,
-//                             href: href)
-
-  // MARK: - Sub structs
-
+  // MARK: - Detail Structs
   enum DetailTypes {
     case shows(showDetails: ShowDetails)
     case tracks(trackDetails: TrackDetails)
@@ -92,6 +70,7 @@ struct SpotifyModel {
     case album(albumDetails: AlbumDetails)
   }
 
+  
   struct ShowDetails {
     var description: String
     var explicit: Bool
@@ -102,8 +81,9 @@ struct SpotifyModel {
   struct TrackDetails {
     var popularity: Int
     var explicit: Bool
-    var durationInMs: Int
+    var durationInMs: Double
     var href: String
+    var album: AlbumDetails?
   }
 
   struct PlaylistDetails {
@@ -121,12 +101,14 @@ struct SpotifyModel {
   }
 
   struct AlbumDetails {
+    var name: String
     var numberOfTracks: Int
     var href: String
   }
 
 
 
+  // MARK: - Sub structs
   struct PlaylistTracks {
     var href: String
     var numberOfSongs: Int

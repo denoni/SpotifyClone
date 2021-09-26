@@ -19,7 +19,7 @@ struct Track: Decodable {
 
   var popularity: Int
   var explicit: Bool
-  var duration_ms: Int
+  var duration_ms: Double
   var href: String
 }
 

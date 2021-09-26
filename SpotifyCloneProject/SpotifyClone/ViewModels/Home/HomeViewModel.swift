@@ -30,7 +30,9 @@ class HomeViewModel: ObservableObject {
 
   enum HomeSubpage {
     case none
-    case mediaDetail
+    case playlistDetail
+    case trackDetail
+    case stillToBeMade // TODO: Create the rest of the real detail screens
   }
 
   init(mainViewModel: MainViewModel) {
