@@ -22,7 +22,7 @@ struct AlbumAuthor: View {
   }
 
   var body: some View {
-    LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))], alignment: .leading) {
+    LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))], alignment: .leading) {
       ForEach(authors, id: \.id) { author in
         AuthorItem(author: author)
       }
@@ -44,6 +44,8 @@ struct AlbumAuthor: View {
           .frame(width: 25, height: 25)
         Text(author.name)
           .font(.avenir(.heavy, size: 16))
+          .lineLimit(2)
+          .frame(width: .none)
       }
     }
   }
