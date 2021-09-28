@@ -17,6 +17,7 @@ struct LoadingView<Content>: View where Content: View {
         self.content()
         Group {
           Color.spotifyDarkGray
+            .ignoresSafeArea()
             ProgressView()
               .withSpotifyStyle()
               .scaleEffect(2)
