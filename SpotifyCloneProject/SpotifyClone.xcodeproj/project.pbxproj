@@ -66,6 +66,7 @@
 		C089875927000CC000F9BF70 /* MediasScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C089875827000CC000F9BF70 /* MediasScrollView.swift */; };
 		C089875B27000CE600F9BF70 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C089875A27000CE600F9BF70 /* BackButton.swift */; };
 		C089875D27000DE800F9BF70 /* TrackDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C089875C27000DE800F9BF70 /* TrackDetailScreen.swift */; };
+		C09CF214270249F200EB9DA3 /* APIFetchingTracks.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09CF213270249F200EB9DA3 /* APIFetchingTracks.swift */; };
 		C09FD8FF26E03D6E0069CEAE /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09FD8FE26E03D6E0069CEAE /* BottomBar.swift */; };
 		C09FD90126E049BE0069CEAE /* Image+ResizeToFit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09FD90026E049BE0069CEAE /* Image+ResizeToFit.swift */; };
 		C09FD90326E04E470069CEAE /* Text+SpotifySizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09FD90226E04E470069CEAE /* Text+SpotifySizes.swift */; };
@@ -83,8 +84,6 @@
 		C0F8198F26FE4E1B000F5FEE /* PlaylistResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F8198E26FE4E1B000F5FEE /* PlaylistResponseType.swift */; };
 		C0F8199126FE4E57000F5FEE /* ShowResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F8199026FE4E57000F5FEE /* ShowResponseType.swift */; };
 		C0F8199326FE4E7D000F5FEE /* AlbumResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F8199226FE4E7D000F5FEE /* AlbumResponseType.swift */; };
-		C0F8199526FE4ED7000F5FEE /* GeneralResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F8199426FE4ED7000F5FEE /* GeneralResponseType.swift */; };
-		C0F8199726FE4F4C000F5FEE /* MixedResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F8199626FE4F4C000F5FEE /* MixedResponseType.swift */; };
 		C0F8199926FE4F79000F5FEE /* TrackResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F8199826FE4F79000F5FEE /* TrackResponseType.swift */; };
 		C0F8199B26FE4F9B000F5FEE /* ArtistResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F8199A26FE4F9B000F5FEE /* ArtistResponseType.swift */; };
 		E814D7692793EF526E835DE5 /* Pods_SpotifyClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B75A3140099F8C9F0EBC8917 /* Pods_SpotifyClone.framework */; };
@@ -172,6 +171,7 @@
 		C089875827000CC000F9BF70 /* MediasScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediasScrollView.swift; sourceTree = "<group>"; };
 		C089875A27000CE600F9BF70 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		C089875C27000DE800F9BF70 /* TrackDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDetailScreen.swift; sourceTree = "<group>"; };
+		C09CF213270249F200EB9DA3 /* APIFetchingTracks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFetchingTracks.swift; sourceTree = "<group>"; };
 		C09FD8FE26E03D6E0069CEAE /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
 		C09FD90026E049BE0069CEAE /* Image+ResizeToFit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+ResizeToFit.swift"; sourceTree = "<group>"; };
 		C09FD90226E04E470069CEAE /* Text+SpotifySizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+SpotifySizes.swift"; sourceTree = "<group>"; };
@@ -195,8 +195,6 @@
 		C0F8198E26FE4E1B000F5FEE /* PlaylistResponseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistResponseType.swift; sourceTree = "<group>"; };
 		C0F8199026FE4E57000F5FEE /* ShowResponseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowResponseType.swift; sourceTree = "<group>"; };
 		C0F8199226FE4E7D000F5FEE /* AlbumResponseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumResponseType.swift; sourceTree = "<group>"; };
-		C0F8199426FE4ED7000F5FEE /* GeneralResponseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralResponseType.swift; sourceTree = "<group>"; };
-		C0F8199626FE4F4C000F5FEE /* MixedResponseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixedResponseType.swift; sourceTree = "<group>"; };
 		C0F8199826FE4F79000F5FEE /* TrackResponseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackResponseType.swift; sourceTree = "<group>"; };
 		C0F8199A26FE4F9B000F5FEE /* ArtistResponseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistResponseType.swift; sourceTree = "<group>"; };
 		CD37E65E9CE3A48F333D478C /* Pods-SpotifyClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotifyClone.debug.xcconfig"; path = "Target Support Files/Pods-SpotifyClone/Pods-SpotifyClone.debug.xcconfig"; sourceTree = "<group>"; };
@@ -273,7 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				C081873126EF728100AB19E9 /* APIAuthentication.swift */,
-				C084267D26F10BBD000ACAEE /* APIFetchingDataHomePage.swift */,
+				C09CF2122702499800EB9DA3 /* HomePage */,
 				C089135E26F9816F00CA1A69 /* APIFetchingDataSearchPage.swift */,
 			);
 			path = Service;
@@ -460,6 +458,15 @@
 			path = TrackDetailViews;
 			sourceTree = "<group>";
 		};
+		C09CF2122702499800EB9DA3 /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				C084267D26F10BBD000ACAEE /* APIFetchingDataHomePage.swift */,
+				C09CF213270249F200EB9DA3 /* APIFetchingTracks.swift */,
+			);
+			path = HomePage;
+			sourceTree = "<group>";
+		};
 		C0C63C5126DD144E00532792 = {
 			isa = PBXGroup;
 			children = (
@@ -559,9 +566,7 @@
 				C0F8199C26FE4FF9000F5FEE /* SubTypes */,
 				C0F8199226FE4E7D000F5FEE /* AlbumResponseType.swift */,
 				C0F8199A26FE4F9B000F5FEE /* ArtistResponseType.swift */,
-				C0F8199426FE4ED7000F5FEE /* GeneralResponseType.swift */,
 				C0F8199826FE4F79000F5FEE /* TrackResponseType.swift */,
-				C0F8199626FE4F4C000F5FEE /* MixedResponseType.swift */,
 				C0F8199026FE4E57000F5FEE /* ShowResponseType.swift */,
 				C0F8198E26FE4E1B000F5FEE /* PlaylistResponseType.swift */,
 			);
@@ -848,7 +853,6 @@
 				C080CE202700A172003D0C11 /* SmallTopSection.swift in Sources */,
 				C089135F26F9816F00CA1A69 /* APIFetchingDataSearchPage.swift in Sources */,
 				C080CE262700A22F003D0C11 /* PlayerControllerSection.swift in Sources */,
-				C0F8199726FE4F4C000F5FEE /* MixedResponseType.swift in Sources */,
 				C0883A0926E2703D00E1ADFA /* SearchSection.swift in Sources */,
 				C081873526EF97DF00AB19E9 /* AuthScreen.swift in Sources */,
 				C0883A0126E26F1500E1ADFA /* SmallSongCardsGrid.swift in Sources */,
@@ -868,7 +872,6 @@
 				C089874F27000C2F00F9BF70 /* MediaDescription.swift in Sources */,
 				C089875D27000DE800F9BF70 /* TrackDetailScreen.swift in Sources */,
 				C0F8199B26FE4F9B000F5FEE /* ArtistResponseType.swift in Sources */,
-				C0F8199526FE4ED7000F5FEE /* GeneralResponseType.swift in Sources */,
 				C089875327000C6100F9BF70 /* MediaLikesAndDuration.swift in Sources */,
 				C081873926EFBABF00AB19E9 /* AuthViewModel.swift in Sources */,
 				C084268426F11CF7000ACAEE /* YourSensitiveData.swift in Sources */,
@@ -897,6 +900,7 @@
 				C0A06A7C26E18A6F00E85DD4 /* SearchScreen.swift in Sources */,
 				C084268026F10DC8000ACAEE /* AuthCoordinator.swift in Sources */,
 				C080CE242700A210003D0C11 /* BigTrackImage.swift in Sources */,
+				C09CF214270249F200EB9DA3 /* APIFetchingTracks.swift in Sources */,
 				C089135D26F97E8C00CA1A69 /* SearchViewModel.swift in Sources */,
 				C09FD90126E049BE0069CEAE /* Image+ResizeToFit.swift in Sources */,
 				C081873D26F0168700AB19E9 /* AuthKey.swift in Sources */,

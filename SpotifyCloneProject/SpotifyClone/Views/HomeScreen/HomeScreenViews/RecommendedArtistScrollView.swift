@@ -41,6 +41,7 @@ struct RecommendedArtistScrollView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
           Text(getArtistInfo().author)
             .spotifyTitle()
+            .padding(.trailing, 40)
         }.frame(maxWidth: .infinity, alignment: .topLeading)
       }
       .frame(height: 60)
@@ -53,7 +54,7 @@ struct RecommendedArtistScrollView: View {
                         title: media.title,
                         mediaType: media.mediaType)
               .onTapGesture {
-                homeViewModel.changeSubpageTo(.stillToBeMade,
+                homeViewModel.changeSubpageTo(.trackDetail,
                                               mediaDetailViewModel: homeViewModel.mediaDetailViewModel,
                                               withData: media)
               }

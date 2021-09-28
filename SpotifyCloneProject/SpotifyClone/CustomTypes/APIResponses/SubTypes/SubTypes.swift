@@ -56,7 +56,6 @@ struct Artist: Decodable {
   var genres: [String]?
   var popularity: Int?
   var href: String
-
 }
 
 struct Playlist: Decodable {
