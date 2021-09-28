@@ -60,7 +60,8 @@ struct HomeScreen: View {
               
               // MARK: New Releases
               BigSongCoversScrollView(homeViewModel: homeViewModel,
-                                      section: .newReleases)
+                                      section: .newReleases,
+                                      showArtistName: true)
                 .padding(.bottom, paddingSectionSeparation)
               
               // MARK: User Favorite Tracks

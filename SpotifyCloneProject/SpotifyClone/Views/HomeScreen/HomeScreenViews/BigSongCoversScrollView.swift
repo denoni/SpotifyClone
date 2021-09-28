@@ -10,6 +10,7 @@ import SwiftUI
 struct BigSongCoversScrollView: View {
   @StateObject var homeViewModel: HomeViewModel
   let section: HomeViewModel.Section
+  var showArtistName: Bool = false
   var sectionTitle = ""
   var medias: [SpotifyModel.MediaItem] {
     homeViewModel.mediaCollection[section]!
@@ -38,7 +39,7 @@ struct BigSongCoversScrollView: View {
           ForEach(medias) { media in
             BigSongItem(imageURL: media.imageURL,
                         title: media.title,
-                        artist: "",
+                        artist: showArtistName ? media.authorName.joined(separator: ", ") : "",
                         mediaType: media.mediaType)
               .onAppear { testIfShouldFetchMoreData(basedOn: media) }
               .onTapGesture {
