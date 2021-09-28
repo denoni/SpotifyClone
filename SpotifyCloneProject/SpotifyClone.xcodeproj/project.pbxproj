@@ -14,6 +14,11 @@
 		C016E6092703464100EFF870 /* AlbumInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E6082703464100EFF870 /* AlbumInfo.swift */; };
 		C016E60B2703623000EFF870 /* AlbumAuthor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E60A2703623000EFF870 /* AlbumAuthor.swift */; };
 		C016E60D270372D000EFF870 /* MediaTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E60C270372CF00EFF870 /* MediaTitle.swift */; };
+		C016E610270385E300EFF870 /* ShowDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E60F270385E300EFF870 /* ShowDetailScreen.swift */; };
+		C016E612270388F600EFF870 /* ShowAuthor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E611270388F600EFF870 /* ShowAuthor.swift */; };
+		C016E61527038BEF00EFF870 /* SmallMediaCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E61427038BEF00EFF870 /* SmallMediaCover.swift */; };
+		C016E61727038FA500EFF870 /* FollowAndThreeDotsIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E61627038FA500EFF870 /* FollowAndThreeDotsIcons.swift */; };
+		C016E6192703949500EFF870 /* ShowEpisodesScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E6182703949500EFF870 /* ShowEpisodesScrollView.swift */; };
 		C06A4A5026E1BB6C00D2CA90 /* SpotifyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06A4A4F26E1BB6C00D2CA90 /* SpotifyTextField.swift */; };
 		C06AB91426FA07B000F46356 /* Color+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06AB91326FA07B000F46356 /* Color+Random.swift */; };
 		C06AB93126FA85F600F46356 /* ProgressView+SpotifyStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06AB93026FA85F600F46356 /* ProgressView+SpotifyStyle.swift */; };
@@ -124,6 +129,11 @@
 		C016E6082703464100EFF870 /* AlbumInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumInfo.swift; sourceTree = "<group>"; };
 		C016E60A2703623000EFF870 /* AlbumAuthor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumAuthor.swift; sourceTree = "<group>"; };
 		C016E60C270372CF00EFF870 /* MediaTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTitle.swift; sourceTree = "<group>"; };
+		C016E60F270385E300EFF870 /* ShowDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailScreen.swift; sourceTree = "<group>"; };
+		C016E611270388F600EFF870 /* ShowAuthor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAuthor.swift; sourceTree = "<group>"; };
+		C016E61427038BEF00EFF870 /* SmallMediaCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallMediaCover.swift; sourceTree = "<group>"; };
+		C016E61627038FA500EFF870 /* FollowAndThreeDotsIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowAndThreeDotsIcons.swift; sourceTree = "<group>"; };
+		C016E6182703949500EFF870 /* ShowEpisodesScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowEpisodesScrollView.swift; sourceTree = "<group>"; };
 		C06A4A4F26E1BB6C00D2CA90 /* SpotifyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyTextField.swift; sourceTree = "<group>"; };
 		C06AB91326FA07B000F46356 /* Color+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Random.swift"; sourceTree = "<group>"; };
 		C06AB93026FA85F600F46356 /* ProgressView+SpotifyStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressView+SpotifyStyle.swift"; sourceTree = "<group>"; };
@@ -252,6 +262,26 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		C016E60E270385B200EFF870 /* ShowDetailScreen */ = {
+			isa = PBXGroup;
+			children = (
+				C016E60F270385E300EFF870 /* ShowDetailScreen.swift */,
+				C016E613270388FA00EFF870 /* ShowDetailViews */,
+			);
+			path = ShowDetailScreen;
+			sourceTree = "<group>";
+		};
+		C016E613270388FA00EFF870 /* ShowDetailViews */ = {
+			isa = PBXGroup;
+			children = (
+				C016E611270388F600EFF870 /* ShowAuthor.swift */,
+				C016E61427038BEF00EFF870 /* SmallMediaCover.swift */,
+				C016E61627038FA500EFF870 /* FollowAndThreeDotsIcons.swift */,
+				C016E6182703949500EFF870 /* ShowEpisodesScrollView.swift */,
+			);
+			path = ShowDetailViews;
+			sourceTree = "<group>";
+		};
 		C07B761026F5001700B8EEC6 /* HomeScreenViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,7 +304,8 @@
 				C080CE272700A255003D0C11 /* TrackInfoSection.swift */,
 				C080CE292700A279003D0C11 /* SpotifySlider.swift */,
 			);
-			path = TrackDetailViews;
+			name = TrackDetailViews;
+			path = TrackDetailViews/TrackDetailViews;
 			sourceTree = "<group>";
 		};
 		C081873026EF725700AB19E9 /* Service */ = {
@@ -337,6 +368,7 @@
 		C084E04C2703404100C6AAAE /* GeneralSubviews */ = {
 			isa = PBXGroup;
 			children = (
+				C089874E27000C2F00F9BF70 /* MediaDescription.swift */,
 				C084E04A27033FB000C6AAAE /* LikeAndThreeDotsIcons.swift */,
 				C089875A27000CE600F9BF70 /* BackButton.swift */,
 				C016E60C270372CF00EFF870 /* MediaTitle.swift */,
@@ -351,6 +383,7 @@
 			isa = PBXGroup;
 			children = (
 				C084E04C2703404100C6AAAE /* GeneralSubviews */,
+				C016E60E270385B200EFF870 /* ShowDetailScreen */,
 				C084E04027033FAC00C6AAAE /* AlbumDetailScreen */,
 				C089874627000B6700F9BF70 /* PlaylistDetailScreen */,
 				C089874727000B7100F9BF70 /* TrackDetailScreen */,
@@ -472,7 +505,8 @@
 		C089874727000B7100F9BF70 /* TrackDetailScreen */ = {
 			isa = PBXGroup;
 			children = (
-				C089874927000BBF00F9BF70 /* TrackDetailViews */,
+				C089875C27000DE800F9BF70 /* TrackDetailScreen.swift */,
+				C080CE1C2700A125003D0C11 /* TrackDetailViews */,
 			);
 			path = TrackDetailScreen;
 			sourceTree = "<group>";
@@ -481,20 +515,10 @@
 			isa = PBXGroup;
 			children = (
 				C084E04B27033FB000C6AAAE /* PlaylistAuthor.swift */,
-				C089874E27000C2F00F9BF70 /* MediaDescription.swift */,
 				C084E0502703423B00C6AAAE /* MediaLikesAndDuration.swift */,
 				C089875827000CC000F9BF70 /* MediasScrollView.swift */,
 			);
 			path = PlaylistDetailViews;
-			sourceTree = "<group>";
-		};
-		C089874927000BBF00F9BF70 /* TrackDetailViews */ = {
-			isa = PBXGroup;
-			children = (
-				C089875C27000DE800F9BF70 /* TrackDetailScreen.swift */,
-				C080CE1C2700A125003D0C11 /* TrackDetailViews */,
-			);
-			path = TrackDetailViews;
 			sourceTree = "<group>";
 		};
 		C09CF2122702499800EB9DA3 /* HomePage */ = {
@@ -890,16 +914,19 @@
 				C089875B27000CE600F9BF70 /* BackButton.swift in Sources */,
 				C089874D27000C1900F9BF70 /* BigMediaCover.swift in Sources */,
 				C080CE202700A172003D0C11 /* SmallTopSection.swift in Sources */,
+				C016E61527038BEF00EFF870 /* SmallMediaCover.swift in Sources */,
 				C089135F26F9816F00CA1A69 /* APIFetchingDataSearchPage.swift in Sources */,
 				C080CE262700A22F003D0C11 /* PlayerControllerSection.swift in Sources */,
 				C0883A0926E2703D00E1ADFA /* SearchSection.swift in Sources */,
 				C081873526EF97DF00AB19E9 /* AuthScreen.swift in Sources */,
 				C0883A0126E26F1500E1ADFA /* SmallSongCardsGrid.swift in Sources */,
 				C088F23A26DEE0F800C4BCA2 /* SmallSongCard.swift in Sources */,
+				C016E61727038FA500EFF870 /* FollowAndThreeDotsIcons.swift in Sources */,
 				C016E60D270372D000EFF870 /* MediaTitle.swift in Sources */,
 				C087873826FD481D0013924E /* UIImage+AverageColor.swift in Sources */,
 				C0C63C6026DD144E00532792 /* MainView.swift in Sources */,
 				C0883A1126E270CB00E1ADFA /* BrowseAllSection.swift in Sources */,
+				C016E612270388F600EFF870 /* ShowAuthor.swift in Sources */,
 				C087B0EB26E65FFA00A72A13 /* SpotifyModel.swift in Sources */,
 				C088F23E26DEE61B00C4BCA2 /* BigSongItem.swift in Sources */,
 				C06AB91426FA07B000F46356 /* Color+Random.swift in Sources */,
@@ -946,11 +973,13 @@
 				C09FD90126E049BE0069CEAE /* Image+ResizeToFit.swift in Sources */,
 				C081873D26F0168700AB19E9 /* AuthKey.swift in Sources */,
 				C0F8199126FE4E57000F5FEE /* ShowResponseType.swift in Sources */,
+				C016E6192703949500EFF870 /* ShowEpisodesScrollView.swift in Sources */,
 				C016E607270345CA00EFF870 /* AlbumTracksScrollView.swift in Sources */,
 				C0F8199326FE4E7D000F5FEE /* AlbumResponseType.swift in Sources */,
 				C087873226FCCCA70013924E /* PlaylistDetailScreen.swift in Sources */,
 				C016E6092703464100EFF870 /* AlbumInfo.swift in Sources */,
 				C09FD8FF26E03D6E0069CEAE /* BottomBar.swift in Sources */,
+				C016E610270385E300EFF870 /* ShowDetailScreen.swift in Sources */,
 				C084E04D2703409600C6AAAE /* PlaylistAuthor.swift in Sources */,
 				C084267E26F10BBD000ACAEE /* APIFetchingDataHomePage.swift in Sources */,
 				C089136226F986E600CA1A69 /* ColorfulCardPair.swift in Sources */,

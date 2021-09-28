@@ -33,6 +33,7 @@ class HomeViewModel: ObservableObject {
     case playlistDetail
     case trackDetail
     case albumDetail
+    case showDetail
     case stillToBeMade // TODO: Create the rest of the real detail screens
   }
   

@@ -23,6 +23,8 @@ struct HomeScreen: View {
       TrackDetailScreen(homeViewModel: homeViewModel)
     case .albumDetail:
       AlbumDetailScreen(homeViewModel: homeViewModel)
+    case .showDetail:
+      ShowDetailScreen(homeViewModel: homeViewModel)
     default:
       fatalError("Didn't support other media types yet")
     }

@@ -123,6 +123,7 @@ class APIFetchingDataHomePage: ObservableObject {
           let id = data.shows.items[itemIndex].id
 
           let description = data.shows.items[itemIndex].description
+          let explicit = data.shows.items[itemIndex].explicit
           let showHref = data.shows.items[itemIndex].href
           let numberOfEpisodes = data.shows.items[itemIndex].total_episodes
 
@@ -133,12 +134,10 @@ class APIFetchingDataHomePage: ObservableObject {
                                                    mediaType: .show,
                                                    id: id,
 
-                                                   // TODO: Put real data from api
-
-                                                   details: SpotifyModel.DetailTypes.shows(showDetails: SpotifyModel.ShowDetails(description: "",
-                                                                                                                                 explicit: false,
-                                                                                                                                 numberOfEpisodes: 0,
-                                                                                                                                 href: "")))
+                                                   details: SpotifyModel.DetailTypes.shows(showDetails: SpotifyModel.ShowDetails(description: description,
+                                                                                                                                 explicit: explicit,
+                                                                                                                                 numberOfEpisodes: numberOfEpisodes,
+                                                                                                                                 href: showHref)))
           podcastItems.append(podcastItem)
         }
         completionHandler(podcastItems)

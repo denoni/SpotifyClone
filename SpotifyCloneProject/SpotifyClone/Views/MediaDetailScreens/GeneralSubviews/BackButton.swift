@@ -22,7 +22,6 @@ struct BackButton: View {
       .onTapGesture {
         homeViewModel.goToNoneSubpage()
       }
-      Spacer()
     }
   }
 }

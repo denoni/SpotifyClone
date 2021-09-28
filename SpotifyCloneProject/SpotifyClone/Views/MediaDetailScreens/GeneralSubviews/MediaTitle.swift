@@ -11,8 +11,7 @@ struct MediaTitle: View {
   let mediaTitle: String
 
   var body: some View {
-    VStack(alignment: .leading,
-           spacing: 0) {
+    VStack(alignment: .leading) {
       Text(mediaTitle)
         .font(.avenir(.black, size: 26))
         .foregroundColor(.white)
