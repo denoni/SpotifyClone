@@ -64,7 +64,7 @@ class APIFetchingDataHomePage: ObservableObject {
           let artistItem = SpotifyModel.MediaItem(title: title,
                                                   previewURL: "",
                                                   imageURL: imageURL ?? "",
-                                                  author: title,
+                                                  authorName: [title],
                                                   mediaType: .artist,
                                                   id: id,
 
@@ -119,7 +119,7 @@ class APIFetchingDataHomePage: ObservableObject {
         for itemIndex in 0 ..< numberOfItems {
           let title = data.shows.items[itemIndex].name
           let imageURL = data.shows.items[itemIndex].images[0].url
-          let author = data.shows.items[itemIndex].publisher
+          let authorName = data.shows.items[itemIndex].publisher
           let id = data.shows.items[itemIndex].id
 
           let description = data.shows.items[itemIndex].description
@@ -129,7 +129,7 @@ class APIFetchingDataHomePage: ObservableObject {
           let podcastItem = SpotifyModel.MediaItem(title: title,
                                                    previewURL: "",
                                                    imageURL: imageURL,
-                                                   author: author,
+                                                   authorName: [authorName],
                                                    mediaType: .show,
                                                    id: id,
 
@@ -146,7 +146,7 @@ class APIFetchingDataHomePage: ObservableObject {
   }
 
 
-  // PLAYLIST
+  // ALBUM
 
   func getNewReleases(accessToken: String,
                       limit: Int = 10,
@@ -181,30 +181,38 @@ class APIFetchingDataHomePage: ObservableObject {
         for itemIndex in 0 ..< numberOfItems {
           let title = data.albums.items[itemIndex].name
           let imageURL = data.albums.items[itemIndex].images?[0].url
-          let author = data.albums.items[itemIndex].artists[0].name // TODO: Support multiple artists
+          let author = data.albums.items[itemIndex].artists
           let id = data.albums.items[itemIndex].id
+          var authorName = [String]()
 
           let albumHref = data.albums.items[itemIndex].href
           let numberOfTracks = data.albums.items[itemIndex].total_tracks
+          let releaseDate = data.albums.items[itemIndex].release_date
+
+          for artistIndex in data.albums.items[itemIndex].artists.indices {
+            authorName.append(data.albums.items[itemIndex].artists[artistIndex].name)
+          }
 
           let trackItem = SpotifyModel.MediaItem(title: title,
                                                  previewURL: "",
                                                  imageURL: imageURL ?? "",
+                                                 authorName: authorName,
                                                  author: author,
                                                  mediaType: .album,
                                                  id: id,
-
-                                                 // TODO: Put real data from api
-
-                                                 details: SpotifyModel.DetailTypes.album(albumDetails: SpotifyModel.AlbumDetails(name: "",
-                                                                                                                                 numberOfTracks: 0,
-                                                                                                                                 href: "")))
+                                                 details: SpotifyModel.DetailTypes.album(albumDetails: SpotifyModel.AlbumDetails(name: title,
+                                                                                                                                 numberOfTracks: numberOfTracks,
+                                                                                                                                 href: albumHref,
+                                                                                                                                 releaseDate: releaseDate)))
           trackItems.append(trackItem)
         }
         completionHandler(trackItems)
       }
 
   }
+
+
+  // PLAYLIST
 
   func getFeaturedPlaylists(accessToken: String,
                             limit: Int = 20,
@@ -248,7 +256,7 @@ class APIFetchingDataHomePage: ObservableObject {
           let playlistItem = SpotifyModel.MediaItem(title: title,
                                                     previewURL: sectionTitle,
                                                     imageURL: imageURL,
-                                                    author: mediaOwner.display_name,
+                                                    authorName: [mediaOwner.display_name],
                                                     mediaType: .playlist,
                                                     id: id,
                                                     details: SpotifyModel.DetailTypes.playlists(
@@ -310,7 +318,7 @@ class APIFetchingDataHomePage: ObservableObject {
           let playlistItem = SpotifyModel.MediaItem(title: title,
                                                     previewURL: "",
                                                     imageURL: imageURL,
-                                                    author: mediaOwner.display_name,
+                                                    authorName: [mediaOwner.display_name],
                                                     mediaType: .playlist,
                                                     id: id,
                                                     details: SpotifyModel.DetailTypes.playlists(

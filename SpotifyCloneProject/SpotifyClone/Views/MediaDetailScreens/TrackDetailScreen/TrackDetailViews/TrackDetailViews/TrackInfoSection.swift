@@ -9,22 +9,32 @@ import SwiftUI
 
 struct TrackInfoSection: View {
   var songName: String
-  var artistName: String
+  var author: [Artist]
   var isLiked: Bool
   var isExplicit: Bool
+
+  var authorNames: String {
+    var authorsToReturn = ""
+    for authorIndex in author.indices {
+      authorsToReturn.append("\(author[authorIndex].name), ")
+    }
+    // Remove the ", " from the last artist name.
+    authorsToReturn.removeLast()
+    authorsToReturn.removeLast()
+    return authorsToReturn
+  }
 
   var body: some View {
     Group {
       HStack {
         VStack(alignment: .leading,
                spacing: 0) {
-          Text(songName)
-            .font(.avenir(.black, size: 26))
-            .foregroundColor(.white)
+          MediaTitle(mediaTitle: songName)
           HStack(spacing: 0) {
             ExplicitIcon(isExplicit: isExplicit)
               .padding(.trailing, isExplicit ? 5 : 0)
-            Text(artistName)
+            // TODO: Open artist's profile onClick
+            Text(authorNames)
               .font(.avenir(.medium, size: 18))
               .foregroundColor(.white)
               .tracking(0.5)

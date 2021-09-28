@@ -29,7 +29,8 @@ struct SpotifyModel {
     var title: String
     var previewURL: String
     var imageURL: String
-    var author: String
+    var authorName: [String]
+    var author: [Artist]?
     var mediaType: MediaTypes
     var id: String
     var details: DetailTypes
@@ -99,9 +100,8 @@ struct SpotifyModel {
     var name: String
     var numberOfTracks: Int
     var href: String
+    var releaseDate: String // yyyy-MM-dd
   }
-
-
 
   // MARK: - Sub structs
   struct PlaylistTracks {

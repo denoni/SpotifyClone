@@ -39,7 +39,7 @@ struct RecommendedArtistScrollView: View {
           Text("FOR THE FANS OF").font(.avenir(.book, size: 14))
             .opacity(0.7)
             .frame(maxWidth: .infinity, alignment: .leading)
-          Text(getArtistInfo().author)
+          Text(getArtistInfo().authorName.first!)
             .spotifyTitle()
             .padding(.trailing, 40)
         }.frame(maxWidth: .infinity, alignment: .topLeading)

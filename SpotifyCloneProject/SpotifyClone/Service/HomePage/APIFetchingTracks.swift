@@ -64,8 +64,9 @@ class APIFetchingTracks {
         let title = data.tracks[trackIndex].name
         let previewURL = data.tracks[trackIndex].preview_url
         let imageURL = data.tracks[trackIndex].album.images?[0].url
-        let author = data.tracks[trackIndex].artists[0].name
+        let author = data.tracks[trackIndex].artists
         let id = data.tracks[trackIndex].id
+        var authorName = [String]()
 
         let trackHref = data.tracks[trackIndex].href
         let popularity = data.tracks[trackIndex].popularity
@@ -74,11 +75,17 @@ class APIFetchingTracks {
         let albumName = data.tracks[trackIndex].album.name
         let albumHref = data.tracks[trackIndex].album.href
         let numberOfTracks = data.tracks[trackIndex].album.total_tracks
+        let releaseDate = data.tracks[trackIndex].album.release_date
+
+        for artistIndex in data.tracks[trackIndex].artists.indices {
+          authorName.append(data.tracks[trackIndex].artists[artistIndex].name)
+        }
 
         let trackItem = SpotifyModel
           .MediaItem(title: title,
                      previewURL: previewURL ?? "",
                      imageURL: imageURL ?? "",
+                     authorName: authorName,
                      author: author,
                      mediaType: .track,
                      id: id,
@@ -89,7 +96,8 @@ class APIFetchingTracks {
                                                               href: trackHref,
                                                               album: SpotifyModel.AlbumDetails(name: albumName,
                                                                                                numberOfTracks: numberOfTracks,
-                                                                                               href: albumHref))))
+                                                                                               href: albumHref,
+                                                                                               releaseDate: releaseDate))))
         trackItems.append(trackItem)
       }
       completionHandler(trackItems)

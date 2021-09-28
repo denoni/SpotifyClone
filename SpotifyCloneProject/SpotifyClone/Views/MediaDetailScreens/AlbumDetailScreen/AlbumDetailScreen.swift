@@ -1,13 +1,13 @@
 //
-//  PlaylistDetailScreen.swift
+//  AlbumDetailScreen.swift
 //  SpotifyClone
 //
-//  Created by Gabriel on 9/23/21.
+//  Created by Gabriel on 9/28/21.
 //
 
 import SwiftUI
 
-struct PlaylistDetailScreen: View {
+struct AlbumDetailScreen: View {
   var homeViewModel: HomeViewModel
 
   var body: some View {
@@ -18,34 +18,31 @@ struct PlaylistDetailScreen: View {
           VStack {
             TopGradient(mediaDetailViewModel: homeViewModel.mediaDetailViewModel,
                         height: geometry.size.height / 1.8)
-            PlaylistDetailContent(homeViewModel: homeViewModel)
+            AlbumDetailContent(homeViewModel: homeViewModel)
               .padding(.top, -geometry.size.height / 1.8)
               .padding(.bottom, 180)
           }
         }
         .disabledBouncing()
-
       }.ignoresSafeArea()
     }
   }
 }
 
-
-
-struct PlaylistDetailContent: View {
+struct AlbumDetailContent: View {
   var homeViewModel: HomeViewModel
-  var details: SpotifyModel.PlaylistDetails
+  var details: SpotifyModel.AlbumDetails
 
   init(homeViewModel: HomeViewModel) {
     self.homeViewModel = homeViewModel
 
     let detailsTypes = homeViewModel.mediaDetailViewModel.media!.getDetails()
     switch detailsTypes {
-    case .playlists(let playlistDetails):
-      details = SpotifyModel.PlaylistDetails(description: playlistDetails.description,
-                                             playlistTracks: playlistDetails.playlistTracks,
-                                             owner: playlistDetails.owner,
-                                             href: playlistDetails.href)
+    case .album(let albumDetails):
+      details = SpotifyModel.AlbumDetails(name: albumDetails.name,
+                                          numberOfTracks: albumDetails.numberOfTracks,
+                                          href: albumDetails.href,
+                                          releaseDate: albumDetails.releaseDate)
     default:
       fatalError("Wrong type for PlaylistDetailScreen")
     }
@@ -58,20 +55,18 @@ struct PlaylistDetailContent: View {
         BigMediaCover(imageURL: homeViewModel.mediaDetailViewModel.media!.imageURL)
       }
       .padding(.top, 25)
-
-      MediaTitle(mediaTitle: homeViewModel.mediaDetailViewModel.media!.title)
-      MediaDescription(description: details.description)
-      PlaylistAuthor(mediaOwner: details.owner)
+      MediaTitle(mediaTitle: details.name)
+      AlbumAuthor(authors: homeViewModel.mediaDetailViewModel.media!.author!)
 
       HStack {
         VStack(alignment: .leading) {
-          MediaLikesAndDuration(playlistTracks: details.playlistTracks)
+          AlbumInfo(releaseDate: details.releaseDate)
           LikeAndThreeDotsIcons()
         }
         BigPlayButton()
       }.frame(height: 65)
-
-      MediasScrollView()
+      
+      AlbumTracksScrollView()
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .padding(25)
@@ -80,7 +75,7 @@ struct PlaylistDetailContent: View {
 
 
 
-struct MediaDetailScreen_Previews: PreviewProvider {
+struct AlbumDetailScreen_Previews: PreviewProvider {
   static var mainViewModel = MainViewModel()
 
   static var previews: some View {

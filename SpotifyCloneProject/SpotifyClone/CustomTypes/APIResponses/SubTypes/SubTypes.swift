@@ -32,6 +32,7 @@ struct Album: Decodable {
   
   var href: String
   var total_tracks: Int
+  var release_date: String // yyyy-MM-dd
 }
 
 struct Show: Decodable {

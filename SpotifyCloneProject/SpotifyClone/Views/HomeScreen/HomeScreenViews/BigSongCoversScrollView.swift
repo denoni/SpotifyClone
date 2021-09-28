@@ -21,6 +21,8 @@ struct BigSongCoversScrollView: View {
       return HomeViewModel.HomeSubpage.playlistDetail
     case .track:
       return HomeViewModel.HomeSubpage.trackDetail
+    case .album:
+      return HomeViewModel.HomeSubpage.albumDetail
     default:
       fatalError("Didn't implement other media types yet")
     }

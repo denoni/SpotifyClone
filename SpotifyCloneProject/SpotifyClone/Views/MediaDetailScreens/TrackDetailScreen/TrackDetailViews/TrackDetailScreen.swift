@@ -45,7 +45,8 @@ struct TrackDetailContent: View {
                                           href: trackDetails.href,
                                           album: SpotifyModel.AlbumDetails(name: trackDetails.album!.name,
                                                                            numberOfTracks: trackDetails.album!.numberOfTracks,
-                                                                           href: trackDetails.album!.href))
+                                                                           href: trackDetails.album!.href,
+                                                                           releaseDate: trackDetails.album!.releaseDate))
     default:
       fatalError("Wrong type for TrackDetailScreen")
     }
@@ -57,7 +58,7 @@ struct TrackDetailContent: View {
       Spacer()
       BigTrackImage(imageURL: homeViewModel.mediaDetailViewModel.media!.imageURL)
       TrackInfoSection(songName: homeViewModel.mediaDetailViewModel.media!.title,
-                       artistName: homeViewModel.mediaDetailViewModel.media!.author,
+                       author: homeViewModel.mediaDetailViewModel.media!.author!,
                        isLiked: true, // TODO: Use real data
                        isExplicit: details.explicit)
       SpotifySlider(durationInMs: details.durationInMs)
