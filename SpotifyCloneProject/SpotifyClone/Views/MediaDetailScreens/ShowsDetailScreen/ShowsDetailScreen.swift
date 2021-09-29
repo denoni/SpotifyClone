@@ -93,13 +93,12 @@ struct ShowsDetailContent: View {
 
 
 
-
 struct ShowsDetailScreen_Previews: PreviewProvider {
   static var mainViewModel = MainViewModel()
 
   static var previews: some View {
     ZStack {
-      PlaylistDetailScreen(homeViewModel: HomeViewModel(mainViewModel: mainViewModel))
+      ShowsDetailScreen(homeViewModel: HomeViewModel(mainViewModel: mainViewModel))
       VStack {
         Spacer()
         BottomBar(mainViewModel: mainViewModel, showMediaPlayer: true)

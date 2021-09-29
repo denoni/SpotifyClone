@@ -35,7 +35,7 @@ class HomeViewModel: ObservableObject {
     case trackDetail
     case albumDetail
     case showDetail
-    case stillToBeMade // TODO: Create the rest of the real detail screens
+    case artistDetail
   }
   
   init(mainViewModel: MainViewModel) {

@@ -35,6 +35,7 @@ struct SmallSongItem: View {
         .frame(height: coverImageWidth)
       Text(title).font(.avenir(.heavy, size: 16))
         .frame(maxWidth: coverTextWidth, alignment: .leading)
+        .lineLimit(2)
       Spacer()
     }.frame(height: smallSongItemHeight)
   }

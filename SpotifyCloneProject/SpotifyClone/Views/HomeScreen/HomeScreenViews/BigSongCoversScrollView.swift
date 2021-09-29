@@ -26,8 +26,8 @@ struct BigSongCoversScrollView: View {
       return HomeViewModel.HomeSubpage.albumDetail
     case .show:
       return HomeViewModel.HomeSubpage.showDetail
-    default:
-      fatalError("Didn't implement other media types yet")
+    case .artist:
+      return HomeViewModel.HomeSubpage.artistDetail
     }
   }
 

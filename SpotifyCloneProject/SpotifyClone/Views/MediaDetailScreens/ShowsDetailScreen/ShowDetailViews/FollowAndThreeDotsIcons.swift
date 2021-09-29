@@ -10,6 +10,7 @@ import SwiftUI
 // TODO: Make the buttons work
 
 struct FollowAndThreeDotsIcons: View {
+  var threeDotsPlacedVertically = false
   var body: some View {
     HStack(spacing: 30) {
       RoundedRectangle(cornerRadius: 5)
@@ -27,6 +28,7 @@ struct FollowAndThreeDotsIcons: View {
       Image("three-dots")
         .resizable()
         .scaledToFit()
+        .rotationEffect(threeDotsPlacedVertically ? Angle.degrees(90) : .zero)
       Spacer()
     }
     .frame(height: 25)

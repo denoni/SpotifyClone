@@ -74,7 +74,7 @@ struct PlaylistDetailContent: View {
         BigPlayButton()
       }.frame(height: 65)
 
-      MediasScrollView()
+      PlaylistsScrollView()
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .padding(25)
