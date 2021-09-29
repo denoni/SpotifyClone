@@ -179,7 +179,7 @@ class HomeViewModel: ObservableObject {
       
       // MARK: User Favorite Artists
       case .userFavoriteArtists:
-        api.getUserFavoriteArtists(accessToken: accessToken) { artists in
+        api.getArtist(using: .userFavoriteArtists, with: accessToken) { artists in
           trimAndCommunicateResult(section: section, medias: artists)
         }
         
@@ -245,7 +245,7 @@ class HomeViewModel: ObservableObject {
       case .artistTopTracks:
         var artistID = ""
         // Get the user's most favorite artist
-        api.getUserFavoriteArtists(accessToken: accessToken) { artists in
+        api.getArtist(using: .userFavoriteArtists, with: accessToken) { artists in
           let userMostFavoriteArtist = artists[0]
           artistID = userMostFavoriteArtist.id
           mediaCollection[section]!.insert(artists[0], at: 0)
