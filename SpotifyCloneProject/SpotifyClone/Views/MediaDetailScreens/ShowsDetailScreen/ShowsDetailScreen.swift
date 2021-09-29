@@ -1,15 +1,13 @@
 //
-//  ShowDetailScreen.swift
+//  ShowsDetailScreen.swift
 //  SpotifyClone
 //
 //  Created by Gabriel on 9/28/21.
 //
 
-// TODO: Check and show if it`s explicit
-
 import SwiftUI
 
-struct ShowDetailScreen: View {
+struct ShowsDetailScreen: View {
   var homeViewModel: HomeViewModel
 
   var body: some View {
@@ -20,7 +18,7 @@ struct ShowDetailScreen: View {
           VStack {
             TopGradient(mediaDetailViewModel: homeViewModel.mediaDetailViewModel,
                         height: geometry.size.height / 1.8)
-            ShowDetailContent(homeViewModel: homeViewModel)
+            ShowsDetailContent(homeViewModel: homeViewModel)
               .padding(.top, -geometry.size.height / 1.8)
               .padding(.bottom, 180)
           }
@@ -31,7 +29,7 @@ struct ShowDetailScreen: View {
   }
 }
 
-struct ShowDetailContent: View {
+struct ShowsDetailContent: View {
   var homeViewModel: HomeViewModel
   var details: SpotifyModel.ShowDetails
 
@@ -62,10 +60,22 @@ struct ShowDetailContent: View {
             .padding(.bottom, 5)
           ShowAuthor(authorName: homeViewModel.mediaDetailViewModel.media!.authorName.first!)
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
+        Spacer()
       }
-      .padding(.bottom, 10)
+      .padding(.bottom, 5)
 
       MediaDescription(description: details.description)
+
+      HStack(spacing: 0) {
+        ExplicitIcon(isExplicit: details.explicit)
+          .padding(.trailing, details.explicit ? 5 : 0)
+          .scaleEffect(0.8)
+        Text("EPISODES: \(details.numberOfEpisodes)")
+          .font(.avenir(.medium, size: 14))
+        Spacer()
+      }
+      .opacity(0.6)
+      .frame(height: 25)
 
       HStack {
         VStack(alignment: .leading) {
@@ -74,7 +84,6 @@ struct ShowDetailContent: View {
         }
         BigPlayButton()
       }.frame(height: 65)
-
       ShowEpisodesScrollView()
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -85,7 +94,7 @@ struct ShowDetailContent: View {
 
 
 
-struct ShowDetailScreen_Previews: PreviewProvider {
+struct ShowsDetailScreen_Previews: PreviewProvider {
   static var mainViewModel = MainViewModel()
 
   static var previews: some View {

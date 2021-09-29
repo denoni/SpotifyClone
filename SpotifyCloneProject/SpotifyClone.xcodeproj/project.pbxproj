@@ -14,7 +14,7 @@
 		C016E6092703464100EFF870 /* AlbumInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E6082703464100EFF870 /* AlbumInfo.swift */; };
 		C016E60B2703623000EFF870 /* AlbumAuthor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E60A2703623000EFF870 /* AlbumAuthor.swift */; };
 		C016E60D270372D000EFF870 /* MediaTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E60C270372CF00EFF870 /* MediaTitle.swift */; };
-		C016E610270385E300EFF870 /* ShowDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E60F270385E300EFF870 /* ShowDetailScreen.swift */; };
+		C016E610270385E300EFF870 /* ShowsDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E60F270385E300EFF870 /* ShowsDetailScreen.swift */; };
 		C016E612270388F600EFF870 /* ShowAuthor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E611270388F600EFF870 /* ShowAuthor.swift */; };
 		C016E61527038BEF00EFF870 /* SmallMediaCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E61427038BEF00EFF870 /* SmallMediaCover.swift */; };
 		C016E61727038FA500EFF870 /* FollowAndThreeDotsIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E61627038FA500EFF870 /* FollowAndThreeDotsIcons.swift */; };
@@ -129,7 +129,7 @@
 		C016E6082703464100EFF870 /* AlbumInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumInfo.swift; sourceTree = "<group>"; };
 		C016E60A2703623000EFF870 /* AlbumAuthor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumAuthor.swift; sourceTree = "<group>"; };
 		C016E60C270372CF00EFF870 /* MediaTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTitle.swift; sourceTree = "<group>"; };
-		C016E60F270385E300EFF870 /* ShowDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailScreen.swift; sourceTree = "<group>"; };
+		C016E60F270385E300EFF870 /* ShowsDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowsDetailScreen.swift; sourceTree = "<group>"; };
 		C016E611270388F600EFF870 /* ShowAuthor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAuthor.swift; sourceTree = "<group>"; };
 		C016E61427038BEF00EFF870 /* SmallMediaCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallMediaCover.swift; sourceTree = "<group>"; };
 		C016E61627038FA500EFF870 /* FollowAndThreeDotsIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowAndThreeDotsIcons.swift; sourceTree = "<group>"; };
@@ -262,13 +262,13 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		C016E60E270385B200EFF870 /* ShowDetailScreen */ = {
+		C016E60E270385B200EFF870 /* ShowsDetailScreen */ = {
 			isa = PBXGroup;
 			children = (
-				C016E60F270385E300EFF870 /* ShowDetailScreen.swift */,
+				C016E60F270385E300EFF870 /* ShowsDetailScreen.swift */,
 				C016E613270388FA00EFF870 /* ShowDetailViews */,
 			);
-			path = ShowDetailScreen;
+			path = ShowsDetailScreen;
 			sourceTree = "<group>";
 		};
 		C016E613270388FA00EFF870 /* ShowDetailViews */ = {
@@ -383,7 +383,7 @@
 			isa = PBXGroup;
 			children = (
 				C084E04C2703404100C6AAAE /* GeneralSubviews */,
-				C016E60E270385B200EFF870 /* ShowDetailScreen */,
+				C016E60E270385B200EFF870 /* ShowsDetailScreen */,
 				C084E04027033FAC00C6AAAE /* AlbumDetailScreen */,
 				C089874627000B6700F9BF70 /* PlaylistDetailScreen */,
 				C089874727000B7100F9BF70 /* TrackDetailScreen */,
@@ -979,7 +979,7 @@
 				C087873226FCCCA70013924E /* PlaylistDetailScreen.swift in Sources */,
 				C016E6092703464100EFF870 /* AlbumInfo.swift in Sources */,
 				C09FD8FF26E03D6E0069CEAE /* BottomBar.swift in Sources */,
-				C016E610270385E300EFF870 /* ShowDetailScreen.swift in Sources */,
+				C016E610270385E300EFF870 /* ShowsDetailScreen.swift in Sources */,
 				C084E04D2703409600C6AAAE /* PlaylistAuthor.swift in Sources */,
 				C084267E26F10BBD000ACAEE /* APIFetchingDataHomePage.swift in Sources */,
 				C089136226F986E600CA1A69 /* ColorfulCardPair.swift in Sources */,
