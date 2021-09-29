@@ -251,9 +251,8 @@ class HomeViewModel: ObservableObject {
           mediaCollection[section]!.insert(artists[0], at: 0)
           
           // Add the artist's top songs
-          api.getTrack(using: .topTracksFromArtist,
-                       with: accessToken,
-                       ifArtistsUseId: artistID) { tracks in
+          api.getTrack(using: .topTracksFromArtist(artistID: artistID),
+                       with: accessToken) { tracks in
             trimAndCommunicateResult(section: section, medias: tracks, loadMoreEnabled: true)
           }
         }

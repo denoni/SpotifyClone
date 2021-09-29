@@ -13,12 +13,11 @@ class APIFetchingTracks {
   enum TrackEndpointInAPI {
     case userRecentlyPlayed
     case userFavoriteTracks
-    case topTracksFromArtist
+    case topTracksFromArtist(artistID: String)
   }
 
   func getTrack(using endPoint: TrackEndpointInAPI,
                 with accessToken: String,
-                ifArtistsUseId artistID: String = "",
                 limit: Int = 6,
                 offset: Int = 0,
                 completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
@@ -30,7 +29,7 @@ class APIFetchingTracks {
       baseUrl = "https://api.spotify.com/v1/me/player/recently-played?limit=20"
     case .userFavoriteTracks:
       baseUrl = "https://api.spotify.com/v1/me/top/tracks?limit=\(limit)&offset=\(offset)"
-    case .topTracksFromArtist:
+    case .topTracksFromArtist(let artistID):
       baseUrl = "https://api.spotify.com/v1/artists/\(artistID)/top-tracks?market=US"
     }
 

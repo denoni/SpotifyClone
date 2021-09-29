@@ -22,13 +22,12 @@ class APIFetchingDataHomePage: ObservableObject {
   // MARK: - TRACKS
   func getTrack(using endPoint: APIFetchingTracks.TrackEndpointInAPI,
                 with accessToken: String,
-                ifArtistsUseId artistID: String = "",
                 limit: Int = 6,
                 offset: Int = 0,
                 completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
     
-    trackAPI.getTrack(using: endPoint, with: accessToken, ifArtistsUseId: artistID,
-                      limit: limit, offset: offset, completionHandler: completionHandler)
+    trackAPI.getTrack(using: endPoint, with: accessToken, limit: limit,
+                      offset: offset, completionHandler: completionHandler)
   }
 
   // MARK: - SHOWS
