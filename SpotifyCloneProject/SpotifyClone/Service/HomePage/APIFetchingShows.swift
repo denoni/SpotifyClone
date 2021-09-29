@@ -28,8 +28,6 @@ class APIFetchingShows {
       let type = "show"
       let market = "US"
       baseUrl = "https://api.spotify.com/v1/search?q=\(termSearch)&type=\(type)&market=\(market)&limit=\(limit)&offset=\(offset)"
-    default:
-      fatalError("API EndPoint `case` was not implemented")
     }
 
 

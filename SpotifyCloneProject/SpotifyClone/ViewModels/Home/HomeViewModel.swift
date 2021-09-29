@@ -185,11 +185,11 @@ class HomeViewModel: ObservableObject {
         
       // MARK: New Releases
       case .newReleases:
-        api.getNewReleases(accessToken: accessToken,
-                           limit: numberOfItemsInEachLoad,
-                           offset: currentNumberOfLoadedItems) { albums in
+        api.getAlbum(using: .newReleases,
+                     with: accessToken,
+                     limit: numberOfItemsInEachLoad,
+                     offset: currentNumberOfLoadedItems) { albums in
           trimAndCommunicateResult(section: section, medias: albums, loadMoreEnabled: true)
-          
         }
         
       // MARK: Top Podcasts
@@ -203,16 +203,17 @@ class HomeViewModel: ObservableObject {
         
       // MARK: Featured Playlists
       case .featuredPlaylists:
-        api.getFeaturedPlaylists(accessToken: accessToken) { playlists in
+        api.getPlaylist(using: .featuredPlaylists, with: accessToken, limit: 20) { playlists in
           trimAndCommunicateResult(section: section, medias: playlists)
         }
         
       // MARK: Playlist This is X
       case .playlistThisIsX:
         let keyWord = "this is"
-        api.getPlaylistsWith(keyWord: keyWord, accessToken: accessToken,
-                             limit: numberOfItemsInEachLoad,
-                             offset: currentNumberOfLoadedItems) { playlists in
+        api.getPlaylist(using: .playlistWithKeyword(keyWord: keyWord),
+                        with: accessToken,
+                        limit: numberOfItemsInEachLoad,
+                        offset: currentNumberOfLoadedItems) { playlists in
           trimAndCommunicateResult(section: section, medias: playlists, loadMoreEnabled: true)
         }
         
@@ -236,7 +237,7 @@ class HomeViewModel: ObservableObject {
           fatalError("Year not defined or the section is not a year.")
         }
         
-        api.getPlaylistsWith(keyWord: keyWord, accessToken: accessToken) { playlists in
+        api.getPlaylist(using: .playlistWithKeyword(keyWord: keyWord), with: accessToken) { playlists in
           trimAndCommunicateResult(section: section, medias: playlists)
         }
         

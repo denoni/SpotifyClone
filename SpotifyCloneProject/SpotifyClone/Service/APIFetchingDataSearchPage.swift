@@ -25,7 +25,7 @@ class APIFetchingDataSearchPage: ObservableObject {
 
     AF.request(urlRequest)
       .validate()
-      .responseDecodable(of: FeaturedPlaylistsResponse.self) { response in
+      .responseDecodable(of: PlaylistResponse.self) { response in
         guard let data = response.value else {
           fatalError("Error receiving playlists from API.")
         }
@@ -44,7 +44,10 @@ class APIFetchingDataSearchPage: ObservableObject {
           let imageURL = data.playlists.items[index].images[0].url
           let id = data.playlists.items[index].id
 
-          let playlistItem = SpotifyModel.PlaylistItem(sectionTitle: sectionTitle, name: name, imageURL: imageURL, id: id)
+          let playlistItem = SpotifyModel.PlaylistItem(sectionTitle: sectionTitle ?? "Playlist",
+                                                       name: name,
+                                                       imageURL: imageURL,
+                                                       id: id)
           playlists.append(playlistItem)
         }
         completionHandler(playlists)

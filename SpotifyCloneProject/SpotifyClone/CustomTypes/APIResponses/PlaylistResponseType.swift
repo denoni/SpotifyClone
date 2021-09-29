@@ -15,11 +15,7 @@ import Foundation
 
 
 struct PlaylistResponse: Decodable {
-  var playlists: PlaylistItems
-}
-
-struct FeaturedPlaylistsResponse: Decodable {
-  var message: String
+  var message: String?
   var playlists: PlaylistItems
 }
 
