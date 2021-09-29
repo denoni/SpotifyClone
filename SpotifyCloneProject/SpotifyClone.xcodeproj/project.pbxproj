@@ -38,7 +38,7 @@
 		C081873926EFBABF00AB19E9 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081873826EFBABF00AB19E9 /* AuthViewModel.swift */; };
 		C081873B26EFC72B00AB19E9 /* AuthAuxiliaryViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081873A26EFC72B00AB19E9 /* AuthAuxiliaryViews.swift */; };
 		C081873D26F0168700AB19E9 /* AuthKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081873C26F0168700AB19E9 /* AuthKey.swift */; };
-		C084267E26F10BBD000ACAEE /* APIFetchingDataHomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084267D26F10BBD000ACAEE /* APIFetchingDataHomePage.swift */; };
+		C084267E26F10BBD000ACAEE /* HomePageAPIDispatches.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084267D26F10BBD000ACAEE /* HomePageAPIDispatches.swift */; };
 		C084268026F10DC8000ACAEE /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084267F26F10DC8000ACAEE /* AuthCoordinator.swift */; };
 		C084268426F11CF7000ACAEE /* YourSensitiveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084268326F11CF7000ACAEE /* YourSensitiveData.swift */; };
 		C084268626F14A7E000ACAEE /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084268526F14A7E000ACAEE /* RemoteImage.swift */; };
@@ -157,7 +157,7 @@
 		C081873826EFBABF00AB19E9 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		C081873A26EFC72B00AB19E9 /* AuthAuxiliaryViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAuxiliaryViews.swift; sourceTree = "<group>"; };
 		C081873C26F0168700AB19E9 /* AuthKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthKey.swift; sourceTree = "<group>"; };
-		C084267D26F10BBD000ACAEE /* APIFetchingDataHomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFetchingDataHomePage.swift; sourceTree = "<group>"; };
+		C084267D26F10BBD000ACAEE /* HomePageAPIDispatches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageAPIDispatches.swift; sourceTree = "<group>"; };
 		C084267F26F10DC8000ACAEE /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		C084268326F11CF7000ACAEE /* YourSensitiveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourSensitiveData.swift; sourceTree = "<group>"; };
 		C084268526F14A7E000ACAEE /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
@@ -544,7 +544,7 @@
 		C09CF2122702499800EB9DA3 /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
-				C084267D26F10BBD000ACAEE /* APIFetchingDataHomePage.swift */,
+				C084267D26F10BBD000ACAEE /* HomePageAPIDispatches.swift */,
 				C095529B2704BA7F000499B3 /* HomeAPICalls */,
 			);
 			path = HomePage;
@@ -1004,7 +1004,7 @@
 				C09FD8FF26E03D6E0069CEAE /* BottomBar.swift in Sources */,
 				C016E610270385E300EFF870 /* ShowsDetailScreen.swift in Sources */,
 				C084E04D2703409600C6AAAE /* PlaylistAuthor.swift in Sources */,
-				C084267E26F10BBD000ACAEE /* APIFetchingDataHomePage.swift in Sources */,
+				C084267E26F10BBD000ACAEE /* HomePageAPIDispatches.swift in Sources */,
 				C089136226F986E600CA1A69 /* ColorfulCardPair.swift in Sources */,
 				C077D4A526F3A45400EF6ADA /* AuthScope.swift in Sources */,
 				C084268626F14A7E000ACAEE /* RemoteImage.swift in Sources */,

@@ -17,7 +17,7 @@
 import SwiftUI
 
 class HomeViewModel: ObservableObject {
-  var api = APIFetchingDataHomePage()
+  var api = HomePageAPIDispatches()
   @Published var mainViewModel: MainViewModel
   
   @Published var isLoading = [Section:Bool]()
