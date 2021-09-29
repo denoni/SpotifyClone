@@ -194,9 +194,10 @@ class HomeViewModel: ObservableObject {
         
       // MARK: Top Podcasts
       case .topPodcasts:
-        api.getTopPodcasts(accessToken: accessToken,
-                           limit: numberOfItemsInEachLoad,
-                           offset: currentNumberOfLoadedItems) { podcasts in
+        api.getShow(using: .topPodcasts,
+                    with: accessToken,
+                    limit: numberOfItemsInEachLoad,
+                    offset: currentNumberOfLoadedItems) { podcasts in
           trimAndCommunicateResult(section: section, medias: podcasts, loadMoreEnabled: true)
         }
         
