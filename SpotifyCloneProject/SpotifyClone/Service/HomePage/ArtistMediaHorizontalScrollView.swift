@@ -27,6 +27,7 @@ struct ArtistMediaHorizontalScrollView: View {
     VStack(alignment: .center, spacing: spacingSmallItems) {
       Text(sectionTitle)
         .spotifyTitle()
+        .lineLimit(1)
       ScrollView(.horizontal, showsIndicators: false) {
         LazyHStack(alignment: .top, spacing: spacingBigItems) {
           ForEach(0 ..< 10) { index in

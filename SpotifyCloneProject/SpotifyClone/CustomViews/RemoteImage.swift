@@ -29,6 +29,7 @@ struct RemoteImage: View {
     } else {
       Image(uiImage: remoteImageModel.image!)
         .resizable()
+        .scaledToFill()
     }
   }
 }

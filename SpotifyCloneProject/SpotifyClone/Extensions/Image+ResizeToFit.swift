@@ -13,6 +13,6 @@ extension Image {
   func resizeToFit() -> some View {
     self
       .resizable()
-      .aspectRatio(1/1, contentMode:.fit)
+      .scaledToFit()
   }
 }
