@@ -51,7 +51,10 @@ struct AlbumDetailContent: View {
   var body: some View {
     VStack(alignment: .leading, spacing: 15) {
       ZStack {
-        BackButton(homeViewModel: homeViewModel)
+        VStack {
+          BackButton(homeViewModel: homeViewModel)
+          Spacer()
+        }
         BigMediaCover(imageURL: homeViewModel.mediaDetailViewModel.media!.imageURL)
       }
       .padding(.top, 25)
