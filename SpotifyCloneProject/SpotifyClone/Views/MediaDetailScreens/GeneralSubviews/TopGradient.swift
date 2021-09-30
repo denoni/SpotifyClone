@@ -8,13 +8,11 @@
 import SwiftUI
 
 struct TopGradient: View {
-  @EnvironmentObject var homeViewModel: HomeViewModel
+  @EnvironmentObject var mediaDetailViewModel: MediaDetailViewModel
 
   var height: CGFloat
   var color: Color {
-    let mediaDetailViewModel = homeViewModel.mediaDetailViewModel
-    mediaDetailViewModel.imageColorModel = RemoteImageModel(urlString: mediaDetailViewModel.media!.imageURL)
-    return Color(mediaDetailViewModel.imageColorModel.image?.averageColor! ?? .clear)
+    return Color(mediaDetailViewModel.imageColorModel.image!.averageColor!)
   }
 
   init(height: CGFloat) {

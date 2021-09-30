@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RecentlyPlayedScrollView: View {
   @EnvironmentObject var homeViewModel: HomeViewModel
+  @EnvironmentObject var mediaDetailViewModel: MediaDetailViewModel
   @State var medias: [SpotifyModel.MediaItem]
   
   var sectionTitle = "Recently Played"
@@ -24,7 +25,7 @@ struct RecentlyPlayedScrollView: View {
                           title: media.title)
               .onTapGesture {
                 homeViewModel.changeSubpageTo(.trackDetail,
-                                              mediaDetailViewModel: homeViewModel.mediaDetailViewModel,
+                                              mediaDetailViewModel: mediaDetailViewModel,
                                               withData: media)
               }
           }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RecommendedArtistScrollView: View {
   @EnvironmentObject var homeViewModel: HomeViewModel
+  @EnvironmentObject var mediaDetailViewModel: MediaDetailViewModel
   @State var medias: [SpotifyModel.MediaItem]
   // The first item of the array is the artist info
 
@@ -55,7 +56,7 @@ struct RecommendedArtistScrollView: View {
                         mediaType: media.mediaType)
               .onTapGesture {
                 homeViewModel.changeSubpageTo(.trackDetail,
-                                              mediaDetailViewModel: homeViewModel.mediaDetailViewModel,
+                                              mediaDetailViewModel: mediaDetailViewModel,
                                               withData: media)
               }
           }

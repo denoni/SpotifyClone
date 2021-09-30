@@ -8,13 +8,9 @@
 import SwiftUI
 
 struct BigGradient: View {
-  @ObservedObject var mediaDetailViewModel: MediaDetailViewModel
-  @State var color: Color
-
-  init(mediaDetailViewModel: MediaDetailViewModel) {
-    self.mediaDetailViewModel = mediaDetailViewModel
-    mediaDetailViewModel.imageColorModel = RemoteImageModel(urlString: mediaDetailViewModel.media!.imageURL)
-    color = Color(mediaDetailViewModel.imageColorModel.image?.averageColor! ?? .clear)
+  @EnvironmentObject var mediaDetailViewModel: MediaDetailViewModel
+  var color: Color {
+    return Color(mediaDetailViewModel.imageColorModel.image!.averageColor!)
   }
 
   var body: some View {

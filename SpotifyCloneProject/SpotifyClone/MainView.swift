@@ -13,6 +13,8 @@ struct MainView: View {
   @StateObject var homeViewModel: HomeViewModel
   @StateObject var searchViewModel: SearchViewModel
 
+  @StateObject var mediaDetailViewModel = MediaDetailViewModel()
+
   init(mainViewModel: MainViewModel) {
     _mainViewModel = StateObject(wrappedValue: mainViewModel)
     _authViewModel = StateObject(wrappedValue: AuthViewModel(mainViewModel: mainViewModel))
@@ -28,6 +30,7 @@ struct MainView: View {
         case .home:
           HomeScreen()
             .environmentObject(homeViewModel)
+            .environmentObject(mediaDetailViewModel)
         case .search:
           SearchScreen()
             .environmentObject(searchViewModel)

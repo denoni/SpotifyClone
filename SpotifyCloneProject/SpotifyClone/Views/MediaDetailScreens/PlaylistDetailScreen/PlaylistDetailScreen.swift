@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct PlaylistDetailScreen: View {
-  @EnvironmentObject var homeViewModel: HomeViewModel
-
   var body: some View {
     GeometryReader { geometry in
       ZStack {
@@ -32,10 +30,10 @@ struct PlaylistDetailScreen: View {
 
 
 struct PlaylistDetailContent: View {
-  @EnvironmentObject var homeViewModel: HomeViewModel
+  @EnvironmentObject var mediaDetailViewModel: MediaDetailViewModel
 
   var details: SpotifyModel.PlaylistDetails {
-    let detailsTypes = homeViewModel.mediaDetailViewModel.media!.getDetails()
+    let detailsTypes = mediaDetailViewModel.media!.getDetails()
     switch detailsTypes {
     case .playlists(let playlistDetails):
       return SpotifyModel.PlaylistDetails(description: playlistDetails.description,
@@ -54,11 +52,11 @@ struct PlaylistDetailContent: View {
           BackButton()
           Spacer()
         }
-        BigMediaCover(imageURL: homeViewModel.mediaDetailViewModel.media!.imageURL)
+        BigMediaCover(imageURL: mediaDetailViewModel.media!.imageURL)
       }
       .padding(.top, 25)
 
-      MediaTitle(mediaTitle: homeViewModel.mediaDetailViewModel.media!.title)
+      MediaTitle(mediaTitle: mediaDetailViewModel.media!.title)
       MediaDescription(description: details.description)
       PlaylistAuthor(mediaOwner: details.owner)
 

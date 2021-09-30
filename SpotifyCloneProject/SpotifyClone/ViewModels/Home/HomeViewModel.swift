@@ -24,7 +24,6 @@ class HomeViewModel: ObservableObject {
   @Published var mediaCollection = [Section:[SpotifyModel.MediaItem]]()
   @Published var numberOfLoadedItemsInSection = [Section:Int]()
   
-  @Published var mediaDetailViewModel = MediaDetailViewModel()
   @Published var currentSubPage: HomeSubpage = .none
   
   @Published var veryFirstImageInfo = RemoteImageModel(urlString: "")
@@ -307,8 +306,9 @@ class HomeViewModel: ObservableObject {
   func changeSubpageTo(_ subPage: HomeSubpage,
                        mediaDetailViewModel: MediaDetailViewModel,
                        withData data: SpotifyModel.MediaItem) {
-    currentSubPage = subPage
+    mediaDetailViewModel.setVeryFirstImageInfoBasedOn(data.imageURL)
     mediaDetailViewModel.media = data
+    currentSubPage = subPage
   }
   
   func setVeryFirstImageInfoBasedOn(_ firstImageURL: String) {

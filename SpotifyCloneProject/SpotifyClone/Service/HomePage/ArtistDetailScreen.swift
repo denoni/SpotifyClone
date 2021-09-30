@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ArtistDetailScreen: View {
-  @EnvironmentObject var homeViewModel: HomeViewModel
+  @EnvironmentObject var mediaDetailViewModel: MediaDetailViewModel
 
   var body: some View {
     GeometryReader { geometry in
@@ -17,7 +17,7 @@ struct ArtistDetailScreen: View {
         ScrollView(showsIndicators: false) {
           VStack {
             ZStack {
-              ArtistPictureGradient(imageURL: homeViewModel.mediaDetailViewModel.media!.imageURL,
+              ArtistPictureGradient(imageURL: mediaDetailViewModel.media!.imageURL,
                                     height: geometry.size.height / 1.8)
               BackButtonWithCircleBackground()
             }
@@ -37,10 +37,10 @@ struct ArtistDetailScreen: View {
 }
 
 struct ArtistDetailContent: View {
-  @EnvironmentObject var homeViewModel: HomeViewModel
+  @EnvironmentObject var mediaDetailViewModel: MediaDetailViewModel
 
   var details: SpotifyModel.ArtistDetails {
-    let detailsTypes = homeViewModel.mediaDetailViewModel.media!.getDetails()
+    let detailsTypes = mediaDetailViewModel.media!.getDetails()
     switch detailsTypes {
     case .artists(let artistDetails):
       return SpotifyModel.ArtistDetails(followers: artistDetails.followers,
@@ -55,7 +55,7 @@ struct ArtistDetailContent: View {
   var body: some View {
     VStack(alignment: .center, spacing: 15) {
 
-          BigArtistNameTitle(name: homeViewModel.mediaDetailViewModel.media!.title)
+          BigArtistNameTitle(name: mediaDetailViewModel.media!.title)
 
           HStack {
             VStack(alignment: .leading) {
@@ -70,21 +70,21 @@ struct ArtistDetailContent: View {
           .frame(height: 65)
           .padding(.bottom, 25)
 
-      VStack(spacing: 60) {
-        VStack {
-          Text("Popular Tracks")
-            .spotifyTitle()
-          ArtistTracks()
-        }
+        VStack(spacing: 60) {
+          VStack {
+            Text("Popular Tracks")
+              .spotifyTitle()
+            ArtistTracks()
+          }
 
-        VStack {
-          Text("Popular Albums")
-            .spotifyTitle()
-          ArtistAlbums()
-        }
+          VStack {
+            Text("Popular Albums")
+              .spotifyTitle()
+            ArtistAlbums()
+          }
 
-        ArtistMediaHorizontalScrollView(sectionTitle: "Featuring \(homeViewModel.mediaDetailViewModel.media!.title)")
-      }
+          ArtistMediaHorizontalScrollView(sectionTitle: "Featuring \(mediaDetailViewModel.media!.title)")
+        }
 
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -102,9 +102,9 @@ struct ArtistDetailScreen_Previews: PreviewProvider {
       ArtistDetailScreen()
       VStack {
         Spacer()
-        BottomBar(mainViewModel: mainViewModel, showMediaPlayer: true)
+        BottomBar(mainViewModel: mainViewModel,
+                  showMediaPlayer: true)
       }
     }
-    .environmentObject(HomeViewModel(mainViewModel: mainViewModel))
   }
 }

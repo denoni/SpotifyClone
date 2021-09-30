@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct BackButtonWithCircleBackground: View {
-  @EnvironmentObject var homeViewModel: HomeViewModel
 
   var body: some View {
     VStack {

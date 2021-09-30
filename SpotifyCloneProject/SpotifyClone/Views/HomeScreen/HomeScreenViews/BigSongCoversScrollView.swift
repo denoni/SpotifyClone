@@ -9,6 +9,8 @@ import SwiftUI
 
 struct BigSongCoversScrollView: View {
   @EnvironmentObject var homeViewModel: HomeViewModel
+  @EnvironmentObject var mediaDetailViewModel: MediaDetailViewModel
+
   let section: HomeViewModel.Section
   var showArtistName: Bool = false
   var sectionTitle = ""
@@ -46,7 +48,7 @@ struct BigSongCoversScrollView: View {
               .onAppear { testIfShouldFetchMoreData(basedOn: media) }
               .onTapGesture {
                 homeViewModel.changeSubpageTo(detailType,
-                                              mediaDetailViewModel: homeViewModel.mediaDetailViewModel,
+                                              mediaDetailViewModel: mediaDetailViewModel,
                                               withData: media)
               }
             .buttonStyle(PlainButtonStyle())

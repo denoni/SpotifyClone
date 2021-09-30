@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct ShowsDetailScreen: View {
-  @EnvironmentObject var homeViewModel: HomeViewModel
-
   var body: some View {
     GeometryReader { geometry in
       ZStack {
@@ -29,10 +27,10 @@ struct ShowsDetailScreen: View {
 }
 
 struct ShowsDetailContent: View {
-  @EnvironmentObject var homeViewModel: HomeViewModel
+  @EnvironmentObject var mediaDetailViewModel: MediaDetailViewModel
 
   var details: SpotifyModel.ShowDetails {
-    let detailsTypes = homeViewModel.mediaDetailViewModel.media!.getDetails()
+    let detailsTypes = mediaDetailViewModel.media!.getDetails()
     switch detailsTypes {
     case .shows(let showDetails):
       return SpotifyModel.ShowDetails(description: showDetails.description,
@@ -53,11 +51,11 @@ struct ShowsDetailContent: View {
         .padding(.top, 25)
         .padding(.bottom, 10)
       HStack(alignment: .top, spacing: 15) {
-        SmallMediaCover(imageURL: homeViewModel.mediaDetailViewModel.media!.imageURL)
+        SmallMediaCover(imageURL: mediaDetailViewModel.media!.imageURL)
         VStack (alignment: .leading) {
-          MediaTitle(mediaTitle: homeViewModel.mediaDetailViewModel.media!.title)
+          MediaTitle(mediaTitle: mediaDetailViewModel.media!.title)
             .padding(.bottom, 5)
-          ShowAuthor(authorName: homeViewModel.mediaDetailViewModel.media!.authorName.first!)
+          ShowAuthor(authorName: mediaDetailViewModel.media!.authorName.first!)
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
         Spacer()
       }
@@ -103,6 +101,5 @@ struct ShowsDetailScreen_Previews: PreviewProvider {
         BottomBar(mainViewModel: mainViewModel, showMediaPlayer: true)
       }
     }
-    .environmentObject(HomeViewModel(mainViewModel: mainViewModel))
   }
 }

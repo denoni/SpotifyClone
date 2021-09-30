@@ -9,12 +9,12 @@ import SwiftUI
 
 struct TrackDetailScreen: View {
   @EnvironmentObject var homeViewModel: HomeViewModel
-
+  
   var body: some View {
     GeometryReader { _ in
       ZStack(alignment: .center) {
         Color.spotifyDarkGray
-        BigGradient(mediaDetailViewModel: homeViewModel.mediaDetailViewModel)
+        BigGradient()
         TrackDetailContent()
           .padding(.bottom, 120)
       }
@@ -30,9 +30,10 @@ struct TrackDetailScreen: View {
 
 
 struct TrackDetailContent: View {
-  @EnvironmentObject var homeViewModel: HomeViewModel
+  @EnvironmentObject var mediaDetailViewModel: MediaDetailViewModel
+
   var details: SpotifyModel.TrackDetails {
-    let detailsTypes = homeViewModel.mediaDetailViewModel.media!.getDetails()
+    let detailsTypes = mediaDetailViewModel.media!.getDetails()
     switch detailsTypes {
     case .tracks(let trackDetails):
       return SpotifyModel.TrackDetails(popularity: trackDetails.popularity,
@@ -52,9 +53,9 @@ struct TrackDetailContent: View {
     VStack(alignment: .center) {
       SmallTopSection(albumName: details.album!.name)
       Spacer()
-      BigTrackImage(imageURL: homeViewModel.mediaDetailViewModel.media!.imageURL)
-      TrackInfoSection(songName: homeViewModel.mediaDetailViewModel.media!.title,
-                       author: homeViewModel.mediaDetailViewModel.media!.author!,
+      BigTrackImage(imageURL: mediaDetailViewModel.media!.imageURL)
+      TrackInfoSection(songName: mediaDetailViewModel.media!.title,
+                       author: mediaDetailViewModel.media!.author!,
                        isLiked: true, // TODO: Use real data
                        isExplicit: details.explicit)
       SpotifySlider(durationInMs: details.durationInMs)
