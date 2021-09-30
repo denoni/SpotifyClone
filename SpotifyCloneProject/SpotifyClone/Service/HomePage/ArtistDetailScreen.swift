@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ArtistDetailScreen: View {
-  var homeViewModel: HomeViewModel
+  @EnvironmentObject var homeViewModel: HomeViewModel
 
   var body: some View {
     GeometryReader { geometry in
@@ -19,10 +19,10 @@ struct ArtistDetailScreen: View {
             ZStack {
               ArtistPictureGradient(imageURL: homeViewModel.mediaDetailViewModel.media!.imageURL,
                                     height: geometry.size.height / 1.8)
-              BackButtonWithCircleBackground(homeViewModel: homeViewModel)
+              BackButtonWithCircleBackground()
             }
 
-            ArtistDetailContent(homeViewModel: homeViewModel)
+            ArtistDetailContent()
               .padding(.top, -geometry.size.height / 5)
               .padding(.bottom, 180)
             Spacer()
@@ -37,16 +37,13 @@ struct ArtistDetailScreen: View {
 }
 
 struct ArtistDetailContent: View {
-  var homeViewModel: HomeViewModel
-  var details: SpotifyModel.ArtistDetails
+  @EnvironmentObject var homeViewModel: HomeViewModel
 
-  init(homeViewModel: HomeViewModel) {
-    self.homeViewModel = homeViewModel
-
+  var details: SpotifyModel.ArtistDetails {
     let detailsTypes = homeViewModel.mediaDetailViewModel.media!.getDetails()
     switch detailsTypes {
     case .artists(let artistDetails):
-      details = SpotifyModel.ArtistDetails(followers: artistDetails.followers,
+      return SpotifyModel.ArtistDetails(followers: artistDetails.followers,
                                            genres: artistDetails.genres,
                                            popularity: artistDetails.popularity,
                                            href: artistDetails.href)
@@ -102,11 +99,12 @@ struct ArtistDetailScreen_Previews: PreviewProvider {
 
   static var previews: some View {
     ZStack {
-      ArtistDetailScreen(homeViewModel: HomeViewModel(mainViewModel: mainViewModel))
+      ArtistDetailScreen()
       VStack {
         Spacer()
         BottomBar(mainViewModel: mainViewModel, showMediaPlayer: true)
       }
     }
+    .environmentObject(HomeViewModel(mainViewModel: mainViewModel))
   }
 }

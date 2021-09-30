@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RecommendedArtistScrollView: View {
-  @StateObject var homeViewModel: HomeViewModel
+  @EnvironmentObject var homeViewModel: HomeViewModel
   @State var medias: [SpotifyModel.MediaItem]
   // The first item of the array is the artist info
 

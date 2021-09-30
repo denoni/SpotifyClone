@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct BackButtonWithCircleBackground: View {
-  var homeViewModel: HomeViewModel
+  @EnvironmentObject var homeViewModel: HomeViewModel
 
   var body: some View {
     VStack {
       Circle()
-        .overlay(BackButton(homeViewModel: homeViewModel)
+        .overlay(BackButton()
                   .padding(5)
                   .padding(.trailing, -3)
                   .scaledToFit())

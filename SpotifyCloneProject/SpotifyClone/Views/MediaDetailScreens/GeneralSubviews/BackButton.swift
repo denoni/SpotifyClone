@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BackButton: View {
-  var homeViewModel: HomeViewModel
+  @EnvironmentObject var homeViewModel: HomeViewModel
 
   var body: some View {
     VStack {

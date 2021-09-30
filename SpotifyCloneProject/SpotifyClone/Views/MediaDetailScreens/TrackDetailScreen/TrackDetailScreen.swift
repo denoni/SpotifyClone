@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct TrackDetailScreen: View {
-  var homeViewModel: HomeViewModel
+  @EnvironmentObject var homeViewModel: HomeViewModel
 
   var body: some View {
     GeometryReader { _ in
       ZStack(alignment: .center) {
         Color.spotifyDarkGray
         BigGradient(mediaDetailViewModel: homeViewModel.mediaDetailViewModel)
-        TrackDetailContent(homeViewModel: homeViewModel)
+        TrackDetailContent()
           .padding(.bottom, 120)
       }
       .ignoresSafeArea()
@@ -30,16 +30,12 @@ struct TrackDetailScreen: View {
 
 
 struct TrackDetailContent: View {
-  var homeViewModel: HomeViewModel
-  var details: SpotifyModel.TrackDetails
-
-  init(homeViewModel: HomeViewModel) {
-    self.homeViewModel = homeViewModel
-
+  @EnvironmentObject var homeViewModel: HomeViewModel
+  var details: SpotifyModel.TrackDetails {
     let detailsTypes = homeViewModel.mediaDetailViewModel.media!.getDetails()
     switch detailsTypes {
     case .tracks(let trackDetails):
-      details = SpotifyModel.TrackDetails(popularity: trackDetails.popularity,
+      return SpotifyModel.TrackDetails(popularity: trackDetails.popularity,
                                           explicit: trackDetails.explicit,
                                           durationInMs: trackDetails.durationInMs,
                                           href: trackDetails.href,
@@ -54,7 +50,7 @@ struct TrackDetailContent: View {
 
   var body: some View {
     VStack(alignment: .center) {
-      SmallTopSection(homeViewModel: homeViewModel, albumName: details.album!.name)
+      SmallTopSection(albumName: details.album!.name)
       Spacer()
       BigTrackImage(imageURL: homeViewModel.mediaDetailViewModel.media!.imageURL)
       TrackInfoSection(songName: homeViewModel.mediaDetailViewModel.media!.title,
@@ -79,7 +75,7 @@ struct TrackDetailScreen_Previews: PreviewProvider {
 
   static var previews: some View {
     ZStack {
-      TrackDetailScreen(homeViewModel: HomeViewModel(mainViewModel: mainViewModel))
+      TrackDetailScreen()
       VStack {
         Spacer()
       }

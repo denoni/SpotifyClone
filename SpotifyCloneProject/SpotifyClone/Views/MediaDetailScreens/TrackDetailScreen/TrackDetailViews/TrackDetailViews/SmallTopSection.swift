@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SmallTopSection: View {
-  var homeViewModel: HomeViewModel
+  @EnvironmentObject var homeViewModel: HomeViewModel
   var albumName: String
 
   var body: some View {

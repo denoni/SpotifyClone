@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RecentlyPlayedScrollView: View {
-  @StateObject var homeViewModel: HomeViewModel
+  @EnvironmentObject var homeViewModel: HomeViewModel
   @State var medias: [SpotifyModel.MediaItem]
   
   var sectionTitle = "Recently Played"

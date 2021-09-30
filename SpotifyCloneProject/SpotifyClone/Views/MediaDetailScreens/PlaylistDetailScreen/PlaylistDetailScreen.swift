@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PlaylistDetailScreen: View {
-  var homeViewModel: HomeViewModel
+  @EnvironmentObject var homeViewModel: HomeViewModel
 
   var body: some View {
     GeometryReader { geometry in
@@ -16,9 +16,8 @@ struct PlaylistDetailScreen: View {
         Color.spotifyDarkGray
         ScrollView(showsIndicators: false) {
           VStack {
-            TopGradient(mediaDetailViewModel: homeViewModel.mediaDetailViewModel,
-                        height: geometry.size.height / 1.8)
-            PlaylistDetailContent(homeViewModel: homeViewModel)
+            TopGradient(height: geometry.size.height / 1.8)
+            PlaylistDetailContent()
               .padding(.top, -geometry.size.height / 1.8)
               .padding(.bottom, 180)
           }
@@ -33,16 +32,13 @@ struct PlaylistDetailScreen: View {
 
 
 struct PlaylistDetailContent: View {
-  var homeViewModel: HomeViewModel
-  var details: SpotifyModel.PlaylistDetails
+  @EnvironmentObject var homeViewModel: HomeViewModel
 
-  init(homeViewModel: HomeViewModel) {
-    self.homeViewModel = homeViewModel
-
+  var details: SpotifyModel.PlaylistDetails {
     let detailsTypes = homeViewModel.mediaDetailViewModel.media!.getDetails()
     switch detailsTypes {
     case .playlists(let playlistDetails):
-      details = SpotifyModel.PlaylistDetails(description: playlistDetails.description,
+      return SpotifyModel.PlaylistDetails(description: playlistDetails.description,
                                              playlistTracks: playlistDetails.playlistTracks,
                                              owner: playlistDetails.owner,
                                              href: playlistDetails.href)
@@ -55,7 +51,7 @@ struct PlaylistDetailContent: View {
     VStack(alignment: .leading, spacing: 15) {
       ZStack {
         VStack {
-          BackButton(homeViewModel: homeViewModel)
+          BackButton()
           Spacer()
         }
         BigMediaCover(imageURL: homeViewModel.mediaDetailViewModel.media!.imageURL)
@@ -88,7 +84,7 @@ struct MediaDetailScreen_Previews: PreviewProvider {
 
   static var previews: some View {
     ZStack {
-      PlaylistDetailScreen(homeViewModel: HomeViewModel(mainViewModel: mainViewModel))
+      PlaylistDetailScreen()
       VStack {
         Spacer()
         BottomBar(mainViewModel: mainViewModel, showMediaPlayer: true)

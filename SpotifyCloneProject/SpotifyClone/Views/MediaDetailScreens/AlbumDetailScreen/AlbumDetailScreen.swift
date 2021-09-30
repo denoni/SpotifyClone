@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AlbumDetailScreen: View {
-  var homeViewModel: HomeViewModel
+  @EnvironmentObject var homeViewModel: HomeViewModel
 
   var body: some View {
     GeometryReader { geometry in
@@ -16,9 +16,8 @@ struct AlbumDetailScreen: View {
         Color.spotifyDarkGray
         ScrollView(showsIndicators: false) {
           VStack {
-            TopGradient(mediaDetailViewModel: homeViewModel.mediaDetailViewModel,
-                        height: geometry.size.height / 1.8)
-            AlbumDetailContent(homeViewModel: homeViewModel)
+            TopGradient(height: geometry.size.height / 1.8)
+            AlbumDetailContent()
               .padding(.top, -geometry.size.height / 1.8)
               .padding(.bottom, 180)
           }
@@ -30,29 +29,25 @@ struct AlbumDetailScreen: View {
 }
 
 struct AlbumDetailContent: View {
-  var homeViewModel: HomeViewModel
-  var details: SpotifyModel.AlbumDetails
-
-  init(homeViewModel: HomeViewModel) {
-    self.homeViewModel = homeViewModel
-
+  @EnvironmentObject var homeViewModel: HomeViewModel
+  var details: SpotifyModel.AlbumDetails {
     let detailsTypes = homeViewModel.mediaDetailViewModel.media!.getDetails()
-    switch detailsTypes {
-    case .album(let albumDetails):
-      details = SpotifyModel.AlbumDetails(name: albumDetails.name,
-                                          numberOfTracks: albumDetails.numberOfTracks,
-                                          href: albumDetails.href,
-                                          releaseDate: albumDetails.releaseDate)
-    default:
-      fatalError("Wrong type for PlaylistDetailScreen")
-    }
+      switch detailsTypes {
+      case .album(let albumDetails):
+        return SpotifyModel.AlbumDetails(name: albumDetails.name,
+                                            numberOfTracks: albumDetails.numberOfTracks,
+                                            href: albumDetails.href,
+                                            releaseDate: albumDetails.releaseDate)
+      default:
+        fatalError("Wrong type for PlaylistDetailScreen")
+      }
   }
 
   var body: some View {
     VStack(alignment: .leading, spacing: 15) {
       ZStack {
         VStack {
-          BackButton(homeViewModel: homeViewModel)
+          BackButton()
           Spacer()
         }
         BigMediaCover(imageURL: homeViewModel.mediaDetailViewModel.media!.imageURL)
@@ -83,7 +78,7 @@ struct AlbumDetailScreen_Previews: PreviewProvider {
 
   static var previews: some View {
     ZStack {
-      PlaylistDetailScreen(homeViewModel: HomeViewModel(mainViewModel: mainViewModel))
+      PlaylistDetailScreen()
       VStack {
         Spacer()
         BottomBar(mainViewModel: mainViewModel, showMediaPlayer: true)

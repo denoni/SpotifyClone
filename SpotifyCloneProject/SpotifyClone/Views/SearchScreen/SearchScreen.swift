@@ -11,7 +11,7 @@
 import SwiftUI
 
 struct SearchScreen: View {
-  @ObservedObject var searchViewModel: SearchViewModel
+  @EnvironmentObject var searchViewModel: SearchViewModel
 
   var body: some View {
     RadialGradientBackground()

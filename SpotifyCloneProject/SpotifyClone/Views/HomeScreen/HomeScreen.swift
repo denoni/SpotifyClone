@@ -11,22 +11,22 @@
 import SwiftUI
 
 struct HomeScreen: View {
-  @ObservedObject var homeViewModel: HomeViewModel
-  
+  @EnvironmentObject var homeViewModel: HomeViewModel
+
   var body: some View {
     switch homeViewModel.currentSubPage {
     case .none:
-      HomeScreenDefault(homeViewModel: homeViewModel)
+      HomeScreenDefault()
     case .playlistDetail:
-      PlaylistDetailScreen(homeViewModel: homeViewModel)
+      PlaylistDetailScreen()
     case .trackDetail:
-      TrackDetailScreen(homeViewModel: homeViewModel)
+      TrackDetailScreen()
     case .albumDetail:
-      AlbumDetailScreen(homeViewModel: homeViewModel)
+      AlbumDetailScreen()
     case .showDetail:
-      ShowsDetailScreen(homeViewModel: homeViewModel)
+      ShowsDetailScreen()
     case .artistDetail:
-      ArtistDetailScreen(homeViewModel: homeViewModel)
+      ArtistDetailScreen()
     }
   }
   
@@ -35,7 +35,7 @@ struct HomeScreen: View {
   // MARK: - Auxiliary Functions
   
   struct HomeScreenDefault: View {
-    @ObservedObject var homeViewModel: HomeViewModel
+    @EnvironmentObject var homeViewModel: HomeViewModel
 
     var body: some View {
       RadialGradientBackground(color: Color(homeViewModel.veryFirstImageInfo.image?.averageColor! ?? UIColor.clear))
@@ -56,73 +56,60 @@ struct HomeScreen: View {
                 .padding(.bottom, paddingSectionSeparation)
               
               // MARK: Recently Played
-              RecentlyPlayedScrollView(homeViewModel: homeViewModel,
-                                       medias: getTracksFor(.recentlyPlayed))
+              RecentlyPlayedScrollView(medias: getTracksFor(.recentlyPlayed))
                 .padding(.bottom, paddingSectionSeparation)
               
               // MARK: New Releases
-              BigSongCoversScrollView(homeViewModel: homeViewModel,
-                                      section: .newReleases,
+              BigSongCoversScrollView(section: .newReleases,
                                       showArtistName: true)
                 .padding(.bottom, paddingSectionSeparation)
               
               // MARK: User Favorite Tracks
-              BigSongCoversScrollView(homeViewModel: homeViewModel,
-                                      section: .userFavoriteTracks)
+              BigSongCoversScrollView(section: .userFavoriteTracks)
                 .padding(.bottom, paddingSectionSeparation)
               
               // MARK: Top Podcasts
-              BigSongCoversScrollView(homeViewModel: homeViewModel,
-                                      section: .topPodcasts)
+              BigSongCoversScrollView(section: .topPodcasts)
                 .padding(.bottom, paddingSectionSeparation)
               
               // MARK: Featured Playlists
-              BigSongCoversScrollView(homeViewModel: homeViewModel,
-                                      section: .featuredPlaylists,
+              BigSongCoversScrollView(section: .featuredPlaylists,
                                       // TODO: Stop using previewURL to store the featured playlist title
                                       sectionTitle: homeViewModel.mediaCollection[.featuredPlaylists]!.first!.previewURL)
                 .padding(.bottom, paddingSectionSeparation)
               
               // MARK: Artist's Top Tracks
-              RecommendedArtistScrollView(homeViewModel: homeViewModel,
-                                          medias: getTracksFor(.artistTopTracks),
+              RecommendedArtistScrollView(medias: getTracksFor(.artistTopTracks),
                                           sectionTitle: HomeViewModel.Section.artistTopTracks.rawValue)
                 .padding(.bottom, paddingSectionSeparation)
               
               // MARK: User Favorite Artists
-              BigSongCoversScrollView(homeViewModel: homeViewModel,
-                                      section: .userFavoriteArtists)
+              BigSongCoversScrollView(section: .userFavoriteArtists)
                 .padding(.bottom, paddingSectionSeparation)
             }
             Group {
               // MARK: Playlist Rewind 2010s
-              BigSongCoversScrollView(homeViewModel: homeViewModel,
-                                      section: .playlistRewind2010s)
+              BigSongCoversScrollView(section: .playlistRewind2010s)
                 .padding(.bottom, paddingSectionSeparation)
               
               // MARK: Playlist Rewind 2000s
-              BigSongCoversScrollView(homeViewModel: homeViewModel,
-                                      section: .playlistRewind2000s)
+              BigSongCoversScrollView(section: .playlistRewind2000s)
                 .padding(.bottom, paddingSectionSeparation)
               
               // MARK: Playlist Rewind 90s
-              BigSongCoversScrollView(homeViewModel: homeViewModel,
-                                      section: .playlistRewind90s)
+              BigSongCoversScrollView(section: .playlistRewind90s)
                 .padding(.bottom, paddingSectionSeparation)
               
               // MARK: Playlist Rewind 80s
-              BigSongCoversScrollView(homeViewModel: homeViewModel,
-                                      section: .playlistRewind80s)
+              BigSongCoversScrollView(section: .playlistRewind80s)
                 .padding(.bottom, paddingSectionSeparation)
               
               // MARK: Playlist Rewind 70s
-              BigSongCoversScrollView(homeViewModel: homeViewModel,
-                                      section: .playlistRewind70s)
+              BigSongCoversScrollView(section: .playlistRewind70s)
                 .padding(.bottom, paddingSectionSeparation)
               
               // MARK: Playlist This Is X
-              BigSongCoversScrollView(homeViewModel: homeViewModel,
-                                      section: .playlistThisIsX)
+              BigSongCoversScrollView(section: .playlistThisIsX)
                 .padding(.bottom, paddingSectionSeparation)
             }
           }

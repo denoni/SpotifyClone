@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ShowsDetailScreen: View {
-  var homeViewModel: HomeViewModel
+  @EnvironmentObject var homeViewModel: HomeViewModel
 
   var body: some View {
     GeometryReader { geometry in
@@ -16,9 +16,8 @@ struct ShowsDetailScreen: View {
         Color.spotifyDarkGray
         ScrollView(showsIndicators: false) {
           VStack {
-            TopGradient(mediaDetailViewModel: homeViewModel.mediaDetailViewModel,
-                        height: geometry.size.height / 1.8)
-            ShowsDetailContent(homeViewModel: homeViewModel)
+            TopGradient(height: geometry.size.height / 1.8)
+            ShowsDetailContent()
               .padding(.top, -geometry.size.height / 1.8)
               .padding(.bottom, 180)
           }
@@ -30,16 +29,13 @@ struct ShowsDetailScreen: View {
 }
 
 struct ShowsDetailContent: View {
-  var homeViewModel: HomeViewModel
-  var details: SpotifyModel.ShowDetails
+  @EnvironmentObject var homeViewModel: HomeViewModel
 
-  init(homeViewModel: HomeViewModel) {
-    self.homeViewModel = homeViewModel
-
+  var details: SpotifyModel.ShowDetails {
     let detailsTypes = homeViewModel.mediaDetailViewModel.media!.getDetails()
     switch detailsTypes {
     case .shows(let showDetails):
-      details = SpotifyModel.ShowDetails(description: showDetails.description,
+      return SpotifyModel.ShowDetails(description: showDetails.description,
                                          explicit: showDetails.explicit,
                                          numberOfEpisodes: showDetails.numberOfEpisodes,
                                          href: showDetails.href)
@@ -48,9 +44,12 @@ struct ShowsDetailContent: View {
     }
   }
 
+
+
+
   var body: some View {
     VStack(alignment: .center, spacing: 15) {
-      BackButton(homeViewModel: homeViewModel)
+      BackButton()
         .padding(.top, 25)
         .padding(.bottom, 10)
       HStack(alignment: .top, spacing: 15) {
@@ -98,11 +97,12 @@ struct ShowsDetailScreen_Previews: PreviewProvider {
 
   static var previews: some View {
     ZStack {
-      ShowsDetailScreen(homeViewModel: HomeViewModel(mainViewModel: mainViewModel))
+      ShowsDetailScreen()
       VStack {
         Spacer()
         BottomBar(mainViewModel: mainViewModel, showMediaPlayer: true)
       }
     }
+    .environmentObject(HomeViewModel(mainViewModel: mainViewModel))
   }
 }

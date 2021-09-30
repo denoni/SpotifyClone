@@ -26,9 +26,11 @@ struct MainView: View {
         Color.spotifyDarkGray.ignoresSafeArea()
         switch mainViewModel.currentPage {
         case .home:
-          HomeScreen(homeViewModel: homeViewModel)
+          HomeScreen()
+            .environmentObject(homeViewModel)
         case .search:
-          SearchScreen(searchViewModel: searchViewModel)
+          SearchScreen()
+            .environmentObject(searchViewModel)
         case .myLibrary:
           Text("To be done 🛠").font(.title)
         }

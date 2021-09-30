@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BigSongCoversScrollView: View {
-  @StateObject var homeViewModel: HomeViewModel
+  @EnvironmentObject var homeViewModel: HomeViewModel
   let section: HomeViewModel.Section
   var showArtistName: Bool = false
   var sectionTitle = ""
