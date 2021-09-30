@@ -51,19 +51,21 @@ class APIFetchingArtists {
           let imageURL = data.items[itemIndex].images?[0].url
           let id = data.items[itemIndex].id
 
+          let followers = data.items[itemIndex].followers!.total
+          let genres = data.items[itemIndex].genres
+          let popularity = data.items[itemIndex].popularity
+          let href = data.items[itemIndex].href
+
           let artistItem = SpotifyModel.MediaItem(title: title,
                                                   previewURL: "",
                                                   imageURL: imageURL ?? "",
                                                   authorName: [title],
                                                   mediaType: .artist,
                                                   id: id,
-
-                                                  // TODO: Put real data from api
-
-                                                  details: SpotifyModel.DetailTypes.artists(artistDetails: SpotifyModel.ArtistDetails(followers: 0,
-                                                                                                                                      genres: [""],
-                                                                                                                                      popularity: 0,
-                                                                                                                                      href: "")))
+                                                  details: SpotifyModel.DetailTypes.artists(artistDetails: SpotifyModel.ArtistDetails(followers: followers,
+                                                                                                                                      genres: genres!,
+                                                                                                                                      popularity: popularity!,
+                                                                                                                                      href: href)))
           artists.append(artistItem)
         }
         completionHandler(artists)
