@@ -70,11 +70,17 @@ struct ArtistDetailContent: View {
           .frame(height: 65)
           .padding(.bottom, 25)
 
+      if mediaDetailVM.isLoading {
+        ProgressView()
+          .withSpotifyStyle(useDiscreetColors: true)
+          .onAppear { mediaDetailVM.getTopTracksFromArtist() }
+        Spacer()
+      } else {
         VStack(spacing: 60) {
           VStack {
             Text("Popular Tracks")
               .spotifyTitle()
-            ArtistTracks()
+            ArtistTracks(medias: mediaDetailVM.mediaCollection)
           }
 
           VStack {
@@ -83,8 +89,12 @@ struct ArtistDetailContent: View {
             ArtistAlbums()
           }
 
-          ArtistMediaHorizontalScrollView(sectionTitle: "Featuring \(mediaDetailVM.mainItem!.title)")
+          // TODO: Load the correct data
+          ArtistMediaHorizontalScrollView(medias: mediaDetailVM.mediaCollection,
+                                          sectionTitle: "Featuring \(mediaDetailVM.mainItem!.title)")
+            .padding(.trailing, -25)
         }
+      }
 
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)

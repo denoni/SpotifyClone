@@ -250,8 +250,7 @@ class HomeViewModel: ObservableObject {
           mediaCollection[section]!.insert(artists[0], at: 0)
           
           // Add the artist's top songs
-          api.getTrack(using: .topTracksFromArtist(artistID: artistID),
-                       with: accessToken) { tracks in
+          api.getTrack(using: .topTracksFromArtist(artistID: artistID), with: accessToken) { tracks in
             trimAndCommunicateResult(section: section, medias: tracks, loadMoreEnabled: true)
           }
         }
@@ -306,6 +305,8 @@ class HomeViewModel: ObservableObject {
   func changeSubpageTo(_ subPage: HomeSubpage,
                        mediaDetailVM: MediaDetailViewModel,
                        withData data: SpotifyModel.MediaItem) {
+    mediaDetailVM.isLoading = true
+    mediaDetailVM.accessToken = mainVM.authKey!.accessToken
     mediaDetailVM.setVeryFirstImageInfoBasedOn(data.imageURL)
     mediaDetailVM.mainItem = data
     currentSubPage = subPage
