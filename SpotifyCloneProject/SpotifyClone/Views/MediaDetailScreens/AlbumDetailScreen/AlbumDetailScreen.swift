@@ -27,10 +27,10 @@ struct AlbumDetailScreen: View {
 }
 
 struct AlbumDetailContent: View {
-  @EnvironmentObject var mediaDetailViewModel: MediaDetailViewModel
+  @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
 
   var details: SpotifyModel.AlbumDetails {
-    let detailsTypes = mediaDetailViewModel.media!.getDetails()
+    let detailsTypes = mediaDetailVM.mainItem!.getDetails()
       switch detailsTypes {
       case .album(let albumDetails):
         return SpotifyModel.AlbumDetails(name: albumDetails.name,
@@ -49,11 +49,11 @@ struct AlbumDetailContent: View {
           BackButton()
           Spacer()
         }
-        BigMediaCover(imageURL: mediaDetailViewModel.media!.imageURL)
+        BigMediaCover(imageURL: mediaDetailVM.mainItem!.imageURL)
       }
       .padding(.top, 25)
       MediaTitle(mediaTitle: details.name)
-      AlbumAuthor(authors: mediaDetailViewModel.media!.author!)
+      AlbumAuthor(authors: mediaDetailVM.mainItem!.author!)
 
       HStack {
         VStack(alignment: .leading) {
@@ -73,14 +73,14 @@ struct AlbumDetailContent: View {
 
 
 struct AlbumDetailScreen_Previews: PreviewProvider {
-  static var mainViewModel = MainViewModel()
+  static var mainVM = MainViewModel()
 
   static var previews: some View {
     ZStack {
       PlaylistDetailScreen()
       VStack {
         Spacer()
-        BottomBar(mainViewModel: mainViewModel, showMediaPlayer: true)
+        BottomBar(mainVM: mainVM, showMediaPlayer: true)
       }
     }
   }

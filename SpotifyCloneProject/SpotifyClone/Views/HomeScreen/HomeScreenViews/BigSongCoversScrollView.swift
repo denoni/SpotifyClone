@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct BigSongCoversScrollView: View {
-  @EnvironmentObject var homeViewModel: HomeViewModel
-  @EnvironmentObject var mediaDetailViewModel: MediaDetailViewModel
+  @EnvironmentObject var homeVM: HomeViewModel
+  @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
 
   let section: HomeViewModel.Section
   var showArtistName: Bool = false
   var sectionTitle = ""
   var medias: [SpotifyModel.MediaItem] {
-    homeViewModel.mediaCollection[section]!
+    homeVM.mediaCollection[section]!
   }
 
   var detailType: HomeViewModel.HomeSubpage {
@@ -47,9 +47,9 @@ struct BigSongCoversScrollView: View {
                         mediaType: media.mediaType)
               .onAppear { testIfShouldFetchMoreData(basedOn: media) }
               .onTapGesture {
-                homeViewModel.changeSubpageTo(detailType,
-                                              mediaDetailViewModel: mediaDetailViewModel,
-                                              withData: media)
+                homeVM.changeSubpageTo(detailType,
+                                       mediaDetailVM: mediaDetailVM,
+                                       withData: media)
               }
             .buttonStyle(PlainButtonStyle())
           }
@@ -61,8 +61,8 @@ struct BigSongCoversScrollView: View {
   func testIfShouldFetchMoreData(basedOn media: SpotifyModel.MediaItem) {
     if medias.count > 5 {
       if media.id == medias[medias.count - 4].id {
-        homeViewModel.fetchDataFor(section,
-                                   with: homeViewModel.mainViewModel.authKey!.accessToken)
+        homeVM.fetchDataFor(section,
+                                   with: homeVM.mainVM.authKey!.accessToken)
       }
     }
   }

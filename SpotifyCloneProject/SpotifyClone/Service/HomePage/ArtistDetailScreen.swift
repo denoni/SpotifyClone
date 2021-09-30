@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ArtistDetailScreen: View {
-  @EnvironmentObject var mediaDetailViewModel: MediaDetailViewModel
+  @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
 
   var body: some View {
     GeometryReader { geometry in
@@ -17,7 +17,7 @@ struct ArtistDetailScreen: View {
         ScrollView(showsIndicators: false) {
           VStack {
             ZStack {
-              ArtistPictureGradient(imageURL: mediaDetailViewModel.media!.imageURL,
+              ArtistPictureGradient(imageURL: mediaDetailVM.mainItem!.imageURL,
                                     height: geometry.size.height / 1.8)
               BackButtonWithCircleBackground()
             }
@@ -37,10 +37,10 @@ struct ArtistDetailScreen: View {
 }
 
 struct ArtistDetailContent: View {
-  @EnvironmentObject var mediaDetailViewModel: MediaDetailViewModel
+  @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
 
   var details: SpotifyModel.ArtistDetails {
-    let detailsTypes = mediaDetailViewModel.media!.getDetails()
+    let detailsTypes = mediaDetailVM.mainItem!.getDetails()
     switch detailsTypes {
     case .artists(let artistDetails):
       return SpotifyModel.ArtistDetails(followers: artistDetails.followers,
@@ -55,7 +55,7 @@ struct ArtistDetailContent: View {
   var body: some View {
     VStack(alignment: .center, spacing: 15) {
 
-          BigArtistNameTitle(name: mediaDetailViewModel.media!.title)
+          BigArtistNameTitle(name: mediaDetailVM.mainItem!.title)
 
           HStack {
             VStack(alignment: .leading) {
@@ -83,7 +83,7 @@ struct ArtistDetailContent: View {
             ArtistAlbums()
           }
 
-          ArtistMediaHorizontalScrollView(sectionTitle: "Featuring \(mediaDetailViewModel.media!.title)")
+          ArtistMediaHorizontalScrollView(sectionTitle: "Featuring \(mediaDetailVM.mainItem!.title)")
         }
 
     }
@@ -95,14 +95,14 @@ struct ArtistDetailContent: View {
 
 
 struct ArtistDetailScreen_Previews: PreviewProvider {
-  static var mainViewModel = MainViewModel()
+  static var mainVM = MainViewModel()
 
   static var previews: some View {
     ZStack {
       ArtistDetailScreen()
       VStack {
         Spacer()
-        BottomBar(mainViewModel: mainViewModel,
+        BottomBar(mainVM: mainVM,
                   showMediaPlayer: true)
       }
     }

@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct TopGradient: View {
-  @EnvironmentObject var mediaDetailViewModel: MediaDetailViewModel
+  @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
 
   var height: CGFloat
   var color: Color {
-    return Color(mediaDetailViewModel.imageColorModel.image!.averageColor!)
+    return Color(mediaDetailVM.imageColorModel.image!.averageColor!)
   }
 
   init(height: CGFloat) {

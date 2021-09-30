@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct BigGradient: View {
-  @EnvironmentObject var mediaDetailViewModel: MediaDetailViewModel
+  @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   var color: Color {
-    return Color(mediaDetailViewModel.imageColorModel.image!.averageColor!)
+    return Color(mediaDetailVM.imageColorModel.image!.averageColor!)
   }
 
   var body: some View {

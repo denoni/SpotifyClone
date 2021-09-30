@@ -11,15 +11,15 @@
 import SwiftUI
 
 struct SearchScreen: View {
-  @EnvironmentObject var searchViewModel: SearchViewModel
+  @EnvironmentObject var searchVM: SearchViewModel
 
   var body: some View {
     RadialGradientBackground()
-    if searchViewModel.isLoading == true {
+    if searchVM.isLoading == true {
       ProgressView()
         .withSpotifyStyle(useDiscreetColors: true)
         .onAppear {
-          searchViewModel.getCategoriesData()
+          searchVM.getCategoriesData()
         }
     } else {
       ScrollView(showsIndicators: false) {
@@ -31,8 +31,8 @@ struct SearchScreen: View {
           PopularPodcastSection(title: "Popular Podcast Categories")
             .padding(.bottom, 10)
           BrowseAllSection(title: "Browse All",
-                           playlists: searchViewModel.playlists,
-                           colors: searchViewModel.colors)
+                           playlists: searchVM.playlists,
+                           colors: searchVM.colors)
             .padding(.bottom, paddingBottomSection)
         }.padding(.vertical, lateralPadding)
       }

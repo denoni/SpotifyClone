@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct BackButton: View {
-  @EnvironmentObject var homeViewModel: HomeViewModel
-  @EnvironmentObject var mediaDetailViewModel: MediaDetailViewModel
+  @EnvironmentObject var homeVM: HomeViewModel
+  @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
 
   var body: some View {
     VStack {
@@ -21,7 +21,7 @@ struct BackButton: View {
       }
       .frame(height: 20)
       .onTapGesture {
-        homeViewModel.goToNoneSubpage()
+        homeVM.goToNoneSubpage()
       }
     }
   }

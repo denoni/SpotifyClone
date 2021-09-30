@@ -18,7 +18,7 @@ import SwiftUI
 
 class HomeViewModel: ObservableObject {
   var api = HomePageAPIDispatches()
-  @Published var mainViewModel: MainViewModel
+  @Published var mainVM: MainViewModel
   
   @Published var isLoading = [Section:Bool]()
   @Published var mediaCollection = [Section:[SpotifyModel.MediaItem]]()
@@ -38,7 +38,7 @@ class HomeViewModel: ObservableObject {
   }
   
   init(mainViewModel: MainViewModel) {
-    self.mainViewModel = mainViewModel
+    self.mainVM = mainViewModel
     // Populate isLoading and medias with all possible section keys
     for section in Section.allCases {
       isLoading[section] = true
@@ -69,8 +69,8 @@ class HomeViewModel: ObservableObject {
   func fetchHomeData() {
     for dictKey in isLoading.keys { isLoading[dictKey] = true }
     
-    if mainViewModel.authKey != nil {
-      let accessToken = mainViewModel.authKey!.accessToken
+    if mainVM.authKey != nil {
+      let accessToken = mainVM.authKey!.accessToken
       
       getSmallSongCardItems(accessToken: accessToken)
       getUserFavoriteTracks(accessToken: accessToken)
@@ -304,10 +304,10 @@ class HomeViewModel: ObservableObject {
   }
   
   func changeSubpageTo(_ subPage: HomeSubpage,
-                       mediaDetailViewModel: MediaDetailViewModel,
+                       mediaDetailVM: MediaDetailViewModel,
                        withData data: SpotifyModel.MediaItem) {
-    mediaDetailViewModel.setVeryFirstImageInfoBasedOn(data.imageURL)
-    mediaDetailViewModel.media = data
+    mediaDetailVM.setVeryFirstImageInfoBasedOn(data.imageURL)
+    mediaDetailVM.mainItem = data
     currentSubPage = subPage
   }
   

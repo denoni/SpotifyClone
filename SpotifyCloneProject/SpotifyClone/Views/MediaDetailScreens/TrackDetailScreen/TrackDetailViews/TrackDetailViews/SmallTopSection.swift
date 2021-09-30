@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SmallTopSection: View {
-  @EnvironmentObject var homeViewModel: HomeViewModel
+  @EnvironmentObject var homeVM: HomeViewModel
   var albumName: String
 
   var body: some View {
@@ -19,9 +19,9 @@ struct SmallTopSection: View {
         .padding(.vertical, 3)
         .padding(.horizontal, -5)
         .onTapGesture {
-          homeViewModel.goToNoneSubpage()
+          homeVM.goToNoneSubpage()
           // When the trackDetailsScreen is closed, reopen the mediaPlayer.
-          homeViewModel.mainViewModel.showBottomMediaPlayer = true
+          homeVM.mainVM.showBottomMediaPlayer = true
         }
       Spacer()
       VStack {

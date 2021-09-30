@@ -11,10 +11,10 @@
 import SwiftUI
 
 struct HomeScreen: View {
-  @EnvironmentObject var homeViewModel: HomeViewModel
+  @EnvironmentObject var homeVM: HomeViewModel
 
   var body: some View {
-    switch homeViewModel.currentSubPage {
+    switch homeVM.currentSubPage {
     case .none:
       HomeScreenDefault()
     case .playlistDetail:
@@ -35,16 +35,16 @@ struct HomeScreen: View {
   // MARK: - Auxiliary Functions
   
   struct HomeScreenDefault: View {
-    @EnvironmentObject var homeViewModel: HomeViewModel
+    @EnvironmentObject var homeVM: HomeViewModel
 
     var body: some View {
-      RadialGradientBackground(color: Color(homeViewModel.veryFirstImageInfo.image?.averageColor! ?? UIColor.clear))
+      RadialGradientBackground(color: Color(homeVM.veryFirstImageInfo.image?.averageColor! ?? UIColor.clear))
       
       if didEverySectionLoaded() == false {
         ProgressView()
           .withSpotifyStyle()
           .onAppear {
-            homeViewModel.fetchHomeData()
+            homeVM.fetchHomeData()
           }
       } else {
         ScrollView(showsIndicators: false) {
@@ -75,7 +75,7 @@ struct HomeScreen: View {
               // MARK: Featured Playlists
               BigSongCoversScrollView(section: .featuredPlaylists,
                                       // TODO: Stop using previewURL to store the featured playlist title
-                                      sectionTitle: homeViewModel.mediaCollection[.featuredPlaylists]!.first!.previewURL)
+                                      sectionTitle: homeVM.mediaCollection[.featuredPlaylists]!.first!.previewURL)
                 .padding(.bottom, paddingSectionSeparation)
               
               // MARK: Artist's Top Tracks
@@ -120,9 +120,9 @@ struct HomeScreen: View {
     }
     
     func didEverySectionLoaded() -> Bool {
-      for key in homeViewModel.isLoading.keys {
+      for key in homeVM.isLoading.keys {
         // If any section still loading, return false
-        guard homeViewModel.isLoading[key] != true else {
+        guard homeVM.isLoading[key] != true else {
           return false
         }
       }
@@ -131,7 +131,7 @@ struct HomeScreen: View {
     }
     
     func getTracksFor(_ section: HomeViewModel.Section) -> [SpotifyModel.MediaItem] {
-      return !homeViewModel.isLoading[section]! ? homeViewModel.mediaCollection[section]! : []
+      return !homeVM.isLoading[section]! ? homeVM.mediaCollection[section]! : []
     }
   }
   

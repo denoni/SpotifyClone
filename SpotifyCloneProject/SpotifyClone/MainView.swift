@@ -8,41 +8,41 @@
 import SwiftUI
 
 struct MainView: View {
-  @StateObject var mainViewModel: MainViewModel
-  @StateObject var authViewModel: AuthViewModel
-  @StateObject var homeViewModel: HomeViewModel
-  @StateObject var searchViewModel: SearchViewModel
+  @StateObject var mainVM: MainViewModel
+  @StateObject var authVM: AuthViewModel
+  @StateObject var homeVM: HomeViewModel
+  @StateObject var searchVM: SearchViewModel
 
-  @StateObject var mediaDetailViewModel = MediaDetailViewModel()
+  @StateObject var mediaDetailVM = MediaDetailViewModel()
 
   init(mainViewModel: MainViewModel) {
-    _mainViewModel = StateObject(wrappedValue: mainViewModel)
-    _authViewModel = StateObject(wrappedValue: AuthViewModel(mainViewModel: mainViewModel))
-    _homeViewModel = StateObject(wrappedValue: HomeViewModel(mainViewModel: mainViewModel))
-    _searchViewModel = StateObject(wrappedValue: SearchViewModel(mainViewModel: mainViewModel))
+    _mainVM = StateObject(wrappedValue: mainViewModel)
+    _authVM = StateObject(wrappedValue: AuthViewModel(mainViewModel: mainViewModel))
+    _homeVM = StateObject(wrappedValue: HomeViewModel(mainViewModel: mainViewModel))
+    _searchVM = StateObject(wrappedValue: SearchViewModel(mainViewModel: mainViewModel))
   }
   
   var body: some View {
-    if mainViewModel.homeScreenIsReady {
+    if mainVM.homeScreenIsReady {
       ZStack {
         Color.spotifyDarkGray.ignoresSafeArea()
-        switch mainViewModel.currentPage {
+        switch mainVM.currentPage {
         case .home:
           HomeScreen()
-            .environmentObject(homeViewModel)
-            .environmentObject(mediaDetailViewModel)
+            .environmentObject(homeVM)
+            .environmentObject(mediaDetailVM)
         case .search:
           SearchScreen()
-            .environmentObject(searchViewModel)
+            .environmentObject(searchVM)
         case .myLibrary:
           Text("To be done 🛠").font(.title)
         }
-        BottomBar(mainViewModel: mainViewModel, showMediaPlayer: mainViewModel.showBottomMediaPlayer)
+        BottomBar(mainVM: mainVM, showMediaPlayer: mainVM.showBottomMediaPlayer)
       }
       .navigationBarTitle("")
       .navigationBarHidden(true)
     } else {
-      AuthScreen(authViewModel: AuthViewModel(mainViewModel: mainViewModel))
+      AuthScreen(authViewModel: AuthViewModel(mainViewModel: mainVM))
         .navigationBarTitle("")
         .navigationBarHidden(true)
     }

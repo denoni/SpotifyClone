@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ArtistMediaHorizontalScrollView: View {
-//  @StateObject var homeViewModel: HomeViewModel
+//  @StateObject var homeVM: HomeViewModel
 //  @State var medias: [SpotifyModel.MediaItem]
   var sectionTitle: String
 

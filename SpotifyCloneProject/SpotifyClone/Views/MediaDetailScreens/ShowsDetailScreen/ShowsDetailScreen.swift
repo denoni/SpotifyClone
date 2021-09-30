@@ -27,10 +27,10 @@ struct ShowsDetailScreen: View {
 }
 
 struct ShowsDetailContent: View {
-  @EnvironmentObject var mediaDetailViewModel: MediaDetailViewModel
+  @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
 
   var details: SpotifyModel.ShowDetails {
-    let detailsTypes = mediaDetailViewModel.media!.getDetails()
+    let detailsTypes = mediaDetailVM.mainItem!.getDetails()
     switch detailsTypes {
     case .shows(let showDetails):
       return SpotifyModel.ShowDetails(description: showDetails.description,
@@ -51,11 +51,11 @@ struct ShowsDetailContent: View {
         .padding(.top, 25)
         .padding(.bottom, 10)
       HStack(alignment: .top, spacing: 15) {
-        SmallMediaCover(imageURL: mediaDetailViewModel.media!.imageURL)
+        SmallMediaCover(imageURL: mediaDetailVM.mainItem!.imageURL)
         VStack (alignment: .leading) {
-          MediaTitle(mediaTitle: mediaDetailViewModel.media!.title)
+          MediaTitle(mediaTitle: mediaDetailVM.mainItem!.title)
             .padding(.bottom, 5)
-          ShowAuthor(authorName: mediaDetailViewModel.media!.authorName.first!)
+          ShowAuthor(authorName: mediaDetailVM.mainItem!.authorName.first!)
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
         Spacer()
       }
@@ -91,14 +91,14 @@ struct ShowsDetailContent: View {
 
 
 struct ShowsDetailScreen_Previews: PreviewProvider {
-  static var mainViewModel = MainViewModel()
+  static var mainVM = MainViewModel()
 
   static var previews: some View {
     ZStack {
       ShowsDetailScreen()
       VStack {
         Spacer()
-        BottomBar(mainViewModel: mainViewModel, showMediaPlayer: true)
+        BottomBar(mainVM: mainVM, showMediaPlayer: true)
       }
     }
   }

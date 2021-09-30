@@ -8,7 +8,8 @@
 import Foundation
 
 class MediaDetailViewModel: ObservableObject {
-  @Published var media: SpotifyModel.MediaItem?
+  // - mainItem: The item that was clicked to originate the current DetailView.
+  @Published var mainItem: SpotifyModel.MediaItem?
   @Published var imageColorModel = RemoteImageModel(urlString: "")
 
   func setVeryFirstImageInfoBasedOn(_ firstImageURL: String) {

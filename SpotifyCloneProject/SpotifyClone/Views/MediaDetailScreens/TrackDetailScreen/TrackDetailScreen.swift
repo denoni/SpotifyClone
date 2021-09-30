@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TrackDetailScreen: View {
-  @EnvironmentObject var homeViewModel: HomeViewModel
+  @EnvironmentObject var homeVM: HomeViewModel
   
   var body: some View {
     GeometryReader { _ in
@@ -21,7 +21,7 @@ struct TrackDetailScreen: View {
       .ignoresSafeArea()
       .onAppear {
         // When TrackDetailScreen opens up, hide the bottomMediaPlayer
-        homeViewModel.mainViewModel.showBottomMediaPlayer = false
+        homeVM.mainVM.showBottomMediaPlayer = false
       }
     }
   }
@@ -30,10 +30,10 @@ struct TrackDetailScreen: View {
 
 
 struct TrackDetailContent: View {
-  @EnvironmentObject var mediaDetailViewModel: MediaDetailViewModel
+  @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
 
   var details: SpotifyModel.TrackDetails {
-    let detailsTypes = mediaDetailViewModel.media!.getDetails()
+    let detailsTypes = mediaDetailVM.mainItem!.getDetails()
     switch detailsTypes {
     case .tracks(let trackDetails):
       return SpotifyModel.TrackDetails(popularity: trackDetails.popularity,
@@ -53,9 +53,9 @@ struct TrackDetailContent: View {
     VStack(alignment: .center) {
       SmallTopSection(albumName: details.album!.name)
       Spacer()
-      BigTrackImage(imageURL: mediaDetailViewModel.media!.imageURL)
-      TrackInfoSection(songName: mediaDetailViewModel.media!.title,
-                       author: mediaDetailViewModel.media!.author!,
+      BigTrackImage(imageURL: mediaDetailVM.mainItem!.imageURL)
+      TrackInfoSection(songName: mediaDetailVM.mainItem!.title,
+                       author: mediaDetailVM.mainItem!.author!,
                        isLiked: true, // TODO: Use real data
                        isExplicit: details.explicit)
       SpotifySlider(durationInMs: details.durationInMs)
@@ -72,7 +72,7 @@ struct TrackDetailContent: View {
 
 
 struct TrackDetailScreen_Previews: PreviewProvider {
-  static var mainViewModel = MainViewModel()
+  static var mainVM = MainViewModel()
 
   static var previews: some View {
     ZStack {

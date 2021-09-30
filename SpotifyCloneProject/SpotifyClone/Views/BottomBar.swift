@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BottomBar: View {
-  @StateObject var mainViewModel: MainViewModel
+  @StateObject var mainVM: MainViewModel
   var showMediaPlayer = false
 
   var body: some View {
@@ -20,7 +20,7 @@ struct BottomBar: View {
                                artist: "Ed Sheeran",
                                cover: Image("shape-of-you-cover"))
         }
-        BottomNavigationBar(mainViewModel: mainViewModel)
+        BottomNavigationBar(mainVM: mainVM)
       }
     }
   }
@@ -75,23 +75,23 @@ private struct BottomMediaPlayerBar: View {
 
 
 private struct BottomNavigationBar: View {
-  @StateObject var mainViewModel: MainViewModel
+  @StateObject var mainVM: MainViewModel
 
   var body: some View {
     ZStack {
       VStack(spacing: 0) {
         HStack {
-          BottomNavigationItem(mainViewModel: mainViewModel,
+          BottomNavigationItem(mainVM: mainVM,
                                assignedPage: .home,
                                itemName: "Home",
                                iconWhenUnselected: Image("home-unselected"),
                                iconWhenSelected: Image("home-selected"))
-          BottomNavigationItem(mainViewModel: mainViewModel,
+          BottomNavigationItem(mainVM: mainVM,
                                assignedPage: .search,
                                itemName: "Search",
                                iconWhenUnselected: Image("search-unselected"),
                                iconWhenSelected: Image("search-selected"))
-          BottomNavigationItem(mainViewModel: mainViewModel,
+          BottomNavigationItem(mainVM: mainVM,
                                assignedPage: .myLibrary,
                                itemName: "My Library",
                                iconWhenUnselected: Image("library-unselected"),
@@ -109,7 +109,7 @@ private struct BottomNavigationBar: View {
 
   // TODO: Call this struct in a clever way
   private struct BottomNavigationItem: View {
-    @StateObject var mainViewModel: MainViewModel
+    @StateObject var mainVM: MainViewModel
     var assignedPage: Page
 
     var itemName: String
@@ -117,7 +117,7 @@ private struct BottomNavigationBar: View {
     var iconWhenSelected: Image
 
     var thisPageIsTheCurrentPage: Bool {
-      mainViewModel.currentPage == assignedPage
+      mainVM.currentPage == assignedPage
     }
 
     var body: some View {
@@ -126,7 +126,7 @@ private struct BottomNavigationBar: View {
         buildIcon()
         Text(itemName).font(.avenir(.medium, size: bottomBarFontSize))
       }.frame(maxWidth: .infinity, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-      .onTapGesture { mainViewModel.currentPage = assignedPage}
+      .onTapGesture { mainVM.currentPage = assignedPage}
       .foregroundColor(thisPageIsTheCurrentPage ? selectedItemColor : unselectedItemColor)
     }
 

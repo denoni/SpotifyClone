@@ -60,7 +60,7 @@ struct APIAuthentication {
                headers: headers)
       .responseDecodable(of: AuthKey.self) { response in
         guard let key = response.value else {
-          fatalError("Error receiving access keys from API. If you tried to log in using Google, Apple or Facebook, this may be the error cause (in some cases this type of authentication is resulting in errors)") // TODO: Fix it
+          fatalError("Error receiving access keys from API. Check if your ApiKey and Secret are correct in YourSensitiveData. If you tried to log in using Google, Apple or Facebook, this may be the error cause (in some cases this type of authentication is resulting in errors)") // TODO: Fix it
         }
         completionHandler(key)
       }
