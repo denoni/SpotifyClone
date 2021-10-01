@@ -26,6 +26,7 @@ struct SpotifyModel {
   }
   
   struct MediaItem: Identifiable {
+
     var title: String
     var previewURL: String
     var imageURL: String
