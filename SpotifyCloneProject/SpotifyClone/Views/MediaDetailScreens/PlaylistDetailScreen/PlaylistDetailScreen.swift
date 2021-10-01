@@ -57,11 +57,36 @@ struct PlaylistDetailContent: View {
         BigPlayButton()
       }.frame(height: 65)
 
-      PlaylistsScrollView()
+      if didEverySectionLoaded() {
+        PlaylistsScrollView(medias: mediaDetailVM.mediaCollection[.playlist(.tracksFromPlaylist)]!)
+      } else {
+        HStack {
+          ProgressView()
+            .withSpotifyStyle(useDiscreetColors: true)
+            .onAppear {
+              mediaDetailVM.getPlaylistScreenData()
+            }
+        }.frame(maxWidth: .infinity, alignment: .center)
+        Spacer()
+      }
+
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .padding(25)
+
   }
+
+  func didEverySectionLoaded() -> Bool {
+    for section in MediaDetailViewModel.PlaylistSections.allCases {
+      // If any section still loading, return false
+      guard mediaDetailVM.isLoading[.playlist(section)] != true else {
+        return false
+      }
+    }
+    // else, return true
+    return true
+  }
+
 }
 
 

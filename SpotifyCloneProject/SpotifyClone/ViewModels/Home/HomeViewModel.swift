@@ -306,9 +306,9 @@ class HomeViewModel: ObservableObject {
                        mediaDetailVM: MediaDetailViewModel,
                        withData data: SpotifyModel.MediaItem) {
     mediaDetailVM.clean()
+    mediaDetailVM.mainItem = data
     mediaDetailVM.accessToken = mainVM.authKey!.accessToken
     mediaDetailVM.setVeryFirstImageInfoBasedOn(data.imageURL)
-    mediaDetailVM.mainItem = data
     currentSubPage = subPage
   }
   

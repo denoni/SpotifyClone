@@ -39,7 +39,18 @@ struct ArtistDetailScreen: View {
 struct ArtistDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
 
-  var details: SpotifyModel.ArtistDetails { SpotifyModel.getArtistDetails(for: mediaDetailVM.mainItem!) }
+  var details: SpotifyModel.ArtistDetails {
+    let detailsTypes = mediaDetailVM.mainItem!.getDetails()
+    switch detailsTypes {
+    case .artists(let artistDetails):
+      return SpotifyModel.ArtistDetails(followers: artistDetails.followers,
+                                           genres: artistDetails.genres,
+                                           popularity: artistDetails.popularity,
+                                           id: artistDetails.id)
+    default:
+      fatalError("Wrong type for PlaylistDetailScreen")
+    }
+  }
 
   var body: some View {
     VStack(alignment: .center, spacing: 15) {
@@ -65,18 +76,18 @@ struct ArtistDetailContent: View {
             Text("Popular Tracks")
               .spotifyTitle()
               .padding(.trailing, 40)
-            ArtistTracks(medias: mediaDetailVM.mediaCollection[.topTracksFromArtist]!)
+            ArtistTracks(medias: mediaDetailVM.mediaCollection[.artist(.topTracksFromArtist)]!)
           }
 
           VStack {
             Text("Popular Albums")
               .spotifyTitle()
               .padding(.trailing, 40)
-            ArtistAlbums(medias: mediaDetailVM.mediaCollection[.albumsFromArtist]!)
+            ArtistAlbums(medias: mediaDetailVM.mediaCollection[.artist(.albumsFromArtist)]!)
           }
 
           // TODO: Load the correct data
-          ArtistMediaHorizontalScrollView(medias: mediaDetailVM.mediaCollection[.playlistsFromArtist]!,
+          ArtistMediaHorizontalScrollView(medias: mediaDetailVM.mediaCollection[.artist(.playlistsFromArtist)]!,
                                           sectionTitle: "Featuring \(mediaDetailVM.mainItem!.title)")
             .padding(.trailing, -25)
         }
@@ -84,9 +95,7 @@ struct ArtistDetailContent: View {
         ProgressView()
           .withSpotifyStyle(useDiscreetColors: true)
           .onAppear {
-            mediaDetailVM.getAlbumsFromArtist()
-            mediaDetailVM.getTopTracksFromArtist()
-            mediaDetailVM.getPlaylistFromArtist()
+            mediaDetailVM.getArtistScreenData()
           }
         Spacer()
       }
@@ -97,9 +106,9 @@ struct ArtistDetailContent: View {
   }
 
   func didEverySectionLoaded() -> Bool {
-    for key in mediaDetailVM.isLoading.keys {
+    for section in MediaDetailViewModel.ArtistSections.allCases {
       // If any section still loading, return false
-      guard mediaDetailVM.isLoading[key] != true else {
+      guard mediaDetailVM.isLoading[.artist(section)] != true else {
         return false
       }
     }
