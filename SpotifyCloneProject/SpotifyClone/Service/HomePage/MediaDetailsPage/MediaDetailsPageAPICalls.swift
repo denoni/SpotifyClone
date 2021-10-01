@@ -17,7 +17,9 @@ class MediaDetailsPageAPICalls: ObservableObject {
   var albumAPI = APIFetchingAlbums()
   var playlistAPI = APIFetchingPlaylists()
 
-  // MARK: - Top Tracks From Artist
+  // MARK: - Artist Screen
+
+  // MARK: Top Tracks From Artist
   func getTopTracksFromArtist(with accessToken: String,
                               artistID: String,
                               completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
@@ -26,7 +28,7 @@ class MediaDetailsPageAPICalls: ObservableObject {
                       with: accessToken, completionHandler: completionHandler)
   }
 
-  // MARK: - Albums From Artist
+  // MARK: Albums From Artist
   func getAlbumsFromArtist(with accessToken: String,
                            artistID: String,
                            completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
@@ -34,7 +36,7 @@ class MediaDetailsPageAPICalls: ObservableObject {
                       with: accessToken, completionHandler: completionHandler)
   }
 
-  // MARK: - Playlists From Artist
+  // MARK: Playlists From Artist
   func getPlaylistsFromArtist(with accessToken: String,
                               keyWord: String,
                               completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
@@ -42,13 +44,19 @@ class MediaDetailsPageAPICalls: ObservableObject {
                             with: accessToken, completionHandler: completionHandler)
   }
 
-  // MARK: - Tracks From Playlist
+
+  // MARK: - Album Screen
+
+  // MARK: Tracks From Playlist
   func getTracksFromPlaylist(with accessToken: String,
-                                playlistID: String,
-                                completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
+                             playlistID: String,
+                             limit: Int = 10,
+                             offset: Int = 0,
+                             completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
 
     trackAPI.getTrack(using: .tracksFromPlaylist(playlistID: playlistID),
-                      with: accessToken, completionHandler: completionHandler)
+                      with: accessToken, limit: limit, offset: offset,
+                      completionHandler: completionHandler)
   }
 
 

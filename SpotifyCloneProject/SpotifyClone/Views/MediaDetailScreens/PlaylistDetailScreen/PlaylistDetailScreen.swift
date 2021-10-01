@@ -64,7 +64,7 @@ struct PlaylistDetailContent: View {
           ProgressView()
             .withSpotifyStyle(useDiscreetColors: true)
             .onAppear {
-              mediaDetailVM.getPlaylistScreenData()
+              MediaDetailViewModel.PlaylistAPICalls.getTracksFromPlaylist(mediaVM: mediaDetailVM, loadMoreEnabled: true)
             }
         }.frame(maxWidth: .infinity, alignment: .center)
         Spacer()
