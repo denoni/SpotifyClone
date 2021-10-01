@@ -54,7 +54,6 @@ class APIFetchingArtists {
           let followers = data.items[itemIndex].followers!.total
           let genres = data.items[itemIndex].genres
           let popularity = data.items[itemIndex].popularity
-          let href = data.items[itemIndex].href
 
           let artistItem = SpotifyModel.MediaItem(title: title,
                                                   previewURL: "",
@@ -65,7 +64,7 @@ class APIFetchingArtists {
                                                   details: SpotifyModel.DetailTypes.artists(artistDetails: SpotifyModel.ArtistDetails(followers: followers,
                                                                                                                                       genres: genres!,
                                                                                                                                       popularity: popularity!,
-                                                                                                                                      href: href)))
+                                                                                                                                      id: id)))
           artists.append(artistItem)
         }
         completionHandler(artists)

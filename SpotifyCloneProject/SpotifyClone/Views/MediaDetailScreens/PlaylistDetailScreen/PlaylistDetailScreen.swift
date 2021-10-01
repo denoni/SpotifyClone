@@ -37,9 +37,9 @@ struct PlaylistDetailContent: View {
     switch detailsTypes {
     case .playlists(let playlistDetails):
       return SpotifyModel.PlaylistDetails(description: playlistDetails.description,
-                                             playlistTracks: playlistDetails.playlistTracks,
-                                             owner: playlistDetails.owner,
-                                             href: playlistDetails.href)
+                                          playlistTracks: playlistDetails.playlistTracks,
+                                          owner: playlistDetails.owner,
+                                          id: playlistDetails.id)
     default:
       fatalError("Wrong type for PlaylistDetailScreen")
     }

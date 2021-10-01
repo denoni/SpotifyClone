@@ -14,6 +14,7 @@ class APIFetchingTracks {
     case userRecentlyPlayed
     case userFavoriteTracks
     case topTracksFromArtist(artistID: String)
+    case tracksFromPlaylist(playlistID: String)
   }
 
   func getTrack(using endPoint: TrackEndpointInAPI,
@@ -31,6 +32,8 @@ class APIFetchingTracks {
       baseUrl = "https://api.spotify.com/v1/me/top/tracks?limit=\(limit)&offset=\(offset)"
     case .topTracksFromArtist(let artistID):
       baseUrl = "https://api.spotify.com/v1/artists/\(artistID)/top-tracks?market=US"
+    case .tracksFromPlaylist(let playlistID):
+      baseUrl = "https://api.spotify.com/v1/playlists/\(playlistID)/tracks"
     }
 
     var urlRequest = URLRequest(url: URL(string: baseUrl)!)
@@ -67,12 +70,12 @@ class APIFetchingTracks {
         let id = data.tracks[trackIndex].id
         var authorName = [String]()
 
-        let trackHref = data.tracks[trackIndex].href
+        let trackID = data.tracks[trackIndex].id
         let popularity = data.tracks[trackIndex].popularity
         let explicit = data.tracks[trackIndex].explicit
         let durationInMs = data.tracks[trackIndex].duration_ms
         let albumName = data.tracks[trackIndex].album.name
-        let albumHref = data.tracks[trackIndex].album.href
+        let albumID = data.tracks[trackIndex].album.id
         let numberOfTracks = data.tracks[trackIndex].album.total_tracks
         let releaseDate = data.tracks[trackIndex].album.release_date
 
@@ -92,11 +95,11 @@ class APIFetchingTracks {
                       trackDetails: SpotifyModel.TrackDetails(popularity: popularity,
                                                               explicit: explicit,
                                                               durationInMs: durationInMs,
-                                                              href: trackHref,
+                                                              id: trackID,
                                                               album: SpotifyModel.AlbumDetails(name: albumName,
                                                                                                numberOfTracks: numberOfTracks,
-                                                                                               href: albumHref,
-                                                                                               releaseDate: releaseDate))))
+                                                                                               releaseDate: releaseDate,
+                                                                                               id: albumID))))
 
         trackItems.append(trackItem)
       }

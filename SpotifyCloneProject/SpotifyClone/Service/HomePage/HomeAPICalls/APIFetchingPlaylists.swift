@@ -67,7 +67,6 @@ class APIFetchingPlaylists {
         let description = data.playlists.items[playlistIndex].description
         let playlistTracks = data.playlists.items[playlistIndex].tracks
         let mediaOwner = data.playlists.items[playlistIndex].owner
-        let href = data.playlists.items[playlistIndex].href
 
         let playlistItem = SpotifyModel.MediaItem(title: title,
                                                   previewURL: sectionTitle ?? "You Might Like",
@@ -77,11 +76,11 @@ class APIFetchingPlaylists {
                                                   id: id,
                                                   details: SpotifyModel.DetailTypes.playlists(
                                                     playlistDetails: SpotifyModel.PlaylistDetails(description: description,
-                                                                                                  playlistTracks: SpotifyModel.PlaylistTracks(href: playlistTracks.href,
-                                                                                                                                              numberOfSongs: playlistTracks.total),
-                                                                                                  owner: SpotifyModel.MediaOwner(href: mediaOwner.href,
-                                                                                                                                 displayName:mediaOwner.display_name),
-                                                                                                  href: href)))
+                                                                                                  playlistTracks: SpotifyModel.PlaylistTracks(numberOfSongs: playlistTracks.total,
+                                                                                                                                              href: playlistTracks.href),
+                                                                                                  owner: SpotifyModel.MediaOwner(displayName: mediaOwner.display_name,
+                                                                                                                                 id: mediaOwner.id),
+                                                                                                  id: id)))
         trackItems.append(playlistItem)
       }
       completionHandler(trackItems)

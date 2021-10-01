@@ -61,7 +61,7 @@ class APIFetchingShows {
 
           let description = data.shows.items[itemIndex].description
           let explicit = data.shows.items[itemIndex].explicit
-          let showHref = data.shows.items[itemIndex].href
+          let showID = data.shows.items[itemIndex].id
           let numberOfEpisodes = data.shows.items[itemIndex].total_episodes
 
           let podcastItem = SpotifyModel.MediaItem(title: title,
@@ -74,7 +74,7 @@ class APIFetchingShows {
                                                    details: SpotifyModel.DetailTypes.shows(showDetails: SpotifyModel.ShowDetails(description: description,
                                                                                                                                  explicit: explicit,
                                                                                                                                  numberOfEpisodes: numberOfEpisodes,
-                                                                                                                                 href: showHref)))
+                                                                                                                                 id: showID)))
           podcastItems.append(podcastItem)
         }
         completionHandler(podcastItems)

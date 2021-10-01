@@ -34,12 +34,21 @@ class MediaDetailsPageAPICalls: ObservableObject {
                       with: accessToken, completionHandler: completionHandler)
   }
 
-  // MARK: - Playlists From Artis
+  // MARK: - Playlists From Artist
   func getPlaylistsFromArtist(with accessToken: String,
                               keyWord: String,
                               completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
     playlistAPI.getPlaylist(using: .playlistWithKeyword(keyWord: keyWord),
                             with: accessToken, completionHandler: completionHandler)
+  }
+
+  // MARK: - Tracks From Playlist
+  func getTracksFromPlaylist(with accessToken: String,
+                                playlistID: String,
+                                completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
+
+    trackAPI.getTrack(using: .tracksFromPlaylist(playlistID: playlistID),
+                      with: accessToken, completionHandler: completionHandler)
   }
 
 

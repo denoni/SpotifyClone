@@ -118,7 +118,7 @@ class MediaDetailViewModel: ObservableObject {
         if !containsDuplicate { noDuplicateMedias.append(media) }
       }
     }
-    
+
     return noDuplicateMedias
   }
 

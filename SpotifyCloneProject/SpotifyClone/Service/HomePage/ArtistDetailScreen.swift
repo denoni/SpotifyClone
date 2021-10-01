@@ -46,7 +46,7 @@ struct ArtistDetailContent: View {
       return SpotifyModel.ArtistDetails(followers: artistDetails.followers,
                                            genres: artistDetails.genres,
                                            popularity: artistDetails.popularity,
-                                           href: artistDetails.href)
+                                           id: artistDetails.id)
     default:
       fatalError("Wrong type for PlaylistDetailScreen")
     }

@@ -39,11 +39,11 @@ struct TrackDetailContent: View {
       return SpotifyModel.TrackDetails(popularity: trackDetails.popularity,
                                           explicit: trackDetails.explicit,
                                           durationInMs: trackDetails.durationInMs,
-                                          href: trackDetails.href,
+                                          id: trackDetails.id,
                                           album: SpotifyModel.AlbumDetails(name: trackDetails.album!.name,
                                                                            numberOfTracks: trackDetails.album!.numberOfTracks,
-                                                                           href: trackDetails.album!.href,
-                                                                           releaseDate: trackDetails.album!.releaseDate))
+                                                                           releaseDate: trackDetails.album!.releaseDate,
+                                                                           id: trackDetails.album!.id))
     default:
       fatalError("Wrong type for TrackDetailScreen")
     }

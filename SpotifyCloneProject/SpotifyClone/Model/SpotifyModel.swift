@@ -54,6 +54,8 @@ struct SpotifyModel {
           return DetailTypes.album(albumDetails: albumDetails)
       }
     }
+
+
   }
 
 
@@ -72,14 +74,14 @@ struct SpotifyModel {
     var description: String
     var explicit: Bool
     var numberOfEpisodes: Int
-    var href: String
+    var id: String
   }
 
   struct TrackDetails {
     var popularity: Int
     var explicit: Bool
     var durationInMs: Double
-    var href: String
+    var id: String
     var album: AlbumDetails?
   }
 
@@ -87,32 +89,100 @@ struct SpotifyModel {
     var description: String
     var playlistTracks: PlaylistTracks
     var owner: MediaOwner
-    var href: String
+    var id: String
   }
 
   struct ArtistDetails {
     var followers: Int
     var genres: [String]
     var popularity: Int
-    var href: String
+    var id: String
   }
 
   struct AlbumDetails {
     var name: String
     var numberOfTracks: Int
-    var href: String
     var releaseDate: String // yyyy-MM-dd
+    var id: String
   }
 
   // MARK: - Sub structs
   struct PlaylistTracks {
-    var href: String
     var numberOfSongs: Int
+    var href: String // Can't use id because some responses only return href
   }
 
   struct MediaOwner {
-    var href: String
     var displayName: String
+    var id: String
+  }
+
+  // MARK: - Auxiliary functions
+
+  static func getShowDetails(for mediaItem: MediaItem) -> ShowDetails {
+    let detailsTypes = mediaItem.getDetails()
+    switch detailsTypes {
+    case .shows(let showDetails):
+      return SpotifyModel.ShowDetails(description: showDetails.description,
+                                      explicit: showDetails.explicit,
+                                      numberOfEpisodes: showDetails.numberOfEpisodes,
+                                      id: showDetails.id)
+    default:
+      fatalError("Wrong type for `ArtistDetails`")
+    }
+  }
+
+  static func getTrackDetails(for mediaItem: MediaItem) -> TrackDetails {
+    let detailsTypes = mediaItem.getDetails()
+    switch detailsTypes {
+    case .tracks(let trackDetails):
+      return SpotifyModel.TrackDetails(popularity: trackDetails.popularity,
+                                       explicit: trackDetails.explicit,
+                                       durationInMs: trackDetails.durationInMs,
+                                       id: trackDetails.id,
+                                       album: trackDetails.album)
+    default:
+      fatalError("Wrong type for `ArtistDetails`")
+    }
+  }
+
+  static func getPlaylistDetails(for mediaItem: MediaItem) -> PlaylistDetails {
+    let detailsTypes = mediaItem.getDetails()
+    switch detailsTypes {
+    case .playlists(let playlistDetails):
+      return SpotifyModel.PlaylistDetails(description: playlistDetails.description,
+                                          playlistTracks: playlistDetails.playlistTracks,
+                                          owner: playlistDetails.owner,
+                                          id: playlistDetails.id)
+    default:
+      fatalError("Wrong type for `ArtistDetails`")
+    }
+  }
+
+  static func getArtistDetails(for mediaItem: MediaItem) -> ArtistDetails {
+    let detailsTypes = mediaItem.getDetails()
+    switch detailsTypes {
+    case .artists(let artistDetails):
+      return SpotifyModel.ArtistDetails(followers: artistDetails.followers,
+                                        genres: artistDetails.genres,
+                                        popularity: artistDetails.popularity,
+                                        id: artistDetails.id)
+    default:
+      fatalError("Wrong type for `ArtistDetails`")
+    }
+  }
+
+  static func getAlbumDetails(for mediaItem: MediaItem) -> AlbumDetails {
+    let detailsTypes = mediaItem.getDetails()
+    switch detailsTypes {
+    case .album(let albumDetails):
+      return SpotifyModel.AlbumDetails(name: albumDetails.name,
+                                       numberOfTracks: albumDetails.numberOfTracks,
+                                       releaseDate: albumDetails.releaseDate,
+                                       id: albumDetails.id)
+    default:
+      fatalError("Wrong type for `ArtistDetails`")
+    }
   }
 
 }

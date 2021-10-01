@@ -35,8 +35,8 @@ struct AlbumDetailContent: View {
       case .album(let albumDetails):
         return SpotifyModel.AlbumDetails(name: albumDetails.name,
                                             numberOfTracks: albumDetails.numberOfTracks,
-                                            href: albumDetails.href,
-                                            releaseDate: albumDetails.releaseDate)
+                                            releaseDate: albumDetails.releaseDate,
+                                            id: albumDetails.id)
       default:
         fatalError("Wrong type for PlaylistDetailScreen")
       }

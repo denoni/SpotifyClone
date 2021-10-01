@@ -66,7 +66,7 @@ class APIFetchingAlbums {
         let id = data.albums[albumIndex].id
         var authorName = [String]()
 
-        let albumHref = data.albums[albumIndex].href
+        let albumID = data.albums[albumIndex].id
         let numberOfTracks = data.albums[albumIndex].total_tracks
         let releaseDate = data.albums[albumIndex].release_date
 
@@ -83,8 +83,8 @@ class APIFetchingAlbums {
                                                id: id,
                                                details: SpotifyModel.DetailTypes.album(albumDetails: SpotifyModel.AlbumDetails(name: title,
                                                                                                                                numberOfTracks: numberOfTracks,
-                                                                                                                               href: albumHref,
-                                                                                                                               releaseDate: releaseDate)))
+                                                                                                                               releaseDate: releaseDate,
+                                                                                                                               id: albumID)))
 
         albumItems.append(albumItem)
       }
