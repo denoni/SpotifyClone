@@ -70,36 +70,54 @@ struct ArtistDetailContent: View {
           .frame(height: 65)
           .padding(.bottom, 25)
 
-      if mediaDetailVM.isLoading {
-        ProgressView()
-          .withSpotifyStyle(useDiscreetColors: true)
-          .onAppear { mediaDetailVM.getTopTracksFromArtist() }
-        Spacer()
-      } else {
+      if didEverySectionLoaded() {
         VStack(spacing: 60) {
           VStack {
             Text("Popular Tracks")
               .spotifyTitle()
-            ArtistTracks(medias: mediaDetailVM.mediaCollection)
+              .padding(.trailing, 40)
+            ArtistTracks(medias: mediaDetailVM.mediaCollection[.topTracksFromArtist]!)
           }
 
           VStack {
             Text("Popular Albums")
               .spotifyTitle()
-            ArtistAlbums()
+              .padding(.trailing, 40)
+            ArtistAlbums(medias: mediaDetailVM.mediaCollection[.albumsFromArtist]!)
           }
 
           // TODO: Load the correct data
-          ArtistMediaHorizontalScrollView(medias: mediaDetailVM.mediaCollection,
+          ArtistMediaHorizontalScrollView(medias: mediaDetailVM.mediaCollection[.playlistsFromArtist]!,
                                           sectionTitle: "Featuring \(mediaDetailVM.mainItem!.title)")
             .padding(.trailing, -25)
         }
+      } else {
+        ProgressView()
+          .withSpotifyStyle(useDiscreetColors: true)
+          .onAppear {
+            mediaDetailVM.getAlbumsFromArtist()
+            mediaDetailVM.getTopTracksFromArtist()
+            mediaDetailVM.getPlaylistFromArtist()
+          }
+        Spacer()
       }
 
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .padding(25)
   }
+
+  func didEverySectionLoaded() -> Bool {
+    for key in mediaDetailVM.isLoading.keys {
+      // If any section still loading, return false
+      guard mediaDetailVM.isLoading[key] != true else {
+        return false
+      }
+    }
+    // else, return true
+    return true
+  }
+
 }
 
 

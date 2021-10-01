@@ -12,6 +12,7 @@ class APIFetchingAlbums {
 
   enum AlbumsEndpointInAPI {
     case newReleases
+    case artistAlbums(artistID: String)
   }
 
   func getAlbum(using endPoint: AlbumsEndpointInAPI,
@@ -27,6 +28,8 @@ class APIFetchingAlbums {
     switch endPoint {
     case .newReleases:
       baseUrl = "https://api.spotify.com/v1/browse/new-releases?country=\(country)&limit=\(limit)&offset=\(offset)"
+    case .artistAlbums(let artistID):
+      baseUrl = "https://api.spotify.com/v1/artists/\(artistID)/albums"
     }
 
     var urlRequest = URLRequest(url: URL(string: baseUrl)!)
@@ -34,54 +37,59 @@ class APIFetchingAlbums {
     urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
     urlRequest.cachePolicy = NSURLRequest.CachePolicy.returnCacheDataElseLoad
 
+    var albumItems = [SpotifyModel.MediaItem]()
+
     AF.request(urlRequest)
       .validate()
       .responseDecodable(of: AlbumResponse.self) { response in
-
-        guard let data = response.value else {
-          fatalError("Error receiving tracks from API.")
-        }
-
-        let numberOfItems = data.albums.items.count
-
-        guard numberOfItems != 0 else {
-          fatalError("The API response was corrects but empty. We don't have a way to handle this yet.")
-        }
-
-        var trackItems = [SpotifyModel.MediaItem]()
-
-        for itemIndex in 0 ..< numberOfItems {
-          let title = data.albums.items[itemIndex].name
-          let imageURL = data.albums.items[itemIndex].images?[0].url
-          let author = data.albums.items[itemIndex].artists
-          let id = data.albums.items[itemIndex].id
-          var authorName = [String]()
-
-          let albumHref = data.albums.items[itemIndex].href
-          let numberOfTracks = data.albums.items[itemIndex].total_tracks
-          let releaseDate = data.albums.items[itemIndex].release_date
-
-          for artistIndex in data.albums.items[itemIndex].artists.indices {
-            authorName.append(data.albums.items[itemIndex].artists[artistIndex].name)
-          }
-
-          let trackItem = SpotifyModel.MediaItem(title: title,
-                                                 previewURL: "",
-                                                 imageURL: imageURL ?? "",
-                                                 authorName: authorName,
-                                                 author: author,
-                                                 mediaType: .album,
-                                                 id: id,
-                                                 details: SpotifyModel.DetailTypes.album(albumDetails: SpotifyModel.AlbumDetails(name: title,
-                                                                                                                                 numberOfTracks: numberOfTracks,
-                                                                                                                                 href: albumHref,
-                                                                                                                                 releaseDate: releaseDate)))
-          trackItems.append(trackItem)
-        }
-        completionHandler(trackItems)
+        parseResponse(response)
       }
 
+    func parseResponse(_ response: DataResponse<AlbumResponse, AFError>) {
+
+      guard let data = response.value else {
+        fatalError("Error receiving tracks from API.")
+      }
+
+      let numberOfItems = data.albums.count
+
+      guard numberOfItems != 0 else {
+        fatalError("The API response was corrects but empty. We don't have a way to handle this yet.")
+      }
+
+
+
+      for albumIndex in 0 ..< numberOfItems {
+        let title = data.albums[albumIndex].name
+        let imageURL = data.albums[albumIndex].images?[0].url
+        let author = data.albums[albumIndex].artists
+        let id = data.albums[albumIndex].id
+        var authorName = [String]()
+
+        let albumHref = data.albums[albumIndex].href
+        let numberOfTracks = data.albums[albumIndex].total_tracks
+        let releaseDate = data.albums[albumIndex].release_date
+
+        for artistIndex in data.albums[albumIndex].artists.indices {
+          authorName.append(data.albums[albumIndex].artists[artistIndex].name)
+        }
+
+        let albumItem = SpotifyModel.MediaItem(title: title,
+                                               previewURL: "",
+                                               imageURL: imageURL ?? "",
+                                               authorName: authorName,
+                                               author: author,
+                                               mediaType: .album,
+                                               id: id,
+                                               details: SpotifyModel.DetailTypes.album(albumDetails: SpotifyModel.AlbumDetails(name: title,
+                                                                                                                               numberOfTracks: numberOfTracks,
+                                                                                                                               href: albumHref,
+                                                                                                                               releaseDate: releaseDate)))
+
+        albumItems.append(albumItem)
+      }
+      completionHandler(albumItems)
+    }
+
   }
-
-
 }

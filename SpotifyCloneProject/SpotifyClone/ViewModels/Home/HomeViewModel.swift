@@ -17,7 +17,7 @@
 import SwiftUI
 
 class HomeViewModel: ObservableObject {
-  var api = HomePageAPIDispatches()
+  var api = HomePageAPICalls()
   @Published var mainVM: MainViewModel
   
   @Published var isLoading = [Section:Bool]()
@@ -305,7 +305,7 @@ class HomeViewModel: ObservableObject {
   func changeSubpageTo(_ subPage: HomeSubpage,
                        mediaDetailVM: MediaDetailViewModel,
                        withData data: SpotifyModel.MediaItem) {
-    mediaDetailVM.isLoading = true
+    mediaDetailVM.clean()
     mediaDetailVM.accessToken = mainVM.authKey!.accessToken
     mediaDetailVM.setVeryFirstImageInfoBasedOn(data.imageURL)
     mediaDetailVM.mainItem = data

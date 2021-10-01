@@ -13,37 +13,71 @@ class MediaDetailViewModel: ObservableObject {
 
   @Published var imageColorModel = RemoteImageModel(urlString: "")
 
-  @Published var mediaCollection = [SpotifyModel.MediaItem]()
-  @Published var isLoading = true
+  @Published var mediaCollection = [Section:[SpotifyModel.MediaItem]]()
+  @Published var isLoading = [Section:Bool]()
   @Published var accessToken: String?
 
-  var api = HomePageAPIDispatches()
-
-  func getTopTracksFromArtist() {
-    api.getTrack(using: .topTracksFromArtist(artistID: mainItem!.id), with: accessToken!) { tracks in
-      guard tracks.count <= 5 else {
-        // If the api got more than 5 tracks, return just the first 5
-        self.trimAndCommunicateResult(medias: Array(tracks.prefix(5)))
-        return
-      }
-      self.trimAndCommunicateResult(medias: tracks)
+  init() {
+    for section in Section.allCases {
+      isLoading[section] = true
+      mediaCollection[section] = []
     }
   }
 
-  func trimAndCommunicateResult(medias: [SpotifyModel.MediaItem]) {
+  enum Section: CaseIterable {
+    case topTracksFromArtist
+    case albumsFromArtist
+    case playlistsFromArtist
+  }
+
+  var api = MediaDetailsPageAPICalls()
+
+  func getTopTracksFromArtist() {
+    api.getTopTracksFromArtist(with: accessToken!, artistID: mainItem!.id) { tracks in
+      self.trimAndCommunicateResult(medias: tracks, section: .topTracksFromArtist)
+    }
+  }
+
+  func getAlbumsFromArtist() {
+    api.getAlbumsFromArtist(with: accessToken!, artistID: mainItem!.id) { albums in
+      self.trimAndCommunicateResult(medias: albums, section: .albumsFromArtist)
+    }
+  }
+
+  func getPlaylistFromArtist() {
+    // Remote special characters artist title(name)
+    let keyWord: String = mainItem!.title.folding(options: .diacriticInsensitive, locale: .current)
+    
+    api.getPlaylistsFromArtist(with: accessToken!, keyWord: keyWord) { playlist in
+      self.trimAndCommunicateResult(medias: playlist, section: .playlistsFromArtist, limit: 10)
+    }
+  }
+
+
+  // MARK: - Auxiliary Functions
+
+  func trimAndCommunicateResult(medias: [SpotifyModel.MediaItem], section: Section, limit: Int = 5) {
+
+    // If the api got more than `limit` items, return just the elements within the `limit`
+    let mediasWithinTheLimit = medias.count >= limit ? Array(medias.prefix(limit)) : medias
     var noDuplicateMedias = [SpotifyModel.MediaItem]()
     var mediaIDs = [String]()
 
-    for media in medias {
+    for media in mediasWithinTheLimit {
       if !mediaIDs.contains(media.id) {
         mediaIDs.append(media.id)
         noDuplicateMedias.append(media)
       }
     }
-    mediaCollection = noDuplicateMedias
-    isLoading = false
+    mediaCollection[section] = noDuplicateMedias
+    isLoading[section] = false
   }
 
+  func clean() {
+    for section in Section.allCases {
+      isLoading[section] = true
+    }
+  }
 
   func setVeryFirstImageInfoBasedOn(_ firstImageURL: String) {
     imageColorModel = RemoteImageModel(urlString: firstImageURL)

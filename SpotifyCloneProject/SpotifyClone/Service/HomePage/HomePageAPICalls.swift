@@ -1,5 +1,5 @@
 //
-//  HomePageAPIDispatches.swift
+//  HomePageAPICalls.swift
 //  SpotifyClone
 //
 //  Created by Gabriel on 9/14/21.
@@ -11,7 +11,7 @@ import Alamofire
 // TODO: Handle empty responses and errors
 // TODO: The data received after decoding should be easier to access
 
-class HomePageAPIDispatches: ObservableObject {
+class HomePageAPICalls: ObservableObject {
 
   var trackAPI = APIFetchingTracks()
   var showsAPI = APIFetchingShows()

@@ -22,6 +22,7 @@ struct ArtistTracks: View {
             Text(media.title)
               .font(.avenir(.medium, size: 18))
               .lineLimit(1)
+              .padding(.trailing, 40)
             Text("Single • 2020") // TODO: Show real data
               .font(.avenir(.medium, size: 14))
               .opacity(0.7)

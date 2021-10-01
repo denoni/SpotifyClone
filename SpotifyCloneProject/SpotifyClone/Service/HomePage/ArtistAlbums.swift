@@ -8,17 +8,20 @@
 import SwiftUI
 
 struct ArtistAlbums: View {
-  let arr = [1,2,3,4,5]
+  let medias: [SpotifyModel.MediaItem]
 
   var body: some View {
     VStack {
-      ForEach(arr, id: \.self) { _ in
+      ForEach(medias) { media in
         HStack(spacing: 12) {
           VStack(alignment: .leading) {
-            Text("Sweetener (Studio Mix)")
+            Text(media.title)
               .font(.avenir(.medium, size: 18))
-            Text("Album • 2020")
+              .lineLimit(1)
+              .padding(.trailing, 40)
+            Text("Album • 2020") // TODO: Add real data
               .font(.avenir(.medium, size: 14))
+              .lineLimit(1)
               .opacity(0.7)
           }
           Spacer()

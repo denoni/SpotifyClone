@@ -38,7 +38,8 @@
 		C081873926EFBABF00AB19E9 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081873826EFBABF00AB19E9 /* AuthViewModel.swift */; };
 		C081873B26EFC72B00AB19E9 /* AuthAuxiliaryViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081873A26EFC72B00AB19E9 /* AuthAuxiliaryViews.swift */; };
 		C081873D26F0168700AB19E9 /* AuthKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081873C26F0168700AB19E9 /* AuthKey.swift */; };
-		C084267E26F10BBD000ACAEE /* HomePageAPIDispatches.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084267D26F10BBD000ACAEE /* HomePageAPIDispatches.swift */; };
+		C082720B270646090086E34F /* MediaDetailsPageAPICalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = C082720A270646090086E34F /* MediaDetailsPageAPICalls.swift */; };
+		C084267E26F10BBD000ACAEE /* HomePageAPICalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084267D26F10BBD000ACAEE /* HomePageAPICalls.swift */; };
 		C084268026F10DC8000ACAEE /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084267F26F10DC8000ACAEE /* AuthCoordinator.swift */; };
 		C084268426F11CF7000ACAEE /* YourSensitiveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084268326F11CF7000ACAEE /* YourSensitiveData.swift */; };
 		C084268626F14A7E000ACAEE /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084268526F14A7E000ACAEE /* RemoteImage.swift */; };
@@ -165,7 +166,8 @@
 		C081873826EFBABF00AB19E9 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		C081873A26EFC72B00AB19E9 /* AuthAuxiliaryViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAuxiliaryViews.swift; sourceTree = "<group>"; };
 		C081873C26F0168700AB19E9 /* AuthKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthKey.swift; sourceTree = "<group>"; };
-		C084267D26F10BBD000ACAEE /* HomePageAPIDispatches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageAPIDispatches.swift; sourceTree = "<group>"; };
+		C082720A270646090086E34F /* MediaDetailsPageAPICalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDetailsPageAPICalls.swift; sourceTree = "<group>"; };
+		C084267D26F10BBD000ACAEE /* HomePageAPICalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageAPICalls.swift; sourceTree = "<group>"; };
 		C084267F26F10DC8000ACAEE /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		C084268326F11CF7000ACAEE /* YourSensitiveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourSensitiveData.swift; sourceTree = "<group>"; };
 		C084268526F14A7E000ACAEE /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
@@ -350,6 +352,14 @@
 				C081873A26EFC72B00AB19E9 /* AuthAuxiliaryViews.swift */,
 			);
 			path = AuthScreen;
+			sourceTree = "<group>";
+		};
+		C0827209270645A10086E34F /* MediaDetailsPage */ = {
+			isa = PBXGroup;
+			children = (
+				C082720A270646090086E34F /* MediaDetailsPageAPICalls.swift */,
+			);
+			path = MediaDetailsPage;
 			sourceTree = "<group>";
 		};
 		C084268126F10DF3000ACAEE /* Auth */ = {
@@ -561,7 +571,8 @@
 		C09CF2122702499800EB9DA3 /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
-				C084267D26F10BBD000ACAEE /* HomePageAPIDispatches.swift */,
+				C084267D26F10BBD000ACAEE /* HomePageAPICalls.swift */,
+				C0827209270645A10086E34F /* MediaDetailsPage */,
 				C095529B2704BA7F000499B3 /* HomeAPICalls */,
 			);
 			path = HomePage;
@@ -1006,6 +1017,7 @@
 				C0F8199B26FE4F9B000F5FEE /* ArtistResponseType.swift in Sources */,
 				C081873926EFBABF00AB19E9 /* AuthViewModel.swift in Sources */,
 				C084268426F11CF7000ACAEE /* YourSensitiveData.swift in Sources */,
+				C082720B270646090086E34F /* MediaDetailsPageAPICalls.swift in Sources */,
 				C0F8198F26FE4E1B000F5FEE /* PlaylistResponseType.swift in Sources */,
 				C0F8198926FE3802000F5FEE /* MediaDetailViewModel.swift in Sources */,
 				C0C5F9782704F9E70099EEB5 /* SeeMoreButton.swift in Sources */,
@@ -1049,7 +1061,7 @@
 				C0C5F9702704ECF40099EEB5 /* BackButtonWithCircleBackground.swift in Sources */,
 				C016E610270385E300EFF870 /* ShowsDetailScreen.swift in Sources */,
 				C084E04D2703409600C6AAAE /* PlaylistAuthor.swift in Sources */,
-				C084267E26F10BBD000ACAEE /* HomePageAPIDispatches.swift in Sources */,
+				C084267E26F10BBD000ACAEE /* HomePageAPICalls.swift in Sources */,
 				C089136226F986E600CA1A69 /* ColorfulCardPair.swift in Sources */,
 				C077D4A526F3A45400EF6ADA /* AuthScope.swift in Sources */,
 				C084268626F14A7E000ACAEE /* RemoteImage.swift in Sources */,

@@ -13,7 +13,7 @@ import Foundation
 struct TrackResponse: Decodable {
   var tracks: [Track]
 
-  private enum CodingKeys : String, CodingKey { case items, tracks }
+  private enum CodingKeys: String, CodingKey { case items, tracks }
 
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)

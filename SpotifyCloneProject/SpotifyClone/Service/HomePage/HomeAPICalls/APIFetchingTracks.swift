@@ -97,6 +97,7 @@ class APIFetchingTracks {
                                                                                                numberOfTracks: numberOfTracks,
                                                                                                href: albumHref,
                                                                                                releaseDate: releaseDate))))
+
         trackItems.append(trackItem)
       }
       completionHandler(trackItems)
