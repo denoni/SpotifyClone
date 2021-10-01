@@ -29,21 +29,7 @@ struct ShowsDetailScreen: View {
 struct ShowsDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
 
-  var details: SpotifyModel.ShowDetails {
-    let detailsTypes = mediaDetailVM.mainItem!.getDetails()
-    switch detailsTypes {
-    case .shows(let showDetails):
-      return SpotifyModel.ShowDetails(description: showDetails.description,
-                                      explicit: showDetails.explicit,
-                                      numberOfEpisodes: showDetails.numberOfEpisodes,
-                                      id: showDetails.id)
-    default:
-      fatalError("Wrong type for PlaylistDetailScreen")
-    }
-  }
-
-
-
+  var details: SpotifyModel.ShowDetails { SpotifyModel.getShowDetails(for: mediaDetailVM.mainItem!) }
 
   var body: some View {
     VStack(alignment: .center, spacing: 15) {

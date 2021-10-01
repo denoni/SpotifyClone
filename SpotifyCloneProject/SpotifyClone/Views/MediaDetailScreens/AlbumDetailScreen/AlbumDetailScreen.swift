@@ -29,18 +29,7 @@ struct AlbumDetailScreen: View {
 struct AlbumDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
 
-  var details: SpotifyModel.AlbumDetails {
-    let detailsTypes = mediaDetailVM.mainItem!.getDetails()
-      switch detailsTypes {
-      case .album(let albumDetails):
-        return SpotifyModel.AlbumDetails(name: albumDetails.name,
-                                            numberOfTracks: albumDetails.numberOfTracks,
-                                            releaseDate: albumDetails.releaseDate,
-                                            id: albumDetails.id)
-      default:
-        fatalError("Wrong type for PlaylistDetailScreen")
-      }
-  }
+  var details: SpotifyModel.AlbumDetails { SpotifyModel.getAlbumDetails(for: mediaDetailVM.mainItem!) }
 
   var body: some View {
     VStack(alignment: .leading, spacing: 15) {
