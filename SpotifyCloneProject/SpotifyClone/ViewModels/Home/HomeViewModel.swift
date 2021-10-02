@@ -298,7 +298,7 @@ class HomeViewModel: ObservableObject {
   
   // MARK: - Non-api Related Functions
   
-  func goToNoneSubpage() {
+  func goToNoneSubpage( ) {
     currentSubPage = .none
   }
   

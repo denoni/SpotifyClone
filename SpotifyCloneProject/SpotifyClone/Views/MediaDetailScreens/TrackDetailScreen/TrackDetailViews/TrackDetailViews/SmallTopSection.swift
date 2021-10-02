@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SmallTopSection: View {
   @EnvironmentObject var homeVM: HomeViewModel
+  @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   var albumName: String
 
   var body: some View {

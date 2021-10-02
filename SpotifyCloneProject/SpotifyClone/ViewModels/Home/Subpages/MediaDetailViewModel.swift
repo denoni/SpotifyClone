@@ -18,22 +18,34 @@ class MediaDetailViewModel: ObservableObject {
   @Published var accessToken: String?
 
   init() {
+    
+    // Artist
     for section in ArtistSections.allCases {
       isLoading[.artist(section)] = true
       mediaCollection[.artist(section)] = []
       numberOfLoadedItemsInSection[.artist(section)] = 0
     }
 
+    // Playlist
     for section in PlaylistSections.allCases {
       isLoading[.playlist(section)] = true
       mediaCollection[.playlist(section)] = []
       numberOfLoadedItemsInSection[.playlist(section)] = 0
     }
+
+    // Album
+    for section in AlbumSections.allCases {
+      isLoading[.album(section)] = true
+      mediaCollection[.album(section)] = []
+      numberOfLoadedItemsInSection[.album(section)] = 0
+    }
+
   }
 
   enum Section: Hashable {
     case artist(_ artistSection: ArtistSections)
     case playlist(_ playlistSection: PlaylistSections)
+    case album(_ albumSection: AlbumSections)
   }
 
   enum ArtistSections: CaseIterable {
@@ -46,6 +58,12 @@ class MediaDetailViewModel: ObservableObject {
     case tracksFromPlaylist
   }
 
+  enum AlbumSections: CaseIterable {
+    case tracksFromAlbum
+  }
+
+
+
 
   var api = MediaDetailsPageAPICalls()
 
@@ -56,6 +74,10 @@ class MediaDetailViewModel: ObservableObject {
   }
 
   func getPlaylistScreenData() {
+    PlaylistAPICalls.getTracksFromPlaylist(mediaVM: self)
+  }
+
+  func getAlbumScreenData() {
     PlaylistAPICalls.getTracksFromPlaylist(mediaVM: self)
   }
 
@@ -79,8 +101,8 @@ class MediaDetailViewModel: ObservableObject {
       // Remote special characters artist title(name)
       let keyWord: String = mediaVM.mainItem!.title.folding(options: .diacriticInsensitive, locale: .current)
 
-      mediaVM.api.getPlaylistsFromArtist(with: mediaVM.accessToken!, keyWord: keyWord) { playlist in
-        mediaVM.trimAndCommunicateResult(medias: playlist, section: .artist(.playlistsFromArtist))
+      mediaVM.api.getPlaylistsFromArtist(with: mediaVM.accessToken!, keyWord: keyWord) { playlists in
+        mediaVM.trimAndCommunicateResult(medias: playlists, section: .artist(.playlistsFromArtist))
       }
     }
 
@@ -89,18 +111,37 @@ class MediaDetailViewModel: ObservableObject {
 
   struct PlaylistAPICalls {
 
-    static func getTracksFromPlaylist(mediaVM: MediaDetailViewModel, loadMoreEnabled: Bool = false) {
+    static func getTracksFromPlaylist(mediaVM: MediaDetailViewModel,
+                                      loadMoreEnabled: Bool = false) {
       let offset = mediaVM.getNumberOfLoadedItems(for: .playlist(.tracksFromPlaylist))
       mediaVM.increaseNumberOfLoadedItems(for: .playlist(.tracksFromPlaylist), by: 10)
 
-      mediaVM.api.getTracksFromPlaylist(with: mediaVM.accessToken!, playlistID: SpotifyModel.getPlaylistDetails(for: mediaVM.mainItem!).id,
-                                        offset: offset) { playlist in
-        mediaVM.trimAndCommunicateResult(medias: playlist, section: .playlist(.tracksFromPlaylist), loadMoreEnabled: loadMoreEnabled)
+      mediaVM.api.getTracksFromPlaylist(with: mediaVM.accessToken!,
+                                        playlistID: SpotifyModel.getPlaylistDetails(for: mediaVM.mainItem!).id,
+                                        offset: offset) { tracks in
+
+        mediaVM.trimAndCommunicateResult(medias: tracks, section: .playlist(.tracksFromPlaylist), loadMoreEnabled: loadMoreEnabled)
       }
     }
 
   }
 
+
+  struct AlbumAPICalls {
+
+    static func getTracksFromAlbum(mediaVM: MediaDetailViewModel,
+                                   loadMoreEnabled: Bool = false) {
+      let offset = mediaVM.getNumberOfLoadedItems(for: .album(.tracksFromAlbum))
+      mediaVM.increaseNumberOfLoadedItems(for: .album(.tracksFromAlbum), by: 10)
+
+      mediaVM.api.getTracksFromAlbum(with: mediaVM.accessToken!,
+                                     albumID: SpotifyModel.getAlbumDetails(for: mediaVM.mainItem!).id,
+                                     offset: offset) { tracks in
+        mediaVM.trimAndCommunicateResult(medias: tracks, section: .album(.tracksFromAlbum), loadMoreEnabled: loadMoreEnabled)
+      }
+    }
+
+  }
 
 
   // MARK: - API Auxiliary Functions
@@ -133,9 +174,7 @@ class MediaDetailViewModel: ObservableObject {
   }
 
   func increaseNumberOfLoadedItems(for section: Section, by amount: Int) {
-    if numberOfLoadedItemsInSection[section]! <= 50 {
-      numberOfLoadedItemsInSection[section]! += amount
-    }
+    numberOfLoadedItemsInSection[section]! += amount
   }
 
 
@@ -146,11 +185,20 @@ class MediaDetailViewModel: ObservableObject {
     for section in ArtistSections.allCases {
       isLoading[.artist(section)] = true
       mediaCollection[.artist(section)]! = []
+      numberOfLoadedItemsInSection[.artist(section)] = 0
     }
     for section in PlaylistSections.allCases {
       isLoading[.playlist(section)] = true
       mediaCollection[.playlist(section)]! = []
+      numberOfLoadedItemsInSection[.playlist(section)] = 0
     }
+    for section in AlbumSections.allCases {
+      isLoading[.album(section)] = true
+      mediaCollection[.album(section)]! = []
+      numberOfLoadedItemsInSection[.album(section)] = 0
+    }
+
+
   }
 
   func setVeryFirstImageInfoBasedOn(_ firstImageURL: String) {

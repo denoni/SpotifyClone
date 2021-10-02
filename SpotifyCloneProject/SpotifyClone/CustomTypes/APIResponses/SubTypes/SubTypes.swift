@@ -12,12 +12,12 @@ import Foundation
 struct Track: Decodable {
   var name: String
   var preview_url: String?
-  var album: Album
+  var album: Album?
   var artists: [Artist]
   var type: String
   var id: String
 
-  var popularity: Int
+  var popularity: Int?
   var explicit: Bool
   var duration_ms: Double
 }

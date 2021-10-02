@@ -45,7 +45,7 @@ class MediaDetailsPageAPICalls: ObservableObject {
   }
 
 
-  // MARK: - Album Screen
+  // MARK: - Playlist Screen
 
   // MARK: Tracks From Playlist
   func getTracksFromPlaylist(with accessToken: String,
@@ -55,6 +55,21 @@ class MediaDetailsPageAPICalls: ObservableObject {
                              completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
 
     trackAPI.getTrack(using: .tracksFromPlaylist(playlistID: playlistID),
+                      with: accessToken, limit: limit, offset: offset,
+                      completionHandler: completionHandler)
+  }
+
+
+  // MARK: - Album Screen
+
+  // MARK: Tracks From Album
+  func getTracksFromAlbum(with accessToken: String,
+                          albumID: String,
+                          limit: Int = 10,
+                          offset: Int = 0,
+                          completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
+
+    trackAPI.getTrack(using: .tracksFromAlbum(albumID: albumID),
                       with: accessToken, limit: limit, offset: offset,
                       completionHandler: completionHandler)
   }

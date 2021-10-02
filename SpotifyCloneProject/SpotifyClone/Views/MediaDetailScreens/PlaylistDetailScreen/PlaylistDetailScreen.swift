@@ -56,9 +56,8 @@ struct PlaylistDetailContent: View {
         }
         BigPlayButton()
       }.frame(height: 65)
-
       if didEverySectionLoaded() {
-        PlaylistsScrollView(medias: mediaDetailVM.mediaCollection[.playlist(.tracksFromPlaylist)]!)
+        PlaylistTracksScrollView()
       } else {
         HStack {
           ProgressView()

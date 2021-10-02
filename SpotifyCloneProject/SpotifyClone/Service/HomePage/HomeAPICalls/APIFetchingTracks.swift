@@ -15,6 +15,7 @@ class APIFetchingTracks {
     case userFavoriteTracks
     case topTracksFromArtist(artistID: String)
     case tracksFromPlaylist(playlistID: String)
+    case tracksFromAlbum(albumID: String)
   }
 
   func getTrack(using endPoint: TrackEndpointInAPI,
@@ -33,7 +34,9 @@ class APIFetchingTracks {
     case .topTracksFromArtist(let artistID):
       baseUrl = "https://api.spotify.com/v1/artists/\(artistID)/top-tracks?market=US"
     case .tracksFromPlaylist(let playlistID):
-      baseUrl = "https://api.spotify.com/v1/playlists/\(playlistID)/tracks"
+      baseUrl = "https://api.spotify.com/v1/playlists/\(playlistID)/tracks?limit=\(limit)&offset=\(offset)"
+    case .tracksFromAlbum(let albumID):
+      baseUrl = "https://api.spotify.com/v1/albums/\(albumID)/tracks?limit=\(limit)&offset=\(offset)"
     }
 
     var urlRequest = URLRequest(url: URL(string: baseUrl)!)
@@ -59,25 +62,27 @@ class APIFetchingTracks {
       let numberOfItems = data.tracks.count
 
       guard numberOfItems != 0 else {
-        fatalError("The API response was corrects but empty. We don't have a way to handle this yet.")
+        completionHandler(trackItems)
+        print("The API response was corrects but empty. We'll just return []")
+        return
       }
 
       for trackIndex in 0 ..< numberOfItems {
         let title = data.tracks[trackIndex].name
         let previewURL = data.tracks[trackIndex].preview_url
-        let imageURL = data.tracks[trackIndex].album.images?[0].url
         let author = data.tracks[trackIndex].artists
         let id = data.tracks[trackIndex].id
         var authorName = [String]()
 
-        let trackID = data.tracks[trackIndex].id
         let popularity = data.tracks[trackIndex].popularity
         let explicit = data.tracks[trackIndex].explicit
         let durationInMs = data.tracks[trackIndex].duration_ms
-        let albumName = data.tracks[trackIndex].album.name
-        let albumID = data.tracks[trackIndex].album.id
-        let numberOfTracks = data.tracks[trackIndex].album.total_tracks
-        let releaseDate = data.tracks[trackIndex].album.release_date
+
+        let imageURL = data.tracks[trackIndex].album?.images?[0].url
+        let albumName = data.tracks[trackIndex].album?.name
+        let albumID = data.tracks[trackIndex].album?.id
+        let numberOfTracks = data.tracks[trackIndex].album?.total_tracks
+        let releaseDate = data.tracks[trackIndex].album?.release_date
 
         for artistIndex in data.tracks[trackIndex].artists.indices {
           authorName.append(data.tracks[trackIndex].artists[artistIndex].name)
@@ -92,15 +97,14 @@ class APIFetchingTracks {
                      mediaType: .track,
                      id: id,
                      details: SpotifyModel.DetailTypes.tracks(
-                      trackDetails: SpotifyModel.TrackDetails(popularity: popularity,
+                      trackDetails: SpotifyModel.TrackDetails(popularity: popularity ?? 0,
                                                               explicit: explicit,
                                                               durationInMs: durationInMs,
-                                                              id: trackID,
-                                                              album: SpotifyModel.AlbumDetails(name: albumName,
-                                                                                               numberOfTracks: numberOfTracks,
-                                                                                               releaseDate: releaseDate,
-                                                                                               id: albumID))))
-
+                                                              id: id,
+                                                              album: SpotifyModel.AlbumDetails(name: albumName ?? "",
+                                                                                               numberOfTracks: numberOfTracks ?? 0,
+                                                                                               releaseDate: releaseDate ?? "0",
+                                                                                               id: albumID ?? ""))))
         trackItems.append(trackItem)
       }
       completionHandler(trackItems)

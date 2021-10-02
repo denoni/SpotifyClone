@@ -1,24 +1,26 @@
 //
-//  AlbumTracksScrollView.swift
+//  PlaylistTracksScrollView.swift
 //  SpotifyClone
 //
-//  Created by Gabriel on 9/28/21.
+//  Created by Gabriel on 9/25/21.
 //
 
 import SwiftUI
 
-struct AlbumTracksScrollView: View {
+struct PlaylistTracksScrollView: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
+
   var medias: [SpotifyModel.MediaItem] {
-    mediaDetailVM.mediaCollection[.album(.tracksFromAlbum)]!
+    mediaDetailVM.mediaCollection[.playlist(.tracksFromPlaylist)]!
   }
 
   var body: some View {
     LazyVStack {
       ForEach(medias) { media in
-        AlbumItem(title: media.title,
-                  author: media.authorName.joined(separator: ", "))
-          .onAppear { testIfShouldFetchMoreData(basedOn: media) }
+        PlaylistItem(imageURL: media.imageURL,
+                     title: media.title,
+                     authorName: media.authorName.joined(separator: ", "))
+        .onAppear { testIfShouldFetchMoreData(basedOn: media) }
       }
     }
     .padding(.top, 15)
@@ -27,23 +29,28 @@ struct AlbumTracksScrollView: View {
   func testIfShouldFetchMoreData(basedOn media: SpotifyModel.MediaItem) {
     if medias.count > 5 {
       if media.id == medias[medias.count - 4].id {
-        MediaDetailViewModel.AlbumAPICalls.getTracksFromAlbum(mediaVM: mediaDetailVM, loadMoreEnabled: true)
+        MediaDetailViewModel.PlaylistAPICalls.getTracksFromPlaylist(mediaVM: mediaDetailVM, loadMoreEnabled: true)
       }
     }
   }
 
-  struct AlbumItem: View {
+  struct PlaylistItem: View {
+    let imageURL: String
     let title: String
-    let author: String
+    let authorName: String
 
     var body: some View {
       HStack(spacing: 12) {
+        Rectangle()
+          .foregroundColor(.spotifyMediumGray)
+          .overlay(RemoteImage(urlString: imageURL))
+          .frame(width: 60, height: 60)
         VStack(alignment: .leading) {
           Text(title)
             .font(.avenir(.medium, size: 20))
-          Text(author)
+          Text(authorName)
             .font(.avenir(.medium, size: 16))
-            .opacity(0.6)
+            .opacity(0.7)
         }
         Spacer()
         Image("three-dots")
@@ -51,11 +58,9 @@ struct AlbumTracksScrollView: View {
           .padding(.vertical, 16)
       }
       .frame(height: 60)
-      .padding(.bottom, 5)
     }
   }
 
 }
-
 
 
