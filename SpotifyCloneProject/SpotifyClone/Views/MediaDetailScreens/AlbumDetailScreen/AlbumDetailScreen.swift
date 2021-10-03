@@ -8,19 +8,24 @@
 import SwiftUI
 
 struct AlbumDetailScreen: View {
+  @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
+  @State var scrollViewPosition = CGFloat.zero
+
   var body: some View {
     GeometryReader { geometry in
       ZStack {
         Color.spotifyDarkGray
-        ScrollView(showsIndicators: false) {
+        ReadableScrollView(currentPosition: $scrollViewPosition) {
           VStack {
             TopGradient(height: geometry.size.height / 1.8)
-            AlbumDetailContent()
+            AlbumDetailContent(scrollViewPosition: $scrollViewPosition)
               .padding(.top, -geometry.size.height / 1.8)
               .padding(.bottom, 180)
           }
         }
-        .disabledBouncing()
+        TopBarWithTitle(scrollViewPosition: $scrollViewPosition,
+                        title: mediaDetailVM.mainItem!.title)
+
       }.ignoresSafeArea()
     }
   }
@@ -28,17 +33,21 @@ struct AlbumDetailScreen: View {
 
 struct AlbumDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
+  @Binding var scrollViewPosition: CGFloat
+
+  var scale: CGFloat {
+    let myScale = scrollViewPosition / UIScreen.main.bounds.height * 2
+    return myScale > 0.8 ? 0.8 : myScale
+  }
 
   var details: SpotifyModel.AlbumDetails { SpotifyModel.getAlbumDetails(for: mediaDetailVM.mainItem!) }
 
   var body: some View {
     VStack(alignment: .leading, spacing: 15) {
       ZStack {
-        VStack {
-          BackButton()
-          Spacer()
-        }
         BigMediaCover(imageURL: mediaDetailVM.mainItem!.imageURL)
+          .scaleEffect(1 / (scale + 1))
+          .opacity(1 - Double(scale * 2 > 0.8 ? 0.8 : scale * 2))
       }
       .padding(.top, 25)
       MediaTitle(mediaTitle: details.name)

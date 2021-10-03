@@ -10,6 +10,7 @@ import SwiftUI
 struct TopBarWithTitle: View {
   @Binding var scrollViewPosition: CGFloat
   var title: String
+  var backButtonWithCircleBackground: Bool = false
 
   var backgroundOpacity: Double {
     let opacity = Double(scrollViewPosition / UIScreen.main.bounds.height * 2)
@@ -19,6 +20,12 @@ struct TopBarWithTitle: View {
   var titleOpacity: Double {
     let opacity = Double(log(scrollViewPosition / UIScreen.main.bounds.height * 4))
     return opacity > 0.8 ? 0.8 : opacity
+  }
+
+  var circleOpacity: Double {
+    let opacity = 1 - Double(scrollViewPosition / UIScreen.main.bounds.height * 2)
+    print(opacity)
+    return opacity - 0.7 > 0.3 ? 0.3 : opacity - 0.7
   }
 
   var body: some View {
@@ -31,8 +38,18 @@ struct TopBarWithTitle: View {
           .ignoresSafeArea()
           .opacity(backgroundOpacity)
         HStack(spacing: 15) {
-          BackButton()
-            .aspectRatio(contentMode: .fit)
+          if backButtonWithCircleBackground {
+            Circle()
+              .overlay(BackButton()
+                        .padding(5)
+                        .padding(.trailing, -3)
+                        .scaledToFit())
+              .foregroundColor(.black.opacity(circleOpacity))
+              .frame(width: 35, height: 35)
+          } else {
+            BackButton()
+              .aspectRatio(contentMode: .fit)
+          }
           Text(title)
             .font(.avenir(.black, size: 20))
             .opacity(titleOpacity > 0.8 ? 0.8 : titleOpacity)

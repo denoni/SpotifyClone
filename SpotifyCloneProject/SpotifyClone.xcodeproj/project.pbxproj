@@ -93,7 +93,6 @@
 		C0A06A7C26E18A6F00E85DD4 /* SearchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A06A7B26E18A6F00E85DD4 /* SearchScreen.swift */; };
 		C0C5F96B2704DE9E0099EEB5 /* ArtistDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C5F96A2704DE9E0099EEB5 /* ArtistDetailScreen.swift */; };
 		C0C5F96E2704DF9D0099EEB5 /* ArtistPictureGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C5F96D2704DF9D0099EEB5 /* ArtistPictureGradient.swift */; };
-		C0C5F9702704ECF40099EEB5 /* BackButtonWithCircleBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C5F96F2704ECF40099EEB5 /* BackButtonWithCircleBackground.swift */; };
 		C0C5F9722704EF3D0099EEB5 /* BigArtistNameTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C5F9712704EF3D0099EEB5 /* BigArtistNameTitle.swift */; };
 		C0C5F9742704F2A40099EEB5 /* ArtistTracks.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C5F9732704F2A40099EEB5 /* ArtistTracks.swift */; };
 		C0C5F9762704F76D0099EEB5 /* ArtistAlbums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C5F9752704F76D0099EEB5 /* ArtistAlbums.swift */; };
@@ -226,7 +225,6 @@
 		C0A06A7B26E18A6F00E85DD4 /* SearchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreen.swift; sourceTree = "<group>"; };
 		C0C5F96A2704DE9E0099EEB5 /* ArtistDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ArtistDetailScreen.swift; path = SpotifyClone/Service/HomePage/ArtistDetailScreen.swift; sourceTree = SOURCE_ROOT; };
 		C0C5F96D2704DF9D0099EEB5 /* ArtistPictureGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ArtistPictureGradient.swift; path = SpotifyClone/Service/HomePage/ArtistPictureGradient.swift; sourceTree = SOURCE_ROOT; };
-		C0C5F96F2704ECF40099EEB5 /* BackButtonWithCircleBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BackButtonWithCircleBackground.swift; path = SpotifyClone/Service/HomePage/BackButtonWithCircleBackground.swift; sourceTree = SOURCE_ROOT; };
 		C0C5F9712704EF3D0099EEB5 /* BigArtistNameTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BigArtistNameTitle.swift; path = SpotifyClone/Service/HomePage/BigArtistNameTitle.swift; sourceTree = SOURCE_ROOT; };
 		C0C5F9732704F2A40099EEB5 /* ArtistTracks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ArtistTracks.swift; path = SpotifyClone/Service/HomePage/ArtistTracks.swift; sourceTree = SOURCE_ROOT; };
 		C0C5F9752704F76D0099EEB5 /* ArtistAlbums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ArtistAlbums.swift; path = SpotifyClone/Service/HomePage/ArtistAlbums.swift; sourceTree = SOURCE_ROOT; };
@@ -608,7 +606,6 @@
 				C0C5F9712704EF3D0099EEB5 /* BigArtistNameTitle.swift */,
 				C0C5F9732704F2A40099EEB5 /* ArtistTracks.swift */,
 				C0C5F9752704F76D0099EEB5 /* ArtistAlbums.swift */,
-				C0C5F96F2704ECF40099EEB5 /* BackButtonWithCircleBackground.swift */,
 				C0C5F9772704F9E70099EEB5 /* SeeMoreButton.swift */,
 				C0C5F9792704FB930099EEB5 /* ArtistMediaHorizontalScrollView.swift */,
 			);
@@ -1076,7 +1073,6 @@
 				C087873226FCCCA70013924E /* PlaylistDetailScreen.swift in Sources */,
 				C016E6092703464100EFF870 /* AlbumInfo.swift in Sources */,
 				C09FD8FF26E03D6E0069CEAE /* BottomBar.swift in Sources */,
-				C0C5F9702704ECF40099EEB5 /* BackButtonWithCircleBackground.swift in Sources */,
 				C016E610270385E300EFF870 /* ShowsDetailScreen.swift in Sources */,
 				C084E04D2703409600C6AAAE /* PlaylistAuthor.swift in Sources */,
 				C084267E26F10BBD000ACAEE /* HomePageAPICalls.swift in Sources */,

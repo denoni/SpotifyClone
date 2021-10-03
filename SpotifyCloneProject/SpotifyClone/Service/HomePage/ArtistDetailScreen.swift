@@ -9,19 +9,16 @@ import SwiftUI
 
 struct ArtistDetailScreen: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
+  @State var scrollViewPosition = CGFloat.zero
 
   var body: some View {
     GeometryReader { geometry in
       ZStack {
         Color.spotifyDarkGray
-        ScrollView(showsIndicators: false) {
+        ReadableScrollView(currentPosition: $scrollViewPosition) {
           VStack {
-            ZStack {
-              ArtistPictureGradient(imageURL: mediaDetailVM.mainItem!.imageURL,
-                                    height: geometry.size.height / 1.8)
-              BackButtonWithCircleBackground()
-            }
-
+            ArtistPictureGradient(imageURL: mediaDetailVM.mainItem!.imageURL,
+                                  height: geometry.size.height / 1.8)
             ArtistDetailContent()
               .padding(.top, -geometry.size.height / 5)
               .padding(.bottom, 180)
@@ -29,7 +26,10 @@ struct ArtistDetailScreen: View {
           }
           .frame(maxHeight: .infinity, alignment: .top)
         }
-        .disabledBouncing()
+        TopBarWithTitle(scrollViewPosition: $scrollViewPosition,
+                        title: mediaDetailVM.mainItem!.title,
+                        backButtonWithCircleBackground: true)
+
       }.ignoresSafeArea()
     }
 
