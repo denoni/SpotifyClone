@@ -24,11 +24,10 @@ class APIFetchingEpisodes {
 
     switch endPoint {
     case .episodesFromShow(let showID):
-      print(showID)
       baseUrl = "https://api.spotify.com/v1/shows/\(showID)/episodes?limit=\(limit)&offset=\(offset)"
     }
 
-
+    var podcastItems = [SpotifyModel.MediaItem]()
 
     var urlRequest = URLRequest(url: URL(string: baseUrl)!)
     urlRequest.httpMethod = "GET"
@@ -39,8 +38,6 @@ class APIFetchingEpisodes {
       .validate()
       .responseDecodable(of: EpisodeResponse.self) { response in
 
-        debugPrint(response.debugDescription)
-
         guard let data = response.value else {
           fatalError("Error receiving tracks from API.")
         }
@@ -49,10 +46,10 @@ class APIFetchingEpisodes {
 
 
         guard numberOfItems != 0 else {
-          fatalError("The API response was corrects but empty. We don't have a way to handle this yet.")
+          completionHandler(podcastItems)
+          print("The API response was corrects but empty. We'll just return []")
+          return
         }
-
-        var podcastItems = [SpotifyModel.MediaItem]()
 
         for itemIndex in 0 ..< numberOfItems {
           let title = data.items[itemIndex].name
