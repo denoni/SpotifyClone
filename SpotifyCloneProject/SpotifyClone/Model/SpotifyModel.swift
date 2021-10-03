@@ -142,7 +142,7 @@ struct SpotifyModel {
                                       numberOfEpisodes: showDetails.numberOfEpisodes,
                                       id: showDetails.id)
     default:
-      fatalError("Wrong type for `ArtistDetails`")
+      fatalError("Wrong type for `ShowDetails`")
     }
   }
 
@@ -156,7 +156,7 @@ struct SpotifyModel {
                                        id: trackDetails.id,
                                        album: trackDetails.album)
     default:
-      fatalError("Wrong type for `ArtistDetails`")
+      fatalError("Wrong type for `TrackDetails`")
     }
   }
 
@@ -169,7 +169,7 @@ struct SpotifyModel {
                                           owner: playlistDetails.owner,
                                           id: playlistDetails.id)
     default:
-      fatalError("Wrong type for `ArtistDetails`")
+      fatalError("Wrong type for `PlaylistDetails`")
     }
   }
 
@@ -195,7 +195,7 @@ struct SpotifyModel {
                                        releaseDate: albumDetails.releaseDate,
                                        id: albumDetails.id)
     default:
-      fatalError("Wrong type for `ArtistDetails`")
+      fatalError("Wrong type for `AlbumDetails`")
     }
   }
 
@@ -209,7 +209,7 @@ struct SpotifyModel {
                                          releaseDate: episodeDetails.releaseDate,
                                          id: episodeDetails.id)
     default:
-      fatalError("Wrong type for `ArtistDetails`")
+      fatalError("Wrong type for `EpisodeDetails`")
     }
   }
 
