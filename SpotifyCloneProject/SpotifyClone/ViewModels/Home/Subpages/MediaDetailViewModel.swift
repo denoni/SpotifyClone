@@ -5,6 +5,8 @@
 //  Created by Gabriel on 9/24/21.
 //
 
+// TODO: Simplify - Reduce duplicated code
+
 import Foundation
 
 class MediaDetailViewModel: ObservableObject {
@@ -40,12 +42,19 @@ class MediaDetailViewModel: ObservableObject {
       numberOfLoadedItemsInSection[.album(section)] = 0
     }
 
+    for section in ShowsSections.allCases {
+      isLoading[.shows(section)] = true
+      mediaCollection[.shows(section)] = []
+      numberOfLoadedItemsInSection[.shows(section)] = 0
+    }
+
   }
 
   enum Section: Hashable {
     case artist(_ artistSection: ArtistSections)
     case playlist(_ playlistSection: PlaylistSections)
     case album(_ albumSection: AlbumSections)
+    case shows(_ showSection: ShowsSections)
   }
 
   enum ArtistSections: CaseIterable {
@@ -62,6 +71,9 @@ class MediaDetailViewModel: ObservableObject {
     case tracksFromAlbum
   }
 
+  enum ShowsSections: CaseIterable {
+    case episodesFromShow
+  }
 
 
 
@@ -81,6 +93,9 @@ class MediaDetailViewModel: ObservableObject {
     PlaylistAPICalls.getTracksFromPlaylist(mediaVM: self)
   }
 
+  func getShowsScreenData() {
+    ShowsAPICalls.getEpisodesFromShows(mediaVM: self)
+  }
 
 
   struct ArtistAPICalls {
@@ -137,11 +152,31 @@ class MediaDetailViewModel: ObservableObject {
       mediaVM.api.getTracksFromAlbum(with: mediaVM.accessToken!,
                                      albumID: SpotifyModel.getAlbumDetails(for: mediaVM.mainItem!).id,
                                      offset: offset) { tracks in
-        mediaVM.trimAndCommunicateResult(medias: tracks, section: .album(.tracksFromAlbum), loadMoreEnabled: loadMoreEnabled)
+        mediaVM.trimAndCommunicateResult(medias: tracks, section: .album(.tracksFromAlbum),
+                                         loadMoreEnabled: loadMoreEnabled)
       }
     }
 
   }
+
+
+  struct ShowsAPICalls {
+
+    static func getEpisodesFromShows(mediaVM: MediaDetailViewModel,
+                                     loadMoreEnabled: Bool = false) {
+      let offset = mediaVM.getNumberOfLoadedItems(for: .shows(.episodesFromShow))
+      mediaVM.increaseNumberOfLoadedItems(for: .shows(.episodesFromShow), by: 10)
+
+      mediaVM.api.getEpisodesFromShow(with: mediaVM.accessToken!,
+                                     showID: SpotifyModel.getShowDetails(for: mediaVM.mainItem!).id,
+                                     offset: offset) { episodes in
+        mediaVM.trimAndCommunicateResult(medias: episodes, section: .shows(.episodesFromShow),
+                                         loadMoreEnabled: loadMoreEnabled)
+      }
+    }
+
+  }
+
 
 
   // MARK: - API Auxiliary Functions
@@ -196,6 +231,11 @@ class MediaDetailViewModel: ObservableObject {
       isLoading[.album(section)] = true
       mediaCollection[.album(section)]! = []
       numberOfLoadedItemsInSection[.album(section)] = 0
+    }
+    for section in ShowsSections.allCases {
+      isLoading[.shows(section)] = true
+      mediaCollection[.shows(section)]! = []
+      numberOfLoadedItemsInSection[.shows(section)] = 0
     }
 
 

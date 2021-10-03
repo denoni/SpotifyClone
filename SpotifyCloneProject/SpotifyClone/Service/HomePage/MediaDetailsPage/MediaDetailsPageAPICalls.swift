@@ -16,6 +16,8 @@ class MediaDetailsPageAPICalls: ObservableObject {
   var trackAPI = APIFetchingTracks()
   var albumAPI = APIFetchingAlbums()
   var playlistAPI = APIFetchingPlaylists()
+  var episodeAPI =  APIFetchingEpisodes()
+  
 
   // MARK: - Artist Screen
 
@@ -72,6 +74,21 @@ class MediaDetailsPageAPICalls: ObservableObject {
     trackAPI.getTrack(using: .tracksFromAlbum(albumID: albumID),
                       with: accessToken, limit: limit, offset: offset,
                       completionHandler: completionHandler)
+  }
+
+
+  // MARK: - Shows Screen
+
+  // MARK: Episodes From Show
+  func getEpisodesFromShow(with accessToken: String,
+                           showID: String,
+                           limit: Int = 10,
+                           offset: Int = 0,
+                           completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
+
+    episodeAPI.getEpisode(using: .episodesFromShow(showID: showID),
+                          with: accessToken, limit: limit, offset: offset,
+                          completionHandler: completionHandler)
   }
 
 

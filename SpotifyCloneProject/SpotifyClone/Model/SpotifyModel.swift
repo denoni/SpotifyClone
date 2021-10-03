@@ -15,6 +15,7 @@ struct SpotifyModel {
     case playlist
     case show
     case artist
+    case episode
   }
 
   // This struct will be modified
@@ -52,6 +53,9 @@ struct SpotifyModel {
 
         case .album(let albumDetails):
           return DetailTypes.album(albumDetails: albumDetails)
+
+        case .episode(let episodeDetails):
+          return DetailTypes.episode(episodeDetails: episodeDetails)
       }
     }
 
@@ -67,6 +71,7 @@ struct SpotifyModel {
     case playlists(playlistDetails: PlaylistDetails)
     case artists(artistDetails: ArtistDetails)
     case album(albumDetails: AlbumDetails)
+    case episode(episodeDetails: EpisodeDetails)
   }
 
   
@@ -80,6 +85,7 @@ struct SpotifyModel {
   struct TrackDetails {
     var popularity: Int
     var explicit: Bool
+    var description: String?
     var durationInMs: Double
     var id: String
     var album: AlbumDetails?
@@ -103,6 +109,14 @@ struct SpotifyModel {
     var name: String
     var numberOfTracks: Int
     var releaseDate: String // yyyy-MM-dd
+    var id: String
+  }
+
+  struct EpisodeDetails {
+    var explicit: Bool
+    var description: String?
+    var durationInMs: Double
+    var releaseDate: String
     var id: String
   }
 
@@ -180,6 +194,20 @@ struct SpotifyModel {
                                        numberOfTracks: albumDetails.numberOfTracks,
                                        releaseDate: albumDetails.releaseDate,
                                        id: albumDetails.id)
+    default:
+      fatalError("Wrong type for `ArtistDetails`")
+    }
+  }
+
+  static func getEpisodeDetails(for mediaItem: MediaItem) -> EpisodeDetails {
+    let detailsTypes = mediaItem.getDetails()
+    switch detailsTypes {
+    case .episode(let episodeDetails):
+      return SpotifyModel.EpisodeDetails(explicit: episodeDetails.explicit,
+                                         description: episodeDetails.description,
+                                         durationInMs: episodeDetails.durationInMs,
+                                         releaseDate: episodeDetails.releaseDate,
+                                         id: episodeDetails.id)
     default:
       fatalError("Wrong type for `ArtistDetails`")
     }

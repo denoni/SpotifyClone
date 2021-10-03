@@ -62,16 +62,39 @@ struct ShowsDetailContent: View {
 
       HStack {
         VStack(alignment: .leading) {
-//          AlbumInfo(releaseDate: details.releaseDate)
           FollowAndThreeDotsIcons()
         }
         BigPlayButton()
       }.frame(height: 65)
-      ShowEpisodesScrollView()
+
+      if didEverySectionLoaded() {
+        ShowEpisodesScrollView()
+      } else {
+        HStack {
+          ProgressView()
+            .withSpotifyStyle(useDiscreetColors: true)
+            .onAppear {
+              MediaDetailViewModel.ShowsAPICalls.getEpisodesFromShows(mediaVM: mediaDetailVM, loadMoreEnabled: true)
+            }
+        }
+      }
+
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .padding(25)
   }
+
+  func didEverySectionLoaded() -> Bool {
+    for section in MediaDetailViewModel.ShowsSections.allCases {
+      // If any section still loading, return false
+      guard mediaDetailVM.isLoading[.shows(section)] != true else {
+        return false
+      }
+    }
+    // else, return true
+    return true
+  }
+
 }
 
 

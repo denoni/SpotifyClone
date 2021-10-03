@@ -65,6 +65,19 @@ struct Playlist: Decodable {
   var owner: MediaOwner
 }
 
+struct Episode: Decodable {
+  var name: String
+  var images: [CoverImage]
+  var audio_preview_url: String
+  var type: String
+  var id: String
+
+  var description: String
+  var explicit: Bool
+  var duration_ms: Double
+  var release_date: String
+}
+
 struct CoverImage: Decodable {
   var url: String
 }

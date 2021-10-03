@@ -30,6 +30,8 @@ struct BigSongCoversScrollView: View {
       return HomeViewModel.HomeSubpage.showDetail
     case .artist:
       return HomeViewModel.HomeSubpage.artistDetail
+    case .episode:
+      fatalError("Type not implemented yet.")
     }
   }
 
