@@ -48,6 +48,8 @@
 		C084E04E270340E500C6AAAE /* BigPlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084E04427033FAF00C6AAAE /* BigPlayButton.swift */; };
 		C084E04F2703411C00C6AAAE /* LikeAndThreeDotsIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084E04A27033FB000C6AAAE /* LikeAndThreeDotsIcons.swift */; };
 		C084E0512703423B00C6AAAE /* MediaLikesAndDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084E0502703423B00C6AAAE /* MediaLikesAndDuration.swift */; };
+		C08592052709E9DB0087C834 /* ReadableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08592042709E9DB0087C834 /* ReadableScrollView.swift */; };
+		C08592072709F6C50087C834 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08592062709F6C50087C834 /* TopBar.swift */; };
 		C08724DB2709374D00E2DDB0 /* APIFetchingEpisodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08724DA2709374D00E2DDB0 /* APIFetchingEpisodes.swift */; };
 		C08724DF2709405F00E2DDB0 /* EpisodeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08724DE2709405F00E2DDB0 /* EpisodeResponse.swift */; };
 		C087873226FCCCA70013924E /* PlaylistDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C087873126FCCCA70013924E /* PlaylistDetailScreen.swift */; };
@@ -178,6 +180,8 @@
 		C084E04A27033FB000C6AAAE /* LikeAndThreeDotsIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeAndThreeDotsIcons.swift; sourceTree = "<group>"; };
 		C084E04B27033FB000C6AAAE /* PlaylistAuthor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistAuthor.swift; sourceTree = "<group>"; };
 		C084E0502703423B00C6AAAE /* MediaLikesAndDuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaLikesAndDuration.swift; sourceTree = "<group>"; };
+		C08592042709E9DB0087C834 /* ReadableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadableScrollView.swift; sourceTree = "<group>"; };
+		C08592062709F6C50087C834 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
 		C08724DA2709374D00E2DDB0 /* APIFetchingEpisodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFetchingEpisodes.swift; sourceTree = "<group>"; };
 		C08724DE2709405F00E2DDB0 /* EpisodeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeResponse.swift; sourceTree = "<group>"; };
 		C087873126FCCCA70013924E /* PlaylistDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDetailScreen.swift; sourceTree = "<group>"; };
@@ -504,11 +508,13 @@
 				C088F23926DEE0F800C4BCA2 /* SmallSongCard.swift */,
 				C088F23B26DEE48E00C4BCA2 /* SmallSongItem.swift */,
 				C088F23D26DEE61B00C4BCA2 /* BigSongItem.swift */,
+				C08592062709F6C50087C834 /* TopBar.swift */,
 				C06A4A4F26E1BB6C00D2CA90 /* SpotifyTextField.swift */,
 				C0883A0A26E2705B00E1ADFA /* ColorfulCard.swift */,
 				C089136126F986E600CA1A69 /* ColorfulCardPair.swift */,
 				C084268526F14A7E000ACAEE /* RemoteImage.swift */,
 				C080CE1A270099F2003D0C11 /* ExplicitIcon.swift */,
+				C08592042709E9DB0087C834 /* ReadableScrollView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -1002,6 +1008,7 @@
 				C088F23A26DEE0F800C4BCA2 /* SmallSongCard.swift in Sources */,
 				C016E61727038FA500EFF870 /* FollowAndThreeDotsIcons.swift in Sources */,
 				C016E60D270372D000EFF870 /* MediaTitle.swift in Sources */,
+				C08592052709E9DB0087C834 /* ReadableScrollView.swift in Sources */,
 				C09552982704B7E8000499B3 /* APIFetchingAlbums.swift in Sources */,
 				C087873826FD481D0013924E /* UIImage+AverageColor.swift in Sources */,
 				C0C63C6026DD144E00532792 /* MainView.swift in Sources */,
@@ -1072,6 +1079,7 @@
 				C089136226F986E600CA1A69 /* ColorfulCardPair.swift in Sources */,
 				C077D4A526F3A45400EF6ADA /* AuthScope.swift in Sources */,
 				C084268626F14A7E000ACAEE /* RemoteImage.swift in Sources */,
+				C08592072709F6C50087C834 /* TopBar.swift in Sources */,
 				C08724DF2709405F00E2DDB0 /* EpisodeResponse.swift in Sources */,
 				C0C5F9742704F2A40099EEB5 /* ArtistTracks.swift in Sources */,
 				C0883A0F26E270A300E1ADFA /* PopularPodcastSection.swift in Sources */,

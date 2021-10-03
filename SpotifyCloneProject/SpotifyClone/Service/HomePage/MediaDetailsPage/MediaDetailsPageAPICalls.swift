@@ -91,6 +91,5 @@ class MediaDetailsPageAPICalls: ObservableObject {
                           completionHandler: completionHandler)
   }
 
-
 }
 

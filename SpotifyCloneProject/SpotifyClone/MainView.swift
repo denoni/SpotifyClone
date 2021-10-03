@@ -47,6 +47,7 @@ struct MainView: View {
         .navigationBarHidden(true)
     }
   }
+
 }
 
 // MARK: - Previews
