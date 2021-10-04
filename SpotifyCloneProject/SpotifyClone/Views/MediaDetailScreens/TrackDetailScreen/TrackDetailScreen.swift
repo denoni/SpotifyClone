@@ -44,7 +44,6 @@ struct TrackDetailContent: View {
                        author: mediaDetailVM.mainItem!.author!,
                        isLiked: true, // TODO: Use real data
                        isExplicit: details.explicit)
-      SpotifySlider(durationInMs: details.durationInMs)
       PlayerControllerSection()
       Spacer()
       SmallBottomSection()
