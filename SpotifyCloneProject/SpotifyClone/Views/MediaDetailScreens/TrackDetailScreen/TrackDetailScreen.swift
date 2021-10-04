@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import Alamofire
 
 struct TrackDetailScreen: View {
   @EnvironmentObject var homeVM: HomeViewModel
-  
+
   var body: some View {
     GeometryReader { _ in
       ZStack(alignment: .center) {
