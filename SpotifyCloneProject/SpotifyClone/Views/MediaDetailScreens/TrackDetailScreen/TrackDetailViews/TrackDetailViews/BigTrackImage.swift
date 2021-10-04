@@ -14,7 +14,8 @@ struct BigTrackImage: View {
     Rectangle()
       .fill(Color.white)
       .aspectRatio(1/1, contentMode: .fill)
-      .overlay(RemoteImage(urlString: imageURL))
+      .overlay(RemoteImage(urlString: imageURL)
+                .mask(Rectangle().aspectRatio(1/1 , contentMode: .fit)))
       .padding(.bottom, 25)
       .shadow(color: .spotifyDarkGray.opacity(0.3), radius: 15)
   }
