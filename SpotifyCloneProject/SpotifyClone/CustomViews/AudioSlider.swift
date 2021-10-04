@@ -37,6 +37,11 @@ struct AudioSlider: View {
       if time > 0 {
         remoteAudio.state = .active
       }
+
+      // If reach the end, move to start position(time).
+      if remoteAudio.currentTime.rounded() == remoteAudio.currentDuration.rounded() {
+        remoteAudio.moveToStartTime()
+      }
     }
     // Listen out for the duration observer publishing changes to the player's item duration
     .onReceive(remoteAudio.durationObserver.publisher) { duration in

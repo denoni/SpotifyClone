@@ -22,7 +22,9 @@ class RemoteAudio: ObservableObject {
   @Published var state = PlaybackState.waitingForSelection
 
   var lastPlayedURL = ""
-  var isPaused = false
+  var showPauseButton = false
+
+  var isFirstTimePlaying = true
 
   init() {
     player = AVPlayer()
@@ -32,18 +34,73 @@ class RemoteAudio: ObservableObject {
   }
 
   func play(_ audioURL: String) {
-      if !isPaused || lastPlayedURL != audioURL {
+      isFirstTimePlaying = false
+      if !showPauseButton && lastPlayedURL != audioURL {
         let playerItem = AVPlayerItem(url: URL(string: audioURL)!)
         player.replaceCurrentItem(with: playerItem)
       }
 
       player.play()
       lastPlayedURL = audioURL
-    }
+      showPauseButton = true
+  }
 
   func pause() {
     player.pause()
-    isPaused = true
+    showPauseButton = false
+  }
+
+  func forwardFiveSeconds() {
+    changeCurrentTime(by: 5)
+  }
+
+  func backwardFiveSeconds() {
+    changeCurrentTime(by: -5)
+  }
+
+  func moveToStartTime() {
+    let minimumTime = CMTime(seconds: 0, preferredTimescale: 600)
+
+    player.seek(to: minimumTime) { _ in
+      self.timeObserver.pause(false)
+      self.state = .active
+    }
+
+    // Play and stop stop immediately to refresh the view if `isPaused`.
+
+    self.player.play()
+    self.player.pause()
+    self.showPauseButton = false
+  }
+
+  private func changeCurrentTime(by time: Double) {
+
+    timeObserver.pause(true)
+    var targetTime = CMTime(seconds: currentTime + time, preferredTimescale: 600)
+    let duration = CMTime(seconds: currentDuration, preferredTimescale: 600)
+    let minimumTime = CMTime(seconds: 0, preferredTimescale: 600)
+
+    if time > 0 {
+      if targetTime > duration {
+        let oneSecond = CMTime(seconds: 1, preferredTimescale: 600)
+        targetTime = duration - oneSecond
+      }
+    } else {
+      if targetTime < minimumTime {
+        targetTime = minimumTime
+      }
+    }
+
+    player.seek(to: targetTime) { _ in
+      self.timeObserver.pause(false)
+      self.state = .active
+    }
+
+    // Play and stop stop immediately to refresh the view if `isPaused`.
+
+    self.player.pause()
+    self.player.play()
+    self.showPauseButton = true
   }
 
   @ViewBuilder func buildSliderForAudio() -> some View {

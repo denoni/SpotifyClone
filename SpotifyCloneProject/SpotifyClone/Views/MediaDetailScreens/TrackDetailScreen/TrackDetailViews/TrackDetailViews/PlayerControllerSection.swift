@@ -12,9 +12,6 @@ struct PlayerControllerSection: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @ObservedObject var audioManager = RemoteAudio()
 
-  @State var alreadyPlaying = false
-  @State var playerPaused = true
-
   var urlString: String { mediaDetailVM.mainItem!.previewURL }
 
   var body: some View {
@@ -28,26 +25,27 @@ struct PlayerControllerSection: View {
             print(audioManager.state)
           }
         Spacer()
+
         Image("previous")
           .resizeToFit()
           .padding(.vertical, 22)
+          .onTapGesture {
+            audioManager.backwardFiveSeconds()
+          }
+
         Spacer()
 
         ZStack {
-
-          if alreadyPlaying {
+          if audioManager.showPauseButton && !audioManager.isFirstTimePlaying {
             Image("circle-stop")
               .resizeToFit()
               .onTapGesture {
                 audioManager.pause()
-                alreadyPlaying = false
               }
           } else {
-            // TODO: Animate a loading indicator when already clicked but still loading.
             Image("circle-play")
               .resizeToFit()
               .onTapGesture {
-                alreadyPlaying = true
 
                 let mediaURL = mediaDetailVM.mainItem!.previewURL
                 if mediaURL.isEmpty {
@@ -60,7 +58,6 @@ struct PlayerControllerSection: View {
           }
 
           if audioManager.state == .buffering {
-
             ZStack {
               Circle()
               ProgressView()
@@ -73,9 +70,14 @@ struct PlayerControllerSection: View {
         }
 
         Spacer()
+
         Image("next")
           .resizeToFit()
           .padding(.vertical, 22)
+          .onTapGesture {
+            audioManager.forwardFiveSeconds()
+          }
+
         Spacer()
         Image("play-repeat")
           .resizeToFit()
