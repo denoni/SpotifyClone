@@ -1,5 +1,5 @@
 //
-//  AlbumTracksScrollView.swift
+//  TracksVerticalScrollView.swift
 //  SpotifyClone
 //
 //  Created by Gabriel on 9/28/21.
@@ -7,18 +7,34 @@
 
 import SwiftUI
 
-struct AlbumTracksScrollView: View {
+struct TracksVerticalScrollView: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @StateObject var audioManager = RemoteAudio()
+  var tracksOrigin: MediaDetailViewModel.Section
   var medias: [SpotifyModel.MediaItem] {
-    mediaDetailVM.mediaCollection[.album(.tracksFromAlbum)]!
+    switch tracksOrigin {
+    case .album:
+      return mediaDetailVM.mediaCollection[.album(.tracksFromAlbum)]!
+    case .playlist:
+      return mediaDetailVM.mediaCollection[.playlist(.tracksFromPlaylist)]!
+    default:
+      fatalError("")
+    }
   }
 
   var body: some View {
     LazyVStack {
       ForEach(medias) { media in
-        AlbumItem(audioManager: audioManager, media: media)
-          .onAppear { testIfShouldFetchMoreData(basedOn: media) }
+        switch tracksOrigin {
+        case .album:
+          AlbumItem(audioManager: audioManager, media: media)
+            .onAppear { testIfShouldFetchMoreData(basedOn: media) }
+        case .playlist:
+          PlaylistItem(audioManager: audioManager, media: media)
+            .onAppear { testIfShouldFetchMoreData(basedOn: media) }
+        default:
+          fatalError("Media type(\(tracksOrigin)) shouldn't be used here")
+        }
       }
     }
     .padding(.top, 15)
@@ -27,7 +43,11 @@ struct AlbumTracksScrollView: View {
   func testIfShouldFetchMoreData(basedOn media: SpotifyModel.MediaItem) {
     if medias.count > 5 {
       if media.id == medias[medias.count - 4].id {
-        MediaDetailViewModel.AlbumAPICalls.getTracksFromAlbum(mediaVM: mediaDetailVM, loadMoreEnabled: true)
+        if tracksOrigin == .album(.tracksFromAlbum) {
+          MediaDetailViewModel.AlbumAPICalls.getTracksFromAlbum(mediaVM: mediaDetailVM, loadMoreEnabled: true)
+        } else {
+          MediaDetailViewModel.PlaylistAPICalls.getTracksFromPlaylist(mediaVM: mediaDetailVM, loadMoreEnabled: true)
+        }
       }
     }
   }
@@ -87,6 +107,32 @@ struct AlbumTracksScrollView: View {
       }
       .frame(height: 60)
       .padding(.bottom, 5)
+    }
+  }
+
+  struct PlaylistItem: View {
+    @StateObject var audioManager: RemoteAudio
+    let media: SpotifyModel.MediaItem
+
+    var body: some View {
+      HStack(spacing: 12) {
+        Rectangle()
+          .foregroundColor(.spotifyMediumGray)
+          .overlay(RemoteImage(urlString: media.imageURL))
+          .frame(width: 60, height: 60)
+        VStack(alignment: .leading) {
+          Text(media.title)
+            .font(.avenir(.medium, size: 20))
+          Text(media.authorName.joined(separator: ", "))
+            .font(.avenir(.medium, size: 16))
+            .opacity(0.7)
+        }
+        Spacer()
+        Image("three-dots")
+          .resizeToFit()
+          .padding(.vertical, 16)
+      }
+      .frame(height: 60)
     }
   }
 

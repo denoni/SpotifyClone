@@ -62,7 +62,7 @@ struct AlbumDetailContent: View {
       }.frame(height: 65)
 
       if didEverySectionLoaded() {
-        AlbumTracksScrollView()
+        TracksVerticalScrollView(tracksOrigin: .album(.tracksFromAlbum))
       } else {
         HStack {
           ProgressView()

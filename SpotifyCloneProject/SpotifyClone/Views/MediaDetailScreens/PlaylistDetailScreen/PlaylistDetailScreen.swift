@@ -68,7 +68,7 @@ struct PlaylistDetailContent: View {
       .frame(height: 65)
 
       if didEverySectionLoaded() {
-        PlaylistTracksScrollView()
+        TracksVerticalScrollView(tracksOrigin: .playlist(.tracksFromPlaylist))
       } else {
         HStack {
           ProgressView()

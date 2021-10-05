@@ -10,7 +10,7 @@
 		05776DD17531AE4F13C053F1 /* Pods_SpotifyClone_SpotifyCloneUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6E0A4C3B34E520C39ADB989 /* Pods_SpotifyClone_SpotifyCloneUITests.framework */; };
 		76AA60019401CBE4BC1DCE1F /* Pods_SpotifyCloneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A25E39009EAB848647A176B /* Pods_SpotifyCloneTests.framework */; };
 		C016E605270344C200EFF870 /* AlbumDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E604270344C200EFF870 /* AlbumDetailScreen.swift */; };
-		C016E607270345CA00EFF870 /* AlbumTracksScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E606270345CA00EFF870 /* AlbumTracksScrollView.swift */; };
+		C016E607270345CA00EFF870 /* TracksVerticalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E606270345CA00EFF870 /* TracksVerticalScrollView.swift */; };
 		C016E6092703464100EFF870 /* AlbumInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E6082703464100EFF870 /* AlbumInfo.swift */; };
 		C016E60B2703623000EFF870 /* AlbumAuthor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E60A2703623000EFF870 /* AlbumAuthor.swift */; };
 		C016E60D270372D000EFF870 /* MediaTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E60C270372CF00EFF870 /* MediaTitle.swift */; };
@@ -83,7 +83,6 @@
 		C089874B27000BFC00F9BF70 /* TopGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C089874A27000BFC00F9BF70 /* TopGradient.swift */; };
 		C089874D27000C1900F9BF70 /* BigMediaCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = C089874C27000C1900F9BF70 /* BigMediaCover.swift */; };
 		C089874F27000C2F00F9BF70 /* MediaDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = C089874E27000C2F00F9BF70 /* MediaDescription.swift */; };
-		C089875927000CC000F9BF70 /* PlaylistTracksScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C089875827000CC000F9BF70 /* PlaylistTracksScrollView.swift */; };
 		C089875B27000CE600F9BF70 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C089875A27000CE600F9BF70 /* BackButton.swift */; };
 		C089875D27000DE800F9BF70 /* TrackDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C089875C27000DE800F9BF70 /* TrackDetailScreen.swift */; };
 		C09552942704B16C000499B3 /* APIFetchingShows.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09552932704B16C000499B3 /* APIFetchingShows.swift */; };
@@ -146,7 +145,7 @@
 		90F935BC104E5E279A07CDC2 /* Pods-SpotifyClone-SpotifyCloneUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotifyClone-SpotifyCloneUITests.release.xcconfig"; path = "Target Support Files/Pods-SpotifyClone-SpotifyCloneUITests/Pods-SpotifyClone-SpotifyCloneUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B75A3140099F8C9F0EBC8917 /* Pods_SpotifyClone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpotifyClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C016E604270344C200EFF870 /* AlbumDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailScreen.swift; sourceTree = "<group>"; };
-		C016E606270345CA00EFF870 /* AlbumTracksScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTracksScrollView.swift; sourceTree = "<group>"; };
+		C016E606270345CA00EFF870 /* TracksVerticalScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksVerticalScrollView.swift; sourceTree = "<group>"; };
 		C016E6082703464100EFF870 /* AlbumInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumInfo.swift; sourceTree = "<group>"; };
 		C016E60A2703623000EFF870 /* AlbumAuthor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumAuthor.swift; sourceTree = "<group>"; };
 		C016E60C270372CF00EFF870 /* MediaTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTitle.swift; sourceTree = "<group>"; };
@@ -219,7 +218,6 @@
 		C089874A27000BFC00F9BF70 /* TopGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopGradient.swift; sourceTree = "<group>"; };
 		C089874C27000C1900F9BF70 /* BigMediaCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigMediaCover.swift; sourceTree = "<group>"; };
 		C089874E27000C2F00F9BF70 /* MediaDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDescription.swift; sourceTree = "<group>"; };
-		C089875827000CC000F9BF70 /* PlaylistTracksScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistTracksScrollView.swift; sourceTree = "<group>"; };
 		C089875A27000CE600F9BF70 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		C089875C27000DE800F9BF70 /* TrackDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDetailScreen.swift; sourceTree = "<group>"; };
 		C09552932704B16C000499B3 /* APIFetchingShows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFetchingShows.swift; sourceTree = "<group>"; };
@@ -407,7 +405,6 @@
 		C084E04227033FAE00C6AAAE /* AlbumDetailViews */ = {
 			isa = PBXGroup;
 			children = (
-				C016E606270345CA00EFF870 /* AlbumTracksScrollView.swift */,
 				C016E6082703464100EFF870 /* AlbumInfo.swift */,
 				C016E60A2703623000EFF870 /* AlbumAuthor.swift */,
 			);
@@ -417,6 +414,7 @@
 		C084E04C2703404100C6AAAE /* GeneralSubviews */ = {
 			isa = PBXGroup;
 			children = (
+				C016E606270345CA00EFF870 /* TracksVerticalScrollView.swift */,
 				C089874E27000C2F00F9BF70 /* MediaDescription.swift */,
 				C084E04A27033FB000C6AAAE /* LikeAndThreeDotsIcons.swift */,
 				C089875A27000CE600F9BF70 /* BackButton.swift */,
@@ -572,7 +570,6 @@
 			children = (
 				C084E04B27033FB000C6AAAE /* PlaylistAuthor.swift */,
 				C084E0502703423B00C6AAAE /* MediaLikesAndDuration.swift */,
-				C089875827000CC000F9BF70 /* PlaylistTracksScrollView.swift */,
 			);
 			path = PlaylistDetailViews;
 			sourceTree = "<group>";
@@ -1035,7 +1032,6 @@
 				C087B0E826E6556F00A72A13 /* HomeViewModel.swift in Sources */,
 				C080CE1B270099F2003D0C11 /* ExplicitIcon.swift in Sources */,
 				C084268826F1588B000ACAEE /* MainViewModel.swift in Sources */,
-				C089875927000CC000F9BF70 /* PlaylistTracksScrollView.swift in Sources */,
 				C0C5F97A2704FB930099EEB5 /* ArtistMediaHorizontalScrollView.swift in Sources */,
 				C084E0512703423B00C6AAAE /* MediaLikesAndDuration.swift in Sources */,
 				C089874F27000C2F00F9BF70 /* MediaDescription.swift in Sources */,
@@ -1081,7 +1077,7 @@
 				C0859209270A1CC20087C834 /* TopBarWithTitle.swift in Sources */,
 				C0F8199126FE4E57000F5FEE /* ShowResponseType.swift in Sources */,
 				C016E6192703949500EFF870 /* ShowEpisodesScrollView.swift in Sources */,
-				C016E607270345CA00EFF870 /* AlbumTracksScrollView.swift in Sources */,
+				C016E607270345CA00EFF870 /* TracksVerticalScrollView.swift in Sources */,
 				C08861AF270BF5FF00D6AD89 /* RemoteAudio+ItunesPlayer.swift in Sources */,
 				C0F8199326FE4E7D000F5FEE /* AlbumResponseType.swift in Sources */,
 				C087873226FCCCA70013924E /* PlaylistDetailScreen.swift in Sources */,
