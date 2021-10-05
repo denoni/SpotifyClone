@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AlbumTracksScrollView: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
+  @StateObject var audioManager = RemoteAudio()
   var medias: [SpotifyModel.MediaItem] {
     mediaDetailVM.mediaCollection[.album(.tracksFromAlbum)]!
   }
@@ -16,8 +17,7 @@ struct AlbumTracksScrollView: View {
   var body: some View {
     LazyVStack {
       ForEach(medias) { media in
-        AlbumItem(title: media.title,
-                  author: media.authorName.joined(separator: ", "))
+        AlbumItem(audioManager: audioManager, media: media)
           .onAppear { testIfShouldFetchMoreData(basedOn: media) }
       }
     }
@@ -33,17 +33,52 @@ struct AlbumTracksScrollView: View {
   }
 
   struct AlbumItem: View {
-    let title: String
-    let author: String
+    @StateObject var audioManager: RemoteAudio
+    let media: SpotifyModel.MediaItem
 
     var body: some View {
       HStack(spacing: 12) {
+        ZStack {
+          if audioManager.showPauseButton
+              && audioManager.lastItemPlayedID == media.id {
+            Image("stop")
+              .resizeToFit()
+              .onTapGesture {
+                audioManager.pause()
+              }
+          } else {
+            Image("play")
+              .resizeToFit()
+              .onTapGesture {
+                if media.previewURL.isEmpty {
+                  audioManager.playWithItunes(forItem: media,
+                                              canPlayMoreThanOneAudio: true)
+                } else {
+                  audioManager.pause()
+                  audioManager.play(media.previewURL, audioID: media.id)
+                }
+              }
+          }
+
+          if audioManager.state == .buffering {
+            ProgressView()
+              .scaledToFit()
+          }
+        }
+        .frame(width: 25, height: 25)
+        .padding(.trailing, 10)
+
+
         VStack(alignment: .leading) {
-          Text(title)
+          Text(media.title)
             .font(.avenir(.medium, size: 20))
-          Text(author)
+          Text(media.authorName.joined(separator: ", "))
             .font(.avenir(.medium, size: 16))
             .opacity(0.6)
+        }
+        .onTapGesture {
+          print(audioManager.showPauseButton)
+          print(audioManager.lastPlayedURL == media.previewURL)
         }
         Spacer()
         Image("three-dots")

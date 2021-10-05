@@ -9,14 +9,16 @@ import Foundation
 import Alamofire
 
 extension RemoteAudio {
-  func playWithItunes(forItem item: SpotifyModel.MediaItem) {
+  func playWithItunes(forItem item: SpotifyModel.MediaItem, canPlayMoreThanOneAudio: Bool) {
 
-    // If the player was already used, that means that we
-    // don't need to grab a new URL from the API, we may
-    // just grab the URL from `lastPlayedURL` instead.
-    guard self.isFirstTimePlaying == true else {
-      self.play(self.lastPlayedURL)
-      return
+    if !canPlayMoreThanOneAudio {
+      // In this case, if the player was already used, that means
+      // that we don't need to grab a new URL from the API, we
+      // may just grab the URL from `lastPlayedURL` instead.
+      guard self.isFirstTimePlaying == true else {
+        self.play(self.lastPlayedURL, audioID: item.id)
+        return
+      }
     }
 
     var songName: String {
@@ -42,14 +44,19 @@ extension RemoteAudio {
     AF.request(URLRequest(url: URL(string: baseUrl)!))
       .validate()
       .responseDecodable(of: ItunesTrackResponse.self) { response in
-        guard response.data != nil else {
+        guard response.value != nil else {
           var errorMessage = "No specific error message."
           if response.error != nil { errorMessage = response.error!.localizedDescription }
           print(">>> Error in iTunes response. \(errorMessage)")
           return
         }
 
-        self.play(response.value!.results[0].previewUrl)
+        if canPlayMoreThanOneAudio {
+          self.pause()
+        }
+
+        self.play(response.value!.results[0].previewUrl, audioID: item.id)
+
 
         print("""
 

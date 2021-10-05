@@ -50,10 +50,10 @@ struct PlayerControllerSection: View {
               .resizeToFit()
               .onTapGesture {
                 if mediaDetailVM.mainItem!.previewURL.isEmpty {
-                  audioManager.playWithItunes(forItem: mediaDetailVM.mainItem!)
+                  audioManager.playWithItunes(forItem: mediaDetailVM.mainItem!, canPlayMoreThanOneAudio: false)
                 } else {
                   print(mediaDetailVM.mainItem!.previewURL)
-                  audioManager.play(mediaDetailVM.mainItem!.previewURL)
+                  audioManager.play(mediaDetailVM.mainItem!.previewURL, audioID: mediaDetailVM.mainItem!.id)
                 }
               }
           }

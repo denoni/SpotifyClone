@@ -21,10 +21,10 @@ class RemoteAudio: ObservableObject {
   @Published var currentDuration: TimeInterval = 0
   @Published var state = PlaybackState.waitingForSelection
 
-  var lastPlayedURL = ""
-  var showPauseButton = false
-
-  var isFirstTimePlaying = true
+  @Published var lastPlayedURL = ""
+  @Published var lastItemPlayedID = ""
+  @Published var showPauseButton = false
+  @Published var isFirstTimePlaying = true
 
   init() {
     player = AVPlayer()
@@ -33,7 +33,7 @@ class RemoteAudio: ObservableObject {
     itemObserver = PlayerItemObserver(player: player)
   }
 
-  func play(_ audioURL: String) {
+  func play(_ audioURL: String, audioID: String) {
       isFirstTimePlaying = false
       if !showPauseButton && lastPlayedURL != audioURL {
         let playerItem = AVPlayerItem(url: URL(string: audioURL)!)
@@ -42,6 +42,7 @@ class RemoteAudio: ObservableObject {
 
       player.play()
       lastPlayedURL = audioURL
+      lastItemPlayedID = audioID
       showPauseButton = true
   }
 
