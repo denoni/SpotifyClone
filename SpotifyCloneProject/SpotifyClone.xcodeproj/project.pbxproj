@@ -71,6 +71,8 @@
 		C0883A1126E270CB00E1ADFA /* BrowseAllSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0883A1026E270CB00E1ADFA /* BrowseAllSection.swift */; };
 		C08861AB270BB06100D6AD89 /* SecondsToHMS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08861AA270BB06100D6AD89 /* SecondsToHMS.swift */; };
 		C08861AD270BB15700D6AD89 /* AudioSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08861AC270BB15700D6AD89 /* AudioSlider.swift */; };
+		C08861AF270BF5FF00D6AD89 /* RemoteAudio+ItunesPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08861AE270BF5FF00D6AD89 /* RemoteAudio+ItunesPlayer.swift */; };
+		C08861B1270BFB5900D6AD89 /* String+RemoveSpecialChars.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08861B0270BFB5900D6AD89 /* String+RemoveSpecialChars.swift */; };
 		C088F23726DEDE5600C4BCA2 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F23626DEDE5600C4BCA2 /* HomeScreen.swift */; };
 		C088F23A26DEE0F800C4BCA2 /* SmallSongCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F23926DEE0F800C4BCA2 /* SmallSongCard.swift */; };
 		C088F23C26DEE48E00C4BCA2 /* SmallSongItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F23B26DEE48E00C4BCA2 /* SmallSongItem.swift */; };
@@ -205,6 +207,8 @@
 		C0883A1026E270CB00E1ADFA /* BrowseAllSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseAllSection.swift; sourceTree = "<group>"; };
 		C08861AA270BB06100D6AD89 /* SecondsToHMS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondsToHMS.swift; sourceTree = "<group>"; };
 		C08861AC270BB15700D6AD89 /* AudioSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSlider.swift; sourceTree = "<group>"; };
+		C08861AE270BF5FF00D6AD89 /* RemoteAudio+ItunesPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RemoteAudio+ItunesPlayer.swift"; sourceTree = "<group>"; };
+		C08861B0270BFB5900D6AD89 /* String+RemoveSpecialChars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+RemoveSpecialChars.swift"; sourceTree = "<group>"; };
 		C088F23626DEDE5600C4BCA2 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		C088F23926DEE0F800C4BCA2 /* SmallSongCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallSongCard.swift; sourceTree = "<group>"; };
 		C088F23B26DEE48E00C4BCA2 /* SmallSongItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallSongItem.swift; sourceTree = "<group>"; };
@@ -699,6 +703,8 @@
 				C06AB93026FA85F600F46356 /* ProgressView+SpotifyStyle.swift */,
 				C087873326FCF6EF0013924E /* ScrollView+NoBouncing.swift */,
 				C087873726FD481D0013924E /* UIImage+AverageColor.swift */,
+				C08861AE270BF5FF00D6AD89 /* RemoteAudio+ItunesPlayer.swift */,
+				C08861B0270BFB5900D6AD89 /* String+RemoveSpecialChars.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1076,11 +1082,13 @@
 				C0F8199126FE4E57000F5FEE /* ShowResponseType.swift in Sources */,
 				C016E6192703949500EFF870 /* ShowEpisodesScrollView.swift in Sources */,
 				C016E607270345CA00EFF870 /* AlbumTracksScrollView.swift in Sources */,
+				C08861AF270BF5FF00D6AD89 /* RemoteAudio+ItunesPlayer.swift in Sources */,
 				C0F8199326FE4E7D000F5FEE /* AlbumResponseType.swift in Sources */,
 				C087873226FCCCA70013924E /* PlaylistDetailScreen.swift in Sources */,
 				C016E6092703464100EFF870 /* AlbumInfo.swift in Sources */,
 				C09FD8FF26E03D6E0069CEAE /* BottomBar.swift in Sources */,
 				C016E610270385E300EFF870 /* ShowsDetailScreen.swift in Sources */,
+				C08861B1270BFB5900D6AD89 /* String+RemoveSpecialChars.swift in Sources */,
 				C084E04D2703409600C6AAAE /* PlaylistAuthor.swift in Sources */,
 				C084267E26F10BBD000ACAEE /* HomePageAPICalls.swift in Sources */,
 				C089136226F986E600CA1A69 /* ColorfulCardPair.swift in Sources */,

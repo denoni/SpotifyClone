@@ -8,6 +8,9 @@
 import SwiftUI
 import AVKit
 
+
+import Alamofire
+
 struct PlayerControllerSection: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @ObservedObject var audioManager = RemoteAudio()
@@ -46,17 +49,14 @@ struct PlayerControllerSection: View {
             Image("circle-play")
               .resizeToFit()
               .onTapGesture {
-
-                let mediaURL = mediaDetailVM.mainItem!.previewURL
-                if mediaURL.isEmpty {
-                  print("\n\nEmpty preview URL. Spotify API doesn't provide preview for a lot of songs. A workaround will be found.\n\n")
+                if mediaDetailVM.mainItem!.previewURL.isEmpty {
+                  audioManager.playWithItunes(forItem: mediaDetailVM.mainItem!)
                 } else {
-
-                  audioManager.play(urlString)
+                  print(mediaDetailVM.mainItem!.previewURL)
+                  audioManager.play(mediaDetailVM.mainItem!.previewURL)
                 }
               }
           }
-
           if audioManager.state == .buffering {
             ZStack {
               Circle()
