@@ -15,7 +15,7 @@ extension RemoteAudio {
       // In this case, if the player was already used, that means
       // that we don't need to grab a new URL from the API, we
       // may just grab the URL from `lastPlayedURL` instead.
-      guard self.isFirstTimePlaying == true else {
+      guard self.lastPlayedURL.isEmpty else {
         self.play(self.lastPlayedURL, audioID: item.id)
         return
       }

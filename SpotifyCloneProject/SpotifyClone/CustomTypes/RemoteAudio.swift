@@ -24,7 +24,6 @@ class RemoteAudio: ObservableObject {
   @Published var lastPlayedURL = ""
   @Published var lastItemPlayedID = ""
   @Published var showPauseButton = false
-  @Published var isFirstTimePlaying = true
 
   init() {
     player = AVPlayer()
@@ -34,7 +33,6 @@ class RemoteAudio: ObservableObject {
   }
 
   func play(_ audioURL: String, audioID: String) {
-      isFirstTimePlaying = false
       if !showPauseButton && lastPlayedURL != audioURL {
         let playerItem = AVPlayerItem(url: URL(string: audioURL)!)
         player.replaceCurrentItem(with: playerItem)

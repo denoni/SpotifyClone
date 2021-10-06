@@ -39,7 +39,7 @@ struct PlayerControllerSection: View {
         Spacer()
 
         ZStack {
-          if audioManager.showPauseButton && !audioManager.isFirstTimePlaying {
+          if audioManager.showPauseButton && !audioManager.lastPlayedURL.isEmpty  {
             Image("circle-stop")
               .resizeToFit()
               .onTapGesture {
