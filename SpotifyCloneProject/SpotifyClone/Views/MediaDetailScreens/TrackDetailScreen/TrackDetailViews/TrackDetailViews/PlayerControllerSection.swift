@@ -24,9 +24,6 @@ struct PlayerControllerSection: View {
         Image("play-mix")
           .resizeToFit()
           .padding(.vertical, 24)
-          .onTapGesture {
-            print(audioManager.state)
-          }
         Spacer()
 
         Image("previous")

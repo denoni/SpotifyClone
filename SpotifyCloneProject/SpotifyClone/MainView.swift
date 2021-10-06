@@ -5,6 +5,8 @@
 //  Created by Gabriel on 8/30/21.
 //
 
+// TODO: Adjust all screens in the app for smaller phone displays.
+
 import SwiftUI
 
 struct MainView: View {

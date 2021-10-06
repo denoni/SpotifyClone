@@ -24,7 +24,6 @@ struct TopBarWithTitle: View {
 
   var circleOpacity: Double {
     let opacity = 1 - Double(scrollViewPosition / UIScreen.main.bounds.height * 2)
-    print(opacity)
     return opacity - 0.7 > 0.3 ? 0.3 : opacity - 0.7
   }
 

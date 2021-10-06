@@ -18,9 +18,6 @@ struct AuthScreen: View {
                        startPoint: .topLeading,
                        endPoint: .bottomTrailing)
           .ignoresSafeArea()
-          .onAppear {
-            print(geometry.size)
-          }
         VStack(alignment: .leading) {
           Image("spotify-full-logo")
             .resizable()
