@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ShowEpisodesScrollView: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
+  @StateObject var audioManager = RemoteAudio()
 
   var medias: [SpotifyModel.MediaItem] {
     mediaDetailVM.mediaCollection[.shows(.episodesFromShow)]!
@@ -19,9 +20,7 @@ struct ShowEpisodesScrollView: View {
       ForEach(medias) { media in
         Group {
           let episodeDetails = SpotifyModel.getEpisodeDetails(for: media)
-          EpisodeItem(title: media.title,
-                      description: episodeDetails.description!,
-                      imageURL: media.imageURL)
+          EpisodeItem(audioManager: audioManager, media: media, details: episodeDetails)
             .onAppear { testIfShouldFetchMoreData(basedOn: media) }
         }
 
@@ -39,26 +38,28 @@ struct ShowEpisodesScrollView: View {
   }
 
   struct EpisodeItem: View {
-    var title: String
-    var description: String
-    var imageURL: String
+    @StateObject var audioManager: RemoteAudio
+    let media: SpotifyModel.MediaItem
+    let details: SpotifyModel.EpisodeDetails
+
+    var isPlaying: Bool { audioManager.showPauseButton && audioManager.lastItemPlayedID == media.id }
 
     var body: some View {
       VStack(alignment: .leading, spacing: 12) {
           HStack (alignment: .center, spacing: 15) {
             RoundedRectangle(cornerRadius: 10)
               .foregroundColor(.spotifyMediumGray)
-              .overlay(RemoteImage(urlString: imageURL))
+              .overlay(RemoteImage(urlString: media.imageURL))
               .mask(RoundedRectangle(cornerRadius: 10))
               .frame(width: 50, height: 50)
-            Text(title)
+            Text(media.title)
               .font(.avenir(.heavy, size: 18))
             Spacer()
           }
 
         Group {
 
-          Text(description)
+          Text(details.description!)
             .font(.avenir(.medium, size: 14))
             .lineLimit(2)
             .opacity(0.7)
@@ -88,9 +89,17 @@ struct ShowEpisodesScrollView: View {
           Spacer()
           Circle()
             .foregroundColor(.black)
-            .overlay(Image("circle-play").resizeToFit())
+            .overlay(Image(isPlaying ? "circle-stop" : "circle-play").resizeToFit())
             .aspectRatio(contentMode: .fit)
             .frame(height: 35)
+            .onTapGesture {
+              if isPlaying {
+                audioManager.pause()
+              } else {
+                audioManager.pause()
+                audioManager.play(media.previewURL, audioID: media.id)
+              }
+            }
         }
         .frame(height: 25, alignment: .leading)
         Divider()
