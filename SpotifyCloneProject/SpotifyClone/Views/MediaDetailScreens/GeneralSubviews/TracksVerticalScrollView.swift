@@ -67,6 +67,7 @@ struct TracksVerticalScrollView: View {
             .font(.avenir(.medium, size: 16))
             .opacity(0.6)
         }
+        .padding(.trailing, 25)
         Spacer()
         Image("three-dots")
           .resizeToFit()
@@ -113,6 +114,7 @@ struct TracksVerticalScrollView: View {
               .font(.avenir(.medium, size: 16))
               .opacity(0.7)
           }
+          .padding(.trailing, 25)
           Spacer()
           Image("three-dots")
             .resizeToFit()

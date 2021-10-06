@@ -30,6 +30,7 @@ struct TrackInfoSection: View {
         VStack(alignment: .leading,
                spacing: 0) {
           MediaTitle(mediaTitle: songName)
+            .padding(.trailing, 25)
           HStack(spacing: 0) {
             ExplicitIcon(isExplicit: isExplicit)
               .padding(.trailing, isExplicit ? 5 : 0)
@@ -40,6 +41,7 @@ struct TrackInfoSection: View {
               .tracking(0.5)
           }
           .opacity(0.7)
+          .padding(.trailing, 25)
         }.frame(
           maxWidth: .infinity,
           alignment: .topLeading
