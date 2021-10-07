@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BigTrackImage: View {
   var imageURL: String
+  var isSmallDisplay: Bool = false
 
   var body: some View {
     Rectangle()
@@ -16,7 +17,7 @@ struct BigTrackImage: View {
       .aspectRatio(1/1, contentMode: .fill)
       .overlay(RemoteImage(urlString: imageURL)
                 .mask(Rectangle().aspectRatio(1/1 , contentMode: .fit)))
-      .padding(.bottom, 25)
       .shadow(color: .spotifyDarkGray.opacity(0.3), radius: 15)
+      .padding(.horizontal, isSmallDisplay ? 15 : 0)
   }
 }

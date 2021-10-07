@@ -12,6 +12,8 @@ struct TopBarWithTitle: View {
   var title: String
   var backButtonWithCircleBackground: Bool = false
 
+  @Environment(\.topSafeAreaSize) var topSafeAreaSize
+
   var backgroundOpacity: Double {
     let opacity = Double(scrollViewPosition / UIScreen.main.bounds.height * 2)
     return opacity > 0.8 ? 0.8 : opacity
@@ -32,11 +34,11 @@ struct TopBarWithTitle: View {
       ZStack {
         Rectangle()
           .foregroundColor(.black)
-          .frame(height: 100)
+          .frame(height: topSafeAreaSize + 60)
           .frame(maxWidth: .infinity)
           .ignoresSafeArea()
           .opacity(backgroundOpacity)
-        HStack(spacing: 15) {
+        HStack {
           if backButtonWithCircleBackground {
             Circle()
               .overlay(BackButton()
@@ -45,18 +47,22 @@ struct TopBarWithTitle: View {
                         .scaledToFit())
               .foregroundColor(.black.opacity(circleOpacity))
               .frame(width: 35, height: 35)
+              .padding(.leading, 25)
           } else {
             BackButton()
-              .aspectRatio(contentMode: .fit)
+              .frame(width: 30, height: 30, alignment: .center)
+              .padding(.leading, 25)
           }
           Text(title)
             .font(.avenir(.black, size: 20))
             .opacity(titleOpacity > 0.8 ? 0.8 : titleOpacity)
             .lineLimit(1)
+            .padding(.leading, 15)
+            .padding(.trailing, 25)
           Spacer()
         }
-        .padding()
-        .padding(.top, 25)
+        .padding(.top, topSafeAreaSize)
+        .padding(.top, 10)        
       }
       Spacer()
     }

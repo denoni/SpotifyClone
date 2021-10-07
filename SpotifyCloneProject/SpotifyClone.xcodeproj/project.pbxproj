@@ -19,6 +19,7 @@
 		C016E61527038BEF00EFF870 /* SmallMediaCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E61427038BEF00EFF870 /* SmallMediaCover.swift */; };
 		C016E61727038FA500EFF870 /* FollowAndThreeDotsIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E61627038FA500EFF870 /* FollowAndThreeDotsIcons.swift */; };
 		C016E6192703949500EFF870 /* ShowEpisodesScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E6182703949500EFF870 /* ShowEpisodesScrollView.swift */; };
+		C03F968D270F6836005FBC1F /* TopSafeAreaSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03F968C270F6836005FBC1F /* TopSafeAreaSize.swift */; };
 		C06A4A5026E1BB6C00D2CA90 /* SpotifyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06A4A4F26E1BB6C00D2CA90 /* SpotifyTextField.swift */; };
 		C06AB91426FA07B000F46356 /* Color+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06AB91326FA07B000F46356 /* Color+Random.swift */; };
 		C06AB93126FA85F600F46356 /* ProgressView+SpotifyStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06AB93026FA85F600F46356 /* ProgressView+SpotifyStyle.swift */; };
@@ -154,6 +155,7 @@
 		C016E61427038BEF00EFF870 /* SmallMediaCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallMediaCover.swift; sourceTree = "<group>"; };
 		C016E61627038FA500EFF870 /* FollowAndThreeDotsIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowAndThreeDotsIcons.swift; sourceTree = "<group>"; };
 		C016E6182703949500EFF870 /* ShowEpisodesScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowEpisodesScrollView.swift; sourceTree = "<group>"; };
+		C03F968C270F6836005FBC1F /* TopSafeAreaSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSafeAreaSize.swift; sourceTree = "<group>"; };
 		C06A4A4F26E1BB6C00D2CA90 /* SpotifyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyTextField.swift; sourceTree = "<group>"; };
 		C06AB91326FA07B000F46356 /* Color+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Random.swift"; sourceTree = "<group>"; };
 		C06AB93026FA85F600F46356 /* ProgressView+SpotifyStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressView+SpotifyStyle.swift"; sourceTree = "<group>"; };
@@ -692,6 +694,7 @@
 			isa = PBXGroup;
 			children = (
 				C0C63C9926DD35D900532792 /* ColorPalette.swift */,
+				C03F968C270F6836005FBC1F /* TopSafeAreaSize.swift */,
 				C0C63C9B26DD3CD700532792 /* CustomFonts.swift */,
 				C07DA12F26DDD6F20086EEAB /* View+RoundedSpecificSide.swift */,
 				C09FD90026E049BE0069CEAE /* Image+ResizeToFit.swift */,
@@ -1015,6 +1018,7 @@
 				C081873526EF97DF00AB19E9 /* AuthScreen.swift in Sources */,
 				C09552962704B3B3000499B3 /* APIFetchingPlaylists.swift in Sources */,
 				C0883A0126E26F1500E1ADFA /* SmallSongCardsGrid.swift in Sources */,
+				C03F968D270F6836005FBC1F /* TopSafeAreaSize.swift in Sources */,
 				C088F23A26DEE0F800C4BCA2 /* SmallSongCard.swift in Sources */,
 				C016E61727038FA500EFF870 /* FollowAndThreeDotsIcons.swift in Sources */,
 				C016E60D270372D000EFF870 /* MediaTitle.swift in Sources */,

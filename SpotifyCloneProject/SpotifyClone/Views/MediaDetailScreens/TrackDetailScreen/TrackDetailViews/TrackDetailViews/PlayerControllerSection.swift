@@ -14,27 +14,26 @@ import Alamofire
 struct PlayerControllerSection: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @ObservedObject var audioManager = RemoteAudio()
+  var isSmallDisplay: Bool = false
 
   var urlString: String { mediaDetailVM.mainItem!.previewURL }
 
   var body: some View {
     VStack {
       audioManager.buildSliderForAudio()
+        .padding(.bottom, isSmallDisplay ? -5 : 0)
       HStack {
         Image("play-mix")
           .resizeToFit()
-          .padding(.vertical, 24)
+          .frame(width: isSmallDisplay ? 20 : 25)
         Spacer()
-
         Image("previous")
           .resizeToFit()
-          .padding(.vertical, 22)
+          .frame(width: isSmallDisplay ? 25 : 30)
           .onTapGesture {
             audioManager.backwardFiveSeconds()
           }
-
         Spacer()
-
         ZStack {
           if audioManager.showPauseButton && !audioManager.lastPlayedURL.isEmpty  {
             Image("circle-stop")
@@ -63,30 +62,25 @@ struct PlayerControllerSection: View {
             }
             .scaledToFit()
           }
-
         }
-
+        .frame(width: isSmallDisplay ? 60 : 70)
         Spacer()
-
         Image("next")
           .resizeToFit()
-          .padding(.vertical, 22)
+          .frame(width: isSmallDisplay ? 25 : 30)
           .onTapGesture {
             audioManager.forwardFiveSeconds()
           }
-
         Spacer()
         Image("play-repeat")
           .resizeToFit()
-          .padding(.vertical, 24)
+          .frame(width: isSmallDisplay ? 20 : 25)
       }
-      .frame(height: 70,
-             alignment: .center)
     }
+    .padding(.bottom, isSmallDisplay ? -5 : 0)
     .onDisappear {
       // When this View isn't being shown anymore stop the player
       audioManager.player.replaceCurrentItem(with: nil)
     }
   }
-  
 }

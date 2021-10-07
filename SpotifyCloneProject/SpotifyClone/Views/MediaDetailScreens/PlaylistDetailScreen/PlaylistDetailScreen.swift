@@ -38,6 +38,8 @@ struct PlaylistDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @Binding var scrollViewPosition: CGFloat
 
+  @Environment(\.topSafeAreaSize) var topSafeAreaSize
+
   var scale: CGFloat {
     let myScale = scrollViewPosition / UIScreen.main.bounds.height * 2
     return myScale > 0.8 ? 0.8 : myScale
@@ -52,7 +54,7 @@ struct PlaylistDetailContent: View {
           .scaleEffect(1 / (scale + 1))
           .opacity(1 - Double(scale * 2 > 0.8 ? 0.8 : scale * 2))
       }
-      .padding(.top, 25)
+      .padding(.top, topSafeAreaSize)
 
       MediaTitle(mediaTitle: mediaDetailVM.mainItem!.title)
       MediaDescription(description: details.description)
@@ -82,7 +84,8 @@ struct PlaylistDetailContent: View {
 
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .padding(25)
+    .padding(.horizontal, 25)
+    .padding(.vertical, 15)
 
   }
 

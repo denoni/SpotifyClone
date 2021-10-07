@@ -11,6 +11,7 @@ struct SmallTopSection: View {
   @EnvironmentObject var homeVM: HomeViewModel
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   var albumName: String
+  var isSmallDisplay: Bool = false
 
   var body: some View {
     HStack {
@@ -37,9 +38,7 @@ struct SmallTopSection: View {
         .resizeToFit()
         .padding(.vertical, 3)
     }
-    .frame(height: 30,
-           alignment: .center)
-    .padding(.bottom, 25)
-    .padding(.top, 25)
+    .frame(height: isSmallDisplay ? 25 : 30, alignment: .center)
+    .border(Color.white)
   }
 }

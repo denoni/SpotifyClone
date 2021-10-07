@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TopBar: View {
+  @Environment(\.topSafeAreaSize) var topSafeAreaSize
   var animateOpacityWith: CGFloat
   var body: some View {
     Group {
@@ -16,7 +17,7 @@ struct TopBar: View {
       VStack {
         Rectangle()
           .foregroundColor(.black)
-          .frame(height: 50)
+          .frame(height: topSafeAreaSize)
           .frame(maxWidth: .infinity)
           .opacity(Double(opacity > 0.8 ? 0.8 : opacity))
           .ignoresSafeArea()

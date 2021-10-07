@@ -32,21 +32,27 @@ struct TrackDetailScreen: View {
 
 struct TrackDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
+  @Environment(\.topSafeAreaSize) var topSafeAreaSize
 
   var details: SpotifyModel.TrackDetails { SpotifyModel.getTrackDetails(for: mediaDetailVM.mainItem!) }
+  var isSmallDisplay: Bool { UIScreen.main.bounds.size.height < 750 }
 
   var body: some View {
     VStack(alignment: .center) {
-      SmallTopSection(albumName: details.album!.name)
+      SmallTopSection(albumName: details.album!.name, isSmallDisplay: isSmallDisplay)
+        .padding(.bottom, isSmallDisplay ? 0 : 15)
+        .padding(.top, isSmallDisplay ? 0 : 15)
       Spacer()
-      BigTrackImage(imageURL: mediaDetailVM.mainItem!.imageURL)
+      BigTrackImage(imageURL: mediaDetailVM.mainItem!.imageURL, isSmallDisplay: isSmallDisplay)
+        .padding(.bottom, isSmallDisplay ? 0 : 15)
       TrackInfoSection(songName: mediaDetailVM.mainItem!.title,
                        author: mediaDetailVM.mainItem!.author!,
                        isLiked: true, // TODO: Use real data
-                       isExplicit: details.explicit)
-      PlayerControllerSection()
+                       isExplicit: details.explicit,
+                       isSmallDisplay: isSmallDisplay)
+      PlayerControllerSection(isSmallDisplay: isSmallDisplay)
       Spacer()
-      SmallBottomSection()
+      SmallBottomSection(isSmallDisplay: isSmallDisplay)
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .scaledToFit()

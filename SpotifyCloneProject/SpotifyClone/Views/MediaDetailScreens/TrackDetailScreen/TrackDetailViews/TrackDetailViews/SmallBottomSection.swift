@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct SmallBottomSection: View {
+  var isSmallDisplay: Bool = false
+
   var body: some View {
     HStack {
       Image("devices")
         .resizeToFit()
-        .padding(.vertical, 3)
+        .frame(width: isSmallDisplay ? 25 : 30)
       Spacer()
       Image("playlist")
         .resizeToFit()
         .padding(.vertical, 3)
+        .frame(width: isSmallDisplay ? 25 : 30)
     }
-    .frame(height: 32,
-           alignment: .center)
   }
 }

@@ -12,6 +12,7 @@ struct TrackInfoSection: View {
   var author: [Artist]
   var isLiked: Bool
   var isExplicit: Bool
+  var isSmallDisplay: Bool = false
 
   var authorNames: String {
     var authorsToReturn = ""
@@ -29,14 +30,14 @@ struct TrackInfoSection: View {
       HStack {
         VStack(alignment: .leading,
                spacing: 0) {
-          MediaTitle(mediaTitle: songName)
+          MediaTitle(mediaTitle: songName, useSmallerFont: isSmallDisplay)
             .padding(.trailing, 25)
           HStack(spacing: 0) {
             ExplicitIcon(isExplicit: isExplicit)
               .padding(.trailing, isExplicit ? 5 : 0)
             // TODO: Open artist's profile onClick
             Text(authorNames)
-              .font(.avenir(.medium, size: 18))
+              .font(.avenir(.medium, size: isSmallDisplay ? 16 : 18))
               .foregroundColor(.white)
               .tracking(0.5)
           }
@@ -51,6 +52,6 @@ struct TrackInfoSection: View {
           .padding(3)
           .frame(height: 30)
       }
-    }.frame(height: 60)
+    }
   }
 }
