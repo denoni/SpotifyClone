@@ -16,9 +16,9 @@ struct BottomBar: View {
       Spacer()
       Group {
         if showMediaPlayer {
-          BottomMediaPlayerBar(songName: "Shape of You",
-                               artist: "Ed Sheeran",
-                               cover: Image("shape-of-you-cover"))
+          BottomMediaPlayerBar(songName: "Nothing but the beat",
+                               artist: "David Guetta",
+                               cover: Image("nothing-but-the-beat-cover"))
         }
         BottomNavigationBar(mainVM: mainVM)
       }
