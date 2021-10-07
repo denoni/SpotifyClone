@@ -52,52 +52,26 @@ struct HomeScreen: View {
           ReadableScrollView(currentPosition: $scrollViewPosition) {
             LazyVStack(alignment: .leading, spacing: paddingSectionSeparation) {
               Group {
-                // MARK: Small Song Cards
                 SmallSongCardsGrid(medias: getTracksFor(.smallSongCards))
                   .padding(.horizontal, lateralPadding)
-
-                // MARK: Recently Played
                 RecentlyPlayedScrollView(medias: getTracksFor(.recentlyPlayed))
-
-                // MARK: New Releases
                 BigSongCoversScrollView(section: .newReleases,
                                         showArtistName: true)
-
-                // MARK: User Favorite Tracks
                 BigSongCoversScrollView(section: .userFavoriteTracks)
-
-                // MARK: Top Podcasts
                 BigSongCoversScrollView(section: .topPodcasts)
-
-                // MARK: Featured Playlists
+                // TODO: Stop using previewURL to store the featured playlist title
                 BigSongCoversScrollView(section: .featuredPlaylists,
-                                        // TODO: Stop using previewURL to store the featured playlist title
                                         sectionTitle: homeVM.mediaCollection[.featuredPlaylists]!.first!.previewURL)
-
-                // MARK: Artist's Top Tracks
                 RecommendedArtistScrollView(medias: getTracksFor(.artistTopTracks),
                                             sectionTitle: HomeViewModel.Section.artistTopTracks.rawValue)
-
-                // MARK: User Favorite Artists
                 BigSongCoversScrollView(section: .userFavoriteArtists)
               }
               Group {
-                // MARK: Playlist Rewind 2010s
                 BigSongCoversScrollView(section: .playlistRewind2010s)
-
-                // MARK: Playlist Rewind 2000s
                 BigSongCoversScrollView(section: .playlistRewind2000s)
-
-                // MARK: Playlist Rewind 90s
                 BigSongCoversScrollView(section: .playlistRewind90s)
-
-                // MARK: Playlist Rewind 80s
                 BigSongCoversScrollView(section: .playlistRewind80s)
-
-                // MARK: Playlist Rewind 70s
                 BigSongCoversScrollView(section: .playlistRewind70s)
-
-                // MARK: Playlist This Is X
                 BigSongCoversScrollView(section: .playlistThisIsX)
               }
             }

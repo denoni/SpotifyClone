@@ -31,6 +31,10 @@ struct AlbumDetailScreen: View {
   }
 }
 
+
+
+// MARK: - Detail Content
+
 struct AlbumDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @Binding var scrollViewPosition: CGFloat
@@ -83,7 +87,7 @@ struct AlbumDetailContent: View {
     .padding(.vertical, 15)
   }
 
-  func didEverySectionLoaded() -> Bool {
+  private func didEverySectionLoaded() -> Bool {
     for section in MediaDetailViewModel.AlbumSections.allCases {
       // If any section still loading, return false
       guard mediaDetailVM.isLoading[.album(section)] != true else {
@@ -97,6 +101,8 @@ struct AlbumDetailContent: View {
 }
 
 
+
+// MARK: - Preview
 
 struct AlbumDetailScreen_Previews: PreviewProvider {
   static var mainVM = MainViewModel()

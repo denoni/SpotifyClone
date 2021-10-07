@@ -30,6 +30,10 @@ struct ShowsDetailScreen: View {
   }
 }
 
+
+
+// MARK: - Detail Content
+
 struct ShowsDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @Binding var scrollViewPosition: CGFloat
@@ -54,22 +58,15 @@ struct ShowsDetailContent: View {
       }
       .padding(.top, 60)
       .padding(.bottom, 5)
+      // Animate the opacity and size based on `scale`
+      // (originated from the current position of the scroll view)
       .scaleEffect(1 / (scale + 1))
       .opacity(1 - Double(scale * 2 > 0.8 ? 0.8 : scale * 2))
       
 
       MediaDescription(description: details.description)
 
-      HStack(spacing: 0) {
-        ExplicitIcon(isExplicit: details.explicit)
-          .padding(.trailing, details.explicit ? 5 : 0)
-          .scaleEffect(0.8)
-        Text("EPISODES: \(details.numberOfEpisodes)")
-          .font(.avenir(.medium, size: 14))
-        Spacer()
-      }
-      .opacity(0.6)
-      .frame(height: 25)
+      NumberOfEpisodes(isExplicit: details.explicit, numberOfEpisodes: details.numberOfEpisodes)
 
       HStack {
         VStack(alignment: .leading) {
@@ -95,6 +92,24 @@ struct ShowsDetailContent: View {
     .padding(25)
   }
 
+  struct NumberOfEpisodes: View {
+    var isExplicit: Bool
+    var numberOfEpisodes: Int
+
+    var body: some View {
+      HStack(spacing: 0) {
+        ExplicitIcon(isExplicit: isExplicit)
+          .padding(.trailing, isExplicit ? 5 : 0)
+          .scaleEffect(0.8)
+        Text("EPISODES: \(numberOfEpisodes)")
+          .font(.avenir(.medium, size: 14))
+        Spacer()
+      }
+      .opacity(0.6)
+      .frame(height: 25)
+    }
+  }
+
   func didEverySectionLoaded() -> Bool {
     for section in MediaDetailViewModel.ShowsSections.allCases {
       // If any section still loading, return false
@@ -109,6 +124,8 @@ struct ShowsDetailContent: View {
 }
 
 
+
+// MARK: - Preview
 
 struct ShowsDetailScreen_Previews: PreviewProvider {
   static var mainVM = MainViewModel()

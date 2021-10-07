@@ -15,6 +15,7 @@ struct SmallTopSection: View {
 
   var body: some View {
     HStack {
+      // Rotate the down-arrow to turn it into a left arrow
       Image("down-arrow")
         .resizeToFit()
         .rotationEffect(Angle.degrees(90))
@@ -39,6 +40,5 @@ struct SmallTopSection: View {
         .padding(.vertical, 3)
     }
     .frame(height: isSmallDisplay ? 25 : 30, alignment: .center)
-    .border(Color.white)
   }
 }

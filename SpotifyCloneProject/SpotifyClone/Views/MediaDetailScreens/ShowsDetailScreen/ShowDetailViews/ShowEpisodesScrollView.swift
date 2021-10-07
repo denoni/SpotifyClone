@@ -37,6 +37,10 @@ struct ShowEpisodesScrollView: View {
     }
   }
 
+
+  // MARK: - Episode Item
+
+
   struct EpisodeItem: View {
     @StateObject var audioManager: RemoteAudio
     let media: SpotifyModel.MediaItem
@@ -73,14 +77,11 @@ struct ShowEpisodesScrollView: View {
 
         HStack(spacing: 25) {
           Group {
-            Circle()
-              .foregroundColor(.clear)
-              .overlay(Image("plus-circle").resizeToFit())
-              .aspectRatio(contentMode: .fit)
-            Circle()
-              .foregroundColor(.clear)
-              .overlay(Image("download-circle").resizeToFit())
-              .aspectRatio(contentMode: .fit)
+            // Plus icon
+            Image("plus-circle")
+              .resizeToFit()
+            Image("download-circle")
+              .resizeToFit()
             Image("three-dots")
               .resizeToFit()
               .padding(.vertical, 3)

@@ -52,14 +52,18 @@ struct TracksVerticalScrollView: View {
     }
   }
 
+
+
+  // MARK: - Album Item
+
   struct AlbumItem: View {
     @StateObject var audioManager: RemoteAudio
     let media: SpotifyModel.MediaItem
 
     var body: some View {
       HStack(spacing: 12) {
-        MediaControllerView(audioManager: audioManager,
-                            media: media)
+        PlayStopButton(audioManager: audioManager,
+                       media: media)
         VStack(alignment: .leading) {
           Text(media.title)
             .font(.avenir(.medium, size: 20))
@@ -78,6 +82,10 @@ struct TracksVerticalScrollView: View {
     }
   }
 
+
+
+  // MARK: - Playlist Item
+
   struct PlaylistItem: View {
     @StateObject var audioManager: RemoteAudio
 
@@ -89,6 +97,7 @@ struct TracksVerticalScrollView: View {
     var body: some View {
       ZStack {
 
+        // Small color accent in the background of the tapped item
         Color.spotifyLightGray.opacity(0.3)
           .padding(.vertical, -5)
           .padding(.horizontal, -25)
@@ -99,8 +108,8 @@ struct TracksVerticalScrollView: View {
             Rectangle()
               .foregroundColor(.spotifyMediumGray)
               .overlay(RemoteImage(urlString: media.imageURL))
-              MediaControllerView(audioManager: audioManager,
-                                  media: media)
+            PlayStopButton(audioManager: audioManager,
+                           media: media)
                 .shadow(color: Color.spotifyDarkGray, radius: 10)
                 .padding(.leading, 10)
                 .opacity(isTapped ? 1 : 0)
@@ -123,6 +132,8 @@ struct TracksVerticalScrollView: View {
         .frame(height: 60)
         .onTapGesture {
           isTapped = true
+          // If after 3 seconds the tapped item was not played,
+          // stop marking it as `isTapped`
           DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             guard isPlaying else {
               isTapped = false
@@ -137,7 +148,11 @@ struct TracksVerticalScrollView: View {
     }
   }
 
-  struct MediaControllerView: View {
+
+
+  // MARK: - Media Controller View
+
+  struct PlayStopButton: View {
     @StateObject var audioManager: RemoteAudio
     var media: SpotifyModel.MediaItem
 

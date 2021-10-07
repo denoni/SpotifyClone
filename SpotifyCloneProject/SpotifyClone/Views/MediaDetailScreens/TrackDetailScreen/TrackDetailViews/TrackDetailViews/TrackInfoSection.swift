@@ -9,21 +9,10 @@ import SwiftUI
 
 struct TrackInfoSection: View {
   var songName: String
-  var author: [Artist]
+  var authors: [Artist]
   var isLiked: Bool
   var isExplicit: Bool
   var isSmallDisplay: Bool = false
-
-  var authorNames: String {
-    var authorsToReturn = ""
-    for authorIndex in author.indices {
-      authorsToReturn.append("\(author[authorIndex].name), ")
-    }
-    // Remove the ", " from the last artist name.
-    authorsToReturn.removeLast()
-    authorsToReturn.removeLast()
-    return authorsToReturn
-  }
 
   var body: some View {
     Group {
@@ -36,7 +25,7 @@ struct TrackInfoSection: View {
             ExplicitIcon(isExplicit: isExplicit)
               .padding(.trailing, isExplicit ? 5 : 0)
             // TODO: Open artist's profile onClick
-            Text(authorNames)
+            Text(getAuthorNames(from: authors))
               .font(.avenir(.medium, size: isSmallDisplay ? 16 : 18))
               .foregroundColor(.white)
               .tracking(0.5)
@@ -53,5 +42,16 @@ struct TrackInfoSection: View {
           .frame(height: 30)
       }
     }
+  }
+
+  private func getAuthorNames(from authors: [Artist]) -> String {
+    var authorsToReturn = ""
+    for authorIndex in authors.indices {
+      authorsToReturn.append("\(authors[authorIndex].name), ")
+    }
+    // Remove the ", " from the last artist name.
+    authorsToReturn.removeLast()
+    authorsToReturn.removeLast()
+    return authorsToReturn
   }
 }

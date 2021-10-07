@@ -29,10 +29,11 @@ struct PlaylistDetailScreen: View {
       .ignoresSafeArea()
     }
   }
-
 }
 
 
+
+// MARK: - Detail Content
 
 struct PlaylistDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
@@ -40,6 +41,7 @@ struct PlaylistDetailContent: View {
 
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
 
+  /// `scale` gets the current position of the scroll view and returns a CGFloat used for animations.
   var scale: CGFloat {
     let myScale = scrollViewPosition / UIScreen.main.bounds.height * 2
     return myScale > 0.8 ? 0.8 : myScale
@@ -99,10 +101,11 @@ struct PlaylistDetailContent: View {
     // else, return true
     return true
   }
-
 }
 
 
+
+// MARK: - Preview
 
 struct MediaDetailScreen_Previews: PreviewProvider {
   static var mainVM = MainViewModel()

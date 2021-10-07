@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Alamofire
 
 struct TrackDetailScreen: View {
   @EnvironmentObject var homeVM: HomeViewModel
@@ -30,6 +29,8 @@ struct TrackDetailScreen: View {
 
 
 
+// MARK: - Detail Content
+
 struct TrackDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
@@ -46,7 +47,7 @@ struct TrackDetailContent: View {
       BigTrackImage(imageURL: mediaDetailVM.mainItem!.imageURL, isSmallDisplay: isSmallDisplay)
         .padding(.bottom, isSmallDisplay ? 0 : 15)
       TrackInfoSection(songName: mediaDetailVM.mainItem!.title,
-                       author: mediaDetailVM.mainItem!.author!,
+                       authors: mediaDetailVM.mainItem!.author!,
                        isLiked: true, // TODO: Use real data
                        isExplicit: details.explicit,
                        isSmallDisplay: isSmallDisplay)
@@ -61,6 +62,8 @@ struct TrackDetailContent: View {
 }
 
 
+
+// MARK: - Preview
 
 struct TrackDetailScreen_Previews: PreviewProvider {
   static var mainVM = MainViewModel()

@@ -60,6 +60,7 @@ struct BigSongCoversScrollView: View {
     }
   }
 
+  // If we are reaching the end of the scroll, fetch more data
   func testIfShouldFetchMoreData(basedOn media: SpotifyModel.MediaItem) {
     if medias.count > 5 {
       if media.id == medias[medias.count - 4].id {

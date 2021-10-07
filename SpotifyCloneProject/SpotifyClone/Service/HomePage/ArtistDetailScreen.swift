@@ -36,6 +36,10 @@ struct ArtistDetailScreen: View {
   }
 }
 
+
+
+// MARK: - Detail Content
+
 struct ArtistDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
 
@@ -105,7 +109,7 @@ struct ArtistDetailContent: View {
     .padding(25)
   }
 
-  func didEverySectionLoaded() -> Bool {
+  private func didEverySectionLoaded() -> Bool {
     for section in MediaDetailViewModel.ArtistSections.allCases {
       // If any section still loading, return false
       guard mediaDetailVM.isLoading[.artist(section)] != true else {
@@ -119,6 +123,8 @@ struct ArtistDetailContent: View {
 }
 
 
+
+// MARK: - Preview
 
 struct ArtistDetailScreen_Previews: PreviewProvider {
   static var mainVM = MainViewModel()

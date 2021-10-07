@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// `RecentlyPlayedScrollView` a smaller sized scroll view(smaller version of `BigSongCoversScrollView`).
 struct RecentlyPlayedScrollView: View {
   @EnvironmentObject var homeVM: HomeViewModel
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
