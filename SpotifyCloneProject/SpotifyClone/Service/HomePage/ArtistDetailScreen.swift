@@ -74,7 +74,7 @@ struct ArtistDetailContent: View {
           .frame(height: 65)
           .padding(.bottom, 25)
 
-      if didEverySectionLoaded() {
+      if Utility.didEverySectionLoaded(in: .artistDetail, mediaDetailVM: mediaDetailVM) {
         VStack(spacing: 60) {
           VStack {
             Text("Popular Tracks")
@@ -108,18 +108,6 @@ struct ArtistDetailContent: View {
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .padding(25)
   }
-
-  private func didEverySectionLoaded() -> Bool {
-    for section in MediaDetailViewModel.ArtistSections.allCases {
-      // If any section still loading, return false
-      guard mediaDetailVM.isLoading[.artist(section)] != true else {
-        return false
-      }
-    }
-    // else, return true
-    return true
-  }
-
 }
 
 

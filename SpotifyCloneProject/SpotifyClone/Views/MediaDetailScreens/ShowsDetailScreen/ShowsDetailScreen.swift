@@ -75,7 +75,7 @@ struct ShowsDetailContent: View {
         BigPlayButton()
       }.frame(height: 65)
 
-      if didEverySectionLoaded() {
+      if Utility.didEverySectionLoaded(in: .showDetail, mediaDetailVM: mediaDetailVM) {
         ShowEpisodesScrollView()
       } else {
         HStack {
@@ -109,18 +109,6 @@ struct ShowsDetailContent: View {
       .frame(height: 25)
     }
   }
-
-  func didEverySectionLoaded() -> Bool {
-    for section in MediaDetailViewModel.ShowsSections.allCases {
-      // If any section still loading, return false
-      guard mediaDetailVM.isLoading[.shows(section)] != true else {
-        return false
-      }
-    }
-    // else, return true
-    return true
-  }
-
 }
 
 

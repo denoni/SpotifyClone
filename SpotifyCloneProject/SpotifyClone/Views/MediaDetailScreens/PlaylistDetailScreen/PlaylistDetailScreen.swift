@@ -71,7 +71,7 @@ struct PlaylistDetailContent: View {
       }
       .frame(height: 65)
 
-      if didEverySectionLoaded() {
+      if Utility.didEverySectionLoaded(in: .playlistDetail, mediaDetailVM: mediaDetailVM) {
         TracksVerticalScrollView(tracksOrigin: .playlist(.tracksFromPlaylist))
       } else {
         HStack {
@@ -89,17 +89,6 @@ struct PlaylistDetailContent: View {
     .padding(.horizontal, 25)
     .padding(.vertical, 15)
 
-  }
-
-  func didEverySectionLoaded() -> Bool {
-    for section in MediaDetailViewModel.PlaylistSections.allCases {
-      // If any section still loading, return false
-      guard mediaDetailVM.isLoading[.playlist(section)] != true else {
-        return false
-      }
-    }
-    // else, return true
-    return true
   }
 }
 
