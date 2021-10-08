@@ -12,6 +12,6 @@ struct MediaLikesAndDuration: View {
 
   var body: some View {
     Text("\(playlistTracks.numberOfSongs) songs • 1h 22m") // TODO: Get real data
-      .opacity(0.6)
+      .opacity(Constants.opacityStandard)
   }
 }

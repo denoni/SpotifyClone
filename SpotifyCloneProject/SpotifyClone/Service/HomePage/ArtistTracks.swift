@@ -13,19 +13,19 @@ struct ArtistTracks: View {
   var body: some View {
     VStack {
       ForEach(medias) { media in
-        HStack(spacing: 12) {
+        HStack(spacing: Constants.spacingSmall) {
           Rectangle()
             .foregroundColor(.spotifyMediumGray)
             .overlay(RemoteImage(urlString: media.imageURL))
             .frame(width: 80, height: 80)
           VStack(alignment: .leading) {
             Text(media.title)
-              .font(.avenir(.medium, size: 18))
+              .font(.avenir(.medium, size: Constants.fontSmall))
               .lineLimit(1)
-              .padding(.trailing, 40)
+              .padding(.trailing, Constants.paddingLarge)
             Text("Single • 2020") // TODO: Show real data
-              .font(.avenir(.medium, size: 14))
-              .opacity(0.7)
+              .font(.avenir(.medium, size: Constants.fontXSmall))
+              .opacity(Constants.opacityHigh)
               .lineLimit(1)
           }
           Spacer()
@@ -36,7 +36,7 @@ struct ArtistTracks: View {
       }
       SeeMoreButton()
         .padding(.top, 5)
-        .opacity(0.7)
+        .opacity(Constants.opacityHigh)
     }
   }
 }

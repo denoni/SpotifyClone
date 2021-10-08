@@ -21,12 +21,12 @@ struct AudioSlider: View {
       .disabled(remoteAudio.state != .active)
       HStack {
         Text(SecondsToHMS.formatSecondsToHMS(remoteAudio.currentTime))
-          .font(.avenir(.medium, size: 14))
-          .opacity(0.8)
+          .font(.avenir(.medium, size: Constants.fontXSmall))
+          .opacity(Constants.opacityStandard)
         Spacer()
         Text(SecondsToHMS.formatSecondsToHMS(remoteAudio.currentDuration))
-          .font(.avenir(.medium, size: 14))
-          .opacity(0.8)
+          .font(.avenir(.medium, size: Constants.fontXSmall))
+          .opacity(Constants.opacityStandard)
       }
     }
     // Listen out for the time observer publishing changes to the player's time

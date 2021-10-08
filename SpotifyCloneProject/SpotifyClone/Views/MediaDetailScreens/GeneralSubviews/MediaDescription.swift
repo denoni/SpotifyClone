@@ -13,7 +13,7 @@ struct MediaDescription: View {
   var body: some View {
 
     Text(description)
-      .opacity(0.9)
+      .opacity(Constants.opacityLow)
       .lineLimit(2)
     // TODO: Add a `Read more...` clickable to show the full description
   }

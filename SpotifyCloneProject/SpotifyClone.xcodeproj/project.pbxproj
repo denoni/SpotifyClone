@@ -21,6 +21,7 @@
 		C016E6192703949500EFF870 /* ShowEpisodesScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E6182703949500EFF870 /* ShowEpisodesScrollView.swift */; };
 		C03F968D270F6836005FBC1F /* TopSafeAreaSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03F968C270F6836005FBC1F /* TopSafeAreaSize.swift */; };
 		C03F968F270FBAEA005FBC1F /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03F968E270FBAEA005FBC1F /* Utility.swift */; };
+		C03F9691270FC090005FBC1F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03F9690270FC090005FBC1F /* Constants.swift */; };
 		C06A4A5026E1BB6C00D2CA90 /* SpotifyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06A4A4F26E1BB6C00D2CA90 /* SpotifyTextField.swift */; };
 		C06AB91426FA07B000F46356 /* Color+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06AB91326FA07B000F46356 /* Color+Random.swift */; };
 		C06AB93126FA85F600F46356 /* ProgressView+SpotifyStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06AB93026FA85F600F46356 /* ProgressView+SpotifyStyle.swift */; };
@@ -158,6 +159,7 @@
 		C016E6182703949500EFF870 /* ShowEpisodesScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowEpisodesScrollView.swift; sourceTree = "<group>"; };
 		C03F968C270F6836005FBC1F /* TopSafeAreaSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSafeAreaSize.swift; sourceTree = "<group>"; };
 		C03F968E270FBAEA005FBC1F /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		C03F9690270FC090005FBC1F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C06A4A4F26E1BB6C00D2CA90 /* SpotifyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyTextField.swift; sourceTree = "<group>"; };
 		C06AB91326FA07B000F46356 /* Color+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Random.swift"; sourceTree = "<group>"; };
 		C06AB93026FA85F600F46356 /* ProgressView+SpotifyStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressView+SpotifyStyle.swift"; sourceTree = "<group>"; };
@@ -472,6 +474,7 @@
 				C07D2BBB270AA88C003663FB /* RemoteAudio.swift */,
 				C08861AA270BB06100D6AD89 /* SecondsToHMS.swift */,
 				C03F968E270FBAEA005FBC1F /* Utility.swift */,
+				C03F9690270FC090005FBC1F /* Constants.swift */,
 			);
 			path = CustomTypes;
 			sourceTree = "<group>";
@@ -1110,6 +1113,7 @@
 				C0C63C9A26DD35D900532792 /* ColorPalette.swift in Sources */,
 				C08861AB270BB06100D6AD89 /* SecondsToHMS.swift in Sources */,
 				C0C5F9722704EF3D0099EEB5 /* BigArtistNameTitle.swift in Sources */,
+				C03F9691270FC090005FBC1F /* Constants.swift in Sources */,
 				C080CE222700A1A5003D0C11 /* SmallBottomSection.swift in Sources */,
 				C06A4A5026E1BB6C00D2CA90 /* SpotifyTextField.swift in Sources */,
 			);

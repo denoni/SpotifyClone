@@ -13,9 +13,9 @@ struct BigArtistNameTitle: View {
   var body: some View {
     HStack {
       Text(name)
-        .font(.avenir(.black, size: 45))
-        .padding(.top, 25)
-        .padding(.bottom, 15)
+        .font(.avenir(.black, size: Constants.fontXXLarge))
+        .padding(.top, Constants.paddingStandard)
+        .padding(.bottom, Constants.paddingSmall)
         .multilineTextAlignment(.leading)
         .fixedSize(horizontal: false, vertical: true)
         .lineLimit(3)

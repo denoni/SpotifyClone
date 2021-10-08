@@ -19,7 +19,7 @@ struct ArtistPictureGradient: View {
             RemoteImage(urlString: imageURL)
               .scaledToFill()
             LinearGradient(gradient: Gradient(colors: [.clear,
-                                                       .spotifyDarkGray.opacity(0.7),
+                                                       .spotifyDarkGray.opacity(Constants.opacityStandard),
                                                        .spotifyDarkGray]),
                            startPoint: .top,
                            endPoint: .bottom)

@@ -25,16 +25,16 @@ struct SearchScreen: View {
       ScrollView(showsIndicators: false) {
         LazyVStack(alignment: .leading) {
           SearchSection()
-            .padding(.bottom, 30)
+            .padding(.bottom, Constants.paddingStandard)
           TopGenresSection(title: "Top Genres")
-            .padding(.bottom, 10)
+            .padding(.bottom, Constants.paddingSmall)
           PopularPodcastSection(title: "Popular Podcast Categories")
-            .padding(.bottom, 10)
+            .padding(.bottom, Constants.paddingSmall)
           BrowseAllSection(title: "Browse All",
                            playlists: searchVM.playlists,
                            colors: searchVM.colors)
-            .padding(.bottom, paddingBottomSection)
-        }.padding(.vertical, lateralPadding)
+            .padding(.bottom, Constants.paddingBottomSection)
+        }.padding(.vertical, Constants.paddingStandard)
       }
     }
   }

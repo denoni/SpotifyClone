@@ -25,12 +25,12 @@ struct RecommendedArtistScrollView: View {
   var sectionTitle: String  
 
   var body: some View {
-    VStack(spacing: spacingSmallItems) {
+    VStack(spacing: Constants.spacingSmall) {
       ArtistImageAndTitle(artist: artist)
 
       // Horizontal scroll view of artist's songs
       ScrollView(.horizontal, showsIndicators: false) {
-        LazyHStack(alignment: .top,spacing: spacingBigItems) {
+        LazyHStack(alignment: .top,spacing: Constants.spacingLarge) {
           ForEach(getArtistSongs()) { media in
             BigSongItem(imageURL: media.imageURL, title: media.title, mediaType: media.mediaType)
               .onTapGesture {
@@ -38,7 +38,7 @@ struct RecommendedArtistScrollView: View {
               }
           }
         }
-        .padding(.horizontal, 25)
+        .padding(.horizontal, Constants.paddingSmall)
       }
     }
   }
@@ -47,7 +47,7 @@ struct RecommendedArtistScrollView: View {
     var artist: SpotifyModel.MediaItem
 
     var body: some View {
-      HStack(alignment: .top, spacing: spacingSmallItems) {
+      HStack(alignment: .top, spacing: Constants.spacingSmall) {
         Circle()
           .overlay(RemoteImage(urlString: artist.imageURL))
           .aspectRatio(contentMode: .fit)
@@ -55,17 +55,17 @@ struct RecommendedArtistScrollView: View {
           .padding(3)
         VStack(alignment: .center) {
           Spacer()
-          Text("FOR THE FANS OF").font(.avenir(.book, size: 14))
-            .opacity(0.7)
+          Text("FOR THE FANS OF").font(.avenir(.book, size: Constants.fontXSmall))
+            .opacity(Constants.opacityStandard)
             .frame(maxWidth: .infinity, alignment: .leading)
           Text(artist.authorName.first!)
             .spotifyTitle()
-            .padding(.trailing, 40)
+            .padding(.trailing, Constants.paddingLarge)
         }.frame(maxWidth: .infinity, alignment: .topLeading)
       }
       .frame(height: 60)
       .aspectRatio(contentMode: .fit)
-      .padding(.leading, lateralPadding)
+      .padding(.leading, Constants.paddingStandard)
     }
   }
 }

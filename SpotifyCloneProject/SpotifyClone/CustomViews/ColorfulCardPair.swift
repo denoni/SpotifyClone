@@ -13,7 +13,7 @@ struct ColorfulCardPair: View {
   var colors: [Color]
 
   var body: some View {
-    HStack(spacing: 25) {
+    HStack(spacing: Constants.paddingStandard) {
       ColorfulCard(text: titles[0],
                    imageURL: imagesURL[0],
                    color: colors[0])

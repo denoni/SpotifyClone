@@ -46,8 +46,8 @@ struct ShowsDetailContent: View {
   var details: SpotifyModel.ShowDetails { SpotifyModel.getShowDetails(for: mediaDetailVM.mainItem!) }
 
   var body: some View {
-    VStack(alignment: .center, spacing: 15) {
-      HStack(alignment: .top, spacing: 15) {
+    VStack(alignment: .center, spacing: Constants.spacingMedium) {
+      HStack(alignment: .top, spacing: Constants.spacingMedium) {
         SmallMediaCover(imageURL: mediaDetailVM.mainItem!.imageURL)
         VStack (alignment: .leading) {
           MediaTitle(mediaTitle: mediaDetailVM.mainItem!.title)
@@ -89,7 +89,7 @@ struct ShowsDetailContent: View {
 
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .padding(25)
+    .padding(Constants.paddingStandard)
   }
 
   struct NumberOfEpisodes: View {
@@ -102,11 +102,11 @@ struct ShowsDetailContent: View {
           .padding(.trailing, isExplicit ? 5 : 0)
           .scaleEffect(0.8)
         Text("EPISODES: \(numberOfEpisodes)")
-          .font(.avenir(.medium, size: 14))
+          .font(.avenir(.medium, size: Constants.fontXSmall))
         Spacer()
       }
-      .opacity(0.6)
-      .frame(height: 25)
+      .opacity(Constants.opacityHigh)
+      .frame(height: Constants.paddingStandard)
     }
   }
 }

@@ -14,7 +14,7 @@ struct MediaTitle: View {
   var body: some View {
     VStack(alignment: .leading) {
       Text(mediaTitle)
-        .font(.avenir(.black, size: useSmallerFont ? 22 : 26))
+        .font(.avenir(.black, size: useSmallerFont ? Constants.fontMedium : Constants.fontLarge))
         .foregroundColor(.white)
         .lineLimit(2)
     }

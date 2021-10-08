@@ -13,16 +13,16 @@ struct ArtistAlbums: View {
   var body: some View {
     VStack {
       ForEach(medias) { media in
-        HStack(spacing: 12) {
+        HStack(spacing: Constants.spacingSmall) {
           VStack(alignment: .leading) {
             Text(media.title)
-              .font(.avenir(.medium, size: 18))
+              .font(.avenir(.medium, size: Constants.fontSmall))
               .lineLimit(1)
-              .padding(.trailing, 40)
+              .padding(.trailing, Constants.paddingLarge)
             Text("Album • 2020") // TODO: Add real data
-              .font(.avenir(.medium, size: 14))
+              .font(.avenir(.medium, size: Constants.fontXSmall))
               .lineLimit(1)
-              .opacity(0.7)
+              .opacity(Constants.opacityHigh)
           }
           Spacer()
         }
@@ -30,7 +30,7 @@ struct ArtistAlbums: View {
       }
       SeeMoreButton()
         .padding(.top, 10)
-        .opacity(0.7)
+        .opacity(Constants.opacityHigh)
     }
   }
 }

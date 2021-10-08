@@ -12,11 +12,11 @@ struct TopGenresSection: View {
 
   var body: some View {
     VStack {
-      Text(title).font(.avenir(.heavy, size: 18))
+      Text(title).font(.avenir(.heavy, size: Constants.fontSmall))
         .frame(maxWidth: .infinity, alignment: .topLeading)
-        .padding(.horizontal, lateralPadding)
-      VStack(spacing: lateralPadding) {
-        HStack(spacing: lateralPadding) {
+        .padding(.horizontal, Constants.paddingStandard)
+      VStack(spacing: Constants.paddingStandard) {
+        HStack(spacing: Constants.paddingStandard) {
           ColorfulCard(text: "Rock",
                        imageURL: "",
                        color: Color(#colorLiteral(red: 0.5476108789, green: 0.1544825733, blue: 0.5206049085, alpha: 1)))
@@ -26,7 +26,7 @@ struct TopGenresSection: View {
         }
       }
         .frame(height: 100)
-        .padding(.horizontal, lateralPadding)
+        .padding(.horizontal, Constants.paddingStandard)
     }
     .padding(.bottom, 10)
   }

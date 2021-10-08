@@ -16,7 +16,7 @@ struct TrackDetailScreen: View {
         Color.spotifyDarkGray
         BigGradient()
         TrackDetailContent()
-          .padding(.bottom, 120)
+          .padding(.bottom, Constants.paddingBottomSection)
       }
       .ignoresSafeArea()
       .onAppear {
@@ -36,16 +36,18 @@ struct TrackDetailContent: View {
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
 
   var details: SpotifyModel.TrackDetails { SpotifyModel.getTrackDetails(for: mediaDetailVM.mainItem!) }
+  // Todo: All versions above iPhone X will
+  // end up returning false and vice versa
   var isSmallDisplay: Bool { UIScreen.main.bounds.size.height < 750 }
 
   var body: some View {
     VStack(alignment: .center) {
       SmallTopSection(albumName: details.album!.name, isSmallDisplay: isSmallDisplay)
-        .padding(.bottom, isSmallDisplay ? 0 : 15)
-        .padding(.top, isSmallDisplay ? 0 : 15)
+        .padding(.bottom, isSmallDisplay ? 0 : Constants.paddingSmall)
+        .padding(.top, isSmallDisplay ? 0 : Constants.paddingSmall)
       Spacer()
       BigTrackImage(imageURL: mediaDetailVM.mainItem!.imageURL, isSmallDisplay: isSmallDisplay)
-        .padding(.bottom, isSmallDisplay ? 0 : 15)
+        .padding(.bottom, isSmallDisplay ? 0 : Constants.paddingSmall)
       TrackInfoSection(songName: mediaDetailVM.mainItem!.title,
                        authors: mediaDetailVM.mainItem!.author!,
                        isLiked: true, // TODO: Use real data
@@ -57,7 +59,7 @@ struct TrackDetailContent: View {
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .scaledToFit()
-    .padding(25)
+    .padding(Constants.paddingStandard)
   }
 }
 

@@ -17,11 +17,12 @@ struct ArtistDetailScreen: View {
         Color.spotifyDarkGray
         ReadableScrollView(currentPosition: $scrollViewPosition) {
           VStack {
+            // 1.8 is just a ratio that looked visually good
             ArtistPictureGradient(imageURL: mediaDetailVM.mainItem!.imageURL,
                                   height: geometry.size.height / 1.8)
             ArtistDetailContent()
               .padding(.top, -geometry.size.height / 5)
-              .padding(.bottom, 180)
+              .padding(.bottom, Constants.paddingBottomSection)
             Spacer()
           }
           .frame(maxHeight: .infinity, alignment: .top)
@@ -57,43 +58,43 @@ struct ArtistDetailContent: View {
   }
 
   var body: some View {
-    VStack(alignment: .center, spacing: 15) {
+    VStack(alignment: .center, spacing: Constants.spacingMedium) {
 
           BigArtistNameTitle(name: mediaDetailVM.mainItem!.title)
 
           HStack {
             VStack(alignment: .leading) {
               Text("\(details.followers) FOLLOWERS")
-                .font(.avenir(.medium, size: 16))
-                .opacity(0.6)
+                .font(.avenir(.medium, size: Constants.fontSmall))
+                .opacity(Constants.opacityStandard)
               FollowAndThreeDotsIcons(threeDotsPlacedVertically: true)
             }
             Spacer()
             BigPlayButton()
           }
           .frame(height: 65)
-          .padding(.bottom, 25)
+          .padding(.bottom, Constants.paddingStandard)
 
       if Utility.didEverySectionLoaded(in: .artistDetail, mediaDetailVM: mediaDetailVM) {
         VStack(spacing: 60) {
           VStack {
             Text("Popular Tracks")
               .spotifyTitle()
-              .padding(.trailing, 40)
+              .padding(.trailing, Constants.paddingLarge)
             ArtistTracks(medias: mediaDetailVM.mediaCollection[.artist(.topTracksFromArtist)]!)
           }
 
           VStack {
             Text("Popular Albums")
               .spotifyTitle()
-              .padding(.trailing, 40)
+              .padding(.trailing, Constants.paddingLarge)
             ArtistAlbums(medias: mediaDetailVM.mediaCollection[.artist(.albumsFromArtist)]!)
           }
 
           // TODO: Load the correct data
           ArtistMediaHorizontalScrollView(medias: mediaDetailVM.mediaCollection[.artist(.playlistsFromArtist)]!,
                                           sectionTitle: "Featuring \(mediaDetailVM.mainItem!.title)")
-            .padding(.trailing, -25)
+            .padding(.trailing, -Constants.paddingStandard)
         }
       } else {
         ProgressView()
@@ -106,7 +107,7 @@ struct ArtistDetailContent: View {
 
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .padding(25)
+    .padding(Constants.paddingStandard)
   }
 }
 

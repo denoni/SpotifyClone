@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// TODO: Add documentation
+
 extension ProgressView {
 
   @ViewBuilder

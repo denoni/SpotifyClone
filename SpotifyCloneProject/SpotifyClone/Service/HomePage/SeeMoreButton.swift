@@ -13,7 +13,7 @@ struct SeeMoreButton: View {
       .strokeBorder(Color.white, lineWidth: 0.5)
       .foregroundColor(.clear)
       .overlay(Text("See more")
-                .font(.avenir(.medium, size: 18))
+                .font(.avenir(.medium, size: Constants.fontSmall))
                 .padding(3))
       .frame(width: 120, height: 30, alignment: .center)
   }

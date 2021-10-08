@@ -29,11 +29,11 @@ struct SmallTopSection: View {
       Spacer()
       VStack {
         Text(albumName)
-          .font(.avenir(.heavy, size: 16))
+          .font(.avenir(.heavy, size: Constants.fontSmall))
           .frame(maxWidth: .infinity)
       }
       .frame(maxWidth: .infinity)
-      .padding(.horizontal, 25)
+      .padding(.horizontal, Constants.paddingStandard)
       Spacer()
       Image("three-dots")
         .resizeToFit()

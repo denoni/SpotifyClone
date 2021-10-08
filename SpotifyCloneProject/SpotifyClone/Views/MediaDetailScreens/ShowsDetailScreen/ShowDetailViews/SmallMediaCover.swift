@@ -12,10 +12,10 @@ struct SmallMediaCover: View {
 
   var body: some View {
     HStack {
-      RoundedRectangle(cornerRadius: 10)
+      RoundedRectangle(cornerRadius: Constants.radiusStandard)
         .foregroundColor(.spotifyMediumGray)
         .overlay(RemoteImage(urlString: imageURL))
-        .mask(RoundedRectangle(cornerRadius: 10))
+        .mask(RoundedRectangle(cornerRadius: Constants.radiusStandard))
         .frame(width: 150, height: 150)
         .shadow(color: .spotifyDarkGray.opacity(0.3), radius: 15)
     }

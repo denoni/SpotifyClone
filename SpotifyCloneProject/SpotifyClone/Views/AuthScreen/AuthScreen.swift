@@ -23,7 +23,7 @@ struct AuthScreen: View {
             .resizable()
             .scaledToFit()
             .frame(width: geometry.size.width / 3.5)
-            .padding(.vertical, 40)
+            .padding(.vertical, Constants.paddingLarge)
           Spacer()
           HStack {
             Text("Millions of songs.\nFree on Spotify.")
@@ -56,9 +56,9 @@ struct AuthScreen: View {
             }
           }
           .frame(maxWidth: .infinity)
-          .padding(.vertical, 40)
+          .padding(.vertical, Constants.paddingLarge)
         }
-        .padding(.horizontal, 40)
+        .padding(.horizontal, Constants.paddingLarge)
       }
       .sheet(isPresented: $isShowingAuthWebView, content: {
         AuthSheetView(authViewModel: authViewModel,
@@ -85,10 +85,10 @@ struct AuthScreen: View {
               .padding(.vertical, 10)
           }
           Text(text)
-          .font(.avenir(.heavy, size: 16))
+            .font(.avenir(.heavy, size: Constants.fontXSmall))
             .tracking(1.5)
         }
-        .padding(.horizontal, 15)
+        .padding(.horizontal, Constants.paddingSmall)
         .foregroundColor(.white)
         .frame(maxWidth: .infinity)
         .frame(height: 50)

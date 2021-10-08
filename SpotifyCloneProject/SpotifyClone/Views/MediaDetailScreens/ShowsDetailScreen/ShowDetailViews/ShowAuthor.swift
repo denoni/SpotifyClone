@@ -12,10 +12,10 @@ struct ShowAuthor: View {
 
   var body: some View {
     Text(authorName)
-      .font(.avenir(.heavy, size: 16))
+      .font(.avenir(.heavy, size: Constants.fontSmall))
       .lineLimit(2)
       .frame(width: .none)
-      .opacity(0.6)
+      .opacity(Constants.opacityStandard)
   }
 }
 

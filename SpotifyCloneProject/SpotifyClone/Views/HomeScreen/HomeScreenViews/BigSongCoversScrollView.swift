@@ -37,11 +37,11 @@ struct BigSongCoversScrollView: View {
 
   
   var body: some View {
-    VStack(spacing: spacingSmallItems) {
+    VStack(spacing: Constants.spacingSmall) {
       Text(sectionTitle.isEmpty ? section.rawValue : sectionTitle)
         .spotifyTitle(withPadding: true)
       ScrollView(.horizontal, showsIndicators: false) {
-        LazyHStack(alignment: .top,spacing: spacingBigItems) {
+        LazyHStack(alignment: .top,spacing: Constants.spacingLarge) {
           ForEach(medias) { media in
             BigSongItem(imageURL: media.imageURL,
                         title: media.title,
@@ -55,7 +55,7 @@ struct BigSongCoversScrollView: View {
               }
             .buttonStyle(PlainButtonStyle())
           }
-        }.padding(.horizontal, 25)
+        }.padding(.horizontal, Constants.paddingStandard)
       }
     }
   }

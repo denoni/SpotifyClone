@@ -49,7 +49,7 @@ struct AlbumDetailContent: View {
   var details: SpotifyModel.AlbumDetails { SpotifyModel.getAlbumDetails(for: mediaDetailVM.mainItem!) }
 
   var body: some View {
-    VStack(alignment: .leading, spacing: 15) {
+    VStack(alignment: .leading, spacing: Constants.spacingMedium) {
       ZStack {
         BigMediaCover(imageURL: mediaDetailVM.mainItem!.imageURL)
           .scaleEffect(1 / (scale + 1))
@@ -83,8 +83,8 @@ struct AlbumDetailContent: View {
       
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .padding(.horizontal, 25)
-    .padding(.vertical, 15)
+    .padding(.horizontal, Constants.paddingStandard)
+    .padding(.vertical, Constants.paddingSmall)
   }
 }
 

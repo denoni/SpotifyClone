@@ -5,6 +5,8 @@
 //  Created by Gabriel on 8/31/21.
 //
 
+// Credits to Hacking With Swift for the majority of the code
+
 import SwiftUI
 
 extension View {

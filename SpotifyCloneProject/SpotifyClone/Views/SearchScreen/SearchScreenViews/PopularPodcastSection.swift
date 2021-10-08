@@ -12,11 +12,11 @@ struct PopularPodcastSection: View {
 
   var body: some View {
     VStack {
-      Text(title).font(.avenir(.heavy, size: 18))
+      Text(title).font(.avenir(.heavy, size: Constants.fontSmall))
         .frame(maxWidth: .infinity, alignment: .topLeading)
-        .padding(.horizontal, lateralPadding)
-      VStack(spacing: lateralPadding) {
-        HStack(spacing: lateralPadding) {
+        .padding(.horizontal, Constants.paddingStandard)
+      VStack(spacing: Constants.paddingStandard) {
+        HStack(spacing: Constants.paddingStandard) {
           ColorfulCard(text: "Interviews",
                        imageURL: "",
                        color: Color(#colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1)),
@@ -28,7 +28,7 @@ struct PopularPodcastSection: View {
         }
       }
         .frame(height: 100)
-        .padding(.horizontal, lateralPadding)
+        .padding(.horizontal, Constants.paddingStandard)
     }
   }
 }

@@ -16,8 +16,8 @@ struct BottomBar: View {
       Spacer()
       Group {
         if showMediaPlayer {
-          BottomMediaPlayerBar(songName: "Nothing but the beat",
-                               artist: "David Guetta",
+          BottomMediaPlayerBar(songName: "Nothing But The Beat",
+                               artist: "Ed Sheeran",
                                cover: Image("nothing-but-the-beat-cover"))
         }
         BottomNavigationBar(mainVM: mainVM)
@@ -147,6 +147,7 @@ private struct BottomNavigationBar: View {
 
 }
 
+// TODO: Move those constants out of here
 // MARK: - Constants
 
 private let grayReallyLight = Color(red: 0.325, green: 0.325, blue: 0.325)

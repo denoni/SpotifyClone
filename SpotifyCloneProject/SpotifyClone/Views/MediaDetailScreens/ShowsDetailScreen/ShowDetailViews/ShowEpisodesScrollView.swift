@@ -26,7 +26,7 @@ struct ShowEpisodesScrollView: View {
 
       }
     }
-    .padding(.top, 15)
+    .padding(.top, Constants.paddingSmall)
   }
 
   func testIfShouldFetchMoreData(basedOn media: SpotifyModel.MediaItem) {
@@ -49,33 +49,33 @@ struct ShowEpisodesScrollView: View {
     var isPlaying: Bool { audioManager.showPauseButton && audioManager.lastItemPlayedID == media.id }
 
     var body: some View {
-      VStack(alignment: .leading, spacing: 12) {
-          HStack (alignment: .center, spacing: 15) {
-            RoundedRectangle(cornerRadius: 10)
+      VStack(alignment: .leading, spacing: Constants.spacingSmall) {
+        HStack(alignment: .center, spacing: Constants.spacingMedium) {
+            RoundedRectangle(cornerRadius: Constants.radiusSmall)
               .foregroundColor(.spotifyMediumGray)
               .overlay(RemoteImage(urlString: media.imageURL))
-              .mask(RoundedRectangle(cornerRadius: 10))
+              .mask(RoundedRectangle(cornerRadius: Constants.radiusSmall))
               .frame(width: 50, height: 50)
             Text(media.title)
-              .font(.avenir(.heavy, size: 18))
+              .font(.avenir(.heavy, size: Constants.fontMedium))
             Spacer()
           }
 
         Group {
 
           Text(details.description!)
-            .font(.avenir(.medium, size: 14))
+            .font(.avenir(.medium, size: Constants.fontXSmall))
             .lineLimit(2)
-            .opacity(0.7)
+            .opacity(Constants.opacityStandard)
             .padding(.bottom, 5)
         }
 
         Text("Yesterday • 1h 55m") // TODO: Add real data
-          .font(.avenir(.medium, size: 14))
-          .opacity(0.6)
+          .font(.avenir(.medium, size: Constants.fontXSmall))
+          .opacity(Constants.opacityHigh)
           .padding(.bottom, 5)
 
-        HStack(spacing: 25) {
+        HStack(spacing: Constants.paddingStandard) {
           Group {
             // Plus icon
             Image("plus-circle")
@@ -85,7 +85,7 @@ struct ShowEpisodesScrollView: View {
             Image("three-dots")
               .resizeToFit()
               .padding(.vertical, 3)
-              .opacity(0.8)
+              .opacity(Constants.opacityLow)
           }
           Spacer()
           Circle()

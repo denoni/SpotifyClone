@@ -11,10 +11,10 @@ struct ExplicitIcon: View {
   var isExplicit: Bool
   var body: some View {
 
-    RoundedRectangle(cornerRadius: 3)
+    RoundedRectangle(cornerRadius: Constants.radiusSmall)
       .foregroundColor(.white)
       .overlay(Text("E")
-                .font(.system(size: 15))
+                .font(.system(size: Constants.fontXSmall))
                 .foregroundColor(.black)
                 .padding(1))
       .aspectRatio(1/1, contentMode: .fit)

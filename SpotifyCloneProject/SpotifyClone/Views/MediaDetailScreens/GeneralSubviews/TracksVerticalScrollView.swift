@@ -37,8 +37,9 @@ struct TracksVerticalScrollView: View {
         }
       }
     }
-    .padding(.top, 15)
+    .padding(.top, Constants.paddingSmall)
   }
+
 
   func testIfShouldFetchMoreData(basedOn media: SpotifyModel.MediaItem) {
     if medias.count > 5 {
@@ -61,21 +62,21 @@ struct TracksVerticalScrollView: View {
     let media: SpotifyModel.MediaItem
 
     var body: some View {
-      HStack(spacing: 12) {
+      HStack(spacing: Constants.spacingSmall) {
         PlayStopButton(audioManager: audioManager,
                        media: media)
         VStack(alignment: .leading) {
           Text(media.title)
-            .font(.avenir(.medium, size: 20))
+            .font(.avenir(.medium, size: Constants.fontMedium))
           Text(media.authorName.joined(separator: ", "))
-            .font(.avenir(.medium, size: 16))
-            .opacity(0.6)
+            .font(.avenir(.medium, size: Constants.fontSmall))
+            .opacity(Constants.opacityStandard)
         }
-        .padding(.trailing, 25)
+        .padding(.trailing, Constants.paddingStandard)
         Spacer()
         Image("three-dots")
           .resizeToFit()
-          .padding(.vertical, 16)
+          .padding(.vertical, Constants.paddingSmall)
       }
       .frame(height: 60)
       .padding(.bottom, 5)
@@ -98,9 +99,9 @@ struct TracksVerticalScrollView: View {
       ZStack {
 
         // Small color accent in the background of the tapped item
-        Color.spotifyLightGray.opacity(0.3)
+        Color.spotifyLightGray.opacity(Constants.opacityXHigh)
           .padding(.vertical, -5)
-          .padding(.horizontal, -25)
+          .padding(.horizontal, -Constants.paddingStandard)
           .opacity(isTapped ? 1 : 0)
 
         HStack {
@@ -118,16 +119,16 @@ struct TracksVerticalScrollView: View {
 
           VStack(alignment: .leading) {
             Text(media.title)
-              .font(.avenir(.medium, size: 20))
+              .font(.avenir(.medium, size: Constants.fontMedium))
             Text(media.authorName.joined(separator: ", "))
-              .font(.avenir(.medium, size: 16))
-              .opacity(0.7)
+              .font(.avenir(.medium, size: Constants.fontSmall))
+              .opacity(Constants.opacityStandard)
           }
-          .padding(.trailing, 25)
+          .padding(.trailing, Constants.paddingStandard)
           Spacer()
           Image("three-dots")
             .resizeToFit()
-            .padding(.vertical, 16)
+            .padding(.vertical, Constants.fontSmall)
         }
         .frame(height: 60)
         .onTapGesture {

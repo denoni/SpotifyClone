@@ -17,18 +17,18 @@ struct SmallSongCard: View {
 
   var body: some View {
     ZStack(alignment: .leading) {
-      RoundedRectangle(cornerRadius: 5)
+      RoundedRectangle(cornerRadius: Constants.radiusSmall)
         .fill(LinearGradient(gradient: Gradient(colors: [grayLighter, grayDarker]), startPoint: .top, endPoint: .bottom))
       HStack {
         Rectangle()
           .overlay(RemoteImage(urlString: imageURL))
           .foregroundColor(grayHeavyDark)
-          .cornerRadius(5, corners: [.topLeft, .bottomLeft])
+          .cornerRadius(Constants.radiusSmall, corners: [.topLeft, .bottomLeft])
           .aspectRatio(1/1, contentMode: .fit)
         Text(title)
-          .font(.avenir(.heavy, size: 16))
+          .font(.avenir(.heavy, size: Constants.fontSmall))
           .frame(maxWidth: .infinity, alignment: .topLeading)
-          .padding(.trailing, 15)
+          .padding(.trailing, Constants.paddingSmall)
       }
     }.aspectRatio(3/1, contentMode: .fit)
   }

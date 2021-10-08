@@ -16,11 +16,11 @@ struct RecentlyPlayedScrollView: View {
   var sectionTitle = "Recently Played"
   
   var body: some View {
-    VStack(spacing: spacingSmallItems) {
+    VStack(spacing: Constants.spacingSmall) {
       Text(sectionTitle)
         .spotifyTitle(withPadding: true)
       ScrollView(.horizontal, showsIndicators: false) {
-        LazyHStack(alignment: .top, spacing: spacingBigItems) {
+        LazyHStack(alignment: .top, spacing: Constants.spacingLarge) {
           ForEach(medias) { media in
             SmallSongItem(imageURL: media.imageURL,
                           title: media.title)
@@ -30,7 +30,7 @@ struct RecentlyPlayedScrollView: View {
                                        withData: media)
               }
           }
-        }.padding(.horizontal, 25)
+        }.padding(.horizontal, Constants.paddingStandard)
       }
     }
   }

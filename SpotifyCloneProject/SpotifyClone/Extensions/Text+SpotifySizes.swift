@@ -12,8 +12,8 @@ extension Text {
   @ViewBuilder
   func spotifyTitle(withPadding: Bool = false) -> some View {
     self
-      .font(.avenir(.heavy, size: titleFontSize))
+      .font(.avenir(.heavy, size: Constants.fontLarge))
       .frame(maxWidth: .infinity, alignment: .topLeading)
-      .padding(.leading, withPadding ? lateralPadding : 0)
+      .padding(.leading, withPadding ? Constants.paddingStandard : 0)
   }
 }

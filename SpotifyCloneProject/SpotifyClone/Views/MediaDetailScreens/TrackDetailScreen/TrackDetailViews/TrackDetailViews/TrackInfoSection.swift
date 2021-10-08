@@ -20,18 +20,18 @@ struct TrackInfoSection: View {
         VStack(alignment: .leading,
                spacing: 0) {
           MediaTitle(mediaTitle: songName, useSmallerFont: isSmallDisplay)
-            .padding(.trailing, 25)
+            .padding(.trailing, Constants.paddingStandard)
           HStack(spacing: 0) {
             ExplicitIcon(isExplicit: isExplicit)
               .padding(.trailing, isExplicit ? 5 : 0)
             // TODO: Open artist's profile onClick
             Text(getAuthorNames(from: authors))
-              .font(.avenir(.medium, size: isSmallDisplay ? 16 : 18))
+              .font(.avenir(.medium, size: isSmallDisplay ? Constants.fontSmall : Constants.fontMedium))
               .foregroundColor(.white)
               .tracking(0.5)
           }
-          .opacity(0.7)
-          .padding(.trailing, 25)
+          .opacity(Constants.opacityStandard)
+          .padding(.trailing, Constants.paddingStandard)
         }.frame(
           maxWidth: .infinity,
           alignment: .topLeading

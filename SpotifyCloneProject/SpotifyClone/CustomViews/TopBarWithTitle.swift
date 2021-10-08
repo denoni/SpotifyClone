@@ -16,17 +16,17 @@ struct TopBarWithTitle: View {
 
   var backgroundOpacity: Double {
     let opacity = Double(scrollViewPosition / UIScreen.main.bounds.height * 2)
-    return opacity > 0.8 ? 0.8 : opacity
+    return opacity > Constants.opacityLow ? Constants.opacityLow : opacity
   }
 
   var titleOpacity: Double {
     let opacity = Double(log(scrollViewPosition / UIScreen.main.bounds.height * 4))
-    return opacity > 0.8 ? 0.8 : opacity
+    return opacity > 1 ? 1 : opacity
   }
 
   var circleOpacity: Double {
     let opacity = 1 - Double(scrollViewPosition / UIScreen.main.bounds.height * 2)
-    return opacity - 0.7 > 0.3 ? 0.3 : opacity - 0.7
+    return opacity - 0.7 > Constants.opacityHigh ? Constants.opacityHigh : opacity - 0.7
   }
 
   var body: some View {
@@ -47,18 +47,18 @@ struct TopBarWithTitle: View {
                         .scaledToFit())
               .foregroundColor(.black.opacity(circleOpacity))
               .frame(width: 35, height: 35)
-              .padding(.leading, 25)
+              .padding(.leading, Constants.paddingStandard)
           } else {
             BackButton()
               .frame(width: 30, height: 30, alignment: .center)
-              .padding(.leading, 25)
+              .padding(.leading, Constants.paddingStandard)
           }
           Text(title)
-            .font(.avenir(.black, size: 20))
-            .opacity(titleOpacity > 0.8 ? 0.8 : titleOpacity)
+            .font(.avenir(.black, size: Constants.fontMedium))
+            .opacity(titleOpacity)
             .lineLimit(1)
-            .padding(.leading, 15)
-            .padding(.trailing, 25)
+            .padding(.leading, Constants.paddingSmall)
+            .padding(.trailing, Constants.paddingStandard)
           Spacer()
         }
         .padding(.top, topSafeAreaSize)

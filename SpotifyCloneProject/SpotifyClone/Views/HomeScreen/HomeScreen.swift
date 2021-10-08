@@ -50,10 +50,10 @@ struct HomeScreen: View {
       } else {
         ZStack {
           ReadableScrollView(currentPosition: $scrollViewPosition) {
-            LazyVStack(alignment: .leading, spacing: paddingSectionSeparation) {
+            LazyVStack(alignment: .leading, spacing: Constants.paddingStandard) {
               Group {
                 SmallSongCardsGrid(medias: getTracksFor(.smallSongCards))
-                  .padding(.horizontal, lateralPadding)
+                  .padding(.horizontal, Constants.paddingStandard)
                 RecentlyPlayedScrollView(medias: getTracksFor(.recentlyPlayed))
                 BigSongCoversScrollView(section: .newReleases,
                                         showArtistName: true)
@@ -75,8 +75,8 @@ struct HomeScreen: View {
                 BigSongCoversScrollView(section: .playlistThisIsX)
               }
             }
-            .padding(.vertical, lateralPadding)
-            .padding(.bottom, paddingBottomSection)
+            .padding(.vertical, Constants.paddingStandard)
+            .padding(.bottom, Constants.paddingBottomSection)
           }
           TopBar(animateOpacityWith: scrollViewPosition)
 
@@ -101,16 +101,3 @@ struct HomeScreen: View {
   }
   
 }
-
-
-
-// MARK: - Constants
-
-var lateralPadding: CGFloat = 25
-var titleFontSize: CGFloat = 26
-var paddingBottomSection: CGFloat = 135
-var spacingSmallItems: CGFloat = 12
-var spacingBigItems: CGFloat = 20
-
-fileprivate var paddingSectionSeparation: CGFloat = 25
-

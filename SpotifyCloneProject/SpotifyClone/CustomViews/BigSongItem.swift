@@ -21,7 +21,7 @@ struct BigSongItem: View {
   func buildCoverShape() -> some View {
     Group {
       if mediaType == .artist { Circle() }
-      else if mediaType == .show { RoundedRectangle(cornerRadius: 10) }
+      else if mediaType == .show { RoundedRectangle(cornerRadius: Constants.radiusStandard) }
       else { Rectangle() }
     }.foregroundColor(Color.spotifyDarkGray)
   }
@@ -33,11 +33,13 @@ struct BigSongItem: View {
         .mask(buildCoverShape())
         .aspectRatio(1/1, contentMode: .fit)
         .frame(height: coverImageWidth)
-      Text(title).font(.avenir(.heavy, size: 16))
+      Text(title).font(.avenir(.heavy, size: Constants.fontSmall))
         .frame(maxWidth: coverTextWidth, alignment: .leading)
-      Text(artist).font(.avenir(.medium, size: 14))
+        .lineLimit(2)
+      Text(artist).font(.avenir(.medium, size: Constants.fontXSmall))
         .frame(maxWidth: coverTextWidth, alignment: .leading)
-        .opacity(0.7)
+        .opacity(Constants.opacityStandard)
+        .lineLimit(1)
       Spacer()
     }.frame(height: smallSongItemHeight)
   }

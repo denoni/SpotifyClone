@@ -13,13 +13,13 @@ struct FollowAndThreeDotsIcons: View {
   var threeDotsPlacedVertically = false
   var body: some View {
     HStack(spacing: 30) {
-      RoundedRectangle(cornerRadius: 5)
-        .strokeBorder(Color.white.opacity(0.6), lineWidth: 1)
+      RoundedRectangle(cornerRadius: Constants.radiusSmall)
+        .strokeBorder(Color.white.opacity(Constants.opacityStandard), lineWidth: 1)
         .foregroundColor(.clear)
         .overlay(
           VStack {
             Text("FOLLOW")
-              .font(.avenir(.medium, size: 14))
+              .font(.avenir(.medium, size: Constants.fontXSmall))
               .padding(5)
           }
         )

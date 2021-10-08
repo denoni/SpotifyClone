@@ -21,7 +21,7 @@ struct PlaylistAuthor: View {
                   .colorMultiply(.spotifyGreen))
         .frame(width: 25, height: 25)
       Text(mediaOwner.displayName)
-        .font(.avenir(.heavy, size: 16))
+        .font(.avenir(.heavy, size: Constants.fontSmall))
       Spacer()
     }
   }

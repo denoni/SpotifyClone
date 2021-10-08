@@ -12,7 +12,7 @@ struct SmallSongCardsGrid: View {
   var numberOfItems: Range<Int> { 0 ..< medias.count / 2 }
 
   var body: some View {
-    VStack(spacing: spacingSmallItems) {
+    VStack(spacing: Constants.spacingSmall) {
       HStack {
         // TODO: Change based on user time
         Text("Good Evening")
@@ -27,7 +27,7 @@ struct SmallSongCardsGrid: View {
 
   @ViewBuilder private func buildGrid(medias: [SpotifyModel.MediaItem]) -> some View {
 
-    VStack(spacing: spacingSmallItems) {
+    VStack(spacing: Constants.spacingSmall) {
       ForEach(numberOfItems) { pairIndex in
         if medias.count >= 2 {
           SmallSongCardPair(imagesURL: [medias[pairIndex * 2].imageURL,
@@ -45,7 +45,7 @@ struct SmallSongCardsGrid: View {
 
     var body: some View {
       if imagesURL.count == 2 && titles.count == 2 {
-        HStack(spacing: spacingSmallItems) {
+        HStack(spacing: Constants.spacingSmall) {
           SmallSongCard(imageURL: imagesURL[0],
                         title: titles[0])
           SmallSongCard(imageURL: imagesURL[1],

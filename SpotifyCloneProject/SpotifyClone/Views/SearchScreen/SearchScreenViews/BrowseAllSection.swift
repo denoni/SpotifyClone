@@ -15,9 +15,9 @@ struct BrowseAllSection: View {
 
   var body: some View {
     VStack {
-      Text(title).font(.avenir(.heavy, size: 18))
+      Text(title).font(.avenir(.heavy, size: Constants.fontSmall))
         .frame(maxWidth: .infinity, alignment: .topLeading)
-      VStack(spacing: lateralPadding) {
+      VStack(spacing: Constants.paddingStandard) {
         ForEach(numberOfItems) { pairIndex in
           ColorfulCardPair(titles: [playlists[pairIndex * 2].name, playlists[pairIndex * 2 + 1].name],
                            imagesURL: [playlists[pairIndex * 2].imageURL, playlists[pairIndex * 2 + 1].imageURL],
@@ -25,7 +25,7 @@ struct BrowseAllSection: View {
         }
       }
     }
-    .padding(.horizontal, lateralPadding)
+    .padding(.horizontal, Constants.paddingStandard)
   }
 }
 

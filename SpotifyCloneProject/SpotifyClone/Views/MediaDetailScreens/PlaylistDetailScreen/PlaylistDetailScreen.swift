@@ -17,10 +17,11 @@ struct PlaylistDetailScreen: View {
         Color.spotifyDarkGray
         ReadableScrollView(currentPosition: $scrollViewPosition) {
           VStack {
+            // 1.8 is just a ratio that looked visually good
             TopGradient(height: geometry.size.height / 1.8)
             PlaylistDetailContent(scrollViewPosition: $scrollViewPosition)
               .padding(.top, -geometry.size.height / 1.8)
-              .padding(.bottom, 180)
+              .padding(.bottom, Constants.paddingBottomSection)
           }
         }
         TopBarWithTitle(scrollViewPosition: $scrollViewPosition,
@@ -50,7 +51,7 @@ struct PlaylistDetailContent: View {
   var details: SpotifyModel.PlaylistDetails { SpotifyModel.getPlaylistDetails(for: mediaDetailVM.mainItem!) }
 
   var body: some View {
-    VStack(alignment: .leading, spacing: 15) {
+    VStack(alignment: .leading, spacing: Constants.spacingMedium) {
       ZStack {
         BigMediaCover(imageURL: mediaDetailVM.mainItem!.imageURL)
           .scaleEffect(1 / (scale + 1))
@@ -86,8 +87,8 @@ struct PlaylistDetailContent: View {
 
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .padding(.horizontal, 25)
-    .padding(.vertical, 15)
+    .padding(.horizontal, Constants.paddingStandard)
+    .padding(.vertical, Constants.paddingSmall)
 
   }
 }

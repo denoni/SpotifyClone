@@ -5,6 +5,8 @@
 //  Created by Gabriel on 9/14/21.
 //
 
+// Credits to SchwiftyUI for the majority of the code.
+
 import SwiftUI
 
 struct RemoteImage: View {

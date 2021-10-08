@@ -22,7 +22,7 @@ struct ColorfulCard: View {
   }
 
   var getCornerRadius: CGFloat {
-    isPodcast ? 10 : 0
+    isPodcast ? Constants.radiusStandard : 0
   }
 
   @ViewBuilder
@@ -32,11 +32,11 @@ struct ColorfulCard: View {
         .fill(color)
       Text(text)
         .foregroundColor(.white)
-        .font(.avenir(.black, size: 18))
+        .font(.avenir(.black, size: Constants.fontSmall))
         .padding(.vertical, 8)
         .padding(.horizontal, 12)
-        .padding(.trailing, 50)
-        .padding(.bottom, 25)
+        .padding(.trailing, Constants.paddingLarge)
+        .padding(.bottom, Constants.paddingStandard)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .lineLimit(textHasMoreThanOneWord ? 2 : 1)
       RoundedRectangle(cornerRadius: getCornerRadius)
@@ -44,7 +44,7 @@ struct ColorfulCard: View {
         .frame(width: 80, height: 80)
         .overlay(RemoteImage(urlString: imageURL).mask(RoundedRectangle(cornerRadius: getCornerRadius)))
         .rotationEffect(Angle(degrees: 25))
-        .shadow(radius: 10)
+        .shadow(radius: Constants.radiusStandard)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
         .padding(.vertical, -5)
         .padding(.horizontal, -20)
