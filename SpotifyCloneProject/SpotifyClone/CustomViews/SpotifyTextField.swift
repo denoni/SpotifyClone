@@ -22,12 +22,12 @@ struct SpotifyTextField: View {
         .modifier(PlaceholderStyle(showPlaceHolder: textInput.wrappedValue.isEmpty, placeholder: placeholder))
         .padding(.horizontal, 5)
     }
-        .font(.avenir(.medium, size: Constants.fontMedium))
-        .foregroundColor(.black)
-        .padding(.vertical, 10)
-        .padding(.horizontal, Constants.paddingSmall)
-        .background(Color.white)
-        .cornerRadius(Constants.radiusSmall)
+    .font(.avenir(.medium, size: Constants.fontMedium))
+    .foregroundColor(.black)
+    .padding(.vertical, 10)
+    .padding(.horizontal, Constants.paddingSmall)
+    .background(Color.white)
+    .cornerRadius(Constants.radiusSmall)
   }
 
   private struct PlaceholderStyle: ViewModifier {

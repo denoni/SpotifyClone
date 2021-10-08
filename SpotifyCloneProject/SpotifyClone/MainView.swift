@@ -16,12 +16,13 @@ struct MainView: View {
   @StateObject var searchVM: SearchViewModel
 
   @StateObject var mediaDetailVM = MediaDetailViewModel()
+  @StateObject var searchDetailVM = SearchDetailViewModel()
 
   init(mainViewModel: MainViewModel) {
     _mainVM = StateObject(wrappedValue: mainViewModel)
     _authVM = StateObject(wrappedValue: AuthViewModel(mainViewModel: mainViewModel))
     _homeVM = StateObject(wrappedValue: HomeViewModel(mainViewModel: mainViewModel))
-    _searchVM = StateObject(wrappedValue: SearchViewModel(mainViewModel: mainViewModel))
+    _searchVM = StateObject(wrappedValue: SearchViewModel(mainVM: mainViewModel))
   }
   
   var body: some View {
@@ -36,6 +37,7 @@ struct MainView: View {
         case .search:
           SearchScreen()
             .environmentObject(searchVM)
+            .environmentObject(searchDetailVM)
         case .myLibrary:
           Text("To be done 🛠").font(.title)
         }

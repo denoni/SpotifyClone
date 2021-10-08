@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SearchSection: View {
+  @EnvironmentObject var searchVM: SearchViewModel
+  @EnvironmentObject var searchDetailVM: SearchDetailViewModel
   @State private var searchInput: String = ""
 
   var body: some View {
@@ -18,8 +20,12 @@ struct SearchSection: View {
       HStack {
         SpotifyTextField(textInput: $searchInput, placeholder: "Artists, Songs, Podcasts...")
       }
-        .frame(height: 50)
-        .padding(.horizontal, Constants.paddingStandard)
+      .frame(height: 50)
+      .padding(.horizontal, Constants.paddingStandard)
+      .onTapGesture {
+        searchVM.changeSubpageTo(.activeSearching,
+                                 searchDetailViewModel: searchDetailVM)
+      }
     }
   }
 }

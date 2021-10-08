@@ -9,18 +9,25 @@ import SwiftUI
 
 class SearchViewModel: ObservableObject {
   var api = APIFetchingDataSearchPage()
-  var mainViewModel: MainViewModel
+  var mainVM: MainViewModel
   @Published var isLoading = true
   @Published var playlists = [SpotifyModel.PlaylistItem]()
   @Published var colors = [Color]()
 
-  init(mainViewModel: MainViewModel) {
-    self.mainViewModel = mainViewModel
+  @Published var currentSubPage: SearchSubpage = .none
+
+  enum SearchSubpage {
+    case none
+    case activeSearching
+  }
+
+  init(mainVM: MainViewModel) {
+    self.mainVM = mainVM
   }
 
   func getCategoriesData() {
     DispatchQueue.main.async {
-      self.api.getPlaylists(accessToken: self.mainViewModel.authKey!.accessToken) { [unowned self] categoryItems in
+      self.api.getPlaylists(accessToken: self.mainVM.authKey!.accessToken) { [unowned self] categoryItems in
 
         // Generate the cards' color here to stop the random
         // color from being changed every time the view updates.
@@ -32,6 +39,19 @@ class SearchViewModel: ObservableObject {
         self.isLoading = false
       }
     }
+  }
+
+
+
+  // MARK: - Non-api Related Functions
+
+  func goToNoneSubpage( ) {
+    currentSubPage = .none
+  }
+
+  func changeSubpageTo(_ subPage: SearchSubpage,
+                       searchDetailViewModel: SearchDetailViewModel) {
+    currentSubPage = subPage
   }
 
 }
