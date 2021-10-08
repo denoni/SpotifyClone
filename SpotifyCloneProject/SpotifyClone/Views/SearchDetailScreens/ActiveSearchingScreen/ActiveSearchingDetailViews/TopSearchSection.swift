@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Introspect
 
 struct TopSearchSection: View {
   @EnvironmentObject var searchVM: SearchViewModel

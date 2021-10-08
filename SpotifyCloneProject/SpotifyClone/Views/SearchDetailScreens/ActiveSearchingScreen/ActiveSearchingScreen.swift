@@ -22,6 +22,8 @@ struct ActiveSearchingScreen: View {
         .overlay( SearchResponsesScrollView() )
       VStack {
         TopSearchSection(searchInput: $searchInput)
+          // So when the page appears, the focus automatically goes to text field(keyboard opens).
+          .introspectTextField { textField in textField.becomeFirstResponder() }
           .onChange(of: searchInput) { _ in
             searchDetailVM.search(for: searchInput)
           }
