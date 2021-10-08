@@ -1,5 +1,5 @@
 //
-//  SearchSection.swift
+//  SearchBarSection.swift
 //  SpotifyClone
 //
 //  Created by Gabriel on 9/3/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SearchSection: View {
+struct SearchBarSection: View {
   @EnvironmentObject var searchVM: SearchViewModel
   @EnvironmentObject var searchDetailVM: SearchDetailViewModel
   @State private var searchInput: String = ""
@@ -24,7 +24,8 @@ struct SearchSection: View {
       .padding(.horizontal, Constants.paddingStandard)
       .onTapGesture {
         searchVM.changeSubpageTo(.activeSearching,
-                                 searchDetailViewModel: searchDetailVM)
+                                 searchDetailViewModel: searchDetailVM,
+                                 accessToken: searchVM.mainVM.authKey!.accessToken)
       }
     }
   }

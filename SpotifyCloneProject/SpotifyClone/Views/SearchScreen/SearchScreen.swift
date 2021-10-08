@@ -39,7 +39,7 @@ struct SearchScreen: View {
       } else {
         ScrollView(showsIndicators: false) {
           LazyVStack(alignment: .leading) {
-            SearchSection()
+            SearchBarSection()
               .padding(.bottom, Constants.paddingStandard)
             TopGenresSection(title: "Top Genres")
               .padding(.bottom, Constants.paddingSmall)

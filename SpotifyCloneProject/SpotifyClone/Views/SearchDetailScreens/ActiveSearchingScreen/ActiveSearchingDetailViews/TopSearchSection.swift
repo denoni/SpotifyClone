@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TopSearchSection: View {
   @EnvironmentObject var searchVM: SearchViewModel
-  @State var searchInput: String
+  @Binding var searchInput: String
 
   var body: some View {
     VStack(spacing: 0) {

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ActiveSearchingScreen: View {
+  @EnvironmentObject var searchDetailVM: SearchDetailViewModel
   @State var searchInput = ""
 
   var body: some View {
@@ -15,11 +16,15 @@ struct ActiveSearchingScreen: View {
       LinearGradient(gradient: Gradient(colors: [.spotifyLightGray, .spotifyDarkGray]),
                      startPoint: .topLeading, endPoint: .bottomTrailing)
         .ignoresSafeArea()
+      // The scroll view of responses
       Rectangle()
         .foregroundColor(.clear)
         .overlay( SearchResponsesScrollView() )
       VStack {
-        TopSearchSection(searchInput: searchInput)
+        TopSearchSection(searchInput: $searchInput)
+          .onChange(of: searchInput) { _ in
+            searchDetailVM.search(for: searchInput)
+          }
         BottomBar(mainVM: MainViewModel())
       }
     }

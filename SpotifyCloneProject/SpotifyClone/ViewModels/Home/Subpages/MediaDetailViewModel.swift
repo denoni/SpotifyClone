@@ -10,7 +10,7 @@
 import Foundation
 
 class MediaDetailViewModel: ObservableObject {
-  // - mainItem: The item that was clicked to originate the current DetailView.
+  /// `mainItem` -  The item that was clicked to originate the current DetailView.
   @Published var mainItem: SpotifyModel.MediaItem?
   @Published var imageColorModel = RemoteImageModel(urlString: "")
 

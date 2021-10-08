@@ -50,7 +50,9 @@ class SearchViewModel: ObservableObject {
   }
 
   func changeSubpageTo(_ subPage: SearchSubpage,
-                       searchDetailViewModel: SearchDetailViewModel) {
+                       searchDetailViewModel: SearchDetailViewModel,
+                       accessToken: String) {
+    searchDetailViewModel.accessToken = accessToken
     currentSubPage = subPage
   }
 
