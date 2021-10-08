@@ -37,6 +37,7 @@ struct ShowsDetailScreen: View {
 struct ShowsDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @Binding var scrollViewPosition: CGFloat
+  @Environment(\.topSafeAreaSize) var topSafeAreaSize
 
   var scale: CGFloat {
     let myScale = scrollViewPosition / UIScreen.main.bounds.height * 2
@@ -56,7 +57,8 @@ struct ShowsDetailContent: View {
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
         Spacer()
       }
-      .padding(.top, 60)
+      .padding(.top, topSafeAreaSize)
+      .padding(.top, Constants.paddingStandard)
       .padding(.bottom, 5)
       // Animate the opacity and size based on `scale`
       // (originated from the current position of the scroll view)
