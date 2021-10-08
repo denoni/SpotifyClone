@@ -67,9 +67,6 @@ class APIFetchingDataSearchPage: ObservableObject {
           authorName.append(data.tracks.items[trackIndex].artists[artistIndex].name)
         }
 
-        // Only for debugging, should be deleted
-        print(title)
-
         let trackItem = SpotifyModel
           .MediaItem(title: title,
                      previewURL: previewURL ?? "",

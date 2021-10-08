@@ -39,12 +39,8 @@ class SearchDetailViewModel: ObservableObject {
             // lets say, 5 letters without stopping, it would
             // make 5 repeated API calls with the same search.
             if $0 != self.lastSearchedString {
-              print("\n====== Searching for '\($0)' ======")
-              print(">>> Song titles:")
-              // TODO: Format the userInputText before searching
-              self.api.search(for: $0, accessToken: self.accessToken!) { mediaItems in
+              self.api.search(for: self.getFormattedString(for: $0), accessToken: self.accessToken!) { mediaItems in
                 self.mediaResponses = mediaItems
-                print("====== Finished ====== \n")
               }
               self.numberOfSearches += 1
             }
@@ -55,4 +51,10 @@ class SearchDetailViewModel: ObservableObject {
     } else { print("\nREACHED SEARCH LIMIT(You can disable this in `SearchDetailViewModel`)\n") }
   }
 
+  func getFormattedString(for string: String) -> String {
+    return string
+      .folding(options: .diacriticInsensitive, locale: .current)
+      .replacingOccurrences(of: " ", with: "+")
+      .lowercased()
+  }
 }
