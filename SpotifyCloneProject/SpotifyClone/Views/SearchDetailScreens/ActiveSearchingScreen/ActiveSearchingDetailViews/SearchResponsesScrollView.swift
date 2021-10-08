@@ -44,9 +44,8 @@ struct SearchResponsesScrollView: View {
           Rectangle()
             .foregroundColor(.spotifyMediumGray)
             .overlay(RemoteImage(urlString: imageURL))
-            .padding(.leading, 10)
         }
-          .frame(width: 60, height: 60)
+        .frame(width: 60, height: 60)
         VStack(alignment: .leading) {
           Text(title)
             .font(.avenir(.medium, size: Constants.fontMedium))
