@@ -63,29 +63,3 @@ struct SearchResponsesScrollView: View {
   }
 
 }
-
-//HStack {
-//  ZStack(alignment: .center) {
-//    Rectangle()
-//      .foregroundColor(.spotifyMediumGray)
-//      .overlay(RemoteImage(urlString: imageURL))
-//        .shadow(color: Color.spotifyDarkGray, radius: 10)
-//        .padding(.leading, 10)
-//  }
-//  .frame(width: 60, height: 60)
-//
-//  VStack(alignment: .leading) {
-//    Text(title)
-//      .font(.avenir(.medium, size: Constants.fontMedium))
-//    Text(author)
-//      .font(.avenir(.medium, size: Constants.fontSmall))
-//      .opacity(Constants.opacityStandard)
-//  }
-//  .padding(.trailing, Constants.paddingStandard)
-//  Spacer()
-//  Image("three-dots")
-//    .resizeToFit()
-//    .padding(.vertical, Constants.fontSmall)
-//}
-//.frame(height: 60)
-//.padding(.horizontal, Constants.paddingStandard)

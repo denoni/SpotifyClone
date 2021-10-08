@@ -111,7 +111,6 @@ struct TracksVerticalScrollView: View {
               .overlay(RemoteImage(urlString: media.imageURL))
             PlayStopButton(audioManager: audioManager,
                            media: media)
-                .shadow(color: Color.spotifyDarkGray, radius: 10)
                 .padding(.leading, 10)
                 .opacity(isTapped ? 1 : 0)
           }

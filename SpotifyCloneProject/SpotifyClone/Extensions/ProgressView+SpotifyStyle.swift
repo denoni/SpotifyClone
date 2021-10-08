@@ -53,7 +53,6 @@ struct SpotifyProgressViewStyle: ProgressViewStyle {
             .rotation3DEffect(.degrees(-degrees), axis: (x: 1, y: 1, z: 1))
         }
         .frame(width: size * 0.4, height: size * 0.4)
-//        .shadow(color: Color.spotifyGreen, radius: 5)
         .onAppear {
           withAnimation(Animation.easeInOut(duration: 2)
                           .repeatForever(autoreverses: true)) {
