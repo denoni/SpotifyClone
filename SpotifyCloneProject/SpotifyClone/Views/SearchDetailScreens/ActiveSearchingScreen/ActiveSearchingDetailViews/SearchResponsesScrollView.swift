@@ -8,18 +8,22 @@
 import SwiftUI
 
 struct SearchResponsesScrollView: View {
+  @EnvironmentObject var searchDetailVM: SearchDetailViewModel
 
-  static let mediaItem = (trackTitle: "Track Title", trackAuthor: "Author", imageURL: "https://i.scdn.co/image/ab67616d0000b2733db35792fa2e91722e9897b1")
-
-  let medias = Array(repeating: mediaItem, count: 15)
+  var medias: [SpotifyModel.MediaItem] {
+    return searchDetailVM.mediaResponses
+  }
 
   var body: some View {
-    ScrollView {
+    ScrollView(showsIndicators: false) {
       LazyVStack() {
-        ForEach(0 ..< medias.count) { index in
-          ResponseItem(imageURL: medias[index].imageURL,
-                       title: medias[index].trackTitle,
-                       author: medias[index].trackAuthor)
+        ForEach(medias) { media in
+          // Unfortunately, the imageURL will always be nil,
+          // because the API doesn't return it right away.
+          // TODO: Do a new API call afterwards to get the imageURL
+          ResponseItem(imageURL: media.imageURL,
+                       title: media.title,
+                       author: media.authorName.joined(separator: " ,"))
         }
       }
       .padding(.bottom, Constants.paddingBottomSection)
