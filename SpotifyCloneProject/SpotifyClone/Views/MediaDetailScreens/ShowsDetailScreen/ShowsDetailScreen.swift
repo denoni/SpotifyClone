@@ -59,7 +59,7 @@ struct ShowsDetailContent: View {
       HStack(alignment: .top, spacing: Constants.spacingMedium) {
         SmallMediaCover(imageURL: mediaDetailVM.mainItem!.imageURL)
         VStack (alignment: .leading) {
-          MediaTitle(mediaTitle: mediaDetailVM.mainItem!.title)
+          MediaTitle(mediaTitle: mediaDetailVM.mainItem!.title, lineLimit: 2)
             .padding(.bottom, 5)
           ShowAuthor(authorName: mediaDetailVM.mainItem!.authorName.first!)
         }.frame(maxWidth: .infinity, maxHeight: .infinity)

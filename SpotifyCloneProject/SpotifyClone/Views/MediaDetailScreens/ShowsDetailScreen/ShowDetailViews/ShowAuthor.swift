@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ShowAuthor: View {
-  @State var authorName: String
+  var authorName: String
 
   var body: some View {
     Text(authorName)

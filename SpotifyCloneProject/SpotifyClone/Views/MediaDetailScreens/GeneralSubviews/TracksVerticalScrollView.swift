@@ -59,19 +59,27 @@ struct TracksVerticalScrollView: View {
   // MARK: - Album Item
 
   struct AlbumItem: View {
+    @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
     @StateObject var audioManager: RemoteAudio
+
     let media: SpotifyModel.MediaItem
+    var details: SpotifyModel.TrackDetails { SpotifyModel.getTrackDetails(for: media) }
 
     var body: some View {
       HStack(spacing: Constants.spacingSmall) {
         PlayStopButton(audioManager: audioManager,
                        media: media)
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 0) {
           Text(media.title)
             .font(.avenir(.medium, size: Constants.fontMedium))
-          Text(media.authorName.joined(separator: ", "))
-            .font(.avenir(.medium, size: Constants.fontSmall))
-            .opacity(Constants.opacityStandard)
+          HStack(spacing: 0) {
+            ExplicitIcon(isExplicit: details.explicit)
+              .padding(.trailing, details.explicit ? 5 : 0)
+              .scaleEffect(0.8)
+            Text(media.authorName.joined(separator: ", "))
+              .font(.avenir(.medium, size: Constants.fontSmall))
+          }
+          .opacity(Constants.opacityStandard)
         }
         .padding(.trailing, Constants.paddingStandard)
         Spacer()
@@ -81,6 +89,7 @@ struct TracksVerticalScrollView: View {
       }
       .frame(height: 60)
       .padding(.bottom, 5)
+      .padding(.leading, -Constants.paddingSmall)
     }
   }
 
@@ -89,11 +98,12 @@ struct TracksVerticalScrollView: View {
   // MARK: - Playlist Item
 
   struct PlaylistItem: View {
+    @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
     @StateObject var audioManager: RemoteAudio
 
     @State var isTapped = false
     var isPlaying: Bool { audioManager.showPauseButton && audioManager.lastItemPlayedID == media.id }
-
+    var details: SpotifyModel.TrackDetails { SpotifyModel.getTrackDetails(for: media) }
     let media: SpotifyModel.MediaItem
 
     var body: some View {
@@ -112,17 +122,21 @@ struct TracksVerticalScrollView: View {
               .overlay(RemoteImage(urlString: media.imageURL))
             PlayStopButton(audioManager: audioManager,
                            media: media)
-                .padding(.leading, 10)
                 .opacity(isTapped ? 1 : 0)
           }
           .frame(width: 60, height: 60)
 
-          VStack(alignment: .leading) {
+          VStack(alignment: .leading, spacing: 0) {
             Text(media.title)
               .font(.avenir(.medium, size: Constants.fontMedium))
-            Text(media.authorName.joined(separator: ", "))
-              .font(.avenir(.medium, size: Constants.fontSmall))
-              .opacity(Constants.opacityStandard)
+            HStack(spacing: 0) {
+              ExplicitIcon(isExplicit: details.explicit)
+                .padding(.trailing, details.explicit ? 5 : 0)
+                .scaleEffect(0.8)
+              Text(media.authorName.joined(separator: ", "))
+                .font(.avenir(.medium, size: Constants.fontSmall))
+            }
+            .opacity(Constants.opacityStandard)
           }
           .padding(.trailing, Constants.paddingStandard)
           Spacer()
@@ -158,36 +172,44 @@ struct TracksVerticalScrollView: View {
     var media: SpotifyModel.MediaItem
 
     var body: some View {
+
       ZStack {
-        if audioManager.state == .buffering {
-          ProgressView()
-            .scaledToFit()
-        } else {
-          if audioManager.showPauseButton
-              && audioManager.lastItemPlayedID == media.id {
-            Image("stop")
-              .resizeToFit()
-              .onTapGesture {
-                audioManager.pause()
-              }
+        // Add a darkish background to the play/stop button, so
+        // it gets more visible even when the cover image is whitish.
+        Color.spotifyMediumGray.opacity(0.3)
+
+        // The play/stop/buffering icon
+        ZStack(alignment: .center) {
+          if audioManager.state == .buffering {
+            ProgressView()
+              .scaledToFit()
           } else {
-            Image("play")
-              .resizeToFit()
-              .padding(.leading, 3)
-              .onTapGesture {
-                if media.previewURL.isEmpty {
-                  audioManager.playWithItunes(forItem: media,
-                                              canPlayMoreThanOneAudio: true)
-                } else {
+            if audioManager.showPauseButton
+                && audioManager.lastItemPlayedID == media.id {
+              Image("stop")
+                .resizeToFit()
+                .onTapGesture {
                   audioManager.pause()
-                  audioManager.play(media.previewURL, audioID: media.id)
                 }
-              }
+            } else {
+              Image("play")
+                .resizeToFit()
+                .padding(.leading, 3)
+                .onTapGesture {
+                  if media.previewURL.isEmpty {
+                    audioManager.playWithItunes(forItem: media,
+                                                canPlayMoreThanOneAudio: true)
+                  } else {
+                    audioManager.pause()
+                    audioManager.play(media.previewURL, audioID: media.id)
+                  }
+                }
+            }
           }
         }
+        .frame(width: 25, height: 25)
       }
-      .frame(width: 25, height: 25)
-      .padding(.trailing, 10)
+      .frame(width: 60, height: 60, alignment: .center)
     }
   }
 

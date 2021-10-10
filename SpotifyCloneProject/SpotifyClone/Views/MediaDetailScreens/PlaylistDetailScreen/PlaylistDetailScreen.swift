@@ -67,7 +67,7 @@ struct PlaylistDetailContent: View {
       }
       .padding(.top, topSafeAreaSize)
 
-      MediaTitle(mediaTitle: mediaDetailVM.mainItem!.title)
+      MediaTitle(mediaTitle: mediaDetailVM.mainItem!.title, lineLimit: 2)
       MediaDescription(description: details.description)
       PlaylistAuthor(mediaOwner: details.owner)
 

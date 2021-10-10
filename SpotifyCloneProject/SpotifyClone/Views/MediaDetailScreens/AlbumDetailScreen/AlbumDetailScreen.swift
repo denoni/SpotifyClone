@@ -65,7 +65,7 @@ struct AlbumDetailContent: View {
       }
       .padding(.top, topSafeAreaSize)
 
-      MediaTitle(mediaTitle: details.name)
+      MediaTitle(mediaTitle: details.name, lineLimit: 2)
       AlbumAuthor(authors: mediaDetailVM.mainItem!.author!)
 
       HStack {
