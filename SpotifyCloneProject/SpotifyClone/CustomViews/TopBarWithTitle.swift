@@ -11,6 +11,7 @@ struct TopBarWithTitle: View {
   @Binding var scrollViewPosition: CGFloat
   var title: String
   var backButtonWithCircleBackground: Bool = false
+  var backButtonShouldReturnTo: MediaDetailViewModel.DetailScreenOrigin
 
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
 
@@ -41,7 +42,7 @@ struct TopBarWithTitle: View {
         HStack {
           if backButtonWithCircleBackground {
             Circle()
-              .overlay(BackButton()
+              .overlay(BackButton(backButtonShouldReturnTo: backButtonShouldReturnTo)
                         .padding(5)
                         .padding(.trailing, -3)
                         .scaledToFit())
@@ -49,7 +50,7 @@ struct TopBarWithTitle: View {
               .frame(width: 35, height: 35)
               .padding(.leading, Constants.paddingStandard)
           } else {
-            BackButton()
+            BackButton(backButtonShouldReturnTo: backButtonShouldReturnTo)
               .frame(width: 30, height: 30, alignment: .center)
               .padding(.leading, Constants.paddingStandard)
           }

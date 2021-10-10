@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BackButton: View {
-//  @EnvironmentObject var homeVM: HomeViewModel
+  var backButtonShouldReturnTo: MediaDetailViewModel.DetailScreenOrigin
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
 
   var body: some View {
@@ -21,7 +21,12 @@ struct BackButton: View {
       }
       .frame(height: 20)
       .onTapGesture {
-//        homeVM.goToNoneSubpage()
+        switch backButtonShouldReturnTo {
+        case .home(let homeVM):
+          homeVM.goToNoneSubpage()
+        case .search(let searchVM):
+          searchVM.goToNoneSubpage()
+        }
       }
     }
   }

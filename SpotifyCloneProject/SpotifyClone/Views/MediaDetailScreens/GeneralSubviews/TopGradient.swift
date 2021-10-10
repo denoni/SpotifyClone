@@ -15,9 +15,7 @@ struct TopGradient: View {
     return Color(mediaDetailVM.imageColorModel.image!.averageColor!)
   }
 
-  init(height: CGFloat) {
-    self.height = height
-  }
+  init(height: CGFloat) { self.height = height }
 
   var body: some View {
     Rectangle()

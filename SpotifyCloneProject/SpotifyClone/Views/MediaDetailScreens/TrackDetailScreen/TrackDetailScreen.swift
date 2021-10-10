@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct TrackDetailScreen: View {
-  @ObservedObject var mediaDetailVM: MediaDetailViewModel
-//  @EnvironmentObject var homeVM: HomeViewModel
+  var mediaDetailVM: MediaDetailViewModel
+  @EnvironmentObject var homeVM: HomeViewModel
+  var detailScreenOrigin: MediaDetailViewModel.DetailScreenOrigin
 
   init(detailScreenOrigin: MediaDetailViewModel.DetailScreenOrigin, mediaDetailVM: MediaDetailViewModel) {
     self.mediaDetailVM = mediaDetailVM
+    self.detailScreenOrigin = detailScreenOrigin
     self.mediaDetailVM.detailScreenOrigin = detailScreenOrigin
   }
 
@@ -27,7 +29,12 @@ struct TrackDetailScreen: View {
       .ignoresSafeArea()
       .onAppear {
         // When TrackDetailScreen opens up, hide the bottomMediaPlayer
-//        homeVM.mainVM.showBottomMediaPlayer = false
+        switch detailScreenOrigin {
+        case .home(let homeVM):
+          homeVM.mainVM.showBottomMediaPlayer = false
+        case .search(let searchVM):
+          searchVM.mainVM.showBottomMediaPlayer = false
+        }
       }
     }
   }
@@ -42,13 +49,15 @@ struct TrackDetailContent: View {
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
 
   var details: SpotifyModel.TrackDetails { SpotifyModel.getTrackDetails(for: mediaDetailVM.mainItem!) }
-  // Todo: All versions above iPhone X will
+  // All versions above iPhone X will
   // end up returning false and vice versa
   var isSmallDisplay: Bool { UIScreen.main.bounds.size.height < 750 }
 
   var body: some View {
     VStack(alignment: .center) {
-      SmallTopSection(albumName: details.album!.name, isSmallDisplay: isSmallDisplay)
+      SmallTopSection(albumName: details.album!.name,
+                      isSmallDisplay: isSmallDisplay,
+                      backButtonShouldReturnTo: mediaDetailVM.detailScreenOrigin!)
         .padding(.bottom, isSmallDisplay ? 0 : Constants.paddingSmall)
         .padding(.top, isSmallDisplay ? 0 : Constants.paddingSmall)
       Spacer()

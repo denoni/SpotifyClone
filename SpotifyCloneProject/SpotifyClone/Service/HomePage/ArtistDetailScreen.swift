@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct ArtistDetailScreen: View {
-  @ObservedObject var mediaDetailVM: MediaDetailViewModel
+  var mediaDetailVM: MediaDetailViewModel
   @State var scrollViewPosition = CGFloat.zero
+  var detailScreenOrigin: MediaDetailViewModel.DetailScreenOrigin
 
   init(detailScreenOrigin: MediaDetailViewModel.DetailScreenOrigin, mediaDetailVM: MediaDetailViewModel) {
     self.mediaDetailVM = mediaDetailVM
+    self.detailScreenOrigin = detailScreenOrigin
     self.mediaDetailVM.detailScreenOrigin = detailScreenOrigin
   }
 
@@ -34,7 +36,8 @@ struct ArtistDetailScreen: View {
         }
         TopBarWithTitle(scrollViewPosition: $scrollViewPosition,
                         title: mediaDetailVM.mainItem!.title,
-                        backButtonWithCircleBackground: true)
+                        backButtonWithCircleBackground: true,
+                        backButtonShouldReturnTo: detailScreenOrigin)
 
       }.ignoresSafeArea()
     }

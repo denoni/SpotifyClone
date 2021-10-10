@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct SmallTopSection: View {
-//  @EnvironmentObject var homeVM: HomeViewModel
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   var albumName: String
   var isSmallDisplay: Bool = false
+  var backButtonShouldReturnTo: MediaDetailViewModel.DetailScreenOrigin
+
 
   var body: some View {
     HStack {
@@ -22,9 +23,16 @@ struct SmallTopSection: View {
         .padding(.vertical, 3)
         .padding(.horizontal, -5)
         .onTapGesture {
-//          homeVM.goToNoneSubpage()
-          // When the trackDetailsScreen is closed, reopen the mediaPlayer.
-//          homeVM.mainVM.showBottomMediaPlayer = true
+          switch mediaDetailVM.detailScreenOrigin {
+          case .home(let homeVM):
+            homeVM.goToNoneSubpage()
+            homeVM.mainVM.showBottomMediaPlayer = true
+          case .search(let searchVM):
+            searchVM.goToNoneSubpage()
+            searchVM.mainVM.showBottomMediaPlayer = true
+          case .none:
+            fatalError("Back button was clicked, but there's no known page origin.")
+          }
         }
       Spacer()
       VStack {

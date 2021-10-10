@@ -19,6 +19,12 @@ class MediaDetailViewModel: ObservableObject {
   @Published var numberOfLoadedItemsInSection = [Section:Int]()
   @Published var accessToken: String?
 
+  deinit {
+    print(">>>>>>>> deinit")
+    clean()
+    mainItem = nil
+  }
+
   var detailScreenOrigin: DetailScreenOrigin? = nil
 
   enum DetailScreenOrigin {
@@ -244,8 +250,6 @@ class MediaDetailViewModel: ObservableObject {
       mediaCollection[.shows(section)]! = []
       numberOfLoadedItemsInSection[.shows(section)] = 0
     }
-
-
   }
 
   func setVeryFirstImageInfoBasedOn(_ firstImageURL: String) {
