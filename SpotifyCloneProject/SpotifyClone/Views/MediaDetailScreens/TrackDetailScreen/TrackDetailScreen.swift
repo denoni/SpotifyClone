@@ -8,7 +8,13 @@
 import SwiftUI
 
 struct TrackDetailScreen: View {
-  @EnvironmentObject var homeVM: HomeViewModel
+  @ObservedObject var mediaDetailVM: MediaDetailViewModel
+//  @EnvironmentObject var homeVM: HomeViewModel
+
+  init(detailScreenOrigin: MediaDetailViewModel.DetailScreenOrigin, mediaDetailVM: MediaDetailViewModel) {
+    self.mediaDetailVM = mediaDetailVM
+    self.mediaDetailVM.detailScreenOrigin = detailScreenOrigin
+  }
 
   var body: some View {
     GeometryReader { _ in
@@ -21,7 +27,7 @@ struct TrackDetailScreen: View {
       .ignoresSafeArea()
       .onAppear {
         // When TrackDetailScreen opens up, hide the bottomMediaPlayer
-        homeVM.mainVM.showBottomMediaPlayer = false
+//        homeVM.mainVM.showBottomMediaPlayer = false
       }
     }
   }
@@ -72,7 +78,7 @@ struct TrackDetailScreen_Previews: PreviewProvider {
 
   static var previews: some View {
     ZStack {
-      TrackDetailScreen()
+      TrackDetailScreen(detailScreenOrigin: .home(homeVM: HomeViewModel(mainViewModel: mainVM)), mediaDetailVM: MediaDetailViewModel())
       VStack {
         Spacer()
       }

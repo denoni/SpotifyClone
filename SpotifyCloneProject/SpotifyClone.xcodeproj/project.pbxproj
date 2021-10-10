@@ -406,7 +406,6 @@
 			isa = PBXGroup;
 			children = (
 				C087B0E726E6556F00A72A13 /* HomeViewModel.swift */,
-				C0F8198A26FE3805000F5FEE /* Subpages */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -463,6 +462,7 @@
 				C084268726F1588B000ACAEE /* MainViewModel.swift */,
 				C084268126F10DF3000ACAEE /* Auth */,
 				C084268226F10DFF000ACAEE /* Home */,
+				C0A07F0227135D030069B664 /* Detail */,
 				C089135B26F97E6900CA1A69 /* Search */,
 			);
 			path = ViewModels;
@@ -662,6 +662,14 @@
 			path = HomePage;
 			sourceTree = "<group>";
 		};
+		C0A07F0227135D030069B664 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				C0F8198826FE3802000F5FEE /* MediaDetailViewModel.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		C0C5F9692704DE800099EEB5 /* ArtistDetailScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -770,14 +778,6 @@
 				C08861B0270BFB5900D6AD89 /* String+RemoveSpecialChars.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		C0F8198A26FE3805000F5FEE /* Subpages */ = {
-			isa = PBXGroup;
-			children = (
-				C0F8198826FE3802000F5FEE /* MediaDetailViewModel.swift */,
-			);
-			path = Subpages;
 			sourceTree = "<group>";
 		};
 		C0F8198B26FE4D47000F5FEE /* APIResponses */ = {

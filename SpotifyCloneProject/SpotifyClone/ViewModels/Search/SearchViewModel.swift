@@ -19,6 +19,13 @@ class SearchViewModel: ObservableObject {
   enum SearchSubpage {
     case none
     case activeSearching
+
+    case trackDetail
+    case playlistDetail
+    case albumDetail
+    case showDetail
+    case artistDetail
+    case episodeDetail
   }
 
   init(mainVM: MainViewModel) {
@@ -49,10 +56,26 @@ class SearchViewModel: ObservableObject {
     currentSubPage = .none
   }
 
+  enum SubPageType {
+    case search(searchDetailVM: SearchDetailViewModel, accessToken: String)
+    case detail(mediaDetailVM: MediaDetailViewModel, data: SpotifyModel.MediaItem)
+  }
+
   func changeSubpageTo(_ subPage: SearchSubpage,
-                       searchDetailViewModel: SearchDetailViewModel,
-                       accessToken: String) {
-    searchDetailViewModel.accessToken = accessToken
+                       subPageType: SubPageType) {
+
+    switch subPageType {
+
+    case .search(let searchDetailVM, let accessToken):
+      searchDetailVM.accessToken = accessToken
+
+    case .detail(let mediaDetailVM, let data):
+      mediaDetailVM.clean()
+      mediaDetailVM.mainItem = data
+      mediaDetailVM.accessToken = mainVM.authKey!.accessToken
+      mediaDetailVM.setVeryFirstImageInfoBasedOn(data.imageURL)
+    }
+    
     currentSubPage = subPage
   }
 

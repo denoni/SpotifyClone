@@ -12,21 +12,27 @@ import SwiftUI
 
 struct HomeScreen: View {
   @EnvironmentObject var homeVM: HomeViewModel
+  @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
 
   var body: some View {
     switch homeVM.currentSubPage {
     case .none:
       HomeScreenDefault()
     case .playlistDetail:
-      PlaylistDetailScreen()
+      PlaylistDetailScreen(detailScreenOrigin: .home(homeVM: homeVM),
+                           mediaDetailVM: mediaDetailVM)
     case .trackDetail:
-      TrackDetailScreen()
+      TrackDetailScreen(detailScreenOrigin: .home(homeVM: homeVM),
+                        mediaDetailVM: mediaDetailVM)
     case .albumDetail:
-      AlbumDetailScreen()
+      AlbumDetailScreen(detailScreenOrigin: .home(homeVM: homeVM),
+                        mediaDetailVM: mediaDetailVM)
     case .showDetail:
-      ShowsDetailScreen()
+      ShowsDetailScreen(detailScreenOrigin: .home(homeVM: homeVM),
+                        mediaDetailVM: mediaDetailVM)
     case .artistDetail:
-      ArtistDetailScreen()
+      ArtistDetailScreen(detailScreenOrigin: .home(homeVM: homeVM),
+                         mediaDetailVM: mediaDetailVM)
     }
   }
   

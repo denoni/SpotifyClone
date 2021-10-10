@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct PlaylistDetailScreen: View {
-  @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
+  @ObservedObject var mediaDetailVM: MediaDetailViewModel
   @State var scrollViewPosition = CGFloat.zero
+
+  init(detailScreenOrigin: MediaDetailViewModel.DetailScreenOrigin, mediaDetailVM: MediaDetailViewModel) {
+    self.mediaDetailVM = mediaDetailVM
+    self.mediaDetailVM.detailScreenOrigin = detailScreenOrigin
+  }
 
   var body: some View {
     GeometryReader { geometry in
@@ -102,7 +107,8 @@ struct MediaDetailScreen_Previews: PreviewProvider {
 
   static var previews: some View {
     ZStack {
-      PlaylistDetailScreen()
+      // `detailScreenOrigin` doesn't matter on preview.
+      PlaylistDetailScreen(detailScreenOrigin: .home(homeVM: HomeViewModel(mainViewModel: mainVM)), mediaDetailVM: MediaDetailViewModel())
       VStack {
         Spacer()
         BottomBar(mainVM: mainVM, showMediaPlayer: true)

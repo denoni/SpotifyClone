@@ -19,6 +19,13 @@ class MediaDetailViewModel: ObservableObject {
   @Published var numberOfLoadedItemsInSection = [Section:Int]()
   @Published var accessToken: String?
 
+  var detailScreenOrigin: DetailScreenOrigin? = nil
+
+  enum DetailScreenOrigin {
+    case home(homeVM: HomeViewModel)
+    case search(searchVM: SearchViewModel)
+  }
+
   init() {
     
     // Artist

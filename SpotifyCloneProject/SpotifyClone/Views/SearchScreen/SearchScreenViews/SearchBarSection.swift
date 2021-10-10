@@ -24,8 +24,8 @@ struct SearchBarSection: View {
       .padding(.horizontal, Constants.paddingStandard)
       .onTapGesture {
         searchVM.changeSubpageTo(.activeSearching,
-                                 searchDetailViewModel: searchDetailVM,
-                                 accessToken: searchVM.mainVM.authKey!.accessToken)
+                                 subPageType: .search(searchDetailVM: searchDetailVM,
+                                                      accessToken: searchVM.mainVM.authKey!.accessToken))
       }
     }
   }

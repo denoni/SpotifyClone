@@ -5,13 +5,11 @@
 //  Created by Gabriel on 9/2/21.
 //
 
-// TODO: Make the custom view structures more usable with arguments when called
-// TODO: Make all group of cards just one ColorfulCardsSection
-
 import SwiftUI
 
 struct SearchScreen: View {
   @EnvironmentObject var searchVM: SearchViewModel
+  @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
 
   var body: some View {
     switch searchVM.currentSubPage {
@@ -19,6 +17,24 @@ struct SearchScreen: View {
       SearchScreenDefault()
     case .activeSearching:
       ActiveSearchingScreen()
+
+    case .trackDetail:
+      TrackDetailScreen(detailScreenOrigin: .search(searchVM: searchVM),
+                        mediaDetailVM: mediaDetailVM)
+    case .albumDetail:
+      AlbumDetailScreen(detailScreenOrigin: .search(searchVM: searchVM),
+                        mediaDetailVM: mediaDetailVM)
+    case .showDetail:
+      ShowsDetailScreen(detailScreenOrigin: .search(searchVM: searchVM),
+                        mediaDetailVM: mediaDetailVM)
+    case .artistDetail:
+      ArtistDetailScreen(detailScreenOrigin: .search(searchVM: searchVM),
+                         mediaDetailVM: mediaDetailVM)
+    case .playlistDetail:
+      PlaylistDetailScreen(detailScreenOrigin: .search(searchVM: searchVM),
+                           mediaDetailVM: mediaDetailVM)
+    case .episodeDetail:
+      fatalError("DIDN'T IMPLEMENT TYPE(episodeDetail) YET")
     }
   }
 

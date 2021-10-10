@@ -38,6 +38,7 @@ struct MainView: View {
           SearchScreen()
             .environmentObject(searchVM)
             .environmentObject(searchDetailVM)
+            .environmentObject(mediaDetailVM)
         case .myLibrary:
           Text("To be done 🛠").font(.title)
         }
