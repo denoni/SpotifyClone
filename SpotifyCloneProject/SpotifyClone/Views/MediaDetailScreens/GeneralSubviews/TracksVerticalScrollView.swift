@@ -38,6 +38,7 @@ struct TracksVerticalScrollView: View {
       }
     }
     .padding(.top, Constants.paddingSmall)
+    .padding(.bottom, Constants.paddingStandard)
   }
 
 
