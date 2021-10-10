@@ -15,8 +15,9 @@ class APIFetchingDataSearchPage: ObservableObject {
               completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
 
     // Do not separate with spaces.
+    let limit = 5
     let type = "track,playlist,album,artist,show,episode"
-    let baseUrl = "https://api.spotify.com/v1/search?q=\(searchTerm)&type=\(type)"
+    let baseUrl = "https://api.spotify.com/v1/search?q=\(searchTerm)&type=\(type)&limit=\(limit)"
 
     var urlRequest = URLRequest(url: URL(string: baseUrl)!)
     urlRequest.httpMethod = "GET"

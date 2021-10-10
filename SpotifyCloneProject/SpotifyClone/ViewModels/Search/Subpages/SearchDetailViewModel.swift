@@ -40,7 +40,10 @@ class SearchDetailViewModel: ObservableObject {
             // make 5 repeated API calls with the same search.
             if $0 != self.lastSearchedString {
               self.api.search(for: self.getFormattedString(for: $0), accessToken: self.accessToken!) { mediaItems in
-                self.mediaResponses = mediaItems
+                // Shuffled so the the responses are not separated by types
+                // (which is the way that Spotify's API originally responds).
+                self.mediaResponses = mediaItems.shuffled()
+
               }
               self.numberOfSearches += 1
             }
