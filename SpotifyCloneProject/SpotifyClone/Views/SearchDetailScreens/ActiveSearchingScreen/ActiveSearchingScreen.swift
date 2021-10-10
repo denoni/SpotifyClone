@@ -16,10 +16,13 @@ struct ActiveSearchingScreen: View {
       LinearGradient(gradient: Gradient(colors: [.spotifyLightGray, .spotifyDarkGray]),
                      startPoint: .topLeading, endPoint: .bottomTrailing)
         .ignoresSafeArea()
+      
       // The scroll view of responses
       Rectangle()
         .foregroundColor(.clear)
         .overlay( SearchResponsesScrollView() )
+
+      // The top bar search and the bottom navigation bar
       VStack {
         TopSearchSection(searchInput: $searchInput)
           // So when the page appears, the focus automatically goes to text field(keyboard opens).

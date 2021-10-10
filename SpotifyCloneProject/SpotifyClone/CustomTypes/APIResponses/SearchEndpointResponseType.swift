@@ -9,11 +9,30 @@ import Foundation
 
 /// # Used in any response from the Search endpoint of the API
 
-// TODO: use custom init with `if` to support all media types.
 struct SearchEndpointResponse: Decodable {
-  let tracks: TrackSearchResponse
+  let tracks: TrackSearchResponse?
+  let playlists: PlaylistSearchResponse?
+  let albums: AlbumSearchResponse?
+  let shows: ShowSearchResponse?
+  let artists: ArtistSearchResponse?
 
   struct TrackSearchResponse: Decodable {
     var items: [Track]
+  }
+
+  struct PlaylistSearchResponse: Decodable {
+    var items: [Playlist]
+  }
+
+  struct AlbumSearchResponse: Decodable {
+    var items: [Album]
+  }
+
+  struct ShowSearchResponse: Decodable {
+    var items: [Show]
+  }
+
+  struct ArtistSearchResponse: Decodable {
+    var items: [Artist]
   }
 }

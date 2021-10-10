@@ -18,9 +18,6 @@ struct SearchResponsesScrollView: View {
     ScrollView(showsIndicators: false) {
       LazyVStack() {
         ForEach(medias) { media in
-          // Unfortunately, the imageURL will always be nil,
-          // because the API doesn't return it right away.
-          // TODO: Do a new API call afterwards to get the imageURL
           ResponseItem(imageURL: media.imageURL,
                        title: media.title,
                        author: media.authorName.joined(separator: " ,"))

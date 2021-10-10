@@ -14,8 +14,8 @@ class APIFetchingDataSearchPage: ObservableObject {
   func search(for searchTerm: String, accessToken: String,
               completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
 
-    //      let country = "US"
-    let type = "track"
+    // Do not separate with spaces.
+    let type = "track,playlist,album,artist,show,episode"
     let baseUrl = "https://api.spotify.com/v1/search?q=\(searchTerm)&type=\(type)"
 
     var urlRequest = URLRequest(url: URL(string: baseUrl)!)
@@ -28,43 +28,56 @@ class APIFetchingDataSearchPage: ObservableObject {
     AF.request(urlRequest)
       .validate()
       .responseDecodable(of: SearchEndpointResponse.self) { response in
-        parseResponse(response)
+
+        guard let data = response.value else {
+          fatalError("Error receiving tracks from API.")
+        }
+
+        if data.tracks != nil {
+          print("Track")
+          parseTracks(response.value!.tracks!)
+        }
+
+        if data.playlists != nil {
+          print("Playlist")
+          parsePlaylists(response.value!.playlists!)
+        }
+
       }
 
-    func parseResponse(_ response: DataResponse<SearchEndpointResponse, AFError>) {
 
-      guard let data = response.value else {
-        fatalError("Error receiving tracks from API.")
-      }
 
-      let numberOfItems = data.tracks.items.count
+    // MARK: - Tracks
+    func parseTracks(_ data: SearchEndpointResponse.TrackSearchResponse) {
+
+      let numberOfTracks = data.items.count
 
       // TODO: Handle empty responses in a better way
-      guard numberOfItems != 0 else {
+      guard numberOfTracks != 0 else {
         completionHandler(trackItems)
         print("The API response was corrects but empty. We'll just return []")
         return
       }
 
-      for trackIndex in 0 ..< numberOfItems {
-        let title = data.tracks.items[trackIndex].name
-        let previewURL = data.tracks.items[trackIndex].preview_url
-        let author = data.tracks.items[trackIndex].artists
-        let id = data.tracks.items[trackIndex].id
+      for trackIndex in 0 ..< numberOfTracks {
+        let title = data.items[trackIndex].name
+        let previewURL = data.items[trackIndex].preview_url
+        let author = data.items[trackIndex].artists
+        let id = data.items[trackIndex].id
         var authorName = [String]()
 
-        let popularity = data.tracks.items[trackIndex].popularity
-        let explicit = data.tracks.items[trackIndex].explicit
-        let durationInMs = data.tracks.items[trackIndex].duration_ms
+        let popularity = data.items[trackIndex].popularity
+        let explicit = data.items[trackIndex].explicit
+        let durationInMs = data.items[trackIndex].duration_ms
 
-        let imageURL = data.tracks.items[trackIndex].album?.images?[0].url
-        let albumName = data.tracks.items[trackIndex].album?.name
-        let albumID = data.tracks.items[trackIndex].album?.id
-        let numberOfTracks = data.tracks.items[trackIndex].album?.total_tracks
-        let releaseDate = data.tracks.items[trackIndex].album?.release_date
+        let imageURL = data.items[trackIndex].album?.images?[0].url
+        let albumName = data.items[trackIndex].album?.name
+        let albumID = data.items[trackIndex].album?.id
+        let numberOfTracks = data.items[trackIndex].album?.total_tracks
+        let releaseDate = data.items[trackIndex].album?.release_date
 
-        for artistIndex in data.tracks.items[trackIndex].artists.indices {
-          authorName.append(data.tracks.items[trackIndex].artists[artistIndex].name)
+        for artistIndex in data.items[trackIndex].artists.indices {
+          authorName.append(data.items[trackIndex].artists[artistIndex].name)
         }
 
         let trackItem = SpotifyModel
@@ -88,7 +101,54 @@ class APIFetchingDataSearchPage: ObservableObject {
       }
       completionHandler(trackItems)
     }
+
+
+    // MARK: - Playlists
+    func parsePlaylists(_ data: SearchEndpointResponse.PlaylistSearchResponse) {
+
+      let numberOfPlaylists = data.items.count
+
+      guard numberOfPlaylists != 0 else {
+        fatalError("The API response was corrects but empty. We don't have a way to handle this yet.")
+      }
+
+      for playlistIndex in 0 ..< numberOfPlaylists {
+        let title = data.items[playlistIndex].name
+        let imageURL = data.items[playlistIndex].images[0].url
+        let id = data.items[playlistIndex].id
+
+        let description = data.items[playlistIndex].description
+        let playlistTracks = data.items[playlistIndex].tracks
+        let mediaOwner = data.items[playlistIndex].owner
+
+        let playlistItem = SpotifyModel.MediaItem(title: title,
+                                                  previewURL: "",
+                                                  imageURL: imageURL,
+                                                  authorName: [mediaOwner.display_name],
+                                                  mediaType: .playlist,
+                                                  id: id,
+                                                  details: SpotifyModel.DetailTypes.playlists(
+                                                    playlistDetails: SpotifyModel.PlaylistDetails(description: description,
+                                                                                                  playlistTracks: SpotifyModel.PlaylistTracks(numberOfSongs: playlistTracks.total,
+                                                                                                                                              href: playlistTracks.href),
+                                                                                                  owner: SpotifyModel.MediaOwner(displayName: mediaOwner.display_name,
+                                                                                                                                 id: mediaOwner.id),
+                                                                                                  id: id)))
+        print(title)
+        trackItems.append(playlistItem)
+      }
+      completionHandler(trackItems)
+    }
+
   }
+
+
+
+
+
+
+
+  // TODO: Separate this func into a different file
 
   func getPlaylists(accessToken: String,
                     completionHandler: @escaping ([SpotifyModel.PlaylistItem]) -> Void) {
