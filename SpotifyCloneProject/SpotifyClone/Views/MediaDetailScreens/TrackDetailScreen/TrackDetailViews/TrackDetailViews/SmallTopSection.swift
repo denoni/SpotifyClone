@@ -28,7 +28,7 @@ struct SmallTopSection: View {
             homeVM.goToNoneSubpage()
             homeVM.mainVM.showBottomMediaPlayer = true
           case .search(let searchVM):
-            searchVM.goToNoneSubpage()
+            searchVM.goToActiveSearchingPage()
             searchVM.mainVM.showBottomMediaPlayer = true
           case .none:
             fatalError("Back button was clicked, but there's no known page origin.")

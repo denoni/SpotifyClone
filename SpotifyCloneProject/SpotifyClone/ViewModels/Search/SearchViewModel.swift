@@ -56,6 +56,10 @@ class SearchViewModel: ObservableObject {
     currentSubPage = .none
   }
 
+  func goToActiveSearchingPage( ) {
+    currentSubPage = .activeSearching
+  }
+
   enum SubPageType {
     case search(searchDetailVM: SearchDetailViewModel, accessToken: String)
     case detail(mediaDetailVM: MediaDetailViewModel, data: SpotifyModel.MediaItem)
