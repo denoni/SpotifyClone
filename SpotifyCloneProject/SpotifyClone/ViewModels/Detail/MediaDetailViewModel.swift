@@ -11,6 +11,7 @@ import Foundation
 
 class MediaDetailViewModel: ObservableObject {
   /// `mainItem` -  The item that was clicked to originate the current DetailView.
+  var mainVM: MainViewModel
   @Published var mainItem: SpotifyModel.MediaItem?
   @Published var imageColorModel = RemoteImageModel(urlString: "")
 
@@ -19,12 +20,6 @@ class MediaDetailViewModel: ObservableObject {
   @Published var numberOfLoadedItemsInSection = [Section:Int]()
   @Published var accessToken: String?
 
-  deinit {
-    print(">>>>>>>> deinit")
-    clean()
-    mainItem = nil
-  }
-
   var detailScreenOrigin: DetailScreenOrigin? = nil
 
   enum DetailScreenOrigin {
@@ -32,8 +27,10 @@ class MediaDetailViewModel: ObservableObject {
     case search(searchVM: SearchViewModel)
   }
 
-  init() {
-    
+  init(mainVM: MainViewModel) {
+
+    self.mainVM = mainVM
+
     // Artist
     for section in ArtistSections.allCases {
       isLoading[.artist(section)] = true
@@ -230,6 +227,8 @@ class MediaDetailViewModel: ObservableObject {
   // MARK: - Non-API Auxiliary Functions
 
   func clean() {
+    mainItem = nil
+
     for section in ArtistSections.allCases {
       isLoading[.artist(section)] = true
       mediaCollection[.artist(section)]! = []

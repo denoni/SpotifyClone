@@ -14,8 +14,8 @@ struct MainView: View {
   @StateObject var authVM: AuthViewModel
   @StateObject var homeVM: HomeViewModel
   @StateObject var searchVM: SearchViewModel
+  @StateObject var mediaDetailVM: MediaDetailViewModel
 
-  @StateObject var mediaDetailVM = MediaDetailViewModel()
   @StateObject var searchDetailVM = SearchDetailViewModel()
 
   init(mainViewModel: MainViewModel) {
@@ -23,6 +23,7 @@ struct MainView: View {
     _authVM = StateObject(wrappedValue: AuthViewModel(mainViewModel: mainViewModel))
     _homeVM = StateObject(wrappedValue: HomeViewModel(mainViewModel: mainViewModel))
     _searchVM = StateObject(wrappedValue: SearchViewModel(mainVM: mainViewModel))
+    _mediaDetailVM = StateObject(wrappedValue: MediaDetailViewModel(mainVM: mainViewModel))
   }
   
   var body: some View {
@@ -44,6 +45,11 @@ struct MainView: View {
         }
         BottomBar(mainVM: mainVM, showMediaPlayer: mainVM.showBottomMediaPlayer)
       }
+      .onChange(of: mainVM.currentPage, perform: { _ in
+        homeVM.currentSubPage = .none
+        searchVM.currentSubPage = .none
+        mediaDetailVM.clean()
+      })
       .navigationBarTitle("")
       .navigationBarHidden(true)
     } else {

@@ -111,7 +111,7 @@ struct MediaDetailScreen_Previews: PreviewProvider {
   static var previews: some View {
     ZStack {
       // `detailScreenOrigin` doesn't matter on preview.
-      PlaylistDetailScreen(detailScreenOrigin: .home(homeVM: HomeViewModel(mainViewModel: mainVM)), mediaDetailVM: MediaDetailViewModel())
+      PlaylistDetailScreen(detailScreenOrigin: .home(homeVM: HomeViewModel(mainViewModel: mainVM)), mediaDetailVM: MediaDetailViewModel(mainVM: mainVM))
       VStack {
         Spacer()
         BottomBar(mainVM: mainVM, showMediaPlayer: true)

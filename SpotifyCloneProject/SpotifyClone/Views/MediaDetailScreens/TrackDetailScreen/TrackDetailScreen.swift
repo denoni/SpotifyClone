@@ -87,7 +87,7 @@ struct TrackDetailScreen_Previews: PreviewProvider {
 
   static var previews: some View {
     ZStack {
-      TrackDetailScreen(detailScreenOrigin: .home(homeVM: HomeViewModel(mainViewModel: mainVM)), mediaDetailVM: MediaDetailViewModel())
+      TrackDetailScreen(detailScreenOrigin: .home(homeVM: HomeViewModel(mainViewModel: mainVM)), mediaDetailVM: MediaDetailViewModel(mainVM: mainVM))
       VStack {
         Spacer()
       }
