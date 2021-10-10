@@ -23,7 +23,7 @@ class APIFetchingDataSearchPage: ObservableObject {
     urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
     urlRequest.cachePolicy = NSURLRequest.CachePolicy.returnCacheDataElseLoad
 
-    var trackItems = [SpotifyModel.MediaItem]()
+    var mediaItems = [SpotifyModel.MediaItem]()
 
     AF.request(urlRequest)
       .validate()
@@ -34,13 +34,19 @@ class APIFetchingDataSearchPage: ObservableObject {
         }
 
         if data.tracks != nil {
-          print("Track")
           parseTracks(response.value!.tracks!)
         }
 
         if data.playlists != nil {
-          print("Playlist")
           parsePlaylists(response.value!.playlists!)
+        }
+
+        if data.albums != nil {
+          parseAlbums(response.value!.albums!)
+        }
+
+        if data.artists != nil {
+          parseArtists(response.value!.artists!)
         }
 
       }
@@ -54,7 +60,7 @@ class APIFetchingDataSearchPage: ObservableObject {
 
       // TODO: Handle empty responses in a better way
       guard numberOfTracks != 0 else {
-        completionHandler(trackItems)
+        completionHandler(mediaItems)
         print("The API response was corrects but empty. We'll just return []")
         return
       }
@@ -97,19 +103,21 @@ class APIFetchingDataSearchPage: ObservableObject {
                                                                                                numberOfTracks: numberOfTracks ?? 0,
                                                                                                releaseDate: releaseDate ?? "0",
                                                                                                id: albumID ?? ""))))
-        trackItems.append(trackItem)
+        mediaItems.append(trackItem)
       }
-      completionHandler(trackItems)
+      completionHandler(mediaItems)
     }
-
 
     // MARK: - Playlists
     func parsePlaylists(_ data: SearchEndpointResponse.PlaylistSearchResponse) {
 
       let numberOfPlaylists = data.items.count
 
+      // TODO: Handle empty responses in a better way
       guard numberOfPlaylists != 0 else {
-        fatalError("The API response was corrects but empty. We don't have a way to handle this yet.")
+        completionHandler(mediaItems)
+        print("The API response was corrects but empty. We'll just return []")
+        return
       }
 
       for playlistIndex in 0 ..< numberOfPlaylists {
@@ -134,13 +142,101 @@ class APIFetchingDataSearchPage: ObservableObject {
                                                                                                   owner: SpotifyModel.MediaOwner(displayName: mediaOwner.display_name,
                                                                                                                                  id: mediaOwner.id),
                                                                                                   id: id)))
-        print(title)
-        trackItems.append(playlistItem)
+        mediaItems.append(playlistItem)
       }
-      completionHandler(trackItems)
+      completionHandler(mediaItems)
+    }
+
+    // MARK: - Playlists
+    func parseAlbums(_ data: SearchEndpointResponse.AlbumSearchResponse) {
+
+      let numberOfAlbums = data.items.count
+
+      // TODO: Handle empty responses in a better way
+      guard numberOfAlbums != 0 else {
+        completionHandler(mediaItems)
+        print("The API response was corrects but empty. We'll just return []")
+        return
+      }
+
+      for albumIndex in 0 ..< numberOfAlbums {
+        let title = data.items[albumIndex].name
+        let imageURL = data.items[albumIndex].images?[0].url
+        let author = data.items[albumIndex].artists
+        let id = data.items[albumIndex].id
+        var authorName = [String]()
+
+        let albumID = data.items[albumIndex].id
+        let numberOfTracks = data.items[albumIndex].total_tracks
+        let releaseDate = data.items[albumIndex].release_date
+
+        for artistIndex in data.items[albumIndex].artists.indices {
+          authorName.append(data.items[albumIndex].artists[artistIndex].name)
+        }
+
+        let albumItem = SpotifyModel.MediaItem(title: title,
+                                               previewURL: "",
+                                               imageURL: imageURL ?? "",
+                                               authorName: authorName,
+                                               author: author,
+                                               mediaType: .album,
+                                               id: id,
+                                               details: SpotifyModel.DetailTypes.album(albumDetails: SpotifyModel.AlbumDetails(name: title,
+                                                                                                                               numberOfTracks: numberOfTracks,
+                                                                                                                               releaseDate: releaseDate,
+                                                                                                                               id: albumID)))
+
+        mediaItems.append(albumItem)
+      }
+      completionHandler(mediaItems)
+    }
+
+    // MARK: - Artists
+    func parseArtists(_ data: SearchEndpointResponse.ArtistSearchResponse) {
+
+      let numberOfArtists = data.items.count
+
+      // TODO: Handle empty responses in a better way
+      guard numberOfArtists != 0 else {
+        completionHandler(mediaItems)
+        print("The API response was corrects but empty. We'll just return []")
+        return
+      }
+
+      for artistIndex in 0 ..< numberOfArtists {
+        let title = data.items[artistIndex].name
+        let id = data.items[artistIndex].id
+
+        let followers = data.items[artistIndex].followers!.total
+        let genres = data.items[artistIndex].genres
+        let popularity = data.items[artistIndex].popularity
+
+        var imageURL: String {
+          if data.items[artistIndex].images != nil {
+            return data.items[artistIndex].images!.count > 0 ? data.items[artistIndex].images![0].url : ""
+          }
+          return "" // TODO: Return a avatar placeholder image
+        }
+
+        let artistItem = SpotifyModel.MediaItem(title: title,
+                                                previewURL: "",
+                                                imageURL: imageURL,
+                                                authorName: [title],
+                                                mediaType: .artist,
+                                                id: id,
+                                                details: SpotifyModel.DetailTypes.artists(artistDetails: SpotifyModel.ArtistDetails(followers: followers,
+                                                                                                                                    genres: genres!,
+                                                                                                                                    popularity: popularity!,
+                                                                                                                                    id: id)))
+        mediaItems.append(artistItem)
+      }
+      completionHandler(mediaItems)
     }
 
   }
+
+
+
 
 
 
