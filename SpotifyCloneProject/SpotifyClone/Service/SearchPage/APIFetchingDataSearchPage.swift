@@ -49,6 +49,14 @@ class APIFetchingDataSearchPage: ObservableObject {
           parseArtists(response.value!.artists!)
         }
 
+        if data.shows != nil {
+          parseShows(response.value!.shows!)
+        }
+
+        if data.episodes != nil {
+          parseEpisodes(response.value!.episodes!)
+        }
+
       }
 
 
@@ -229,6 +237,85 @@ class APIFetchingDataSearchPage: ObservableObject {
                                                                                                                                     popularity: popularity!,
                                                                                                                                     id: id)))
         mediaItems.append(artistItem)
+      }
+      completionHandler(mediaItems)
+    }
+
+    // MARK: - Shows
+    func parseShows(_ data: SearchEndpointResponse.ShowSearchResponse) {
+
+      let numberOfShows = data.items.count
+
+      // TODO: Handle empty responses in a better way
+      guard numberOfShows != 0 else {
+        completionHandler(mediaItems)
+        print("The API response was corrects but empty. We'll just return []")
+        return
+      }
+
+      for showIndex in 0 ..< numberOfShows {
+        let title = data.items[showIndex].name
+        let imageURL = data.items[showIndex].images[0].url
+        let authorName = data.items[showIndex].publisher
+        let id = data.items[showIndex].id
+
+        let description = data.items[showIndex].description
+        let explicit = data.items[showIndex].explicit
+        let showID = data.items[showIndex].id
+        let numberOfEpisodes = data.items[showIndex].total_episodes
+
+        let showItem = SpotifyModel.MediaItem(title: title,
+                                              previewURL: "",
+                                              imageURL: imageURL,
+                                              authorName: [authorName],
+                                              mediaType: .show,
+                                              id: id,
+                                              details: SpotifyModel.DetailTypes.shows(showDetails: SpotifyModel.ShowDetails(description: description,
+                                                                                                                               explicit: explicit,
+                                                                                                                               numberOfEpisodes: numberOfEpisodes,
+                                                                                                                               id: showID)))
+        mediaItems.append(showItem)
+      }
+      completionHandler(mediaItems)
+    }
+
+    // MARK: - Episodes
+    func parseEpisodes(_ data: SearchEndpointResponse.EpisodesSearchResponse) {
+
+      let numberOfEpisodes = data.items.count
+
+      // TODO: Handle empty responses in a better way
+      guard numberOfEpisodes != 0 else {
+        completionHandler(mediaItems)
+        print("The API response was corrects but empty. We'll just return []")
+        return
+      }
+
+      for episodeIndex in 0 ..< numberOfEpisodes {
+        let title = data.items[episodeIndex].name
+        let imageURL = data.items[episodeIndex].images[0].url
+        let audioPreview = data.items[episodeIndex].audio_preview_url
+        let id = data.items[episodeIndex].id
+
+        let description = data.items[episodeIndex].description
+        let explicit = data.items[episodeIndex].explicit
+        let durationInMs = data.items[episodeIndex].duration_ms
+        let releaseDate = data.items[episodeIndex].release_date
+
+
+        let episodeItem = SpotifyModel.MediaItem(title: title,
+                                                 previewURL: audioPreview,
+                                                 imageURL: imageURL,
+                                                 authorName: [""],
+                                                 mediaType: .episode,
+                                                 id: id,
+
+                                                 details: SpotifyModel.DetailTypes.episode(episodeDetails: SpotifyModel.EpisodeDetails(explicit: explicit,
+                                                                                                                                       description: description,
+                                                                                                                                       durationInMs: durationInMs,
+                                                                                                                                       releaseDate: releaseDate,
+                                                                                                                                       id: id)))
+        mediaItems.append(episodeItem)
       }
       completionHandler(mediaItems)
     }

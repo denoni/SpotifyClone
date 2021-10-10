@@ -15,6 +15,7 @@ struct SearchEndpointResponse: Decodable {
   let albums: AlbumSearchResponse?
   let shows: ShowSearchResponse?
   let artists: ArtistSearchResponse?
+  let episodes: EpisodesSearchResponse?
 
   struct TrackSearchResponse: Decodable {
     var items: [Track]
@@ -34,5 +35,9 @@ struct SearchEndpointResponse: Decodable {
 
   struct ArtistSearchResponse: Decodable {
     var items: [Artist]
+  }
+
+  struct EpisodesSearchResponse: Decodable {
+    var items: [Episode]
   }
 }
