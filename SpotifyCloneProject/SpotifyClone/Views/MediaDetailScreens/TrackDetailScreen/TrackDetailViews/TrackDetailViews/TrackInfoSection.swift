@@ -29,6 +29,7 @@ struct TrackInfoSection: View {
               .font(.avenir(.medium, size: isSmallDisplay ? Constants.fontSmall : Constants.fontMedium))
               .foregroundColor(.white)
               .tracking(0.5)
+              .lineLimit(1)
           }
           .opacity(Constants.opacityStandard)
           .padding(.trailing, Constants.paddingStandard)

@@ -37,6 +37,7 @@ struct PlayerControllerSection: View {
         Spacer()
         PlayStopButton(audioManager: audioManager,
                        isSmallDisplay: isSmallDisplay)
+          .fixedSize()
         Spacer()
         Image("next")
           .resizeToFit()

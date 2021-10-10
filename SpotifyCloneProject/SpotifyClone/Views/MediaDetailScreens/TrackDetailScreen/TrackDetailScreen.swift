@@ -54,27 +54,34 @@ struct TrackDetailContent: View {
   var isSmallDisplay: Bool { UIScreen.main.bounds.size.height < 750 }
 
   var body: some View {
-    VStack(alignment: .center) {
-      SmallTopSection(albumName: details.album!.name,
-                      isSmallDisplay: isSmallDisplay,
-                      backButtonShouldReturnTo: mediaDetailVM.detailScreenOrigin!)
-        .padding(.bottom, isSmallDisplay ? 0 : Constants.paddingSmall)
-        .padding(.top, isSmallDisplay ? 0 : Constants.paddingSmall)
-      Spacer()
-      BigTrackImage(imageURL: mediaDetailVM.mainItem!.imageURL, isSmallDisplay: isSmallDisplay)
-        .padding(.bottom, isSmallDisplay ? 0 : Constants.paddingSmall)
-      TrackInfoSection(songName: mediaDetailVM.mainItem!.title,
-                       authors: mediaDetailVM.mainItem!.author!,
-                       isLiked: true, // TODO: Use real data
-                       isExplicit: details.explicit,
-                       isSmallDisplay: isSmallDisplay)
-      PlayerControllerSection(isSmallDisplay: isSmallDisplay)
-      Spacer()
-      SmallBottomSection(isSmallDisplay: isSmallDisplay)
+    HStack(alignment: .center) {
+      VStack(alignment: .center) {
+        SmallTopSection(albumName: details.album!.name,
+                        isSmallDisplay: isSmallDisplay,
+                        backButtonShouldReturnTo: mediaDetailVM.detailScreenOrigin!)
+          .padding(.bottom, isSmallDisplay ? 0 : Constants.paddingSmall)
+          .padding(.top, isSmallDisplay ? 0 : Constants.paddingSmall)
+          .border(Color.white)
+        Spacer()
+        BigTrackImage(imageURL: mediaDetailVM.mainItem!.imageURL, isSmallDisplay: isSmallDisplay)
+          .padding(.bottom, isSmallDisplay ? 0 : Constants.paddingSmall)
+          .border(Color.red)
+        TrackInfoSection(songName: mediaDetailVM.mainItem!.title,
+                         authors: mediaDetailVM.mainItem!.author!,
+                         isLiked: true, // TODO: Use real data
+                         isExplicit: details.explicit,
+                         isSmallDisplay: isSmallDisplay)
+          .border(Color.white)
+        PlayerControllerSection(isSmallDisplay: isSmallDisplay)
+          .border(Color.pink)
+        Spacer()
+        SmallBottomSection(isSmallDisplay: isSmallDisplay)
+          .border(Color.yellow)
+      }
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .scaledToFit()
     .padding(Constants.paddingStandard)
+    .scaledToFit()
   }
 }
 
