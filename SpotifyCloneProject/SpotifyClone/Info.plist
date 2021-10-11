@@ -34,7 +34,7 @@
 		<key>UIImageName</key>
 		<string>spotify-small-colorful-logo</string>
 		<key>UIColorName</key>
-		<string>spotifyDarkerGray</string>
+		<string>spotifyDarkGray</string>
 	</dict>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
