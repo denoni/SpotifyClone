@@ -1,11 +1,98 @@
 # SpotifyClone
 
-## UI
+An iOS app that **visually clones Spotify's app** and **consumes the official Spotify's Web API** to show(and play) songs, podcasts, artists and more.
 
-| Home Screen              | Search Screen |
-|:--------------------------:|:---------------:|
-| ![spotifyClone-home-page](https://user-images.githubusercontent.com/62707916/132109987-e6bb1b14-0986-4253-9006-0ef6af54ebdc.gif) | ![ezgif-1-64cd01136596](https://user-images.githubusercontent.com/62707916/132110243-17d264b9-6bb0-4074-a9ff-a5b2bf696e89.gif) |
-| ![Screen Shot 2021-08-30 at 11 22 34 PM](https://user-images.githubusercontent.com/62707916/131431912-e85f8f19-0652-4f13-b158-b4e46bc1ee9a.png) |  |
+The app can play a **30-second** preview of a song, otherwise, to play the full song it would be necessary to have a physical device and the real Spotify app installed(requirements of the Spotify iOS SDK).
 
-*Any stuttering is due to simulator lag and gif conversion.*
+I've built the project by myself to learn more about iOS development, and to consolidate already learnt concepts by putting them into practice. By no means the project is perfect, so feel free to open issues or make pull requests with your own new features.
+
+I hope you enjoy the app. Feel free to hit me up! <br>
+
+*-Gabriel*
+
+<br>
+
+| Home Screen | Search Screen | Track Details Screen | Playlist Details Screen |
+|:---------------:|:---------------:|:---------------:|:---------------:|
+| ![Screen Shot 2021-10-11 at 11 59 25 AM](https://user-images.githubusercontent.com/62707916/136813393-a3dcc218-d800-4556-aa58-11b0019fd89b.png) | ![Screen Shot 2021-10-11 at 12 00 41 PM](https://user-images.githubusercontent.com/62707916/136813456-e010e92f-2465-4f59-94a3-ecbe4bab71cf.png) | ![Screen Shot 2021-10-11 at 11 59 34 AM](https://user-images.githubusercontent.com/62707916/136813590-cbb9dd10-3798-45ac-990c-8f6ace31b36e.png) | ![Screen Shot 2021-10-11 at 12 00 36 PM](https://user-images.githubusercontent.com/62707916/136813659-5b816b8b-bcdb-4320-a166-6b203cb8ff0b.png) 
+| Artist Details Screen | Podcast Details Screen | Album Details Screen | Active Searching Screen |  
+![Screen Shot 2021-10-11 at 12 00 11 PM](https://user-images.githubusercontent.com/62707916/136813737-86d94816-901d-435f-9811-a3febb308024.png) | ![Screen Shot 2021-10-11 at 12 01 16 PM](https://user-images.githubusercontent.com/62707916/136813754-be65c94e-8c5e-4f47-b868-9bc861e8508e.png) | ![Screen Shot 2021-10-11 at 11 59 43 AM](https://user-images.githubusercontent.com/62707916/136813855-1a6a621d-96b9-45c3-b046-bc55c2eea414.png) | ![Screen Shot 2021-10-11 at 12 01 01 PM](https://user-images.githubusercontent.com/62707916/136819824-dfe87231-459f-42e3-a356-133b8503d6d2.png)
+
+<br> <br>
+
+## Concepts & Technologies Used
+ - Swift
+ - Consuming a REST API
+ - Caching
+ - AVFoundation to play and control audio
+ - Combine *(minor use)*
+ - SwiftUI
+ - Grand Central Dispatch
+ - Dependency Injection
+ - CocoaPods
+
+
+ 
+ **External Dependencies:**
+ - Alamofire
+ - Introspect *(really small use)*
+
+
+<br> <br>
+
+## Turn on the video volume
+| | | | |
+| :-: | :-: | :-: | :- |
+<video src='https://user-images.githubusercontent.com/62707916/136820570-20152e5d-0c7d-4c41-9f51-65f6dac9b95b.mov' width=180/> | <video src='https://user-images.githubusercontent.com/62707916/136820651-4d632ea2-e952-4b4f-afde-cbd3becf3b1a.mov' width=180/> | <video src='https://user-images.githubusercontent.com/62707916/136820663-5bf7d61d-57ac-4fe7-9b47-2aca33516611.mov' width=180/> | <video src='https://user-images.githubusercontent.com/62707916/136820671-a5aece22-3a97-4cdd-9a4f-6b4ef77311ff.mov' width=180/>
+
+*Stuttering is due to simulator lag and shouldn't happen on real device.*
+
+<br> <br>
+
+## Code Overview
+
+### ViewModels
+
+#### Main
+- Navigation
+- Source of the Spotify's Authentication Key to the subviewmodels
+
+#### Auth
+- *`Coordinator`*: Controls the WebView responses
+- Contacts Service(`/APIAuthentication`) to get the Authentication Key
+- Controls the state of AuthScreen
+
+#### Home
+- Contacts Service(`/HomePageAPICalls`) to get media(tracks, podcasts, playlists, albums, artists and episodes) data from the API
+- Controls HomeSubpages(playlistDetail, trackDetail, etc…)
+- Controls the state of HomeScreen
+
+#### Search
+- *`SearchDetailViewModel`*: Contacts Service(`/SearchPageAPICalls`) to get response data(based on what the user searched) from the API ¹ 
+- Contacts Service(`/SearchPageAPICalls`) to get media data from API ²
+- Controls SearchSubpages(activeSearching, playlistDetail, trackDetail, etc…)
+- Controls the state of DetailScreen
+
+#### Details
+- Contacts Service(`/MediaDetailsPageAPICalls`) to get the detailed data, for a specific item(the item that was clicked), from the API
+- Controls the state of DetailScreen
+
+
+<sup> ¹ The viewmodel for when the user is actively searching for an item. <br>
+² The viewmodel for when the user just opened the SearchScreen, it's similar to a discover screen.
+
+
+## To be done
+  
+- [ ] Better performance by cleaning up cache
+- [ ] MyLibraryScreen
+- [ ] Make the follow and like buttons work
+- [ ] XCode Instruments and LLDB to find memory leaks
+- [ ] Play playlists(one song after another)
+- [ ] Unit testing
+- [ ] Add a simple diagram of the project architecture in the README
+
+<br> <br> <br>
+  
+![DeC-SV5W4AEDegt](https://user-images.githubusercontent.com/62707916/136847961-b1d23d4c-2f2a-4a1c-b34b-e726997204af.png)
 
