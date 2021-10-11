@@ -21,21 +21,17 @@ struct ShowEpisodesScrollView: View {
         Group {
           let episodeDetails = SpotifyModel.getEpisodeDetails(for: media)
           EpisodeItem(audioManager: audioManager, media: media, details: episodeDetails)
-            .onAppear { testIfShouldFetchMoreData(basedOn: media) }
+            .onAppear {
+              if mediaDetailVM.shouldFetchMoreData(basedOn: media, inRelationTo: medias) {
+                MediaDetailViewModel.ShowsAPICalls.getEpisodesFromShows(mediaVM: mediaDetailVM, loadMoreEnabled: true)
+              }
+            }
         }
-
       }
     }
     .padding(.top, Constants.paddingSmall)
   }
 
-  func testIfShouldFetchMoreData(basedOn media: SpotifyModel.MediaItem) {
-    if medias.count > 5 {
-      if media.id == medias[medias.count - 4].id {
-        MediaDetailViewModel.ShowsAPICalls.getEpisodesFromShows(mediaVM: mediaDetailVM, loadMoreEnabled: true)
-      }
-    }
-  }
 
 
   // MARK: - Episode Item

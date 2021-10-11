@@ -222,6 +222,17 @@ class MediaDetailViewModel: ObservableObject {
     numberOfLoadedItemsInSection[section]! += amount
   }
 
+  // If we are reaching the end of the scroll, fetch more data
+  func shouldFetchMoreData(basedOn media: SpotifyModel.MediaItem,
+                                 inRelationTo medias: [SpotifyModel.MediaItem]) -> Bool {
+    if medias.count > 5 {
+      if media.id == medias[medias.count - 4].id {
+        return true
+      }
+    }
+    return false
+  }
+
 
 
   // MARK: - Non-API Auxiliary Functions

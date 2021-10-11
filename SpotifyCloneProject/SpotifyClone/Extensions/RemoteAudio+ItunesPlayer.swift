@@ -28,7 +28,9 @@ extension RemoteAudio {
         let lastIndex = strippedName.endIndex
         strippedName.removeSubrange(firstOccurrenceIndex ..< lastIndex)
       }
-      if item.title.contains("-") {
+      // Use strippedName here(instead of item.title), otherwise if the first
+      // check(contains "(") return true and the second one too, it'll cause a crash.
+      if strippedName.contains("-") {
         let firstOccurrenceIndex = strippedName.firstIndex(of: "-")!
         let lastIndex = strippedName.endIndex
         strippedName.removeSubrange(firstOccurrenceIndex ..< lastIndex)

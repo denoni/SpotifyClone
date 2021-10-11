@@ -28,10 +28,18 @@ struct TracksVerticalScrollView: View {
         switch tracksOrigin {
         case .album:
           AlbumItem(audioManager: audioManager, media: media)
-            .onAppear { testIfShouldFetchMoreData(basedOn: media) }
+            .onAppear {
+              if mediaDetailVM.shouldFetchMoreData(basedOn: media, inRelationTo: medias) {
+                MediaDetailViewModel.AlbumAPICalls.getTracksFromAlbum(mediaVM: mediaDetailVM, loadMoreEnabled: true)
+              }
+            }
         case .playlist:
           PlaylistItem(audioManager: audioManager, media: media)
-            .onAppear { testIfShouldFetchMoreData(basedOn: media) }
+            .onAppear {
+              if mediaDetailVM.shouldFetchMoreData(basedOn: media, inRelationTo: medias) {
+                MediaDetailViewModel.PlaylistAPICalls.getTracksFromPlaylist(mediaVM: mediaDetailVM, loadMoreEnabled: true)
+              }
+            }
         default:
           fatalError("Media type(\(tracksOrigin)) shouldn't be used here")
         }
@@ -39,19 +47,6 @@ struct TracksVerticalScrollView: View {
     }
     .padding(.top, Constants.paddingSmall)
     .padding(.bottom, Constants.paddingStandard)
-  }
-
-
-  func testIfShouldFetchMoreData(basedOn media: SpotifyModel.MediaItem) {
-    if medias.count > 5 {
-      if media.id == medias[medias.count - 4].id {
-        if tracksOrigin == .album(.tracksFromAlbum) {
-          MediaDetailViewModel.AlbumAPICalls.getTracksFromAlbum(mediaVM: mediaDetailVM, loadMoreEnabled: true)
-        } else {
-          MediaDetailViewModel.PlaylistAPICalls.getTracksFromPlaylist(mediaVM: mediaDetailVM, loadMoreEnabled: true)
-        }
-      }
-    }
   }
 
 

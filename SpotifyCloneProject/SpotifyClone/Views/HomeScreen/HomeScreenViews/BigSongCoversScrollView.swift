@@ -47,7 +47,11 @@ struct BigSongCoversScrollView: View {
                         title: media.title,
                         artist: showArtistName ? media.authorName.joined(separator: ", ") : "",
                         mediaType: media.mediaType)
-              .onAppear { testIfShouldFetchMoreData(basedOn: media) }
+              .onAppear {
+                if mediaDetailVM.shouldFetchMoreData(basedOn: media, inRelationTo: medias) {
+                  homeVM.fetchDataFor(section, with: homeVM.mainVM.authKey!.accessToken)
+                }
+              }
               .onTapGesture {
                 homeVM.changeSubpageTo(detailType,
                                        mediaDetailVM: mediaDetailVM,
@@ -56,16 +60,6 @@ struct BigSongCoversScrollView: View {
             .buttonStyle(PlainButtonStyle())
           }
         }.padding(.horizontal, Constants.paddingStandard)
-      }
-    }
-  }
-
-  // If we are reaching the end of the scroll, fetch more data
-  func testIfShouldFetchMoreData(basedOn media: SpotifyModel.MediaItem) {
-    if medias.count > 5 {
-      if media.id == medias[medias.count - 4].id {
-        homeVM.fetchDataFor(section,
-                                   with: homeVM.mainVM.authKey!.accessToken)
       }
     }
   }
