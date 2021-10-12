@@ -61,7 +61,7 @@ struct ArtistDetailContent: View {
                                            popularity: artistDetails.popularity,
                                            id: artistDetails.id)
     default:
-      fatalError("Wrong type for PlaylistDetailScreen")
+      fatalError("Wrong type for ArtistDetailScreen")
     }
   }
 

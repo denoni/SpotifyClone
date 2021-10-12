@@ -18,7 +18,7 @@ struct TracksVerticalScrollView: View {
     case .playlist:
       return mediaDetailVM.mediaCollection[.playlist(.tracksFromPlaylist)]!
     default:
-      fatalError("")
+      fatalError("Media Type '\(tracksOrigin)' is not compatible with TracksVerticalScrollView")
     }
   }
 
