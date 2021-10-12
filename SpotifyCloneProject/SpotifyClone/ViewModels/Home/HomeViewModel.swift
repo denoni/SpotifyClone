@@ -32,6 +32,8 @@ class HomeViewModel: ObservableObject {
 
   enum HomeSubpage {
     case none
+    case transitionScreen
+    
     case playlistDetail
     case trackDetail
     case albumDetail
@@ -306,6 +308,7 @@ class HomeViewModel: ObservableObject {
   }
 
   func goToPreviousPage() {
+
     // removes the current page
     pageHistory.removeLast()
 
@@ -313,6 +316,10 @@ class HomeViewModel: ObservableObject {
       changeSubpageTo(pageHistory.last!.subPage,
                       mediaDetailVM: pageHistory.last!.mediaDetailVM,
                       withData: pageHistory.last!.data)
+
+      // removes the page that we just returned to
+      pageHistory.removeLast()
+
     } else {
       goToNoneSubpage()
     }
@@ -323,13 +330,19 @@ class HomeViewModel: ObservableObject {
                        mediaDetailVM: MediaDetailViewModel,
                        withData data: SpotifyModel.MediaItem) {
 
-    self.pageHistory.append((subPage: subPage, data: data, mediaDetailVM: mediaDetailVM))
+    pageHistory.append((subPage: subPage, data: data, mediaDetailVM: mediaDetailVM))
 
-    mediaDetailVM.clean()
-    mediaDetailVM.mainItem = data
-    mediaDetailVM.accessToken = mainVM.authKey!.accessToken
-    mediaDetailVM.setVeryFirstImageInfoBasedOn(data.imageURL)
-    currentSubPage = subPage
+    currentSubPage = .transitionScreen
+
+    // if we change the subpage right away it'll cause a crash
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      mediaDetailVM.clean()
+      mediaDetailVM.mainItem = data
+      mediaDetailVM.accessToken = self.mainVM.authKey!.accessToken
+      mediaDetailVM.setVeryFirstImageInfoBasedOn(data.imageURL)
+      self.currentSubPage = subPage
+    }
+
   }
   
   func setVeryFirstImageInfoBasedOn(_ firstImageURL: String) {

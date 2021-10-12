@@ -18,6 +18,11 @@ struct HomeScreen: View {
     switch homeVM.currentSubPage {
     case .none:
       HomeScreenDefault()
+
+    case .transitionScreen:
+      ProgressView()
+        .withSpotifyStyle(useDiscreetColors: true)
+
     case .playlistDetail:
       PlaylistDetailScreen(detailScreenOrigin: .home(homeVM: homeVM),
                            mediaDetailVM: mediaDetailVM)

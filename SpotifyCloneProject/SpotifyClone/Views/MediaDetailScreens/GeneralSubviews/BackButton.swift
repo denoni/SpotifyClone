@@ -23,7 +23,7 @@ struct BackButton: View {
       .onTapGesture {
         switch backButtonShouldReturnTo {
         case .home(let homeVM):
-          homeVM.goToNoneSubpage()
+          homeVM.goToPreviousPage()
         case .search(let searchVM):
           searchVM.goToPreviousPage()
         }

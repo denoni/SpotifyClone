@@ -19,6 +19,10 @@ struct SearchScreen: View {
     case .activeSearching:
       ActiveSearchingScreen()
 
+    case .transitionScreen:
+      ProgressView()
+        .withSpotifyStyle(useDiscreetColors: true)
+
     case .trackDetail:
       TrackDetailScreen(detailScreenOrigin: .search(searchVM: searchVM),
                         mediaDetailVM: mediaDetailVM)

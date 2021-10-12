@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ArtistMediaHorizontalScrollView: View {
+  @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @State var medias: [SpotifyModel.MediaItem]
   var sectionTitle: String
 
@@ -22,7 +23,20 @@ struct ArtistMediaHorizontalScrollView: View {
           ForEach(medias) { media in
             SmallSongItem(imageURL: media.imageURL,
                           title: media.title)
-            // TODO: On tap gesture
+              .onTapGesture {
+                switch mediaDetailVM.detailScreenOrigin {
+                case .home(let homeVM):
+                  homeVM.changeSubpageTo(.playlistDetail,
+                                         mediaDetailVM: mediaDetailVM,
+                                         withData: media)
+                case .search(let searchVM):
+                  searchVM.changeSubpageTo(.playlistDetail, subPageType: .detail(mediaDetailVM: mediaDetailVM,
+                                                                                 data: media))
+                default:
+                  fatalError("Missing detail screen origin.")
+                }
+              }
+            .buttonStyle(PlainButtonStyle())
           }
         }
         .padding(.trailing, Constants.paddingStandard)

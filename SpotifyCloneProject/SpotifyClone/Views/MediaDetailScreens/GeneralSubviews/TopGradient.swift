@@ -12,7 +12,12 @@ struct TopGradient: View {
 
   var height: CGFloat
   var color: Color {
-    return Color(mediaDetailVM.imageColorModel.image!.averageColor!)
+    if mediaDetailVM.imageColorModel.image != nil {
+      return Color(mediaDetailVM.imageColorModel.image!.averageColor!)
+    } else {
+      return .clear
+    }
+
   }
 
   init(height: CGFloat) { self.height = height }

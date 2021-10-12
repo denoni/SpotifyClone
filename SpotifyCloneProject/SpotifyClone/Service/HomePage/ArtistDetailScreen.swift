@@ -11,13 +11,13 @@ struct ArtistDetailScreen: View {
   var mediaDetailVM: MediaDetailViewModel
   @State var scrollViewPosition = CGFloat.zero
   var detailScreenOrigin: MediaDetailViewModel.DetailScreenOrigin
-
+  
   init(detailScreenOrigin: MediaDetailViewModel.DetailScreenOrigin, mediaDetailVM: MediaDetailViewModel) {
     self.mediaDetailVM = mediaDetailVM
     self.detailScreenOrigin = detailScreenOrigin
     self.mediaDetailVM.detailScreenOrigin = detailScreenOrigin
   }
-
+  
   var body: some View {
     GeometryReader { geometry in
       ZStack {
@@ -38,10 +38,10 @@ struct ArtistDetailScreen: View {
                         title: mediaDetailVM.mainItem!.title,
                         backButtonWithCircleBackground: true,
                         backButtonShouldReturnTo: detailScreenOrigin)
-
+        
       }.ignoresSafeArea()
     }
-
+    
   }
 }
 
@@ -51,38 +51,38 @@ struct ArtistDetailScreen: View {
 
 struct ArtistDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
-
+  
   var details: SpotifyModel.ArtistDetails {
     let detailsTypes = mediaDetailVM.mainItem!.getDetails()
     switch detailsTypes {
     case .artists(let artistDetails):
       return SpotifyModel.ArtistDetails(followers: artistDetails.followers,
-                                           genres: artistDetails.genres,
-                                           popularity: artistDetails.popularity,
-                                           id: artistDetails.id)
+                                        genres: artistDetails.genres,
+                                        popularity: artistDetails.popularity,
+                                        id: artistDetails.id)
     default:
       fatalError("Wrong type for ArtistDetailScreen")
     }
   }
-
+  
   var body: some View {
     VStack(alignment: .center, spacing: Constants.spacingMedium) {
-
-          BigArtistNameTitle(name: mediaDetailVM.mainItem!.title)
-
-          HStack {
-            VStack(alignment: .leading) {
-              Text("\(details.followers) FOLLOWERS")
-                .font(.avenir(.medium, size: Constants.fontSmall))
-                .opacity(Constants.opacityStandard)
-              FollowAndThreeDotsIcons(threeDotsPlacedVertically: true)
-            }
-            Spacer()
-            BigPlayButton()
-          }
-          .frame(height: 65)
-          .padding(.bottom, Constants.paddingStandard)
-
+      
+      BigArtistNameTitle(name: mediaDetailVM.mainItem!.title)
+      
+      HStack {
+        VStack(alignment: .leading) {
+          Text("\(details.followers) FOLLOWERS")
+            .font(.avenir(.medium, size: Constants.fontSmall))
+            .opacity(Constants.opacityStandard)
+          FollowAndThreeDotsIcons(threeDotsPlacedVertically: true)
+        }
+        Spacer()
+        BigPlayButton()
+      }
+      .frame(height: 65)
+      .padding(.bottom, Constants.paddingStandard)
+      
       if Utility.didEverySectionLoaded(in: .artistDetail, mediaDetailVM: mediaDetailVM) {
         VStack(spacing: 60) {
           VStack {
@@ -91,14 +91,14 @@ struct ArtistDetailContent: View {
               .padding(.trailing, Constants.paddingLarge)
             ArtistTracks(medias: mediaDetailVM.mediaCollection[.artist(.topTracksFromArtist)]!)
           }
-
+          
           VStack {
             Text("Popular Albums")
               .spotifyTitle()
               .padding(.trailing, Constants.paddingLarge)
             ArtistAlbums(medias: mediaDetailVM.mediaCollection[.artist(.albumsFromArtist)]!)
           }
-
+          
           // TODO: Load the correct data
           ArtistMediaHorizontalScrollView(medias: mediaDetailVM.mediaCollection[.artist(.playlistsFromArtist)]!,
                                           sectionTitle: "Featuring \(mediaDetailVM.mainItem!.title)")
@@ -112,7 +112,7 @@ struct ArtistDetailContent: View {
           }
         Spacer()
       }
-
+      
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .padding(Constants.paddingStandard)
@@ -125,7 +125,7 @@ struct ArtistDetailContent: View {
 
 struct ArtistDetailScreen_Previews: PreviewProvider {
   static var mainVM = MainViewModel()
-
+  
   static var previews: some View {
     ZStack {
       // `detailScreenOrigin` doesn't matter on preview.

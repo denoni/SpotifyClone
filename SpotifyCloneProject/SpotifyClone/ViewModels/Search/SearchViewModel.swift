@@ -20,6 +20,7 @@ class SearchViewModel: ObservableObject {
 
   enum SearchSubpage {
     case none
+    case transitionScreen
     case activeSearching
 
     case trackDetail
@@ -65,6 +66,10 @@ class SearchViewModel: ObservableObject {
 
     if pageHistory.isEmpty == false {
       changeSubpageTo(pageHistory.last!.subPage, subPageType: pageHistory.last!.subPageType)
+
+      // removes the page that we just returned to
+      pageHistory.removeLast()
+      
     } else {
       goToNoneSubpage()
     }
@@ -81,19 +86,26 @@ class SearchViewModel: ObservableObject {
 
     self.pageHistory.append((subPage: subPage, subPageType: subPageType))
 
-    switch subPageType {
-
-    case .search(let searchDetailVM, let accessToken):
-      searchDetailVM.accessToken = accessToken
-
-    case .detail(let mediaDetailVM, let data):
-      mediaDetailVM.clean()
-      mediaDetailVM.mainItem = data
-      mediaDetailVM.accessToken = mainVM.authKey!.accessToken
-      mediaDetailVM.setVeryFirstImageInfoBasedOn(data.imageURL)
-    }
+    currentSubPage = .transitionScreen
     
-    currentSubPage = subPage
+
+    // if we change the subpage right away it'll cause a crash
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+      switch subPageType {
+
+      case .search(let searchDetailVM, let accessToken):
+        searchDetailVM.accessToken = accessToken
+
+      case .detail(let mediaDetailVM, let data):
+        mediaDetailVM.clean()
+        mediaDetailVM.mainItem = data
+        mediaDetailVM.accessToken = self.mainVM.authKey!.accessToken
+        mediaDetailVM.setVeryFirstImageInfoBasedOn(data.imageURL)
+      }
+
+      self.currentSubPage = subPage
+
+    }
   }
 
 }

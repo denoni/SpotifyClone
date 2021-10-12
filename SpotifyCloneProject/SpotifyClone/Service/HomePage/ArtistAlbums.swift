@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ArtistAlbums: View {
+  @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   let medias: [SpotifyModel.MediaItem]
 
   var body: some View {
@@ -27,6 +28,19 @@ struct ArtistAlbums: View {
           Spacer()
         }
         .padding(.top, 5)
+        .onTapGesture {
+          switch mediaDetailVM.detailScreenOrigin {
+          case .home(let homeVM):
+            homeVM.changeSubpageTo(.albumDetail,
+                                   mediaDetailVM: mediaDetailVM,
+                                   withData: media)
+          case .search(let searchVM):
+            searchVM.changeSubpageTo(.albumDetail, subPageType: .detail(mediaDetailVM: mediaDetailVM,
+                                                                        data: media))
+          default:
+            fatalError("Missing detail screen origin.")
+          }
+        }
       }
       SeeMoreButton()
         .padding(.top, 10)
