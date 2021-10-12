@@ -1,5 +1,5 @@
 //
-//  APIFetchingDataSearchPage.swift
+//  SearchPageAPICalls.swift
 //  SpotifyClone
 //
 //  Created by Gabriel on 9/20/21.
@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-class APIFetchingDataSearchPage: ObservableObject {
+class SearchPageAPICalls: ObservableObject {
 
   // TODO: Add support for all media types
   func search(for searchTerm: String, accessToken: String,

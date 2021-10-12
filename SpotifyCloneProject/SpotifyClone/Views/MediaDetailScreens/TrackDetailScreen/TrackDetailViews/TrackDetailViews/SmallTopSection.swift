@@ -11,8 +11,6 @@ struct SmallTopSection: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   var albumName: String
   var isSmallDisplay: Bool = false
-  var backButtonShouldReturnTo: MediaDetailViewModel.DetailScreenOrigin
-
 
   var body: some View {
     HStack {
@@ -25,10 +23,10 @@ struct SmallTopSection: View {
         .onTapGesture {
           switch mediaDetailVM.detailScreenOrigin {
           case .home(let homeVM):
-            homeVM.goToNoneSubpage()
+            homeVM.goToPreviousPage()
             homeVM.mainVM.showBottomMediaPlayer = true
           case .search(let searchVM):
-            searchVM.goToActiveSearchingPage()
+            searchVM.goToPreviousPage()
             searchVM.mainVM.showBottomMediaPlayer = true
           case .none:
             fatalError("Back button was clicked, but there's no known page origin.")

@@ -27,7 +27,9 @@ class HomeViewModel: ObservableObject {
   @Published var currentSubPage: HomeSubpage = .none
   
   @Published var veryFirstImageInfo = RemoteImageModel(urlString: "")
-  
+
+  @Published var pageHistory = [(subPage: HomeSubpage, data: SpotifyModel.MediaItem, mediaDetailVM: MediaDetailViewModel)]()
+
   enum HomeSubpage {
     case none
     case playlistDetail
@@ -298,13 +300,31 @@ class HomeViewModel: ObservableObject {
   
   // MARK: - Non-api Related Functions
   
-  func goToNoneSubpage( ) {
+  func goToNoneSubpage() {
+    pageHistory.removeAll()
     currentSubPage = .none
+  }
+
+  func goToPreviousPage() {
+    // removes the current page
+    pageHistory.removeLast()
+
+    if pageHistory.isEmpty == false {
+      changeSubpageTo(pageHistory.last!.subPage,
+                      mediaDetailVM: pageHistory.last!.mediaDetailVM,
+                      withData: pageHistory.last!.data)
+    } else {
+      goToNoneSubpage()
+    }
+
   }
   
   func changeSubpageTo(_ subPage: HomeSubpage,
                        mediaDetailVM: MediaDetailViewModel,
                        withData data: SpotifyModel.MediaItem) {
+
+    self.pageHistory.append((subPage: subPage, data: data, mediaDetailVM: mediaDetailVM))
+
     mediaDetailVM.clean()
     mediaDetailVM.mainItem = data
     mediaDetailVM.accessToken = mainVM.authKey!.accessToken

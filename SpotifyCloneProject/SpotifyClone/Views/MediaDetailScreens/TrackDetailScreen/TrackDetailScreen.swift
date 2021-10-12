@@ -57,8 +57,7 @@ struct TrackDetailContent: View {
     HStack(alignment: .center) {
       VStack(alignment: .center) {
         SmallTopSection(albumName: details.album!.name,
-                        isSmallDisplay: isSmallDisplay,
-                        backButtonShouldReturnTo: mediaDetailVM.detailScreenOrigin!)
+                        isSmallDisplay: isSmallDisplay)
           .padding(.bottom, isSmallDisplay ? 0 : Constants.paddingSmall)
           .padding(.top, isSmallDisplay ? 0 : Constants.paddingSmall)
         Spacer()

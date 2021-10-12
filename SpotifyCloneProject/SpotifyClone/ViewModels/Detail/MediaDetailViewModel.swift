@@ -10,6 +10,8 @@
 import Foundation
 
 class MediaDetailViewModel: ObservableObject {
+  var api = MediaDetailsPageAPICalls()
+
   /// `mainItem` -  The item that was clicked to originate the current DetailView.
   var mainVM: MainViewModel
   @Published var mainItem: SpotifyModel.MediaItem?
@@ -52,6 +54,7 @@ class MediaDetailViewModel: ObservableObject {
       numberOfLoadedItemsInSection[.album(section)] = 0
     }
 
+    // Shows
     for section in ShowsSections.allCases {
       isLoading[.shows(section)] = true
       mediaCollection[.shows(section)] = []
@@ -84,10 +87,6 @@ class MediaDetailViewModel: ObservableObject {
   enum ShowsSections: CaseIterable {
     case episodesFromShow
   }
-
-
-
-  var api = MediaDetailsPageAPICalls()
 
   func getArtistScreenData() {
     ArtistAPICalls.getTopTracksFromArtist(mediaVM: self)

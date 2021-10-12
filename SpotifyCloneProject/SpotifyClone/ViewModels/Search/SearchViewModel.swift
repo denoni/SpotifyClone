@@ -8,13 +8,15 @@
 import SwiftUI
 
 class SearchViewModel: ObservableObject {
-  var api = APIFetchingDataSearchPage()
+  var api = SearchPageAPICalls()
   var mainVM: MainViewModel
   @Published var isLoading = true
   @Published var playlists = [SpotifyModel.PlaylistItem]()
   @Published var colors = [Color]()
 
   @Published var currentSubPage: SearchSubpage = .none
+
+  @Published var pageHistory = [(subPage: SearchSubpage, subPageType: SubPageType)]()
 
   enum SearchSubpage {
     case none
@@ -52,12 +54,21 @@ class SearchViewModel: ObservableObject {
 
   // MARK: - Non-api Related Functions
 
-  func goToNoneSubpage( ) {
+  func goToNoneSubpage() {
+    pageHistory.removeAll()
     currentSubPage = .none
   }
 
-  func goToActiveSearchingPage( ) {
-    currentSubPage = .activeSearching
+  func goToPreviousPage() {
+    // removes the current page
+    pageHistory.removeLast()
+
+    if pageHistory.isEmpty == false {
+      changeSubpageTo(pageHistory.last!.subPage, subPageType: pageHistory.last!.subPageType)
+    } else {
+      goToNoneSubpage()
+    }
+
   }
 
   enum SubPageType {
@@ -67,6 +78,8 @@ class SearchViewModel: ObservableObject {
 
   func changeSubpageTo(_ subPage: SearchSubpage,
                        subPageType: SubPageType) {
+
+    self.pageHistory.append((subPage: subPage, subPageType: subPageType))
 
     switch subPageType {
 

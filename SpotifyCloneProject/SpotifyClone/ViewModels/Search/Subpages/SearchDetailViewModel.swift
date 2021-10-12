@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 class SearchDetailViewModel: ObservableObject {
-  var api = APIFetchingDataSearchPage()
+  var api = SearchPageAPICalls()
   @Published var accessToken: String?
 
   @Published private var userInputText: String = ""
