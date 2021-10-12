@@ -53,16 +53,17 @@ class APIFetchingShows {
 
         var podcastItems = [SpotifyModel.MediaItem]()
 
-        for itemIndex in 0 ..< numberOfItems {
-          let title = data.shows.items[itemIndex].name
-          let imageURL = data.shows.items[itemIndex].images[0].url
-          let authorName = data.shows.items[itemIndex].publisher
-          let id = data.shows.items[itemIndex].id
+        for showIndex in 0 ..< numberOfItems {
+          let show = data.shows.items[showIndex]
+          let title = show.name
+          let imageURL = show.images[0].url
+          let authorName = show.publisher
+          let id = show.id
 
-          let description = data.shows.items[itemIndex].description
-          let explicit = data.shows.items[itemIndex].explicit
-          let showID = data.shows.items[itemIndex].id
-          let numberOfEpisodes = data.shows.items[itemIndex].total_episodes
+          let description = show.description
+          let explicit = show.explicit
+          let showID = show.id
+          let numberOfEpisodes = show.total_episodes
 
           let podcastItem = SpotifyModel.MediaItem(title: title,
                                                    previewURL: "",

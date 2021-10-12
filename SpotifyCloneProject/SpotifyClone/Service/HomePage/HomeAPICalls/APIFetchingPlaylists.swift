@@ -59,14 +59,16 @@ class APIFetchingPlaylists {
       }
 
       for playlistIndex in 0 ..< numberOfPlaylists {
-        let sectionTitle = data.message
-        let title = data.playlists.items[playlistIndex].name
-        let imageURL = data.playlists.items[playlistIndex].images[0].url
-        let id = data.playlists.items[playlistIndex].id
+        let playlist = data.playlists.items[playlistIndex]
 
-        let description = data.playlists.items[playlistIndex].description
-        let playlistTracks = data.playlists.items[playlistIndex].tracks
-        let mediaOwner = data.playlists.items[playlistIndex].owner
+        let sectionTitle = data.message
+        let title = playlist.name
+        let imageURL = playlist.images[0].url
+        let id = playlist.id
+
+        let description = playlist.description
+        let playlistTracks = playlist.tracks
+        let mediaOwner = playlist.owner
 
         let playlistItem = SpotifyModel.MediaItem(title: title,
                                                   previewURL: sectionTitle ?? "You Might Like",

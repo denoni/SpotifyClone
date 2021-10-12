@@ -75,24 +75,26 @@ class SearchPageAPICalls: ObservableObject {
       }
 
       for trackIndex in 0 ..< numberOfTracks {
-        let title = data.items[trackIndex].name
-        let previewURL = data.items[trackIndex].preview_url
-        let author = data.items[trackIndex].artists
-        let id = data.items[trackIndex].id
+        let track = data.items[trackIndex]
+
+        let title = track.name
+        let previewURL = track.preview_url
+        let author = track.artists
+        let id = track.id
         var authorName = [String]()
 
-        let popularity = data.items[trackIndex].popularity
-        let explicit = data.items[trackIndex].explicit
-        let durationInMs = data.items[trackIndex].duration_ms
+        let popularity = track.popularity
+        let explicit = track.explicit
+        let durationInMs = track.duration_ms
 
-        let imageURL = data.items[trackIndex].album?.images?[0].url
-        let albumName = data.items[trackIndex].album?.name
-        let albumID = data.items[trackIndex].album?.id
-        let numberOfTracks = data.items[trackIndex].album?.total_tracks
-        let releaseDate = data.items[trackIndex].album?.release_date
+        let imageURL = track.album?.images?[0].url
+        let albumName = track.album?.name
+        let albumID = track.album?.id
+        let numberOfTracks = track.album?.total_tracks
+        let releaseDate = track.album?.release_date
 
-        for artistIndex in data.items[trackIndex].artists.indices {
-          authorName.append(data.items[trackIndex].artists[artistIndex].name)
+        for artistIndex in track.artists.indices {
+          authorName.append(track.artists[artistIndex].name)
         }
 
         let trackItem = SpotifyModel
@@ -130,13 +132,15 @@ class SearchPageAPICalls: ObservableObject {
       }
 
       for playlistIndex in 0 ..< numberOfPlaylists {
-        let title = data.items[playlistIndex].name
-        let imageURL = data.items[playlistIndex].images[0].url
-        let id = data.items[playlistIndex].id
+        let playlist = data.items[playlistIndex]
 
-        let description = data.items[playlistIndex].description
-        let playlistTracks = data.items[playlistIndex].tracks
-        let mediaOwner = data.items[playlistIndex].owner
+        let title = playlist.name
+        let imageURL = playlist.images[0].url
+        let id = playlist.id
+
+        let description = playlist.description
+        let playlistTracks = playlist.tracks
+        let mediaOwner = playlist.owner
 
         let playlistItem = SpotifyModel.MediaItem(title: title,
                                                   previewURL: "",
@@ -169,18 +173,20 @@ class SearchPageAPICalls: ObservableObject {
       }
 
       for albumIndex in 0 ..< numberOfAlbums {
-        let title = data.items[albumIndex].name
-        let imageURL = data.items[albumIndex].images?[0].url
-        let author = data.items[albumIndex].artists
-        let id = data.items[albumIndex].id
+        let album = data.items[albumIndex]
+
+        let title = album.name
+        let imageURL = album.images?[0].url
+        let author = album.artists
+        let id = album.id
         var authorName = [String]()
 
-        let albumID = data.items[albumIndex].id
-        let numberOfTracks = data.items[albumIndex].total_tracks
-        let releaseDate = data.items[albumIndex].release_date
+        let albumID = album.id
+        let numberOfTracks = album.total_tracks
+        let releaseDate = album.release_date
 
-        for artistIndex in data.items[albumIndex].artists.indices {
-          authorName.append(data.items[albumIndex].artists[artistIndex].name)
+        for artistIndex in album.artists.indices {
+          authorName.append(album.artists[artistIndex].name)
         }
 
         let albumItem = SpotifyModel.MediaItem(title: title,
@@ -213,16 +219,18 @@ class SearchPageAPICalls: ObservableObject {
       }
 
       for artistIndex in 0 ..< numberOfArtists {
-        let title = data.items[artistIndex].name
-        let id = data.items[artistIndex].id
+        let artist = data.items[artistIndex]
 
-        let followers = data.items[artistIndex].followers!.total
-        let genres = data.items[artistIndex].genres
-        let popularity = data.items[artistIndex].popularity
+        let title = artist.name
+        let id = artist.id
+
+        let followers = artist.followers!.total
+        let genres = artist.genres
+        let popularity = artist.popularity
 
         var imageURL: String {
-          if data.items[artistIndex].images != nil {
-            return data.items[artistIndex].images!.count > 0 ? data.items[artistIndex].images![0].url : ""
+          if artist.images != nil {
+            return artist.images!.count > 0 ? artist.images![0].url : ""
           }
           return "" // TODO: Return a avatar placeholder image
         }
@@ -255,15 +263,17 @@ class SearchPageAPICalls: ObservableObject {
       }
 
       for showIndex in 0 ..< numberOfShows {
-        let title = data.items[showIndex].name
-        let imageURL = data.items[showIndex].images[0].url
-        let authorName = data.items[showIndex].publisher
-        let id = data.items[showIndex].id
+        let show = data.items[showIndex]
 
-        let description = data.items[showIndex].description
-        let explicit = data.items[showIndex].explicit
-        let showID = data.items[showIndex].id
-        let numberOfEpisodes = data.items[showIndex].total_episodes
+        let title = show.name
+        let imageURL = show.images[0].url
+        let authorName = show.publisher
+        let id = show.id
+
+        let description = show.description
+        let explicit = show.explicit
+        let showID = show.id
+        let numberOfEpisodes = show.total_episodes
 
         let showItem = SpotifyModel.MediaItem(title: title,
                                               previewURL: "",
@@ -293,15 +303,17 @@ class SearchPageAPICalls: ObservableObject {
       }
 
       for episodeIndex in 0 ..< numberOfEpisodes {
-        let title = data.items[episodeIndex].name
-        let imageURL = data.items[episodeIndex].images[0].url
-        let audioPreview = data.items[episodeIndex].audio_preview_url
-        let id = data.items[episodeIndex].id
+        let episode = data.items[episodeIndex]
 
-        let description = data.items[episodeIndex].description
-        let explicit = data.items[episodeIndex].explicit
-        let durationInMs = data.items[episodeIndex].duration_ms
-        let releaseDate = data.items[episodeIndex].release_date
+        let title = episode.name
+        let imageURL = episode.images[0].url
+        let audioPreview = episode.audio_preview_url
+        let id = episode.id
+
+        let description = episode.description
+        let explicit = episode.explicit
+        let durationInMs = episode.duration_ms
+        let releaseDate = episode.release_date
 
 
         let episodeItem = SpotifyModel.MediaItem(title: title,

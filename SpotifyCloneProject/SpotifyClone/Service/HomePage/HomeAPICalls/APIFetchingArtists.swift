@@ -46,14 +46,16 @@ class APIFetchingArtists {
           fatalError("The API response was corrects but empty. We don't have a way to handle this yet.")
         }
 
-        for itemIndex in 0 ..< numberOfArtists {
-          let title = data.items[itemIndex].name
-          let imageURL = data.items[itemIndex].images?[0].url
-          let id = data.items[itemIndex].id
+        for artistIndex in 0 ..< numberOfArtists {
+          let artist = data.items[artistIndex]
 
-          let followers = data.items[itemIndex].followers!.total
-          let genres = data.items[itemIndex].genres
-          let popularity = data.items[itemIndex].popularity
+          let title = artist.name
+          let imageURL = artist.images?[0].url
+          let id = artist.id
+
+          let followers = artist.followers!.total
+          let genres = artist.genres
+          let popularity = artist.popularity
 
           let artistItem = SpotifyModel.MediaItem(title: title,
                                                   previewURL: "",

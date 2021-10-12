@@ -60,18 +60,20 @@ class APIFetchingAlbums {
 
 
       for albumIndex in 0 ..< numberOfItems {
-        let title = data.albums[albumIndex].name
-        let imageURL = data.albums[albumIndex].images?[0].url
-        let author = data.albums[albumIndex].artists
-        let id = data.albums[albumIndex].id
+        let album = data.albums[albumIndex]
+
+        let title = album.name
+        let imageURL = album.images?[0].url
+        let author = album.artists
+        let id = album.id
         var authorName = [String]()
 
-        let albumID = data.albums[albumIndex].id
-        let numberOfTracks = data.albums[albumIndex].total_tracks
-        let releaseDate = data.albums[albumIndex].release_date
+        let albumID = album.id
+        let numberOfTracks = album.total_tracks
+        let releaseDate = album.release_date
 
-        for artistIndex in data.albums[albumIndex].artists.indices {
-          authorName.append(data.albums[albumIndex].artists[artistIndex].name)
+        for artistIndex in album.artists.indices {
+          authorName.append(album.artists[artistIndex].name)
         }
 
         let albumItem = SpotifyModel.MediaItem(title: title,

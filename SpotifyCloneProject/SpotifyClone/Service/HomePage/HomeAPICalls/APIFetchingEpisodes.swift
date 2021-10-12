@@ -42,25 +42,27 @@ class APIFetchingEpisodes {
           fatalError("Error receiving tracks from API.")
         }
 
-        let numberOfItems = data.items.count
+        let numberOfEpisodes = data.items.count
 
 
-        guard numberOfItems != 0 else {
+        guard numberOfEpisodes != 0 else {
           completionHandler(podcastItems)
           print("The API response was corrects but empty. We'll just return []")
           return
         }
 
-        for itemIndex in 0 ..< numberOfItems {
-          let title = data.items[itemIndex].name
-          let imageURL = data.items[itemIndex].images[0].url
-          let audioPreview = data.items[itemIndex].audio_preview_url
-          let id = data.items[itemIndex].id
+        for episodeIndex in 0 ..< numberOfEpisodes {
+          let episode = data.items[episodeIndex]
 
-          let description = data.items[itemIndex].description
-          let explicit = data.items[itemIndex].explicit
-          let durationInMs = data.items[itemIndex].duration_ms
-          let releaseDate = data.items[itemIndex].release_date
+          let title = episode.name
+          let imageURL = episode.images[0].url
+          let audioPreview = episode.audio_preview_url
+          let id = episode.id
+
+          let description = episode.description
+          let explicit = episode.explicit
+          let durationInMs = episode.duration_ms
+          let releaseDate = episode.release_date
 
 
           let podcastItem = SpotifyModel.MediaItem(title: title,

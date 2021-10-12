@@ -68,24 +68,26 @@ class APIFetchingTracks {
       }
 
       for trackIndex in 0 ..< numberOfItems {
-        let title = data.tracks[trackIndex].name
-        let previewURL = data.tracks[trackIndex].preview_url
-        let author = data.tracks[trackIndex].artists
-        let id = data.tracks[trackIndex].id
+        let track = data.tracks[trackIndex]
+
+        let title = track.name
+        let previewURL = track.preview_url
+        let author = track.artists
+        let id = track.id
         var authorName = [String]()
 
-        let popularity = data.tracks[trackIndex].popularity
-        let explicit = data.tracks[trackIndex].explicit
-        let durationInMs = data.tracks[trackIndex].duration_ms
+        let popularity = track.popularity
+        let explicit = track.explicit
+        let durationInMs = track.duration_ms
 
-        let imageURL = data.tracks[trackIndex].album?.images?[0].url
-        let albumName = data.tracks[trackIndex].album?.name
-        let albumID = data.tracks[trackIndex].album?.id
-        let numberOfTracks = data.tracks[trackIndex].album?.total_tracks
-        let releaseDate = data.tracks[trackIndex].album?.release_date
+        let imageURL = track.album?.images?[0].url
+        let albumName = track.album?.name
+        let albumID = track.album?.id
+        let numberOfTracks = track.album?.total_tracks
+        let releaseDate = track.album?.release_date
 
-        for artistIndex in data.tracks[trackIndex].artists.indices {
-          authorName.append(data.tracks[trackIndex].artists[artistIndex].name)
+        for artistIndex in track.artists.indices {
+          authorName.append(track.artists[artistIndex].name)
         }
 
         let trackItem = SpotifyModel
