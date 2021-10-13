@@ -201,8 +201,9 @@ class MediaDetailViewModel: ObservableObject {
 
 
   struct UserInfoAPICalls {
-    static func checksIfUserFollowsTrack(mediaVM: MediaDetailViewModel, trackID: String) {
-      mediaVM.api.checksIfUserFollowsTrack(with: mediaVM.accessToken!, trackID: trackID) { response in
+    static func checksIfUserFollows(_ mediaType: APIFetchingUserInfo.ValidMediaType,
+                                    mediaVM: MediaDetailViewModel) {
+      mediaVM.api.checksIfUserFollows(mediaType, with: mediaVM.accessToken!, trackID: mediaVM.mainItem!.id) { response in
         mediaVM.userFollowsCurrentMainItem = response
       }
     }

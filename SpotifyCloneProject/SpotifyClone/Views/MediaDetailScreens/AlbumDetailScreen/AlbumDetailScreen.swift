@@ -83,6 +83,7 @@ struct AlbumDetailContent: View {
             .withSpotifyStyle(useDiscreetColors: true)
             .onAppear {
               mediaDetailVM.getArtistBasicInfo(mediaVM: mediaDetailVM)
+              MediaDetailViewModel.UserInfoAPICalls.checksIfUserFollows(.album, mediaVM: mediaDetailVM)
               MediaDetailViewModel.AlbumAPICalls.getTracksFromAlbum(mediaVM: mediaDetailVM, loadMoreEnabled: true)
             }
         }.frame(maxWidth: .infinity, alignment: .center)

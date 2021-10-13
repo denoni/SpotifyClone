@@ -104,10 +104,12 @@ class MediaDetailsPageAPICalls: ObservableObject {
 
   // MARK: - User Info
 
-  func checksIfUserFollowsTrack(with accessToken: String,
-                              trackID: String,
-                              completionHandler: @escaping (Bool) -> Void) {
-    userInfoAPI.checksIfUserFollowsTrack(with: accessToken, trackID: trackID, completionHandler: completionHandler)
+  func checksIfUserFollows(_ mediaType: APIFetchingUserInfo.ValidMediaType,
+                          with accessToken: String,
+                          trackID: String,
+                          completionHandler: @escaping (Bool) -> Void) {
+    userInfoAPI.checksIfUserFollows(mediaType, with: accessToken,
+                                    mediaID: trackID, completionHandler: completionHandler)
   }
 
 

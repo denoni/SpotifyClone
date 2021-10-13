@@ -99,6 +99,8 @@
 		C09552982704B7E8000499B3 /* APIFetchingAlbums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09552972704B7E8000499B3 /* APIFetchingAlbums.swift */; };
 		C095529A2704B9AA000499B3 /* APIFetchingArtists.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09552992704B9AA000499B3 /* APIFetchingArtists.swift */; };
 		C097734C271763B000F319D1 /* APIFetchingUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C097734B271763B000F319D1 /* APIFetchingUserInfo.swift */; };
+		C097735027177A3300F319D1 /* MainViewModelAPICalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = C097734F27177A3300F319D1 /* MainViewModelAPICalls.swift */; };
+		C097735227177B2600F319D1 /* CurrentUserInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C097735127177B2600F319D1 /* CurrentUserInfoResponse.swift */; };
 		C09CF214270249F200EB9DA3 /* APIFetchingTracks.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09CF213270249F200EB9DA3 /* APIFetchingTracks.swift */; };
 		C09FD8FF26E03D6E0069CEAE /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09FD8FE26E03D6E0069CEAE /* BottomBar.swift */; };
 		C09FD90126E049BE0069CEAE /* Image+ResizeToFit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09FD90026E049BE0069CEAE /* Image+ResizeToFit.swift */; };
@@ -245,6 +247,8 @@
 		C09552972704B7E8000499B3 /* APIFetchingAlbums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFetchingAlbums.swift; sourceTree = "<group>"; };
 		C09552992704B9AA000499B3 /* APIFetchingArtists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFetchingArtists.swift; sourceTree = "<group>"; };
 		C097734B271763B000F319D1 /* APIFetchingUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFetchingUserInfo.swift; sourceTree = "<group>"; };
+		C097734F27177A3300F319D1 /* MainViewModelAPICalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelAPICalls.swift; sourceTree = "<group>"; };
+		C097735127177B2600F319D1 /* CurrentUserInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserInfoResponse.swift; sourceTree = "<group>"; };
 		C09CF213270249F200EB9DA3 /* APIFetchingTracks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFetchingTracks.swift; sourceTree = "<group>"; };
 		C09FD8FE26E03D6E0069CEAE /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
 		C09FD90026E049BE0069CEAE /* Image+ResizeToFit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+ResizeToFit.swift"; sourceTree = "<group>"; };
@@ -375,6 +379,7 @@
 				C081873126EF728100AB19E9 /* APIAuthentication.swift */,
 				C08D2DB92710C4B0003EB95C /* SearchPage */,
 				C09CF2122702499800EB9DA3 /* HomePage */,
+				C097734F27177A3300F319D1 /* MainViewModelAPICalls.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -792,6 +797,7 @@
 				C0F8199C26FE4FF9000F5FEE /* SubTypes */,
 				C0F8199226FE4E7D000F5FEE /* AlbumResponseType.swift */,
 				C0F8199A26FE4F9B000F5FEE /* ArtistResponseType.swift */,
+				C097735127177B2600F319D1 /* CurrentUserInfoResponse.swift */,
 				C08724DE2709405F00E2DDB0 /* EpisodeResponse.swift */,
 				C0F8199826FE4F79000F5FEE /* TrackResponseType.swift */,
 				C0F8199026FE4E57000F5FEE /* ShowResponseType.swift */,
@@ -1134,10 +1140,12 @@
 				C087873426FCF6EF0013924E /* ScrollView+NoBouncing.swift in Sources */,
 				C088F23726DEDE5600C4BCA2 /* HomeScreen.swift in Sources */,
 				C0F8199926FE4F79000F5FEE /* TrackResponseType.swift in Sources */,
+				C097735027177A3300F319D1 /* MainViewModelAPICalls.swift in Sources */,
 				C0883A0B26E2705B00E1ADFA /* ColorfulCard.swift in Sources */,
 				C084E04F2703411C00C6AAAE /* LikeAndThreeDotsIcons.swift in Sources */,
 				C08724DB2709374D00E2DDB0 /* APIFetchingEpisodes.swift in Sources */,
 				C06AB93126FA85F600F46356 /* ProgressView+SpotifyStyle.swift in Sources */,
+				C097735227177B2600F319D1 /* CurrentUserInfoResponse.swift in Sources */,
 				C081873726EF9A2700AB19E9 /* AuthWebView.swift in Sources */,
 				C08839FF26E26E8400E1ADFA /* BigSongCoversScrollView.swift in Sources */,
 				C0C63C5E26DD144E00532792 /* SpotifyCloneApp.swift in Sources */,

@@ -8,11 +8,14 @@
 import Foundation
 
 class MainViewModel: ObservableObject {
+  var api = MainViewModelAPICalls()
   @Published private(set) var authKey: AuthKey?
   @Published var currentPage: Page = .home
   @Published var homeScreenIsReady = false
   @Published var showBottomMediaPlayer = true
-  
+
+  @Published var currentUserProfileInfo: SpotifyModel.CurrentUserProfileInfo?
+
   func finishAuthentication(authKey: AuthKey) {
     self.authKey = authKey
     
@@ -21,7 +24,14 @@ class MainViewModel: ObservableObject {
     }
 
     homeScreenIsReady = true
-  }  
+  }
+
+  func getCurrentUserInfo() {
+    api.getCurrentUserInfo(with: authKey!.accessToken) { userInfo in
+      self.currentUserProfileInfo = userInfo
+    }
+  }
+
 }
 
 enum Page {

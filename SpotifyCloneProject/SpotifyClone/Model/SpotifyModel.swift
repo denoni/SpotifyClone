@@ -9,6 +9,13 @@ import Foundation
 
 struct SpotifyModel {
 
+  struct CurrentUserProfileInfo {
+    let displayName: String
+    let followers: Int
+    let imageURL: String
+    let id: String
+  }
+
   enum MediaTypes {
     case track
     case album

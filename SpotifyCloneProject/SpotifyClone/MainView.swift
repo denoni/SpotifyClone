@@ -45,6 +45,7 @@ struct MainView: View {
         }
         BottomBar(mainVM: mainVM, showMediaPlayer: mainVM.showBottomMediaPlayer)
       }
+      .onAppear { mainVM.getCurrentUserInfo() }
       .onChange(of: mainVM.currentPage, perform: { _ in
         homeVM.goToNoneSubpage()
         searchVM.goToNoneSubpage()
