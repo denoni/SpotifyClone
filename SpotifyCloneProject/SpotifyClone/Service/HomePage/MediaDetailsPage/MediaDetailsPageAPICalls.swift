@@ -18,6 +18,7 @@ class MediaDetailsPageAPICalls: ObservableObject {
   var playlistAPI = APIFetchingPlaylists()
   var episodeAPI =  APIFetchingEpisodes()
   var basicInfoAPI = APIFetchingBasicInfo()
+  var userInfoAPI = APIFetchingUserInfo()
   
 
   // MARK: - Artist Screen
@@ -100,6 +101,15 @@ class MediaDetailsPageAPICalls: ObservableObject {
                  completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
     basicInfoAPI.getArtists(with: accessToken, artistIDs: artistIDs, completionHandler: completionHandler)
   }
+
+  // MARK: - User Info
+
+  func checksIfUserFollowsTrack(with accessToken: String,
+                              trackID: String,
+                              completionHandler: @escaping (Bool) -> Void) {
+    userInfoAPI.checksIfUserFollowsTrack(with: accessToken, trackID: trackID, completionHandler: completionHandler)
+  }
+
 
 }
 

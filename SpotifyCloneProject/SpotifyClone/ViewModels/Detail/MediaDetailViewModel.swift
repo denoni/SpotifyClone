@@ -22,7 +22,8 @@ class MediaDetailViewModel: ObservableObject {
   @Published var numberOfLoadedItemsInSection = [Section:Int]()
   @Published var accessToken: String?
 
-  var detailScreenOrigin: DetailScreenOrigin? = nil
+  var detailScreenOrigin: DetailScreenOrigin?
+  @Published var userFollowsCurrentMainItem: Bool?
 
   enum DetailScreenOrigin {
     case home(homeVM: HomeViewModel)
@@ -198,6 +199,16 @@ class MediaDetailViewModel: ObservableObject {
 
   }
 
+
+  struct UserInfoAPICalls {
+    static func checksIfUserFollowsTrack(mediaVM: MediaDetailViewModel, trackID: String) {
+      mediaVM.api.checksIfUserFollowsTrack(with: mediaVM.accessToken!, trackID: trackID) { response in
+        mediaVM.userFollowsCurrentMainItem = response
+      }
+    }
+  }
+
+
   // Gets the artist basic info(followers, popularity, profile image -> we're mainly interested in the image)
   func getArtistBasicInfo(mediaVM: MediaDetailViewModel) {
     var artistIDs = [String]()
@@ -263,6 +274,8 @@ class MediaDetailViewModel: ObservableObject {
 
   func clean() {
     mainItem = nil
+    userFollowsCurrentMainItem = nil
+    detailScreenOrigin = nil
 
     for section in ArtistSections.allCases {
       isLoading[.artist(section)] = true

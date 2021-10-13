@@ -25,10 +25,18 @@ struct TrackInfoSection: View {
         }
         .padding(.trailing, Constants.paddingStandard)
         Spacer()
-        Image(isLiked ? "heart-filled" : "heart-stroked")
-          .resizeToFit()
-          .padding(3)
-          .frame(height: 30)
+        Group {
+          if mediaDetailVM.userFollowsCurrentMainItem == nil {
+            ProgressView()
+              .withSpotifyStyle(useDiscreetColors: true)
+              .scaleEffect(0.6)
+          } else {
+            Image(mediaDetailVM.userFollowsCurrentMainItem! ? "heart-filled" : "heart-stroked")
+              .resizeToFit()
+              .padding(3)
+          }
+        }
+        .frame(width: 30, height: 30)
       }.frame(
         maxWidth: .infinity,
         alignment: .topLeading
