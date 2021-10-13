@@ -379,6 +379,8 @@
 				C081873126EF728100AB19E9 /* APIAuthentication.swift */,
 				C08D2DB92710C4B0003EB95C /* SearchPage */,
 				C09CF2122702499800EB9DA3 /* HomePage */,
+				C0827209270645A10086E34F /* MediaDetailsPage */,
+				C095529B2704BA7F000499B3 /* APICalls */,
 				C097734F27177A3300F319D1 /* MainViewModelAPICalls.swift */,
 			);
 			path = Service;
@@ -648,27 +650,25 @@
 			path = SearchPage;
 			sourceTree = "<group>";
 		};
-		C095529B2704BA7F000499B3 /* HomeAPICalls */ = {
+		C095529B2704BA7F000499B3 /* APICalls */ = {
 			isa = PBXGroup;
 			children = (
-				C083314D2716838C00B6923F /* APIFetchingBasicInfo.swift */,
 				C09552952704B3B3000499B3 /* APIFetchingPlaylists.swift */,
 				C09552992704B9AA000499B3 /* APIFetchingArtists.swift */,
 				C09552972704B7E8000499B3 /* APIFetchingAlbums.swift */,
 				C09CF213270249F200EB9DA3 /* APIFetchingTracks.swift */,
 				C09552932704B16C000499B3 /* APIFetchingShows.swift */,
 				C08724DA2709374D00E2DDB0 /* APIFetchingEpisodes.swift */,
+				C083314D2716838C00B6923F /* APIFetchingBasicInfo.swift */,
 				C097734B271763B000F319D1 /* APIFetchingUserInfo.swift */,
 			);
-			path = HomeAPICalls;
+			path = APICalls;
 			sourceTree = "<group>";
 		};
 		C09CF2122702499800EB9DA3 /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
 				C084267D26F10BBD000ACAEE /* HomePageAPICalls.swift */,
-				C0827209270645A10086E34F /* MediaDetailsPage */,
-				C095529B2704BA7F000499B3 /* HomeAPICalls */,
 			);
 			path = HomePage;
 			sourceTree = "<group>";
