@@ -10,11 +10,9 @@ import SwiftUI
 struct AlbumDetailScreen: View {
   var mediaDetailVM: MediaDetailViewModel
   @State var scrollViewPosition = CGFloat.zero
-  var detailScreenOrigin: MediaDetailViewModel.DetailScreenOrigin
 
   init(detailScreenOrigin: MediaDetailViewModel.DetailScreenOrigin, mediaDetailVM: MediaDetailViewModel) {
     self.mediaDetailVM = mediaDetailVM
-    self.detailScreenOrigin = detailScreenOrigin
     self.mediaDetailVM.detailScreenOrigin = detailScreenOrigin
   }
 
@@ -32,7 +30,7 @@ struct AlbumDetailScreen: View {
         }
         TopBarWithTitle(scrollViewPosition: $scrollViewPosition,
                         title: mediaDetailVM.mainItem!.title,
-                        backButtonShouldReturnTo: detailScreenOrigin)
+                        backButtonShouldReturnTo: mediaDetailVM.detailScreenOrigin!)
 
       }.ignoresSafeArea()
     }
@@ -66,23 +64,25 @@ struct AlbumDetailContent: View {
       .padding(.top, topSafeAreaSize)
 
       MediaTitle(mediaTitle: details.name, lineLimit: 2)
-      AlbumAuthor(authors: mediaDetailVM.mainItem!.author!)
-
-      HStack {
-        VStack(alignment: .leading) {
-          AlbumInfo(releaseDate: details.releaseDate)
-          LikeAndThreeDotsIcons()
-        }
-        BigPlayButton()
-      }.frame(height: 65)
 
       if Utility.didEverySectionLoaded(in: .albumDetail, mediaDetailVM: mediaDetailVM) {
+        AlbumAuthor()
+
+        HStack {
+          VStack(alignment: .leading) {
+            AlbumInfo(releaseDate: details.releaseDate)
+            LikeAndThreeDotsIcons()
+          }
+          BigPlayButton()
+        }.frame(height: 65)
+
         TracksVerticalScrollView(tracksOrigin: .album(.tracksFromAlbum))
       } else {
         HStack {
           ProgressView()
             .withSpotifyStyle(useDiscreetColors: true)
             .onAppear {
+              mediaDetailVM.getArtistBasicInfo(mediaVM: mediaDetailVM)
               MediaDetailViewModel.AlbumAPICalls.getTracksFromAlbum(mediaVM: mediaDetailVM, loadMoreEnabled: true)
             }
         }.frame(maxWidth: .infinity, alignment: .center)

@@ -61,6 +61,13 @@ class MediaDetailViewModel: ObservableObject {
       numberOfLoadedItemsInSection[.shows(section)] = 0
     }
 
+    // Artist Basic Info
+    for section in ArtistBasicInfo.allCases {
+      isLoading[.artistBasicInfo(section)] = true
+      mediaCollection[.artistBasicInfo(section)] = []
+      numberOfLoadedItemsInSection[.artistBasicInfo(section)] = 0
+    }
+
   }
 
   enum Section: Hashable {
@@ -68,6 +75,7 @@ class MediaDetailViewModel: ObservableObject {
     case playlist(_ playlistSection: PlaylistSections)
     case album(_ albumSection: AlbumSections)
     case shows(_ showSection: ShowsSections)
+    case artistBasicInfo(_ basicSection: ArtistBasicInfo)
   }
 
   enum ArtistSections: CaseIterable {
@@ -86,6 +94,10 @@ class MediaDetailViewModel: ObservableObject {
 
   enum ShowsSections: CaseIterable {
     case episodesFromShow
+  }
+
+  enum ArtistBasicInfo: CaseIterable {
+    case artistBasicInfo
   }
 
   func getArtistScreenData() {
@@ -186,6 +198,19 @@ class MediaDetailViewModel: ObservableObject {
 
   }
 
+  // Gets the artist basic info(followers, popularity, profile image -> we're mainly interested in the image)
+  func getArtistBasicInfo(mediaVM: MediaDetailViewModel) {
+    var artistIDs = [String]()
+    for index in mediaVM.mainItem!.author!.indices {
+      artistIDs.append(mediaVM.mainItem!.author![index].id)
+    }
+    
+    mediaVM.api.basicInfoAPI.getArtists(with: mediaVM.accessToken!, artistIDs: artistIDs) { artists in
+      mediaVM.trimAndCommunicateResult(medias: artists, section: .artistBasicInfo(.artistBasicInfo))
+    }
+  }
+
+
 
 
   // MARK: - API Auxiliary Functions
@@ -263,6 +288,10 @@ class MediaDetailViewModel: ObservableObject {
 
   func setVeryFirstImageInfoBasedOn(_ firstImageURL: String) {
     imageColorModel = RemoteImageModel(urlString: firstImageURL)
+  }
+
+  func returnBasicArtistsInfo() -> [SpotifyModel.MediaItem] {
+    return mediaCollection[.artistBasicInfo(.artistBasicInfo)]!
   }
 
   private func getNonDuplicateItems(for medias: [SpotifyModel.MediaItem],

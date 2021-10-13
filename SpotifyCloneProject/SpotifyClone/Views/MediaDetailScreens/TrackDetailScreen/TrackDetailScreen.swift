@@ -10,11 +10,9 @@ import SwiftUI
 struct TrackDetailScreen: View {
   var mediaDetailVM: MediaDetailViewModel
   @EnvironmentObject var homeVM: HomeViewModel
-  var detailScreenOrigin: MediaDetailViewModel.DetailScreenOrigin
 
   init(detailScreenOrigin: MediaDetailViewModel.DetailScreenOrigin, mediaDetailVM: MediaDetailViewModel) {
     self.mediaDetailVM = mediaDetailVM
-    self.detailScreenOrigin = detailScreenOrigin
     self.mediaDetailVM.detailScreenOrigin = detailScreenOrigin
   }
 
@@ -29,12 +27,17 @@ struct TrackDetailScreen: View {
       .ignoresSafeArea()
       .onAppear {
         // When TrackDetailScreen opens up, hide the bottomMediaPlayer
-        switch detailScreenOrigin {
+        switch mediaDetailVM.detailScreenOrigin {
         case .home(let homeVM):
           homeVM.mainVM.showBottomMediaPlayer = false
         case .search(let searchVM):
           searchVM.mainVM.showBottomMediaPlayer = false
+        default:
+          fatalError("Missing detail screen origin.")
         }
+
+        // Gets the artist basic info(we're mainly interested in the imageURL of the artist's profile)
+        mediaDetailVM.getArtistBasicInfo(mediaVM: mediaDetailVM)
       }
     }
   }

@@ -13,4 +13,17 @@ import Foundation
 
 struct ArtistResponse: Decodable {
   var items: [Artist]
+
+  private enum CodingKeys: String, CodingKey { case items, artists }
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    if let artists = try? container.decode([Artist].self, forKey: .artists) {
+      self.items = artists
+    } else if let items = try? container.decode([Artist].self, forKey: .items) {
+      self.items = items
+    } else {
+      throw DecodingError.dataCorruptedError(forKey: .artists, in: container, debugDescription: "Unsupported JSON structure")
+    }
+  }
 }
