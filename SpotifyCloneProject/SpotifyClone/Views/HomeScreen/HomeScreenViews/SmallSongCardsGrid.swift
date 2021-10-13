@@ -30,26 +30,32 @@ struct SmallSongCardsGrid: View {
     VStack(spacing: Constants.spacingSmall) {
       ForEach(numberOfItems) { pairIndex in
         if medias.count >= 2 {
-          SmallSongCardPair(imagesURL: [medias[pairIndex * 2].imageURL,
-                                        medias[pairIndex * 2 + 1].imageURL],
-                            titles: [medias[pairIndex * 2].title,
-                                     medias[pairIndex * 2 + 1].title])
+          SmallSongCardPair(mediaPair: [ medias[pairIndex * 2],
+                                     medias[pairIndex * 2 + 1] ])
         }
       }
     }
   }
 
   struct SmallSongCardPair: View {
-    var imagesURL: [String]
-    var titles: [String]
+    @EnvironmentObject var homeVM: HomeViewModel
+    @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
+    var mediaPair: [SpotifyModel.MediaItem]
 
     var body: some View {
-      if imagesURL.count == 2 && titles.count == 2 {
+      if mediaPair.count == 2 {
         HStack(spacing: Constants.spacingSmall) {
-          SmallSongCard(imageURL: imagesURL[0],
-                        title: titles[0])
-          SmallSongCard(imageURL: imagesURL[1],
-                        title: titles[1])
+          SmallSongCard(imageURL: mediaPair[0].imageURL,
+                        title: mediaPair[0].title)
+            .onTapGesture {
+              homeVM.changeSubpageTo(.trackDetail, mediaDetailVM: mediaDetailVM, withData: mediaPair[0])
+            }
+
+          SmallSongCard(imageURL: mediaPair[1].imageURL,
+                        title: mediaPair[1].title)
+            .onTapGesture {
+              homeVM.changeSubpageTo(.trackDetail, mediaDetailVM: mediaDetailVM, withData: mediaPair[1])
+            }
         }
       }
     }
