@@ -84,6 +84,6 @@ struct AuthorNames: View {
     default:
       fatalError("Missing detail screen origin.")
     }
-  } 
+  }
 
 }

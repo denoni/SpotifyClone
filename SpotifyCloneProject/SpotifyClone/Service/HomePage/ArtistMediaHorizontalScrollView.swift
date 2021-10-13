@@ -18,8 +18,10 @@ struct ArtistMediaHorizontalScrollView: View {
         .spotifyTitle()
         .lineLimit(1)
         .padding(.trailing, Constants.paddingLarge)
+        .padding(.leading, Constants.paddingStandard)
       ScrollView(.horizontal, showsIndicators: false) {
         LazyHStack(alignment: .top, spacing: Constants.spacingLarge) {
+//          Spacer(minLength: Constants.paddingStandard)
           ForEach(medias) { media in
             SmallSongItem(imageURL: media.imageURL,
                           title: media.title)
@@ -39,7 +41,7 @@ struct ArtistMediaHorizontalScrollView: View {
             .buttonStyle(PlainButtonStyle())
           }
         }
-        .padding(.trailing, Constants.paddingStandard)
+        .padding(.horizontal, Constants.paddingStandard)
       }
     }
     .frame(height: 250)

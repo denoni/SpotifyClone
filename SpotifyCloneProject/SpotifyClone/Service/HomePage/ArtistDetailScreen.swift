@@ -98,16 +98,17 @@ struct ArtistDetailContent: View {
               .padding(.trailing, Constants.paddingLarge)
             ArtistAlbums(medias: mediaDetailVM.mediaCollection[.artist(.albumsFromArtist)]!)
           }
-          
-          // TODO: Load the correct data
+
           ArtistMediaHorizontalScrollView(medias: mediaDetailVM.mediaCollection[.artist(.playlistsFromArtist)]!,
                                           sectionTitle: "Featuring \(mediaDetailVM.mainItem!.title)")
-            .padding(.trailing, -Constants.paddingStandard)
+            .padding(.horizontal, -Constants.paddingStandard)
         }
       } else {
         ProgressView()
           .withSpotifyStyle(useDiscreetColors: true)
           .onAppear {
+            // 
+            mediaDetailVM.isLoading[.artistBasicInfo(.artistBasicInfo)] = false
             mediaDetailVM.getArtistScreenData()
           }
         Spacer()
