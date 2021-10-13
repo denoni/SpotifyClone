@@ -46,8 +46,8 @@ struct MainView: View {
         BottomBar(mainVM: mainVM, showMediaPlayer: mainVM.showBottomMediaPlayer)
       }
       .onChange(of: mainVM.currentPage, perform: { _ in
-        homeVM.currentSubPage = .none
-        searchVM.currentSubPage = .none
+        homeVM.goToNoneSubpage()
+        searchVM.goToNoneSubpage()
         mediaDetailVM.clean()
       })
       .navigationBarTitle("")
