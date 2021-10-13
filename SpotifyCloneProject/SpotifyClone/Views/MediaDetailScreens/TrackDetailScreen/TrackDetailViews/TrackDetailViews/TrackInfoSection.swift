@@ -21,19 +21,18 @@ struct TrackInfoSection: View {
         VStack(alignment: .leading,
                spacing: 0) {
           MediaTitle(mediaTitle: songName, useSmallerFont: isSmallDisplay)
-            .padding(.trailing, Constants.paddingStandard)
-
           AuthorNames(authors: authors, useSmallerFont: isSmallDisplay, isExplicit: isExplicit)
         }
-
+        .padding(.trailing, Constants.paddingStandard)
+        Spacer()
+        Image(isLiked ? "heart-filled" : "heart-stroked")
+          .resizeToFit()
+          .padding(3)
+          .frame(height: 30)
       }.frame(
         maxWidth: .infinity,
         alignment: .topLeading
       )
-      Image(isLiked ? "heart-filled" : "heart-stroked")
-        .resizeToFit()
-        .padding(3)
-        .frame(height: 30)
     }
   }
 }
@@ -67,7 +66,6 @@ struct AuthorNames: View {
       }
     }
     .opacity(Constants.opacityStandard)
-    .padding(.trailing, Constants.paddingStandard)
     .redacted(reason: isLoadingArtistBasicInfo ? .placeholder : [])
   }
 
