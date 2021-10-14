@@ -24,6 +24,7 @@ class MediaDetailViewModel: ObservableObject {
 
   var detailScreenOrigin: DetailScreenOrigin?
   @Published var userFollowsCurrentMainItem: Bool?
+  @Published var errorOccurredWhileTryingToFollow: Bool?
 
   enum DetailScreenOrigin {
     case home(homeVM: HomeViewModel)
@@ -203,8 +204,18 @@ class MediaDetailViewModel: ObservableObject {
   struct UserInfoAPICalls {
     static func checksIfUserFollows(_ mediaType: APIFetchingUserInfo.ValidMediaType,
                                     mediaVM: MediaDetailViewModel) {
-      mediaVM.api.checksIfUserFollows(mediaType, with: mediaVM.accessToken!, trackID: mediaVM.mainItem!.id) { response in
+      mediaVM.api.checksIfUserFollows(mediaType, with: mediaVM.accessToken!, mediaID: mediaVM.mainItem!.id) { response in
         mediaVM.userFollowsCurrentMainItem = response
+      }
+    }
+
+    static func follow(_ mediaType: APIFetchingUserInfo.ValidMediaType,
+                       mediaVM: MediaDetailViewModel) {
+      mediaVM.api.follow(mediaType, with: mediaVM.accessToken!, mediaID: mediaVM.mainItem!.id) { errorOccurred in
+        mediaVM.errorOccurredWhileTryingToFollow = errorOccurred
+        if !errorOccurred {
+          mediaVM.userFollowsCurrentMainItem = true
+        }
       }
     }
   }

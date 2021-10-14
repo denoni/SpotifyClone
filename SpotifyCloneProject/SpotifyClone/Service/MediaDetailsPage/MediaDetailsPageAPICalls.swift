@@ -106,10 +106,17 @@ class MediaDetailsPageAPICalls: ObservableObject {
 
   func checksIfUserFollows(_ mediaType: APIFetchingUserInfo.ValidMediaType,
                           with accessToken: String,
-                          trackID: String,
+                          mediaID: String,
                           completionHandler: @escaping (Bool) -> Void) {
     userInfoAPI.checksIfUserFollows(mediaType, with: accessToken,
-                                    mediaID: trackID, completionHandler: completionHandler)
+                                    mediaID: mediaID, completionHandler: completionHandler)
+  }
+
+  func follow(_ mediaType: APIFetchingUserInfo.ValidMediaType,
+              with accessToken: String,
+              mediaID: String,
+              completionHandler: @escaping (Bool) -> Void) {
+    userInfoAPI.follow(.artist, with: accessToken, mediaID: mediaID, completionHandler: completionHandler)
   }
 
 

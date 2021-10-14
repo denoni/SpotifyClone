@@ -55,13 +55,10 @@ class APIFetchingUserInfo {
     var urlRequest = URLRequest(url: URL(string: baseUrl)!)
     urlRequest.httpMethod = "GET"
     urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-    urlRequest.cachePolicy = NSURLRequest.CachePolicy.returnCacheDataElseLoad
 
     AF.request(urlRequest)
       .validate()
       .responseJSON { json in
-
-        print(json.debugDescription)
 
         do {
           let decoder = JSONDecoder()
@@ -74,5 +71,45 @@ class APIFetchingUserInfo {
       }
   }
 
+
+  func follow(_ mediaType: ValidMediaType,
+              with accessToken: String,
+              mediaID: String,
+              completionHandler: @escaping (Bool) -> Void) {
+
+    var mediaTypeString = ""
+
+    switch mediaType {
+    case .artist:
+      mediaTypeString = "artist"
+    default:
+      fatalError("Type not implemented yet.")
+    }
+
+    var baseUrl = ""
+
+    if mediaTypeString == "artist" {
+      baseUrl = "https://api.spotify.com/v1/me/following?type=\(mediaTypeString)&ids=\(mediaID)"
+    }
+
+
+    var urlRequest = URLRequest(url: URL(string: baseUrl)!)
+    urlRequest.httpMethod = "PUT"
+    urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+
+    AF.request(urlRequest)
+      .validate()
+      .responseJSON { json in
+
+        if json.data != nil {
+          // if data is not nil an error occurred, so we returns true
+          completionHandler(true)
+        } else {
+          completionHandler(false)
+        }
+
+      }
+
+  }
 
 }
