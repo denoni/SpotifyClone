@@ -97,26 +97,27 @@ class MediaDetailsPageAPICalls: ObservableObject {
   // MARK: - Basic Info
 
   func getArtists(with accessToken: String,
-                 artistIDs: [String],
-                 completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
+                  artistIDs: [String],
+                  completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
     basicInfoAPI.getArtists(with: accessToken, artistIDs: artistIDs, completionHandler: completionHandler)
   }
 
   // MARK: - User Info
 
   func checksIfUserFollows(_ mediaType: APIFetchingUserInfo.ValidMediaType,
-                          with accessToken: String,
-                          mediaID: String,
-                          completionHandler: @escaping (Bool) -> Void) {
+                           with accessToken: String,
+                           mediaID: String,
+                           completionHandler: @escaping (Bool) -> Void) {
     userInfoAPI.checksIfUserFollows(mediaType, with: accessToken,
                                     mediaID: mediaID, completionHandler: completionHandler)
   }
 
-  func follow(_ mediaType: APIFetchingUserInfo.ValidMediaType,
-              with accessToken: String,
-              mediaID: String,
-              completionHandler: @escaping (Bool) -> Void) {
-    userInfoAPI.follow(mediaType, with: accessToken, mediaID: mediaID, completionHandler: completionHandler)
+  func changeFollowingState(to followingState: APIFetchingUserInfo.FollowingState,
+                            in mediaType: APIFetchingUserInfo.ValidMediaType,
+                            with accessToken: String,
+                            mediaID: String,
+                            completionHandler: @escaping (Bool) -> Void) {
+    userInfoAPI.changeFollowingState(to: followingState, in: mediaType, with: accessToken, mediaID: mediaID, completionHandler: completionHandler)
   }
 
 

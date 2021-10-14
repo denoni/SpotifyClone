@@ -12,6 +12,11 @@ struct TrackInfoSection: View {
   var isExplicit: Bool
   var isSmallDisplay: Bool = false
 
+  var isFollowing: Bool {
+    guard mediaDetailVM.userFollowsCurrentMainItem != nil else { return false }
+    return mediaDetailVM.userFollowsCurrentMainItem!
+  }
+
   var body: some View {
     Group {
       HStack {
@@ -22,7 +27,8 @@ struct TrackInfoSection: View {
         }
         .padding(.trailing, Constants.paddingStandard)
         Spacer()
-        Button(action: { MediaDetailViewModel.UserInfoAPICalls.follow(.track, mediaVM: mediaDetailVM) }) {
+        Button(action: { MediaDetailViewModel.UserInfoAPICalls.changeFollowingState(to: isFollowing ? .unfollow : .follow,
+                                                                                    in: .track, mediaVM: mediaDetailVM) }) {
           if mediaDetailVM.errorOccurredWhileTryingToFollow == true {
             Image(systemName: "xmark.octagon.fill")
               .resizable()
@@ -35,7 +41,7 @@ struct TrackInfoSection: View {
                   .withSpotifyStyle(useDiscreetColors: true)
                   .scaleEffect(0.6)
               } else {
-                Image(mediaDetailVM.userFollowsCurrentMainItem! ? "heart-filled" : "heart-stroked")
+                Image(isFollowing ? "heart-filled" : "heart-stroked")
                   .resizeToFit()
                   .padding(3)
               }
@@ -66,7 +72,7 @@ struct AuthorNames: View {
       ExplicitIcon(isExplicit: isExplicit)
         .padding(.trailing, isExplicit ? 5 : 0)
       ForEach(0 ..< authors.count) { index in
-                                          // checks if should put ", " or not(we don't put when the current item is the last one)
+        // checks if should put ", " or not(we don't put when the current item is the last one)
         Text("\(authors[index].name)" + "\(index == authors.count - 1 ? "" : ", ")")
           .font(.avenir(.medium, size: useSmallerFont ? Constants.fontSmall : Constants.fontMedium))
           .foregroundColor(.white)

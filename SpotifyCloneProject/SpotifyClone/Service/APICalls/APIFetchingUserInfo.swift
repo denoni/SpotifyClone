@@ -75,12 +75,18 @@ class APIFetchingUserInfo {
   }
 
 
-  func follow(_ mediaType: ValidMediaType,
-              with accessToken: String,
-              mediaID: String,
-              completionHandler: @escaping (Bool) -> Void) {
+  enum FollowingState {
+    case follow
+    case unfollow
+  }
 
-    var mediaTypeString = ""
+  func changeFollowingState(to followingState: FollowingState,
+                                    in mediaType: ValidMediaType,
+                                    with accessToken: String,
+                                    mediaID: String,
+                                    completionHandler: @escaping (Bool) -> Void) {
+
+    let mediaTypeString: String
 
     switch mediaType {
     case .artist:
@@ -93,9 +99,10 @@ class APIFetchingUserInfo {
       mediaTypeString = "episodes"
     case .track:
       mediaTypeString = "tracks"
-    default:
-      fatalError("Type not implemented yet.")
+    case .playlist:
+      mediaTypeString = "playlists"
     }
+
 
     var baseUrl = "https://api.spotify.com/v1/me/\(mediaTypeString)?ids=\(mediaID)"
 
@@ -103,10 +110,21 @@ class APIFetchingUserInfo {
       baseUrl = "https://api.spotify.com/v1/me/following?type=\(mediaTypeString)&ids=\(mediaID)"
     }
 
+    if mediaTypeString == "playlists" {
+      print()
+      baseUrl = "https://api.spotify.com/v1/playlists/\(mediaID)/followers"
+    }
+
 
     var urlRequest = URLRequest(url: URL(string: baseUrl)!)
-    urlRequest.httpMethod = "PUT"
     urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+
+    switch followingState {
+    case .follow:
+      urlRequest.httpMethod = "PUT"
+    case .unfollow:
+      urlRequest.httpMethod = "DELETE"
+    }
 
     AF.request(urlRequest)
       .validate()
@@ -118,7 +136,6 @@ class APIFetchingUserInfo {
         } else {
           completionHandler(false)
         }
-
       }
 
   }

@@ -21,6 +21,11 @@ struct LikeAndThreeDotsIcons: View {
     }
   }
 
+  var isFollowing: Bool {
+    guard mediaDetailVM.userFollowsCurrentMainItem != nil else { return false }
+    return mediaDetailVM.userFollowsCurrentMainItem!
+  }
+
   var body: some View {
     HStack(spacing: 30) {
       if mediaDetailVM.errorOccurredWhileTryingToFollow == true {
@@ -29,7 +34,8 @@ struct LikeAndThreeDotsIcons: View {
           .aspectRatio(1/1, contentMode: .fit)
           .frame(width: 25)
       } else {
-        Button(action: {  MediaDetailViewModel.UserInfoAPICalls.follow(mediaTypeThatIsUsingThisView, mediaVM: mediaDetailVM) }) {
+        Button(action: {  MediaDetailViewModel.UserInfoAPICalls.changeFollowingState(to: isFollowing ? .unfollow : .follow,
+                                                                                     in: mediaTypeThatIsUsingThisView, mediaVM: mediaDetailVM) }) {
           Rectangle()
             .fill(Color.clear)
             .frame(width: 25)
@@ -39,7 +45,7 @@ struct LikeAndThreeDotsIcons: View {
                   .withSpotifyStyle(useDiscreetColors: true)
                   .scaleEffect(0.6)
               } else {
-                Image(mediaDetailVM.userFollowsCurrentMainItem! ?  "heart-filled" : "heart-stroked")
+                Image(isFollowing ?  "heart-filled" : "heart-stroked")
                   .resizable()
               }
             }.scaledToFit())

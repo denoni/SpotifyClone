@@ -191,8 +191,8 @@ class MediaDetailViewModel: ObservableObject {
       mediaVM.increaseNumberOfLoadedItems(for: .shows(.episodesFromShow), by: 10)
 
       mediaVM.api.getEpisodesFromShow(with: mediaVM.accessToken!,
-                                     showID: SpotifyModel.getShowDetails(for: mediaVM.mainItem!).id,
-                                     offset: offset) { episodes in
+                                      showID: SpotifyModel.getShowDetails(for: mediaVM.mainItem!).id,
+                                      offset: offset) { episodes in
         mediaVM.trimAndCommunicateResult(medias: episodes, section: .shows(.episodesFromShow),
                                          loadMoreEnabled: loadMoreEnabled)
       }
@@ -209,16 +209,22 @@ class MediaDetailViewModel: ObservableObject {
       }
     }
 
-    static func follow(_ mediaType: APIFetchingUserInfo.ValidMediaType,
-                       mediaVM: MediaDetailViewModel) {
+    static func changeFollowingState(to followingState: APIFetchingUserInfo.FollowingState,
+                                     in mediaType: APIFetchingUserInfo.ValidMediaType,
+                                     mediaVM: MediaDetailViewModel) {
       mediaVM.errorOccurredWhileTryingToFollow = nil
-      mediaVM.api.follow(mediaType, with: mediaVM.accessToken!, mediaID: mediaVM.mainItem!.id) { errorOccurred in
+      mediaVM.api.changeFollowingState(to: followingState, in: mediaType, with: mediaVM.accessToken!, mediaID: mediaVM.mainItem!.id) { errorOccurred in
         mediaVM.errorOccurredWhileTryingToFollow = errorOccurred
         if !errorOccurred {
-          mediaVM.userFollowsCurrentMainItem = true
+          if followingState == .follow {
+            mediaVM.userFollowsCurrentMainItem = true
+          } else {
+            mediaVM.userFollowsCurrentMainItem = false
+          }
         }
       }
     }
+    
   }
 
 
@@ -271,7 +277,7 @@ class MediaDetailViewModel: ObservableObject {
 
   // If we are reaching the end of the scroll, fetch more data
   func shouldFetchMoreData(basedOn media: SpotifyModel.MediaItem,
-                                 inRelationTo medias: [SpotifyModel.MediaItem]) -> Bool {
+                           inRelationTo medias: [SpotifyModel.MediaItem]) -> Bool {
     if medias.count > 5 {
       if media.id == medias[medias.count - 4].id {
         return true

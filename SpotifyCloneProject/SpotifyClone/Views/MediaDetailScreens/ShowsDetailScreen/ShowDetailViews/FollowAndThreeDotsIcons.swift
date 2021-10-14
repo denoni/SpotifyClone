@@ -22,9 +22,15 @@ struct FollowAndThreeDotsIcons: View {
     }
   }
 
+  var isFollowing: Bool {
+    guard mediaDetailVM.userFollowsCurrentMainItem != nil else { return false }
+    return mediaDetailVM.userFollowsCurrentMainItem!
+  }
+
   var body: some View {
     HStack(spacing: 30) {
-      Button(action: { MediaDetailViewModel.UserInfoAPICalls.follow(mediaTypeThatIsUsingThisView, mediaVM: mediaDetailVM) }) {
+      Button(action: { MediaDetailViewModel.UserInfoAPICalls.changeFollowingState(to: isFollowing ? .unfollow : .follow,
+                                                                                  in: mediaTypeThatIsUsingThisView, mediaVM: mediaDetailVM) }) {
         RoundedRectangle(cornerRadius: Constants.radiusSmall)
           .strokeBorder(Color.white.opacity(Constants.opacityStandard), lineWidth: 1)
           .foregroundColor(.clear)
@@ -35,14 +41,14 @@ struct FollowAndThreeDotsIcons: View {
                   .font(.avenir(.medium, size: Constants.fontXSmall))
                   .padding(5)
               } else {
-                Text(mediaDetailVM.userFollowsCurrentMainItem ?? false ? "FOLLOWING" : "FOLLOW")
+                Text(isFollowing ? "FOLLOWING" : "FOLLOW")
                   .font(.avenir(.medium, size: Constants.fontXSmall))
                   .padding(5)
               }
             }
           )
           .frame(height: 35)
-          .aspectRatio(mediaDetailVM.userFollowsCurrentMainItem ?? false ? 4.5 : 3.5 / 1, contentMode: .fit)
+          .aspectRatio(isFollowing ? 4.5 : 3.5 / 1, contentMode: .fit)
           .redacted(reason: mediaDetailVM.userFollowsCurrentMainItem == nil ? .placeholder : [])
       }
       .buttonStyle(PlainButtonStyle())
