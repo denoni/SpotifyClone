@@ -13,6 +13,7 @@ class APIFetchingUserInfo {
   enum ValidMediaType {
     case track
     case album
+    case show
     case episode
     case playlist(userID: String)
     case artist
@@ -31,6 +32,8 @@ class APIFetchingUserInfo {
       mediaTypeString = "tracks"
     case .album:
       mediaTypeString = "albums"
+    case .show:
+      mediaTypeString = "shows"
     case .episode:
       mediaTypeString = "episodes"
     case .playlist(let userID):
@@ -82,11 +85,19 @@ class APIFetchingUserInfo {
     switch mediaType {
     case .artist:
       mediaTypeString = "artist"
+    case .album:
+      mediaTypeString = "albums"
+    case .show:
+      mediaTypeString = "shows"
+    case .episode:
+      mediaTypeString = "episodes"
+    case .track:
+      mediaTypeString = "tracks"
     default:
       fatalError("Type not implemented yet.")
     }
 
-    var baseUrl = ""
+    var baseUrl = "https://api.spotify.com/v1/me/\(mediaTypeString)?ids=\(mediaID)"
 
     if mediaTypeString == "artist" {
       baseUrl = "https://api.spotify.com/v1/me/following?type=\(mediaTypeString)&ids=\(mediaID)"
@@ -100,9 +111,9 @@ class APIFetchingUserInfo {
     AF.request(urlRequest)
       .validate()
       .responseJSON { json in
-
         if json.data != nil {
-          // if data is not nil an error occurred, so we returns true
+          // if data is not nil an error occurred, so we return true
+          print(json.error.debugDescription)
           completionHandler(true)
         } else {
           completionHandler(false)

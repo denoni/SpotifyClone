@@ -9,9 +9,6 @@ import SwiftUI
 
 struct TrackInfoSection: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
-  var songName: String
-  var authors: [Artist]
-  var isLiked: Bool
   var isExplicit: Bool
   var isSmallDisplay: Bool = false
 
@@ -20,23 +17,32 @@ struct TrackInfoSection: View {
       HStack {
         VStack(alignment: .leading,
                spacing: 0) {
-          MediaTitle(mediaTitle: songName, useSmallerFont: isSmallDisplay)
-          AuthorNames(authors: authors, useSmallerFont: isSmallDisplay, isExplicit: isExplicit)
+          MediaTitle(mediaTitle: mediaDetailVM.mainItem!.title, useSmallerFont: isSmallDisplay)
+          AuthorNames(authors: mediaDetailVM.mainItem!.author!, useSmallerFont: isSmallDisplay, isExplicit: isExplicit)
         }
         .padding(.trailing, Constants.paddingStandard)
         Spacer()
-        Group {
-          if mediaDetailVM.userFollowsCurrentMainItem == nil {
-            ProgressView()
-              .withSpotifyStyle(useDiscreetColors: true)
-              .scaleEffect(0.6)
+        Button(action: { MediaDetailViewModel.UserInfoAPICalls.follow(.track, mediaVM: mediaDetailVM) }) {
+          if mediaDetailVM.errorOccurredWhileTryingToFollow == true {
+            Image(systemName: "xmark.octagon.fill")
+              .resizable()
+              .aspectRatio(1/1, contentMode: .fit)
+              .frame(width: 30)
           } else {
-            Image(mediaDetailVM.userFollowsCurrentMainItem! ? "heart-filled" : "heart-stroked")
-              .resizeToFit()
-              .padding(3)
+            Group {
+              if mediaDetailVM.userFollowsCurrentMainItem == nil {
+                ProgressView()
+                  .withSpotifyStyle(useDiscreetColors: true)
+                  .scaleEffect(0.6)
+              } else {
+                Image(mediaDetailVM.userFollowsCurrentMainItem! ? "heart-filled" : "heart-stroked")
+                  .resizeToFit()
+                  .padding(3)
+              }
+            }
+            .frame(width: 30, height: 30)
           }
         }
-        .frame(width: 30, height: 30)
       }.frame(
         maxWidth: .infinity,
         alignment: .topLeading

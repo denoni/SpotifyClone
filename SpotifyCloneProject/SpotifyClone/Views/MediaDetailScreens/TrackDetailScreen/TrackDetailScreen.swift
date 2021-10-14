@@ -68,10 +68,7 @@ struct TrackDetailContent: View {
         Spacer()
         BigTrackImage(imageURL: mediaDetailVM.mainItem!.imageURL, isSmallDisplay: isSmallDisplay)
           .padding(.bottom, isSmallDisplay ? 0 : Constants.paddingSmall)
-        TrackInfoSection(songName: mediaDetailVM.mainItem!.title,
-                         authors: mediaDetailVM.mainItem!.author!,
-                         isLiked: true, // TODO: Use real data
-                         isExplicit: details.explicit,
+        TrackInfoSection(isExplicit: details.explicit,
                          isSmallDisplay: isSmallDisplay)
         PlayerControllerSection(isSmallDisplay: isSmallDisplay)
         Spacer()

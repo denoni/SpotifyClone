@@ -211,6 +211,7 @@ class MediaDetailViewModel: ObservableObject {
 
     static func follow(_ mediaType: APIFetchingUserInfo.ValidMediaType,
                        mediaVM: MediaDetailViewModel) {
+      mediaVM.errorOccurredWhileTryingToFollow = nil
       mediaVM.api.follow(mediaType, with: mediaVM.accessToken!, mediaID: mediaVM.mainItem!.id) { errorOccurred in
         mediaVM.errorOccurredWhileTryingToFollow = errorOccurred
         if !errorOccurred {
@@ -287,7 +288,9 @@ class MediaDetailViewModel: ObservableObject {
   func clean() {
     mainItem = nil
     userFollowsCurrentMainItem = nil
+    errorOccurredWhileTryingToFollow = nil
     detailScreenOrigin = nil
+
 
     for section in ArtistSections.allCases {
       isLoading[.artist(section)] = true

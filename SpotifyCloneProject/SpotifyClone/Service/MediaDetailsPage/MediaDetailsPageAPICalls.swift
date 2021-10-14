@@ -116,7 +116,7 @@ class MediaDetailsPageAPICalls: ObservableObject {
               with accessToken: String,
               mediaID: String,
               completionHandler: @escaping (Bool) -> Void) {
-    userInfoAPI.follow(.artist, with: accessToken, mediaID: mediaID, completionHandler: completionHandler)
+    userInfoAPI.follow(mediaType, with: accessToken, mediaID: mediaID, completionHandler: completionHandler)
   }
 
 

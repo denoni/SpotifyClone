@@ -11,11 +11,6 @@ struct FollowAndThreeDotsIcons: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   var threeDotsPlacedVertically = false
 
-  var isUserFollowing: Bool {
-    guard mediaDetailVM.userFollowsCurrentMainItem != nil else { return false }
-    return mediaDetailVM.userFollowsCurrentMainItem!
-  }
-
   var body: some View {
     HStack(spacing: 30) {
       Button(action: { MediaDetailViewModel.UserInfoAPICalls.follow(.artist, mediaVM: mediaDetailVM) }) {
