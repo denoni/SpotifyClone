@@ -39,7 +39,8 @@ struct SearchScreen: View {
       PlaylistDetailScreen(detailScreenOrigin: .search(searchVM: searchVM),
                            mediaDetailVM: mediaDetailVM)
     case .episodeDetail:
-      fatalError("DIDN'T IMPLEMENT TYPE(episodeDetail) YET")
+      EpisodeDetailScreen(detailScreenOrigin: .search(searchVM: searchVM),
+                          mediaDetailVM: mediaDetailVM)
     }
   }
 

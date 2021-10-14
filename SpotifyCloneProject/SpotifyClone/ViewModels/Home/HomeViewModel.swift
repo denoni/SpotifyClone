@@ -39,6 +39,7 @@ class HomeViewModel: ObservableObject {
     case albumDetail
     case showDetail
     case artistDetail
+    case episodeDetail
   }
   
   init(mainViewModel: MainViewModel) {

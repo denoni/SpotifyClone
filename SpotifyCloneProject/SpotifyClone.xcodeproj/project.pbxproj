@@ -94,6 +94,8 @@
 		C08D2DB627108B4A003EB95C /* TopSearchSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08D2DB527108B4A003EB95C /* TopSearchSection.swift */; };
 		C08D2DB827108E1A003EB95C /* SearchResponsesScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08D2DB727108E1A003EB95C /* SearchResponsesScrollView.swift */; };
 		C08D2DBB2710C6EC003EB95C /* SearchEndpointResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08D2DBA2710C6EB003EB95C /* SearchEndpointResponseType.swift */; };
+		C094167D2718A05F00C658B3 /* EpisodeDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C094167C2718A05F00C658B3 /* EpisodeDetailScreen.swift */; };
+		C094167F2718B06100C658B3 /* AuthorItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C094167E2718B06100C658B3 /* AuthorItem.swift */; };
 		C09552942704B16C000499B3 /* APIFetchingShows.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09552932704B16C000499B3 /* APIFetchingShows.swift */; };
 		C09552962704B3B3000499B3 /* APIFetchingPlaylists.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09552952704B3B3000499B3 /* APIFetchingPlaylists.swift */; };
 		C09552982704B7E8000499B3 /* APIFetchingAlbums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09552972704B7E8000499B3 /* APIFetchingAlbums.swift */; };
@@ -242,6 +244,8 @@
 		C08D2DB527108B4A003EB95C /* TopSearchSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSearchSection.swift; sourceTree = "<group>"; };
 		C08D2DB727108E1A003EB95C /* SearchResponsesScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponsesScrollView.swift; sourceTree = "<group>"; };
 		C08D2DBA2710C6EB003EB95C /* SearchEndpointResponseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEndpointResponseType.swift; sourceTree = "<group>"; };
+		C094167C2718A05F00C658B3 /* EpisodeDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailScreen.swift; sourceTree = "<group>"; };
+		C094167E2718B06100C658B3 /* AuthorItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorItem.swift; sourceTree = "<group>"; };
 		C09552932704B16C000499B3 /* APIFetchingShows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFetchingShows.swift; sourceTree = "<group>"; };
 		C09552952704B3B3000499B3 /* APIFetchingPlaylists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFetchingPlaylists.swift; sourceTree = "<group>"; };
 		C09552972704B7E8000499B3 /* APIFetchingAlbums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFetchingAlbums.swift; sourceTree = "<group>"; };
@@ -450,6 +454,7 @@
 				C089874C27000C1900F9BF70 /* BigMediaCover.swift */,
 				C084E04427033FAF00C6AAAE /* BigPlayButton.swift */,
 				C089874A27000BFC00F9BF70 /* TopGradient.swift */,
+				C094167E2718B06100C658B3 /* AuthorItem.swift */,
 			);
 			path = GeneralSubviews;
 			sourceTree = "<group>";
@@ -462,6 +467,7 @@
 				C084E04027033FAC00C6AAAE /* AlbumDetailScreen */,
 				C089874627000B6700F9BF70 /* PlaylistDetailScreen */,
 				C0C5F9692704DE800099EEB5 /* ArtistDetailScreen */,
+				C094167B2718A03700C658B3 /* EpisodeDetailScreen */,
 				C089874727000B7100F9BF70 /* TrackDetailScreen */,
 			);
 			path = MediaDetailScreens;
@@ -648,6 +654,14 @@
 				C089135E26F9816F00CA1A69 /* SearchPageAPICalls.swift */,
 			);
 			path = SearchPage;
+			sourceTree = "<group>";
+		};
+		C094167B2718A03700C658B3 /* EpisodeDetailScreen */ = {
+			isa = PBXGroup;
+			children = (
+				C094167C2718A05F00C658B3 /* EpisodeDetailScreen.swift */,
+			);
+			path = EpisodeDetailScreen;
 			sourceTree = "<group>";
 		};
 		C095529B2704BA7F000499B3 /* APICalls */ = {
@@ -1166,8 +1180,10 @@
 				C0859209270A1CC20087C834 /* TopBarWithTitle.swift in Sources */,
 				C0F8199126FE4E57000F5FEE /* ShowResponseType.swift in Sources */,
 				C08D2DB3271080DD003EB95C /* ActiveSearchingScreen.swift in Sources */,
+				C094167D2718A05F00C658B3 /* EpisodeDetailScreen.swift in Sources */,
 				C016E6192703949500EFF870 /* ShowEpisodesScrollView.swift in Sources */,
 				C016E607270345CA00EFF870 /* TracksVerticalScrollView.swift in Sources */,
+				C094167F2718B06100C658B3 /* AuthorItem.swift in Sources */,
 				C08861AF270BF5FF00D6AD89 /* RemoteAudio+ItunesPlayer.swift in Sources */,
 				C0F8199326FE4E7D000F5FEE /* AlbumResponseType.swift in Sources */,
 				C087873226FCCCA70013924E /* PlaylistDetailScreen.swift in Sources */,

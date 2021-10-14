@@ -26,6 +26,20 @@ struct ShowEpisodesScrollView: View {
                 MediaDetailViewModel.ShowsAPICalls.getEpisodesFromShows(mediaVM: mediaDetailVM, loadMoreEnabled: true)
               }
             }
+            .onTapGesture {
+              print(media.id)
+              switch mediaDetailVM.detailScreenOrigin {
+              case .home(let homeVM):
+                homeVM.changeSubpageTo(.episodeDetail,
+                                       mediaDetailVM: mediaDetailVM,
+                                       withData: media)
+              case .search(let searchVM):
+                searchVM.changeSubpageTo(.episodeDetail, subPageType: .detail(mediaDetailVM: mediaDetailVM,
+                                                                              data: media))
+              default:
+                fatalError("Missing detail screen origin.")
+              }
+            }
         }
       }
     }
@@ -81,7 +95,7 @@ struct ShowEpisodesScrollView: View {
             Image("three-dots")
               .resizeToFit()
               .padding(.vertical, 3)
-              .opacity(Constants.opacityLow)
+              .opacity(Constants.opacityStandard)
           }
           Spacer()
           Circle()

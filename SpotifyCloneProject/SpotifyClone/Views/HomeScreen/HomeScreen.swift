@@ -38,6 +38,9 @@ struct HomeScreen: View {
     case .artistDetail:
       ArtistDetailScreen(detailScreenOrigin: .home(homeVM: homeVM),
                          mediaDetailVM: mediaDetailVM)
+    case .episodeDetail:
+      EpisodeDetailScreen(detailScreenOrigin: .home(homeVM: homeVM),
+                          mediaDetailVM: mediaDetailVM)
     }
   }
   

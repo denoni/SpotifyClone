@@ -9,12 +9,14 @@ import SwiftUI
 
 struct MediaDescription: View {
   @State var description: String
+  var lineLimit: Int = 2
 
   var body: some View {
 
     Text(description)
-      .opacity(Constants.opacityLow)
-      .lineLimit(2)
+      .font(.avenir(.medium, size: Constants.fontSmall))
+      .opacity(Constants.opacityStandard)
+      .lineLimit(lineLimit)
     // TODO: Add a `Read more...` clickable to show the full description
   }
 }
