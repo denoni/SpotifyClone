@@ -26,7 +26,7 @@ class AuthViewModel: ObservableObject {
   static var clientSecret = YourSensitiveData.clientSecret
 
   // To know more about what all those variables are, check APIAuthentication.swift
-  static var scope = "\(AuthScope.userReadRecentlyPlayed.rawValue)+\(AuthScope.userTopRead.rawValue)+\(AuthScope.userReadPlaybackPosition.rawValue)+\(AuthScope.userLibraryRead.rawValue)" // Don't forget to put .rawValue at the end
+  static var scope = "\(AuthScope.userReadRecentlyPlayed.rawValue)+\(AuthScope.userTopRead.rawValue)+\(AuthScope.userReadPlaybackPosition.rawValue)+\(AuthScope.userLibraryRead.rawValue)+\(AuthScope.userFollowRead.rawValue)" // Don't forget to put .rawValue at the end
   static var redirectURI = "https://www.github.com"
   static var url = apiAuth.getAuthURL(clientID: clientID, scope: scope, redirectURI: redirectURI)
 

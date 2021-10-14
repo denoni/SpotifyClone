@@ -15,6 +15,7 @@ class APIFetchingUserInfo {
     case album
     case episode
     case playlist(userID: String)
+    case artist
   }
 
   func checksIfUserFollows(_ mediaType: ValidMediaType,
@@ -35,6 +36,8 @@ class APIFetchingUserInfo {
     case .playlist(let userID):
       mediaTypeString = "playlists"
       currentUserID = userID
+    case .artist:
+      mediaTypeString = "artist"
     }
 
     var baseUrl = "https://api.spotify.com/v1/me/\(mediaTypeString)/contains?ids=\(mediaID)"
@@ -44,6 +47,11 @@ class APIFetchingUserInfo {
       baseUrl = "https://api.spotify.com/v1/playlists/\(mediaID)/followers/contains?ids=\(currentUserID!)"
     }
 
+    if mediaTypeString == "artist" {
+      baseUrl = "https://api.spotify.com/v1/me/following/contains?type=\(mediaTypeString)&ids=\(mediaID)"
+    }
+
+
     var urlRequest = URLRequest(url: URL(string: baseUrl)!)
     urlRequest.httpMethod = "GET"
     urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
@@ -52,6 +60,9 @@ class APIFetchingUserInfo {
     AF.request(urlRequest)
       .validate()
       .responseJSON { json in
+
+        print(json.debugDescription)
+
         do {
           let decoder = JSONDecoder()
           let response = try decoder.decode([Bool].self, from: json.data!)
