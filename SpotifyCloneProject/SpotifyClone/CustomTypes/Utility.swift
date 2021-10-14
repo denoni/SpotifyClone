@@ -45,8 +45,8 @@ struct Utility {
       fatalError("Didn't implement `didEverySectionLoaded` for \(subPage)")
     }
 
-    // in playlist detail we have no interest in the playlist author.
-    if subPage != .playlistDetail {
+    // in playlist/show's detail screen we have no interest in the playlist author.
+    if subPage != .playlistDetail && subPage != .showDetail {
 
       // Checks if artist basic info is still loading
       guard mediaDetailVM.isLoading[.artistBasicInfo(.artistBasicInfo)] != true else {
