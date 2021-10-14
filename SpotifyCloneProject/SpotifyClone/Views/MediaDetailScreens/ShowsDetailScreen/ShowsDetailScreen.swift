@@ -92,6 +92,7 @@ struct ShowsDetailContent: View {
           ProgressView()
             .withSpotifyStyle(useDiscreetColors: true)
             .onAppear {
+              MediaDetailViewModel.UserInfoAPICalls.checksIfUserFollows(.show, mediaVM: mediaDetailVM)
               MediaDetailViewModel.ShowsAPICalls.getEpisodesFromShows(mediaVM: mediaDetailVM, loadMoreEnabled: true)
             }
         }

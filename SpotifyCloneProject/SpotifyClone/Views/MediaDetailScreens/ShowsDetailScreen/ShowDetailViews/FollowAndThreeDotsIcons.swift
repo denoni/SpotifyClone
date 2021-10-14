@@ -11,9 +11,20 @@ struct FollowAndThreeDotsIcons: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   var threeDotsPlacedVertically = false
 
+  var mediaTypeThatIsUsingThisView: APIFetchingUserInfo.ValidMediaType {
+    switch mediaDetailVM.mainItem!.mediaType {
+    case .artist:
+      return .artist
+    case .show:
+      return .show
+    default:
+      fatalError("Media type is not compatible with this struct.")
+    }
+  }
+
   var body: some View {
     HStack(spacing: 30) {
-      Button(action: { MediaDetailViewModel.UserInfoAPICalls.follow(.artist, mediaVM: mediaDetailVM) }) {
+      Button(action: { MediaDetailViewModel.UserInfoAPICalls.follow(mediaTypeThatIsUsingThisView, mediaVM: mediaDetailVM) }) {
         RoundedRectangle(cornerRadius: Constants.radiusSmall)
           .strokeBorder(Color.white.opacity(Constants.opacityStandard), lineWidth: 1)
           .foregroundColor(.clear)

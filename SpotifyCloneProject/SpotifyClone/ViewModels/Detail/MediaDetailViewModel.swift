@@ -258,7 +258,6 @@ class MediaDetailViewModel: ObservableObject {
       mediaCollection[section] = mediasWithinTheLimit
     }
 
-
     isLoading[section] = false
   }
 
