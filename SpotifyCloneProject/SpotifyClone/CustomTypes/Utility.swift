@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Utility {
 
-  // MARK: - Convert ms to HMS hour,minutes, seconds
+  // MARK: - Time formatter
   enum TimeFormat {
     case seconds(_ sec: Double)
     case milliseconds(_ ms: Double)
@@ -56,6 +56,37 @@ struct Utility {
       return timeHMSFormatter.string(from: timeInSeconds)!
     }
   }
+
+
+  // MARK: - Data formatter
+  static func getSpelledOutDate(from dateString: String) -> String {
+    let formatter = DateFormatter()
+
+    formatter.dateFormat = "yyyy-MM-dd"
+    guard let releaseDate = formatter.date(from: dateString) else {
+      return ""
+    }
+
+    // Checks if the date is today/yesterday or not
+    let currentDate = Date()
+    let numberOfSecondsInADay: Double = 86400
+
+    // Checks if release date was less than 24 hours ago
+    if Double(currentDate.timeIntervalSince(releaseDate)) < numberOfSecondsInADay {
+      return "Today"
+    }
+
+    // Checks if release date was less than 2 day ago
+    if Double(currentDate.timeIntervalSince(releaseDate)) < numberOfSecondsInADay * 2 {
+      return "Yesterday"
+    }
+
+    formatter.dateStyle = .medium
+    formatter.timeStyle = .none
+
+    return formatter.string(from: releaseDate)
+  }
+
 
 
   // MARK: - Media Detail Utility

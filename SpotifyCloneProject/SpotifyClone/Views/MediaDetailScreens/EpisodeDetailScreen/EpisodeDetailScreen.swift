@@ -75,7 +75,7 @@ struct EpisodeDetailContent: View {
           let episode = mediaDetailVM.mediaCollection[.episodes(.episodeDetails)]!.first!
           let episodeDetails = SpotifyModel.getEpisodeDetails(for: episode)
 
-          let releaseDate = episodeDetails.releaseDate
+          let releaseDate = Utility.getSpelledOutDate(from: episodeDetails.releaseDate)
           let duration = Utility.formatTimeToHourMinSec(for: .milliseconds(episodeDetails.durationInMs), spelledOut: true)
 
           AuthorItem(name: episode.authorName.first!,
