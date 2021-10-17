@@ -107,7 +107,7 @@ struct ArtistDetailContent: View {
         ProgressView()
           .withSpotifyStyle(useDiscreetColors: true)
           .onAppear {
-            MediaDetailViewModel.UserInfoAPICalls.checksIfUserFollows(.artist, mediaVM: mediaDetailVM)
+            MediaDetailViewModel.UserInfoAPICalls.checksIfUserFollows(.artist, mediaVM: mediaDetailVM, itemID: mediaDetailVM.mainItem!.id)
             mediaDetailVM.isLoading[.artistBasicInfo(.artistBasicInfo)] = false
             mediaDetailVM.getArtistScreenData()
           }

@@ -30,7 +30,8 @@ struct FollowAndThreeDotsIcons: View {
   var body: some View {
     HStack(spacing: 30) {
       Button(action: { MediaDetailViewModel.UserInfoAPICalls.changeFollowingState(to: followingState == .isFollowing ? .unfollow : .follow,
-                                                                                  in: mediaTypeThatIsUsingThisView, mediaVM: mediaDetailVM) }) {
+                                                                                  in: mediaTypeThatIsUsingThisView, mediaVM: mediaDetailVM,
+                                                                                  itemID: mediaDetailVM.mainItem!.id) }) {
         RoundedRectangle(cornerRadius: Constants.radiusSmall)
           .strokeBorder(Color.white.opacity(Constants.opacityStandard), lineWidth: 1)
           .foregroundColor(.clear)

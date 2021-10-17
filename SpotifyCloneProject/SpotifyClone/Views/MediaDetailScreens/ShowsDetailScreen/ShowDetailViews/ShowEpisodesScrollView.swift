@@ -22,6 +22,7 @@ struct ShowEpisodesScrollView: View {
           let episodeDetails = SpotifyModel.getEpisodeDetails(for: media)
           EpisodeItem(audioManager: audioManager, media: media, details: episodeDetails)
             .onAppear {
+              MediaDetailViewModel.UserInfoAPICalls.checksIfUserFollows(.episode, mediaVM: mediaDetailVM, itemID: media.id)
               if mediaDetailVM.shouldFetchMoreData(basedOn: media, inRelationTo: medias) {
                 MediaDetailViewModel.ShowsAPICalls.getEpisodesFromShows(mediaVM: mediaDetailVM, loadMoreEnabled: true)
               }
@@ -60,6 +61,10 @@ struct ShowEpisodesScrollView: View {
     var duration: String { Utility.formatTimeToHourMinSec(for: .milliseconds(details.durationInMs), spelledOut: true) }
     var isPlaying: Bool { audioManager.showPauseButton && audioManager.lastItemPlayedID == media.id }
 
+    var followingState: MediaDetailViewModel.CurrentFollowingState {
+      guard mediaDetailVM.followedIDs[media.id] != nil else { return .isNotFollowing }
+      return mediaDetailVM.followedIDs[media.id]!
+    }
 
     var body: some View {
       VStack(alignment: .leading, spacing: Constants.spacingSmall) {
@@ -90,12 +95,24 @@ struct ShowEpisodesScrollView: View {
 
         HStack(spacing: Constants.paddingStandard) {
           Group {
-            Image("plus-circle")
-              .resizable()
-              .frame(width: 25, height: 25)
-              .onTapGesture {
-                MediaDetailViewModel.UserInfoAPICalls.changeFollowingState(to: .follow, in: .episode, mediaVM: mediaDetailVM)
+            Group {
+              if followingState == .isFollowing {
+                Image(systemName: "checkmark.circle.fill")
+                  .resizable()
+                  .foregroundColor(.spotifyGreen)
+                  .frame(width: 25, height: 25)
+                  .onTapGesture {
+                    MediaDetailViewModel.UserInfoAPICalls.changeFollowingState(to: .unfollow, in: .episode, mediaVM: mediaDetailVM, itemID: media.id)
+                  }
+              } else {
+                Image("plus-circle")
+                  .resizable()
+                  .frame(width: 25, height: 25)
+                  .onTapGesture {
+                    MediaDetailViewModel.UserInfoAPICalls.changeFollowingState(to: .follow, in: .episode, mediaVM: mediaDetailVM, itemID: media.id)
+                  }
               }
+            }
             Image("download-circle")
               .resizable()
               .frame(width: 25, height: 25)

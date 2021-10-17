@@ -51,8 +51,6 @@ struct EpisodeDetailContent: View {
     return myScale > 0.8 ? 0.8 : myScale
   }
 
-
-
   var body: some View {
     VStack(alignment: .leading, spacing: Constants.spacingMedium) {
 
@@ -130,7 +128,7 @@ struct EpisodeDetailContent: View {
           ProgressView()
             .withSpotifyStyle(useDiscreetColors: true)
             .onAppear {
-              MediaDetailViewModel.UserInfoAPICalls.checksIfUserFollows(.episode, mediaVM: mediaDetailVM)
+              MediaDetailViewModel.UserInfoAPICalls.checksIfUserFollows(.episode, mediaVM: mediaDetailVM, itemID: mediaDetailVM.mainItem!.id)
               MediaDetailViewModel.EpisodeAPICalls.getEpisodeDetails(mediaVM: mediaDetailVM)
             }
           Spacer()

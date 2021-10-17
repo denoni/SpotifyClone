@@ -230,12 +230,13 @@ class MediaDetailViewModel: ObservableObject {
 
   struct UserInfoAPICalls {
     static func checksIfUserFollows(_ mediaType: APIFetchingUserInfo.ValidMediaType,
-                                    mediaVM: MediaDetailViewModel) {
-      mediaVM.api.checksIfUserFollows(mediaType, with: mediaVM.accessToken!, mediaID: mediaVM.mainItem!.id) { response in
+                                    mediaVM: MediaDetailViewModel,
+                                    itemID: String) {
+      mediaVM.api.checksIfUserFollows(mediaType, with: mediaVM.accessToken!, mediaID: itemID) { response in
         if response == true {
-          mediaVM.followedIDs = [mediaVM.mainItem!.id: .isFollowing]
+          mediaVM.followedIDs[itemID] = .isFollowing
         } else {
-          mediaVM.followedIDs = [mediaVM.mainItem!.id: .isNotFollowing]
+          mediaVM.followedIDs[itemID] = .isNotFollowing
         }
 
       }
@@ -243,16 +244,17 @@ class MediaDetailViewModel: ObservableObject {
 
     static func changeFollowingState(to followingState: APIFetchingUserInfo.FollowingState,
                                      in mediaType: APIFetchingUserInfo.ValidMediaType,
-                                     mediaVM: MediaDetailViewModel) {
-      mediaVM.api.changeFollowingState(to: followingState, in: mediaType, with: mediaVM.accessToken!, mediaID: mediaVM.mainItem!.id) { errorOccurred in
+                                     mediaVM: MediaDetailViewModel,
+                                     itemID: String) {
+      mediaVM.api.changeFollowingState(to: followingState, in: mediaType, with: mediaVM.accessToken!, mediaID: itemID) { errorOccurred in
         if !errorOccurred {
           if followingState == .follow {
-            mediaVM.followedIDs = [mediaVM.mainItem!.id: .isFollowing]
+            mediaVM.followedIDs[itemID] = .isFollowing
           } else {
-            mediaVM.followedIDs = [mediaVM.mainItem!.id: .isNotFollowing]
+            mediaVM.followedIDs[itemID] = .isNotFollowing
           }
         } else {
-          mediaVM.followedIDs = [mediaVM.mainItem!.id: .error]
+          mediaVM.followedIDs[itemID] = .error
         }
       }
     }

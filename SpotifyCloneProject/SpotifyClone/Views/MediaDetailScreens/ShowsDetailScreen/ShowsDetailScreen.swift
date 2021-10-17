@@ -78,11 +78,11 @@ struct ShowsDetailContent: View {
       NumberOfEpisodes(isExplicit: details.explicit, numberOfEpisodes: details.numberOfEpisodes)
 
       HStack {
-        VStack(alignment: .leading) {
-          FollowAndThreeDotsIcons()
-        }
+        FollowAndThreeDotsIcons()
+        Spacer()
         BigPlayButton()
-      }.frame(height: 65)
+      }
+      .frame(height: 65)
 
       if Utility.didEverySectionLoaded(in: .showDetail, mediaDetailVM: mediaDetailVM) {
         ShowEpisodesScrollView()
@@ -91,8 +91,10 @@ struct ShowsDetailContent: View {
           ProgressView()
             .withSpotifyStyle(useDiscreetColors: true)
             .onAppear {
-              MediaDetailViewModel.UserInfoAPICalls.checksIfUserFollows(.show, mediaVM: mediaDetailVM)
-              MediaDetailViewModel.ShowsAPICalls.getEpisodesFromShows(mediaVM: mediaDetailVM, loadMoreEnabled: true)
+              MediaDetailViewModel.UserInfoAPICalls.checksIfUserFollows(.show, mediaVM: mediaDetailVM,
+                                                                        itemID: mediaDetailVM.mainItem!.id)
+              MediaDetailViewModel.ShowsAPICalls.getEpisodesFromShows(mediaVM: mediaDetailVM,
+                                                                      loadMoreEnabled: true)
             }
         }
       }

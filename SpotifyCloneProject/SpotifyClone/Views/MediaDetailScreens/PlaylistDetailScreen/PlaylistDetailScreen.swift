@@ -86,7 +86,7 @@ struct PlaylistDetailContent: View {
             .withSpotifyStyle(useDiscreetColors: true)
             .onAppear {
               let currentUserId = mediaDetailVM.mainVM.currentUserProfileInfo!.id
-              MediaDetailViewModel.UserInfoAPICalls.checksIfUserFollows(.playlist(userID: currentUserId), mediaVM: mediaDetailVM)
+              MediaDetailViewModel.UserInfoAPICalls.checksIfUserFollows(.playlist(userID: currentUserId), mediaVM: mediaDetailVM, itemID: mediaDetailVM.mainItem!.id)
               MediaDetailViewModel.PlaylistAPICalls.getTracksFromPlaylist(mediaVM: mediaDetailVM, loadMoreEnabled: true)
             }
         }.frame(maxWidth: .infinity, alignment: .center)

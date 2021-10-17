@@ -28,7 +28,8 @@ struct TrackInfoSection: View {
         .padding(.trailing, Constants.paddingStandard)
         Spacer()
         Button(action: { MediaDetailViewModel.UserInfoAPICalls.changeFollowingState(to: followingState == .isFollowing ? .unfollow : .follow,
-                                                                                    in: .track, mediaVM: mediaDetailVM) }) {
+                                                                                    in: .track, mediaVM: mediaDetailVM,
+                                                                                    itemID: mediaDetailVM.mainItem!.id) }) {
           if mediaDetailVM.followedIDs[mediaDetailVM.mainItem!.id] == .error {
             Image(systemName: "xmark.octagon.fill")
               .resizable()

@@ -35,7 +35,8 @@ struct LikeAndThreeDotsIcons: View {
           .frame(width: 25)
       } else {
         Button(action: {  MediaDetailViewModel.UserInfoAPICalls.changeFollowingState(to: followingState == .isFollowing ? .unfollow : .follow,
-                                                                                     in: mediaTypeThatIsUsingThisView, mediaVM: mediaDetailVM) }) {
+                                                                                     in: mediaTypeThatIsUsingThisView, mediaVM: mediaDetailVM,
+                                                                                     itemID: mediaDetailVM.mainItem!.id) }) {
           Rectangle()
             .fill(Color.clear)
             .frame(width: 25)
