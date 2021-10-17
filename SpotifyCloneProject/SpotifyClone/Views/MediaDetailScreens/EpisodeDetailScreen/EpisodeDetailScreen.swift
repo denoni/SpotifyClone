@@ -76,7 +76,7 @@ struct EpisodeDetailContent: View {
           let episodeDetails = SpotifyModel.getEpisodeDetails(for: episode)
 
           let releaseDate = episodeDetails.releaseDate
-          let duration = Utility.formatSecondsToHMS(episodeDetails.durationInMs / 1000, spelledOut: true)
+          let duration = Utility.formatTimeToHourMinSec(for: .milliseconds(episodeDetails.durationInMs), spelledOut: true)
 
           AuthorItem(name: episode.authorName.first!,
                      id: episode.id,
@@ -111,7 +111,6 @@ struct EpisodeDetailContent: View {
 
           MediaDescription(description: episodeDetails.description ?? "", lineLimit: 5)
 
-
           Rectangle()
             .fill(Color.spotifyDarkGray)
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
@@ -119,7 +118,7 @@ struct EpisodeDetailContent: View {
             .padding(.vertical, Constants.paddingSmall)
             .padding(.horizontal, -Constants.paddingStandard)
 
-          Text("20 Jul • 53min") // TODO: Add real data
+          Text("\(releaseDate) • \(duration)")
             .opacity(Constants.opacityStandard)
             .font(.avenir(.medium, size: Constants.fontXSmall))
         }

@@ -10,8 +10,20 @@ import SwiftUI
 struct Utility {
 
   // MARK: - Convert ms to HMS hour,minutes, seconds
+  enum TimeFormat {
+    case seconds(_ sec: Double)
+    case milliseconds(_ ms: Double)
+  }
 
-  static func formatSecondsToHMS(_ seconds: Double, spelledOut: Bool = false) -> String {
+  static func formatTimeToHourMinSec(for time: TimeFormat, spelledOut: Bool = false) -> String {
+    var timeInSeconds: Double {
+      switch time {
+      case .seconds(let sec):
+        return sec
+      case .milliseconds(let ms):
+        return ms / 1000
+      }
+    }
     let timeHMSFormatter: DateComponentsFormatter = {
       let formatter = DateComponentsFormatter()
       formatter.unitsStyle = .positional
@@ -27,7 +39,7 @@ struct Utility {
       return formatter
     }()
 
-    guard !seconds.isNaN else {
+    guard !timeInSeconds.isNaN else {
       if spelledOut {
         return "0 min"
       } else {
@@ -36,12 +48,12 @@ struct Utility {
     }
 
     if spelledOut {
-      guard seconds >= 60 else {
-        return "\(Int(seconds)) sec"
+      guard timeInSeconds >= 60 else {
+        return "\(Int(timeInSeconds)) sec"
       }
-      return timeHMSFormatterSpelledOut.string(from: seconds)!
+      return timeHMSFormatterSpelledOut.string(from: timeInSeconds)!
     } else {
-      return timeHMSFormatter.string(from: seconds)!
+      return timeHMSFormatter.string(from: timeInSeconds)!
     }
   }
 
@@ -93,8 +105,8 @@ struct Utility {
       }
     }
 
-  // else, return true
-  return true
+    // else, return true
+    return true
   }
 
 }
