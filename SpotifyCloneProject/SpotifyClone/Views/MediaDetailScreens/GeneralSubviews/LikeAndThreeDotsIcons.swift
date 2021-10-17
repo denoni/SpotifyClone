@@ -21,39 +21,13 @@ struct LikeAndThreeDotsIcons: View {
     }
   }
 
-  var followingState: MediaDetailViewModel.CurrentFollowingState {
-    guard mediaDetailVM.followedIDs[mediaDetailVM.mainItem!.id] != nil else { return .isNotFollowing }
-    return mediaDetailVM.followedIDs[mediaDetailVM.mainItem!.id]!
-  }
+
 
   var body: some View {
     HStack(spacing: 30) {
-      if mediaDetailVM.followedIDs[mediaDetailVM.mainItem!.id] == .error {
-        Image(systemName: "xmark.octagon.fill")
-          .resizable()
-          .aspectRatio(1/1, contentMode: .fit)
-          .frame(width: 25)
-      } else {
-        Button(action: {  MediaDetailViewModel.UserInfoAPICalls.changeFollowingState(to: followingState == .isFollowing ? .unfollow : .follow,
-                                                                                     in: mediaTypeThatIsUsingThisView, mediaVM: mediaDetailVM,
-                                                                                     itemID: mediaDetailVM.mainItem!.id) }) {
-          Rectangle()
-            .fill(Color.clear)
-            .frame(width: 25)
-            .overlay( Group {
-              if mediaDetailVM.followedIDs[mediaDetailVM.mainItem!.id] == nil {
-                ProgressView()
-                  .withSpotifyStyle(useDiscreetColors: true)
-                  .scaleEffect(0.6)
-              } else {
-                Image(followingState == .isFollowing ?  "heart-filled" : "heart-stroked")
-                  .resizable()
-              }
-            }.scaledToFit())
-        }
-
-      }
-
+      HeartButton(mediaDetailVM: mediaDetailVM,
+                  itemID: mediaDetailVM.mainItem!.id,
+                  itemType: mediaTypeThatIsUsingThisView)
       Image("three-dots")
         .resizable()
         .scaledToFit()

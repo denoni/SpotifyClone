@@ -29,31 +29,9 @@ struct FollowAndThreeDotsIcons: View {
 
   var body: some View {
     HStack(spacing: 30) {
-      Button(action: { MediaDetailViewModel.UserInfoAPICalls.changeFollowingState(to: followingState == .isFollowing ? .unfollow : .follow,
-                                                                                  in: mediaTypeThatIsUsingThisView, mediaVM: mediaDetailVM,
-                                                                                  itemID: mediaDetailVM.mainItem!.id) }) {
-        RoundedRectangle(cornerRadius: Constants.radiusSmall)
-          .strokeBorder(Color.white.opacity(Constants.opacityStandard), lineWidth: 1)
-          .foregroundColor(.clear)
-          .overlay(
-            VStack {
-              if mediaDetailVM.followedIDs[mediaDetailVM.mainItem!.id] == .error {
-                Text("ERROR")
-                  .font(.avenir(.medium, size: Constants.fontXSmall))
-                  .padding(5)
-              } else {
-                Text(followingState == .isFollowing ? "FOLLOWING" : "FOLLOW")
-                  .font(.avenir(.medium, size: Constants.fontXSmall))
-                  .padding(5)
-              }
-            }
-          )
-          .frame(height: 35)
-          .aspectRatio(followingState == .isFollowing ? 4.5 : 3.5 / 1, contentMode: .fit)
-          .redacted(reason: mediaDetailVM.followedIDs[mediaDetailVM.mainItem!.id] == nil ? .placeholder : [])
-      }
-      .buttonStyle(PlainButtonStyle())
-
+      FollowButton(mediaDetailVM: mediaDetailVM,
+                   itemID: mediaDetailVM.mainItem!.id,
+                   itemType: mediaTypeThatIsUsingThisView)
       Image("three-dots")
         .resizable()
         .scaledToFit()

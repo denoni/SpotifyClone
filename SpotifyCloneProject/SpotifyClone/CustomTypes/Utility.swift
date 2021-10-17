@@ -140,4 +140,10 @@ struct Utility {
     return true
   }
 
+  // MARK: Checks if user follows/saved an item
+  static func checkIfIsFollowingItem(_ itemID: String, mediaDetailVM: MediaDetailViewModel) -> MediaDetailViewModel.CurrentFollowingState {
+    guard mediaDetailVM.followedIDs[itemID] != nil else { return .isNotFollowing }
+    return mediaDetailVM.followedIDs[itemID]!
+  }
+
 }

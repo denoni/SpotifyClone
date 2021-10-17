@@ -12,11 +12,6 @@ struct TrackInfoSection: View {
   var isExplicit: Bool
   var isSmallDisplay: Bool = false
 
-  var followingState: MediaDetailViewModel.CurrentFollowingState {
-    guard mediaDetailVM.followedIDs[mediaDetailVM.mainItem!.id] != nil else { return .isNotFollowing }
-    return mediaDetailVM.followedIDs[mediaDetailVM.mainItem!.id]!
-  }
-
   var body: some View {
     Group {
       HStack {
@@ -27,29 +22,9 @@ struct TrackInfoSection: View {
         }
         .padding(.trailing, Constants.paddingStandard)
         Spacer()
-        Button(action: { MediaDetailViewModel.UserInfoAPICalls.changeFollowingState(to: followingState == .isFollowing ? .unfollow : .follow,
-                                                                                    in: .track, mediaVM: mediaDetailVM,
-                                                                                    itemID: mediaDetailVM.mainItem!.id) }) {
-          if mediaDetailVM.followedIDs[mediaDetailVM.mainItem!.id] == .error {
-            Image(systemName: "xmark.octagon.fill")
-              .resizable()
-              .aspectRatio(1/1, contentMode: .fit)
-              .frame(width: 30)
-          } else {
-            Group {
-              if mediaDetailVM.followedIDs[mediaDetailVM.mainItem!.id] == nil {
-                ProgressView()
-                  .withSpotifyStyle(useDiscreetColors: true)
-                  .scaleEffect(0.6)
-              } else {
-                Image(followingState == .isFollowing ? "heart-filled" : "heart-stroked")
-                  .resizeToFit()
-                  .padding(3)
-              }
-            }
-            .frame(width: 30, height: 30)
-          }
-        }
+        HeartButton(mediaDetailVM: mediaDetailVM,
+                    itemID: mediaDetailVM.mainItem!.id,
+                    itemType: .track)          
       }
       .frame(maxWidth: .infinity,
              alignment: .topLeading)

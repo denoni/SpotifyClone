@@ -95,24 +95,9 @@ struct ShowEpisodesScrollView: View {
 
         HStack(spacing: Constants.paddingStandard) {
           Group {
-            Group {
-              if followingState == .isFollowing {
-                Image(systemName: "checkmark.circle.fill")
-                  .resizable()
-                  .foregroundColor(.spotifyGreen)
-                  .frame(width: 25, height: 25)
-                  .onTapGesture {
-                    MediaDetailViewModel.UserInfoAPICalls.changeFollowingState(to: .unfollow, in: .episode, mediaVM: mediaDetailVM, itemID: media.id)
-                  }
-              } else {
-                Image("plus-circle")
-                  .resizable()
-                  .frame(width: 25, height: 25)
-                  .onTapGesture {
-                    MediaDetailViewModel.UserInfoAPICalls.changeFollowingState(to: .follow, in: .episode, mediaVM: mediaDetailVM, itemID: media.id)
-                  }
-              }
-            }
+            SaveButton(mediaDetailVM: mediaDetailVM,
+                       itemID: media.id,
+                       itemType: .episode)
             Image("download-circle")
               .resizable()
               .frame(width: 25, height: 25)

@@ -89,6 +89,9 @@
 		C089874F27000C2F00F9BF70 /* MediaDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = C089874E27000C2F00F9BF70 /* MediaDescription.swift */; };
 		C089875B27000CE600F9BF70 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C089875A27000CE600F9BF70 /* BackButton.swift */; };
 		C089875D27000DE800F9BF70 /* TrackDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C089875C27000DE800F9BF70 /* TrackDetailScreen.swift */; };
+		C08B90A4271CB8FA00C057B2 /* SaveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08B90A3271CB8FA00C057B2 /* SaveButton.swift */; };
+		C08B90A6271CB91000C057B2 /* HeartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08B90A5271CB91000C057B2 /* HeartButton.swift */; };
+		C08B90A8271CDA0300C057B2 /* FollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08B90A7271CDA0300C057B2 /* FollowButton.swift */; };
 		C08D2DAF27107E2C003EB95C /* SearchDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08D2DAE27107E2C003EB95C /* SearchDetailViewModel.swift */; };
 		C08D2DB3271080DD003EB95C /* ActiveSearchingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08D2DB2271080DD003EB95C /* ActiveSearchingScreen.swift */; };
 		C08D2DB627108B4A003EB95C /* TopSearchSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08D2DB527108B4A003EB95C /* TopSearchSection.swift */; };
@@ -239,6 +242,9 @@
 		C089874E27000C2F00F9BF70 /* MediaDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDescription.swift; sourceTree = "<group>"; };
 		C089875A27000CE600F9BF70 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		C089875C27000DE800F9BF70 /* TrackDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDetailScreen.swift; sourceTree = "<group>"; };
+		C08B90A3271CB8FA00C057B2 /* SaveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveButton.swift; sourceTree = "<group>"; };
+		C08B90A5271CB91000C057B2 /* HeartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartButton.swift; sourceTree = "<group>"; };
+		C08B90A7271CDA0300C057B2 /* FollowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowButton.swift; sourceTree = "<group>"; };
 		C08D2DAE27107E2C003EB95C /* SearchDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailViewModel.swift; sourceTree = "<group>"; };
 		C08D2DB2271080DD003EB95C /* ActiveSearchingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveSearchingScreen.swift; sourceTree = "<group>"; };
 		C08D2DB527108B4A003EB95C /* TopSearchSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSearchSection.swift; sourceTree = "<group>"; };
@@ -455,6 +461,9 @@
 				C084E04427033FAF00C6AAAE /* BigPlayButton.swift */,
 				C089874A27000BFC00F9BF70 /* TopGradient.swift */,
 				C094167E2718B06100C658B3 /* AuthorItem.swift */,
+				C08B90A3271CB8FA00C057B2 /* SaveButton.swift */,
+				C08B90A5271CB91000C057B2 /* HeartButton.swift */,
+				C08B90A7271CDA0300C057B2 /* FollowButton.swift */,
 			);
 			path = GeneralSubviews;
 			sourceTree = "<group>";
@@ -1122,6 +1131,7 @@
 				C016E612270388F600EFF870 /* ShowAuthor.swift in Sources */,
 				C0C5F96B2704DE9E0099EEB5 /* ArtistDetailScreen.swift in Sources */,
 				C087B0EB26E65FFA00A72A13 /* SpotifyModel.swift in Sources */,
+				C08B90A6271CB91000C057B2 /* HeartButton.swift in Sources */,
 				C088F23E26DEE61B00C4BCA2 /* BigSongItem.swift in Sources */,
 				C06AB91426FA07B000F46356 /* Color+Random.swift in Sources */,
 				C087B0E826E6556F00A72A13 /* HomeViewModel.swift in Sources */,
@@ -1192,6 +1202,7 @@
 				C09FD8FF26E03D6E0069CEAE /* BottomBar.swift in Sources */,
 				C016E610270385E300EFF870 /* ShowsDetailScreen.swift in Sources */,
 				C08861B1270BFB5900D6AD89 /* String+RemoveSpecialChars.swift in Sources */,
+				C08B90A8271CDA0300C057B2 /* FollowButton.swift in Sources */,
 				C084E04D2703409600C6AAAE /* PlaylistAuthor.swift in Sources */,
 				C084267E26F10BBD000ACAEE /* HomePageAPICalls.swift in Sources */,
 				C089136226F986E600CA1A69 /* ColorfulCardPair.swift in Sources */,
@@ -1207,6 +1218,7 @@
 				C016E60B2703623000EFF870 /* AlbumAuthor.swift in Sources */,
 				C0C5F96E2704DF9D0099EEB5 /* ArtistPictureGradient.swift in Sources */,
 				C097734C271763B000F319D1 /* APIFetchingUserInfo.swift in Sources */,
+				C08B90A4271CB8FA00C057B2 /* SaveButton.swift in Sources */,
 				C0C63C9A26DD35D900532792 /* ColorPalette.swift in Sources */,
 				C0C5F9722704EF3D0099EEB5 /* BigArtistNameTitle.swift in Sources */,
 				C03F9691270FC090005FBC1F /* Constants.swift in Sources */,
