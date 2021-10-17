@@ -61,7 +61,7 @@ struct ShowsDetailContent: View {
             .padding(.bottom, 5)
           ShowAuthor(authorName: mediaDetailVM.mainItem!.authorName.first!)
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, alignment: .leading)
       }
       .padding(.top, topSafeAreaSize)
       .padding(.top, Constants.paddingStandard)
