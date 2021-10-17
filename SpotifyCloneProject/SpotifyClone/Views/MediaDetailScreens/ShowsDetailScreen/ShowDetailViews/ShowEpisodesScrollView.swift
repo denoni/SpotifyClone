@@ -55,7 +55,10 @@ struct ShowEpisodesScrollView: View {
     let media: SpotifyModel.MediaItem
     let details: SpotifyModel.EpisodeDetails
 
+    var releaseDate: String { Utility.getSpelledOutDate(from: details.releaseDate) }
+    var duration: String { Utility.formatTimeToHourMinSec(for: .milliseconds(details.durationInMs), spelledOut: true) }
     var isPlaying: Bool { audioManager.showPauseButton && audioManager.lastItemPlayedID == media.id }
+
 
     var body: some View {
       VStack(alignment: .leading, spacing: Constants.spacingSmall) {
@@ -79,7 +82,7 @@ struct ShowEpisodesScrollView: View {
             .padding(.bottom, 5)
         }
 
-        Text("Yesterday • 1h 55m") // TODO: Add real data
+        Text("\(releaseDate) • \(duration)") // TODO: Add real data
           .font(.avenir(.medium, size: Constants.fontXSmall))
           .opacity(Constants.opacityHigh)
           .padding(.bottom, 5)
