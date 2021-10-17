@@ -20,11 +20,11 @@ struct AudioSlider: View {
       .accentColor(.spotifyGreen)
       .disabled(remoteAudio.state != .active)
       HStack {
-        Text(SecondsToHMS.formatSecondsToHMS(remoteAudio.currentTime))
+        Text(Utility.formatSecondsToHMS(remoteAudio.currentTime))
           .font(.avenir(.medium, size: Constants.fontXSmall))
           .opacity(Constants.opacityStandard)
         Spacer()
-        Text(SecondsToHMS.formatSecondsToHMS(remoteAudio.currentDuration))
+        Text(Utility.formatSecondsToHMS(remoteAudio.currentDuration))
           .font(.avenir(.medium, size: Constants.fontXSmall))
           .opacity(Constants.opacityStandard)
       }

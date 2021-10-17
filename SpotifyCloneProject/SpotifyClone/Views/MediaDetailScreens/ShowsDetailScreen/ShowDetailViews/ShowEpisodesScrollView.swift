@@ -27,7 +27,6 @@ struct ShowEpisodesScrollView: View {
               }
             }
             .onTapGesture {
-              print(media.id)
               switch mediaDetailVM.detailScreenOrigin {
               case .home(let homeVM):
                 homeVM.changeSubpageTo(.episodeDetail,

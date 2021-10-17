@@ -51,7 +51,7 @@ struct EpisodeDetailContent: View {
     return myScale > 0.8 ? 0.8 : myScale
   }
 
-  var details: SpotifyModel.EpisodeDetails { SpotifyModel.getEpisodeDetails(for: mediaDetailVM.mainItem!) }
+
 
   var body: some View {
     VStack(alignment: .leading, spacing: Constants.spacingMedium) {
@@ -69,68 +69,75 @@ struct EpisodeDetailContent: View {
       .opacity(1 - Double(scale * 2 > 0.8 ? 0.8 : scale * 2))
       .frame(maxWidth: .infinity)
 
-      AlbumAuthor()
+      if Utility.didEverySectionLoaded(in: .episodeDetail, mediaDetailVM: mediaDetailVM) {
 
-      AuthorItem(name: "Author Name", // TODO: Add real name
-                 id: "aaa", // TODO: Add real id
-                 imageURL: mediaDetailVM.mainItem!.imageURL,
-                 isPodcast: true)
+        Group {
+          let episode = mediaDetailVM.mediaCollection[.episodes(.episodeDetails)]!.first!
+          let episodeDetails = SpotifyModel.getEpisodeDetails(for: episode)
 
-      Text("Yesterday • Played") // TODO: Add real data
-        .opacity(Constants.opacityStandard)
-        .font(.avenir(.medium, size: Constants.fontXSmall))
+          let releaseDate = episodeDetails.releaseDate
+          let duration = Utility.formatSecondsToHMS(episodeDetails.durationInMs / 1000, spelledOut: true)
 
+          AuthorItem(name: episode.authorName.first!,
+                     id: episode.id,
+                     imageURL: episode.author!.first!.images!.first!.url,
+                     isPodcast: true)
 
-      HStack {
-        VStack(alignment: .leading) {
+          Text("\(releaseDate) • \(duration)")
+            .opacity(Constants.opacityStandard)
+            .font(.avenir(.medium, size: Constants.fontXSmall))
 
-          HStack(spacing: Constants.paddingStandard) {
-            Group {
-              Image("plus-circle")
-                .resizeToFit()
-              Image("download-circle")
-                .resizeToFit()
-              Image("three-dots")
-                .resizeToFit()
-                .padding(.vertical, 3)
-                .opacity(Constants.opacityStandard)
+          HStack {
+            VStack(alignment: .leading) {
+
+              HStack(spacing: Constants.paddingStandard) {
+                Group {
+                  Image("plus-circle")
+                    .resizeToFit()
+                  Image("download-circle")
+                    .resizeToFit()
+                  Image("three-dots")
+                    .resizeToFit()
+                    .padding(.vertical, 3)
+                    .opacity(Constants.opacityStandard)
+                }
+                Spacer()
+              }
+              .frame(height: 25, alignment: .leading)
+
             }
-            Spacer()
-          }
-          .frame(height: 25, alignment: .leading)
+            BigPlayButton()
+          }.frame(height: 65)
 
+          MediaDescription(description: episodeDetails.description ?? "", lineLimit: 5)
+
+
+          Rectangle()
+            .fill(Color.spotifyDarkGray)
+            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
+            .overlay(RemoteImage(urlString: mediaDetailVM.mainItem!.imageURL))
+            .padding(.vertical, Constants.paddingSmall)
+            .padding(.horizontal, -Constants.paddingStandard)
+
+          Text("20 Jul • 53min") // TODO: Add real data
+            .opacity(Constants.opacityStandard)
+            .font(.avenir(.medium, size: Constants.fontXSmall))
         }
-        BigPlayButton()
-      }.frame(height: 65)
 
-      MediaDescription(description: details.description ?? "", lineLimit: 5)
+      } else {
 
-      Text("20 Jul • 53min") // TODO: Add real data
-        .opacity(Constants.opacityStandard)
-        .font(.avenir(.medium, size: Constants.fontXSmall))
+        HStack {
+          Spacer()
+          ProgressView()
+            .withSpotifyStyle(useDiscreetColors: true)
+            .onAppear {
+              MediaDetailViewModel.UserInfoAPICalls.checksIfUserFollows(.episode, mediaVM: mediaDetailVM)
+              MediaDetailViewModel.EpisodeAPICalls.getEpisodeDetails(mediaVM: mediaDetailVM)
+            }
+          Spacer()
+        }
 
-      Rectangle()
-        .fill(Color.spotifyDarkGray)
-        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
-        .overlay(RemoteImage(urlString: mediaDetailVM.mainItem!.imageURL))
-        .padding(.vertical, Constants.paddingSmall)
-        .padding(.horizontal, -Constants.paddingStandard)
-
-      Text("20 Jul • 53min") // TODO: Add real data
-        .opacity(Constants.opacityStandard)
-        .font(.avenir(.medium, size: Constants.fontXSmall))
-      //      if Utility.didEverySectionLoaded(in: .showDetail, mediaDetailVM: mediaDetailVM) {
-      //        ShowEpisodesScrollView()
-      //      } else {
-      //        HStack {
-      //          ProgressView()
-      //            .withSpotifyStyle(useDiscreetColors: true)
-      //            .onAppear {
-      //              MediaDetailViewModel.UserInfoAPICalls.checksIfUserFollows(.show, mediaVM: mediaDetailVM)
-      //              MediaDetailViewModel.ShowsAPICalls.getEpisodesFromShows(mediaVM: mediaDetailVM, loadMoreEnabled: true)
-      //            }
-      //        }
-      //      }
+      }
 
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)

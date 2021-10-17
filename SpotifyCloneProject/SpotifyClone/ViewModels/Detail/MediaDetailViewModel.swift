@@ -63,6 +63,13 @@ class MediaDetailViewModel: ObservableObject {
       numberOfLoadedItemsInSection[.shows(section)] = 0
     }
 
+    // Episodes
+    for section in EpisodeSections.allCases {
+      isLoading[.episodes(section)] = true
+      mediaCollection[.episodes(section)] = []
+      numberOfLoadedItemsInSection[.episodes(section)] = 0
+    }
+
     // Artist Basic Info
     for section in ArtistBasicInfo.allCases {
       isLoading[.artistBasicInfo(section)] = true
@@ -77,6 +84,7 @@ class MediaDetailViewModel: ObservableObject {
     case playlist(_ playlistSection: PlaylistSections)
     case album(_ albumSection: AlbumSections)
     case shows(_ showSection: ShowsSections)
+    case episodes(_ showSection: EpisodeSections)
     case artistBasicInfo(_ basicSection: ArtistBasicInfo)
   }
 
@@ -96,6 +104,10 @@ class MediaDetailViewModel: ObservableObject {
 
   enum ShowsSections: CaseIterable {
     case episodesFromShow
+  }
+
+  enum EpisodeSections: CaseIterable {
+    case episodeDetails
   }
 
   enum ArtistBasicInfo: CaseIterable {
@@ -157,7 +169,6 @@ class MediaDetailViewModel: ObservableObject {
       mediaVM.api.getTracksFromPlaylist(with: mediaVM.accessToken!,
                                         playlistID: SpotifyModel.getPlaylistDetails(for: mediaVM.mainItem!).id,
                                         offset: offset) { tracks in
-
         mediaVM.trimAndCommunicateResult(medias: tracks, section: .playlist(.tracksFromPlaylist), loadMoreEnabled: loadMoreEnabled)
       }
     }
@@ -198,6 +209,17 @@ class MediaDetailViewModel: ObservableObject {
       }
     }
 
+  }
+
+
+  struct EpisodeAPICalls {
+
+    static func getEpisodeDetails(mediaVM: MediaDetailViewModel,
+                                  loadMoreEnabled: Bool = false) {
+      mediaVM.api.getEpisodeDetails(with: mediaVM.accessToken!, episodeID: mediaVM.mainItem!.id) { episode in
+        mediaVM.trimAndCommunicateResult(medias: [episode], section: .episodes(.episodeDetails))
+      }
+    }
   }
 
 
@@ -316,6 +338,11 @@ class MediaDetailViewModel: ObservableObject {
       isLoading[.shows(section)] = true
       mediaCollection[.shows(section)]! = []
       numberOfLoadedItemsInSection[.shows(section)] = 0
+    }
+    for section in EpisodeSections.allCases {
+      isLoading[.episodes(section)] = true
+      mediaCollection[.episodes(section)]! = []
+      numberOfLoadedItemsInSection[.episodes(section)] = 0
     }
   }
 

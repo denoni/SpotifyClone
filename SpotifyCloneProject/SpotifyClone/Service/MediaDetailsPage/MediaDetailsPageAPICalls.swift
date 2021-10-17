@@ -93,6 +93,17 @@ class MediaDetailsPageAPICalls: ObservableObject {
                           completionHandler: completionHandler)
   }
 
+  // MARK: - Episode Screen
+
+  func getEpisodeDetails(with accessToken: String,
+                         episodeID: String,
+                         completionHandler: @escaping (SpotifyModel.MediaItem) -> Void) {
+
+    episodeAPI.getEpisodeDetails(with: accessToken,
+                                 episodeID: episodeID,
+                                 completionHandler: completionHandler)
+  }
+
 
   // MARK: - Basic Info
 

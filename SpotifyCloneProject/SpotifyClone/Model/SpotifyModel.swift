@@ -125,6 +125,7 @@ struct SpotifyModel {
     var durationInMs: Double
     var releaseDate: String
     var id: String
+    var showId: String?
   }
 
   // MARK: - Sub structs

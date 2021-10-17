@@ -111,7 +111,6 @@ class APIFetchingUserInfo {
     }
 
     if mediaTypeString == "playlists" {
-      print()
       baseUrl = "https://api.spotify.com/v1/playlists/\(mediaID)/followers"
     }
 
@@ -131,7 +130,7 @@ class APIFetchingUserInfo {
       .responseJSON { json in
         if json.data != nil {
           // if data is not nil an error occurred, so we return true
-          print(json.error.debugDescription)
+          debugPrint(json.error.debugDescription)
           completionHandler(true)
         } else {
           completionHandler(false)

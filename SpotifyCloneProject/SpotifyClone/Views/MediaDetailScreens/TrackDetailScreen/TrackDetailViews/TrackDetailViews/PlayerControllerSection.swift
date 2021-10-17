@@ -78,7 +78,6 @@ struct PlayerControllerSection: View {
               if mediaDetailVM.mainItem!.previewURL.isEmpty {
                 audioManager.playWithItunes(forItem: mediaDetailVM.mainItem!, canPlayMoreThanOneAudio: false)
               } else {
-                print(mediaDetailVM.mainItem!.previewURL)
                 audioManager.play(mediaDetailVM.mainItem!.previewURL, audioID: mediaDetailVM.mainItem!.id)
               }
             }
