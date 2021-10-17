@@ -40,6 +40,7 @@ struct RecommendedArtistScrollView: View {
         }
         .padding(.horizontal, Constants.paddingSmall)
       }
+      .padding(.leading, 10)
     }
   }
 
