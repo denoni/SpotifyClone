@@ -51,6 +51,7 @@ struct ShowEpisodesScrollView: View {
 
 
   struct EpisodeItem: View {
+    @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
     @StateObject var audioManager: RemoteAudio
     let media: SpotifyModel.MediaItem
     let details: SpotifyModel.EpisodeDetails
@@ -89,14 +90,18 @@ struct ShowEpisodesScrollView: View {
 
         HStack(spacing: Constants.paddingStandard) {
           Group {
-            // Plus icon
             Image("plus-circle")
-              .resizeToFit()
+              .resizable()
+              .frame(width: 25, height: 25)
+              .onTapGesture {
+                MediaDetailViewModel.UserInfoAPICalls.changeFollowingState(to: .follow, in: .episode, mediaVM: mediaDetailVM)
+              }
             Image("download-circle")
-              .resizeToFit()
+              .resizable()
+              .frame(width: 25, height: 25)
             Image("three-dots")
-              .resizeToFit()
-              .padding(.vertical, 3)
+              .resizable()
+              .frame(width: 22, height: 22)
               .opacity(Constants.opacityStandard)
           }
           Spacer()

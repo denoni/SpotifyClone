@@ -21,31 +21,31 @@ struct LikeAndThreeDotsIcons: View {
     }
   }
 
-  var isFollowing: Bool {
-    guard mediaDetailVM.userFollowsCurrentMainItem != nil else { return false }
-    return mediaDetailVM.userFollowsCurrentMainItem!
+  var followingState: MediaDetailViewModel.CurrentFollowingState {
+    guard mediaDetailVM.followedIDs[mediaDetailVM.mainItem!.id] != nil else { return .isNotFollowing }
+    return mediaDetailVM.followedIDs[mediaDetailVM.mainItem!.id]!
   }
 
   var body: some View {
     HStack(spacing: 30) {
-      if mediaDetailVM.errorOccurredWhileTryingToFollow == true {
+      if mediaDetailVM.followedIDs[mediaDetailVM.mainItem!.id] == .error {
         Image(systemName: "xmark.octagon.fill")
           .resizable()
           .aspectRatio(1/1, contentMode: .fit)
           .frame(width: 25)
       } else {
-        Button(action: {  MediaDetailViewModel.UserInfoAPICalls.changeFollowingState(to: isFollowing ? .unfollow : .follow,
+        Button(action: {  MediaDetailViewModel.UserInfoAPICalls.changeFollowingState(to: followingState == .isFollowing ? .unfollow : .follow,
                                                                                      in: mediaTypeThatIsUsingThisView, mediaVM: mediaDetailVM) }) {
           Rectangle()
             .fill(Color.clear)
             .frame(width: 25)
             .overlay( Group {
-              if mediaDetailVM.userFollowsCurrentMainItem == nil {
+              if mediaDetailVM.followedIDs[mediaDetailVM.mainItem!.id] == nil {
                 ProgressView()
                   .withSpotifyStyle(useDiscreetColors: true)
                   .scaleEffect(0.6)
               } else {
-                Image(isFollowing ?  "heart-filled" : "heart-stroked")
+                Image(followingState == .isFollowing ?  "heart-filled" : "heart-stroked")
                   .resizable()
               }
             }.scaledToFit())

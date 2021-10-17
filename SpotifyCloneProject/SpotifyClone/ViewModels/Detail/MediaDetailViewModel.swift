@@ -23,8 +23,13 @@ class MediaDetailViewModel: ObservableObject {
   @Published var accessToken: String?
 
   var detailScreenOrigin: DetailScreenOrigin?
-  @Published var userFollowsCurrentMainItem: Bool?
-  @Published var errorOccurredWhileTryingToFollow: Bool?
+  @Published var followedIDs = [String: CurrentFollowingState]()
+
+  enum CurrentFollowingState {
+    case isFollowing
+    case isNotFollowing
+    case error
+  }
 
   enum DetailScreenOrigin {
     case home(homeVM: HomeViewModel)
@@ -227,22 +232,27 @@ class MediaDetailViewModel: ObservableObject {
     static func checksIfUserFollows(_ mediaType: APIFetchingUserInfo.ValidMediaType,
                                     mediaVM: MediaDetailViewModel) {
       mediaVM.api.checksIfUserFollows(mediaType, with: mediaVM.accessToken!, mediaID: mediaVM.mainItem!.id) { response in
-        mediaVM.userFollowsCurrentMainItem = response
+        if response == true {
+          mediaVM.followedIDs = [mediaVM.mainItem!.id: .isFollowing]
+        } else {
+          mediaVM.followedIDs = [mediaVM.mainItem!.id: .isNotFollowing]
+        }
+
       }
     }
 
     static func changeFollowingState(to followingState: APIFetchingUserInfo.FollowingState,
                                      in mediaType: APIFetchingUserInfo.ValidMediaType,
                                      mediaVM: MediaDetailViewModel) {
-      mediaVM.errorOccurredWhileTryingToFollow = nil
       mediaVM.api.changeFollowingState(to: followingState, in: mediaType, with: mediaVM.accessToken!, mediaID: mediaVM.mainItem!.id) { errorOccurred in
-        mediaVM.errorOccurredWhileTryingToFollow = errorOccurred
         if !errorOccurred {
           if followingState == .follow {
-            mediaVM.userFollowsCurrentMainItem = true
+            mediaVM.followedIDs = [mediaVM.mainItem!.id: .isFollowing]
           } else {
-            mediaVM.userFollowsCurrentMainItem = false
+            mediaVM.followedIDs = [mediaVM.mainItem!.id: .isNotFollowing]
           }
+        } else {
+          mediaVM.followedIDs = [mediaVM.mainItem!.id: .error]
         }
       }
     }
@@ -314,10 +324,8 @@ class MediaDetailViewModel: ObservableObject {
 
   func clean() {
     mainItem = nil
-    userFollowsCurrentMainItem = nil
-    errorOccurredWhileTryingToFollow = nil
     detailScreenOrigin = nil
-
+    followedIDs.removeAll()
 
     for section in ArtistSections.allCases {
       isLoading[.artist(section)] = true
