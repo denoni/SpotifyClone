@@ -74,7 +74,10 @@ struct EpisodeDetailContent: View {
           let episodeDetails = SpotifyModel.getEpisodeDetails(for: episode)
 
           let releaseDate = Utility.getSpelledOutDate(from: episodeDetails.releaseDate)
-          let duration = Utility.formatTimeToHourMinSec(for: .milliseconds(episodeDetails.durationInMs), spelledOut: true)
+          let duration = Utility.formatTimeToHourMinSec(for: .milliseconds(episodeDetails.durationInMs),
+                                                        spelledOut: true)
+
+          let followingState = mediaDetailVM.followedIDs[episode.id] ?? .isNotFollowing
 
           AuthorItem(name: episode.authorName.first!,
                      id: episode.id,
@@ -90,13 +93,36 @@ struct EpisodeDetailContent: View {
 
               HStack(spacing: Constants.paddingStandard) {
                 Group {
-                  Image("plus-circle")
-                    .resizeToFit()
+                  Group {
+                    if followingState == .isFollowing {
+                      Image(systemName: "checkmark.circle.fill")
+                        .resizable()
+                        .foregroundColor(.spotifyGreen)
+                        .frame(width: 25, height: 25)
+                        .onTapGesture {
+                          MediaDetailViewModel.UserInfoAPICalls.changeFollowingState(to: .unfollow,
+                                                                                     in: .episode,
+                                                                                     mediaVM: mediaDetailVM,
+                                                                                     itemID: episode.id)
+                        }
+                    } else {
+                      Image("plus-circle")
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                        .onTapGesture {
+                          MediaDetailViewModel.UserInfoAPICalls.changeFollowingState(to: .follow,
+                                                                                     in: .episode,
+                                                                                     mediaVM: mediaDetailVM,
+                                                                                     itemID: episode.id)
+                        }
+                    }
+                  }
                   Image("download-circle")
-                    .resizeToFit()
+                    .resizable()
+                    .frame(width: 25, height: 25)
                   Image("three-dots")
-                    .resizeToFit()
-                    .padding(.vertical, 3)
+                    .resizable()
+                    .frame(width: 22, height: 22)
                     .opacity(Constants.opacityStandard)
                 }
                 Spacer()
@@ -128,7 +154,8 @@ struct EpisodeDetailContent: View {
           ProgressView()
             .withSpotifyStyle(useDiscreetColors: true)
             .onAppear {
-              MediaDetailViewModel.UserInfoAPICalls.checksIfUserFollows(.episode, mediaVM: mediaDetailVM, itemID: mediaDetailVM.mainItem!.id)
+              MediaDetailViewModel.UserInfoAPICalls.checksIfUserFollows(.episode, mediaVM: mediaDetailVM,
+                                                                        itemID: mediaDetailVM.mainItem!.id)
               MediaDetailViewModel.EpisodeAPICalls.getEpisodeDetails(mediaVM: mediaDetailVM)
             }
           Spacer()
@@ -152,7 +179,8 @@ struct EpisodeDetailScreen_Previews: PreviewProvider {
   static var previews: some View {
     ZStack {
       // `detailScreenOrigin` doesn't matter on preview.
-      EpisodeDetailScreen(detailScreenOrigin: .home(homeVM: HomeViewModel(mainViewModel: mainVM)), mediaDetailVM: MediaDetailViewModel(mainVM: mainVM))
+      EpisodeDetailScreen(detailScreenOrigin: .home(homeVM: HomeViewModel(mainViewModel: mainVM)),
+                          mediaDetailVM: MediaDetailViewModel(mainVM: mainVM))
       VStack {
         Spacer()
         BottomBar(mainVM: mainVM,
