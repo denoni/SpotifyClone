@@ -94,32 +94,32 @@ struct Utility {
 
     switch subPage {
     case .albumDetail:
-      for section in MediaDetailViewModel.AlbumSections.allCases {
+      for section in MediaDetailSection.AlbumSections.allCases {
         // If any section still loading, return false
         guard mediaDetailVM.isLoading[.album(section)] != true else {
           return false
         }
       }
     case .artistDetail:
-      for section in MediaDetailViewModel.ArtistSections.allCases {
+      for section in MediaDetailSection.ArtistSections.allCases {
         guard mediaDetailVM.isLoading[.artist(section)] != true else {
           return false
         }
       }
     case .playlistDetail:
-      for section in MediaDetailViewModel.PlaylistSections.allCases {
+      for section in MediaDetailSection.PlaylistSections.allCases {
         guard mediaDetailVM.isLoading[.playlist(section)] != true else {
           return false
         }
       }
     case .showDetail:
-      for section in MediaDetailViewModel.ShowsSections.allCases {
+      for section in MediaDetailSection.ShowsSections.allCases {
         guard mediaDetailVM.isLoading[.shows(section)] != true else {
           return false
         }
       }
     case .episodeDetail:
-      for section in MediaDetailViewModel.EpisodeSections.allCases {
+      for section in MediaDetailSection.EpisodeSections.allCases {
         guard mediaDetailVM.isLoading[.episodes(section)] != true else {
           return false
         }

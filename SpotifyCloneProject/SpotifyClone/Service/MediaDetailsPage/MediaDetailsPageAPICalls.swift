@@ -26,6 +26,8 @@ class MediaDetailsPageAPICalls: ObservableObject {
   // MARK: Top Tracks From Artist
   func getTopTracksFromArtist(with accessToken: String,
                               artistID: String,
+                              limit: Int = 10,
+                              offset: Int = 0,
                               completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
 
     trackAPI.getTrack(using: .topTracksFromArtist(artistID: artistID),

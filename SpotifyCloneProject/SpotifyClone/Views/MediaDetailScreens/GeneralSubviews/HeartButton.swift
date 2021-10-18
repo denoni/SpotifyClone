@@ -17,7 +17,7 @@ struct HeartButton: View {
   }
 
   var body: some View {
-    Button(action: {  MediaDetailViewModel.UserInfoAPICalls.changeFollowingState(to: followingState == .isFollowing ? .unfollow : .follow,
+    Button(action: {  MediaDetailAPICalls.UserInfoAPICalls.changeFollowingState(to: followingState == .isFollowing ? .unfollow : .follow,
                                                                                  in: itemType,
                                                                                  mediaVM: mediaDetailVM,
                                                                                  itemID: itemID) }) {

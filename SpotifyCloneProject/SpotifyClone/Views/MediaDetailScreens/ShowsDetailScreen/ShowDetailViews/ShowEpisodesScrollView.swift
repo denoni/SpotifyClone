@@ -22,9 +22,9 @@ struct ShowEpisodesScrollView: View {
           let episodeDetails = SpotifyModel.getEpisodeDetails(for: media)
           EpisodeItem(audioManager: audioManager, media: media, details: episodeDetails)
             .onAppear {
-              MediaDetailViewModel.UserInfoAPICalls.checksIfUserFollows(.episode, mediaVM: mediaDetailVM, itemID: media.id)
+              MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.episode, mediaVM: mediaDetailVM, itemID: media.id)
               if mediaDetailVM.shouldFetchMoreData(basedOn: media, inRelationTo: medias) {
-                MediaDetailViewModel.ShowsAPICalls.getEpisodesFromShows(mediaVM: mediaDetailVM, loadMoreEnabled: true)
+                MediaDetailAPICalls.ShowsAPICalls.getEpisodesFromShows(mediaVM: mediaDetailVM, loadMoreEnabled: true)
               }
             }
             .onTapGesture {

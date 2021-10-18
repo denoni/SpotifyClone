@@ -77,8 +77,6 @@ struct EpisodeDetailContent: View {
           let duration = Utility.formatTimeToHourMinSec(for: .milliseconds(episodeDetails.durationInMs),
                                                         spelledOut: true)
 
-          let followingState = mediaDetailVM.followedIDs[episode.id] ?? .isNotFollowing
-
           AuthorItem(name: episode.authorName.first!,
                      id: episode.id,
                      imageURL: episode.author!.first!.images!.first!.url,
@@ -133,9 +131,7 @@ struct EpisodeDetailContent: View {
           ProgressView()
             .withSpotifyStyle(useDiscreetColors: true)
             .onAppear {
-              MediaDetailViewModel.UserInfoAPICalls.checksIfUserFollows(.episode, mediaVM: mediaDetailVM,
-                                                                        itemID: mediaDetailVM.mainItem!.id)
-              MediaDetailViewModel.EpisodeAPICalls.getEpisodeDetails(mediaVM: mediaDetailVM)
+              mediaDetailVM.getEpisodesScreenData()
             }
           Spacer()
         }

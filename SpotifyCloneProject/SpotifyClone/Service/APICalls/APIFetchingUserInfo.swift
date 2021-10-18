@@ -63,6 +63,8 @@ class APIFetchingUserInfo {
       .validate()
       .responseJSON { json in
 
+        debugPrint(json.debugDescription)
+
         do {
           let decoder = JSONDecoder()
           let response = try decoder.decode([Bool].self, from: json.data!)

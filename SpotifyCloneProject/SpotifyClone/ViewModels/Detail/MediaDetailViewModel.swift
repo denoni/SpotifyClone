@@ -9,6 +9,8 @@
 
 import Foundation
 
+protocol MediaDetailSectionsProtocol {}
+
 class MediaDetailViewModel: ObservableObject {
   var api = MediaDetailsPageAPICalls()
 
@@ -17,9 +19,9 @@ class MediaDetailViewModel: ObservableObject {
   @Published var mainItem: SpotifyModel.MediaItem?
   @Published var imageColorModel = RemoteImageModel(urlString: "")
 
-  @Published var mediaCollection = [Section:[SpotifyModel.MediaItem]]()
-  @Published var isLoading = [Section:Bool]()
-  @Published var numberOfLoadedItemsInSection = [Section:Int]()
+  @Published var mediaCollection = [MediaDetailSection:[SpotifyModel.MediaItem]]()
+  @Published var isLoading = [MediaDetailSection:Bool]()
+  @Published var numberOfLoadedItemsInSection = [MediaDetailSection:Int]()
   @Published var accessToken: String?
 
   var detailScreenOrigin: DetailScreenOrigin?
@@ -37,250 +39,48 @@ class MediaDetailViewModel: ObservableObject {
   }
 
   init(mainVM: MainViewModel) {
-
     self.mainVM = mainVM
-
-    // Artist
-    for section in ArtistSections.allCases {
-      isLoading[.artist(section)] = true
-      mediaCollection[.artist(section)] = []
-      numberOfLoadedItemsInSection[.artist(section)] = 0
-    }
-
-    // Playlist
-    for section in PlaylistSections.allCases {
-      isLoading[.playlist(section)] = true
-      mediaCollection[.playlist(section)] = []
-      numberOfLoadedItemsInSection[.playlist(section)] = 0
-    }
-
-    // Album
-    for section in AlbumSections.allCases {
-      isLoading[.album(section)] = true
-      mediaCollection[.album(section)] = []
-      numberOfLoadedItemsInSection[.album(section)] = 0
-    }
-
-    // Shows
-    for section in ShowsSections.allCases {
-      isLoading[.shows(section)] = true
-      mediaCollection[.shows(section)] = []
-      numberOfLoadedItemsInSection[.shows(section)] = 0
-    }
-
-    // Episodes
-    for section in EpisodeSections.allCases {
-      isLoading[.episodes(section)] = true
-      mediaCollection[.episodes(section)] = []
-      numberOfLoadedItemsInSection[.episodes(section)] = 0
-    }
-
-    // Artist Basic Info
-    for section in ArtistBasicInfo.allCases {
-      isLoading[.artistBasicInfo(section)] = true
-      mediaCollection[.artistBasicInfo(section)] = []
-      numberOfLoadedItemsInSection[.artistBasicInfo(section)] = 0
-    }
-
+    cleanAllSection()
   }
 
-  enum Section: Hashable {
-    case artist(_ artistSection: ArtistSections)
-    case playlist(_ playlistSection: PlaylistSections)
-    case album(_ albumSection: AlbumSections)
-    case shows(_ showSection: ShowsSections)
-    case episodes(_ showSection: EpisodeSections)
-    case artistBasicInfo(_ basicSection: ArtistBasicInfo)
-  }
-
-  enum ArtistSections: CaseIterable {
-    case topTracksFromArtist
-    case albumsFromArtist
-    case playlistsFromArtist
-  }
-
-  enum PlaylistSections: CaseIterable {
-    case tracksFromPlaylist
-  }
-
-  enum AlbumSections: CaseIterable {
-    case tracksFromAlbum
-  }
-
-  enum ShowsSections: CaseIterable {
-    case episodesFromShow
-  }
-
-  enum EpisodeSections: CaseIterable {
-    case episodeDetails
-  }
-
-  enum ArtistBasicInfo: CaseIterable {
-    case artistBasicInfo
-  }
 
   func getArtistScreenData() {
-    ArtistAPICalls.getTopTracksFromArtist(mediaVM: self)
-    ArtistAPICalls.getAlbumsFromArtist(mediaVM: self)
-    ArtistAPICalls.getPlaylistFromArtist(mediaVM: self)
+    MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.artist, mediaVM: self,
+                                                             itemID: self.mainItem!.id)
+    MediaDetailAPICalls.ArtistAPICalls.getTopTracksFromArtist(mediaVM: self)
+    MediaDetailAPICalls.ArtistAPICalls.getAlbumsFromArtist(mediaVM: self)
+    MediaDetailAPICalls.ArtistAPICalls.getPlaylistFromArtist(mediaVM: self)
   }
 
-  func getPlaylistScreenData() {
-    PlaylistAPICalls.getTracksFromPlaylist(mediaVM: self)
+  func getPlaylistScreenData(currentUserID: String) {
+    MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.playlist(userID: currentUserID),
+                                                             mediaVM: self, itemID: self.mainItem!.id)
+    MediaDetailAPICalls.PlaylistAPICalls.getTracksFromPlaylist(mediaVM: self, loadMoreEnabled: true)
   }
 
   func getAlbumScreenData() {
-    PlaylistAPICalls.getTracksFromPlaylist(mediaVM: self)
+    MediaDetailAPICalls.UserInfoAPICalls.getArtistBasicInfo(mediaVM: self)
+    MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.album, mediaVM: self,
+                                                             itemID: self.mainItem!.id)
+    MediaDetailAPICalls.AlbumAPICalls.getTracksFromAlbum(mediaVM: self, loadMoreEnabled: true)
   }
 
   func getShowsScreenData() {
-    ShowsAPICalls.getEpisodesFromShows(mediaVM: self)
+    MediaDetailAPICalls.ShowsAPICalls.getEpisodesFromShows(mediaVM: self, loadMoreEnabled: true)
   }
 
-
-  struct ArtistAPICalls {
-
-    static func getTopTracksFromArtist(mediaVM: MediaDetailViewModel) {
-      mediaVM.api.getTopTracksFromArtist(with: mediaVM.accessToken!, artistID: mediaVM.mainItem!.id) { tracks in
-        mediaVM.trimAndCommunicateResult(medias: tracks, section: .artist(.topTracksFromArtist), limit: 5)
-      }
-    }
-
-    static func getAlbumsFromArtist(mediaVM: MediaDetailViewModel) {
-      mediaVM.api.getAlbumsFromArtist(with: mediaVM.accessToken!, artistID: mediaVM.mainItem!.id) { albums in
-        mediaVM.trimAndCommunicateResult(medias: albums, section: .artist(.albumsFromArtist), limit: 5)
-      }
-    }
-
-    static func getPlaylistFromArtist(mediaVM: MediaDetailViewModel) {
-      // Remote special characters artist title(name)
-      let keyWord: String = mediaVM.mainItem!.title.folding(options: .diacriticInsensitive, locale: .current)
-
-      mediaVM.api.getPlaylistsFromArtist(with: mediaVM.accessToken!, keyWord: keyWord) { playlists in
-        mediaVM.trimAndCommunicateResult(medias: playlists, section: .artist(.playlistsFromArtist))
-      }
-    }
-
+  func getEpisodesScreenData() {
+    MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.show, mediaVM: self,
+                                                             itemID: self.mainItem!.id)
+    MediaDetailAPICalls.EpisodeAPICalls.getEpisodeDetails(mediaVM: self)
   }
-
-
-  struct PlaylistAPICalls {
-
-    static func getTracksFromPlaylist(mediaVM: MediaDetailViewModel,
-                                      loadMoreEnabled: Bool = false) {
-      let offset = mediaVM.getNumberOfLoadedItems(for: .playlist(.tracksFromPlaylist))
-      mediaVM.increaseNumberOfLoadedItems(for: .playlist(.tracksFromPlaylist), by: 10)
-
-      mediaVM.api.getTracksFromPlaylist(with: mediaVM.accessToken!,
-                                        playlistID: SpotifyModel.getPlaylistDetails(for: mediaVM.mainItem!).id,
-                                        offset: offset) { tracks in
-        mediaVM.trimAndCommunicateResult(medias: tracks, section: .playlist(.tracksFromPlaylist), loadMoreEnabled: loadMoreEnabled)
-      }
-    }
-
-  }
-
-
-  struct AlbumAPICalls {
-
-    static func getTracksFromAlbum(mediaVM: MediaDetailViewModel,
-                                   loadMoreEnabled: Bool = false) {
-      let offset = mediaVM.getNumberOfLoadedItems(for: .album(.tracksFromAlbum))
-      mediaVM.increaseNumberOfLoadedItems(for: .album(.tracksFromAlbum), by: 10)
-
-      mediaVM.api.getTracksFromAlbum(with: mediaVM.accessToken!,
-                                     albumID: SpotifyModel.getAlbumDetails(for: mediaVM.mainItem!).id,
-                                     offset: offset) { tracks in
-        mediaVM.trimAndCommunicateResult(medias: tracks, section: .album(.tracksFromAlbum),
-                                         loadMoreEnabled: loadMoreEnabled)
-      }
-    }
-
-  }
-
-
-  struct ShowsAPICalls {
-
-    static func getEpisodesFromShows(mediaVM: MediaDetailViewModel,
-                                     loadMoreEnabled: Bool = false) {
-      let offset = mediaVM.getNumberOfLoadedItems(for: .shows(.episodesFromShow))
-      mediaVM.increaseNumberOfLoadedItems(for: .shows(.episodesFromShow), by: 10)
-
-      mediaVM.api.getEpisodesFromShow(with: mediaVM.accessToken!,
-                                      showID: SpotifyModel.getShowDetails(for: mediaVM.mainItem!).id,
-                                      offset: offset) { episodes in
-        mediaVM.trimAndCommunicateResult(medias: episodes, section: .shows(.episodesFromShow),
-                                         loadMoreEnabled: loadMoreEnabled)
-      }
-    }
-
-  }
-
-
-  struct EpisodeAPICalls {
-
-    static func getEpisodeDetails(mediaVM: MediaDetailViewModel,
-                                  loadMoreEnabled: Bool = false) {
-      mediaVM.api.getEpisodeDetails(with: mediaVM.accessToken!, episodeID: mediaVM.mainItem!.id) { episode in
-        mediaVM.trimAndCommunicateResult(medias: [episode], section: .episodes(.episodeDetails))
-      }
-    }
-  }
-
-
-  struct UserInfoAPICalls {
-    static func checksIfUserFollows(_ mediaType: APIFetchingUserInfo.ValidMediaType,
-                                    mediaVM: MediaDetailViewModel,
-                                    itemID: String) {
-      mediaVM.api.checksIfUserFollows(mediaType, with: mediaVM.accessToken!, mediaID: itemID) { response in
-        if response == true {
-          mediaVM.followedIDs[itemID] = .isFollowing
-        } else {
-          mediaVM.followedIDs[itemID] = .isNotFollowing
-        }
-
-      }
-    }
-
-    static func changeFollowingState(to followingState: APIFetchingUserInfo.FollowingState,
-                                     in mediaType: APIFetchingUserInfo.ValidMediaType,
-                                     mediaVM: MediaDetailViewModel,
-                                     itemID: String) {
-      mediaVM.api.changeFollowingState(to: followingState, in: mediaType, with: mediaVM.accessToken!, mediaID: itemID) { errorOccurred in
-        if !errorOccurred {
-          if followingState == .follow {
-            mediaVM.followedIDs[itemID] = .isFollowing
-          } else {
-            mediaVM.followedIDs[itemID] = .isNotFollowing
-          }
-        } else {
-          mediaVM.followedIDs[itemID] = .error
-        }
-      }
-    }
-    
-  }
-
-
-  // Gets the artist basic info(followers, popularity, profile image -> we're mainly interested in the image)
-  func getArtistBasicInfo(mediaVM: MediaDetailViewModel) {
-    var artistIDs = [String]()
-    for index in mediaVM.mainItem!.author!.indices {
-      artistIDs.append(mediaVM.mainItem!.author![index].id)
-    }
-    
-    mediaVM.api.basicInfoAPI.getArtists(with: mediaVM.accessToken!, artistIDs: artistIDs) { artists in
-      mediaVM.trimAndCommunicateResult(medias: artists, section: .artistBasicInfo(.artistBasicInfo))
-    }
-  }
-
 
 
 
   // MARK: - API Auxiliary Functions
 
   func trimAndCommunicateResult(medias: [SpotifyModel.MediaItem],
-                                section: Section,
+                                section: MediaDetailSection,
                                 limit: Int = 10,
                                 loadMoreEnabled: Bool = false,
                                 deleteAlmostDuplicateResults: Bool = false) {
@@ -301,11 +101,11 @@ class MediaDetailViewModel: ObservableObject {
     isLoading[section] = false
   }
 
-  func getNumberOfLoadedItems(for section: Section) -> Int {
+  func getNumberOfLoadedItems(for section: MediaDetailSection) -> Int {
     return numberOfLoadedItemsInSection[section]!
   }
 
-  func increaseNumberOfLoadedItems(for section: Section, by amount: Int) {
+  func increaseNumberOfLoadedItems(for section: MediaDetailSection, by amount: Int) {
     numberOfLoadedItemsInSection[section]! += amount
   }
 
@@ -322,38 +122,13 @@ class MediaDetailViewModel: ObservableObject {
 
 
 
-  // MARK: - Non-API Auxiliary Functions
+  // MARK: - Auxiliary Functions not related to API calls
 
   func clean() {
     mainItem = nil
     detailScreenOrigin = nil
     followedIDs.removeAll()
-
-    for section in ArtistSections.allCases {
-      isLoading[.artist(section)] = true
-      mediaCollection[.artist(section)]! = []
-      numberOfLoadedItemsInSection[.artist(section)] = 0
-    }
-    for section in PlaylistSections.allCases {
-      isLoading[.playlist(section)] = true
-      mediaCollection[.playlist(section)]! = []
-      numberOfLoadedItemsInSection[.playlist(section)] = 0
-    }
-    for section in AlbumSections.allCases {
-      isLoading[.album(section)] = true
-      mediaCollection[.album(section)]! = []
-      numberOfLoadedItemsInSection[.album(section)] = 0
-    }
-    for section in ShowsSections.allCases {
-      isLoading[.shows(section)] = true
-      mediaCollection[.shows(section)]! = []
-      numberOfLoadedItemsInSection[.shows(section)] = 0
-    }
-    for section in EpisodeSections.allCases {
-      isLoading[.episodes(section)] = true
-      mediaCollection[.episodes(section)]! = []
-      numberOfLoadedItemsInSection[.episodes(section)] = 0
-    }
+    cleanAllSection()
   }
 
   func setVeryFirstImageInfoBasedOn(_ firstImageURL: String) {
@@ -362,6 +137,50 @@ class MediaDetailViewModel: ObservableObject {
 
   func returnBasicArtistsInfo() -> [SpotifyModel.MediaItem] {
     return mediaCollection[.artistBasicInfo(.artistBasicInfo)]!
+  }
+
+
+  
+  // MARK: - Private functions
+
+  private func cleanAllSection() {
+    cleanSection(MediaDetailSection.ArtistSections.self)
+    cleanSection(MediaDetailSection.PlaylistSections.self)
+    cleanSection(MediaDetailSection.AlbumSections.self)
+    cleanSection(MediaDetailSection.ShowsSections.self)
+    cleanSection(MediaDetailSection.EpisodeSections.self)
+    cleanSection(MediaDetailSection.ArtistSections.self)
+    cleanSection(MediaDetailSection.ArtistBasicInfo.self)
+  }
+
+  private func cleanSection<DetailSection: MediaDetailSectionsProtocol & CaseIterable>(_ section: DetailSection.Type) {
+
+    for subSection in section.allCases {
+      var sectionInstance: MediaDetailSection?
+
+      if section == MediaDetailSection.ArtistSections.self {
+        sectionInstance = .artist(subSection as! MediaDetailSection.ArtistSections)
+
+      } else if section == MediaDetailSection.PlaylistSections.self {
+        sectionInstance = .playlist(subSection as! MediaDetailSection.PlaylistSections)
+
+      } else if section == MediaDetailSection.AlbumSections.self {
+        sectionInstance = .album(subSection as! MediaDetailSection.AlbumSections)
+
+      } else if section == MediaDetailSection.ShowsSections.self {
+        sectionInstance = .shows(subSection as! MediaDetailSection.ShowsSections)
+
+      } else if section == MediaDetailSection.EpisodeSections.self {
+        sectionInstance = .episodes(subSection as! MediaDetailSection.EpisodeSections)
+
+      } else if section == MediaDetailSection.ArtistBasicInfo.self {
+        sectionInstance = .artistBasicInfo(subSection as! MediaDetailSection.ArtistBasicInfo)
+      }
+
+      isLoading[sectionInstance!] = true
+      mediaCollection[sectionInstance!] = []
+      numberOfLoadedItemsInSection[sectionInstance!] = 0
+    }
   }
 
   private func getNonDuplicateItems(for medias: [SpotifyModel.MediaItem],
@@ -420,10 +239,7 @@ class MediaDetailViewModel: ObservableObject {
           if !containsDuplicate { noDuplicateMedias.append(media) }
         }
       }
-
     }
-
-
     return noDuplicateMedias
   }
 

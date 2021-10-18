@@ -18,7 +18,7 @@ struct SaveButton: View {
 
   var body: some View {
     if followingState == .isFollowing {
-      Button(action: { MediaDetailViewModel.UserInfoAPICalls.changeFollowingState(to: .unfollow,
+      Button(action: { MediaDetailAPICalls.UserInfoAPICalls.changeFollowingState(to: .unfollow,
                                                                                   in: itemType,
                                                                                   mediaVM: mediaDetailVM,
                                                                                   itemID: itemID) }) {
@@ -28,7 +28,7 @@ struct SaveButton: View {
           .frame(width: 25, height: 25)
       }
     } else {
-      Button(action: { MediaDetailViewModel.UserInfoAPICalls.changeFollowingState(to: .follow,
+      Button(action: { MediaDetailAPICalls.UserInfoAPICalls.changeFollowingState(to: .follow,
                                                                                   in: itemType,
                                                                                   mediaVM: mediaDetailVM,
                                                                                   itemID: itemID) }) {

@@ -10,7 +10,7 @@ import SwiftUI
 struct TracksVerticalScrollView: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @StateObject var audioManager = RemoteAudio()
-  var tracksOrigin: MediaDetailViewModel.Section
+  var tracksOrigin: MediaDetailSection
   var medias: [SpotifyModel.MediaItem] {
     switch tracksOrigin {
     case .album:
@@ -30,14 +30,14 @@ struct TracksVerticalScrollView: View {
           AlbumItem(audioManager: audioManager, media: media)
             .onAppear {
               if mediaDetailVM.shouldFetchMoreData(basedOn: media, inRelationTo: medias) {
-                MediaDetailViewModel.AlbumAPICalls.getTracksFromAlbum(mediaVM: mediaDetailVM, loadMoreEnabled: true)
+                MediaDetailAPICalls.AlbumAPICalls.getTracksFromAlbum(mediaVM: mediaDetailVM, loadMoreEnabled: true)
               }
             }
         case .playlist:
           PlaylistItem(audioManager: audioManager, media: media)
             .onAppear {
               if mediaDetailVM.shouldFetchMoreData(basedOn: media, inRelationTo: medias) {
-                MediaDetailViewModel.PlaylistAPICalls.getTracksFromPlaylist(mediaVM: mediaDetailVM, loadMoreEnabled: true)
+                MediaDetailAPICalls.PlaylistAPICalls.getTracksFromPlaylist(mediaVM: mediaDetailVM, loadMoreEnabled: true)
               }
             }
         default:
