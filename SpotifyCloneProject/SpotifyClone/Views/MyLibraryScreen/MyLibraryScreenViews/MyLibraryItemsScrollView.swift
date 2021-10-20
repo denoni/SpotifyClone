@@ -24,9 +24,11 @@ struct MyLibraryItemsScrollView: View {
           Group {
             if media.mediaType == .artist {
               MyLibraryArtistMediaItem(name: media.title, imageURL: media.imageURL)
+            } else if media.mediaType == .show {
+              MyLibraryShowMediaItem(title: media.title, authorName: media.authorName.first!, imageURL: media.imageURL)
             } else {
-              MyLibraryDefaultMediaItem(title: media.title, subTitle: media.previewURL, imageURL: media.imageURL,
-                               pinnedItem: media.id == "liked-songs" || media.id == "your-episodes")
+              MyLibraryDefaultMediaItem(title: media.title, subTitle: "Playlist • \(media.authorName.first!) ", imageURL: media.imageURL,
+                                        pinnedItem: media.id == "liked-songs" || media.id == "your-episodes")
             }
           }
           .frame(height: 80)

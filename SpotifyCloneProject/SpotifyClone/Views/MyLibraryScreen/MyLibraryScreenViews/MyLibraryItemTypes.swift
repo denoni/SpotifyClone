@@ -17,8 +17,9 @@ struct MyLibraryDefaultMediaItem: View {
     HStack(spacing: Constants.spacingSmall) {
       Rectangle()
         .foregroundColor(.spotifyMediumGray)
-        .overlay(RemoteImage(urlString: imageURL).scaledToFit().aspectRatio(1/1, contentMode: .fit))
+        .overlay(RemoteImage(urlString: imageURL).aspectRatio(1/1, contentMode: .fill))
         .frame(width: 80, height: 80)
+        .mask(Rectangle().frame(width: 80, height: 80))
       VStack(alignment: .leading, spacing: 5) {
         Text(title)
           .font(.avenir(.heavy, size: Constants.fontSmall))
@@ -51,7 +52,7 @@ struct MyLibraryArtistMediaItem: View {
     HStack(spacing: Constants.spacingSmall) {
       Circle()
         .foregroundColor(.spotifyMediumGray)
-        .overlay(RemoteImage(urlString: imageURL).scaledToFit().aspectRatio(1/1, contentMode: .fit))
+        .overlay(RemoteImage(urlString: imageURL).aspectRatio(1/1, contentMode: .fill))
         .frame(width: 80, height: 80)
         .mask(Circle())
       VStack(alignment: .leading, spacing: 5) {
@@ -60,6 +61,32 @@ struct MyLibraryArtistMediaItem: View {
           .lineLimit(1)
           .padding(.trailing, Constants.paddingLarge)
         Text("Artist")
+          .font(.avenir(.medium, size: Constants.fontXSmall))
+          .opacity(Constants.opacityHigh)
+      }
+      Spacer()
+    }
+  }
+}
+
+struct MyLibraryShowMediaItem: View {
+  let title: String
+  let authorName: String
+  let imageURL: String
+
+  var body: some View {
+    HStack(spacing: Constants.spacingSmall) {
+      RoundedRectangle(cornerRadius: Constants.radiusStandard)
+        .foregroundColor(.spotifyMediumGray)
+        .overlay(RemoteImage(urlString: imageURL).aspectRatio(1/1, contentMode: .fill))
+        .frame(width: 80, height: 80)
+        .mask(RoundedRectangle(cornerRadius: Constants.radiusStandard))
+      VStack(alignment: .leading, spacing: 5) {
+        Text(title)
+          .font(.avenir(.heavy, size: Constants.fontSmall))
+          .lineLimit(1)
+          .padding(.trailing, Constants.paddingLarge)
+        Text("Podcast • \(authorName)")
           .font(.avenir(.medium, size: Constants.fontXSmall))
           .opacity(Constants.opacityHigh)
       }

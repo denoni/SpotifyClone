@@ -34,8 +34,9 @@ struct MyLibraryScreen: View {
   func getMyLibraryMedias() -> [SpotifyModel.MediaItem] {
     var myLibraryMedias = [SpotifyModel.MediaItem]()
 
-    myLibraryMedias += myLibraryVM.mediaCollection[.userPlaylists]!
-    myLibraryMedias += myLibraryVM.mediaCollection[.userArtists]!
+    for section in MyLibraryViewModel.Section.allCases {
+      myLibraryMedias += myLibraryVM.mediaCollection[section]!
+    }
 
     return myLibraryMedias
   }

@@ -12,6 +12,7 @@ class APIFetchingShows {
 
   enum ShowsEndpointInAPI {
     case topPodcasts
+    case followedPodcasts
   }
 
   func getShow(using endPoint: ShowsEndpointInAPI,
@@ -28,58 +29,98 @@ class APIFetchingShows {
       let type = "show"
       let market = "US"
       baseUrl = "https://api.spotify.com/v1/search?q=\(termSearch)&type=\(type)&market=\(market)&limit=\(limit)&offset=\(offset)"
+
+      var urlRequest = URLRequest(url: URL(string: baseUrl)!)
+      urlRequest.httpMethod = "GET"
+      urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+      urlRequest.cachePolicy = NSURLRequest.CachePolicy.returnCacheDataElseLoad
+
+      AF.request(urlRequest)
+        .validate()
+        .responseDecodable(of: ShowResponse.self) { response in
+          guard let data = response.value else {
+            fatalError("Error receiving tracks from API.")
+          }
+
+          let numberOfItems = data.shows.items.count
+
+
+          guard numberOfItems != 0 else {
+            fatalError("The API response was corrects but empty. We don't have a way to handle this yet.")
+          }
+
+          var podcastItems = [SpotifyModel.MediaItem]()
+
+          for showIndex in 0 ..< numberOfItems {
+            let show = data.shows.items[showIndex]
+            podcastItems.append(self.parseShowData(show))
+          }
+
+          completionHandler(podcastItems)
+        }
+
+
+    case .followedPodcasts:
+      baseUrl = "https://api.spotify.com/v1/me/shows"
+
+      var urlRequest = URLRequest(url: URL(string: baseUrl)!)
+      urlRequest.httpMethod = "GET"
+      urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+      urlRequest.cachePolicy = NSURLRequest.CachePolicy.returnCacheDataElseLoad
+
+      AF.request(urlRequest)
+        .validate()
+        .responseDecodable(of: FollowedShowResponse.self) { response in
+          guard let data = response.value else {
+            fatalError("Error receiving tracks from API.")
+          }
+
+          let numberOfItems = data.items.count
+
+
+          guard numberOfItems != 0 else {
+            fatalError("The API response was corrects but empty. We don't have a way to handle this yet.")
+          }
+
+          var podcastItems = [SpotifyModel.MediaItem]()
+
+          for showIndex in 0 ..< numberOfItems {
+            let show = data.items[showIndex].show
+            podcastItems.append(self.parseShowData(show))
+          }
+
+          completionHandler(podcastItems)
+        }
     }
+  }
 
 
 
-    var urlRequest = URLRequest(url: URL(string: baseUrl)!)
-    urlRequest.httpMethod = "GET"
-    urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-    urlRequest.cachePolicy = NSURLRequest.CachePolicy.returnCacheDataElseLoad
+  // MARK: - Auxiliary functions
 
-    AF.request(urlRequest)
-      .validate()
-      .responseDecodable(of: ShowResponse.self) { response in
-        guard let data = response.value else {
-          fatalError("Error receiving tracks from API.")
-        }
+  private func parseShowData(_ show: Show) -> SpotifyModel.MediaItem {
+    let title = show.name
+    let imageURL = show.images[0].url
+    let authorName = show.publisher
+    let id = show.id
 
-        let numberOfItems = data.shows.items.count
+    let description = show.description
+    let explicit = show.explicit
+    let showID = show.id
+    let numberOfEpisodes = show.total_episodes
 
+    let podcastItem = SpotifyModel.MediaItem(title: title,
+                                             previewURL: "",
+                                             imageURL: imageURL,
+                                             authorName: [authorName],
+                                             mediaType: .show,
+                                             id: id,
 
-        guard numberOfItems != 0 else {
-          fatalError("The API response was corrects but empty. We don't have a way to handle this yet.")
-        }
-
-        var podcastItems = [SpotifyModel.MediaItem]()
-
-        for showIndex in 0 ..< numberOfItems {
-          let show = data.shows.items[showIndex]
-          let title = show.name
-          let imageURL = show.images[0].url
-          let authorName = show.publisher
-          let id = show.id
-
-          let description = show.description
-          let explicit = show.explicit
-          let showID = show.id
-          let numberOfEpisodes = show.total_episodes
-
-          let podcastItem = SpotifyModel.MediaItem(title: title,
-                                                   previewURL: "",
-                                                   imageURL: imageURL,
-                                                   authorName: [authorName],
-                                                   mediaType: .show,
-                                                   id: id,
-
-                                                   details: SpotifyModel.DetailTypes.shows(showDetails: SpotifyModel.ShowDetails(description: description,
-                                                                                                                                 explicit: explicit,
-                                                                                                                                 numberOfEpisodes: numberOfEpisodes,
-                                                                                                                                 id: showID)))
-          podcastItems.append(podcastItem)
-        }
-        completionHandler(podcastItems)
-      }
+                                             details: SpotifyModel.DetailTypes.shows(showDetails: SpotifyModel.ShowDetails(description: description,
+                                                                                                                           explicit: explicit,
+                                                                                                                           numberOfEpisodes: numberOfEpisodes,
+                                                                                                                           id: showID)))
+    return podcastItem
   }
 
 }
