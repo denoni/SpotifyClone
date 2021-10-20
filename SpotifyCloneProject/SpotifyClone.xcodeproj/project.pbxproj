@@ -140,6 +140,8 @@
 		C0FB4FDD27205CF300E61982 /* MyLibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FB4FDC27205CF300E61982 /* MyLibraryViewModel.swift */; };
 		C0FB4FE027205E8E00E61982 /* MyLibraryPageAPICalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FB4FDF27205E8E00E61982 /* MyLibraryPageAPICalls.swift */; };
 		C0FB4FE227207A2700E61982 /* FollowedArtistResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FB4FE127207A2700E61982 /* FollowedArtistResponse.swift */; };
+		C0FB4FE5272080B800E61982 /* MyLibraryTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FB4FE4272080B800E61982 /* MyLibraryTopBar.swift */; };
+		C0FB4FE72720811E00E61982 /* MyLibraryItemsScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FB4FE62720811E00E61982 /* MyLibraryItemsScrollView.swift */; };
 		E814D7692793EF526E835DE5 /* Pods_SpotifyClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B75A3140099F8C9F0EBC8917 /* Pods_SpotifyClone.framework */; };
 /* End PBXBuildFile section */
 
@@ -305,6 +307,8 @@
 		C0FB4FDC27205CF300E61982 /* MyLibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryViewModel.swift; sourceTree = "<group>"; };
 		C0FB4FDF27205E8E00E61982 /* MyLibraryPageAPICalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryPageAPICalls.swift; sourceTree = "<group>"; };
 		C0FB4FE127207A2700E61982 /* FollowedArtistResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedArtistResponse.swift; sourceTree = "<group>"; };
+		C0FB4FE4272080B800E61982 /* MyLibraryTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryTopBar.swift; sourceTree = "<group>"; };
+		C0FB4FE62720811E00E61982 /* MyLibraryItemsScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryItemsScrollView.swift; sourceTree = "<group>"; };
 		CD37E65E9CE3A48F333D478C /* Pods-SpotifyClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotifyClone.debug.xcconfig"; path = "Target Support Files/Pods-SpotifyClone/Pods-SpotifyClone.debug.xcconfig"; sourceTree = "<group>"; };
 		D6E0A4C3B34E520C39ADB989 /* Pods_SpotifyClone_SpotifyCloneUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpotifyClone_SpotifyCloneUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -834,6 +838,7 @@
 			isa = PBXGroup;
 			children = (
 				C0E076D7271EF08800777E66 /* MyLibraryScreen.swift */,
+				C0FB4FE32720809700E61982 /* MyLibraryScreenViews */,
 			);
 			path = MyLibraryScreen;
 			sourceTree = "<group>";
@@ -878,6 +883,15 @@
 				C0FB4FDF27205E8E00E61982 /* MyLibraryPageAPICalls.swift */,
 			);
 			path = MyLibraryPage;
+			sourceTree = "<group>";
+		};
+		C0FB4FE32720809700E61982 /* MyLibraryScreenViews */ = {
+			isa = PBXGroup;
+			children = (
+				C0FB4FE4272080B800E61982 /* MyLibraryTopBar.swift */,
+				C0FB4FE62720811E00E61982 /* MyLibraryItemsScrollView.swift */,
+			);
+			path = MyLibraryScreenViews;
 			sourceTree = "<group>";
 		};
 		C1B051469A676817097FE5BB /* Frameworks */ = {
@@ -1220,6 +1234,7 @@
 				C0FB4FE027205E8E00E61982 /* MyLibraryPageAPICalls.swift in Sources */,
 				C0C63C5E26DD144E00532792 /* SpotifyCloneApp.swift in Sources */,
 				C073D43527190B2F00C2B3AD /* EpisodeDetailsResponse.swift in Sources */,
+				C0FB4FE72720811E00E61982 /* MyLibraryItemsScrollView.swift in Sources */,
 				C09FD90326E04E470069CEAE /* Text+SpotifySizes.swift in Sources */,
 				C0883A0326E26F8900E1ADFA /* RecommendedArtistScrollView.swift in Sources */,
 				C07DA13026DDD6F20086EEAB /* View+RoundedSpecificSide.swift in Sources */,
@@ -1228,6 +1243,7 @@
 				C08B90B1271D1BCD00C057B2 /* MediaDetailAPICalls.swift in Sources */,
 				C0A07F0127132FB20069B664 /* SearchResponseItem.swift in Sources */,
 				C084268026F10DC8000ACAEE /* AuthCoordinator.swift in Sources */,
+				C0FB4FE5272080B800E61982 /* MyLibraryTopBar.swift in Sources */,
 				C084E04E270340E500C6AAAE /* BigPlayButton.swift in Sources */,
 				C080CE242700A210003D0C11 /* BigTrackImage.swift in Sources */,
 				C016E605270344C200EFF870 /* AlbumDetailScreen.swift in Sources */,
