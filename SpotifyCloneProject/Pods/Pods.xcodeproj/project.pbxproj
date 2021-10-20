@@ -135,7 +135,7 @@
 		45BDBA6E7A8AD6E499AC0FC37277B251 /* Pods-SpotifyCloneTests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SpotifyCloneTests"; path = Pods_SpotifyCloneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A4EA772BF28F2A38617376534867BA8 /* Pods-SpotifyClone.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SpotifyClone.modulemap"; sourceTree = "<group>"; };
 		5C42170A5D7F62C1D9F284A2D4A3462F /* Alamofire.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Alamofire.modulemap; sourceTree = "<group>"; };
-		5D797E9A5C5782CE845840781FA1CC81 /* Alamofire */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Alamofire; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D797E9A5C5782CE845840781FA1CC81 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63118EA69B9C23C039EC7BC291709082 /* Pods-SpotifyClone-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SpotifyClone-Info.plist"; sourceTree = "<group>"; };
 		7260AEB3C11E4980758502FF0957618B /* Pods-SpotifyCloneTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SpotifyCloneTests-Info.plist"; sourceTree = "<group>"; };
 		787CE6CF4F9E213A65AD34659BA75949 /* Result+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Result+Alamofire.swift"; path = "Source/Result+Alamofire.swift"; sourceTree = "<group>"; };
@@ -152,7 +152,7 @@
 		98E30044A35582E17AA084328C6CE74C /* UIKitIntrospectionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UIKitIntrospectionView.swift; path = Introspect/UIKitIntrospectionView.swift; sourceTree = "<group>"; };
 		9AE8319FE7761D1657AFDC21D1F8F009 /* Alamofire-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-umbrella.h"; sourceTree = "<group>"; };
 		9B6E46F1BA5AD53AD5DBF7AFC5217A77 /* URLRequest+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URLRequest+Alamofire.swift"; path = "Source/URLRequest+Alamofire.swift"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DC2F33D976A0096E69289068E86E470 /* HTTPMethod.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HTTPMethod.swift; path = Source/HTTPMethod.swift; sourceTree = "<group>"; };
 		9E7182C48BDE012B81456E547E6CC9DB /* CachedResponseHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CachedResponseHandler.swift; path = Source/CachedResponseHandler.swift; sourceTree = "<group>"; };
 		9E8642B5AF17DB4909F1F6B20B7A8598 /* Response.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Response.swift; path = Source/Response.swift; sourceTree = "<group>"; };
@@ -170,7 +170,7 @@
 		CB090B3ACFC73C34D3E8592B583EE337 /* Notifications.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = Source/Notifications.swift; sourceTree = "<group>"; };
 		CE7CEB3C81C49F21F6647A1F6FBBB187 /* Pods-SpotifyClone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SpotifyClone.release.xcconfig"; sourceTree = "<group>"; };
 		CFC42BD756E374845637CD5BA954E2A2 /* MultipartFormData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartFormData.swift; path = Source/MultipartFormData.swift; sourceTree = "<group>"; };
-		D0A70003FD5E49B30CA83DAAFE03116B /* Introspect */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Introspect; path = Introspect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0A70003FD5E49B30CA83DAAFE03116B /* Introspect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Introspect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1319005C09F51D19C129FF8088745CE /* Pods-SpotifyClone-SpotifyCloneUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SpotifyClone-SpotifyCloneUITests-Info.plist"; sourceTree = "<group>"; };
 		D22DD8E7ADA0DC6AE5BAFDA33CE41519 /* Pods-SpotifyCloneTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SpotifyCloneTests-dummy.m"; sourceTree = "<group>"; };
 		D232A5AF62132F01A988EF00C18853B0 /* EventMonitor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EventMonitor.swift; path = Source/EventMonitor.swift; sourceTree = "<group>"; };
@@ -344,15 +344,14 @@
 				DB4CD961868459FED982FED63DDC773A /* Validation.swift */,
 				84C7E93B2C2CAFAD1CBDAA5D522A7DBB /* Support Files */,
 			);
-			name = Alamofire;
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
 		68CB6D94B7EF0CAE4D1EAFCECB63937F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5D797E9A5C5782CE845840781FA1CC81 /* Alamofire */,
-				D0A70003FD5E49B30CA83DAAFE03116B /* Introspect */,
+				5D797E9A5C5782CE845840781FA1CC81 /* Alamofire.framework */,
+				D0A70003FD5E49B30CA83DAAFE03116B /* Introspect.framework */,
 				08B2EDA4376D4B5D12FA50278A978C42 /* Pods-SpotifyClone */,
 				1E0DB88D67A5A185DB2DEBFA73AD400C /* Pods-SpotifyClone-SpotifyCloneUITests */,
 				45BDBA6E7A8AD6E499AC0FC37277B251 /* Pods-SpotifyCloneTests */,
@@ -412,7 +411,6 @@
 				1AD30F97D3EA50D0408421766C9639D5 /* ViewExtensions.swift */,
 				4A77DF84C0DFDC9E9EA0FD858FBD6535 /* Support Files */,
 			);
-			name = Introspect;
 			path = Introspect;
 			sourceTree = "<group>";
 		};
@@ -536,7 +534,7 @@
 			);
 			name = Introspect;
 			productName = Introspect;
-			productReference = D0A70003FD5E49B30CA83DAAFE03116B /* Introspect */;
+			productReference = D0A70003FD5E49B30CA83DAAFE03116B /* Introspect.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		C2AE4AC206EFF880E08F83A227A03FE9 /* Pods-SpotifyClone-SpotifyCloneUITests */ = {
@@ -574,7 +572,7 @@
 			);
 			name = Alamofire;
 			productName = Alamofire;
-			productReference = 5D797E9A5C5782CE845840781FA1CC81 /* Alamofire */;
+			productReference = 5D797E9A5C5782CE845840781FA1CC81 /* Alamofire.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -584,7 +582,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1300;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 10.0";
@@ -779,7 +777,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Introspect/Introspect-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Introspect/Introspect-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -993,7 +991,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Alamofire/Alamofire-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Alamofire/Alamofire-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1129,7 +1127,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Introspect/Introspect-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Introspect/Introspect-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1164,7 +1162,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Alamofire/Alamofire-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Alamofire/Alamofire-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
