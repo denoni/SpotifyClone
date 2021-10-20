@@ -104,7 +104,7 @@ fileprivate struct MyLibraryItemsScrollView: View {
         HStack(spacing: Constants.spacingSmall) {
           Rectangle()
             .foregroundColor(.spotifyMediumGray)
-            .overlay(RemoteImage(urlString: media.imageURL))
+            .overlay(RemoteImage(urlString: media.imageURL).scaledToFit().aspectRatio(1/1, contentMode: .fit))
             .frame(width: 80, height: 80)
           VStack(alignment: .leading, spacing: 5) {
             Text(media.title)
