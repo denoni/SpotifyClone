@@ -16,11 +16,19 @@ class MyLibraryPageAPICalls: ObservableObject {
   var albumAPI = APIFetchingAlbums()
   var artistAPI = APIFetchingArtists()
 
-  // MARK: - PLAYLISTS
+
+  // MARK: - PLAYLISTs
   func getCurrentUserPlaylists(with accessToken: String,
                                completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
 
     playlistAPI.getPlaylist(using: .currentUserPlaylists, with: accessToken, completionHandler: completionHandler)
+  }
+
+  // MARK: - ARTISTs
+  func getCurrentUserArtists(with accessToken: String,
+                             completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
+
+    artistAPI.getArtist(using: .userFollowedArtists, with: accessToken, completionHandler: completionHandler)
   }
 
 }

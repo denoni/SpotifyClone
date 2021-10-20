@@ -21,7 +21,7 @@ struct MyLibraryScreen: View {
             }
         } else {
           ScrollView(showsIndicators: false) {
-            MyLibraryItemsScrollView(medias: myLibraryVM.mediaCollection[.currentUserPlaylists]!)
+            MyLibraryItemsScrollView(medias: getMyLibraryMedias())
           }
           .padding(.horizontal, Constants.paddingStandard)
         }
@@ -31,6 +31,15 @@ struct MyLibraryScreen: View {
     }
   }
 
+
+  func getMyLibraryMedias() -> [SpotifyModel.MediaItem] {
+    var myLibraryMedias = [SpotifyModel.MediaItem]()
+
+    myLibraryMedias += myLibraryVM.mediaCollection[.userPlaylists]!
+    myLibraryMedias += myLibraryVM.mediaCollection[.userArtists]!
+
+    return myLibraryMedias
+  }
 
   func didEverySectionLoaded() -> Bool {
     for key in myLibraryVM.isLoading.keys {

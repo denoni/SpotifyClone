@@ -28,10 +28,12 @@ class APIFetchingPlaylists {
     switch endPoint {
     case .featuredPlaylists:
       baseUrl = "https://api.spotify.com/v1/browse/featured-playlists?country=\(country)&limit=\(limit)&offset=\(offset)"
+
     case .playlistWithKeyword(let keyWord):
       let keyWord = keyWord.replacingOccurrences(of: " ", with: "+")
       let type = "playlist"
       baseUrl = "https://api.spotify.com/v1/search?q=\(keyWord)&type=\(type)&market=\(country)&limit=\(limit)&offset=\(offset)"
+      
     case .currentUserPlaylists:
       baseUrl = "https://api.spotify.com/v1/me/playlists"
     }

@@ -15,7 +15,8 @@ class MyLibraryViewModel: ObservableObject {
   @Published var mediaCollection = [Section:[SpotifyModel.MediaItem]]()
 
   enum Section: String, CaseIterable {
-    case currentUserPlaylists
+    case userPlaylists
+    case userArtists
   }
 
   init(mainViewModel: MainViewModel) {
@@ -36,13 +37,23 @@ class MyLibraryViewModel: ObservableObject {
       let accessToken = mainVM.authKey!.accessToken
 
       getCurrentUserPlaylists(accessToken: accessToken)
+      getCurrentUserArtists(accessToken: accessToken)
     }
   }
 
 
+
+  // MARK: - API Calls
+
   func getCurrentUserPlaylists(accessToken: String) {
     api.getCurrentUserPlaylists(with: accessToken) { playlists in
-      self.trimAndCommunicateResult(section: .currentUserPlaylists, medias: playlists)
+      self.trimAndCommunicateResult(section: .userPlaylists, medias: playlists)
+    }
+  }
+
+  func getCurrentUserArtists(accessToken: String) {
+    api.getCurrentUserArtists(with: accessToken) { artists in
+      self.trimAndCommunicateResult(section: .userArtists, medias: artists)
     }
   }
 
