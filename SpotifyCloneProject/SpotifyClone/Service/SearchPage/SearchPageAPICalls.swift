@@ -10,7 +10,6 @@ import Alamofire
 
 class SearchPageAPICalls: ObservableObject {
 
-  // TODO: Add support for all media types
   func search(for searchTerm: String, accessToken: String,
               completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
 

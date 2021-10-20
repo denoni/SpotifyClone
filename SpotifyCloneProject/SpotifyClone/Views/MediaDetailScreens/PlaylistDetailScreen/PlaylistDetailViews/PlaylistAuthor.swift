@@ -14,7 +14,6 @@ struct PlaylistAuthor: View {
     HStack {
       Circle()
         .foregroundColor(.black)
-        // TODO: Get image from api.
         .overlay(Image("spotify-small-logo")
                   .resizable()
                   .scaledToFit()

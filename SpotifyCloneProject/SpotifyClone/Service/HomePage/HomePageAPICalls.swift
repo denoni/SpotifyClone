@@ -9,7 +9,6 @@ import Foundation
 import Alamofire
 
 // TODO: Handle empty responses and errors
-// TODO: The data received after decoding should be easier to access
 
 class HomePageAPICalls: ObservableObject {
 

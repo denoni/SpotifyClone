@@ -28,7 +28,6 @@ extension Font {
     }
   }
 
-  // TODO: Create more methods like these to simplify the code
   static func avenir(_ type: Avenir, size: CGFloat = Constants.fontXLarge) -> Font {
       return .custom(type.value, size: size)
   }

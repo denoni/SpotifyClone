@@ -107,7 +107,6 @@ private struct BottomNavigationBar: View {
     }
   }
 
-  // TODO: Call this struct in a clever way
   private struct BottomNavigationItem: View {
     @StateObject var mainVM: MainViewModel
     var assignedPage: Page

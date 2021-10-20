@@ -88,7 +88,7 @@ struct ShowEpisodesScrollView: View {
             .padding(.bottom, 5)
         }
 
-        Text("\(releaseDate) • \(duration)") // TODO: Add real data
+        Text("\(releaseDate) • \(duration)")
           .font(.avenir(.medium, size: Constants.fontXSmall))
           .opacity(Constants.opacityHigh)
           .padding(.bottom, 5)

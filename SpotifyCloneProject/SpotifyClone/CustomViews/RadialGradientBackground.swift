@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// TODO: Make gradient color represent the color of the first song cover in HomeScreen
 struct RadialGradientBackground: View {
   var color: Color = Color(red: 0.051, green: 0.608, blue: 0.784)
 
