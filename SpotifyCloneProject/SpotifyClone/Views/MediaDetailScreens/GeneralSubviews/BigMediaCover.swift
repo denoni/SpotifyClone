@@ -16,6 +16,7 @@ struct BigMediaCover: View {
       Rectangle()
         .foregroundColor(.spotifyMediumGray)
         .overlay(RemoteImage(urlString: imageURL))
+        .mask(Rectangle().frame(width: 250, height: 250))
         .frame(width: 250, height: 250)
         .shadow(color: .spotifyDarkGray.opacity(Constants.opacityXHigh), radius: Constants.radiusStandard)
       Spacer()
