@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct MyLibraryScreen: View {
-
-
+  @Environment(\.topSafeAreaSize) var topSafeAreaSize
 
   static let mediaForTest = SpotifyModel.MediaItem(title: "Don't Stop Me Now",
                                                    previewURL: "",
@@ -29,42 +28,86 @@ struct MyLibraryScreen: View {
   let mediaTestArray = Array(repeating: mediaForTest, count: 5)
 
   var body: some View {
-    ScrollView(showsIndicators: false) {
-      VStack {
-        Text("My Library")
-          .spotifyTitle()
+    VStack {
+      ZStack {
+        Color.spotifyMediumGray
+          .shadow(color: .black, radius: 10)
+        VStack {
+          Spacer()
+          HStack(spacing: 10) {
+            Circle()
+              .fill(Color.spotifyGreen)
+              .overlay(Text("G").fontWeight(.bold).foregroundColor(.black))
+              .scaledToFit()
+            Text("My Library")
+              .font(.avenir(.black, size: Constants.fontMedium))
+            Spacer()
+            Image("search-unselected")
+              .resizeToFit()
+              .padding(8)
+              .opacity(Constants.opacityLow)
+            Image(systemName: "plus") // TODO: Use the real icon from Spotify
+              .resizeToFit()
+              .padding(8)
+              .opacity(Constants.opacityLow)
+          }
+          .frame(height: 35)
+          .frame(maxWidth: .infinity)
+          .padding(.horizontal, Constants.paddingStandard)
+          Spacer()
+        }
+        .padding(.top, topSafeAreaSize)
+      }
+      .frame(height: 60 + topSafeAreaSize)
+      .frame(maxWidth: .infinity)
+      .ignoresSafeArea()
+
+
+      ScrollView(showsIndicators: false) {
         MyLibraryItemsScrollView(medias: mediaTestArray)
       }
-      .padding(Constants.paddingStandard)
+      .padding(.horizontal, Constants.paddingStandard)
+      .padding(.bottom, Constants.paddingBottomSection)
+      Spacer()
     }
   }
 }
 
 struct MyLibraryItemsScrollView: View {
   @State var medias: [SpotifyModel.MediaItem]
+  var mockData: [(image: Image, title: String, subTitle: String)] = [(Image("liked-songs-cover"), "Liked Songs", "Playlist • 33 songs"),
+                                                                   (Image("your-episodes-cover"), "Your Episodes", "Saved and downloaded episodes")]
 
   var body: some View {
     VStack {
-      ForEach(medias) { media in
+      ForEach(mockData, id: \.title) { media in
         HStack(spacing: Constants.spacingSmall) {
           Rectangle()
             .foregroundColor(.spotifyMediumGray)
-            .overlay(RemoteImage(urlString: media.imageURL))
+            .overlay(media.image.resizeToFit())
+//            .overlay(RemoteImage(urlString: media.imageURL))
             .frame(width: 80, height: 80)
           VStack(alignment: .leading) {
             Text(media.title)
-              .font(.avenir(.medium, size: Constants.fontSmall))
+              .font(.avenir(.heavy, size: Constants.fontSmall))
               .lineLimit(1)
               .padding(.trailing, Constants.paddingLarge)
-            Text("Single • 2020") // TODO: Show real data
-              .font(.avenir(.medium, size: Constants.fontXSmall))
-              .opacity(Constants.opacityHigh)
-              .lineLimit(1)
+            HStack {
+              Image(systemName: "pin.fill")
+                .resizeToFit()
+                .frame(height: 12)
+                .foregroundColor(.spotifyGreen)
+                .padding(.trailing, -3)
+              Text(media.subTitle) // TODO: Show real data
+                .font(.avenir(.medium, size: Constants.fontXSmall))
+                .opacity(Constants.opacityHigh)
+                .lineLimit(1)
+            }
           }
           Spacer()
         }
         .frame(height: 80)
-        .padding(.top, 10)
+        .padding(.bottom, 10)
         .onTapGesture {
           //TODO: Add on tap
         }
