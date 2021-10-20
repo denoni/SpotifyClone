@@ -11,6 +11,7 @@ struct MainView: View {
   @StateObject var mainVM: MainViewModel
   @StateObject var authVM: AuthViewModel
   @StateObject var homeVM: HomeViewModel
+  @StateObject var myLibraryVM: MyLibraryViewModel
   @StateObject var searchVM: SearchViewModel
   @StateObject var mediaDetailVM: MediaDetailViewModel
 
@@ -20,6 +21,7 @@ struct MainView: View {
     _mainVM = StateObject(wrappedValue: mainViewModel)
     _authVM = StateObject(wrappedValue: AuthViewModel(mainViewModel: mainViewModel))
     _homeVM = StateObject(wrappedValue: HomeViewModel(mainViewModel: mainViewModel))
+    _myLibraryVM = StateObject(wrappedValue: MyLibraryViewModel(mainViewModel: mainViewModel))
     _searchVM = StateObject(wrappedValue: SearchViewModel(mainVM: mainViewModel))
     _mediaDetailVM = StateObject(wrappedValue: MediaDetailViewModel(mainVM: mainViewModel))
   }
@@ -40,6 +42,7 @@ struct MainView: View {
             .environmentObject(mediaDetailVM)
         case .myLibrary:
           MyLibraryScreen()
+            .environmentObject(myLibraryVM)
         }
         BottomBar(mainVM: mainVM, showMediaPlayer: mainVM.showBottomMediaPlayer)
       }

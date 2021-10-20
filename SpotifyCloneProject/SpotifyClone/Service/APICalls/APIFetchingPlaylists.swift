@@ -13,6 +13,7 @@ class APIFetchingPlaylists {
   enum PlaylistsEndpointInAPI {
     case featuredPlaylists
     case playlistWithKeyword(keyWord: String)
+    case currentUserPlaylists
   }
 
   func getPlaylist(using endPoint: PlaylistsEndpointInAPI,
@@ -31,6 +32,8 @@ class APIFetchingPlaylists {
       let keyWord = keyWord.replacingOccurrences(of: " ", with: "+")
       let type = "playlist"
       baseUrl = "https://api.spotify.com/v1/search?q=\(keyWord)&type=\(type)&market=\(country)&limit=\(limit)&offset=\(offset)"
+    case .currentUserPlaylists:
+      baseUrl = "https://api.spotify.com/v1/me/playlists"
     }
 
     var urlRequest = URLRequest(url: URL(string: baseUrl)!)
@@ -49,17 +52,17 @@ class APIFetchingPlaylists {
     func parseResponse(_ response: DataResponse<PlaylistResponse, AFError>) {
 
       guard let data = response.value else {
-        fatalError("Error receiving tracks from API.")
+        fatalError("Error receiving playlists from API.")
       }
 
-      let numberOfPlaylists = data.playlists.items.count
+      let numberOfPlaylists = data.playlists.count
 
       guard numberOfPlaylists != 0 else {
         fatalError("The API response was corrects but empty. We don't have a way to handle this yet.")
       }
 
       for playlistIndex in 0 ..< numberOfPlaylists {
-        let playlist = data.playlists.items[playlistIndex]
+        let playlist = data.playlists[playlistIndex]
 
         let sectionTitle = data.message
         let title = playlist.name

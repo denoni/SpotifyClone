@@ -137,6 +137,8 @@
 		C0F8199326FE4E7D000F5FEE /* AlbumResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F8199226FE4E7D000F5FEE /* AlbumResponseType.swift */; };
 		C0F8199926FE4F79000F5FEE /* TrackResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F8199826FE4F79000F5FEE /* TrackResponseType.swift */; };
 		C0F8199B26FE4F9B000F5FEE /* ArtistResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F8199A26FE4F9B000F5FEE /* ArtistResponseType.swift */; };
+		C0FB4FDD27205CF300E61982 /* MyLibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FB4FDC27205CF300E61982 /* MyLibraryViewModel.swift */; };
+		C0FB4FE027205E8E00E61982 /* MyLibraryPageAPICalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FB4FDF27205E8E00E61982 /* MyLibraryPageAPICalls.swift */; };
 		E814D7692793EF526E835DE5 /* Pods_SpotifyClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B75A3140099F8C9F0EBC8917 /* Pods_SpotifyClone.framework */; };
 /* End PBXBuildFile section */
 
@@ -299,6 +301,8 @@
 		C0F8199226FE4E7D000F5FEE /* AlbumResponseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumResponseType.swift; sourceTree = "<group>"; };
 		C0F8199826FE4F79000F5FEE /* TrackResponseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackResponseType.swift; sourceTree = "<group>"; };
 		C0F8199A26FE4F9B000F5FEE /* ArtistResponseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistResponseType.swift; sourceTree = "<group>"; };
+		C0FB4FDC27205CF300E61982 /* MyLibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryViewModel.swift; sourceTree = "<group>"; };
+		C0FB4FDF27205E8E00E61982 /* MyLibraryPageAPICalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryPageAPICalls.swift; sourceTree = "<group>"; };
 		CD37E65E9CE3A48F333D478C /* Pods-SpotifyClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotifyClone.debug.xcconfig"; path = "Target Support Files/Pods-SpotifyClone/Pods-SpotifyClone.debug.xcconfig"; sourceTree = "<group>"; };
 		D6E0A4C3B34E520C39ADB989 /* Pods_SpotifyClone_SpotifyCloneUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpotifyClone_SpotifyCloneUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -395,6 +399,7 @@
 				C081873126EF728100AB19E9 /* APIAuthentication.swift */,
 				C08D2DB92710C4B0003EB95C /* SearchPage */,
 				C09CF2122702499800EB9DA3 /* HomePage */,
+				C0FB4FDE27205E6C00E61982 /* MyLibraryPage */,
 				C0827209270645A10086E34F /* MediaDetailsPage */,
 				C095529B2704BA7F000499B3 /* APICalls */,
 				C097734F27177A3300F319D1 /* MainViewModelAPICalls.swift */,
@@ -494,6 +499,7 @@
 				C084268726F1588B000ACAEE /* MainViewModel.swift */,
 				C084268126F10DF3000ACAEE /* Auth */,
 				C084268226F10DFF000ACAEE /* Home */,
+				C0FB4FDB27205CB500E61982 /* MyLibrary */,
 				C0A07F0227135D030069B664 /* Detail */,
 				C089135B26F97E6900CA1A69 /* Search */,
 			);
@@ -855,6 +861,22 @@
 			path = SubTypes;
 			sourceTree = "<group>";
 		};
+		C0FB4FDB27205CB500E61982 /* MyLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				C0FB4FDC27205CF300E61982 /* MyLibraryViewModel.swift */,
+			);
+			path = MyLibrary;
+			sourceTree = "<group>";
+		};
+		C0FB4FDE27205E6C00E61982 /* MyLibraryPage */ = {
+			isa = PBXGroup;
+			children = (
+				C0FB4FDF27205E8E00E61982 /* MyLibraryPageAPICalls.swift */,
+			);
+			path = MyLibraryPage;
+			sourceTree = "<group>";
+		};
 		C1B051469A676817097FE5BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1145,6 +1167,7 @@
 				C0C63C6026DD144E00532792 /* MainView.swift in Sources */,
 				C0883A1126E270CB00E1ADFA /* BrowseAllSection.swift in Sources */,
 				C0C5F9762704F76D0099EEB5 /* ArtistAlbums.swift in Sources */,
+				C0FB4FDD27205CF300E61982 /* MyLibraryViewModel.swift in Sources */,
 				C016E612270388F600EFF870 /* ShowAuthor.swift in Sources */,
 				C0C5F96B2704DE9E0099EEB5 /* ArtistDetailScreen.swift in Sources */,
 				C087B0EB26E65FFA00A72A13 /* SpotifyModel.swift in Sources */,
@@ -1190,6 +1213,7 @@
 				C097735227177B2600F319D1 /* CurrentUserInfoResponse.swift in Sources */,
 				C081873726EF9A2700AB19E9 /* AuthWebView.swift in Sources */,
 				C08839FF26E26E8400E1ADFA /* BigSongCoversScrollView.swift in Sources */,
+				C0FB4FE027205E8E00E61982 /* MyLibraryPageAPICalls.swift in Sources */,
 				C0C63C5E26DD144E00532792 /* SpotifyCloneApp.swift in Sources */,
 				C073D43527190B2F00C2B3AD /* EpisodeDetailsResponse.swift in Sources */,
 				C09FD90326E04E470069CEAE /* Text+SpotifySizes.swift in Sources */,

@@ -365,7 +365,7 @@ class SearchPageAPICalls: ObservableObject {
           fatalError("Error receiving playlists from API.")
         }
 
-        let numberOfPlaylists = data.playlists.items.count
+        let numberOfPlaylists = data.playlists.count
 
         var playlists = [SpotifyModel.PlaylistItem]()
 
@@ -375,9 +375,9 @@ class SearchPageAPICalls: ObservableObject {
 
         for index in 0 ..< numberOfPlaylists {
           let sectionTitle = data.message
-          let name = data.playlists.items[index].name
-          let imageURL = data.playlists.items[index].images[0].url
-          let id = data.playlists.items[index].id
+          let name = data.playlists[index].name
+          let imageURL = data.playlists[index].images[0].url
+          let id = data.playlists[index].id
 
           let playlistItem = SpotifyModel.PlaylistItem(sectionTitle: sectionTitle ?? "Playlist",
                                                        name: name,

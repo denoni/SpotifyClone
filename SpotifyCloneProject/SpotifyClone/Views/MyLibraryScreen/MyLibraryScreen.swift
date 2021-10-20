@@ -8,36 +8,41 @@
 import SwiftUI
 
 struct MyLibraryScreen: View {
-  static let mediaForTest = SpotifyModel.MediaItem(title: "Don't Stop Me Now",
-                                                   previewURL: "",
-                                                   imageURL: "https://i.scdn.co/image/ab67616d0000b273008b06ec71019afd70153889",
-                                                   authorName: ["Queen"],
-                                                   author: nil,
-                                                   mediaType: .track,
-                                                   id: UUID().uuidString,
-                                                   details: SpotifyModel.DetailTypes
-                                                    .tracks(trackDetails: SpotifyModel.TrackDetails(popularity: 0,
-                                                                                                    explicit: false,
-                                                                                                    description: nil,
-                                                                                                    durationInMs: 0,
-                                                                                                    id: "abc",
-                                                                                                    album: nil)))
-
-
-  let mediaTestArray = Array(repeating: mediaForTest, count: 5)
+  @EnvironmentObject var myLibraryVM: MyLibraryViewModel
 
   var body: some View {
     VStack {
       ZStack {
-        ScrollView(showsIndicators: false) {
-          MyLibraryItemsScrollView(medias: mediaTestArray)
+        if didEverySectionLoaded() == false {
+          ProgressView()
+            .withSpotifyStyle()
+            .onAppear {
+              myLibraryVM.fetchMyLibraryData()
+            }
+        } else {
+          ScrollView(showsIndicators: false) {
+            MyLibraryItemsScrollView(medias: myLibraryVM.mediaCollection[.currentUserPlaylists]!)
+          }
+          .padding(.horizontal, Constants.paddingStandard)
         }
-        .padding(.horizontal, Constants.paddingStandard)
 
         LibraryTopBar()
       }
     }
   }
+
+
+  func didEverySectionLoaded() -> Bool {
+    for key in myLibraryVM.isLoading.keys {
+      // If any section still loading, return false
+      guard myLibraryVM.isLoading[key] != true else {
+        return false
+      }
+    }
+    // else, return true
+    return true
+  }
+
 }
 
 fileprivate struct LibraryTopBar: View {
@@ -101,7 +106,7 @@ fileprivate struct MyLibraryItemsScrollView: View {
             .foregroundColor(.spotifyMediumGray)
             .overlay(RemoteImage(urlString: media.imageURL))
             .frame(width: 80, height: 80)
-          VStack(alignment: .leading) {
+          VStack(alignment: .leading, spacing: 5) {
             Text(media.title)
               .font(.avenir(.heavy, size: Constants.fontSmall))
               .lineLimit(1)
