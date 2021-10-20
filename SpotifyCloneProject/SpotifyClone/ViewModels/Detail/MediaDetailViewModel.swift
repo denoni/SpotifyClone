@@ -34,6 +34,7 @@ class MediaDetailViewModel: ObservableObject {
   enum DetailScreenOrigin {
     case home(homeVM: HomeViewModel)
     case search(searchVM: SearchViewModel)
+    case myLibrary(myLibraryVM: MyLibraryViewModel)
   }
 
   init(mainVM: MainViewModel) {

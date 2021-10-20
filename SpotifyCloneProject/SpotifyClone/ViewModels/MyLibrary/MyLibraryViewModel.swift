@@ -14,6 +14,21 @@ class MyLibraryViewModel: ObservableObject {
   @Published var isLoading = [Section:Bool]()
   @Published var mediaCollection = [Section:[SpotifyModel.MediaItem]]()
 
+  @Published var currentSubPage: MyLibrarySubpage = .none
+  @Published var pageHistory = [(subPage: MyLibrarySubpage, data: SpotifyModel.MediaItem, mediaDetailVM: MediaDetailViewModel)]()
+
+  enum MyLibrarySubpage {
+    case none
+    case transitionScreen
+
+    case playlistDetail
+    case trackDetail
+    case albumDetail
+    case showDetail
+    case artistDetail
+    case episodeDetail
+  }
+
   enum Section: String, CaseIterable {
     case userPlaylists
     case userArtists
@@ -69,6 +84,13 @@ class MyLibraryViewModel: ObservableObject {
 
   // MARK: - Auxiliary Functions
 
+  func clean() {
+    for section in Section.allCases {
+      isLoading[section] = true
+      mediaCollection[section] = []
+    }
+  }
+
   func trimAndCommunicateResult(section: Section, medias: [SpotifyModel.MediaItem]) {
     var noDuplicateMedias = [SpotifyModel.MediaItem]()
     var mediaIDs = [String]()
@@ -83,6 +105,53 @@ class MyLibraryViewModel: ObservableObject {
     mediaCollection[section] = noDuplicateMedias
 
     isLoading[section] = false
+  }
+
+
+
+  // MARK: - Non-api Related Functions
+
+  func goToNoneSubpage() {
+    pageHistory.removeAll()
+    currentSubPage = .none
+  }
+
+  func goToPreviousPage() {
+
+    // removes the current page
+    pageHistory.removeLast()
+
+    if pageHistory.isEmpty == false {
+      changeSubpageTo(pageHistory.last!.subPage,
+                      mediaDetailVM: pageHistory.last!.mediaDetailVM,
+                      withData: pageHistory.last!.data)
+
+      // removes the page that we just returned to
+      pageHistory.removeLast()
+
+    } else {
+      goToNoneSubpage()
+    }
+
+  }
+
+  func changeSubpageTo(_ subPage: MyLibrarySubpage,
+                       mediaDetailVM: MediaDetailViewModel,
+                       withData data: SpotifyModel.MediaItem) {
+
+    pageHistory.append((subPage: subPage, data: data, mediaDetailVM: mediaDetailVM))
+
+    currentSubPage = .transitionScreen
+
+    // if we change the subpage right away it'll cause a crash
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      mediaDetailVM.clean()
+      mediaDetailVM.mainItem = data
+      mediaDetailVM.accessToken = self.mainVM.authKey!.accessToken
+      mediaDetailVM.setVeryFirstImageInfoBasedOn(data.imageURL)
+      self.currentSubPage = subPage
+    }
+
   }
 
 }

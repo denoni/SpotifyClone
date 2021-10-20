@@ -26,6 +26,8 @@ struct BackButton: View {
           homeVM.goToPreviousPage()
         case .search(let searchVM):
           searchVM.goToPreviousPage()
+        case .myLibrary(let myLibraryVM):
+          myLibraryVM.goToPreviousPage()
         }
       }
     }
