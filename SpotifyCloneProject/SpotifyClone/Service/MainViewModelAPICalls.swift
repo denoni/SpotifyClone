@@ -35,7 +35,7 @@ class MainViewModelAPICalls {
 
         let currentUserProfileInfo = SpotifyModel.CurrentUserProfileInfo(displayName: displayName,
                                                                          followers: followers,
-                                                                         imageURL: imageURL ?? "",
+                                                                         imageURL: imageURL,
                                                                          id: id)
         completionHandler(currentUserProfileInfo)
       }
