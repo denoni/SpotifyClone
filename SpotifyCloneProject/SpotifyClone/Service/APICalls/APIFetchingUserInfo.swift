@@ -62,7 +62,7 @@ class APIFetchingUserInfo {
     AF.request(urlRequest)
       .validate()
       .responseJSON { json in
-        
+
         do {
           let decoder = JSONDecoder()
           let response = try decoder.decode([Bool].self, from: json.data!)
@@ -73,7 +73,6 @@ class APIFetchingUserInfo {
         }
       }
   }
-
 
   enum FollowingState {
     case follow

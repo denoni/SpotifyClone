@@ -5,8 +5,6 @@
 //  Created by Gabriel on 9/24/21.
 //
 
-// TODO: Simplify - Reduce duplicated code
-
 import Foundation
 
 protocol MediaDetailSectionsProtocol {}

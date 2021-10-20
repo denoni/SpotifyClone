@@ -5,9 +5,6 @@
 //  Created by Gabriel on 8/31/21.
 //
 
-// TODO: Reduce duplicated code
-// TODO: Convert to arrays and render using ForEach
-// TODO: Try to use EnvironmentObject instead of ObservedObject
 import SwiftUI
 
 struct HomeScreen: View {

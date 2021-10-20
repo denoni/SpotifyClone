@@ -41,7 +41,7 @@ struct MainView: View {
             .environmentObject(searchDetailVM)
             .environmentObject(mediaDetailVM)
         case .myLibrary:
-          Text("To be done 🛠").font(.title)
+          MyLibraryScreen()
         }
         BottomBar(mainVM: mainVM, showMediaPlayer: mainVM.showBottomMediaPlayer)
       }
