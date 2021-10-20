@@ -19,6 +19,7 @@ class RemoteAudio: ObservableObject {
   let itemObserver: PlayerItemObserver
   @Published var currentTime: TimeInterval = 0
   @Published var currentDuration: TimeInterval = 0
+  @Published var currentRate: String = "1x"
   @Published var state = PlaybackState.waitingForSelection
 
   @Published var lastPlayedURL = ""
@@ -47,6 +48,24 @@ class RemoteAudio: ObservableObject {
   func pause() {
     player.pause()
     showPauseButton = false
+  }
+
+  func changePlayingRate(audioManager: RemoteAudio) {
+    if audioManager.state == .active {
+      if player.rate == 0.5 {
+        player.rate = 1.0
+        currentRate = "1x"
+      } else if player.rate == 1.0 {
+        player.rate = 1.5
+        currentRate = "1.5x"
+      } else if player.rate == 1.5 {
+        player.rate = 2.0
+        currentRate = "2x"
+      } else if player.rate == 2.0 {
+        player.rate = 0.5
+        currentRate = "0.5x"
+      }
+    }
   }
 
   func forwardFiveSeconds() {

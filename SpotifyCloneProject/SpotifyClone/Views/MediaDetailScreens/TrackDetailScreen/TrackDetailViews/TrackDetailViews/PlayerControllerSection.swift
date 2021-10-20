@@ -24,9 +24,15 @@ struct PlayerControllerSection: View {
         .padding(.bottom, isSmallDisplay ? -5 : 0)
 
       HStack {
-        Image("play-mix")
-          .resizeToFit()
+        Rectangle()
+          .fill(Color.clear)
+          .overlay(Text(audioManager.currentRate)
+                    .font(.avenir(.medium, size: isSmallDisplay ? 15 : 18))
+                    .fixedSize())
           .frame(width: isSmallDisplay ? 20 : 25)
+          .onTapGesture {
+            audioManager.changePlayingRate(audioManager: audioManager)
+          }
         Spacer()
         Image("previous")
           .resizeToFit()
@@ -46,8 +52,9 @@ struct PlayerControllerSection: View {
             audioManager.forwardFiveSeconds()
           }
         Spacer()
-        Image("play-repeat")
-          .resizeToFit()
+        HeartButton(mediaDetailVM: mediaDetailVM,
+                    itemID: mediaDetailVM.mainItem!.id,
+                    itemType: .track)
           .frame(width: isSmallDisplay ? 20 : 25)
       }
     }

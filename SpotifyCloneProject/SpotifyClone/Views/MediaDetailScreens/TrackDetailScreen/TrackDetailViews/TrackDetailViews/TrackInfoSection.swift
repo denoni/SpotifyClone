@@ -22,9 +22,6 @@ struct TrackInfoSection: View {
         }
         .padding(.trailing, Constants.paddingStandard)
         Spacer()
-        HeartButton(mediaDetailVM: mediaDetailVM,
-                    itemID: mediaDetailVM.mainItem!.id,
-                    itemType: .track)          
       }
       .frame(maxWidth: .infinity,
              alignment: .topLeading)
