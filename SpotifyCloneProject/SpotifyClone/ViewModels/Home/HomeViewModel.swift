@@ -77,67 +77,23 @@ class HomeViewModel: ObservableObject {
     if mainVM.authKey != nil {
       let accessToken = mainVM.authKey!.accessToken
       
-      getSmallSongCardItems(accessToken: accessToken)
-      getUserFavoriteTracks(accessToken: accessToken)
-      getUserRecentlyPlayed(accessToken: accessToken)
-      getNewReleases(accessToken: accessToken)
-      getTopPodcasts(accessToken: accessToken)
-      getTopTracksFromArtist(accessToken: accessToken)
-      getFeaturedPlaylists(accessToken: accessToken)
-      getUserFavoriteArtists(accessToken: accessToken)
-      getPlaylistYearRewinds(accessToken: accessToken, year: .playlistRewind2010s)
-      getPlaylistYearRewinds(accessToken: accessToken, year: .playlistRewind2000s)
-      getPlaylistYearRewinds(accessToken: accessToken, year: .playlistRewind90s)
-      getPlaylistYearRewinds(accessToken: accessToken, year: .playlistRewind80s)
-      getPlaylistYearRewinds(accessToken: accessToken, year: .playlistRewind70s)
-      getPlaylistThisIsX(accessToken: accessToken)
+      fetchDataFor(.smallSongCards, with: accessToken)
+      fetchDataFor(.newReleases, with: accessToken)
+      fetchDataFor(.topPodcasts, with: accessToken)
+      fetchDataFor(.recentlyPlayed, with: accessToken)
+      fetchDataFor(.userFavoriteTracks, with: accessToken)
+      fetchDataFor(.userFavoriteArtists, with: accessToken)
+      fetchDataFor(.featuredPlaylists, with: accessToken)
+      fetchDataFor(.playlistThisIsX, with: accessToken)
+      fetchDataFor(.artistTopTracks, with: accessToken)
+      fetchDataFor(.playlistRewind70s, with: accessToken)
+      fetchDataFor(.playlistRewind80s, with: accessToken)
+      fetchDataFor(.playlistRewind90s, with: accessToken)
+      fetchDataFor(.playlistRewind2000s, with: accessToken)
+      fetchDataFor(.playlistRewind2010s, with: accessToken)
     }
   }
-  
-  
-  
-  // MARK: - Calls to fetch data
-  
-  private func getSmallSongCardItems(accessToken: String, loadingMore: Bool = false) {
-    fetchDataFor(Section.smallSongCards, with: accessToken)
-  }
-  
-  private func getNewReleases(accessToken: String, loadingMore: Bool = false) {
-    fetchDataFor(Section.newReleases, with: accessToken)
-  }
-  
-  private func getTopPodcasts(accessToken: String) {
-    fetchDataFor(Section.topPodcasts, with: accessToken)
-  }
-  
-  private func getUserRecentlyPlayed(accessToken: String) {
-    fetchDataFor(Section.recentlyPlayed, with: accessToken)
-  }
-  
-  private func getUserFavoriteTracks(accessToken: String) {
-    fetchDataFor(Section.userFavoriteTracks, with: accessToken)
-  }
-  
-  private func getUserFavoriteArtists(accessToken: String) {
-    fetchDataFor(Section.userFavoriteArtists, with: accessToken)
-  }
-  
-  private func getFeaturedPlaylists(accessToken: String) {
-    fetchDataFor(Section.featuredPlaylists, with: accessToken)
-  }
-  
-  private func getPlaylistYearRewinds(accessToken: String, year: Section) {
-    fetchDataFor(year, with: accessToken)
-  }
-  
-  private func getPlaylistThisIsX(accessToken: String) {
-    fetchDataFor(Section.playlistThisIsX, with: accessToken)
-  }
-  
-  private func getTopTracksFromArtist(accessToken: String) {
-    fetchDataFor(Section.artistTopTracks, with: accessToken)
-  }
-  
+
   
   
   // MARK: - Fetch Data From API
