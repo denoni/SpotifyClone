@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MyLibraryTopBar: View {
+  @EnvironmentObject var myLibraryVM: MyLibraryViewModel
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
   
   var body: some View {
@@ -19,8 +20,21 @@ struct MyLibraryTopBar: View {
           Spacer()
           HStack(spacing: 10) {
             Circle()
-              .fill(Color.spotifyGreen)
-              .overlay(Text("G").fontWeight(.bold).foregroundColor(.black))
+              .fill(Color.spotifyMediumGray)
+              .overlay(Group {
+                let userName = myLibraryVM.mainVM.currentUserProfileInfo?.displayName ?? ""
+                let userProfileImageURL = myLibraryVM.mainVM.currentUserProfileInfo?.imageURL ?? "S"
+
+                if userProfileImageURL != "" {
+                  RemoteImage(urlString: userProfileImageURL)
+                } else {
+                  Color.spotifyGreen
+                    .overlay(Text(String(userName.first! /* get first letter */))
+                              .fontWeight(.bold).foregroundColor(.black))
+                }
+
+              })
+              .mask(Circle())
               .scaledToFit()
             Text("My Library")
               .font(.avenir(.black, size: Constants.fontMedium))
