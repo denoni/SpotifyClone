@@ -77,8 +77,11 @@ struct MyLibraryScreen: View {
       var myLibraryMedias = [SpotifyModel.MediaItem]()
 
       for section in MyLibraryViewModel.Section.allCases {
-        guard myLibraryVM.isLoading[section]! == false else { return [] }
-        myLibraryMedias += myLibraryVM.mediaCollection[section]!
+        // `tracksPreview` and `episodesPreview` data should not be loaded here
+        if section != .tracksPreview && section != .episodesPreview {
+          guard myLibraryVM.isLoading[section]! == false else { return [] }
+          myLibraryMedias += myLibraryVM.mediaCollection[section]!
+        }
       }
 
       return myLibraryMedias
@@ -86,9 +89,14 @@ struct MyLibraryScreen: View {
 
     func didEverySectionLoaded() -> Bool {
       for key in myLibraryVM.isLoading.keys {
-        // If any section still loading, return false
-        guard myLibraryVM.isLoading[key] != true else {
-          return false
+
+        // `tracksPreview` and `episodesPreview` will only be called if user
+        // clicks liked songs item or my episodes item, so we can ignore it for now
+        if key != .tracksPreview && key != .episodesPreview {
+          // Now if any other section still loading, return false
+          guard myLibraryVM.isLoading[key] != true else {
+            return false
+          }
         }
       }
       // else, return true

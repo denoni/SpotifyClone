@@ -32,7 +32,7 @@ struct TracksPreviewScreen: View {
 // MARK: - Detail Content
 struct TracksPreviewDetailContent: View {
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
-  @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
+  @EnvironmentObject var myLibraryVM: MyLibraryViewModel
   @Binding var scrollViewPosition: CGFloat
 
   var body: some View {
@@ -40,28 +40,23 @@ struct TracksPreviewDetailContent: View {
       Text("Liked Songs")
         .spotifyTitle()
         .padding(.top, topSafeAreaSize + 60)
-      Text("30 songs")
+      Text("30 songs") // TODO: Add real data
         .font(.avenir(.medium, size: Constants.fontSmall))
         .opacity(Constants.opacityStandard)
 
-      TracksPreviewVerticalScrollView()
-
-      //      if Utility.didEverySectionLoaded(in: .playlistDetail, mediaDetailVM: mediaDetailVM) {
-      //        TracksVerticalScrollView(tracksOrigin: .playlist(.tracksFromPlaylist))
-      //      } else {
-      //        HStack {
-      //          ProgressView()
-      //            .withSpotifyStyle(useDiscreetColors: true)
-      //            .onAppear {
-      //              let currentUserId = mediaDetailVM.mainVM.currentUserProfileInfo!.id
-      //              mediaDetailVM.getPlaylistScreenData(currentUserID: currentUserId)
-      //            }
-      //        }.frame(maxWidth: .infinity, alignment: .center)
-      //        Spacer()
-      //      }
-
+      if myLibraryVM.isLoading[.tracksPreview]! == false {
+        TracksPreviewVerticalScrollView(medias: myLibraryVM.mediaCollection[.tracksPreview]!)
+      } else {
+        HStack {
+          ProgressView()
+            .withSpotifyStyle(useDiscreetColors: true)
+            .onAppear {
+              myLibraryVM.getCurrentUserLikedTracks(accessToken: myLibraryVM.mainVM.authKey!.accessToken)
+            }
+        }.frame(maxWidth: .infinity, alignment: .center)
+        Spacer()
+      }
       Spacer()
-
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .padding(.horizontal, Constants.paddingStandard)
@@ -70,13 +65,13 @@ struct TracksPreviewDetailContent: View {
 }
 
 struct TracksPreviewVerticalScrollView: View {
-
-  let testMedia = SpotifyModel.MediaItem.init(title: "Test Track", previewURL: "Subtitle", imageURL: "", authorName: [""], author: nil, mediaType: .track, id: "", details: SpotifyModel.DetailTypes.tracks(trackDetails: SpotifyModel.TrackDetails.init(popularity: 0, explicit: false, description: "", durationInMs: 0, id: "0", album: nil)))
+  var medias: [SpotifyModel.MediaItem]
 
   var body: some View {
     LazyVStack {
-      ForEach([testMedia]) { media in
-        TrackPreviewItem(title: media.title, subTitle: media.previewURL, imageURL: media.imageURL)
+      ForEach(medias) { media in
+        TrackPreviewItem(title: media.title, authorsName: media.authorName, imageURL: media.imageURL)
+          .padding(.bottom, Constants.paddingSmall)
       }
     }
     .padding(.top, Constants.paddingSmall)
@@ -86,7 +81,7 @@ struct TracksPreviewVerticalScrollView: View {
 
 struct TrackPreviewItem: View {
   let title: String
-  let subTitle: String
+  let authorsName: [String]
   let imageURL: String
 
   var body: some View {
@@ -105,7 +100,7 @@ struct TrackPreviewItem: View {
               .font(.avenir(.heavy, size: Constants.fontSmall))
               .lineLimit(1)
               .padding(.trailing, Constants.paddingLarge)
-            Text(subTitle)
+            Text(authorsName.joined(separator: ", "))
               .font(.avenir(.medium, size: Constants.fontXSmall))
               .opacity(Constants.opacityHigh)
               .lineLimit(1)

@@ -13,6 +13,7 @@ class APIFetchingTracks {
   enum TrackEndpointInAPI {
     case userRecentlyPlayed
     case userFavoriteTracks
+    case userLikedTracks
     case topTracksFromArtist(artistID: String)
     case tracksFromPlaylist(playlistID: String)
     case tracksFromAlbum(albumID: String)
@@ -31,6 +32,8 @@ class APIFetchingTracks {
       baseUrl = "https://api.spotify.com/v1/me/player/recently-played?limit=20"
     case .userFavoriteTracks:
       baseUrl = "https://api.spotify.com/v1/me/top/tracks?limit=\(limit)&offset=\(offset)"
+    case .userLikedTracks:
+      baseUrl = "https://api.spotify.com/v1/me/tracks"
     case .topTracksFromArtist(let artistID):
       baseUrl = "https://api.spotify.com/v1/artists/\(artistID)/top-tracks?market=US"
     case .tracksFromPlaylist(let playlistID):

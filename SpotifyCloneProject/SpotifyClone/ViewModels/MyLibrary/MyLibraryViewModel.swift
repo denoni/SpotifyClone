@@ -32,10 +32,14 @@ class MyLibraryViewModel: ObservableObject {
     case episodeDetail
   }
 
-  enum Section: String, CaseIterable {
+  enum Section: CaseIterable {
     case userPlaylists
     case userArtists
     case userShows
+
+    // Detail sections
+    case tracksPreview
+    case episodesPreview
   }
 
   init(mainViewModel: MainViewModel) {
@@ -78,8 +82,14 @@ class MyLibraryViewModel: ObservableObject {
   }
 
   func getCurrentUserShows(accessToken: String) {
-    api.getCurrentUserShows(with: accessToken) { artists in
-      self.trimAndCommunicateResult(section: .userShows, medias: artists)
+    api.getCurrentUserShows(with: accessToken) { shows in
+      self.trimAndCommunicateResult(section: .userShows, medias: shows)
+    }
+  }
+
+  func getCurrentUserLikedTracks(accessToken: String) {
+    api.getCurrentUserLikedTracks(with: accessToken) { tracks in
+      self.trimAndCommunicateResult(section: .tracksPreview, medias: tracks)
     }
   }
 

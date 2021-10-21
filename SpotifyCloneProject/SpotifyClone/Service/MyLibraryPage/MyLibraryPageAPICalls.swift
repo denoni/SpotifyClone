@@ -38,4 +38,11 @@ class MyLibraryPageAPICalls: ObservableObject {
     showsAPI.getShow(using: .followedPodcasts, with: accessToken, completionHandler: completionHandler)
   }
 
+  // MARK: - TRACKs
+  func getCurrentUserLikedTracks(with accessToken: String,
+                                 completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
+
+    trackAPI.getTrack(using: .userLikedTracks, with: accessToken, completionHandler: completionHandler)
+  }
+
 }
