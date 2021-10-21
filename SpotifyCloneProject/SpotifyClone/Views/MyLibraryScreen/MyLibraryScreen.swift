@@ -20,6 +20,11 @@ struct MyLibraryScreen: View {
       ProgressView()
         .withSpotifyStyle(useDiscreetColors: true)
 
+    case .tracksPreview:
+      TracksPreviewScreen()
+    case .episodesPreview:
+      Text("To be done")
+
     case .playlistDetail:
       PlaylistDetailScreen(detailScreenOrigin: .myLibrary(myLibraryVM: myLibraryVM),
                            mediaDetailVM: mediaDetailVM)

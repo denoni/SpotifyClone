@@ -21,6 +21,9 @@ class MyLibraryViewModel: ObservableObject {
     case none
     case transitionScreen
 
+    case tracksPreview
+    case episodesPreview
+
     case playlistDetail
     case trackDetail
     case albumDetail

@@ -51,8 +51,8 @@ struct MainView: View {
       .onChange(of: mainVM.currentPage) { _ in
         homeVM.goToNoneSubpage()
         searchVM.goToNoneSubpage()
+        myLibraryVM.goToNoneSubpage()
         mediaDetailVM.clean()
-        myLibraryVM.clean()
       }
       .navigationBarTitle("")
       .navigationBarHidden(true)

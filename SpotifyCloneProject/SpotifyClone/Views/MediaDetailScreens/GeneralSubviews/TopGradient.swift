@@ -9,18 +9,25 @@ import SwiftUI
 
 struct TopGradient: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
+  var userSpecifiedColor: Color? = nil
 
   var height: CGFloat
   var color: Color {
+    guard userSpecifiedColor == nil else {
+      return userSpecifiedColor!
+    }
+
     if mediaDetailVM.imageColorModel.image != nil {
       return Color(mediaDetailVM.imageColorModel.image!.averageColor!)
     } else {
       return .clear
     }
-
   }
 
-  init(height: CGFloat) { self.height = height }
+  init(height: CGFloat, specificColor: Color? = nil) {
+    self.height = height
+    self.userSpecifiedColor = specificColor
+  }
 
   var body: some View {
     Rectangle()

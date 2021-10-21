@@ -35,13 +35,15 @@ struct MyLibraryItemsScrollView: View {
           .frame(height: 80)
           .padding(.bottom, 10)
           .onTapGesture {
-            guard media.id != "liked-songs" || media.id != "your-episodes" else {
-              // Implement their screens, currently we can't navigate using them
-              return
+
+            guard media.id != "liked-songs" else {
+              return myLibraryVM.changeSubpageTo(.tracksPreview, mediaDetailVM: mediaDetailVM, withData: media)
+            }
+            guard media.id != "your-episodes" else {
+              return myLibraryVM.changeSubpageTo(.episodesPreview, mediaDetailVM: mediaDetailVM, withData: media)
             }
             myLibraryVM.changeSubpageTo(getDetailScreen(for: media.mediaType), mediaDetailVM: mediaDetailVM, withData: media)
           }
-          .onLongPressGesture { print(myLibraryVM.currentSubPage) }
         }
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity)
