@@ -44,8 +44,8 @@ struct TracksPreviewDetailContent: View {
         .font(.avenir(.medium, size: Constants.fontSmall))
         .opacity(Constants.opacityStandard)
 
-      if myLibraryVM.isLoading[.tracksPreview]! == false {
-        TracksPreviewVerticalScrollView(medias: myLibraryVM.mediaCollection[.tracksPreview]!)
+      if myLibraryVM.isLoading[.userLikedSongs]! == false {
+        TracksPreviewVerticalScrollView(medias: myLibraryVM.mediaCollection[.userLikedSongs]!)
       } else {
         HStack {
           ProgressView()

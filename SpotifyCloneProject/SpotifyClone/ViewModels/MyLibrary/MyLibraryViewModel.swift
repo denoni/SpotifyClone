@@ -38,8 +38,8 @@ class MyLibraryViewModel: ObservableObject {
     case userShows
 
     // Detail sections
-    case tracksPreview
-    case episodesPreview
+    case userLikedSongs
+    case userSavedEpisodes
   }
 
   init(mainViewModel: MainViewModel) {
@@ -89,7 +89,7 @@ class MyLibraryViewModel: ObservableObject {
 
   func getCurrentUserLikedTracks(accessToken: String) {
     api.getCurrentUserLikedTracks(with: accessToken) { tracks in
-      self.trimAndCommunicateResult(section: .tracksPreview, medias: tracks)
+      self.trimAndCommunicateResult(section: .userLikedSongs, medias: tracks)
     }
   }
 

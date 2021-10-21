@@ -78,7 +78,7 @@ struct MyLibraryScreen: View {
 
       for section in MyLibraryViewModel.Section.allCases {
         // `tracksPreview` and `episodesPreview` data should not be loaded here
-        if section != .tracksPreview && section != .episodesPreview {
+        if section != .userLikedSongs && section != .userSavedEpisodes {
           guard myLibraryVM.isLoading[section]! == false else { return [] }
           myLibraryMedias += myLibraryVM.mediaCollection[section]!
         }
@@ -92,7 +92,7 @@ struct MyLibraryScreen: View {
 
         // `tracksPreview` and `episodesPreview` will only be called if user
         // clicks liked songs item or my episodes item, so we can ignore it for now
-        if key != .tracksPreview && key != .episodesPreview {
+        if key != .userLikedSongs && key != .userSavedEpisodes {
           // Now if any other section still loading, return false
           guard myLibraryVM.isLoading[key] != true else {
             return false
