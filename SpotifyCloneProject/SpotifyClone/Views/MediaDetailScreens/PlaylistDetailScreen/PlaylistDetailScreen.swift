@@ -35,6 +35,9 @@ struct PlaylistDetailScreen: View {
       }
       .ignoresSafeArea()
     }
+    .onDisappear {
+      mediaDetailVM.cleanSectionFor(sectionMediaType: .playlist)
+    }
   }
 }
 

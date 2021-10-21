@@ -293,7 +293,7 @@ class HomeViewModel: ObservableObject {
 
     // if we change the subpage right away it'll cause a crash
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-      mediaDetailVM.clean()
+      mediaDetailVM.cleanAll()
       mediaDetailVM.mainItem = data
       mediaDetailVM.accessToken = self.mainVM.authKey!.accessToken
       mediaDetailVM.setVeryFirstImageInfoBasedOn(data.imageURL)

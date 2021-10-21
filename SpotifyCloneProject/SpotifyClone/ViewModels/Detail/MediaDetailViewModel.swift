@@ -123,11 +123,30 @@ class MediaDetailViewModel: ObservableObject {
 
   // MARK: - Auxiliary Functions not related to API calls
 
-  func clean() {
+  func cleanAll() {
     mainItem = nil
     detailScreenOrigin = nil
     followedIDs.removeAll()
     cleanAllSection()
+  }
+
+  func cleanSectionFor(sectionMediaType: SpotifyModel.MediaTypes) {
+    cleanSection(MediaDetailSection.ArtistBasicInfo.self)
+
+    switch sectionMediaType {
+    case .album:
+      cleanSection(MediaDetailSection.AlbumSections.self)
+    case .playlist:
+      cleanSection(MediaDetailSection.PlaylistSections.self)
+    case .show:
+      cleanSection(MediaDetailSection.ShowsSections.self)
+    case .artist:
+      cleanSection(MediaDetailSection.ArtistSections.self)
+    case .episode:
+      cleanSection(MediaDetailSection.EpisodeSections.self)
+    case .track:
+      print("TrackDetailScreen - We have nothing to clean.")
+    }
   }
 
   func setVeryFirstImageInfoBasedOn(_ firstImageURL: String) {
@@ -172,6 +191,13 @@ class MediaDetailViewModel: ObservableObject {
 
       } else if section == MediaDetailSection.ArtistBasicInfo.self {
         sectionInstance = .artistBasicInfo(subSection as! MediaDetailSection.ArtistBasicInfo)
+      }
+
+      // deletes images in the current section from cache
+      if mediaCollection[sectionInstance!] != nil {
+        for media in mediaCollection[sectionInstance!]! {
+          ImageCache.deleteImageFromCache(imageURL: media.imageURL)
+        }
       }
       
       isLoading[sectionInstance!] = true

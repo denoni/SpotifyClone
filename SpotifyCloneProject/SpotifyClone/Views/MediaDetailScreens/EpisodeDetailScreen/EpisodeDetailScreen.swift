@@ -33,6 +33,9 @@ struct EpisodeDetailScreen: View {
                         backButtonShouldReturnTo: mediaDetailVM.detailScreenOrigin!)
       }.ignoresSafeArea()
     }
+    .onDisappear {
+      mediaDetailVM.cleanSectionFor(sectionMediaType: .episode)
+    }
   }
 
 }

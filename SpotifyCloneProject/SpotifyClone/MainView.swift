@@ -52,7 +52,7 @@ struct MainView: View {
         homeVM.goToNoneSubpage()
         searchVM.goToNoneSubpage()
         myLibraryVM.goToNoneSubpage()
-        mediaDetailVM.clean()
+        mediaDetailVM.cleanAll()
         ImageCache.deleteAll()
       }
       .navigationBarTitle("")

@@ -34,6 +34,9 @@ struct AlbumDetailScreen: View {
 
       }.ignoresSafeArea()
     }
+    .onDisappear {
+      mediaDetailVM.cleanSectionFor(sectionMediaType: .album)
+    }
   }
 }
 

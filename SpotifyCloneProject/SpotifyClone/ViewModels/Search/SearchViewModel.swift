@@ -97,7 +97,7 @@ class SearchViewModel: ObservableObject {
         searchDetailVM.accessToken = accessToken
 
       case .detail(let mediaDetailVM, let data):
-        mediaDetailVM.clean()
+        mediaDetailVM.cleanAll()
         mediaDetailVM.mainItem = data
         mediaDetailVM.accessToken = self.mainVM.authKey!.accessToken
         mediaDetailVM.setVeryFirstImageInfoBasedOn(data.imageURL)

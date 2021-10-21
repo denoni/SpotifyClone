@@ -459,8 +459,8 @@
 		C084E04027033FAC00C6AAAE /* AlbumDetailScreen */ = {
 			isa = PBXGroup;
 			children = (
-				C084E04227033FAE00C6AAAE /* AlbumDetailViews */,
 				C016E604270344C200EFF870 /* AlbumDetailScreen.swift */,
+				C084E04227033FAE00C6AAAE /* AlbumDetailViews */,
 			);
 			path = AlbumDetailScreen;
 			sourceTree = "<group>";
@@ -513,9 +513,9 @@
 				C084268726F1588B000ACAEE /* MainViewModel.swift */,
 				C084268126F10DF3000ACAEE /* Auth */,
 				C084268226F10DFF000ACAEE /* Home */,
+				C089135B26F97E6900CA1A69 /* Search */,
 				C0FB4FDB27205CB500E61982 /* MyLibrary */,
 				C0A07F0227135D030069B664 /* Detail */,
-				C089135B26F97E6900CA1A69 /* Search */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";

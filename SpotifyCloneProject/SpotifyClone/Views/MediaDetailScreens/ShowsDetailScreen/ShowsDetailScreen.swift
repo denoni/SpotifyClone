@@ -33,6 +33,9 @@ struct ShowsDetailScreen: View {
                         backButtonShouldReturnTo: mediaDetailVM.detailScreenOrigin!)
       }.ignoresSafeArea()
     }
+    .onDisappear {
+      mediaDetailVM.cleanSectionFor(sectionMediaType: .show)
+    }
   }
 }
 

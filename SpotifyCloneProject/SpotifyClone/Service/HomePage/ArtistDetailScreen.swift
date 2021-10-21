@@ -41,7 +41,9 @@ struct ArtistDetailScreen: View {
         
       }.ignoresSafeArea()
     }
-    
+    .onDisappear {
+      mediaDetailVM.cleanSectionFor(sectionMediaType: .artist)
+    }
   }
 }
 
