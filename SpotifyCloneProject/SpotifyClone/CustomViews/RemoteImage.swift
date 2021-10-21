@@ -32,6 +32,9 @@ struct RemoteImage: View {
       Image(uiImage: remoteImageModel.image!)
         .resizable()
         .scaledToFill()
+//        .onDisappear {
+//          ImageCache.deleteImageFromCache(imageURL: )
+//        }
     }
   }
 }
@@ -121,11 +124,26 @@ class ImageCache {
   func set(forKey key: String, image: UIImage) {
     cache.setObject(image, forKey: NSString(string: key))
   }
+
+  func delete(forKey key: String) {
+    cache.removeObject(forKey: NSString(string: key))
+  }
+
+  func deleteAll() {
+    cache.removeAllObjects()
+  }
 }
 
 extension ImageCache {
   private static var imageCache = ImageCache()
+
   static func getImageCache() -> ImageCache {
     return imageCache
+  }
+  static func deleteImageFromCache(imageURL: String) {
+    imageCache.delete(forKey: imageURL)
+  }
+  static func deleteAll() {
+    imageCache.deleteAll()
   }
 }

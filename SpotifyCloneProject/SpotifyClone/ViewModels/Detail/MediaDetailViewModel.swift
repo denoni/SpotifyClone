@@ -137,8 +137,6 @@ class MediaDetailViewModel: ObservableObject {
   func returnBasicArtistsInfo() -> [SpotifyModel.MediaItem] {
     return mediaCollection[.artistBasicInfo(.artistBasicInfo)]!
   }
-
-
   
   // MARK: - Private functions
 
@@ -175,7 +173,7 @@ class MediaDetailViewModel: ObservableObject {
       } else if section == MediaDetailSection.ArtistBasicInfo.self {
         sectionInstance = .artistBasicInfo(subSection as! MediaDetailSection.ArtistBasicInfo)
       }
-
+      
       isLoading[sectionInstance!] = true
       mediaCollection[sectionInstance!] = []
       numberOfLoadedItemsInSection[sectionInstance!] = 0
