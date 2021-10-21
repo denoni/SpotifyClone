@@ -99,7 +99,7 @@
 		C08D2DB627108B4A003EB95C /* TopSearchSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08D2DB527108B4A003EB95C /* TopSearchSection.swift */; };
 		C08D2DB827108E1A003EB95C /* SearchResponsesScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08D2DB727108E1A003EB95C /* SearchResponsesScrollView.swift */; };
 		C08D2DBB2710C6EC003EB95C /* SearchEndpointResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08D2DBA2710C6EB003EB95C /* SearchEndpointResponseType.swift */; };
-		C090ABDF2720D90E0069F901 /* TracksPreviewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C090ABDE2720D90E0069F901 /* TracksPreviewScreen.swift */; };
+		C090ABDF2720D90E0069F901 /* LikedSongsScrollScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C090ABDE2720D90E0069F901 /* LikedSongsScrollScreen.swift */; };
 		C094167D2718A05F00C658B3 /* EpisodeDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C094167C2718A05F00C658B3 /* EpisodeDetailScreen.swift */; };
 		C094167F2718B06100C658B3 /* AuthorItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C094167E2718B06100C658B3 /* AuthorItem.swift */; };
 		C09552942704B16C000499B3 /* APIFetchingShows.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09552932704B16C000499B3 /* APIFetchingShows.swift */; };
@@ -263,7 +263,7 @@
 		C08D2DB527108B4A003EB95C /* TopSearchSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSearchSection.swift; sourceTree = "<group>"; };
 		C08D2DB727108E1A003EB95C /* SearchResponsesScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponsesScrollView.swift; sourceTree = "<group>"; };
 		C08D2DBA2710C6EB003EB95C /* SearchEndpointResponseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEndpointResponseType.swift; sourceTree = "<group>"; };
-		C090ABDE2720D90E0069F901 /* TracksPreviewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksPreviewScreen.swift; sourceTree = "<group>"; };
+		C090ABDE2720D90E0069F901 /* LikedSongsScrollScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedSongsScrollScreen.swift; sourceTree = "<group>"; };
 		C094167C2718A05F00C658B3 /* EpisodeDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailScreen.swift; sourceTree = "<group>"; };
 		C094167E2718B06100C658B3 /* AuthorItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorItem.swift; sourceTree = "<group>"; };
 		C09552932704B16C000499B3 /* APIFetchingShows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFetchingShows.swift; sourceTree = "<group>"; };
@@ -501,7 +501,6 @@
 				C0C5F9692704DE800099EEB5 /* ArtistDetailScreen */,
 				C094167B2718A03700C658B3 /* EpisodeDetailScreen */,
 				C089874727000B7100F9BF70 /* TrackDetailScreen */,
-				C090ABE02720DEC80069F901 /* TracksPreviewScreen */,
 			);
 			path = MediaDetailScreens;
 			sourceTree = "<group>";
@@ -690,12 +689,12 @@
 			path = SearchPage;
 			sourceTree = "<group>";
 		};
-		C090ABE02720DEC80069F901 /* TracksPreviewScreen */ = {
+		C090ABE02720DEC80069F901 /* LikedSongsScrollScreen */ = {
 			isa = PBXGroup;
 			children = (
-				C090ABDE2720D90E0069F901 /* TracksPreviewScreen.swift */,
+				C090ABDE2720D90E0069F901 /* LikedSongsScrollScreen.swift */,
 			);
-			path = TracksPreviewScreen;
+			path = LikedSongsScrollScreen;
 			sourceTree = "<group>";
 		};
 		C094167B2718A03700C658B3 /* EpisodeDetailScreen */ = {
@@ -904,6 +903,7 @@
 		C0FB4FE32720809700E61982 /* MyLibraryScreenViews */ = {
 			isa = PBXGroup;
 			children = (
+				C090ABE02720DEC80069F901 /* LikedSongsScrollScreen */,
 				C0FB4FE4272080B800E61982 /* MyLibraryTopBar.swift */,
 				C0FB4FE62720811E00E61982 /* MyLibraryItemsScrollView.swift */,
 				C0FB4FE82720852300E61982 /* MyLibraryItemTypes.swift */,
@@ -1210,7 +1210,7 @@
 				C088F23E26DEE61B00C4BCA2 /* BigSongItem.swift in Sources */,
 				C06AB91426FA07B000F46356 /* Color+Random.swift in Sources */,
 				C087B0E826E6556F00A72A13 /* HomeViewModel.swift in Sources */,
-				C090ABDF2720D90E0069F901 /* TracksPreviewScreen.swift in Sources */,
+				C090ABDF2720D90E0069F901 /* LikedSongsScrollScreen.swift in Sources */,
 				C080CE1B270099F2003D0C11 /* ExplicitIcon.swift in Sources */,
 				C084268826F1588B000ACAEE /* MainViewModel.swift in Sources */,
 				C0C5F97A2704FB930099EEB5 /* ArtistMediaHorizontalScrollView.swift in Sources */,

@@ -7,20 +7,26 @@
 
 import SwiftUI
 
-struct TracksPreviewScreen: View {
+struct LikedSongsScrollScreen: View {
+  @EnvironmentObject var myLibraryVM: MyLibraryViewModel
   @State var scrollViewPosition = CGFloat.zero
   let likedSongsPlaylistCoverColor = Color(UIColor(red: 0.271, green: 0.192, blue: 0.918, alpha: 1))
 
   var body: some View {
     GeometryReader { geometry in
-      ReadableScrollView(currentPosition: $scrollViewPosition) {
-        VStack {
-          // 4 is just a ratio that looked visually good
-          TopGradient(height: geometry.size.height / 4, specificColor: likedSongsPlaylistCoverColor)
-          TracksPreviewDetailContent(scrollViewPosition: $scrollViewPosition)
-            .padding(.top, -geometry.size.height / 4)
-            .padding(.bottom, Constants.paddingBottomSection)
+      ZStack {
+        ReadableScrollView(currentPosition: $scrollViewPosition) {
+          VStack {
+            // 4 is just a ratio that looked visually good
+            TopGradient(height: geometry.size.height / 4, specificColor: likedSongsPlaylistCoverColor)
+            LikedSongsDetailContent(scrollViewPosition: $scrollViewPosition)
+              .padding(.top, -geometry.size.height / 4)
+              .padding(.bottom, Constants.paddingBottomSection)
+          }
         }
+        TopBarWithTitle(scrollViewPosition: $scrollViewPosition,
+                        title: "Liked Songs",
+                        backButtonShouldReturnTo: .myLibrary(myLibraryVM: myLibraryVM))
       }
       .ignoresSafeArea()
     }
@@ -30,7 +36,7 @@ struct TracksPreviewScreen: View {
 
 
 // MARK: - Detail Content
-struct TracksPreviewDetailContent: View {
+struct LikedSongsDetailContent: View {
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
   @EnvironmentObject var myLibraryVM: MyLibraryViewModel
   @Binding var scrollViewPosition: CGFloat

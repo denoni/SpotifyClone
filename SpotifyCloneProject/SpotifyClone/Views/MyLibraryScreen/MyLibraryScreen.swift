@@ -21,7 +21,7 @@ struct MyLibraryScreen: View {
         .withSpotifyStyle(useDiscreetColors: true)
 
     case .tracksPreview:
-      TracksPreviewScreen()
+      LikedSongsScrollScreen()
     case .episodesPreview:
       Text("To be done")
 
