@@ -63,7 +63,8 @@ struct TracksVerticalScrollView: View {
     var body: some View {
       HStack(spacing: Constants.spacingSmall) {
         PlayStopButton(audioManager: audioManager,
-                       media: media)
+                       media: media,
+                       size: 60)
         VStack(alignment: .leading, spacing: 0) {
           Text(media.title)
             .font(.avenir(.medium, size: Constants.fontMedium))
@@ -116,7 +117,8 @@ struct TracksVerticalScrollView: View {
               .foregroundColor(.spotifyMediumGray)
               .overlay(RemoteImage(urlString: media.imageURL))
             PlayStopButton(audioManager: audioManager,
-                           media: media)
+                           media: media,
+                           size: 60)
                 .opacity(isTapped ? 1 : 0)
           }
           .frame(width: 60, height: 60)
@@ -157,57 +159,6 @@ struct TracksVerticalScrollView: View {
       }
     }
   }
-
-
-
-  // MARK: - Media Controller View
-
-  struct PlayStopButton: View {
-    @StateObject var audioManager: RemoteAudio
-    var media: SpotifyModel.MediaItem
-
-    var body: some View {
-
-      ZStack {
-        // Add a darkish background to the play/stop button, so
-        // it gets more visible even when the cover image is whitish.
-        Color.spotifyMediumGray.opacity(0.3)
-
-        // The play/stop/buffering icon
-        ZStack(alignment: .center) {
-          if audioManager.state == .buffering {
-            ProgressView()
-              .scaledToFit()
-          } else {
-            if audioManager.showPauseButton
-                && audioManager.lastItemPlayedID == media.id {
-              Image("stop")
-                .resizeToFit()
-                .onTapGesture {
-                  audioManager.pause()
-                }
-            } else {
-              Image("play")
-                .resizeToFit()
-                .padding(.leading, 3)
-                .onTapGesture {
-                  if media.previewURL.isEmpty {
-                    audioManager.playWithItunes(forItem: media,
-                                                canPlayMoreThanOneAudio: true)
-                  } else {
-                    audioManager.pause()
-                    audioManager.play(media.previewURL, audioID: media.id)
-                  }
-                }
-            }
-          }
-        }
-        .frame(width: 25, height: 25)
-      }
-      .frame(width: 60, height: 60, alignment: .center)
-    }
-  }
-
 }
 
 

@@ -71,12 +71,13 @@ struct LikedSongsDetailContent: View {
 }
 
 struct TracksPreviewVerticalScrollView: View {
+  @StateObject var audioManager = RemoteAudio()
   var medias: [SpotifyModel.MediaItem]
 
   var body: some View {
     LazyVStack {
       ForEach(medias) { media in
-        TrackPreviewItem(title: media.title, authorsName: media.authorName, imageURL: media.imageURL)
+        TrackPreviewItem(media: media, audioManager: audioManager)
           .padding(.bottom, Constants.paddingSmall)
       }
     }
@@ -86,9 +87,8 @@ struct TracksPreviewVerticalScrollView: View {
 }
 
 struct TrackPreviewItem: View {
-  let title: String
-  let authorsName: [String]
-  let imageURL: String
+  let media: SpotifyModel.MediaItem
+  @StateObject var audioManager: RemoteAudio
 
   var body: some View {
     HStack(spacing: Constants.spacingSmall) {
@@ -98,15 +98,18 @@ struct TrackPreviewItem: View {
         HStack {
           Rectangle()
             .foregroundColor(.spotifyMediumGray)
-            .overlay(RemoteImage(urlString: imageURL).aspectRatio(1/1, contentMode: .fill))
+            .overlay(ZStack {
+              RemoteImage(urlString: media.imageURL).aspectRatio(1/1, contentMode: .fill)
+              PlayStopButton(audioManager: audioManager, media: media, size: 80)
+            })
             .frame(width: 80, height: 80)
             .mask(Rectangle().frame(width: 80, height: 80))
           VStack(alignment: .leading, spacing: 5) {
-            Text(title)
+            Text(media.title)
               .font(.avenir(.heavy, size: Constants.fontSmall))
               .lineLimit(1)
               .padding(.trailing, Constants.paddingLarge)
-            Text(authorsName.joined(separator: ", "))
+            Text(media.authorName.joined(separator: ", "))
               .font(.avenir(.medium, size: Constants.fontXSmall))
               .opacity(Constants.opacityHigh)
               .lineLimit(1)
