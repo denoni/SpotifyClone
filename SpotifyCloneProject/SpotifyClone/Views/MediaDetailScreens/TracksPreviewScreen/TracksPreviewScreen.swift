@@ -37,14 +37,29 @@ struct TracksPreviewDetailContent: View {
 
   var body: some View {
     VStack(alignment: .leading, spacing: Constants.spacingMedium) {
-
       Text("Liked Songs")
         .spotifyTitle()
         .padding(.top, topSafeAreaSize + 60)
       Text("30 songs")
         .font(.avenir(.medium, size: Constants.fontSmall))
         .opacity(Constants.opacityStandard)
-      
+
+      TracksPreviewVerticalScrollView()
+
+      //      if Utility.didEverySectionLoaded(in: .playlistDetail, mediaDetailVM: mediaDetailVM) {
+      //        TracksVerticalScrollView(tracksOrigin: .playlist(.tracksFromPlaylist))
+      //      } else {
+      //        HStack {
+      //          ProgressView()
+      //            .withSpotifyStyle(useDiscreetColors: true)
+      //            .onAppear {
+      //              let currentUserId = mediaDetailVM.mainVM.currentUserProfileInfo!.id
+      //              mediaDetailVM.getPlaylistScreenData(currentUserID: currentUserId)
+      //            }
+      //        }.frame(maxWidth: .infinity, alignment: .center)
+      //        Spacer()
+      //      }
+
       Spacer()
 
     }
@@ -54,3 +69,56 @@ struct TracksPreviewDetailContent: View {
   }
 }
 
+struct TracksPreviewVerticalScrollView: View {
+
+  let testMedia = SpotifyModel.MediaItem.init(title: "Test Track", previewURL: "Subtitle", imageURL: "", authorName: [""], author: nil, mediaType: .track, id: "", details: SpotifyModel.DetailTypes.tracks(trackDetails: SpotifyModel.TrackDetails.init(popularity: 0, explicit: false, description: "", durationInMs: 0, id: "0", album: nil)))
+
+  var body: some View {
+    LazyVStack {
+      ForEach([testMedia]) { media in
+        TrackPreviewItem(title: media.title, subTitle: media.previewURL, imageURL: media.imageURL)
+      }
+    }
+    .padding(.top, Constants.paddingSmall)
+    .padding(.bottom, Constants.paddingStandard)
+  }
+}
+
+struct TrackPreviewItem: View {
+  let title: String
+  let subTitle: String
+  let imageURL: String
+
+  var body: some View {
+    HStack(spacing: Constants.spacingSmall) {
+      ZStack {
+        RoundedRectangle(cornerRadius: Constants.radiusStandard)
+          .foregroundColor(.spotifyLightGray)
+        HStack {
+          Rectangle()
+            .foregroundColor(.spotifyMediumGray)
+            .overlay(RemoteImage(urlString: imageURL).aspectRatio(1/1, contentMode: .fill))
+            .frame(width: 80, height: 80)
+            .mask(Rectangle().frame(width: 80, height: 80))
+          VStack(alignment: .leading, spacing: 5) {
+            Text(title)
+              .font(.avenir(.heavy, size: Constants.fontSmall))
+              .lineLimit(1)
+              .padding(.trailing, Constants.paddingLarge)
+            Text(subTitle)
+              .font(.avenir(.medium, size: Constants.fontXSmall))
+              .opacity(Constants.opacityHigh)
+              .lineLimit(1)
+          }
+          Spacer()
+          Image("three-dots")
+            .resizeToFit()
+            .frame(width: 25)
+            .padding(.horizontal, Constants.paddingStandard)
+        }
+        .mask(RoundedRectangle(cornerRadius: Constants.radiusStandard))
+      }
+    }
+    .frame(maxWidth: .infinity)
+  }
+}
