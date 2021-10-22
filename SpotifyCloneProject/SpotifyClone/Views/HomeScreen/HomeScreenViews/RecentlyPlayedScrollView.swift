@@ -29,6 +29,9 @@ struct RecentlyPlayedScrollView: View {
                                        mediaDetailVM: mediaDetailVM,
                                        withData: media)
               }
+              .onDisappear{
+                homeVM.deleteImageFromCache(imageURL: media.imageURL)
+              }
           }
         }.padding(.horizontal, Constants.paddingStandard)
       }

@@ -52,6 +52,9 @@ struct BigSongCoversScrollView: View {
                   homeVM.fetchDataFor(section, with: homeVM.mainVM.authKey!.accessToken)
                 }
               }
+              .onDisappear{
+                homeVM.deleteImageFromCache(imageURL: media.imageURL)
+              }
               .onTapGesture {
                 homeVM.changeSubpageTo(detailType,
                                        mediaDetailVM: mediaDetailVM,

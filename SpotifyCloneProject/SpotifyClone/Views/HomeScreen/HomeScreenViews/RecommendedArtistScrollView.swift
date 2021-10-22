@@ -36,6 +36,9 @@ struct RecommendedArtistScrollView: View {
               .onTapGesture {
                 homeVM.changeSubpageTo(.trackDetail, mediaDetailVM: mediaDetailVM, withData: media)
               }
+              .onDisappear{
+                homeVM.deleteImageFromCache(imageURL: media.imageURL)
+              }
           }
         }
         .padding(.horizontal, Constants.paddingSmall)

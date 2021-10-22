@@ -70,6 +70,11 @@ class HomeViewModel: ObservableObject {
     case playlistRewind2000s = "2000s Rewind"
     case playlistRewind2010s = "2010s Rewind"
   }
+
+  func deleteImageFromCache(imageURL: String) {
+    ImageCache.deleteImageFromCache(imageURL: imageURL)
+    self.objectWillChange.send()
+  }
   
   func fetchHomeData() {
     for dictKey in isLoading.keys { isLoading[dictKey] = true }
