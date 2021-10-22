@@ -218,7 +218,9 @@ class PlayerDurationObserver {
 
   init(player: AVPlayer) {
     let durationKeyPath: KeyPath<AVPlayer, CMTime?> = \.currentItem?.duration
-    cancellable = player.publisher(for: durationKeyPath).sink { duration in
+    cancellable = player.publisher(for: durationKeyPath).sink { [weak self] duration in
+      guard let self = self else { return }
+      
       guard let duration = duration else { return }
       guard duration.isNumeric else { return }
       self.publisher.send(duration.seconds)

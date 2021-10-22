@@ -117,6 +117,16 @@ class RemoteImageModel: ObservableObject {
 class ImageCache {
   var cache = NSCache<NSString, UIImage>()
 
+  // If a memory warning is received, clean all cache
+  init() {
+    NotificationCenter.default.addObserver(
+      forName: UIApplication.didReceiveMemoryWarningNotification,
+      object: nil,
+      queue: .main) { [weak self] _ in
+        self?.cache.removeAllObjects()
+    }
+  }
+
   func get(forKey key: String) -> UIImage? {
     return cache.object(forKey: NSString(string: key))
   }
