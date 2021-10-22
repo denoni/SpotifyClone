@@ -30,6 +30,8 @@ class HomeViewModel: ObservableObject {
 
   @Published var pageHistory = [(subPage: HomeSubpage, data: SpotifyModel.MediaItem, mediaDetailVM: MediaDetailViewModel)]()
 
+  var tappedItemData: SpotifyModel.MediaItem?
+
   enum HomeSubpage {
     case none
     case transitionScreen
@@ -72,10 +74,22 @@ class HomeViewModel: ObservableObject {
   }
 
   func deleteImageFromCache(imageURL: String) {
+
+    guard tappedItemData == nil else {
+      // if tappedItemData != nil, that means the user tapped some item. So for a better UX,
+      // we shouldn't delete the image that the user just tapped from cache, therefore the
+      // detail view of the tapped item will load smoothly.
+      if tappedItemData!.imageURL != imageURL {
+        ImageCache.deleteImageFromCache(imageURL: imageURL)
+        self.objectWillChange.send()
+      }
+      return
+    }
+
     ImageCache.deleteImageFromCache(imageURL: imageURL)
     self.objectWillChange.send()
   }
-  
+
   func fetchHomeData() {
     for dictKey in isLoading.keys { isLoading[dictKey] = true }
     
@@ -291,6 +305,8 @@ class HomeViewModel: ObservableObject {
   func changeSubpageTo(_ subPage: HomeSubpage,
                        mediaDetailVM: MediaDetailViewModel,
                        withData data: SpotifyModel.MediaItem) {
+
+    tappedItemData = data
 
     pageHistory.append((subPage: subPage, data: data, mediaDetailVM: mediaDetailVM))
 
