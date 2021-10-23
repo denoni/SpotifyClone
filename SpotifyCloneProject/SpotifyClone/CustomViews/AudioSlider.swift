@@ -24,7 +24,7 @@ struct AudioSlider: View {
           .font(.avenir(.medium, size: Constants.fontXSmall))
           .opacity(Constants.opacityStandard)
         Spacer()
-        Text(Utility.formatTimeToHourMinSec(for: .seconds(remoteAudio.currentTime)))
+        Text(Utility.formatTimeToHourMinSec(for: .seconds(remoteAudio.currentDuration)))
           .font(.avenir(.medium, size: Constants.fontXSmall))
           .opacity(Constants.opacityStandard)
       }
