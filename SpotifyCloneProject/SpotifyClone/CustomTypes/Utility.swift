@@ -155,26 +155,34 @@ struct Utility {
 
     let homeVMDestinySubpage: HomeViewModel.HomeSubpage
     let searchVMDestinySubpage: SearchViewModel.SearchSubpage
+    let myLibraryVMDestinySubpage: MyLibraryViewModel.MyLibrarySubpage
 
     switch destinySubpage {
     case .albumDetail:
       homeVMDestinySubpage = .albumDetail
       searchVMDestinySubpage = .albumDetail
+      myLibraryVMDestinySubpage = .albumDetail
     case .playlistDetail:
       homeVMDestinySubpage = .playlistDetail
       searchVMDestinySubpage = .playlistDetail
+      myLibraryVMDestinySubpage = .playlistDetail
     case .trackDetail:
       homeVMDestinySubpage = .trackDetail
       searchVMDestinySubpage = .trackDetail
+      myLibraryVMDestinySubpage = .trackDetail
     case .showDetail:
       homeVMDestinySubpage = .showDetail
       searchVMDestinySubpage = .showDetail
+      myLibraryVMDestinySubpage = .showDetail
     case .artistDetail:
       homeVMDestinySubpage = .artistDetail
       searchVMDestinySubpage = .artistDetail
+      myLibraryVMDestinySubpage = .artistDetail
+
     case .episodeDetail:
       homeVMDestinySubpage = .episodeDetail
       searchVMDestinySubpage = .episodeDetail
+      myLibraryVMDestinySubpage = .episodeDetail
     }
 
     switch mediaDetailVM.detailScreenOrigin {
@@ -185,6 +193,10 @@ struct Utility {
     case .search(let searchVM):
       searchVM.changeSubpageTo(searchVMDestinySubpage, subPageType: .detail(mediaDetailVM: mediaDetailVM,
                                                                             data: data))
+    case .myLibrary(let myLibraryVM):
+      myLibraryVM.changeSubpageTo(myLibraryVMDestinySubpage,
+                                  mediaDetailVM: mediaDetailVM,
+                                  withData: data)
     default:
       fatalError("Missing detail screen origin.")
     }

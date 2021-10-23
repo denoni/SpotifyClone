@@ -33,6 +33,8 @@ struct TrackDetailScreen: View {
           homeVM.mainVM.showBottomMediaPlayer = false
         case .search(let searchVM):
           searchVM.mainVM.showBottomMediaPlayer = false
+        case .myLibrary(let myLibraryVM):
+          myLibraryVM.mainVM.showBottomMediaPlayer = false
         default:
           fatalError("Missing detail screen origin.")
         }
