@@ -33,10 +33,12 @@ class MainViewModel: ObservableObject {
     }
   }
 
+  enum Page {
+    case home
+    case search
+    case myLibrary
+  }
+
 }
 
-enum Page {
-  case home
-  case search
-  case myLibrary
-}
+

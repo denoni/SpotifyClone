@@ -113,7 +113,7 @@ private struct BottomNavigationBar: View {
 
   private struct BottomNavigationItem: View {
     @StateObject var mainVM: MainViewModel
-    var assignedPage: Page
+    var assignedPage: MainViewModel.Page
 
     var itemName: String
     var iconWhenUnselected: Image

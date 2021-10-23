@@ -48,27 +48,8 @@ struct MainView: View {
         BottomBar(mainVM: mainVM, showMediaPlayer: mainVM.showBottomMediaPlayer)
       }
       .onAppear { mainVM.getCurrentUserInfo() }
-      .onChange(of: mainVM.currentPage) { _ in
-        homeVM.goToNoneSubpage()
-        searchVM.goToNoneSubpage()
-        myLibraryVM.goToNoneSubpage()
-        mediaDetailVM.cleanAll()
-        ImageCache.deleteAll()
-      }
-      .onChange(of: mainVM.currentPageWasRetapped) { _ in
-        if mainVM.currentPageWasRetapped == true {
-          switch mainVM.currentPage {
-          case .home:
-            homeVM.goToNoneSubpage()
-          case .search:
-            searchVM.goToNoneSubpage()
-          case .myLibrary:
-            myLibraryVM.goToNoneSubpage()
-          }
-        }
-        // reset to previous state
-        mainVM.currentPageWasRetapped = false
-      }
+      .onChange(of: mainVM.currentPage) { _ in cleanAllPages() }
+      .onChange(of: mainVM.currentPageWasRetapped) { _ in goToNoneSubview() }
       .navigationBarTitle("")
       .navigationBarHidden(true)
     } else {
@@ -76,6 +57,29 @@ struct MainView: View {
         .navigationBarTitle("")
         .navigationBarHidden(true)
     }
+  }
+
+  private func cleanAllPages() {
+    homeVM.goToNoneSubpage()
+    searchVM.goToNoneSubpage()
+    myLibraryVM.goToNoneSubpage()
+    mediaDetailVM.cleanAll()
+    ImageCache.deleteAll()
+  }
+
+  private func goToNoneSubview() {
+    if mainVM.currentPageWasRetapped == true {
+      switch mainVM.currentPage {
+      case .home:
+        homeVM.goToNoneSubpage()
+      case .search:
+        searchVM.goToNoneSubpage()
+      case .myLibrary:
+        myLibraryVM.goToNoneSubpage()
+      }
+    }
+    // reset to previous state
+    mainVM.currentPageWasRetapped = false
   }
 
 }
