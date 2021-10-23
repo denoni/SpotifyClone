@@ -26,17 +26,7 @@ struct ArtistMediaHorizontalScrollView: View {
             SmallSongItem(imageURL: media.imageURL,
                           title: media.title)
               .onTapGesture {
-                switch mediaDetailVM.detailScreenOrigin {
-                case .home(let homeVM):
-                  homeVM.changeSubpageTo(.playlistDetail,
-                                         mediaDetailVM: mediaDetailVM,
-                                         withData: media)
-                case .search(let searchVM):
-                  searchVM.changeSubpageTo(.playlistDetail, subPageType: .detail(mediaDetailVM: mediaDetailVM,
-                                                                                 data: media))
-                default:
-                  fatalError("Missing detail screen origin.")
-                }
+                Utility.changeSubpage(to: .playlistDetail, mediaDetailVM: mediaDetailVM, withData: media)
               }
             .buttonStyle(PlainButtonStyle())
           }

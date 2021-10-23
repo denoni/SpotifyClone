@@ -34,17 +34,7 @@ struct ArtistTracks: View {
         .frame(height: 100)
         .padding(.top, 5)
         .onTapGesture {
-          switch mediaDetailVM.detailScreenOrigin {
-          case .home(let homeVM):
-            homeVM.changeSubpageTo(.trackDetail,
-                                   mediaDetailVM: mediaDetailVM,
-                                   withData: media)
-          case .search(let searchVM):
-            searchVM.changeSubpageTo(.trackDetail, subPageType: .detail(mediaDetailVM: mediaDetailVM,
-                                                                        data: media))
-          default:
-            fatalError("Missing detail screen origin.")
-          }
+          Utility.changeSubpage(to: .trackDetail, mediaDetailVM: mediaDetailVM, withData: media)
         }
       }
       // TODO: Make button work

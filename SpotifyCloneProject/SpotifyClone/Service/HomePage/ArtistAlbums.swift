@@ -29,17 +29,7 @@ struct ArtistAlbums: View {
         }
         .padding(.top, 5)
         .onTapGesture {
-          switch mediaDetailVM.detailScreenOrigin {
-          case .home(let homeVM):
-            homeVM.changeSubpageTo(.albumDetail,
-                                   mediaDetailVM: mediaDetailVM,
-                                   withData: media)
-          case .search(let searchVM):
-            searchVM.changeSubpageTo(.albumDetail, subPageType: .detail(mediaDetailVM: mediaDetailVM,
-                                                                        data: media))
-          default:
-            fatalError("Missing detail screen origin.")
-          }
+          Utility.changeSubpage(to: .albumDetail, mediaDetailVM: mediaDetailVM, withData: media)
         }
       }
       SeeMoreButton()

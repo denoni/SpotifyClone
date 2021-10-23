@@ -27,14 +27,7 @@ struct AlbumAuthor: View {
       ForEach(authors, id: \.id) { author in
         AuthorItem(name: author.title, id: author.id, imageURL: author.imageURL)
           .onTapGesture {
-            switch mediaDetailVM.detailScreenOrigin {
-            case .home(let homeVM):
-              homeVM.changeSubpageTo(.artistDetail, mediaDetailVM: mediaDetailVM, withData: author)
-            case .search(let searchVM):
-              searchVM.goToPreviousPage()
-            default:
-              fatalError("Missing detail screen origin.")
-            }
+            Utility.changeSubpage(to: .artistDetail, mediaDetailVM: mediaDetailVM, withData: author)
           }
       }
     }.frame(maxWidth: .infinity)

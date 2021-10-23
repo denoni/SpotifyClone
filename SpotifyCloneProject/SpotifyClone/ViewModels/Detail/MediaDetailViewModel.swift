@@ -37,6 +37,15 @@ class MediaDetailViewModel: ObservableObject {
     case myLibrary(myLibraryVM: MyLibraryViewModel)
   }
 
+  enum BasicDetailSubpages {
+    case playlistDetail
+    case trackDetail
+    case albumDetail
+    case showDetail
+    case artistDetail
+    case episodeDetail
+  }
+
   init(mainVM: MainViewModel) {
     self.mainVM = mainVM
     cleanAllSection()

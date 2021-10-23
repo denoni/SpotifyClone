@@ -42,17 +42,7 @@ struct ShowEpisodesScrollView: View {
               }
             }
             .onTapGesture {
-              switch mediaDetailVM.detailScreenOrigin {
-              case .home(let homeVM):
-                homeVM.changeSubpageTo(.episodeDetail,
-                                       mediaDetailVM: mediaDetailVM,
-                                       withData: media)
-              case .search(let searchVM):
-                searchVM.changeSubpageTo(.episodeDetail, subPageType: .detail(mediaDetailVM: mediaDetailVM,
-                                                                              data: media))
-              default:
-                fatalError("Missing detail screen origin.")
-              }
+              Utility.changeSubpage(to: .episodeDetail, mediaDetailVM: mediaDetailVM, withData: media)
             }
         }
       }

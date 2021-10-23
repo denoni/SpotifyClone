@@ -63,17 +63,7 @@ struct AuthorNames: View {
 
   private func navigateToArtistProfile(itemIndex: Int) {
     let data = mediaDetailVM.mediaCollection[.artistBasicInfo(.artistBasicInfo)]!
-    switch mediaDetailVM.detailScreenOrigin {
-    case .home(let homeVM):
-      homeVM.changeSubpageTo(.artistDetail,
-                             mediaDetailVM: mediaDetailVM,
-                             withData: data[itemIndex])
-    case .search(let searchVM):
-      searchVM.changeSubpageTo(.artistDetail, subPageType: .detail(mediaDetailVM: mediaDetailVM,
-                                                                   data: data[itemIndex]))
-    default:
-      fatalError("Missing detail screen origin.")
-    }
+    Utility.changeSubpage(to: .albumDetail, mediaDetailVM: mediaDetailVM, withData: data[itemIndex])
   }
 
 }

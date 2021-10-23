@@ -146,4 +146,48 @@ struct Utility {
     return mediaDetailVM.followedIDs[itemID]!
   }
 
+
+
+  // MARK: - changeSubView of a viewModel
+  static func changeSubpage(to destinySubpage: MediaDetailViewModel.BasicDetailSubpages,
+                            mediaDetailVM: MediaDetailViewModel,
+                            withData data: SpotifyModel.MediaItem) {
+
+    let homeVMDestinySubpage: HomeViewModel.HomeSubpage
+    let searchVMDestinySubpage: SearchViewModel.SearchSubpage
+
+    switch destinySubpage {
+    case .albumDetail:
+      homeVMDestinySubpage = .albumDetail
+      searchVMDestinySubpage = .albumDetail
+    case .playlistDetail:
+      homeVMDestinySubpage = .playlistDetail
+      searchVMDestinySubpage = .playlistDetail
+    case .trackDetail:
+      homeVMDestinySubpage = .trackDetail
+      searchVMDestinySubpage = .trackDetail
+    case .showDetail:
+      homeVMDestinySubpage = .showDetail
+      searchVMDestinySubpage = .showDetail
+    case .artistDetail:
+      homeVMDestinySubpage = .artistDetail
+      searchVMDestinySubpage = .artistDetail
+    case .episodeDetail:
+      homeVMDestinySubpage = .episodeDetail
+      searchVMDestinySubpage = .episodeDetail
+    }
+
+    switch mediaDetailVM.detailScreenOrigin {
+    case .home(let homeVM):
+      homeVM.changeSubpageTo(homeVMDestinySubpage,
+                             mediaDetailVM: mediaDetailVM,
+                             withData: data)
+    case .search(let searchVM):
+      searchVM.changeSubpageTo(searchVMDestinySubpage, subPageType: .detail(mediaDetailVM: mediaDetailVM,
+                                                                            data: data))
+    default:
+      fatalError("Missing detail screen origin.")
+    }
+  }
+
 }
