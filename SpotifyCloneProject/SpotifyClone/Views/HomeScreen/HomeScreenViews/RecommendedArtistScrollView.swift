@@ -11,7 +11,8 @@ struct RecommendedArtistScrollView: View {
   @EnvironmentObject var homeVM: HomeViewModel
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @State var medias: [SpotifyModel.MediaItem]
-
+  @State var currentLoadedMediasURLs = [String]()
+  
   var artist: SpotifyModel.MediaItem { medias[0] }
 
   func getArtistSongs() -> [SpotifyModel.MediaItem] {
@@ -36,8 +37,14 @@ struct RecommendedArtistScrollView: View {
               .onTapGesture {
                 homeVM.changeSubpageTo(.trackDetail, mediaDetailVM: mediaDetailVM, withData: media)
               }
+              .onAppear { currentLoadedMediasURLs.append(media.imageURL) }
               .onDisappear{
-                homeVM.deleteImageFromCache(imageURL: media.imageURL)
+                if currentLoadedMediasURLs.count > 10 {
+                  for index in 0..<5 {
+                    homeVM.deleteImageFromCache(imageURL: currentLoadedMediasURLs[index])
+                    currentLoadedMediasURLs.removeFirst()
+                  }
+                }
               }
           }
         }

@@ -42,6 +42,10 @@ class MediaDetailViewModel: ObservableObject {
     cleanAllSection()
   }
 
+  func deleteImageFromCache(imageURL: String) {
+    ImageCache.deleteImageFromCache(imageURL: imageURL)
+    self.objectWillChange.send()
+  }
 
   func getArtistScreenData() {
     MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.artist, mediaVM: self,

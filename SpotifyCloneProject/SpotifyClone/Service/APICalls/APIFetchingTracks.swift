@@ -84,6 +84,7 @@ class APIFetchingTracks {
         let durationInMs = track.duration_ms
 
         let imageURL = track.album?.images?[0].url
+        let lowResImageURL = track.album?.images?.last?.url
         let albumName = track.album?.name
         let albumID = track.album?.id
         let numberOfTracks = track.album?.total_tracks
@@ -97,6 +98,7 @@ class APIFetchingTracks {
           .MediaItem(title: title,
                      previewURL: previewURL ?? "",
                      imageURL: imageURL ?? "",
+                     lowResImageURL: imageURL ?? "",
                      authorName: authorName,
                      author: author,
                      mediaType: .track,

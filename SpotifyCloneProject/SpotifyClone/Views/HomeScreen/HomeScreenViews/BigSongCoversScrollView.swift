@@ -10,6 +10,7 @@ import SwiftUI
 struct BigSongCoversScrollView: View {
   @EnvironmentObject var homeVM: HomeViewModel
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
+  @State var currentLoadedMediasURLs = [String]()
 
   let section: HomeViewModel.Section
   var showArtistName: Bool = false
@@ -51,9 +52,15 @@ struct BigSongCoversScrollView: View {
                 if mediaDetailVM.shouldFetchMoreData(basedOn: media, inRelationTo: medias) {
                   homeVM.fetchDataFor(section, with: homeVM.mainVM.authKey!.accessToken)
                 }
+                currentLoadedMediasURLs.append(media.imageURL)
               }
               .onDisappear{
-                homeVM.deleteImageFromCache(imageURL: media.imageURL)
+                if currentLoadedMediasURLs.count > 10 {
+                  for index in 0..<5 {
+                    homeVM.deleteImageFromCache(imageURL: currentLoadedMediasURLs[index])
+                    currentLoadedMediasURLs.removeFirst()
+                  }
+                }
               }
               .onTapGesture {
                 homeVM.changeSubpageTo(detailType,

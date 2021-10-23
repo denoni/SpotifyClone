@@ -38,6 +38,7 @@ struct SpotifyModel {
     var title: String
     var previewURL: String
     var imageURL: String
+    var lowResImageURL: String?
     var authorName: [String]
     var author: [Artist]?
     var mediaType: MediaTypes

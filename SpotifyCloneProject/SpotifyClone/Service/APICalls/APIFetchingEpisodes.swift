@@ -58,6 +58,7 @@ class APIFetchingEpisodes {
 
           let title = episode.name
           let imageURL = episode.images[0].url
+          let lowResImageURL = episode.images.last!.url
           let audioPreview = episode.audio_preview_url
           let id = episode.id
 
@@ -66,10 +67,13 @@ class APIFetchingEpisodes {
           let durationInMs = episode.duration_ms
           let releaseDate = episode.release_date
 
+          print(episode.images.count)
+          print(episode.images)
 
           let podcastItem = SpotifyModel.MediaItem(title: title,
                                                    previewURL: audioPreview,
                                                    imageURL: imageURL,
+                                                   lowResImageURL: lowResImageURL,
                                                    authorName: [""],
                                                    mediaType: .episode,
                                                    id: id,

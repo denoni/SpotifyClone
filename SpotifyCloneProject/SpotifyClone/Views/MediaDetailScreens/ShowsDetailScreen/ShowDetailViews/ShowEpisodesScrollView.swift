@@ -10,6 +10,7 @@ import SwiftUI
 struct ShowEpisodesScrollView: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @StateObject var audioManager = RemoteAudio()
+  @State var currentCachedURLs = [String]()
 
   var medias: [SpotifyModel.MediaItem] {
     mediaDetailVM.mediaCollection[.shows(.episodesFromShow)]!
@@ -25,6 +26,15 @@ struct ShowEpisodesScrollView: View {
               MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.episode, mediaVM: mediaDetailVM, itemID: media.id)
               if mediaDetailVM.shouldFetchMoreData(basedOn: media, inRelationTo: medias) {
                 MediaDetailAPICalls.ShowsAPICalls.getEpisodesFromShows(mediaVM: mediaDetailVM, loadMoreEnabled: true)
+              }
+              currentCachedURLs.append(media.imageURL)
+            }
+            .onDisappear {
+              if currentCachedURLs.count > 15 {
+                for index in 0..<8 {
+                  mediaDetailVM.deleteImageFromCache(imageURL: currentCachedURLs[index])
+                  currentCachedURLs.removeFirst()
+                }
               }
             }
             .onTapGesture {
@@ -71,7 +81,7 @@ struct ShowEpisodesScrollView: View {
         HStack(alignment: .center, spacing: Constants.spacingMedium) {
             RoundedRectangle(cornerRadius: Constants.radiusSmall)
               .foregroundColor(.spotifyMediumGray)
-              .overlay(RemoteImage(urlString: media.imageURL))
+              .overlay(RemoteImage(urlString: media.lowResImageURL != "" ? media.lowResImageURL! : media.imageURL))
               .mask(RoundedRectangle(cornerRadius: Constants.radiusSmall))
               .frame(width: 50, height: 50)
             Text(media.title)

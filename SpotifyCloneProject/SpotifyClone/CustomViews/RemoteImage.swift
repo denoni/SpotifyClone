@@ -32,9 +32,6 @@ struct RemoteImage: View {
       Image(uiImage: remoteImageModel.image!)
         .resizable()
         .scaledToFill()
-//        .onDisappear {
-//          ImageCache.deleteImageFromCache(imageURL: )
-//        }
     }
   }
 }

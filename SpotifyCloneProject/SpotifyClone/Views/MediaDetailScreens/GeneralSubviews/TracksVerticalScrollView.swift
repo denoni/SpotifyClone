@@ -40,6 +40,9 @@ struct TracksVerticalScrollView: View {
                 MediaDetailAPICalls.PlaylistAPICalls.getTracksFromPlaylist(mediaVM: mediaDetailVM, loadMoreEnabled: true)
               }
             }
+            .onDisappear {
+              mediaDetailVM.deleteImageFromCache(imageURL: media.imageURL)
+            }
         default:
           fatalError("Media type(\(tracksOrigin)) shouldn't be used here")
         }
@@ -101,6 +104,13 @@ struct TracksVerticalScrollView: View {
     var isPlaying: Bool { audioManager.showPauseButton && audioManager.lastItemPlayedID == media.id }
     var details: SpotifyModel.TrackDetails { SpotifyModel.getTrackDetails(for: media) }
     let media: SpotifyModel.MediaItem
+    var lowestResImageURL: String {
+      if media.lowResImageURL != "" {
+        return media.lowResImageURL ?? ""
+      } else {
+        return media.imageURL
+      }
+    }
 
     var body: some View {
       ZStack {
@@ -115,7 +125,7 @@ struct TracksVerticalScrollView: View {
           ZStack(alignment: .center) {
             Rectangle()
               .foregroundColor(.spotifyMediumGray)
-              .overlay(RemoteImage(urlString: media.imageURL))
+              .overlay(RemoteImage(urlString: lowestResImageURL))
             PlayStopButton(audioManager: audioManager,
                            media: media,
                            size: 60)
