@@ -48,7 +48,8 @@ class APIFetchingAlbums {
     func parseResponse(_ response: DataResponse<AlbumResponse, AFError>) {
 
       guard let data = response.value else {
-        fatalError("Error receiving tracks from API.")
+        debugPrint(response.debugDescription)
+        fatalError("\n Error receiving tracks from API.")
       }
 
       let numberOfItems = data.albums.count

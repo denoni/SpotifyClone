@@ -29,7 +29,10 @@ class HomeViewModel: ObservableObject {
 
   @Published var pageHistory = [(subPage: HomeSubpage, data: SpotifyModel.MediaItem, mediaDetailVM: MediaDetailViewModel)]()
 
+  // The data from the item the user just tapped.
   var tappedItemData: SpotifyModel.MediaItem?
+  // This ins't the cache. It's just an auxiliary variable used for cleaning cache when needed.
+  var homeCachedImageURLs = [String]()
 
   enum HomeSubpage {
     case none
@@ -72,22 +75,6 @@ class HomeViewModel: ObservableObject {
     case playlistRewind2010s = "2010s Rewind"
   }
 
-  func deleteImageFromCache(imageURL: String) {
-
-    guard tappedItemData == nil else {
-      // if tappedItemData != nil, that means the user tapped some item. So for a better UX,
-      // we shouldn't delete the image that the user just tapped from cache, therefore the
-      // detail view of the tapped item will load smoothly.
-      if tappedItemData!.imageURL != imageURL {
-        ImageCache.deleteImageFromCache(imageURL: imageURL)
-        self.objectWillChange.send()
-      }
-      return
-    }
-
-    ImageCache.deleteImageFromCache(imageURL: imageURL)
-    self.objectWillChange.send()
-  }
 
   func fetchHomeData() {
     for dictKey in isLoading.keys { isLoading[dictKey] = true }
@@ -306,6 +293,7 @@ class HomeViewModel: ObservableObject {
                        withData data: SpotifyModel.MediaItem) {
 
     tappedItemData = data
+    deleteAllImagesFromCache()
 
     pageHistory.append((subPage: subPage, data: data, mediaDetailVM: mediaDetailVM))
 
@@ -325,5 +313,39 @@ class HomeViewModel: ObservableObject {
   func setVeryFirstImageInfoBasedOn(_ firstImageURL: String) {
     veryFirstImageInfo = RemoteImageModel(urlString: firstImageURL)
   }
+
+
+
+  // MARK: - Cache related functions
+
+    func deleteImageFromCache() {
+
+      // Delete from the auxiliary function so we won't keep counting a cached image that was already deleted.
+      let imageURLThatWillBeDeleted = homeCachedImageURLs.removeFirst()
+
+      guard tappedItemData == nil else {
+        // if tappedItemData != nil, that means the user tapped some item. So for a better UX,
+        // we shouldn't delete the image that the user just tapped from cache, therefore the
+        // detail view of the tapped item will load smoothly.
+        if tappedItemData!.imageURL != imageURLThatWillBeDeleted {
+          ImageCache.deleteImageFromCache(imageURL: imageURLThatWillBeDeleted)
+          self.objectWillChange.send()
+
+        }
+        return
+      }
+
+
+      ImageCache.deleteImageFromCache(imageURL: imageURLThatWillBeDeleted)
+      self.objectWillChange.send()
+    }
+
+    func deleteAllImagesFromCache() {
+      // It's better to use this instead of .deleteAll() in 'ImageCache' right away, otherwise the item that
+      // the user just tapped(in case he tapped) will also be deleted causing a non-pleasant user experience.
+      for _ in homeCachedImageURLs.indices {
+        deleteImageFromCache()
+      }
+    }
   
 }

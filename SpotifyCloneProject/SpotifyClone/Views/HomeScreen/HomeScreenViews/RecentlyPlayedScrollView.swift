@@ -12,7 +12,6 @@ struct RecentlyPlayedScrollView: View {
   @EnvironmentObject var homeVM: HomeViewModel
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @State var medias: [SpotifyModel.MediaItem]
-  @State var currentLoadedMediasURLs = [String]()
 
   var sectionTitle = "Recently Played"
   
@@ -25,17 +24,11 @@ struct RecentlyPlayedScrollView: View {
           ForEach(medias) { media in
             SmallSongItem(imageURL: media.imageURL,
                           title: media.title)
-              .onAppear { currentLoadedMediasURLs.append(media.imageURL) }
-              .onTapGesture {
-                homeVM.changeSubpageTo(.trackDetail,
-                                       mediaDetailVM: mediaDetailVM,
-                                       withData: media)
-              }
-              .onDisappear {
-                if currentLoadedMediasURLs.count > 10 {
-                  for index in 0..<5 {
-                    homeVM.deleteImageFromCache(imageURL: currentLoadedMediasURLs[index])
-                    currentLoadedMediasURLs.removeFirst()
+              .onAppear { homeVM.homeCachedImageURLs.append(media.imageURL) }
+              .onDisappear{
+                if homeVM.homeCachedImageURLs.count > 25 {
+                  for _ in 0..<15 {
+                    homeVM.deleteImageFromCache()
                   }
                 }
               }
