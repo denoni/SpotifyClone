@@ -23,7 +23,11 @@ struct ShowEpisodesScrollView: View {
           let episodeDetails = SpotifyModel.getEpisodeDetails(for: media)
           EpisodeItem(audioManager: audioManager, media: media, details: episodeDetails)
             .onAppear {
-              MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.episode, mediaVM: mediaDetailVM, itemID: media.id)
+
+              // TODO: Find a way to do it without performance issues
+              // Disabled the call below because it causes hitches when user scroll really fast.
+//              MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.episode, mediaVM: mediaDetailVM, itemID: media.id)
+
               if mediaDetailVM.shouldFetchMoreData(basedOn: media, inRelationTo: medias) {
                 MediaDetailAPICalls.ShowsAPICalls.getEpisodesFromShows(mediaVM: mediaDetailVM, loadMoreEnabled: true)
               }

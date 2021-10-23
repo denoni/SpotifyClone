@@ -98,7 +98,7 @@ class APIFetchingTracks {
           .MediaItem(title: title,
                      previewURL: previewURL ?? "",
                      imageURL: imageURL ?? "",
-                     lowResImageURL: imageURL ?? "",
+                     lowResImageURL: lowResImageURL ?? "",
                      authorName: authorName,
                      author: author,
                      mediaType: .track,
