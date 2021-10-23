@@ -19,6 +19,7 @@ struct Constants {
   static var fontMedium: CGFloat = 20
   static var fontSmall: CGFloat = 16
   static var fontXSmall: CGFloat = 14
+  static var fontXXSmall: CGFloat = 12
 
   static var spacingLarge: CGFloat = 20
   static var spacingMedium: CGFloat = 16

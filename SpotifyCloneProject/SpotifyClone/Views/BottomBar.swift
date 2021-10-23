@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// TODO: Get the real currently played media.
+
 struct BottomBar: View {
   @StateObject var mainVM: MainViewModel
   var showMediaPlayer = false
@@ -35,19 +37,19 @@ private struct BottomMediaPlayerBar: View {
     ZStack {
       VStack(spacing: 0) {
         Rectangle()
-          .fill(grayReallyLight)
+          .fill(Color.spotifyXLightGray)
           .frame(height: 3)
         HStack {
           HStack {
             cover
               .resizeToFit()
-              .frame(width: coverImageSize)
+              .frame(width: 60)
             VStack(alignment: .leading) {
-              Text(songName).font(.avenir(.medium, size: mediaTitleSize))
+              Text(songName).font(.avenir(.medium, size: Constants.fontSmall))
                 .frame(maxWidth: .infinity, alignment: .topLeading)
-              Text(artist).font(.avenir(.medium, size: mediaAuthorSize))
+              Text(artist).font(.avenir(.medium, size: Constants.fontXSmall))
                 .frame(maxWidth: .infinity, alignment: .topLeading)
-                .opacity(0.6)
+                .opacity(Constants.opacityStandard)
             }
             .padding(.vertical, 10)
           }
@@ -55,15 +57,15 @@ private struct BottomMediaPlayerBar: View {
           HStack(spacing: 30) {
             Image("devices")
               .resizeToFit()
-              .padding(.vertical, 16)
-              .opacity(0.7)
+              .frame(width: 25, height: 25)
+              .opacity(Constants.opacityStandard)
             Image("play")
               .resizeToFit()
-              .padding(.vertical, 18)
-              .padding(.trailing, 25)
+              .frame(width: 25, height: 25)
+              .padding(.trailing, Constants.paddingStandard)
           }
         }
-        .frame(height: bottomMediaPlayerBarSize)
+        .frame(height: 60)
         .background(Color.spotifyLightGray)
         Rectangle()
           .fill(Color.spotifyDarkGray)
@@ -97,8 +99,10 @@ private struct BottomNavigationBar: View {
                                iconWhenUnselected: Image("library-unselected"),
                                iconWhenSelected: Image("library-selected"))
         }
-        .frame(height: bottomNavigationBarSize)
+        .frame(height: 60)
         .background(Color.spotifyLightGray)
+
+        // To fill the bottom safe area
         Rectangle()
           .fill(Color.spotifyLightGray)
           .ignoresSafeArea()
@@ -123,10 +127,15 @@ private struct BottomNavigationBar: View {
       VStack(alignment: .center, spacing: 5) {
         Spacer()
         buildIcon()
-        Text(itemName).font(.avenir(.medium, size: bottomBarFontSize))
+        Text(itemName).font(.avenir(.medium, size: Constants.fontXXSmall))
       }.frame(maxWidth: .infinity, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-      .onTapGesture { mainVM.currentPage = assignedPage}
-      .foregroundColor(thisPageIsTheCurrentPage ? selectedItemColor : unselectedItemColor)
+      .onTapGesture {
+        mainVM.currentPage = assignedPage
+        if mainVM.currentPage == assignedPage {
+          mainVM.currentPageWasRetapped = true
+        }
+      }
+      .foregroundColor(thisPageIsTheCurrentPage ? .white : .white.opacity(Constants.opacityHigh))
     }
 
     func buildIcon() -> some View {
@@ -139,33 +148,12 @@ private struct BottomNavigationBar: View {
       }
 
       return icon.resizeToFit()
-        .colorMultiply(thisPageIsTheCurrentPage ? selectedItemColor : unselectedItemColor)
-        .frame(width: bottomBarIconSize)
+        .colorMultiply(thisPageIsTheCurrentPage ? .white : .white.opacity(Constants.opacityHigh))
+        .frame(width: 25)
     }
   }
 
 }
-
-// TODO: Move those constants out of here
-// MARK: - Constants
-
-private let grayReallyLight = Color(red: 0.325, green: 0.325, blue: 0.325)
-
-
-// MARK: BottomNavigationItem Constants
-private let selectedItemColor = Color.white
-private let unselectedItemColor = selectedItemColor.opacity(0.5)
-private let bottomBarIconSize: CGFloat = 25
-private let bottomBarFontSize: CGFloat = 12
-
-// MARK: BottomNavigationBar Constants
-private let bottomNavigationBarSize: CGFloat = 60
-
-// MARK: BottomMediaPlayerBar Constants
-private let bottomMediaPlayerBarSize: CGFloat = 60
-private let coverImageSize: CGFloat = bottomMediaPlayerBarSize
-private let mediaTitleSize: CGFloat = 16
-private let mediaAuthorSize: CGFloat = 14
 
 
 

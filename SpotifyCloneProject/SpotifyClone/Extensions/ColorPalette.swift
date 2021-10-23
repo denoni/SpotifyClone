@@ -12,6 +12,7 @@ extension Color {
   static let spotifyDarkGray = Color("spotifyDarkGray")
   static let spotifyMediumGray = Color("spotifyMediumGray")
   static let spotifyLightGray = Color("spotifyLightGray")
+  static let spotifyXLightGray = Color("spotifyXLightGray")
 }
 
 

@@ -11,6 +11,7 @@ class MainViewModel: ObservableObject {
   var api = MainViewModelAPICalls()
   @Published private(set) var authKey: AuthKey?
   @Published var currentPage: Page = .home
+  @Published var currentPageWasRetapped = false
   @Published var homeScreenIsReady = false
   @Published var showBottomMediaPlayer = true
 

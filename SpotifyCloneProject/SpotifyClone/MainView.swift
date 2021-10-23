@@ -55,6 +55,20 @@ struct MainView: View {
         mediaDetailVM.cleanAll()
         ImageCache.deleteAll()
       }
+      .onChange(of: mainVM.currentPageWasRetapped) { _ in
+        if mainVM.currentPageWasRetapped == true {
+          switch mainVM.currentPage {
+          case .home:
+            homeVM.goToNoneSubpage()
+          case .search:
+            searchVM.goToNoneSubpage()
+          case .myLibrary:
+            myLibraryVM.goToNoneSubpage()
+          }
+        }
+        // reset to previous state
+        mainVM.currentPageWasRetapped = false
+      }
       .navigationBarTitle("")
       .navigationBarHidden(true)
     } else {
