@@ -40,10 +40,11 @@ I hope you enjoy the app. Feel free to hit me up! <br>
 
 <br> <br>
 
+
 ## Turn on the video volume
 | | | | |
 | :-: | :-: | :-: | :- |
-<video src='https://user-images.githubusercontent.com/62707916/136820570-20152e5d-0c7d-4c41-9f51-65f6dac9b95b.mov' width=180/> | <video src='https://user-images.githubusercontent.com/62707916/136820651-4d632ea2-e952-4b4f-afde-cbd3becf3b1a.mov' width=180/> | <video src='https://user-images.githubusercontent.com/62707916/136820663-5bf7d61d-57ac-4fe7-9b47-2aca33516611.mov' width=180/> | <video src='https://user-images.githubusercontent.com/62707916/136820671-a5aece22-3a97-4cdd-9a4f-6b4ef77311ff.mov' width=180/>
+<video src='https://user-images.githubusercontent.com/62707916/138572032-636c1182-92f0-408d-9ed9-bf143e556fd5.mov' width=180/> | <video src='https://user-images.githubusercontent.com/62707916/136820651-4d632ea2-e952-4b4f-afde-cbd3becf3b1a.mov' width=180/> | <video src='https://user-images.githubusercontent.com/62707916/136820663-5bf7d61d-57ac-4fe7-9b47-2aca33516611.mov' width=180/> | <video src='https://user-images.githubusercontent.com/62707916/136820671-a5aece22-3a97-4cdd-9a4f-6b4ef77311ff.mov' width=180/>
 
 *Stuttering is due to simulator lag and shouldn't happen on real device.*
 
