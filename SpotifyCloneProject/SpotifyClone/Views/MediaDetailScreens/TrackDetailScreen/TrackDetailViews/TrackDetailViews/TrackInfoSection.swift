@@ -63,7 +63,7 @@ private struct AuthorNames: View {
 
   private func navigateToArtistProfile(itemIndex: Int) {
     let data = mediaDetailVM.mediaCollection[.artistBasicInfo(.artistBasicInfo)]!
-    Utility.changeSubpage(to: .albumDetail, mediaDetailVM: mediaDetailVM, withData: data[itemIndex])
+    Utility.changeSubpage(to: .artistDetail, mediaDetailVM: mediaDetailVM, withData: data[itemIndex])
   }
 
 }
