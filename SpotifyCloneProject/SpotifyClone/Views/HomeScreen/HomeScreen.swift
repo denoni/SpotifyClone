@@ -70,7 +70,6 @@ struct HomeScreen: View {
                                         showArtistName: true)
                 BigSongCoversScrollView(section: .userFavoriteTracks)
                 BigSongCoversScrollView(section: .topPodcasts)
-                // TODO: Stop using previewURL to store the featured playlist title
                 BigSongCoversScrollView(section: .featuredPlaylists,
                                         sectionTitle: homeVM.mediaCollection[.featuredPlaylists]!.first!.previewURL)
                 RecommendedArtistScrollView(medias: getTracksFor(.artistTopTracks),

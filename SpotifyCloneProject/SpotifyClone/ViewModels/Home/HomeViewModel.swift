@@ -11,7 +11,6 @@
 /// - New Releases
 /// - Playlist This is X
 
-// TODO: Separate api related and non-api related into different files
 // TODO: Access Control
 
 import SwiftUI
