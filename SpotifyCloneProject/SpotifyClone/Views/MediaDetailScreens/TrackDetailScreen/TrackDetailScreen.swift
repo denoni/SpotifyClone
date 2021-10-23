@@ -20,11 +20,12 @@ struct TrackDetailScreen: View {
     GeometryReader { _ in
       ZStack(alignment: .center) {
         Color.spotifyDarkGray
+          .ignoresSafeArea()
         BigGradient()
+          .ignoresSafeArea()
         TrackDetailContent()
           .padding(.bottom, Constants.paddingBottomSection)
       }
-      .ignoresSafeArea()
       .onAppear {
         // When TrackDetailScreen opens up, hide the bottomMediaPlayer
         switch mediaDetailVM.detailScreenOrigin {
@@ -63,21 +64,21 @@ struct TrackDetailContent: View {
       VStack(alignment: .center) {
         SmallTopSection(albumName: details.album!.name,
                         isSmallDisplay: isSmallDisplay)
-          .padding(.bottom, isSmallDisplay ? 0 : Constants.paddingSmall)
-          .padding(.top, isSmallDisplay ? 0 : Constants.paddingSmall)
+          .padding(.bottom, isSmallDisplay ? 5 : Constants.paddingSmall)
         Spacer()
         BigTrackImage(imageURL: mediaDetailVM.mainItem!.imageURL, isSmallDisplay: isSmallDisplay)
           .padding(.bottom, isSmallDisplay ? 0 : Constants.paddingSmall)
         TrackInfoSection(isExplicit: details.explicit,
                          isSmallDisplay: isSmallDisplay)
         PlayerControllerSection(isSmallDisplay: isSmallDisplay)
+          .padding(.bottom, 5)
         Spacer()
         SmallBottomSection(isSmallDisplay: isSmallDisplay)
+          .padding(.bottom, isSmallDisplay ? 10 : Constants.paddingSmall)
       }
+      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     }
-    .frame(maxWidth: .infinity, maxHeight: .infinity)
     .padding(Constants.paddingStandard)
-    .scaledToFit()
   }
 }
 
