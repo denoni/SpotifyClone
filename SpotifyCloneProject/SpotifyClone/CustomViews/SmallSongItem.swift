@@ -17,8 +17,7 @@ struct SmallSongItem: View {
   let coverTextWidth: CGFloat = 130 * 0.85
   let smallSongItemHeight: CGFloat = 200
 
-  @ViewBuilder
-  func buildCoverShape() -> some View {
+  @ViewBuilder func buildCoverShape() -> some View {
     Group {
       if isArtist { Circle() }
       else if isPodcast { RoundedRectangle(cornerRadius: Constants.radiusStandard) }

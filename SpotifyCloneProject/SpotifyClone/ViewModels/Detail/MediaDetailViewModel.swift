@@ -10,16 +10,16 @@ import Foundation
 protocol MediaDetailSectionsProtocol {}
 
 class MediaDetailViewModel: ObservableObject {
-  var api = MediaDetailsPageAPICalls()
-
-  /// `mainItem` -  The item that was clicked to originate the current DetailView.
+  private(set) var api = MediaDetailsPageAPICalls()
   var mainVM: MainViewModel
-  @Published var mainItem: SpotifyModel.MediaItem?
-  @Published var imageColorModel = RemoteImageModel(urlString: "")
 
-  @Published var mediaCollection = [MediaDetailSection:[SpotifyModel.MediaItem]]()
-  @Published var isLoading = [MediaDetailSection:Bool]()
-  @Published var numberOfLoadedItemsInSection = [MediaDetailSection:Int]()
+  // The item that was clicked to originate the current DetailView.
+  @Published var mainItem: SpotifyModel.MediaItem?
+  @Published private(set) var imageColorModel = RemoteImageModel(urlString: "")
+
+  @Published private(set) var mediaCollection = [MediaDetailSection:[SpotifyModel.MediaItem]]()
+  @Published private(set) var isLoading = [MediaDetailSection:Bool]()
+  @Published private(set) var numberOfLoadedItemsInSection = [MediaDetailSection:Int]()
   @Published var accessToken: String?
 
   var detailScreenOrigin: DetailScreenOrigin?
@@ -113,6 +113,10 @@ class MediaDetailViewModel: ObservableObject {
     isLoading[section] = false
   }
 
+  func artistBasicInfoAlreadyLoaded() {
+    isLoading[.artistBasicInfo(.artistBasicInfo)] = false
+  }
+
   func getNumberOfLoadedItems(for section: MediaDetailSection) -> Int {
     return numberOfLoadedItemsInSection[section]!
   }
@@ -162,7 +166,7 @@ class MediaDetailViewModel: ObservableObject {
     }
   }
 
-  func setVeryFirstImageInfoBasedOn(_ firstImageURL: String) {
+  func setImageColorModelBasedOn(_ firstImageURL: String) {
     imageColorModel = RemoteImageModel(urlString: firstImageURL)
   }
 

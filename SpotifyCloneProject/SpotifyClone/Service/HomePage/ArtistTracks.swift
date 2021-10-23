@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ArtistTracks: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
-  @State var medias: [SpotifyModel.MediaItem]
+  var medias: [SpotifyModel.MediaItem]
 
   var body: some View {
     VStack {

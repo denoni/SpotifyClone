@@ -44,12 +44,12 @@ struct EpisodeDetailScreen: View {
 
 // MARK: - Detail Content
 
-struct EpisodeDetailContent: View {
+fileprivate struct EpisodeDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @Binding var scrollViewPosition: CGFloat
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
 
-  var scale: CGFloat {
+  private var scale: CGFloat {
     let myScale = scrollViewPosition / UIScreen.main.bounds.height * 2
     return myScale > 0.8 ? 0.8 : myScale
   }

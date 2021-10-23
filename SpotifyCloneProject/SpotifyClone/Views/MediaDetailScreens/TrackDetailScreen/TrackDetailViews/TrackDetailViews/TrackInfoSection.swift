@@ -29,7 +29,7 @@ struct TrackInfoSection: View {
   }
 }
 
-struct AuthorNames: View {
+private struct AuthorNames: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   let authors: [Artist]
   let useSmallerFont: Bool

@@ -11,13 +11,12 @@ import SwiftUI
 
 extension ProgressView {
 
-  @ViewBuilder
-  func withSpotifyStyle(size: Int = 100, useDiscreetColors: Bool = false) -> some View {
+  @ViewBuilder func withSpotifyStyle(size: Int = 100, useDiscreetColors: Bool = false) -> some View {
     self.progressViewStyle(SpotifyProgressViewStyle(size: CGFloat(size), discreet: useDiscreetColors))
   }
 }
 
-struct SpotifyProgressViewStyle: ProgressViewStyle {
+fileprivate struct SpotifyProgressViewStyle: ProgressViewStyle {
   var size: CGFloat
   var discreet: Bool
   private(set) var stroke: CGFloat = 2

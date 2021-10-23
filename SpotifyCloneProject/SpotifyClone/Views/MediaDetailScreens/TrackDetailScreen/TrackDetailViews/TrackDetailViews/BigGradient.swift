@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BigGradient: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
-  var color: Color {
+  private var color: Color {
     if mediaDetailVM.imageColorModel.image != nil {
       return Color(mediaDetailVM.imageColorModel.image!.averageColor!)
     } else {

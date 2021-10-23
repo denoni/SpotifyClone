@@ -16,7 +16,7 @@ struct PlayerControllerSection: View {
   @StateObject var audioManager = RemoteAudio()
   var isSmallDisplay: Bool = false
 
-  var urlString: String { mediaDetailVM.mainItem!.previewURL }
+  private var urlString: String { mediaDetailVM.mainItem!.previewURL }
 
   var body: some View {
     VStack {
@@ -65,7 +65,7 @@ struct PlayerControllerSection: View {
     }
   }
 
-  struct PlayStopButton: View {
+  private struct PlayStopButton: View {
     @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
     @StateObject var audioManager: RemoteAudio
     var isSmallDisplay: Bool = false

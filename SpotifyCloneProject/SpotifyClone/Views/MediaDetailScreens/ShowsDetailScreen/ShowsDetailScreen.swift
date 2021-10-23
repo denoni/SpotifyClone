@@ -43,17 +43,17 @@ struct ShowsDetailScreen: View {
 
 // MARK: - Detail Content
 
-struct ShowsDetailContent: View {
+fileprivate struct ShowsDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @Binding var scrollViewPosition: CGFloat
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
 
-  var scale: CGFloat {
+  private var scale: CGFloat {
     let myScale = scrollViewPosition / UIScreen.main.bounds.height * 2
     return myScale > 0.8 ? 0.8 : myScale
   }
 
-  var details: SpotifyModel.ShowDetails { SpotifyModel.getShowDetails(for: mediaDetailVM.mainItem!) }
+  private var details: SpotifyModel.ShowDetails { SpotifyModel.getShowDetails(for: mediaDetailVM.mainItem!) }
 
   var body: some View {
     VStack(alignment: .leading, spacing: Constants.spacingMedium) {
@@ -107,7 +107,7 @@ struct ShowsDetailContent: View {
     .padding(Constants.paddingStandard)
   }
 
-  struct NumberOfEpisodes: View {
+  private struct NumberOfEpisodes: View {
     var isExplicit: Bool
     var numberOfEpisodes: Int
 

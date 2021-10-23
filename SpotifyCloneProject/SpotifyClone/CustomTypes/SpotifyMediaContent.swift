@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct SpotifyMediaContent {
-  var title: String
-  var author: String
-  var imageURL: String
+  let title: String
+  let author: String
+  let imageURL: String
   var isPodcast: Bool = false
   var isArtist: Bool = false
 

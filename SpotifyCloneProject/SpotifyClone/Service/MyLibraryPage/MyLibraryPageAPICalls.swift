@@ -10,11 +10,11 @@ import Alamofire
 
 class MyLibraryPageAPICalls: ObservableObject {
 
-  var trackAPI = APIFetchingTracks()
-  var showsAPI = APIFetchingShows()
-  var playlistAPI = APIFetchingPlaylists()
-  var albumAPI = APIFetchingAlbums()
-  var artistAPI = APIFetchingArtists()
+  private var trackAPI = APIFetchingTracks()
+  private var showsAPI = APIFetchingShows()
+  private var playlistAPI = APIFetchingPlaylists()
+  private var albumAPI = APIFetchingAlbums()
+  private var artistAPI = APIFetchingArtists()
 
 
   // MARK: - PLAYLISTs

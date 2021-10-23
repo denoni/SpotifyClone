@@ -73,7 +73,7 @@ struct MyLibraryScreen: View {
 
     // MARK: - Auxiliary functions
 
-    func getMyLibraryMedias() -> [SpotifyModel.MediaItem] {
+    private func getMyLibraryMedias() -> [SpotifyModel.MediaItem] {
       var myLibraryMedias = [SpotifyModel.MediaItem]()
 
       for section in MyLibraryViewModel.Section.allCases {
@@ -87,7 +87,7 @@ struct MyLibraryScreen: View {
       return myLibraryMedias
     }
 
-    func didEverySectionLoaded() -> Bool {
+    private func didEverySectionLoaded() -> Bool {
       for key in myLibraryVM.isLoading.keys {
 
         // `tracksPreview` and `episodesPreview` will only be called if user

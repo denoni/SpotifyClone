@@ -19,12 +19,12 @@ class RemoteAudio: ObservableObject {
   let itemObserver: PlayerItemObserver
   @Published var currentTime: TimeInterval = 0
   @Published var currentDuration: TimeInterval = 0
-  @Published var currentRate: String = "1x"
+  @Published private(set) var currentRate: String = "1x"
   @Published var state = PlaybackState.waitingForSelection
 
-  @Published var lastPlayedURL = ""
-  @Published var lastItemPlayedID = ""
-  @Published var showPauseButton = false
+  @Published private(set) var lastPlayedURL = ""
+  @Published private(set) var lastItemPlayedID = ""
+  @Published private(set) var showPauseButton = false
 
   init() {
     player = AVPlayer()

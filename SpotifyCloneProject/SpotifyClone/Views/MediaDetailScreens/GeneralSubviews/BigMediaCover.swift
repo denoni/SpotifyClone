@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BigMediaCover: View {
-  @State var imageURL: String
+  var imageURL: String
 
   var body: some View {
     HStack {

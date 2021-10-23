@@ -47,14 +47,14 @@ class RemoteImageModel: ObservableObject {
     loadImage()
   }
 
-  func loadImage() {
+  private func loadImage() {
     if loadImageFromCache() {
       return
     }
     loadImageFromUrl()
   }
 
-  func loadImageFromCache() -> Bool {
+  private func loadImageFromCache() -> Bool {
     guard let urlString = urlString else {
       return false
     }
@@ -67,7 +67,7 @@ class RemoteImageModel: ObservableObject {
     return true
   }
 
-  func loadImageFromUrl() {
+  private func loadImageFromUrl() {
     guard let urlString = urlString else {
       DispatchQueue.main.async { self.noImageFound = true }
       return
@@ -83,7 +83,7 @@ class RemoteImageModel: ObservableObject {
   }
 
 
-  func getImageFromResponse(data: Data?, response: URLResponse?, error: Error?) {
+  private func getImageFromResponse(data: Data?, response: URLResponse?, error: Error?) {
     guard error == nil else {
       print("Error: \(error!)")
       DispatchQueue.main.async { self.noImageFound = true }
@@ -112,7 +112,7 @@ class RemoteImageModel: ObservableObject {
 }
 
 class ImageCache {
-  var cache = NSCache<NSString, UIImage>()
+  private var cache = NSCache<NSString, UIImage>()
 
   // If a memory warning is received, clean all cache
   init() {

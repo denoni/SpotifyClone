@@ -9,9 +9,9 @@ import SwiftUI
 
 struct AlbumAuthor: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
-  var authors: [SpotifyModel.MediaItem] { mediaDetailVM.returnBasicArtistsInfo() }
+  private var authors: [SpotifyModel.MediaItem] { mediaDetailVM.returnBasicArtistsInfo() }
 
-  var authorNames: String {
+  private var authorNames: String {
     var authorsToReturn = ""
     for authorIndex in authors.indices {
       authorsToReturn.append("\(authors[authorIndex].title), ")

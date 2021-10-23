@@ -11,9 +11,9 @@ import Foundation
 /// - `MyLibraryScreen`
 
 struct FollowedArtistResponse: Decodable {
-  var artists: ArtistResponseItem
+  let artists: ArtistResponseItem
 
   struct ArtistResponseItem: Decodable {
-    var items: [Artist]
+    let items: [Artist]
   }
 }

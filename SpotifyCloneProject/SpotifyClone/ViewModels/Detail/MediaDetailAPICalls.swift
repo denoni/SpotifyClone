@@ -111,7 +111,7 @@ struct MediaDetailAPICalls {
         }
 
         // Now we already checked is user follows, so `artistBasicInfo` is not loading anymore
-        mediaVM.isLoading[.artistBasicInfo(.artistBasicInfo)] = false
+        mediaVM.artistBasicInfoAlreadyLoaded()
       }
     }
 

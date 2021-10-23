@@ -9,16 +9,13 @@ import Foundation
 import Combine
 
 class SearchDetailViewModel: ObservableObject {
-  var api = SearchPageAPICalls()
-  @Published var accessToken: String?
-
+  private var api = SearchPageAPICalls()
+  var accessToken: String?
   @Published private var userInputText: String = ""
-  private var disposeBag = Set<AnyCancellable>()
   private var lastSearchedString: String = ""
-
   private var numberOfSearches = 0
-
   @Published var mediaResponses = [SpotifyModel.MediaItem]()
+  private var disposeBag = Set<AnyCancellable>()
 
   /// `search` is used to make an API call to the search endpoint.
   /// It uses a delay of 0.5 seconds before searching, so it can

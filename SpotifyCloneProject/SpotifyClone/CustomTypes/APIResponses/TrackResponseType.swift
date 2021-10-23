@@ -11,7 +11,7 @@ import Foundation
 /// - `Artist's Top Tracks`
 
 struct TrackResponse: Decodable {
-  var tracks: [Track]
+  let tracks: [Track]
 
   private enum CodingKeys: String, CodingKey { case items, tracks }
 

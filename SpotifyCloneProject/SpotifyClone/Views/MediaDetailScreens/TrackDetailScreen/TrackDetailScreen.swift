@@ -50,14 +50,14 @@ struct TrackDetailScreen: View {
 
 // MARK: - Detail Content
 
-struct TrackDetailContent: View {
+fileprivate struct TrackDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
 
-  var details: SpotifyModel.TrackDetails { SpotifyModel.getTrackDetails(for: mediaDetailVM.mainItem!) }
+  private var details: SpotifyModel.TrackDetails { SpotifyModel.getTrackDetails(for: mediaDetailVM.mainItem!) }
   // All versions above iPhone X will
   // end up returning false and vice versa
-  var isSmallDisplay: Bool { UIScreen.main.bounds.size.height < 750 }
+  private var isSmallDisplay: Bool { UIScreen.main.bounds.size.height < 750 }
 
   var body: some View {
     HStack(alignment: .center) {

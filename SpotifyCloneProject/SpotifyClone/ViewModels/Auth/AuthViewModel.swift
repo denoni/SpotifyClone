@@ -8,7 +8,7 @@
 import Foundation
 
 class AuthViewModel: ObservableObject {
-  @Published var mainViewModel: MainViewModel
+  var mainViewModel: MainViewModel
   @Published var isLoading = true
   @Published var finishedAuthentication = false
   @Published var authKeyIsAvailable = false
@@ -17,17 +17,17 @@ class AuthViewModel: ObservableObject {
     self.mainViewModel = mainViewModel
   }
 
-  static var apiAuth = APIAuthentication()
-  var authKey: AuthKey?
+  static private var apiAuth = APIAuthentication()
+  private var authKey: AuthKey?
 
   // Put your API id and secret inside YourSensitiveData and add it to .gitignore
   // How do I do I generate new api keys? Check APIAuthentication.swift
-  static var clientID = YourSensitiveData.clientID
-  static var clientSecret = YourSensitiveData.clientSecret
+  static private var clientID = YourSensitiveData.clientID
+  static private var clientSecret = YourSensitiveData.clientSecret
 
   // To know more about what all those variables are, check APIAuthentication.swift
-  static var scope = "\(AuthScope.userReadRecentlyPlayed.rawValue)+\(AuthScope.userTopRead.rawValue)+\(AuthScope.userReadPlaybackPosition.rawValue)+\(AuthScope.userLibraryRead.rawValue)+\(AuthScope.userFollowRead.rawValue)+\(AuthScope.userFollowModify.rawValue)+\(AuthScope.userLibraryModify.rawValue)+\(AuthScope.playlistModifyPublic.rawValue)+\(AuthScope.playlistModifyPrivate.rawValue)+\(AuthScope.playlistReadPrivate.rawValue)" // Don't forget to put .rawValue at the end
-  static var redirectURI = "https://www.github.com"
+  static private var scope = "\(AuthScope.userReadRecentlyPlayed.rawValue)+\(AuthScope.userTopRead.rawValue)+\(AuthScope.userReadPlaybackPosition.rawValue)+\(AuthScope.userLibraryRead.rawValue)+\(AuthScope.userFollowRead.rawValue)+\(AuthScope.userFollowModify.rawValue)+\(AuthScope.userLibraryModify.rawValue)+\(AuthScope.playlistModifyPublic.rawValue)+\(AuthScope.playlistModifyPrivate.rawValue)+\(AuthScope.playlistReadPrivate.rawValue)" // Don't forget to put .rawValue at the end
+  static private var redirectURI = "https://www.github.com"
   static var url = apiAuth.getAuthURL(clientID: clientID, scope: scope, redirectURI: redirectURI)
 
 

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ArtistMediaHorizontalScrollView: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
-  @State var medias: [SpotifyModel.MediaItem]
+  var medias: [SpotifyModel.MediaItem]
   var sectionTitle: String
 
   var body: some View {
@@ -21,7 +21,6 @@ struct ArtistMediaHorizontalScrollView: View {
         .padding(.leading, Constants.paddingStandard)
       ScrollView(.horizontal, showsIndicators: false) {
         LazyHStack(alignment: .top, spacing: Constants.spacingLarge) {
-//          Spacer(minLength: Constants.paddingStandard)
           ForEach(medias) { media in
             SmallSongItem(imageURL: media.imageURL,
                           title: media.title)

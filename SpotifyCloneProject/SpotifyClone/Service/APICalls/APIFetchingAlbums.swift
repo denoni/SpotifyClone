@@ -48,7 +48,8 @@ class APIFetchingAlbums {
     func parseResponse(_ response: DataResponse<AlbumResponse, AFError>) {
 
       guard let data = response.value else {
-        debugPrint(response.debugDescription)
+        print(response.debugDescription)
+        print(response.response!.statusCode)
         fatalError("\n Error receiving tracks from API.")
       }
 

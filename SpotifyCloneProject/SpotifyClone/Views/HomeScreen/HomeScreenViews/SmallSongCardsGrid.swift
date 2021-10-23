@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SmallSongCardsGrid: View {
-  @State var medias: [SpotifyModel.MediaItem]
-  var numberOfItems: Range<Int> { 0 ..< medias.count / 2 }
+  var medias: [SpotifyModel.MediaItem]
+  private var numberOfItems: Range<Int> { 0 ..< medias.count / 2 }
 
   var body: some View {
     VStack(spacing: Constants.spacingSmall) {
@@ -37,7 +37,7 @@ struct SmallSongCardsGrid: View {
     }
   }
 
-  struct SmallSongCardPair: View {
+  fileprivate struct SmallSongCardPair: View {
     @EnvironmentObject var homeVM: HomeViewModel
     @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
     var mediaPair: [SpotifyModel.MediaItem]

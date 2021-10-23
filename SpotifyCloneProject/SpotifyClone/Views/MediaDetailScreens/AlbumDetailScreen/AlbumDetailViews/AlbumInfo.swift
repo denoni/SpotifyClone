@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AlbumInfo: View {
-  @State var releaseDate: String
+  var releaseDate: String
 
   var body: some View {
     Text("Album • \(String(releaseDate.prefix(4)))")

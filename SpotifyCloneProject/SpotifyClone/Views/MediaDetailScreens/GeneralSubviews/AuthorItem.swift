@@ -13,8 +13,7 @@ struct AuthorItem: View {
   var imageURL: String
   var isPodcast: Bool = false
 
-  @ViewBuilder
-  var imageFormat: some View {
+  @ViewBuilder private var imageFormat: some View {
     if isPodcast {
       RoundedRectangle(cornerRadius: Constants.radiusSmall)
     } else {

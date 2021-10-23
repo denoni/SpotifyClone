@@ -12,7 +12,7 @@ struct TopGradient: View {
   var userSpecifiedColor: Color? = nil
 
   var height: CGFloat
-  var color: Color {
+  private var color: Color {
     guard userSpecifiedColor == nil else {
       return userSpecifiedColor!
     }

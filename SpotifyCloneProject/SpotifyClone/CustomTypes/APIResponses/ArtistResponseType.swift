@@ -12,7 +12,7 @@ import Foundation
 /// - `Artist's Top Tracks` (Used only to get the first artist)
 
 struct ArtistResponse: Decodable {
-  var items: [Artist]
+  let items: [Artist]
 
   private enum CodingKeys: String, CodingKey { case items, artists }
 

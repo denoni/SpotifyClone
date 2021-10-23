@@ -13,7 +13,7 @@ struct ColorfulCard: View {
   var color: Color
   var isPodcast = false
 
-  var textHasMoreThanOneWord: Bool {
+  private var textHasMoreThanOneWord: Bool {
     if text.contains(" ") {
       return true
     } else {
@@ -21,12 +21,11 @@ struct ColorfulCard: View {
     }
   }
 
-  var getCornerRadius: CGFloat {
+  private var getCornerRadius: CGFloat {
     isPodcast ? Constants.radiusStandard : 0
   }
 
-  @ViewBuilder
-  var body: some View {
+  @ViewBuilder var body: some View {
     ZStack() {
       RoundedRectangle(cornerRadius: 5)
         .fill(color)

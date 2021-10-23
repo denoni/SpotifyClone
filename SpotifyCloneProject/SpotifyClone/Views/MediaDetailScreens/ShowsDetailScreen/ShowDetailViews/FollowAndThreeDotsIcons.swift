@@ -11,7 +11,7 @@ struct FollowAndThreeDotsIcons: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   var threeDotsPlacedVertically = false
 
-  var mediaTypeThatIsUsingThisView: APIFetchingUserInfo.ValidMediaType {
+  private var mediaTypeThatIsUsingThisView: APIFetchingUserInfo.ValidMediaType {
     switch mediaDetailVM.mainItem!.mediaType {
     case .artist:
       return .artist
@@ -22,7 +22,7 @@ struct FollowAndThreeDotsIcons: View {
     }
   }
 
-  var followingState: MediaDetailViewModel.CurrentFollowingState {
+  private var followingState: MediaDetailViewModel.CurrentFollowingState {
     guard mediaDetailVM.followedIDs[mediaDetailVM.mainItem!.id] != nil else { return .isNotFollowing }
     return mediaDetailVM.followedIDs[mediaDetailVM.mainItem!.id]!
   }

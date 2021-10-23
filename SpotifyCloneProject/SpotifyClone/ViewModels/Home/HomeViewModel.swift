@@ -16,21 +16,19 @@
 import SwiftUI
 
 class HomeViewModel: ObservableObject {
-  var api = HomePageAPICalls()
-  @Published var mainVM: MainViewModel
-  
-  @Published var isLoading = [Section:Bool]()
-  @Published var mediaCollection = [Section:[SpotifyModel.MediaItem]]()
-  @Published var numberOfLoadedItemsInSection = [Section:Int]()
-  
+  private var api = HomePageAPICalls()
+  private(set) var mainVM: MainViewModel
+  @Published private(set) var isLoading = [Section:Bool]()
+  @Published private(set) var mediaCollection = [Section:[SpotifyModel.MediaItem]]()
+  @Published private(set) var numberOfLoadedItemsInSection = [Section:Int]()
   @Published var currentSubPage: HomeSubpage = .none
-  
-  @Published var veryFirstImageInfo = RemoteImageModel(urlString: "")
+  // Subpage navigation history
+  @Published private(set) var pageHistory = [(subPage: HomeSubpage, data: SpotifyModel.MediaItem, mediaDetailVM: MediaDetailViewModel)]()
+  // This is the first image(the one on top of the scroll view) used to get the average color and to create the gradient background
+  @Published private(set) var imageColorModel = RemoteImageModel(urlString: "")
 
-  @Published var pageHistory = [(subPage: HomeSubpage, data: SpotifyModel.MediaItem, mediaDetailVM: MediaDetailViewModel)]()
-
-  // The data from the item the user just tapped.
-  var tappedItemData: SpotifyModel.MediaItem?
+  // The data from the item the user just tapped(if an item was tapped).
+  private var tappedItemData: SpotifyModel.MediaItem?
   // This ins't the cache. It's just an auxiliary variable used for cleaning cache when needed.
   var homeCachedImageURLs = [String]()
 
@@ -121,7 +119,7 @@ class HomeViewModel: ObservableObject {
       case .smallSongCards:
         api.getTrack(using: .userFavoriteTracks, with: accessToken) { tracks in
           trimAndCommunicateResult(section: section, medias: tracks)
-          setVeryFirstImageInfoBasedOn(tracks[0].imageURL)
+          setImageColorModelBasedOn(tracks[0].imageURL)
         }
         
       // MARK: Recently Played
@@ -231,17 +229,17 @@ class HomeViewModel: ObservableObject {
   
   // MARK: - Auxiliary Functions
   
-  func getNumberOfLoadedItems(for section: Section) -> Int {
+  private func getNumberOfLoadedItems(for section: Section) -> Int {
     return numberOfLoadedItemsInSection[section]!
   }
   
-  func increaseNumberOfLoadedItems(for section: Section, by amount: Int) {
+  private func increaseNumberOfLoadedItems(for section: Section, by amount: Int) {
     if numberOfLoadedItemsInSection[section]! <= 50 {
       numberOfLoadedItemsInSection[section]! += amount
     }
   }
   
-  func trimAndCommunicateResult(section: Section, medias: [SpotifyModel.MediaItem], loadMoreEnabled: Bool = false) {
+  private func trimAndCommunicateResult(section: Section, medias: [SpotifyModel.MediaItem], loadMoreEnabled: Bool = false) {
     var noDuplicateMedias = [SpotifyModel.MediaItem]()
     var mediaIDs = [String]()
     
@@ -304,14 +302,14 @@ class HomeViewModel: ObservableObject {
       mediaDetailVM.cleanAll()
       mediaDetailVM.mainItem = data
       mediaDetailVM.accessToken = self.mainVM.authKey!.accessToken
-      mediaDetailVM.setVeryFirstImageInfoBasedOn(data.imageURL)
+      mediaDetailVM.setImageColorModelBasedOn(data.imageURL)
       self.currentSubPage = subPage
     }
 
   }
   
-  func setVeryFirstImageInfoBasedOn(_ firstImageURL: String) {
-    veryFirstImageInfo = RemoteImageModel(urlString: firstImageURL)
+  func setImageColorModelBasedOn(_ firstImageURL: String) {
+    imageColorModel = RemoteImageModel(urlString: firstImageURL)
   }
 
 
@@ -340,7 +338,7 @@ class HomeViewModel: ObservableObject {
       self.objectWillChange.send()
     }
 
-    func deleteAllImagesFromCache() {
+    private func deleteAllImagesFromCache() {
       // It's better to use this instead of .deleteAll() in 'ImageCache' right away, otherwise the item that
       // the user just tapped(in case he tapped) will also be deleted causing a non-pleasant user experience.
       for _ in homeCachedImageURLs.indices {

@@ -16,7 +16,7 @@ import Foundation
 
 struct PlaylistResponse: Decodable {
   var message: String?
-  var playlists: [Playlist]
+  let playlists: [Playlist]
 
   private enum CodingKeys: String, CodingKey { case items, playlists }
 
@@ -32,7 +32,7 @@ struct PlaylistResponse: Decodable {
   }
 
   private struct PlaylistItems: Decodable {
-    var items: [Playlist]
+    let items: [Playlist]
   }
 }
 

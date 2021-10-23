@@ -8,22 +8,19 @@
 import Foundation
 
 class MainViewModel: ObservableObject {
-  var api = MainViewModelAPICalls()
+  private var api = MainViewModelAPICalls()
   @Published private(set) var authKey: AuthKey?
   @Published var currentPage: Page = .home
   @Published var currentPageWasRetapped = false
-  @Published var homeScreenIsReady = false
+  @Published private(set) var homeScreenIsReady = false
   @Published var showBottomMediaPlayer = true
-
-  @Published var currentUserProfileInfo: SpotifyModel.CurrentUserProfileInfo?
+  @Published private(set) var currentUserProfileInfo: SpotifyModel.CurrentUserProfileInfo?
 
   func finishAuthentication(authKey: AuthKey) {
     self.authKey = authKey
-    
     guard self.authKey != nil else {
       fatalError("HomeScreen would be initiated without authKey.")
     }
-
     homeScreenIsReady = true
   }
 

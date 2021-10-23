@@ -11,7 +11,7 @@ import Foundation
 /// - `New Releases`
 
 struct AlbumResponse: Decodable {
-  var albums: [Album]
+  let albums: [Album]
 
   private enum CodingKeys: String, CodingKey { case items, albums }
 
@@ -25,8 +25,10 @@ struct AlbumResponse: Decodable {
       throw DecodingError.dataCorruptedError(forKey: .albums, in: container, debugDescription: "Unsupported JSON structure")
     }
   }
+
+  struct AlbumItem: Decodable {
+    let items: [Album]
+  }
 }
 
-struct AlbumItem: Decodable {
-  var items: [Album]
-}
+

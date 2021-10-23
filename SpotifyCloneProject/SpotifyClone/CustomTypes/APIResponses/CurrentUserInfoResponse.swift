@@ -8,8 +8,8 @@
 import Foundation
 
 class CurrentUserInfoResponse: Decodable {
-  var display_name: String
-  var followers: Followers
-  var id: String
-  var images: [CoverImage]?
+  let display_name: String
+  let followers: Followers
+  let id: String
+  let images: [CoverImage]?
 }

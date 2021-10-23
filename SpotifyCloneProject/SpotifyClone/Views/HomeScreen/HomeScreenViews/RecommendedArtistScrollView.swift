@@ -10,11 +10,12 @@ import SwiftUI
 struct RecommendedArtistScrollView: View {
   @EnvironmentObject var homeVM: HomeViewModel
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
-  @State var medias: [SpotifyModel.MediaItem]
-  
-  var artist: SpotifyModel.MediaItem { medias[0] }
+  var medias: [SpotifyModel.MediaItem]
+  var sectionTitle: String
 
-  func getArtistSongs() -> [SpotifyModel.MediaItem] {
+  private var artist: SpotifyModel.MediaItem { medias[0] }
+
+  private func getArtistSongs() -> [SpotifyModel.MediaItem] {
     var mediasWithArtist = medias
     mediasWithArtist.removeFirst()
     let mediasWithoutArtist = mediasWithArtist
@@ -22,7 +23,7 @@ struct RecommendedArtistScrollView: View {
     return mediasWithoutArtist
   }
   
-  var sectionTitle: String  
+
 
   var body: some View {
     VStack(spacing: Constants.spacingSmall) {

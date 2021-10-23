@@ -129,6 +129,8 @@ struct SpotifyModel {
     var showId: String?
   }
 
+
+
   // MARK: - Sub structs
   struct PlaylistTracks {
     var numberOfSongs: Int
@@ -139,6 +141,8 @@ struct SpotifyModel {
     var displayName: String
     var id: String
   }
+
+  
 
   // MARK: - Auxiliary functions
 

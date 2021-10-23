@@ -11,7 +11,7 @@ struct TracksVerticalScrollView: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @StateObject var audioManager = RemoteAudio()
   var tracksOrigin: MediaDetailSection
-  var medias: [SpotifyModel.MediaItem] {
+  private var medias: [SpotifyModel.MediaItem] {
     switch tracksOrigin {
     case .album:
       return mediaDetailVM.mediaCollection[.album(.tracksFromAlbum)]!
@@ -56,12 +56,11 @@ struct TracksVerticalScrollView: View {
 
   // MARK: - Album Item
 
-  struct AlbumItem: View {
+  fileprivate struct AlbumItem: View {
     @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
     @StateObject var audioManager: RemoteAudio
-
     let media: SpotifyModel.MediaItem
-    var details: SpotifyModel.TrackDetails { SpotifyModel.getTrackDetails(for: media) }
+    private var details: SpotifyModel.TrackDetails { SpotifyModel.getTrackDetails(for: media) }
 
     var body: some View {
       HStack(spacing: Constants.spacingSmall) {
@@ -96,15 +95,15 @@ struct TracksVerticalScrollView: View {
 
   // MARK: - Playlist Item
 
-  struct PlaylistItem: View {
+  fileprivate struct PlaylistItem: View {
     @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
     @StateObject var audioManager: RemoteAudio
+    let media: SpotifyModel.MediaItem
 
     @State var isTapped = false
-    var isPlaying: Bool { audioManager.showPauseButton && audioManager.lastItemPlayedID == media.id }
-    var details: SpotifyModel.TrackDetails { SpotifyModel.getTrackDetails(for: media) }
-    let media: SpotifyModel.MediaItem
-    var lowestResImageURL: String {
+    private var isPlaying: Bool { audioManager.showPauseButton && audioManager.lastItemPlayedID == media.id }
+    private var details: SpotifyModel.TrackDetails { SpotifyModel.getTrackDetails(for: media) }
+    private var lowestResImageURL: String {
       if media.lowResImageURL != "" {
         return media.lowResImageURL ?? ""
       } else {

@@ -8,9 +8,9 @@
 import Foundation
 
 struct FollowedShowResponse: Decodable {
-  var items: [FollowedShowItem]
+  let items: [FollowedShowItem]
 
   struct FollowedShowItem: Decodable {
-    var show: Show
+    let show: Show
   }
 }

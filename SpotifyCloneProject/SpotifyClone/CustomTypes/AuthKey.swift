@@ -12,7 +12,7 @@ struct AuthKey: Decodable {
   var refreshToken: String
   var scope: String
 
-  enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: String, CodingKey {
     case accessToken = "access_token"
     case refreshToken = "refresh_token"
     case scope

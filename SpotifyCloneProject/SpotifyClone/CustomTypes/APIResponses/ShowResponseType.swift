@@ -11,9 +11,9 @@ import Foundation
 /// - `Top podcasts`
 
 struct ShowResponse: Decodable {
-  var shows: ShowItem
+  let shows: ShowItem
 }
 
 struct ShowItem: Decodable {
-  var items: [Show]
+  let items: [Show]
 }

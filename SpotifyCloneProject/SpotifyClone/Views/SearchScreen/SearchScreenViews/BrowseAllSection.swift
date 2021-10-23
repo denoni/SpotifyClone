@@ -10,8 +10,8 @@ import SwiftUI
 struct BrowseAllSection: View {
   var title: String
   @State var playlists: [SpotifyModel.PlaylistItem]
-  @State var colors: [Color]
-  var numberOfItems: Range<Int> { 0 ..< playlists.count / 2 }
+  var colors: [Color]
+  private var numberOfItems: Range<Int> { 0 ..< playlists.count / 2 }
 
   var body: some View {
     VStack {

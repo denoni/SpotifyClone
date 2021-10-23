@@ -12,7 +12,7 @@ struct ShowEpisodesScrollView: View {
   @StateObject var audioManager = RemoteAudio()
   @State var currentCachedURLs = [String]()
 
-  var medias: [SpotifyModel.MediaItem] {
+  private var medias: [SpotifyModel.MediaItem] {
     mediaDetailVM.mediaCollection[.shows(.episodesFromShow)]!
   }
 
@@ -53,9 +53,7 @@ struct ShowEpisodesScrollView: View {
 
 
   // MARK: - Episode Item
-
-
-  struct EpisodeItem: View {
+  fileprivate struct EpisodeItem: View {
     @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
     @StateObject var audioManager: RemoteAudio
     let media: SpotifyModel.MediaItem

@@ -45,19 +45,18 @@ struct PlaylistDetailScreen: View {
 
 // MARK: - Detail Content
 
-struct PlaylistDetailContent: View {
+fileprivate struct PlaylistDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @Binding var scrollViewPosition: CGFloat
-
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
 
   /// `scale` gets the current position of the scroll view and returns a CGFloat used for animations.
-  var scale: CGFloat {
+  private var scale: CGFloat {
     let myScale = scrollViewPosition / UIScreen.main.bounds.height * 2
     return myScale > 0.8 ? 0.8 : myScale
   }
 
-  var details: SpotifyModel.PlaylistDetails { SpotifyModel.getPlaylistDetails(for: mediaDetailVM.mainItem!) }
+  private var details: SpotifyModel.PlaylistDetails { SpotifyModel.getPlaylistDetails(for: mediaDetailVM.mainItem!) }
 
   var body: some View {
     VStack(alignment: .leading, spacing: Constants.spacingMedium) {

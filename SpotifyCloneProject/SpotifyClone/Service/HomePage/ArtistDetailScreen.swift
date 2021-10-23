@@ -55,6 +55,7 @@ struct ArtistDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   
   var details: SpotifyModel.ArtistDetails {
+    return SpotifyModel.getArtistDetails(for: mediaDetailVM.mainItem!)
     let detailsTypes = mediaDetailVM.mainItem!.getDetails()
     switch detailsTypes {
     case .artists(let artistDetails):

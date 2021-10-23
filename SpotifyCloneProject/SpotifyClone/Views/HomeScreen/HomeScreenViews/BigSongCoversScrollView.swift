@@ -14,11 +14,11 @@ struct BigSongCoversScrollView: View {
   let section: HomeViewModel.Section
   var showArtistName: Bool = false
   var sectionTitle = ""
-  var medias: [SpotifyModel.MediaItem] {
+  private var medias: [SpotifyModel.MediaItem] {
     homeVM.mediaCollection[section]!
   }
 
-  var detailType: HomeViewModel.HomeSubpage {
+  private var detailType: HomeViewModel.HomeSubpage {
     switch medias.first!.mediaType {
     case .playlist:
       return HomeViewModel.HomeSubpage.playlistDetail

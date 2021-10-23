@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PlaylistAuthor: View {
-  @State var mediaOwner: SpotifyModel.MediaOwner
+  var mediaOwner: SpotifyModel.MediaOwner
 
   var body: some View {
     HStack {

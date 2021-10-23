@@ -8,5 +8,5 @@
 import Foundation
 
 struct EpisodeResponse: Decodable {
-  var items: [Episode]
+  let items: [Episode]
 }

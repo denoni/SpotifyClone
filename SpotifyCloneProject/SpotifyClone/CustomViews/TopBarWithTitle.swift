@@ -15,17 +15,17 @@ struct TopBarWithTitle: View {
 
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
 
-  var backgroundOpacity: Double {
+  private var backgroundOpacity: Double {
     let opacity = Double(scrollViewPosition / UIScreen.main.bounds.height * 2)
     return opacity > Constants.opacityLow ? Constants.opacityLow : opacity
   }
 
-  var titleOpacity: Double {
+  private var titleOpacity: Double {
     let opacity = Double(log(scrollViewPosition / UIScreen.main.bounds.height * 4))
     return opacity > 1 ? 1 : opacity
   }
 
-  var circleOpacity: Double {
+  private var circleOpacity: Double {
     let opacity = 1 - Double(scrollViewPosition / UIScreen.main.bounds.height * 2)
     return opacity - 0.7 > Constants.opacityHigh ? Constants.opacityHigh : opacity - 0.7
   }

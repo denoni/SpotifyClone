@@ -18,26 +18,26 @@ struct SearchEndpointResponse: Decodable {
   let episodes: EpisodesSearchResponse?
 
   struct TrackSearchResponse: Decodable {
-    var items: [Track]
+    let items: [Track]
   }
 
   struct PlaylistSearchResponse: Decodable {
-    var items: [Playlist]
+    let items: [Playlist]
   }
 
   struct AlbumSearchResponse: Decodable {
-    var items: [Album]
+    let items: [Album]
   }
 
   struct ShowSearchResponse: Decodable {
-    var items: [Show]
+    let items: [Show]
   }
 
   struct ArtistSearchResponse: Decodable {
-    var items: [Artist]
+    let items: [Artist]
   }
 
   struct EpisodesSearchResponse: Decodable {
-    var items: [Episode]
+    let items: [Episode]
   }
 }

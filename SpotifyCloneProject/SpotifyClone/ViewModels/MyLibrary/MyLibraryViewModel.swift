@@ -10,11 +10,10 @@ import Foundation
 class MyLibraryViewModel: ObservableObject {
   var api = MyLibraryPageAPICalls()
   @Published var mainVM: MainViewModel
-
   @Published var isLoading = [Section:Bool]()
   @Published var mediaCollection = [Section:[SpotifyModel.MediaItem]]()
-
   @Published var currentSubPage: MyLibrarySubpage = .none
+  // Subpage navigation history
   @Published var pageHistory = [(subPage: MyLibrarySubpage, data: SpotifyModel.MediaItem, mediaDetailVM: MediaDetailViewModel)]()
 
   enum MyLibrarySubpage {
@@ -161,7 +160,7 @@ class MyLibraryViewModel: ObservableObject {
       mediaDetailVM.cleanAll()
       mediaDetailVM.mainItem = data
       mediaDetailVM.accessToken = self.mainVM.authKey!.accessToken
-      mediaDetailVM.setVeryFirstImageInfoBasedOn(data.imageURL)
+      mediaDetailVM.setImageColorModelBasedOn(data.imageURL)
       self.currentSubPage = subPage
     }
 

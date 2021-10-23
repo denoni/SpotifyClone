@@ -8,15 +8,17 @@
 import SwiftUI
 
 class SearchViewModel: ObservableObject {
-  var api = SearchPageAPICalls()
-  var mainVM: MainViewModel
-  @Published var isLoading = true
-  @Published var playlists = [SpotifyModel.PlaylistItem]()
-  @Published var colors = [Color]()
-
+  private var api = SearchPageAPICalls()
+  private(set) var mainVM: MainViewModel
+  @Published private(set) var isLoading = true
+  @Published private(set) var playlists = [SpotifyModel.PlaylistItem]()
   @Published var currentSubPage: SearchSubpage = .none
+  // Subpage navigation history
+  @Published private(set) var pageHistory = [(subPage: SearchSubpage, subPageType: SubPageType)]()
 
-  @Published var pageHistory = [(subPage: SearchSubpage, subPageType: SubPageType)]()
+  // TODO: Generate the colors based on the average color and stop storing this here.
+  // Used to store the random generated colors of the cards.
+  @Published private(set) var colors = [Color]()
 
   enum SearchSubpage {
     case none
@@ -73,21 +75,13 @@ class SearchViewModel: ObservableObject {
     } else {
       goToNoneSubpage()
     }
-
-  }
-
-  enum SubPageType {
-    case search(searchDetailVM: SearchDetailViewModel, accessToken: String)
-    case detail(mediaDetailVM: MediaDetailViewModel, data: SpotifyModel.MediaItem)
   }
 
   func changeSubpageTo(_ subPage: SearchSubpage,
                        subPageType: SubPageType) {
 
     self.pageHistory.append((subPage: subPage, subPageType: subPageType))
-
     currentSubPage = .transitionScreen
-    
 
     // if we change the subpage right away it'll cause a crash
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
@@ -100,12 +94,15 @@ class SearchViewModel: ObservableObject {
         mediaDetailVM.cleanAll()
         mediaDetailVM.mainItem = data
         mediaDetailVM.accessToken = self.mainVM.authKey!.accessToken
-        mediaDetailVM.setVeryFirstImageInfoBasedOn(data.imageURL)
+        mediaDetailVM.setImageColorModelBasedOn(data.imageURL)
       }
-
       self.currentSubPage = subPage
-
     }
+  }
+
+  enum SubPageType {
+    case search(searchDetailVM: SearchDetailViewModel, accessToken: String)
+    case detail(mediaDetailVM: MediaDetailViewModel, data: SpotifyModel.MediaItem)
   }
 
 }

@@ -12,7 +12,7 @@ struct FollowButton: View {
   var itemID: String
   var itemType: APIFetchingUserInfo.ValidMediaType
 
-  var followingState: MediaDetailViewModel.CurrentFollowingState {
+  private var followingState: MediaDetailViewModel.CurrentFollowingState {
     Utility.checkIfIsFollowingItem(itemID, mediaDetailVM: mediaDetailVM)
   } 
 
