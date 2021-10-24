@@ -67,6 +67,9 @@ struct LikedSongsDetailContent: View {
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .padding(.horizontal, Constants.paddingStandard)
     .padding(.vertical, Constants.paddingSmall)
+    .onDisappear {
+      mediaDetailVM.cleanUserLikedFollowedSections()
+    }
   }
 }
 

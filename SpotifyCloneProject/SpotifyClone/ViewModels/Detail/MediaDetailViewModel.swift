@@ -169,6 +169,10 @@ class MediaDetailViewModel: ObservableObject {
     }
   }
 
+  func cleanUserLikedFollowedSections() {
+    cleanSection(MediaDetailSection.UserLikedFollowedMedia.self)
+  }
+
   func setImageColorModelBasedOn(_ firstImageURL: String) {
     imageColorModel = RemoteImageModel(urlString: firstImageURL)
   }
