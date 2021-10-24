@@ -18,7 +18,7 @@ struct FollowButton: View {
 
   var body: some View {
     Button(action: { MediaDetailAPICalls.UserInfoAPICalls.changeFollowingState(to: followingState == .isFollowing ? .unfollow : .follow,
-                                                                                in: itemType, mediaVM: mediaDetailVM,
+                                                                                in: itemType, mediaDetailVM: mediaDetailVM,
                                                                                 itemID: itemID) }) {
       RoundedRectangle(cornerRadius: Constants.radiusSmall)
         .strokeBorder(Color.white.opacity(Constants.opacityStandard), lineWidth: 1)

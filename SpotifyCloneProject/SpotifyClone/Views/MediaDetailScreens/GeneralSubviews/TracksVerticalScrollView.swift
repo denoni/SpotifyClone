@@ -30,14 +30,14 @@ struct TracksVerticalScrollView: View {
           AlbumItem(audioManager: audioManager, media: media)
             .onAppear {
               if mediaDetailVM.shouldFetchMoreData(basedOn: media, inRelationTo: medias) {
-                MediaDetailAPICalls.AlbumAPICalls.getTracksFromAlbum(mediaVM: mediaDetailVM, loadMoreEnabled: true)
+                MediaDetailAPICalls.AlbumAPICalls.getTracksFromAlbum(mediaDetailVM: mediaDetailVM, loadMoreEnabled: true)
               }
             }
         case .playlist:
           PlaylistItem(audioManager: audioManager, media: media)
             .onAppear {
               if mediaDetailVM.shouldFetchMoreData(basedOn: media, inRelationTo: medias) {
-                MediaDetailAPICalls.PlaylistAPICalls.getTracksFromPlaylist(mediaVM: mediaDetailVM, loadMoreEnabled: true)
+                MediaDetailAPICalls.PlaylistAPICalls.getTracksFromPlaylist(mediaDetailVM: mediaDetailVM, loadMoreEnabled: true)
               }
             }
             .onDisappear {

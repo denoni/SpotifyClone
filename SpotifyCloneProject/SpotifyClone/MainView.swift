@@ -15,7 +15,7 @@ struct MainView: View {
   @StateObject var searchVM: SearchViewModel
   @StateObject var mediaDetailVM: MediaDetailViewModel
 
-  @StateObject var searchDetailVM = SearchDetailViewModel()
+  @StateObject var activeSearchVM = ActiveSearchViewModel()
 
   init(mainViewModel: MainViewModel) {
     _mainVM = StateObject(wrappedValue: mainViewModel)
@@ -38,7 +38,7 @@ struct MainView: View {
         case .search:
           SearchScreen()
             .environmentObject(searchVM)
-            .environmentObject(searchDetailVM)
+            .environmentObject(activeSearchVM)
             .environmentObject(mediaDetailVM)
         case .myLibrary:
           MyLibraryScreen()

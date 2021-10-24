@@ -9,11 +9,11 @@ import SwiftUI
 
 struct SearchResponsesScrollView: View {
   @EnvironmentObject var searchVM: SearchViewModel
-  @EnvironmentObject var searchDetailVM: SearchDetailViewModel
+  @EnvironmentObject var activeSearchVM: ActiveSearchViewModel
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
 
   var medias: [SpotifyModel.MediaItem] {
-    return searchDetailVM.mediaResponses
+    return activeSearchVM.mediaResponses
   }
 
   func getMediaType(for media: SpotifyModel.MediaItem) -> SearchViewModel.SearchSubpage {

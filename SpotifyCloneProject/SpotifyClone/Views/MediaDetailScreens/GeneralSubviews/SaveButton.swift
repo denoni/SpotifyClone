@@ -20,7 +20,7 @@ struct SaveButton: View {
     if followingState == .isFollowing {
       Button(action: { MediaDetailAPICalls.UserInfoAPICalls.changeFollowingState(to: .unfollow,
                                                                                   in: itemType,
-                                                                                  mediaVM: mediaDetailVM,
+                                                                                  mediaDetailVM: mediaDetailVM,
                                                                                   itemID: itemID) }) {
         Image(systemName: "checkmark.circle.fill")
           .resizable()
@@ -30,7 +30,7 @@ struct SaveButton: View {
     } else {
       Button(action: { MediaDetailAPICalls.UserInfoAPICalls.changeFollowingState(to: .follow,
                                                                                   in: itemType,
-                                                                                  mediaVM: mediaDetailVM,
+                                                                                  mediaDetailVM: mediaDetailVM,
                                                                                   itemID: itemID) }) {
         Image("plus-circle")
           .resizable()

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ActiveSearchingScreen: View {
-  @EnvironmentObject var searchDetailVM: SearchDetailViewModel
+  @EnvironmentObject var activeSearchVM: ActiveSearchViewModel
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @State var searchInput = ""
 
@@ -29,7 +29,7 @@ struct ActiveSearchingScreen: View {
           // So when the page appears, the focus automatically goes to text field(keyboard opens).
           .introspectTextField { textField in textField.becomeFirstResponder() }
           .onChange(of: searchInput) { _ in
-            searchDetailVM.search(for: searchInput)
+            activeSearchVM.search(for: searchInput)
           }
         BottomBar(mainVM: MainViewModel())
       }

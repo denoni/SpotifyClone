@@ -10,6 +10,7 @@ import SwiftUI
 struct ShowEpisodesScrollView: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @StateObject var audioManager = RemoteAudio()
+  // This is not the cache. It's just a helper variable to keep track of what and when should the cache be cleaned.
   @State var currentCachedURLs = [String]()
 
   private var medias: [SpotifyModel.MediaItem] {
@@ -26,10 +27,10 @@ struct ShowEpisodesScrollView: View {
 
               // TODO: Find a way to do it without performance issues
               // Disabled the call below because it causes hitches when user scroll really fast.
-//              MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.episode, mediaVM: mediaDetailVM, itemID: media.id)
+//              MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.episode, mediaDetailVM: mediaDetailVM, itemID: media.id)
 
               if mediaDetailVM.shouldFetchMoreData(basedOn: media, inRelationTo: medias) {
-                MediaDetailAPICalls.ShowsAPICalls.getEpisodesFromShows(mediaVM: mediaDetailVM, loadMoreEnabled: true)
+                MediaDetailAPICalls.ShowsAPICalls.getEpisodesFromShows(mediaDetailVM: mediaDetailVM, loadMoreEnabled: true)
               }
               currentCachedURLs.append(media.imageURL)
             }

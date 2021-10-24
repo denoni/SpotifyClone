@@ -1,5 +1,5 @@
 //
-//  SearchDetailViewModel.swift
+//  ActiveSearchViewModel.swift
 //  SpotifyClone
 //
 //  Created by Gabriel on 10/8/21.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class SearchDetailViewModel: ObservableObject {
+class ActiveSearchViewModel: ObservableObject {
   private var api = SearchPageAPICalls()
   var accessToken: String?
   @Published private var userInputText: String = ""

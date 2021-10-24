@@ -57,34 +57,30 @@ class MediaDetailViewModel: ObservableObject {
   }
 
   func getArtistScreenData() {
-    MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.artist, mediaVM: self,
-                                                             itemID: self.mainItem!.id)
-    MediaDetailAPICalls.ArtistAPICalls.getTopTracksFromArtist(mediaVM: self)
-    MediaDetailAPICalls.ArtistAPICalls.getAlbumsFromArtist(mediaVM: self)
-    MediaDetailAPICalls.ArtistAPICalls.getPlaylistFromArtist(mediaVM: self)
+    MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.artist, mediaDetailVM: self, itemID: self.mainItem!.id)
+    MediaDetailAPICalls.ArtistAPICalls.getTopTracksFromArtist(mediaDetailVM: self)
+    MediaDetailAPICalls.ArtistAPICalls.getAlbumsFromArtist(mediaDetailVM: self)
+    MediaDetailAPICalls.ArtistAPICalls.getPlaylistFromArtist(mediaDetailVM: self)
   }
 
   func getPlaylistScreenData(currentUserID: String) {
-    MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.playlist(userID: currentUserID),
-                                                             mediaVM: self, itemID: self.mainItem!.id)
-    MediaDetailAPICalls.PlaylistAPICalls.getTracksFromPlaylist(mediaVM: self, loadMoreEnabled: true)
+    MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.playlist(userID: currentUserID), mediaDetailVM: self, itemID: self.mainItem!.id)
+    MediaDetailAPICalls.PlaylistAPICalls.getTracksFromPlaylist(mediaDetailVM: self, loadMoreEnabled: true)
   }
 
   func getAlbumScreenData() {
-    MediaDetailAPICalls.UserInfoAPICalls.getArtistBasicInfo(mediaVM: self)
-    MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.album, mediaVM: self,
-                                                             itemID: self.mainItem!.id)
-    MediaDetailAPICalls.AlbumAPICalls.getTracksFromAlbum(mediaVM: self, loadMoreEnabled: true)
+    MediaDetailAPICalls.UserInfoAPICalls.getArtistBasicInfo(mediaDetailVM: self)
+    MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.album, mediaDetailVM: self, itemID: self.mainItem!.id)
+    MediaDetailAPICalls.AlbumAPICalls.getTracksFromAlbum(mediaDetailVM: self, loadMoreEnabled: true)
   }
 
   func getShowsScreenData() {
-    MediaDetailAPICalls.ShowsAPICalls.getEpisodesFromShows(mediaVM: self, loadMoreEnabled: true)
+    MediaDetailAPICalls.ShowsAPICalls.getEpisodesFromShows(mediaDetailVM: self, loadMoreEnabled: true)
   }
 
   func getEpisodesScreenData() {
-    MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.show, mediaVM: self,
-                                                             itemID: self.mainItem!.id)
-    MediaDetailAPICalls.EpisodeAPICalls.getEpisodeDetails(mediaVM: self)
+    MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.show, mediaDetailVM: self, itemID: self.mainItem!.id)
+    MediaDetailAPICalls.EpisodeAPICalls.getEpisodeDetails(mediaDetailVM: self)
   }
 
 
@@ -97,8 +93,7 @@ class MediaDetailViewModel: ObservableObject {
                                 loadMoreEnabled: Bool = false,
                                 deleteAlmostDuplicateResults: Bool = false) {
 
-    let noDuplicateMedias = getNonDuplicateItems(for: medias,
-                                                 deleteAlmostDuplicateResults: deleteAlmostDuplicateResults)
+    let noDuplicateMedias = getNonDuplicateItems(for: medias, deleteAlmostDuplicateResults: deleteAlmostDuplicateResults)
 
     // If the api got more than `limit` items, return just the elements within the `limit`
     let mediasWithinTheLimit = noDuplicateMedias.count >= limit ? Array(noDuplicateMedias.prefix(limit)) : noDuplicateMedias

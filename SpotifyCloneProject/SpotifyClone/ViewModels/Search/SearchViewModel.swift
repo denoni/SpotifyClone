@@ -101,7 +101,7 @@ class SearchViewModel: ObservableObject {
   }
 
   enum SubPageType {
-    case search(searchDetailVM: SearchDetailViewModel, accessToken: String)
+    case search(activeSearchVM: ActiveSearchViewModel, accessToken: String)
     case detail(mediaDetailVM: MediaDetailViewModel, data: SpotifyModel.MediaItem)
   }
 

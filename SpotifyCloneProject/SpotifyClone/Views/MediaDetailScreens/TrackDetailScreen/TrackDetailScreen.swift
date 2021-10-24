@@ -40,9 +40,9 @@ struct TrackDetailScreen: View {
         }
 
         // Gets the artist basic info(we're mainly interested in the imageURL of the artist's profile)
-        MediaDetailAPICalls.UserInfoAPICalls.getArtistBasicInfo(mediaVM: mediaDetailVM)
+        MediaDetailAPICalls.UserInfoAPICalls.getArtistBasicInfo(mediaDetailVM: mediaDetailVM)
 
-        MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.track, mediaVM: mediaDetailVM, itemID: mediaDetailVM.mainItem!.id)
+        MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.track, mediaDetailVM: mediaDetailVM, itemID: mediaDetailVM.mainItem!.id)
       }
     }
   }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchBarSection: View {
   @EnvironmentObject var searchVM: SearchViewModel
-  @EnvironmentObject var searchDetailVM: SearchDetailViewModel
+  @EnvironmentObject var activeSearchVM: ActiveSearchViewModel
   @State private var searchInput: String = ""
 
   var body: some View {
@@ -24,7 +24,7 @@ struct SearchBarSection: View {
       .padding(.horizontal, Constants.paddingStandard)
       .onTapGesture {
         searchVM.changeSubpageTo(.activeSearching,
-                                 subPageType: .search(searchDetailVM: searchDetailVM,
+                                 subPageType: .search(activeSearchVM: activeSearchVM,
                                                       accessToken: searchVM.mainVM.authKey!.accessToken))
       }
     }
