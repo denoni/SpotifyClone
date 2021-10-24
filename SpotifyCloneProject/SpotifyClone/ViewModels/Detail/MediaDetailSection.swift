@@ -12,8 +12,9 @@ enum MediaDetailSection: Hashable {
   case playlist(_ playlistSection: PlaylistSections)
   case album(_ albumSection: AlbumSections)
   case shows(_ showSection: ShowsSections)
-  case episodes(_ showSection: EpisodeSections)
+  case episodes(_ episodeSection: EpisodeSections)
   case artistBasicInfo(_ basicSection: ArtistBasicInfo)
+  case userLikedFollowedMedia(_ userLikedFollowedMedia: UserLikedFollowedMedia)
 
   enum ArtistSections: CaseIterable, MediaDetailSectionsProtocol {
     case topTracksFromArtist
@@ -39,5 +40,9 @@ enum MediaDetailSection: Hashable {
 
   enum ArtistBasicInfo: CaseIterable, MediaDetailSectionsProtocol {
     case artistBasicInfo
+  }
+
+  enum UserLikedFollowedMedia: CaseIterable, MediaDetailSectionsProtocol {
+    case userLikedSongs
   }
 }

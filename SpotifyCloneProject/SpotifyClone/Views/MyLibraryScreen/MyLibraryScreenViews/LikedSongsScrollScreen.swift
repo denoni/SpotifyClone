@@ -38,7 +38,7 @@ struct LikedSongsScrollScreen: View {
 // MARK: - Detail Content
 struct LikedSongsDetailContent: View {
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
-  @EnvironmentObject var myLibraryVM: MyLibraryViewModel
+  @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @Binding var scrollViewPosition: CGFloat
 
   var body: some View {
@@ -50,14 +50,14 @@ struct LikedSongsDetailContent: View {
         .font(.avenir(.medium, size: Constants.fontSmall))
         .opacity(Constants.opacityStandard)
 
-      if myLibraryVM.isLoading[.userLikedSongs]! == false {
-        TracksPreviewVerticalScrollView(medias: myLibraryVM.mediaCollection[.userLikedSongs]!)
+      if mediaDetailVM.isLoading[.userLikedFollowedMedia(.userLikedSongs)]! == false {
+        TracksPreviewVerticalScrollView()
       } else {
         HStack {
           ProgressView()
             .withSpotifyStyle(useDiscreetColors: true)
             .onAppear {
-              myLibraryVM.getCurrentUserLikedTracks(accessToken: myLibraryVM.mainVM.authKey!.accessToken)
+              mediaDetailVM.getUserLikedFollowedMedia()
             }
         }.frame(maxWidth: .infinity, alignment: .center)
         Spacer()
@@ -71,14 +71,20 @@ struct LikedSongsDetailContent: View {
 }
 
 struct TracksPreviewVerticalScrollView: View {
+  @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @StateObject var audioManager = RemoteAudio()
-  var medias: [SpotifyModel.MediaItem]
+  var medias: [SpotifyModel.MediaItem] { mediaDetailVM.mediaCollection[.userLikedFollowedMedia(.userLikedSongs)]! }
 
   var body: some View {
     LazyVStack {
       ForEach(medias) { media in
         TrackPreviewItem(media: media, audioManager: audioManager)
           .padding(.bottom, Constants.paddingSmall)
+          .onAppear {
+            if mediaDetailVM.shouldFetchMoreData(basedOn: media, inRelationTo: medias) {
+              MediaDetailAPICalls.UserLikedFollowedMediaAPICalls.getLikedSongs(mediaDetailVM: mediaDetailVM)
+            }
+          }
       }
     }
     .padding(.top, Constants.paddingSmall)

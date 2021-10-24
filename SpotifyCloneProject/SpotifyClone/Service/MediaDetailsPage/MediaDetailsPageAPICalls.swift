@@ -18,7 +18,6 @@ class MediaDetailsPageAPICalls: ObservableObject {
   var episodeAPI =  APIFetchingEpisodes()
   var basicInfoAPI = APIFetchingBasicInfo()
   var userInfoAPI = APIFetchingUserInfo()
-  
 
   // MARK: - Artist Screen
 
@@ -132,6 +131,12 @@ class MediaDetailsPageAPICalls: ObservableObject {
     userInfoAPI.changeFollowingState(to: followingState, in: mediaType, with: accessToken, mediaID: mediaID, completionHandler: completionHandler)
   }
 
+  // MARK: - User Liked/Followed Media
+
+  func getUserLikedSongs(with accessToken: String,
+                         completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
+    trackAPI.getTrack(using: .userLikedTracks, with: accessToken, completionHandler: completionHandler)
+  }
 
 }
 

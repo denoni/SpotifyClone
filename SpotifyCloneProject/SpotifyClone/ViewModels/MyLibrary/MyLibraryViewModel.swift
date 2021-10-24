@@ -86,12 +86,6 @@ class MyLibraryViewModel: ObservableObject {
     }
   }
 
-  func getCurrentUserLikedTracks(accessToken: String) {
-    api.getCurrentUserLikedTracks(with: accessToken) { tracks in
-      self.trimAndCommunicateResult(section: .userLikedSongs, medias: tracks)
-    }
-  }
-
 
 
   // MARK: - Auxiliary Functions
@@ -129,7 +123,6 @@ class MyLibraryViewModel: ObservableObject {
   }
 
   func goToPreviousPage() {
-
     // removes the current page
     pageHistory.removeLast()
 
@@ -144,7 +137,6 @@ class MyLibraryViewModel: ObservableObject {
     } else {
       goToNoneSubpage()
     }
-
   }
 
   func changeSubpageTo(_ subPage: MyLibrarySubpage,
@@ -163,7 +155,6 @@ class MyLibraryViewModel: ObservableObject {
       mediaDetailVM.setImageColorModelBasedOn(data.imageURL)
       self.currentSubPage = subPage
     }
-
   }
 
 }

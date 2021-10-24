@@ -145,4 +145,15 @@ struct MediaDetailAPICalls {
     }
   }
 
+  struct UserLikedFollowedMediaAPICalls {
+    static func getLikedSongs(mediaDetailVM: MediaDetailViewModel) {
+      let offset = mediaDetailVM.getNumberOfLoadedItems(for: .userLikedFollowedMedia(.userLikedSongs))
+      mediaDetailVM.increaseNumberOfLoadedItems(for: .userLikedFollowedMedia(.userLikedSongs), by: 10)
+
+      mediaDetailVM.api.trackAPI.getTrack(using: .userLikedTracks, with: mediaDetailVM.accessToken!, limit: 10, offset: offset) { tracks in
+        mediaDetailVM.trimAndCommunicateResult(medias: tracks, section: .userLikedFollowedMedia(.userLikedSongs), loadMoreEnabled: true)
+      }
+    }
+  }
+
 }

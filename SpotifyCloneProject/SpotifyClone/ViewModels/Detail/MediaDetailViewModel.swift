@@ -83,6 +83,10 @@ class MediaDetailViewModel: ObservableObject {
     MediaDetailAPICalls.EpisodeAPICalls.getEpisodeDetails(mediaDetailVM: self)
   }
 
+  func getUserLikedFollowedMedia() {
+    MediaDetailAPICalls.UserLikedFollowedMediaAPICalls.getLikedSongs(mediaDetailVM: self)
+  }
+
 
 
   // MARK: - API Auxiliary Functions
@@ -98,8 +102,8 @@ class MediaDetailViewModel: ObservableObject {
     // If the api got more than `limit` items, return just the elements within the `limit`
     let mediasWithinTheLimit = noDuplicateMedias.count >= limit ? Array(noDuplicateMedias.prefix(limit)) : noDuplicateMedias
 
-
     if loadMoreEnabled {
+      print("AAAA")
       mediaCollection[section]! += noDuplicateMedias
     } else {
       mediaCollection[section] = mediasWithinTheLimit
@@ -125,6 +129,7 @@ class MediaDetailViewModel: ObservableObject {
                            inRelationTo medias: [SpotifyModel.MediaItem]) -> Bool {
     if medias.count > 5 {
       if media.id == medias[medias.count - 4].id {
+        print("true")
         return true
       }
     }
@@ -179,6 +184,7 @@ class MediaDetailViewModel: ObservableObject {
     cleanSection(MediaDetailSection.EpisodeSections.self)
     cleanSection(MediaDetailSection.ArtistSections.self)
     cleanSection(MediaDetailSection.ArtistBasicInfo.self)
+    cleanSection(MediaDetailSection.UserLikedFollowedMedia.self)
   }
 
   private func cleanSection<DetailSection: MediaDetailSectionsProtocol & CaseIterable>(_ section: DetailSection.Type) {
@@ -203,6 +209,9 @@ class MediaDetailViewModel: ObservableObject {
 
       } else if section == MediaDetailSection.ArtistBasicInfo.self {
         sectionInstance = .artistBasicInfo(subSection as! MediaDetailSection.ArtistBasicInfo)
+
+      } else if section == MediaDetailSection.UserLikedFollowedMedia.self {
+        sectionInstance = .userLikedFollowedMedia(subSection as! MediaDetailSection.UserLikedFollowedMedia)
       }
 
       // deletes images in the current section from cache

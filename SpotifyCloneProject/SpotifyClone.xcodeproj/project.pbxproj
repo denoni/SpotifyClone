@@ -692,14 +692,6 @@
 			path = SearchPage;
 			sourceTree = "<group>";
 		};
-		C090ABE02720DEC80069F901 /* LikedSongsScrollScreen */ = {
-			isa = PBXGroup;
-			children = (
-				C090ABDE2720D90E0069F901 /* LikedSongsScrollScreen.swift */,
-			);
-			path = LikedSongsScrollScreen;
-			sourceTree = "<group>";
-		};
 		C094167B2718A03700C658B3 /* EpisodeDetailScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -906,7 +898,7 @@
 		C0FB4FE32720809700E61982 /* MyLibraryScreenViews */ = {
 			isa = PBXGroup;
 			children = (
-				C090ABE02720DEC80069F901 /* LikedSongsScrollScreen */,
+				C090ABDE2720D90E0069F901 /* LikedSongsScrollScreen.swift */,
 				C0FB4FE4272080B800E61982 /* MyLibraryTopBar.swift */,
 				C0FB4FE62720811E00E61982 /* MyLibraryItemsScrollView.swift */,
 				C0FB4FE82720852300E61982 /* MyLibraryItemTypes.swift */,

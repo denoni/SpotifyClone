@@ -33,7 +33,7 @@ class APIFetchingTracks {
     case .userFavoriteTracks:
       baseUrl = "https://api.spotify.com/v1/me/top/tracks?limit=\(limit)&offset=\(offset)"
     case .userLikedTracks:
-      baseUrl = "https://api.spotify.com/v1/me/tracks"
+      baseUrl = "https://api.spotify.com/v1/me/tracks?limit=\(limit)&offset=\(offset)"
     case .topTracksFromArtist(let artistID):
       baseUrl = "https://api.spotify.com/v1/artists/\(artistID)/top-tracks?market=US"
     case .tracksFromPlaylist(let playlistID):
