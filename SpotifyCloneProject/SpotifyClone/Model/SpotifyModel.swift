@@ -45,7 +45,7 @@ struct SpotifyModel {
     var id: String
     var details: DetailTypes
 
-    func getDetails() -> DetailTypes {
+    fileprivate func getDetails() -> DetailTypes {
       switch details {
         case .playlists(let playlistDetails):
           return DetailTypes.playlists(playlistDetails: playlistDetails)

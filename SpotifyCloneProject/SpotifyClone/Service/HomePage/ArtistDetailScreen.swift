@@ -55,17 +55,7 @@ struct ArtistDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   
   var details: SpotifyModel.ArtistDetails {
-    return SpotifyModel.getArtistDetails(for: mediaDetailVM.mainItem!)
-    let detailsTypes = mediaDetailVM.mainItem!.getDetails()
-    switch detailsTypes {
-    case .artists(let artistDetails):
-      return SpotifyModel.ArtistDetails(followers: artistDetails.followers,
-                                        genres: artistDetails.genres,
-                                        popularity: artistDetails.popularity,
-                                        id: artistDetails.id)
-    default:
-      fatalError("Wrong type for ArtistDetailScreen")
-    }
+    SpotifyModel.getArtistDetails(for: mediaDetailVM.mainItem!)
   }
   
   var body: some View {
