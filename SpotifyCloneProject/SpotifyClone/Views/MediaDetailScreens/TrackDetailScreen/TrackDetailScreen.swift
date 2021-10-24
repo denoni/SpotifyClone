@@ -28,21 +28,15 @@ struct TrackDetailScreen: View {
       }
       .onAppear {
         // When TrackDetailScreen opens up, hide the bottomMediaPlayer
-        switch mediaDetailVM.detailScreenOrigin {
-        case .home(let homeVM):
-          homeVM.mainVM.showBottomMediaPlayer = false
-        case .search(let searchVM):
-          searchVM.mainVM.showBottomMediaPlayer = false
-        case .myLibrary(let myLibraryVM):
-          myLibraryVM.mainVM.showBottomMediaPlayer = false
-        default:
-          fatalError("Missing detail screen origin.")
-        }
+        Utility.showOrHideMediaPlayer(shouldShowMediaPlayer: false, mediaDetailVM: mediaDetailVM)
 
         // Gets the artist basic info(we're mainly interested in the imageURL of the artist's profile)
         MediaDetailAPICalls.UserInfoAPICalls.getArtistBasicInfo(mediaDetailVM: mediaDetailVM)
-
         MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.track, mediaDetailVM: mediaDetailVM, itemID: mediaDetailVM.mainItem!.id)
+      }
+      .onDisappear {
+        // When TrackDetailScreen is closed, show the bottomMediaPlayer
+        Utility.showOrHideMediaPlayer(shouldShowMediaPlayer: true, mediaDetailVM: mediaDetailVM)
       }
     }
   }

@@ -21,19 +21,7 @@ struct SmallTopSection: View {
         .padding(.vertical, 3)
         .padding(.horizontal, -5)
         .onTapGesture {
-          switch mediaDetailVM.detailScreenOrigin {
-          case .home(let homeVM):
-            homeVM.goToPreviousPage()
-            homeVM.mainVM.showBottomMediaPlayer = true
-          case .search(let searchVM):
-            searchVM.goToPreviousPage()
-            searchVM.mainVM.showBottomMediaPlayer = true
-          case .myLibrary(let myLibraryVM):
-            myLibraryVM.goToPreviousPage()
-            myLibraryVM.mainVM.showBottomMediaPlayer = true
-          case .none:
-            fatalError("Back button was clicked, but there's no known page origin.")
-          }
+          Utility.goToPreviousPage(mediaDetailVM: mediaDetailVM)
         }
       Spacer()
       VStack {

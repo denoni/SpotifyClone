@@ -148,7 +148,9 @@ struct Utility {
 
 
 
-  // MARK: - changeSubView of a viewModel
+  // MARK: - Navigation helper functions
+
+  // MARK: changeSubpage of a ViewModel
   static func changeSubpage(to destinySubpage: MediaDetailViewModel.BasicDetailSubpages,
                             mediaDetailVM: MediaDetailViewModel,
                             withData data: SpotifyModel.MediaItem) {
@@ -197,6 +199,34 @@ struct Utility {
       myLibraryVM.changeSubpageTo(myLibraryVMDestinySubpage,
                                   mediaDetailVM: mediaDetailVM,
                                   withData: data)
+    default:
+      fatalError("Missing detail screen origin.")
+    }
+  }
+
+  // MARK: goToPreviousPage of a ViewModel
+  static func goToPreviousPage(mediaDetailVM: MediaDetailViewModel) {
+    switch mediaDetailVM.detailScreenOrigin {
+    case .home(let homeVM):
+      homeVM.goToPreviousPage()
+    case .search(let searchVM):
+      searchVM.goToPreviousPage()
+    case .myLibrary(let myLibraryVM):
+      myLibraryVM.goToPreviousPage()
+    default:
+      fatalError("Missing detail screen origin.")
+    }
+  }
+
+  // MARK: Show and hide MediaPlayer
+  static func showOrHideMediaPlayer(shouldShowMediaPlayer: Bool, mediaDetailVM: MediaDetailViewModel) {
+    switch mediaDetailVM.detailScreenOrigin {
+    case .home(let homeVM):
+      homeVM.mainVM.showBottomMediaPlayer = shouldShowMediaPlayer
+    case .search(let searchVM):
+      searchVM.mainVM.showBottomMediaPlayer = shouldShowMediaPlayer
+    case .myLibrary(let myLibraryVM):
+      myLibraryVM.mainVM.showBottomMediaPlayer = shouldShowMediaPlayer
     default:
       fatalError("Missing detail screen origin.")
     }
