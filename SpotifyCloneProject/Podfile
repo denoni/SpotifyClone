@@ -6,6 +6,7 @@ target 'SpotifyClone' do
 
   pod 'Alamofire', '~> 5.4'
   pod 'Introspect'
+  pod 'SwiftLint'
 
   target 'SpotifyCloneTests' do
     inherit! :search_paths
