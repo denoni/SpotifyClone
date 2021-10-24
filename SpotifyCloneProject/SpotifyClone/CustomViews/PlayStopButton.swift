@@ -21,12 +21,11 @@ struct PlayStopButton: View {
 
       // The play/stop/buffering icon
       ZStack(alignment: .center) {
-        if audioManager.state == .buffering {
+        if audioManager.isBuffering && audioManager.lastItemPlayedID == media.id {
           ProgressView()
             .scaledToFit()
         } else {
-          if audioManager.showPauseButton
-              && audioManager.lastItemPlayedID == media.id {
+          if audioManager.showPauseButton && audioManager.lastItemPlayedID == media.id {
             Image("stop")
               .resizeToFit()
               .onTapGesture {
@@ -37,9 +36,13 @@ struct PlayStopButton: View {
               .resizeToFit()
               .padding(.leading, 3)
               .onTapGesture {
+
+                // set to true just to eliminate the small delay of the timer that checks if isBuffering
+                audioManager.isBuffering = true
+                audioManager.checkIfIsBuffering()
+
                 if media.previewURL.isEmpty {
-                  audioManager.playWithItunes(forItem: media,
-                                              canPlayMoreThanOneAudio: true)
+                  audioManager.playWithItunes(forItem: media, canPlayMoreThanOneAudio: true)
                 } else {
                   audioManager.pause()
                   audioManager.play(media.previewURL, audioID: media.id)
@@ -49,6 +52,12 @@ struct PlayStopButton: View {
         }
       }
       .frame(width: 25, height: 25)
+      .onReceive(audioManager.bufferingCheckerTimer!) { _ in
+        audioManager.checkIfIsBuffering()
+      }
+      .onDisappear {
+        audioManager.stopObservingForBufferingState()
+      }
     }
     .frame(width: size, height: size, alignment: .center)
   }

@@ -28,23 +28,30 @@ class RemoteAudio: ObservableObject {
   @Published private(set) var lastItemPlayedID = ""
   @Published private(set) var showPauseButton = false
 
+  // Used to check buffering. This is a workaround for cases where the `RemoteAudio.state` doesn't work
+  @Published var isBuffering = false
+  private(set) var bufferingCheckerTimer: Publishers.Autoconnect<Timer.TimerPublisher>?
+
   init() {
     player = AVPlayer()
     timeObserver = PlayerTimeObserver(player: player)
     durationObserver = PlayerDurationObserver(player: player)
     itemObserver = PlayerItemObserver(player: player)
+    isBuffering = (player.timeControlStatus == .waitingToPlayAtSpecifiedRate)
+
+    startObservingForBufferingState()
   }
 
   func play(_ audioURL: String, audioID: String) {
-      if !showPauseButton && lastPlayedURL != audioURL {
-        let playerItem = AVPlayerItem(url: URL(string: audioURL)!)
-        player.replaceCurrentItem(with: playerItem)
-      }
+    if !showPauseButton && lastPlayedURL != audioURL {
+      let playerItem = AVPlayerItem(url: URL(string: audioURL)!)
+      player.replaceCurrentItem(with: playerItem)
+    }
 
-      player.playImmediately(atRate: currentRate)
-      lastPlayedURL = audioURL
-      lastItemPlayedID = audioID
-      showPauseButton = true
+    player.playImmediately(atRate: currentRate)
+    lastPlayedURL = audioURL
+    lastItemPlayedID = audioID
+    showPauseButton = true
   }
 
   func pause() {
@@ -91,6 +98,18 @@ class RemoteAudio: ObservableObject {
     }
 
     refreshPlayerCasePaused()
+  }
+
+  func checkIfIsBuffering() {
+    isBuffering = (player.timeControlStatus == .waitingToPlayAtSpecifiedRate)
+  }
+
+  func startObservingForBufferingState() {
+    bufferingCheckerTimer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+  }
+
+  func stopObservingForBufferingState() {
+    bufferingCheckerTimer!.upstream.connect().cancel()
   }
 
   private func changeCurrentTime(by time: Double) {
