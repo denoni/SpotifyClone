@@ -69,7 +69,7 @@ I hope you enjoy the app. Feel free to hit me up! <br>
 - Controls the state of HomeScreen
 
 #### Search
-- *`SearchDetailViewModel`*: Contacts Service(`/SearchPageAPICalls`) to get response data(based on what the user searched) from the API ¹ 
+- *`ActiveSearchViewModel`*: Contacts Service(`/SearchPageAPICalls`) to get response data(based on what the user searched) from the API ¹ 
 - Contacts Service(`/SearchPageAPICalls`) to get media data from API ²
 - Controls SearchSubpages(activeSearching, playlistDetail, trackDetail, etc…)
 - Controls the state of DetailScreen
