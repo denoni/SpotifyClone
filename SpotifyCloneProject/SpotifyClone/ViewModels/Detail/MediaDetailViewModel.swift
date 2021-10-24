@@ -83,8 +83,12 @@ class MediaDetailViewModel: ObservableObject {
     MediaDetailAPICalls.EpisodeAPICalls.getEpisodeDetails(mediaDetailVM: self)
   }
 
-  func getUserLikedFollowedMedia() {
+  func getUserLikedSongsScreenData() {
     MediaDetailAPICalls.UserLikedFollowedMediaAPICalls.getLikedSongs(mediaDetailVM: self)
+  }
+
+  func getUserSavedEpisodesScreenData() {
+    MediaDetailAPICalls.UserLikedFollowedMediaAPICalls.getUserSavedEpisodes(mediaDetailVM: self)
   }
 
 
@@ -103,7 +107,6 @@ class MediaDetailViewModel: ObservableObject {
     let mediasWithinTheLimit = noDuplicateMedias.count >= limit ? Array(noDuplicateMedias.prefix(limit)) : noDuplicateMedias
 
     if loadMoreEnabled {
-      print("AAAA")
       mediaCollection[section]! += noDuplicateMedias
     } else {
       mediaCollection[section] = mediasWithinTheLimit

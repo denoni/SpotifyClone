@@ -154,6 +154,15 @@ struct MediaDetailAPICalls {
         mediaDetailVM.trimAndCommunicateResult(medias: tracks, section: .userLikedFollowedMedia(.userLikedSongs), loadMoreEnabled: true)
       }
     }
+
+    static func getUserSavedEpisodes(mediaDetailVM: MediaDetailViewModel) {
+      let offset = mediaDetailVM.getNumberOfLoadedItems(for: .userLikedFollowedMedia(.userSavedEpisodes))
+      mediaDetailVM.increaseNumberOfLoadedItems(for: .userLikedFollowedMedia(.userSavedEpisodes), by: 10)
+
+      mediaDetailVM.api.episodeAPI.getEpisode(using: .userSavedEpisodes, with: mediaDetailVM.accessToken!, limit: 10, offset: offset) { episodes in
+        mediaDetailVM.trimAndCommunicateResult(medias: episodes, section: .userLikedFollowedMedia(.userSavedEpisodes), loadMoreEnabled: true)
+      }
+    }
   }
 
 }

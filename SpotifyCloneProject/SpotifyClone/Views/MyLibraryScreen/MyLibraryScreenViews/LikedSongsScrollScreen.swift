@@ -57,7 +57,7 @@ struct LikedSongsDetailContent: View {
           ProgressView()
             .withSpotifyStyle(useDiscreetColors: true)
             .onAppear {
-              mediaDetailVM.getUserLikedFollowedMedia()
+              mediaDetailVM.getUserLikedSongsScreenData()
             }
         }.frame(maxWidth: .infinity, alignment: .center)
         Spacer()

@@ -20,8 +20,8 @@ class MyLibraryViewModel: ObservableObject {
     case none
     case transitionScreen
 
-    case tracksPreview
-    case episodesPreview
+    case likedSongs
+    case yourEpisodes
 
     case playlistDetail
     case trackDetail

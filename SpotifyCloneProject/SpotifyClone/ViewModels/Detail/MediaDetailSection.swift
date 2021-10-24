@@ -44,5 +44,6 @@ enum MediaDetailSection: Hashable {
 
   enum UserLikedFollowedMedia: CaseIterable, MediaDetailSectionsProtocol {
     case userLikedSongs
+    case userSavedEpisodes
   }
 }

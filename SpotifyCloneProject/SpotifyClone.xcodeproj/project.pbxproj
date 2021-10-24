@@ -19,6 +19,8 @@
 		C016E61527038BEF00EFF870 /* SmallMediaCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E61427038BEF00EFF870 /* SmallMediaCover.swift */; };
 		C016E61727038FA500EFF870 /* FollowAndThreeDotsIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E61627038FA500EFF870 /* FollowAndThreeDotsIcons.swift */; };
 		C016E6192703949500EFF870 /* ShowEpisodesScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E6182703949500EFF870 /* ShowEpisodesScrollView.swift */; };
+		C02188CE2725EB740038203C /* YourEpisodesScrollScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02188CD2725EB740038203C /* YourEpisodesScrollScreen.swift */; };
+		C02188D02725ECE60038203C /* SavedEpisodeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02188CF2725ECE60038203C /* SavedEpisodeResponse.swift */; };
 		C03F968D270F6836005FBC1F /* TopSafeAreaSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03F968C270F6836005FBC1F /* TopSafeAreaSize.swift */; };
 		C03F968F270FBAEA005FBC1F /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03F968E270FBAEA005FBC1F /* Utility.swift */; };
 		C03F9691270FC090005FBC1F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03F9690270FC090005FBC1F /* Constants.swift */; };
@@ -184,6 +186,8 @@
 		C016E61427038BEF00EFF870 /* SmallMediaCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallMediaCover.swift; sourceTree = "<group>"; };
 		C016E61627038FA500EFF870 /* FollowAndThreeDotsIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowAndThreeDotsIcons.swift; sourceTree = "<group>"; };
 		C016E6182703949500EFF870 /* ShowEpisodesScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowEpisodesScrollView.swift; sourceTree = "<group>"; };
+		C02188CD2725EB740038203C /* YourEpisodesScrollScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourEpisodesScrollScreen.swift; sourceTree = "<group>"; };
+		C02188CF2725ECE60038203C /* SavedEpisodeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedEpisodeResponse.swift; sourceTree = "<group>"; };
 		C03F968C270F6836005FBC1F /* TopSafeAreaSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSafeAreaSize.swift; sourceTree = "<group>"; };
 		C03F968E270FBAEA005FBC1F /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		C03F9690270FC090005FBC1F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -861,6 +865,7 @@
 				C0FB4FE127207A2700E61982 /* FollowedArtistResponse.swift */,
 				C097735127177B2600F319D1 /* CurrentUserInfoResponse.swift */,
 				C08724DE2709405F00E2DDB0 /* EpisodeResponse.swift */,
+				C02188CF2725ECE60038203C /* SavedEpisodeResponse.swift */,
 				C0F8199826FE4F79000F5FEE /* TrackResponseType.swift */,
 				C0F8199026FE4E57000F5FEE /* ShowResponseType.swift */,
 				C0FB4FEA272088FF00E61982 /* FollowedShowResponse.swift */,
@@ -902,6 +907,7 @@
 				C0FB4FE4272080B800E61982 /* MyLibraryTopBar.swift */,
 				C0FB4FE62720811E00E61982 /* MyLibraryItemsScrollView.swift */,
 				C0FB4FE82720852300E61982 /* MyLibraryItemTypes.swift */,
+				C02188CD2725EB740038203C /* YourEpisodesScrollScreen.swift */,
 			);
 			path = MyLibraryScreenViews;
 			sourceTree = "<group>";
@@ -1214,6 +1220,7 @@
 				C03F968F270FBAEA005FBC1F /* Utility.swift in Sources */,
 				C089875D27000DE800F9BF70 /* TrackDetailScreen.swift in Sources */,
 				C0F8199B26FE4F9B000F5FEE /* ArtistResponseType.swift in Sources */,
+				C02188CE2725EB740038203C /* YourEpisodesScrollScreen.swift in Sources */,
 				C081873926EFBABF00AB19E9 /* AuthViewModel.swift in Sources */,
 				C084268426F11CF7000ACAEE /* YourSensitiveData.swift in Sources */,
 				C082720B270646090086E34F /* MediaDetailsPageAPICalls.swift in Sources */,
@@ -1278,6 +1285,7 @@
 				C0F8199326FE4E7D000F5FEE /* AlbumResponseType.swift in Sources */,
 				C087873226FCCCA70013924E /* PlaylistDetailScreen.swift in Sources */,
 				C016E6092703464100EFF870 /* AlbumInfo.swift in Sources */,
+				C02188D02725ECE60038203C /* SavedEpisodeResponse.swift in Sources */,
 				C09FD8FF26E03D6E0069CEAE /* BottomBar.swift in Sources */,
 				C016E610270385E300EFF870 /* ShowsDetailScreen.swift in Sources */,
 				C08861B1270BFB5900D6AD89 /* String+RemoveSpecialChars.swift in Sources */,

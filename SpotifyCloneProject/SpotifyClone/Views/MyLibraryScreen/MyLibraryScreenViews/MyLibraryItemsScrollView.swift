@@ -37,10 +37,10 @@ struct MyLibraryItemsScrollView: View {
           .onTapGesture {
 
             guard media.id != "liked-songs" else {
-              return myLibraryVM.changeSubpageTo(.tracksPreview, mediaDetailVM: mediaDetailVM, withData: media)
+              return myLibraryVM.changeSubpageTo(.likedSongs, mediaDetailVM: mediaDetailVM, withData: media)
             }
             guard media.id != "your-episodes" else {
-              return myLibraryVM.changeSubpageTo(.episodesPreview, mediaDetailVM: mediaDetailVM, withData: media)
+              return myLibraryVM.changeSubpageTo(.yourEpisodes, mediaDetailVM: mediaDetailVM, withData: media)
             }
             myLibraryVM.changeSubpageTo(getDetailScreen(for: media.mediaType), mediaDetailVM: mediaDetailVM, withData: media)
           }
