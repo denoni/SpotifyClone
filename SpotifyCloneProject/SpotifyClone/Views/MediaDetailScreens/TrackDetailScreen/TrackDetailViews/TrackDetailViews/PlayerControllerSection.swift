@@ -24,37 +24,16 @@ struct PlayerControllerSection: View {
         .padding(.bottom, isSmallDisplay ? -5 : 0)
 
       HStack {
-        Rectangle()
-          .fill(Color.clear)
-          .overlay(Text(audioManager.currentRate)
-                    .font(.avenir(.medium, size: isSmallDisplay ? 15 : 18))
-                    .fixedSize())
-          .frame(width: isSmallDisplay ? 20 : 25)
-          .onTapGesture {
-            audioManager.changePlayingRate(audioManager: audioManager)
-          }
+        PlayingRateButton(audioManager: audioManager, isSmallDisplay: isSmallDisplay)
         Spacer()
-        Image("previous")
-          .resizeToFit()
-          .frame(width: isSmallDisplay ? 25 : 30)
-          .onTapGesture {
-            audioManager.backwardFiveSeconds()
-          }
+        BackwardButton(audioManager: audioManager, isSmallDisplay: isSmallDisplay)
         Spacer()
-        PlayStopButton(audioManager: audioManager,
-                       isSmallDisplay: isSmallDisplay)
+        PlayStopButton(audioManager: audioManager, isSmallDisplay: isSmallDisplay)
           .fixedSize()
         Spacer()
-        Image("next")
-          .resizeToFit()
-          .frame(width: isSmallDisplay ? 25 : 30)
-          .onTapGesture {
-            audioManager.forwardFiveSeconds()
-          }
+        ForwardButton(audioManager: audioManager, isSmallDisplay: isSmallDisplay)
         Spacer()
-        HeartButton(mediaDetailVM: mediaDetailVM,
-                    itemID: mediaDetailVM.mainItem!.id,
-                    itemType: .track)
+        HeartButton(mediaDetailVM: mediaDetailVM, itemID: mediaDetailVM.mainItem!.id, itemType: .track)
           .frame(width: isSmallDisplay ? 20 : 25)
       }
     }
@@ -65,41 +44,95 @@ struct PlayerControllerSection: View {
     }
   }
 
+  private struct PlayingRateButton: View {
+    @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
+    @StateObject var audioManager: RemoteAudio
+    var isSmallDisplay: Bool = false
+
+    var body: some View {
+      Button(action: { audioManager.changePlayingRate(audioManager: audioManager) }) {
+        Rectangle()
+          .fill(Color.clear)
+          .overlay(Text(audioManager.currentRateString)
+                    .font(.avenir(.medium, size: isSmallDisplay ? 15 : 18))
+                    .fixedSize())
+          .frame(width: isSmallDisplay ? 20 : 25)
+      }
+      .buttonStyle(PlainButtonStyle())
+      .disabled(audioManager.state != .active)
+    }
+  }
+
+  private struct ForwardButton: View {
+    @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
+    @StateObject var audioManager: RemoteAudio
+    var isSmallDisplay: Bool = false
+
+    var body: some View {
+      Button(action: { audioManager.forwardFiveSeconds() }) {
+        Image("next")
+          .resizeToFit()
+          .frame(width: isSmallDisplay ? 25 : 30)
+      }
+      .buttonStyle(PlainButtonStyle())
+      .disabled(audioManager.state != .active)
+    }
+  }
+
+  private struct BackwardButton: View {
+    @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
+    @StateObject var audioManager: RemoteAudio
+    var isSmallDisplay: Bool = false
+
+    var body: some View {
+      Button(action: { audioManager.backwardFiveSeconds() }) {
+        Image("previous")
+          .resizeToFit()
+          .frame(width: isSmallDisplay ? 25 : 30)
+      }
+      .buttonStyle(PlainButtonStyle())
+      .disabled(audioManager.state != .active)
+    }
+  }
+
   private struct PlayStopButton: View {
     @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
     @StateObject var audioManager: RemoteAudio
     var isSmallDisplay: Bool = false
 
     var body: some View {
-      ZStack {
-        if audioManager.showPauseButton && !audioManager.lastPlayedURL.isEmpty  {
-          Image("circle-stop")
-            .resizeToFit()
-            .onTapGesture {
-              audioManager.pause()
-            }
+      Button {
+        if audioManager.showPauseButton && !audioManager.lastPlayedURL.isEmpty {
+          audioManager.pause()
         } else {
-          Image("circle-play")
-            .resizeToFit()
-            .onTapGesture {
-              if mediaDetailVM.mainItem!.previewURL.isEmpty {
-                audioManager.playWithItunes(forItem: mediaDetailVM.mainItem!, canPlayMoreThanOneAudio: false)
-              } else {
-                audioManager.play(mediaDetailVM.mainItem!.previewURL, audioID: mediaDetailVM.mainItem!.id)
-              }
-            }
-        }
-        if audioManager.state == .buffering {
-          ZStack {
-            Circle()
-            ProgressView()
-              .progressViewStyle(CircularProgressViewStyle(tint: Color.black))
-              .padding(1)
+          if mediaDetailVM.mainItem!.previewURL.isEmpty {
+            audioManager.playWithItunes(forItem: mediaDetailVM.mainItem!, canPlayMoreThanOneAudio: false)
+          } else {
+            audioManager.play(mediaDetailVM.mainItem!.previewURL, audioID: mediaDetailVM.mainItem!.id)
           }
-          .scaledToFit()
         }
+      } label: {
+        ZStack {
+          if audioManager.showPauseButton && !audioManager.lastPlayedURL.isEmpty {
+            Image("circle-stop")
+              .resizeToFit()
+          } else {
+            Image("circle-play")
+              .resizeToFit()
+          }
+          if audioManager.state == .buffering {
+            ZStack {
+              Circle()
+              ProgressView()
+                .progressViewStyle(CircularProgressViewStyle(tint: Color.black))
+                .padding(1)
+            }
+            .scaledToFit()
+          }
+        }
+        .frame(width: isSmallDisplay ? 60 : 70)
       }
-      .frame(width: isSmallDisplay ? 60 : 70)
+      .buttonStyle(PlainButtonStyle())
     }
   }
 }

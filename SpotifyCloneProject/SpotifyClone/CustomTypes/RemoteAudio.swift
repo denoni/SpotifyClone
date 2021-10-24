@@ -19,7 +19,9 @@ class RemoteAudio: ObservableObject {
   let itemObserver: PlayerItemObserver
   @Published var currentTime: TimeInterval = 0
   @Published var currentDuration: TimeInterval = 0
-  @Published private(set) var currentRate: String = "1x"
+  @Published private(set) var currentRateString: String = "1x"
+  // We need this because the player resets it's own rate tracker when user pauses, skips 5sec, etc...
+  @Published private var currentRate: Float = 1.0
   @Published var state = PlaybackState.waitingForSelection
 
   @Published private(set) var lastPlayedURL = ""
@@ -39,7 +41,7 @@ class RemoteAudio: ObservableObject {
         player.replaceCurrentItem(with: playerItem)
       }
 
-      player.play()
+      player.playImmediately(atRate: currentRate)
       lastPlayedURL = audioURL
       lastItemPlayedID = audioID
       showPauseButton = true
@@ -51,21 +53,25 @@ class RemoteAudio: ObservableObject {
   }
 
   func changePlayingRate(audioManager: RemoteAudio) {
-    if audioManager.state == .active {
-      if player.rate == 0.5 {
-        player.rate = 1.0
-        currentRate = "1x"
-      } else if player.rate == 1.0 {
-        player.rate = 1.5
-        currentRate = "1.5x"
-      } else if player.rate == 1.5 {
-        player.rate = 2.0
-        currentRate = "2x"
-      } else if player.rate == 2.0 {
-        player.rate = 0.5
-        currentRate = "0.5x"
-      }
+    if currentRate == 0.5 {
+      player.rate = 1.0
+      currentRate = 1.0
+      currentRateString = "1x"
+    } else if currentRate == 1.0 {
+      player.rate = 1.5
+      currentRate = 1.5
+      currentRateString = "1.5x"
+    } else if currentRate == 1.5 {
+      player.rate = 2.0
+      currentRate = 2.0
+      currentRateString = "2x"
+    } else if currentRate == 2.0 {
+      player.rate = 0.5
+      currentRate = 0.5
+      currentRateString = "0.5x"
     }
+
+    refreshPlayerCasePaused()
   }
 
   func forwardFiveSeconds() {
@@ -84,11 +90,7 @@ class RemoteAudio: ObservableObject {
       self.state = .active
     }
 
-    // Play and stop stop immediately to refresh the view if `isPaused`.
-
-    self.player.play()
-    self.player.pause()
-    self.showPauseButton = false
+    refreshPlayerCasePaused()
   }
 
   private func changeCurrentTime(by time: Double) {
@@ -114,10 +116,13 @@ class RemoteAudio: ObservableObject {
       self.state = .active
     }
 
-    // Play and stop stop immediately to refresh the view if `isPaused`.
+    refreshPlayerCasePaused()
+  }
 
+  private func refreshPlayerCasePaused() {
+    // Play and stop stop immediately to refresh the view if `isPaused`.
     self.player.pause()
-    self.player.play()
+    player.playImmediately(atRate: currentRate)
     self.showPauseButton = true
   }
 
