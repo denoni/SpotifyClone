@@ -18,7 +18,7 @@ struct MediaTitle: View {
         .font(.avenir(.black, size: useSmallerFont ? Constants.fontMedium : Constants.fontLarge))
         .foregroundColor(.white)
         .lineLimit(lineLimit)
-      
+        .fixedSize(horizontal: false, vertical: true)
     }
   }
 }

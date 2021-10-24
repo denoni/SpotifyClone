@@ -61,6 +61,7 @@ fileprivate struct EpisodeDetailContent: View {
         Text(mediaDetailVM.mainItem!.title)
           .font(.avenir(.black, size: Constants.fontXLarge))
           .lineLimit(4)
+          .fixedSize(horizontal: false, vertical: true)
         Spacer()
       }
       .padding(.top, topSafeAreaSize)
