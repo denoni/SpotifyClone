@@ -5,7 +5,8 @@
 //  Created by Gabriel on 10/20/21.
 //
 
-import Foundation
+import SwiftUI
+// need to import SwiftUI because of the CGFloat(currentScrollPosition)
 
 class MyLibraryViewModel: ObservableObject {
   var api = MyLibraryPageAPICalls()
@@ -15,6 +16,9 @@ class MyLibraryViewModel: ObservableObject {
   @Published var currentSubPage: MyLibrarySubpage = .none
   // Subpage navigation history
   @Published var pageHistory = [(subPage: MyLibrarySubpage, data: SpotifyModel.MediaItem, mediaDetailVM: MediaDetailViewModel)]()
+  // Filter options that the user can tap to show only shows, playlists, etc...
+  @Published var selectedMediaTypeFilter: SpotifyModel.MediaTypes? = nil
+  @Published var currentScrollPosition: CGFloat = 0
 
   enum MyLibrarySubpage {
     case none

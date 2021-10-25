@@ -15,14 +15,15 @@ struct MyLibraryItemsScrollView: View {
   init(medias: [SpotifyModel.MediaItem]) {
     var mediasWithPinnedItems: [SpotifyModel.MediaItem]
     mediasWithPinnedItems = [FixedSectionsItems.likedSongs, FixedSectionsItems.yourEpisodes]
-    mediasWithPinnedItems += medias
+    mediasWithPinnedItems += medias.shuffled()
     self.medias = mediasWithPinnedItems
   }
 
   var body: some View {
-    ScrollView(showsIndicators: false) {
-      VStack {
-        ForEach(medias) { media in
+    VStack {
+      Group {
+        let filteredMedias: [SpotifyModel.MediaItem] = myLibraryVM.selectedMediaTypeFilter != nil ? medias.filter { $0.mediaType == myLibraryVM.selectedMediaTypeFilter! } : medias
+        ForEach(filteredMedias) { media in
           Group {
             if media.mediaType == .artist {
               MyLibraryArtistMediaItem(name: media.title, imageURL: media.imageURL)
@@ -35,7 +36,6 @@ struct MyLibraryItemsScrollView: View {
           .frame(height: 80)
           .padding(.bottom, 10)
           .onTapGesture {
-
             guard media.id != "liked-songs" else {
               return myLibraryVM.changeSubpageTo(.likedSongs, mediaDetailVM: mediaDetailVM, withData: media)
             }
@@ -46,11 +46,10 @@ struct MyLibraryItemsScrollView: View {
           }
         }
       }
-      .frame(maxWidth: .infinity, maxHeight: .infinity)
-      .padding(.bottom, Constants.paddingBottomSection)
-      .padding(.top, 60 + Constants.paddingStandard)
     }
-    .padding(.horizontal, Constants.paddingStandard)
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .padding(.bottom, Constants.paddingBottomSection)
+    .padding(.top, 110 + Constants.paddingStandard)
   }
 
   

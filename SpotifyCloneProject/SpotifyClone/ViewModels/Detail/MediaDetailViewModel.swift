@@ -132,7 +132,6 @@ class MediaDetailViewModel: ObservableObject {
                            inRelationTo medias: [SpotifyModel.MediaItem]) -> Bool {
     if medias.count > 5 {
       if media.id == medias[medias.count - 4].id {
-        print("true")
         return true
       }
     }

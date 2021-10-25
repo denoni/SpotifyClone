@@ -62,10 +62,16 @@ struct MyLibraryScreen: View {
                 myLibraryVM.fetchMyLibraryData()
               }
           } else {
-            MyLibraryItemsScrollView(medias: getMyLibraryMedias())
+            ReadableScrollView(currentPosition: $myLibraryVM.currentScrollPosition) {
+                MyLibraryItemsScrollView(medias: getMyLibraryMedias())
+            }
+            .padding(.horizontal, Constants.paddingStandard)
           }
 
-          MyLibraryTopBar()
+          VStack {
+            MyLibraryTopBar()
+            Spacer()
+          }
         }
       }
     }
