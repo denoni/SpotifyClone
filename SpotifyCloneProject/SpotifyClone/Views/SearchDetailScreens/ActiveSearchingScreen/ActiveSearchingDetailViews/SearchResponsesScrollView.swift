@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct SearchResponsesScrollView: View {
   @EnvironmentObject var searchVM: SearchViewModel
   @EnvironmentObject var activeSearchVM: ActiveSearchViewModel
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
+  @State private var scrollPosition: CGFloat = 0
 
   var medias: [SpotifyModel.MediaItem] {
     return activeSearchVM.mediaResponses
@@ -34,23 +36,30 @@ struct SearchResponsesScrollView: View {
   }
 
   var body: some View {
-    ScrollView(showsIndicators: false) {
-      LazyVStack() {
-        ForEach(medias) { media in
-          SearchResponseItem(imageURL: media.imageURL,
-                             title: media.title,
-                             author: media.authorName.joined(separator: " ,"),
-                             mediaType: media.mediaType)
-            .onTapGesture {
-              searchVM.changeSubpageTo(getMediaType(for: media), subPageType: .detail(mediaDetailVM: mediaDetailVM, data: media))
-            }
+    ZStack {
+      Color.clear
+      ReadableScrollView(currentPosition: $scrollPosition) {
+        LazyVStack() {
+          ForEach(medias) { media in
+            SearchResponseItem(imageURL: media.imageURL,
+                               title: media.title,
+                               author: media.authorName.joined(separator: " ,"),
+                               mediaType: media.mediaType)
+              .onTapGesture {
+                searchVM.changeSubpageTo(getMediaType(for: media), subPageType: .detail(mediaDetailVM: mediaDetailVM, data: media))
+              }
+          }
+        }
+        .padding(.bottom, Constants.paddingBottomSection)
+        .padding(.top, Constants.paddingLarge)
+        .padding(.top, Constants.paddingStandard)
+        // Closes keyboard when user scrolls
+        .onChange(of: scrollPosition) { _ in
+          UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
       }
-      .padding(.bottom, Constants.paddingBottomSection)
-      .padding(.top, Constants.paddingLarge)
-      .padding(.top, Constants.paddingStandard)
     }
-    .disabledBouncing()
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
   }
   
 }
