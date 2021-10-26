@@ -25,6 +25,8 @@ struct BottomBar: View {
         BottomNavigationBar(mainVM: mainVM)
       }
     }
+    // So it doesn't go up when keyboard is open
+    .ignoresSafeArea(.keyboard, edges: .bottom)
   }
 }
 
