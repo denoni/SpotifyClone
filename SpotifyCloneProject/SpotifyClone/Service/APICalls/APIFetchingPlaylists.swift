@@ -60,7 +60,9 @@ class APIFetchingPlaylists {
       let numberOfPlaylists = data.playlists.count
 
       guard numberOfPlaylists != 0 else {
-        fatalError("The API response was corrects but empty. We don't have a way to handle this yet.")
+        completionHandler(trackItems)
+        print("The API response was corrects but empty. We'll just return []")
+        return
       }
 
       for playlistIndex in 0 ..< numberOfPlaylists {

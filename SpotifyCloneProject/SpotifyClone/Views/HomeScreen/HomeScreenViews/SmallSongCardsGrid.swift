@@ -21,7 +21,11 @@ struct SmallSongCardsGrid: View {
           .resizeToFit()
           .padding(5)
       }.frame(height: 30)
-      buildGrid(medias: medias)
+      if !medias.isEmpty {
+        buildGrid(medias: medias)
+      } else {
+        EmptyView()
+      }
     }
   }
 

@@ -42,14 +42,14 @@ class APIFetchingShows {
             fatalError("Error receiving tracks from API.")
           }
 
+          var podcastItems = [SpotifyModel.MediaItem]()
           let numberOfItems = data.shows.items.count
 
-
           guard numberOfItems != 0 else {
-            fatalError("The API response was corrects but empty. We don't have a way to handle this yet.")
+            completionHandler(podcastItems)
+            print("The API response was corrects but empty. We'll just return []")
+            return
           }
-
-          var podcastItems = [SpotifyModel.MediaItem]()
 
           for showIndex in 0 ..< numberOfItems {
             let show = data.shows.items[showIndex]
@@ -75,14 +75,14 @@ class APIFetchingShows {
             fatalError("Error receiving tracks from API.")
           }
 
+          var podcastItems = [SpotifyModel.MediaItem]()
           let numberOfItems = data.items.count
 
-
           guard numberOfItems != 0 else {
-            fatalError("The API response was corrects but empty. We don't have a way to handle this yet.")
+            completionHandler(podcastItems)
+            print("The API response was corrects but empty. We'll just return []")
+            return
           }
-
-          var podcastItems = [SpotifyModel.MediaItem]()
 
           for showIndex in 0 ..< numberOfItems {
             let show = data.items[showIndex].show

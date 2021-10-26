@@ -25,7 +25,11 @@ class MainViewModelAPICalls {
       .responseDecodable(of: CurrentUserInfoResponse.self) { response in
 
         guard let data = response.value else {
-          fatalError("Error receiving tracks from API.")
+          if response.response!.statusCode == 403 {
+            fatalError("You didn't add your user to the dashboard in 'https://developer.spotify.com/dashboard'. Check README('https://github.com/gabrieldenoni/SpotifyClone') to know how to set up the app properly.")
+          } else {
+            fatalError("Error receiving tracks from API.")
+          }
         }
 
         let displayName = data.display_name

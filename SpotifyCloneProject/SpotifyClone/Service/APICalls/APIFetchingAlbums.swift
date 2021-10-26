@@ -56,10 +56,10 @@ class APIFetchingAlbums {
       let numberOfItems = data.albums.count
 
       guard numberOfItems != 0 else {
-        fatalError("The API response was corrects but empty. We don't have a way to handle this yet.")
+        completionHandler(albumItems)
+        print("The API response was corrects but empty. We'll just return []")
+        return
       }
-
-
 
       for albumIndex in 0 ..< numberOfItems {
         let album = data.albums[albumIndex]

@@ -13,7 +13,7 @@ struct RecommendedArtistScrollView: View {
   var medias: [SpotifyModel.MediaItem]
   var sectionTitle: String
 
-  private var artist: SpotifyModel.MediaItem { medias[0] }
+  private var artist: SpotifyModel.MediaItem? { medias.isEmpty ? nil : medias[0] }
 
   private func getArtistSongs() -> [SpotifyModel.MediaItem] {
     var mediasWithArtist = medias
@@ -26,30 +26,34 @@ struct RecommendedArtistScrollView: View {
 
 
   var body: some View {
-    VStack(spacing: Constants.spacingSmall) {
-      ArtistImageAndTitle(artist: artist)
+    if !medias.isEmpty {
+      VStack(spacing: Constants.spacingSmall) {
+        ArtistImageAndTitle(artist: artist!)
 
-      // Horizontal scroll view of artist's songs
-      ScrollView(.horizontal, showsIndicators: false) {
-        LazyHStack(alignment: .top,spacing: Constants.spacingLarge) {
-          ForEach(getArtistSongs()) { media in
-            BigSongItem(imageURL: media.imageURL, title: media.title, mediaType: media.mediaType)
-              .onTapGesture {
-                homeVM.changeSubpageTo(.trackDetail, mediaDetailVM: mediaDetailVM, withData: media)
-              }
-              .onAppear { homeVM.homeCachedImageURLs.append(media.imageURL) }
-              .onDisappear{
-                if homeVM.homeCachedImageURLs.count > 25 {
-                  for _ in 0..<15 {
-                    homeVM.deleteImageFromCache()
+        // Horizontal scroll view of artist's songs
+        ScrollView(.horizontal, showsIndicators: false) {
+          LazyHStack(alignment: .top,spacing: Constants.spacingLarge) {
+            ForEach(getArtistSongs()) { media in
+              BigSongItem(imageURL: media.imageURL, title: media.title, mediaType: media.mediaType)
+                .onTapGesture {
+                  homeVM.changeSubpageTo(.trackDetail, mediaDetailVM: mediaDetailVM, withData: media)
+                }
+                .onAppear { homeVM.homeCachedImageURLs.append(media.imageURL) }
+                .onDisappear{
+                  if homeVM.homeCachedImageURLs.count > 25 {
+                    for _ in 0..<15 {
+                      homeVM.deleteImageFromCache()
+                    }
                   }
                 }
-              }
+            }
           }
+          .padding(.horizontal, Constants.paddingSmall)
         }
-        .padding(.horizontal, Constants.paddingSmall)
+        .padding(.leading, 10)
       }
-      .padding(.leading, 10)
+    } else {
+      EmptyView()
     }
   }
 

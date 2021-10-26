@@ -49,7 +49,9 @@ class APIFetchingEpisodes {
 
           var episodeItems = [SpotifyModel.MediaItem]()
           let numberOfEpisodes = data.items.count
+
           guard numberOfEpisodes != 0 else {
+            completionHandler(episodeItems)
             print("The API response was corrects but empty. We'll just return []")
             return
           }
@@ -73,7 +75,9 @@ class APIFetchingEpisodes {
 
           var episodeItems = [SpotifyModel.MediaItem]()
           let numberOfEpisodes = data.items.count
+
           guard numberOfEpisodes != 0 else {
+            completionHandler(episodeItems)
             print("The API response was corrects but empty. We'll just return []")
             return
           }

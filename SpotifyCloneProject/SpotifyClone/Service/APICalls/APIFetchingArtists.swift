@@ -45,12 +45,13 @@ class APIFetchingArtists {
           }
 
           let numberOfArtists = data.items.count
+          var artists = [SpotifyModel.MediaItem]()
 
           guard numberOfArtists != 0 else {
-            fatalError("The API response was corrects but empty. We don't have a way to handle this yet.")
+            completionHandler(artists)
+            print("The API response was corrects but empty. We'll just return []")
+            return
           }
-
-          var artists = [SpotifyModel.MediaItem]()
 
           for artistIndex in 0 ..< numberOfArtists {
             let artist = data.items[artistIndex]
@@ -69,12 +70,13 @@ class APIFetchingArtists {
           }
 
           let numberOfArtists = data.artists.items.count
+          var artists = [SpotifyModel.MediaItem]()
 
           guard numberOfArtists != 0 else {
-            fatalError("The API response was corrects but empty. We don't have a way to handle this yet.")
+            completionHandler(artists)
+            print("The API response was corrects but empty. We'll just return []")
+            return
           }
-
-          var artists = [SpotifyModel.MediaItem]()
 
           for artistIndex in 0 ..< numberOfArtists {
             let artist = data.artists.items[artistIndex]

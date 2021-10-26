@@ -119,7 +119,7 @@ class HomeViewModel: ObservableObject {
       case .smallSongCards:
         api.getTrack(using: .userFavoriteTracks, with: accessToken) { tracks in
           trimAndCommunicateResult(section: section, medias: tracks)
-          setImageColorModelBasedOn(tracks[0].imageURL)
+          setImageColorModelBasedOn(tracks.isEmpty ? "" : tracks[0].imageURL)
         }
         
       // MARK: Recently Played
@@ -209,13 +209,17 @@ class HomeViewModel: ObservableObject {
         var artistID = ""
         // Get the user's most favorite artist
         api.getArtist(using: .userFavoriteArtists, with: accessToken) { artists in
-          let userMostFavoriteArtist = artists[0]
-          artistID = userMostFavoriteArtist.id
-          mediaCollection[section]!.insert(artists[0], at: 0)
-          
-          // Add the artist's top songs
-          api.getTrack(using: .topTracksFromArtist(artistID: artistID), with: accessToken) { tracks in
-            trimAndCommunicateResult(section: section, medias: tracks, loadMoreEnabled: true)
+          if artists.isEmpty == false {
+            let userMostFavoriteArtist = artists[0]
+            artistID = userMostFavoriteArtist.id
+            mediaCollection[section]!.insert(artists[0], at: 0)
+
+            // Add the artist's top songs
+            api.getTrack(using: .topTracksFromArtist(artistID: artistID), with: accessToken) { tracks in
+              trimAndCommunicateResult(section: section, medias: tracks, loadMoreEnabled: true)
+            }
+          } else {
+            trimAndCommunicateResult(section: section, medias: [SpotifyModel.MediaItem]())
           }
         }
       default:
