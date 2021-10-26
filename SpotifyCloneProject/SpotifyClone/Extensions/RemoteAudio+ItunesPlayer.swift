@@ -21,27 +21,21 @@ extension RemoteAudio {
       }
     }
 
-    var songName: String {
-      var strippedName = item.title
-      if item.title.contains("(") {
-        let firstOccurrenceIndex = strippedName.firstIndex(of: "(")!
-        let lastIndex = strippedName.endIndex
-        strippedName.removeSubrange(firstOccurrenceIndex ..< lastIndex)
-      }
-      // Use strippedName here(instead of item.title), otherwise if the first
-      // check(contains "(") return true and the second one too, it'll cause a crash.
-      if strippedName.contains("-") {
-        let firstOccurrenceIndex = strippedName.firstIndex(of: "-")!
-        let lastIndex = strippedName.endIndex
-        strippedName.removeSubrange(firstOccurrenceIndex ..< lastIndex)
-      }
-      return strippedName
+    var songAndArtistName: String {
+      // Remove everything after the first space(case it has) (e.g. Bob Marley -> Bob)
+      let strippedArtistName = checkAndRemoveEverythingAfter(unwantedCharacter: " ", in: item.authorName.first ?? "")
+
+      var strippedArtistAndSongTitle = "\(item.title) \(strippedArtistName)"
+      strippedArtistAndSongTitle = checkAndRemoveEverythingAfter(unwantedCharacter: "(", in: strippedArtistAndSongTitle)
+      strippedArtistAndSongTitle = checkAndRemoveEverythingAfter(unwantedCharacter: "-", in: strippedArtistAndSongTitle)
+
+      return strippedArtistAndSongTitle
         .removeSpecialChars
         .replacingOccurrences(of: " ", with: "+")
         .lowercased()
     }
 
-    let baseUrl = "https://itunes.apple.com/search?term=\(songName)&limit=1&entity=song"
+    let baseUrl = "https://itunes.apple.com/search?term=\(songAndArtistName)&limit=1&entity=song"
 
     AF.request(URLRequest(url: URL(string: baseUrl)!))
       .validate()
@@ -59,7 +53,6 @@ extension RemoteAudio {
 
         self.play(response.value!.results[0].previewUrl, audioID: item.id)
 
-
         print("""
 
               >>> iTunes URL:
@@ -68,7 +61,6 @@ extension RemoteAudio {
 
               """)
       }
-
   }
 
   private struct ItunesTrackResponse: Decodable {
@@ -78,4 +70,14 @@ extension RemoteAudio {
       var previewUrl: String
     }
   }
+}
+
+fileprivate func checkAndRemoveEverythingAfter(unwantedCharacter: Character, in inputString: String) -> String {
+  var strippedString = inputString
+  if strippedString.contains(unwantedCharacter) {
+    let firstOccurrenceIndex = inputString.firstIndex(of: unwantedCharacter)!
+    let lastIndex = inputString.endIndex
+    strippedString.removeSubrange(firstOccurrenceIndex ..< lastIndex)
+  }
+  return strippedString
 }
