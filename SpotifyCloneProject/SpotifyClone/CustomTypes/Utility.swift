@@ -228,7 +228,7 @@ struct Utility {
     case .myLibrary(let myLibraryVM):
       myLibraryVM.mainVM.showBottomMediaPlayer = shouldShowMediaPlayer
     default:
-      fatalError("Missing detail screen origin.")
+      break
     }
   }
 
