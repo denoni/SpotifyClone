@@ -34,22 +34,21 @@ class ActiveSearchViewModel: ObservableObject & FilterableViewModelProtocol {
       $userInputText
         .debounce(for: .seconds(0.5), scheduler: RunLoop.main)
         .sink {
-          // If the userInputText is empty, we don't search
-          if $0.isEmpty == false {
             // If we don't use this check, in case the user types,
             // lets say, 5 letters without stopping, it would
             // make 5 repeated API calls with the same search.
             if $0 != self.lastSearchedString {
-              self.api.search(for: self.getFormattedString(for: $0), accessToken: self.accessToken!) { mediaItems in
-                // Shuffled so the the responses are not separated by types
-                // (which is the way that Spotify's API originally responds).
-                self.mediaResponses = mediaItems.shuffled()
-
+              let formattedSearchInput = self.getFormattedString(for: $0)
+              if formattedSearchInput != "" {
+                self.api.search(for: formattedSearchInput, accessToken: self.accessToken!) { mediaItems in
+                  // Shuffled so the the responses are not separated by types
+                  // (which is the way that Spotify's API originally responds).
+                  self.mediaResponses = mediaItems.shuffled()
+                }
+                self.numberOfSearches += 1
+                self.lastSearchedString = $0
               }
-              self.numberOfSearches += 1
             }
-            self.lastSearchedString = $0
-          }
         }
         .store(in: &disposeBag)
     } else { print("\nREACHED SEARCH LIMIT(You can disable this in `SearchDetailViewModel`)\n") }
@@ -58,7 +57,8 @@ class ActiveSearchViewModel: ObservableObject & FilterableViewModelProtocol {
   func getFormattedString(for string: String) -> String {
     return string
       .folding(options: .diacriticInsensitive, locale: .current)
-      .replacingOccurrences(of: " ", with: "+")
+      .trimmingCharacters(in: .whitespaces) // removes only the leading and trailing whitespaces
+      .replacingOccurrences(of: " ", with: "+") // take the rest of the whitespaces and replace with "+"
       .lowercased()
   }
 }
