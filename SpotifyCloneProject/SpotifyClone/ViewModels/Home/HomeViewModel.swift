@@ -118,8 +118,20 @@ class HomeViewModel: ObservableObject {
       // MARK: Small Song Card Items
       case .smallSongCards:
         api.getTrack(using: .userFavoriteTracks, with: accessToken) { tracks in
-          trimAndCommunicateResult(section: section, medias: tracks)
-          setImageColorModelBasedOn(tracks.isEmpty ? "" : tracks[0].imageURL)
+
+          if tracks.isEmpty {
+            // If userFavoriteTracks returns empty, fetch tracks from Spotify's today top hits playlist.
+            // Otherwise, the home screen UI won't look good.
+            let todayTopHitsPlaylistID = "37i9dQZF1DXcBWIGoYBM5M"
+            api.getTrack(using: .tracksFromPlaylist(playlistID: todayTopHitsPlaylistID), with: accessToken) { topTracks in
+              trimAndCommunicateResult(section: section, medias: topTracks)
+              setImageColorModelBasedOn(topTracks[0].imageURL)
+            }
+
+          } else {
+            trimAndCommunicateResult(section: section, medias: tracks)
+            setImageColorModelBasedOn(tracks[0].imageURL)
+          }
         }
         
       // MARK: Recently Played
