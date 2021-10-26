@@ -31,7 +31,7 @@ struct ActiveSearchingScreen: View {
           .onChange(of: searchInput) { _ in
             activeSearchVM.search(for: searchInput)
           }
-        BottomBar(mainVM: MainViewModel())
+        BottomBar(mainVM: mediaDetailVM.mainVM)
       }
     }
   }

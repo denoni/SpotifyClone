@@ -12,10 +12,12 @@ struct SearchResponsesScrollView: View {
   @EnvironmentObject var searchVM: SearchViewModel
   @EnvironmentObject var activeSearchVM: ActiveSearchViewModel
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
-  @State private var scrollPosition: CGFloat = 0
 
   var medias: [SpotifyModel.MediaItem] {
-    return activeSearchVM.mediaResponses
+    guard activeSearchVM.selectedMediaTypeFilter != nil else {
+      return activeSearchVM.mediaResponses
+    }
+    return activeSearchVM.mediaResponses.filter { $0.mediaType == activeSearchVM.selectedMediaTypeFilter! }
   }
 
   func getMediaType(for media: SpotifyModel.MediaItem) -> SearchViewModel.SearchSubpage {
@@ -38,7 +40,7 @@ struct SearchResponsesScrollView: View {
   var body: some View {
     ZStack {
       Color.clear
-      ReadableScrollView(currentPosition: $scrollPosition) {
+      ReadableScrollView(currentPosition: $activeSearchVM.currentScrollPosition) {
         LazyVStack() {
           ForEach(medias) { media in
             SearchResponseItem(imageURL: media.imageURL,
@@ -50,11 +52,10 @@ struct SearchResponsesScrollView: View {
               }
           }
         }
+        .padding(.top,  100 + Constants.paddingLarge)
         .padding(.bottom, Constants.paddingBottomSection)
-        .padding(.top, Constants.paddingLarge)
-        .padding(.top, Constants.paddingStandard)
         // Closes keyboard when user scrolls
-        .onChange(of: scrollPosition) { _ in
+        .onChange(of: activeSearchVM.currentScrollPosition) { _ in
           UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
       }

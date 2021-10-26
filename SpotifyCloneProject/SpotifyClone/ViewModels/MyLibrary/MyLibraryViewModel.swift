@@ -8,7 +8,7 @@
 import SwiftUI
 // need to import SwiftUI because of the CGFloat(currentScrollPosition)
 
-class MyLibraryViewModel: ObservableObject {
+class MyLibraryViewModel: ObservableObject & FilterableViewModelProtocol {
   var api = MyLibraryPageAPICalls()
   @Published var mainVM: MainViewModel
   @Published var isLoading = [Section:Bool]()

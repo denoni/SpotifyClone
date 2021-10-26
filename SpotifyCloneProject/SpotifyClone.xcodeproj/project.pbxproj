@@ -38,6 +38,8 @@
 		C080CE242700A210003D0C11 /* BigTrackImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C080CE232700A210003D0C11 /* BigTrackImage.swift */; };
 		C080CE262700A22F003D0C11 /* PlayerControllerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C080CE252700A22F003D0C11 /* PlayerControllerSection.swift */; };
 		C080CE282700A255003D0C11 /* TrackInfoSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C080CE272700A255003D0C11 /* TrackInfoSection.swift */; };
+		C0817FEB2727307F00F3D290 /* FilterSelectionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0817FEA2727307F00F3D290 /* FilterSelectionBar.swift */; };
+		C0817FED27273F8F00F3D290 /* FilterableViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0817FEC27273F8F00F3D290 /* FilterableViewModelProtocol.swift */; };
 		C081873226EF728100AB19E9 /* APIAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081873126EF728100AB19E9 /* APIAuthentication.swift */; };
 		C081873526EF97DF00AB19E9 /* AuthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081873426EF97DF00AB19E9 /* AuthScreen.swift */; };
 		C081873726EF9A2700AB19E9 /* AuthWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081873626EF9A2700AB19E9 /* AuthWebView.swift */; };
@@ -205,6 +207,8 @@
 		C080CE232700A210003D0C11 /* BigTrackImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigTrackImage.swift; sourceTree = "<group>"; };
 		C080CE252700A22F003D0C11 /* PlayerControllerSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerControllerSection.swift; sourceTree = "<group>"; };
 		C080CE272700A255003D0C11 /* TrackInfoSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfoSection.swift; sourceTree = "<group>"; };
+		C0817FEA2727307F00F3D290 /* FilterSelectionBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectionBar.swift; sourceTree = "<group>"; };
+		C0817FEC27273F8F00F3D290 /* FilterableViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FilterableViewModelProtocol.swift; path = SpotifyClone/CustomViews/FilterableViewModelProtocol.swift; sourceTree = SOURCE_ROOT; };
 		C081873126EF728100AB19E9 /* APIAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAuthentication.swift; sourceTree = "<group>"; };
 		C081873426EF97DF00AB19E9 /* AuthScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreen.swift; sourceTree = "<group>"; };
 		C081873626EF9A2700AB19E9 /* AuthWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthWebView.swift; sourceTree = "<group>"; };
@@ -549,6 +553,7 @@
 		C087B0EF26E664BC00A72A13 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				C0817FEC27273F8F00F3D290 /* FilterableViewModelProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -602,6 +607,7 @@
 				C080CE1A270099F2003D0C11 /* ExplicitIcon.swift */,
 				C08592042709E9DB0087C834 /* ReadableScrollView.swift */,
 				C090ABE12721163B0069F901 /* PlayStopButton.swift */,
+				C0817FEA2727307F00F3D290 /* FilterSelectionBar.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -1185,6 +1191,7 @@
 				C08861AD270BB15700D6AD89 /* AudioSlider.swift in Sources */,
 				C016E61527038BEF00EFF870 /* SmallMediaCover.swift in Sources */,
 				C089135F26F9816F00CA1A69 /* SearchPageAPICalls.swift in Sources */,
+				C0817FED27273F8F00F3D290 /* FilterableViewModelProtocol.swift in Sources */,
 				C09552942704B16C000499B3 /* APIFetchingShows.swift in Sources */,
 				C080CE262700A22F003D0C11 /* PlayerControllerSection.swift in Sources */,
 				C0883A0926E2703D00E1ADFA /* SearchBarSection.swift in Sources */,
@@ -1248,6 +1255,7 @@
 				C0FB4FE92720852300E61982 /* MyLibraryItemTypes.swift in Sources */,
 				C084E04F2703411C00C6AAAE /* LikeAndThreeDotsIcons.swift in Sources */,
 				C08724DB2709374D00E2DDB0 /* APIFetchingEpisodes.swift in Sources */,
+				C0817FEB2727307F00F3D290 /* FilterSelectionBar.swift in Sources */,
 				C06AB93126FA85F600F46356 /* ProgressView+SpotifyStyle.swift in Sources */,
 				C097735227177B2600F319D1 /* CurrentUserInfoResponse.swift in Sources */,
 				C081873726EF9A2700AB19E9 /* AuthWebView.swift in Sources */,

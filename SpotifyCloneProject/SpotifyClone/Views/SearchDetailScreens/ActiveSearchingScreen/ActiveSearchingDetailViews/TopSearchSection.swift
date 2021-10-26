@@ -10,13 +10,17 @@ import Introspect
 
 struct TopSearchSection: View {
   @EnvironmentObject var searchVM: SearchViewModel
+  @EnvironmentObject var activeSearchVM: ActiveSearchViewModel
+
   @Binding var searchInput: String
 
   var body: some View {
     VStack(spacing: 0) {
+      // To cover the safe area
       Color.spotifyMediumGray
         .ignoresSafeArea()
         .frame(height: 0)
+
       HStack {
         SearchField(searchInput: $searchInput)
         Text("Cancel")
@@ -26,7 +30,14 @@ struct TopSearchSection: View {
             searchVM.goToNoneSubpage()
           }
       }
-      .padding(.bottom, 8)
+      .padding(.top, Constants.paddingSmall)
+      .background(Color.spotifyMediumGray)
+
+      HStack {
+        FilterSelectionBar(currentViewModel: activeSearchVM)
+          .padding(.top, 5)
+          .padding(.bottom, 20)
+      }
       .background(Color.spotifyMediumGray)
       Spacer()
     }
@@ -50,10 +61,13 @@ struct TopSearchSection: View {
             .padding(.vertical, 10)
           Spacer()
         }
-        .padding(.horizontal, Constants.paddingSmall)
+          .padding(.horizontal, Constants.paddingSmall)
       )
       .padding(.leading, Constants.paddingStandard)
     }
   }
+
+
+
 }
 

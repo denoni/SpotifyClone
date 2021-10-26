@@ -5,16 +5,20 @@
 //  Created by Gabriel on 10/8/21.
 //
 
-import Foundation
+import SwiftUI
 import Combine
+// need to import SwiftUI because of the CGFloat(currentScrollPosition)
 
-class ActiveSearchViewModel: ObservableObject {
+class ActiveSearchViewModel: ObservableObject & FilterableViewModelProtocol {
   private var api = SearchPageAPICalls()
   var accessToken: String?
   @Published private var userInputText: String = ""
   private var lastSearchedString: String = ""
   private var numberOfSearches = 0
   @Published var mediaResponses = [SpotifyModel.MediaItem]()
+  // Filter options that the user can tap to show only shows, playlists, etc...
+  @Published var selectedMediaTypeFilter: SpotifyModel.MediaTypes? = nil
+  @Published var currentScrollPosition: CGFloat = 0
   private var disposeBag = Set<AnyCancellable>()
 
   /// `search` is used to make an API call to the search endpoint.
