@@ -45,12 +45,12 @@ struct WebView: UIViewRepresentable {
                     context: UIViewRepresentableContext<WebView>) {}
   
   func makeUIView(context: Context) -> UIView {
-    self.webView.navigationDelegate = context.coordinator
+    webView.navigationDelegate = context.coordinator
     
     if let url = URL(string: AuthViewModel.url) {
-      self.webView.load(URLRequest(url: url))
+      webView.load(URLRequest(url: url))
     }
     
-    return self.webView
+    return webView
   }
 }

@@ -33,20 +33,20 @@ class ActiveSearchViewModel: ObservableObject & FilterableViewModelProtocol {
       userInputText = userInput
       $userInputText
         .debounce(for: .seconds(0.5), scheduler: RunLoop.main)
-        .sink {
+        .sink { [weak self] in
             // If we don't use this check, in case the user types,
             // lets say, 5 letters without stopping, it would
             // make 5 repeated API calls with the same search.
-            if $0 != self.lastSearchedString {
-              let formattedSearchInput = self.getFormattedString(for: $0)
+            if $0 != self?.lastSearchedString {
+              let formattedSearchInput = self?.getFormattedString(for: $0)
               if formattedSearchInput != "" {
-                self.api.search(for: formattedSearchInput, accessToken: self.accessToken!) { mediaItems in
+                self?.api.search(for: formattedSearchInput!, accessToken: (self?.accessToken!)!) { [weak self] mediaItems in
                   // Shuffled so the the responses are not separated by types
                   // (which is the way that Spotify's API originally responds).
-                  self.mediaResponses = mediaItems.shuffled()
+                  self?.mediaResponses = mediaItems.shuffled()
                 }
-                self.numberOfSearches += 1
-                self.lastSearchedString = $0
+                self?.numberOfSearches += 1
+                self?.lastSearchedString = $0
               }
             }
         }

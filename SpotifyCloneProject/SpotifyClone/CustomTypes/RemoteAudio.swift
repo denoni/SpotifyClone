@@ -92,9 +92,9 @@ class RemoteAudio: ObservableObject {
   func moveToStartTime() {
     let minimumTime = CMTime(seconds: 0, preferredTimescale: 600)
 
-    player.seek(to: minimumTime) { _ in
-      self.timeObserver.pause(false)
-      self.state = .active
+    player.seek(to: minimumTime) { [weak self] _ in
+      self?.timeObserver.pause(false)
+      self?.state = .active
     }
 
     refreshPlayerCasePaused()
@@ -130,9 +130,9 @@ class RemoteAudio: ObservableObject {
       }
     }
 
-    player.seek(to: targetTime) { _ in
-      self.timeObserver.pause(false)
-      self.state = .active
+    player.seek(to: targetTime) { [weak self] _ in
+      self?.timeObserver.pause(false)
+      self?.state = .active
     }
 
     refreshPlayerCasePaused()
@@ -165,10 +165,10 @@ class RemoteAudio: ObservableObject {
       state = .buffering
       let targetTime = CMTime(seconds: currentTime,
                               preferredTimescale: 600)
-      player.seek(to: targetTime) { _ in
+      player.seek(to: targetTime) { [weak self] _ in
         // Now the (async) seek is completed, resume normal operation
-        self.timeObserver.pause(false)
-        self.state = .active
+        self?.timeObserver.pause(false)
+        self?.state = .active
       }
     }
   }

@@ -57,7 +57,7 @@ struct MediaDescription: View {
   private func doesTextAlreadyFit(_ geometry: GeometryProxy) -> Bool {
     // Calculate the bounding box we'd need to render the
     // text given the width from the GeometryReader.
-    let totalOccupied = self.description.boundingRect(
+    let totalOccupied = description.boundingRect(
       with: CGSize(
         width: geometry.size.width,
         height: .greatestFiniteMagnitude

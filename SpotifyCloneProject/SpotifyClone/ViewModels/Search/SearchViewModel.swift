@@ -80,7 +80,7 @@ class SearchViewModel: ObservableObject {
   func changeSubpageTo(_ subPage: SearchSubpage,
                        subPageType: SubPageType) {
 
-    self.pageHistory.append((subPage: subPage, subPageType: subPageType))
+    pageHistory.append((subPage: subPage, subPageType: subPageType))
     currentSubPage = .transitionScreen
 
     // if we change the subpage right away it'll cause a crash

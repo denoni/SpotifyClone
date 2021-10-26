@@ -41,7 +41,7 @@ class AuthViewModel: ObservableObject {
       AuthViewModel.apiAuth.getAccessKey(code: spotifyCode,
                                          redirectURI: AuthViewModel.redirectURI,
                                          clientID: AuthViewModel.clientID,
-                                         clientSecret: AuthViewModel.clientSecret) { authKey in
+                                         clientSecret: AuthViewModel.clientSecret) { [unowned self] authKey in
 
         self.authKey = authKey
         self.authKeyIsAvailable = true

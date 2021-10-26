@@ -25,7 +25,7 @@ class MainViewModel: ObservableObject {
   }
 
   func getCurrentUserInfo() {
-    api.getCurrentUserInfo(with: authKey!.accessToken) { userInfo in
+    api.getCurrentUserInfo(with: authKey!.accessToken) { [unowned self] userInfo in
       self.currentUserProfileInfo = userInfo
     }
   }
