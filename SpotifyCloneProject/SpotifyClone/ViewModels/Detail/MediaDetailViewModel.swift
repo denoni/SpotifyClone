@@ -244,7 +244,7 @@ class MediaDetailViewModel: ObservableObject {
   private func getNonDuplicateItems(for medias: [SpotifyModel.MediaItem],
                                     deleteAlmostDuplicateResults: Bool = false) -> [SpotifyModel.MediaItem] {
     var trimmedMedias = [SpotifyModel.MediaItem]()
-    var noDuplicateMedias = [SpotifyModel.MediaItem]()
+    var nonDuplicateMedias = [SpotifyModel.MediaItem]()
 
     // Why we check for duplicate items? -
     //  Some API results are exactly the same(same id) which causes crashes
@@ -258,12 +258,13 @@ class MediaDetailViewModel: ObservableObject {
       for media in medias {
         if !mediaIDs.contains(media.id) {
           mediaIDs.append(media.id)
-          noDuplicateMedias.append(media)
+          nonDuplicateMedias.append(media)
         }
       }
     } else {
 
       for media in medias {
+        print(media.title)
         var trimmedMedia = media
 
         if media.title.contains("(") {
@@ -272,34 +273,27 @@ class MediaDetailViewModel: ObservableObject {
 
           // Remove everything after the first "("
           trimmedMedia.title.removeSubrange(firstOccurrenceBraces ..< lastIndex)
-          // Remove the " " ("Album Name " -> "Album Name")
+          // Remove the " "(case it has) ("Album Name " -> "Album Name")
           if trimmedMedia.title.last == " " {
             trimmedMedia.title.removeLast()
           }
         }
         trimmedMedias.append(trimmedMedia)
       }
+      nonDuplicateMedias = getNonDuplicateMedias(for: trimmedMedias)
     }
-    return getNonDuplicateMedias(for: trimmedMedias)
+    return nonDuplicateMedias
   }
 
   private func getNonDuplicateMedias(for medias: [SpotifyModel.MediaItem]) -> [SpotifyModel.MediaItem] {
+    let nonDuplicateMediaTitles = Set(medias.map { $0.title })
     var nonDuplicateMedias = [SpotifyModel.MediaItem]()
 
-    for media in medias {
-      var containsDuplicate = false
-      if nonDuplicateMedias.isEmpty {
-        nonDuplicateMedias.append(media)
-      } else {
-        for nonDuplicateMedia in nonDuplicateMedias {
-          // .lowercased to compare only the letters, ignoring upper/lower case
-          if media.title.lowercased() == nonDuplicateMedia.title.lowercased() {
-            containsDuplicate = true
-          }
-        }
-        if !containsDuplicate { nonDuplicateMedias.append(media) }
-      }
+    for title in nonDuplicateMediaTitles {
+      let mediaIndex = medias.firstIndex(where: { $0.title == title })!
+      nonDuplicateMedias.append(medias[mediaIndex])
     }
+
     return nonDuplicateMedias
   }
 

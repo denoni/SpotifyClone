@@ -15,7 +15,8 @@ struct MediaDetailAPICalls {
       mediaDetailVM.api.getTopTracksFromArtist(with: mediaDetailVM.accessToken!,
                                                artistID: mediaDetailVM.mainItem!.id) { tracks in
 
-        mediaDetailVM.trimAndCommunicateResult(medias: tracks, section: .artist(.topTracksFromArtist), limit: 5)
+        mediaDetailVM.trimAndCommunicateResult(medias: tracks, section: .artist(.topTracksFromArtist),
+                                               limit: 5, deleteAlmostDuplicateResults: true)
       }
     }
 
@@ -23,7 +24,8 @@ struct MediaDetailAPICalls {
       mediaDetailVM.api.getAlbumsFromArtist(with: mediaDetailVM.accessToken!,
                                             artistID: mediaDetailVM.mainItem!.id) { albums in
 
-        mediaDetailVM.trimAndCommunicateResult(medias: albums, section: .artist(.albumsFromArtist), limit: 5)
+        mediaDetailVM.trimAndCommunicateResult(medias: albums, section: .artist(.albumsFromArtist),
+                                               limit: 5, deleteAlmostDuplicateResults: true)
       }
     }
 
@@ -33,7 +35,8 @@ struct MediaDetailAPICalls {
 
       mediaDetailVM.api.getPlaylistsFromArtist(with: mediaDetailVM.accessToken!, keyWord: keyWord) { playlists in
 
-        mediaDetailVM.trimAndCommunicateResult(medias: playlists, section: .artist(.playlistsFromArtist))
+        mediaDetailVM.trimAndCommunicateResult(medias: playlists, section: .artist(.playlistsFromArtist),
+                                               deleteAlmostDuplicateResults: true)
       }
     }
 
