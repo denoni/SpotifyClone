@@ -33,8 +33,6 @@ struct YourEpisodesScrollScreen: View {
   }
 }
 
-
-
 // MARK: - Detail Content
 struct YourEpisodesDetailContent: View {
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
@@ -59,7 +57,9 @@ struct YourEpisodesDetailContent: View {
               let episodeDetails = SpotifyModel.getEpisodeDetails(for: media)
               EpisodeItem(audioManager: audioManager, media: media, details: episodeDetails)
                 .onAppear {
-                  MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.episode, mediaDetailVM: mediaDetailVM, itemID: media.id)
+                  MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.episode,
+                                                                           mediaDetailVM: mediaDetailVM,
+                                                                           itemID: media.id)
                 }
             }
             .padding(.bottom, Constants.paddingSmall)

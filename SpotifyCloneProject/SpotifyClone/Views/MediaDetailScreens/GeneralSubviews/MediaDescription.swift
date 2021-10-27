@@ -16,7 +16,7 @@ struct MediaDescription: View {
 
   // that means that text is small enough to fit the line limit
   @State var textAlreadyFits = true
-  
+
   var body: some View {
 
     VStack(alignment: .leading, spacing: 0) {
@@ -39,18 +39,16 @@ struct MediaDescription: View {
             lineLimit = .none
             isExpanded = true
           }
-        }) {
+        }, label: {
           Text(isExpanded ? "Read less" : "Read more")
             .font(.avenir(.heavy, size: Constants.fontSmall))
             .foregroundColor(.white)
-        }
+        })
         .frame(maxWidth: .infinity, alignment: .leading)
       }
     }
 
   }
-
-
 
   // Credits to @bhuemer (stackoverflow) for the majority of the code below.
 

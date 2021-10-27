@@ -16,16 +16,16 @@ class APIFetchingArtists {
   }
 
   func getArtist(using endPoint: ArtistsEndpointInAPI,
-                   with accessToken: String,
-                   limit: Int = 10,
-                   completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
+                 with accessToken: String,
+                 limit: Int = 10,
+                 completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
 
     let baseUrl: String
 
     switch endPoint {
     case .userFavoriteArtists:
       baseUrl = "https://api.spotify.com/v1/me/top/artists?limit=\(limit)"
-      
+
     case .userFollowedArtists:
       baseUrl = "https://api.spotify.com/v1/me/following?type=artist"
     }
@@ -89,8 +89,6 @@ class APIFetchingArtists {
 
   }
 
-  
-
   // MARK: - Auxiliary functions
 
   func parseArtistData(for artist: Artist) -> SpotifyModel.MediaItem {
@@ -103,16 +101,16 @@ class APIFetchingArtists {
     let genres = artist.genres
     let popularity = artist.popularity
 
+    let artistDetails = SpotifyModel.ArtistDetails(followers: followers, genres: genres!,
+                                                   popularity: popularity!, id: id)
+
     let artistItem = SpotifyModel.MediaItem(title: title,
                                             previewURL: "",
                                             imageURL: imageURL ?? "",
                                             authorName: [title],
                                             mediaType: .artist,
                                             id: id,
-                                            details: SpotifyModel.DetailTypes.artists(artistDetails: SpotifyModel.ArtistDetails(followers: followers,
-                                                                                                                                genres: genres!,
-                                                                                                                                popularity: popularity!,
-                                                                                                                                id: id)))
+                                            details: SpotifyModel.DetailTypes.artists(artistDetails: artistDetails))
     return artistItem
   }
 }

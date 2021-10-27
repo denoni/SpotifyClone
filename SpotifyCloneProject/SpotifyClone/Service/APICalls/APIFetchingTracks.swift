@@ -55,7 +55,6 @@ class APIFetchingTracks {
         parseResponse(response)
       }
 
-
     func parseResponse(_ response: DataResponse<TrackResponse, AFError>) {
 
       guard let data = response.value else {

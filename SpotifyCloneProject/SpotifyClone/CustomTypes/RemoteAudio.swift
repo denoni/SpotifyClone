@@ -149,7 +149,6 @@ class RemoteAudio: ObservableObject {
     AudioSlider(remoteAudio: self)
   }
 
-
   // MARK: Private functions
 
   // Returns true or false, based on if the user is currently dragging the slider's thumb.
@@ -159,8 +158,7 @@ class RemoteAudio: ObservableObject {
       // with the slider (otherwise it would keep jumping from where they've moved it to, back
       // to where the player is currently at)
       timeObserver.pause(true)
-    }
-    else {
+    } else {
       // Editing finished, start the seek
       state = .buffering
       let targetTime = CMTime(seconds: currentTime,
@@ -181,8 +179,6 @@ class RemoteAudio: ObservableObject {
 
 }
 
-
-
 // MARK: - Observers
 
 class PlayerTimeObserver {
@@ -195,7 +191,8 @@ class PlayerTimeObserver {
     self.player = player
 
     // Periodically observe the player's current time, whilst playing
-    timeObservation = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 0.5, preferredTimescale: 600), queue: nil) { [weak self] time in
+    timeObservation = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 0.5, preferredTimescale: 600),
+                                                     queue: nil) { [weak self] time in
       guard let self = self else { return }
       // If we've not been told to pause our updates
       guard !self.paused else { return }
@@ -222,7 +219,7 @@ class PlayerItemObserver {
 
   init(player: AVPlayer) {
     // Observe the current item changing
-    itemObservation = player.observe(\.currentItem) { [weak self] player, change in
+    itemObservation = player.observe(\.currentItem) { [weak self] player, _ in
       guard let self = self else { return }
       // Publish whether the player has an item or not
       self.publisher.send(player.currentItem != nil)
@@ -244,7 +241,7 @@ class PlayerDurationObserver {
     let durationKeyPath: KeyPath<AVPlayer, CMTime?> = \.currentItem?.duration
     cancellable = player.publisher(for: durationKeyPath).sink { [weak self] duration in
       guard let self = self else { return }
-      
+
       guard let duration = duration else { return }
       guard duration.isNumeric else { return }
       self.publisher.send(duration.seconds)

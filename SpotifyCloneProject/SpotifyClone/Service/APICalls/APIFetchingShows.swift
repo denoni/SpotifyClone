@@ -16,10 +16,10 @@ class APIFetchingShows {
   }
 
   func getShow(using endPoint: ShowsEndpointInAPI,
-                with accessToken: String,
-                limit: Int = 10,
-                offset: Int = 0,
-                completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
+               with accessToken: String,
+               limit: Int = 10,
+               offset: Int = 0,
+               completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
 
     let baseUrl: String
 
@@ -59,7 +59,6 @@ class APIFetchingShows {
           completionHandler(podcastItems)
         }
 
-
     case .followedPodcasts:
       baseUrl = "https://api.spotify.com/v1/me/shows"
 
@@ -94,8 +93,6 @@ class APIFetchingShows {
     }
   }
 
-
-
   // MARK: - Auxiliary functions
 
   private func parseShowData(_ show: Show) -> SpotifyModel.MediaItem {
@@ -109,17 +106,16 @@ class APIFetchingShows {
     let showID = show.id
     let numberOfEpisodes = show.total_episodes
 
+    let showDetails = SpotifyModel.ShowDetails(description: description, explicit: explicit,
+                                               numberOfEpisodes: numberOfEpisodes, id: showID)
+
     let podcastItem = SpotifyModel.MediaItem(title: title,
                                              previewURL: "",
                                              imageURL: imageURL,
                                              authorName: [authorName],
                                              mediaType: .show,
                                              id: id,
-
-                                             details: SpotifyModel.DetailTypes.shows(showDetails: SpotifyModel.ShowDetails(description: description,
-                                                                                                                           explicit: explicit,
-                                                                                                                           numberOfEpisodes: numberOfEpisodes,
-                                                                                                                           id: showID)))
+                                             details: SpotifyModel.DetailTypes.shows(showDetails: showDetails))
     return podcastItem
   }
 

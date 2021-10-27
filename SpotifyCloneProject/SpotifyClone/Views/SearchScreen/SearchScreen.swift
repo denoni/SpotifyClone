@@ -44,8 +44,6 @@ struct SearchScreen: View {
     }
   }
 
-
-
   // MARK: - Search Screen Default
 
   struct SearchScreenDefault: View {

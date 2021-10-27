@@ -77,7 +77,6 @@ private struct BottomMediaPlayerBar: View {
   }
 }
 
-
 private struct BottomNavigationBar: View {
   @StateObject var mainVM: MainViewModel
 
@@ -156,6 +155,3 @@ private struct BottomNavigationBar: View {
   }
 
 }
-
-
-

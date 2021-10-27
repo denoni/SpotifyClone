@@ -32,7 +32,9 @@ struct TrackDetailScreen: View {
 
         // Gets the artist basic info(we're mainly interested in the imageURL of the artist's profile)
         MediaDetailAPICalls.UserInfoAPICalls.getArtistBasicInfo(mediaDetailVM: mediaDetailVM)
-        MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.track, mediaDetailVM: mediaDetailVM, itemID: mediaDetailVM.mainItem!.id)
+        MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.track,
+                                                                 mediaDetailVM: mediaDetailVM,
+                                                                 itemID: mediaDetailVM.mainItem!.id)
       }
       .onDisappear {
         // When TrackDetailScreen is closed, show the bottomMediaPlayer
@@ -42,11 +44,9 @@ struct TrackDetailScreen: View {
   }
 }
 
-
-
 // MARK: - Detail Content
 
-fileprivate struct TrackDetailContent: View {
+private struct TrackDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
 
@@ -78,8 +78,6 @@ fileprivate struct TrackDetailContent: View {
   }
 }
 
-
-
 // MARK: - Preview
 
 struct TrackDetailScreen_Previews: PreviewProvider {
@@ -87,7 +85,8 @@ struct TrackDetailScreen_Previews: PreviewProvider {
 
   static var previews: some View {
     ZStack {
-      TrackDetailScreen(detailScreenOrigin: .home(homeVM: HomeViewModel(mainViewModel: mainVM)), mediaDetailVM: MediaDetailViewModel(mainVM: mainVM))
+      TrackDetailScreen(detailScreenOrigin: .home(homeVM: HomeViewModel(mainViewModel: mainVM)),
+                        mediaDetailVM: MediaDetailViewModel(mainVM: mainVM))
       VStack {
         Spacer()
       }

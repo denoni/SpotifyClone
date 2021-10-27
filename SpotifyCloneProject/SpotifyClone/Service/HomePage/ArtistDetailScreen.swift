@@ -11,13 +11,13 @@ struct ArtistDetailScreen: View {
   var mediaDetailVM: MediaDetailViewModel
   @State var scrollViewPosition = CGFloat.zero
   var detailScreenOrigin: MediaDetailViewModel.DetailScreenOrigin
-  
+
   init(detailScreenOrigin: MediaDetailViewModel.DetailScreenOrigin, mediaDetailVM: MediaDetailViewModel) {
     self.mediaDetailVM = mediaDetailVM
     self.detailScreenOrigin = detailScreenOrigin
     self.mediaDetailVM.detailScreenOrigin = detailScreenOrigin
   }
-  
+
   var body: some View {
     GeometryReader { geometry in
       ZStack {
@@ -38,7 +38,7 @@ struct ArtistDetailScreen: View {
                         title: mediaDetailVM.mainItem!.title,
                         backButtonWithCircleBackground: true,
                         backButtonShouldReturnTo: detailScreenOrigin)
-        
+
       }.ignoresSafeArea()
     }
     .onDisappear {
@@ -47,22 +47,20 @@ struct ArtistDetailScreen: View {
   }
 }
 
-
-
 // MARK: - Detail Content
 
 struct ArtistDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
-  
+
   var details: SpotifyModel.ArtistDetails {
     SpotifyModel.getArtistDetails(for: mediaDetailVM.mainItem!)
   }
-  
+
   var body: some View {
     VStack(alignment: .center, spacing: Constants.spacingMedium) {
-      
+
       BigArtistNameTitle(name: mediaDetailVM.mainItem!.title)
-      
+
       HStack {
         VStack(alignment: .leading) {
           Text("\(details.followers) FOLLOWERS")
@@ -75,7 +73,7 @@ struct ArtistDetailContent: View {
       }
       .frame(height: 65)
       .padding(.bottom, Constants.paddingStandard)
-      
+
       if Utility.didEverySectionLoaded(in: .artistDetail, mediaDetailVM: mediaDetailVM) {
         VStack(spacing: 60) {
           VStack {
@@ -84,7 +82,7 @@ struct ArtistDetailContent: View {
               .padding(.trailing, Constants.paddingLarge)
             ArtistTracks(medias: mediaDetailVM.mediaCollection[.artist(.topTracksFromArtist)]!)
           }
-          
+
           VStack {
             Text("Popular Albums")
               .spotifyTitle()
@@ -104,24 +102,23 @@ struct ArtistDetailContent: View {
           }
         Spacer()
       }
-      
+
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .padding(Constants.paddingStandard)
   }
 }
 
-
-
 // MARK: - Preview
 
 struct ArtistDetailScreen_Previews: PreviewProvider {
   static var mainVM = MainViewModel()
-  
+
   static var previews: some View {
     ZStack {
       // `detailScreenOrigin` doesn't matter on preview.
-      ArtistDetailScreen(detailScreenOrigin: .home(homeVM: HomeViewModel(mainViewModel: mainVM)), mediaDetailVM: MediaDetailViewModel(mainVM: mainVM))
+      ArtistDetailScreen(detailScreenOrigin: .home(homeVM: HomeViewModel(mainViewModel: mainVM)),
+                         mediaDetailVM: MediaDetailViewModel(mainVM: mainVM))
       VStack {
         Spacer()
         BottomBar(mainVM: mainVM,

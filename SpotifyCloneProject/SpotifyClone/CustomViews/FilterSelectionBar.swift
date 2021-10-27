@@ -55,9 +55,8 @@ struct FilterSelectionBar<CurrentViewModel>: View where CurrentViewModel: Filter
     }
 
     var body: some View {
-      Button(action: {
-        currentViewModel.selectedMediaTypeFilter = mediaType
-      }) {
+      Button(action: { currentViewModel.selectedMediaTypeFilter = mediaType },
+             label: {
         Text(text)
           .font(.avenir(.medium, size: Constants.fontXSmall))
           .padding(.horizontal, Constants.paddingSmall)
@@ -67,11 +66,9 @@ struct FilterSelectionBar<CurrentViewModel>: View where CurrentViewModel: Filter
         // if isTapped -> show green filled background, else show white stroked border
           .background(isTapped ? Capsule().strokeBorder(Color.clear) : Capsule().strokeBorder(Color.white))
           .background(isTapped ? Capsule().foregroundColor(.spotifyGreen) : Capsule().foregroundColor(.clear))
-      }
+      })
       .buttonStyle(PlainButtonStyle())
     }
   }
 
 }
-
-

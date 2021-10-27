@@ -48,7 +48,6 @@ class MediaDetailsPageAPICalls: ObservableObject {
                             with: accessToken, completionHandler: completionHandler)
   }
 
-
   // MARK: - Playlist Screen
 
   // MARK: Tracks From Playlist
@@ -63,7 +62,6 @@ class MediaDetailsPageAPICalls: ObservableObject {
                       completionHandler: completionHandler)
   }
 
-
   // MARK: - Album Screen
 
   // MARK: Tracks From Album
@@ -77,7 +75,6 @@ class MediaDetailsPageAPICalls: ObservableObject {
                       with: accessToken, limit: limit, offset: offset,
                       completionHandler: completionHandler)
   }
-
 
   // MARK: - Shows Screen
 
@@ -104,7 +101,6 @@ class MediaDetailsPageAPICalls: ObservableObject {
                                  completionHandler: completionHandler)
   }
 
-
   // MARK: - Basic Info
 
   func getArtists(with accessToken: String,
@@ -128,7 +124,9 @@ class MediaDetailsPageAPICalls: ObservableObject {
                             with accessToken: String,
                             mediaID: String,
                             completionHandler: @escaping (Bool) -> Void) {
-    userInfoAPI.changeFollowingState(to: followingState, in: mediaType, with: accessToken, mediaID: mediaID, completionHandler: completionHandler)
+    userInfoAPI.changeFollowingState(to: followingState, in: mediaType,
+                                     with: accessToken, mediaID: mediaID,
+                                     completionHandler: completionHandler)
   }
 
   // MARK: - User Liked/Followed Media
@@ -139,4 +137,3 @@ class MediaDetailsPageAPICalls: ObservableObject {
   }
 
 }
-

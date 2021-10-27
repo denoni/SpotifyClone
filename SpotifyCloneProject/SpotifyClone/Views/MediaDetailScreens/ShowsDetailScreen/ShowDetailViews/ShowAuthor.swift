@@ -18,4 +18,3 @@ struct ShowAuthor: View {
       .opacity(Constants.opacityStandard)
   }
 }
-

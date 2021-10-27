@@ -17,9 +17,9 @@ class MediaDetailViewModel: ObservableObject {
   @Published var mainItem: SpotifyModel.MediaItem?
   @Published private(set) var imageColorModel = RemoteImageModel(urlString: "")
 
-  @Published private(set) var mediaCollection = [MediaDetailSection:[SpotifyModel.MediaItem]]()
-  @Published private(set) var isLoading = [MediaDetailSection:Bool]()
-  @Published private(set) var numberOfLoadedItemsInSection = [MediaDetailSection:Int]()
+  @Published private(set) var mediaCollection = [MediaDetailSection: [SpotifyModel.MediaItem]]()
+  @Published private(set) var isLoading = [MediaDetailSection: Bool]()
+  @Published private(set) var numberOfLoadedItemsInSection = [MediaDetailSection: Int]()
   @Published var accessToken: String?
 
   var detailScreenOrigin: DetailScreenOrigin?
@@ -64,7 +64,8 @@ class MediaDetailViewModel: ObservableObject {
   }
 
   func getPlaylistScreenData(currentUserID: String) {
-    MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.playlist(userID: currentUserID), mediaDetailVM: self, itemID: self.mainItem!.id)
+    MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.playlist(userID: currentUserID),
+                                                             mediaDetailVM: self, itemID: self.mainItem!.id)
     MediaDetailAPICalls.PlaylistAPICalls.getTracksFromPlaylist(mediaDetailVM: self, loadMoreEnabled: true)
   }
 
@@ -90,8 +91,6 @@ class MediaDetailViewModel: ObservableObject {
   func getUserSavedEpisodesScreenData() {
     MediaDetailAPICalls.UserLikedFollowedMediaAPICalls.getUserSavedEpisodes(mediaDetailVM: self)
   }
-
-
 
   // MARK: - API Auxiliary Functions
 
@@ -138,8 +137,6 @@ class MediaDetailViewModel: ObservableObject {
     return false
   }
 
-
-
   // MARK: - Auxiliary Functions not related to API calls
 
   func cleanAll() {
@@ -179,7 +176,7 @@ class MediaDetailViewModel: ObservableObject {
   func returnBasicArtistsInfo() -> [SpotifyModel.MediaItem] {
     return mediaCollection[.artistBasicInfo(.artistBasicInfo)]!
   }
-  
+
   // MARK: - Private functions
 
   private func cleanAllSection() {
@@ -226,7 +223,7 @@ class MediaDetailViewModel: ObservableObject {
           ImageCache.deleteImageFromCache(imageURL: media.imageURL)
         }
       }
-      
+
       isLoading[sectionInstance!] = true
       mediaCollection[sectionInstance!] = []
       numberOfLoadedItemsInSection[sectionInstance!] = 0

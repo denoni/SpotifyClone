@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TopGradient: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
-  var userSpecifiedColor: Color? = nil
+  var userSpecifiedColor: Color?
 
   var height: CGFloat
   private var color: Color {

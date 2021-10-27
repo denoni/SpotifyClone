@@ -19,6 +19,6 @@ extension EnvironmentValues {
       let safeFrame = window.safeAreaLayoutGuide.layoutFrame
       return safeFrame.minY
     }
-    
+
   }
 }

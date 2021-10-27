@@ -19,14 +19,17 @@ class MainViewModelAPICalls {
     urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
     urlRequest.cachePolicy = NSURLRequest.CachePolicy.returnCacheDataElseLoad
 
-
     AF.request(urlRequest)
       .validate()
       .responseDecodable(of: CurrentUserInfoResponse.self) { response in
 
         guard let data = response.value else {
           if response.response!.statusCode == 403 {
-            fatalError("You didn't add your user to the dashboard in 'https://developer.spotify.com/dashboard'. Check README('https://github.com/gabrieldenoni/SpotifyClone') to know how to set up the app properly.")
+            fatalError(
+            """
+            You didn't add your user to the dashboard in 'https://developer.spotify.com/dashboard'.
+            Check README('https://github.com/gabrieldenoni/SpotifyClone') to know how to set up the app properly.
+            """)
           } else {
             fatalError("Error receiving tracks from API.")
           }

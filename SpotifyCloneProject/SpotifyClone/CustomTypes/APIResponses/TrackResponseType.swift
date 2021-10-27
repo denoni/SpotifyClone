@@ -27,10 +27,8 @@ struct TrackResponse: Decodable {
       throw DecodingError.dataCorruptedError(forKey: .items, in: container, debugDescription: "Unsupported JSON structure")
     }
   }
-  
+
   struct TrackResponseItem: Decodable {
     let track: Track
   }
 }
-
-

@@ -10,14 +10,14 @@ import Combine
 // need to import SwiftUI because of the CGFloat(currentScrollPosition)
 
 class ActiveSearchViewModel: ObservableObject & FilterableViewModelProtocol {
-  private var api = SearchPageAPICalls()
+  private var api = ActiveSearchPageAPICalls()
   var accessToken: String?
   @Published private var userInputText: String = ""
   private var lastSearchedString: String = ""
   private var numberOfSearches = 0
   @Published var mediaResponses = [SpotifyModel.MediaItem]()
   // Filter options that the user can tap to show only shows, playlists, etc...
-  @Published var selectedMediaTypeFilter: SpotifyModel.MediaTypes? = nil
+  @Published var selectedMediaTypeFilter: SpotifyModel.MediaTypes?
   @Published var currentScrollPosition: CGFloat = 0
   private var disposeBag = Set<AnyCancellable>()
 
@@ -40,7 +40,8 @@ class ActiveSearchViewModel: ObservableObject & FilterableViewModelProtocol {
             if $0 != self?.lastSearchedString {
               let formattedSearchInput = self?.getFormattedString(for: $0)
               if formattedSearchInput != "" {
-                self?.api.search(for: formattedSearchInput!, accessToken: (self?.accessToken!)!) { [weak self] mediaItems in
+                self?.api.search(for: formattedSearchInput!,
+                                 accessToken: (self?.accessToken!)!) { [weak self] mediaItems in
                   // Shuffled so the the responses are not separated by types
                   // (which is the way that Spotify's API originally responds).
                   self?.mediaResponses = mediaItems.shuffled()

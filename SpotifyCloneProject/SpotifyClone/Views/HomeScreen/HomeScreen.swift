@@ -40,18 +40,16 @@ struct HomeScreen: View {
                           mediaDetailVM: mediaDetailVM)
     }
   }
-  
-  
-  
+
   // MARK: - Auxiliary Functions
-  
+
   struct HomeScreenDefault: View {
     @EnvironmentObject var homeVM: HomeViewModel
     @State var scrollViewPosition = CGFloat.zero
 
     var body: some View {
       RadialGradientBackground(color: Color(homeVM.imageColorModel.image?.averageColor! ?? UIColor.clear))
-      
+
       if didEverySectionLoaded() == false {
         ProgressView()
           .withSpotifyStyle()
@@ -94,8 +92,6 @@ struct HomeScreen: View {
       }
     }
 
-
-
     // MARK: Auxiliary functions
     private func didEverySectionLoaded() -> Bool {
       for key in homeVM.isLoading.keys {
@@ -107,10 +103,10 @@ struct HomeScreen: View {
       // else, return true
       return true
     }
-    
+
     private func getTracksFor(_ section: HomeViewModel.Section) -> [SpotifyModel.MediaItem] {
       return !homeVM.isLoading[section]! ? homeVM.mediaCollection[section]! : []
     }
   }
-  
+
 }

@@ -19,9 +19,7 @@ struct SmallSongItem: View {
 
   @ViewBuilder func buildCoverShape() -> some View {
     Group {
-      if isArtist { Circle() }
-      else if isPodcast { RoundedRectangle(cornerRadius: Constants.radiusStandard) }
-      else { Rectangle() }
+      if isArtist { Circle() } else if isPodcast { RoundedRectangle(cornerRadius: Constants.radiusStandard) } else { Rectangle() }
     }.foregroundColor(Color.spotifyDarkGray)
   }
 

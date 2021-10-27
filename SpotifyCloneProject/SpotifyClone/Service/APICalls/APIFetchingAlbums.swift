@@ -21,7 +21,6 @@ class APIFetchingAlbums {
                 offset: Int = 0,
                 completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
 
-
     let country = "US"
     let baseUrl: String
 
@@ -78,6 +77,9 @@ class APIFetchingAlbums {
           authorName.append(album.artists[artistIndex].name)
         }
 
+        let albumDetails = SpotifyModel.AlbumDetails(name: title, numberOfTracks: numberOfTracks,
+                                                     releaseDate: releaseDate, id: albumID)
+
         let albumItem = SpotifyModel.MediaItem(title: title,
                                                previewURL: "",
                                                imageURL: imageURL ?? "",
@@ -85,10 +87,7 @@ class APIFetchingAlbums {
                                                author: author,
                                                mediaType: .album,
                                                id: id,
-                                               details: SpotifyModel.DetailTypes.album(albumDetails: SpotifyModel.AlbumDetails(name: title,
-                                                                                                                               numberOfTracks: numberOfTracks,
-                                                                                                                               releaseDate: releaseDate,
-                                                                                                                               id: albumID)))
+                                               details: SpotifyModel.DetailTypes.album(albumDetails: albumDetails))
 
         albumItems.append(albumItem)
       }

@@ -46,14 +46,14 @@ class APIFetchingUserInfo {
     var baseUrl = "https://api.spotify.com/v1/me/\(mediaTypeString)/contains?ids=\(mediaID)"
 
     if mediaTypeString == "playlists" {
-      print("\n>>> There's probably a bug in the API that for the majority of user ids, it never returns true even when user is following playlist. <<<\n")
+      print("\n>>> There's probably a bug in the API that for the majority of user ids,")
+      print("it never returns true even when user is following playlist. <<<\n")
       baseUrl = "https://api.spotify.com/v1/playlists/\(mediaID)/followers/contains?ids=\(currentUserID!)"
     }
 
     if mediaTypeString == "artist" {
       baseUrl = "https://api.spotify.com/v1/me/following/contains?type=\(mediaTypeString)&ids=\(mediaID)"
     }
-
 
     var urlRequest = URLRequest(url: URL(string: baseUrl)!)
     urlRequest.httpMethod = "GET"
@@ -67,8 +67,7 @@ class APIFetchingUserInfo {
           let decoder = JSONDecoder()
           let response = try decoder.decode([Bool].self, from: json.data!)
           completionHandler(response.first!)
-        }
-        catch {
+        } catch {
           fatalError("Error decoding response.")
         }
       }
@@ -80,10 +79,10 @@ class APIFetchingUserInfo {
   }
 
   func changeFollowingState(to followingState: FollowingState,
-                                    in mediaType: ValidMediaType,
-                                    with accessToken: String,
-                                    mediaID: String,
-                                    completionHandler: @escaping (Bool) -> Void) {
+                            in mediaType: ValidMediaType,
+                            with accessToken: String,
+                            mediaID: String,
+                            completionHandler: @escaping (Bool) -> Void) {
 
     let mediaTypeString: String
 
@@ -102,7 +101,6 @@ class APIFetchingUserInfo {
       mediaTypeString = "playlists"
     }
 
-
     var baseUrl = "https://api.spotify.com/v1/me/\(mediaTypeString)?ids=\(mediaID)"
 
     if mediaTypeString == "artist" {
@@ -112,7 +110,6 @@ class APIFetchingUserInfo {
     if mediaTypeString == "playlists" {
       baseUrl = "https://api.spotify.com/v1/playlists/\(mediaID)/followers"
     }
-
 
     var urlRequest = URLRequest(url: URL(string: baseUrl)!)
     urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")

@@ -40,11 +40,9 @@ struct EpisodeDetailScreen: View {
 
 }
 
-
-
 // MARK: - Detail Content
 
-fileprivate struct EpisodeDetailContent: View {
+private struct EpisodeDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @Binding var scrollViewPosition: CGFloat
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
@@ -147,8 +145,6 @@ fileprivate struct EpisodeDetailContent: View {
     .padding(Constants.paddingStandard)
   }
 }
-
-
 
 // MARK: - Preview
 

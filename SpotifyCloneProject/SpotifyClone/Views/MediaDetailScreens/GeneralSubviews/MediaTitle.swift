@@ -11,7 +11,7 @@ struct MediaTitle: View {
   let mediaTitle: String
   var useSmallerFont: Bool = false
   var lineLimit: Int = 1
-  
+
   var body: some View {
     VStack(alignment: .leading) {
       Text(mediaTitle)

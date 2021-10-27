@@ -14,7 +14,7 @@ struct RecentlyPlayedScrollView: View {
   @State var medias: [SpotifyModel.MediaItem]
 
   var sectionTitle = "Recently Played"
-  
+
   var body: some View {
     if !medias.isEmpty {
       VStack(spacing: Constants.spacingSmall) {
@@ -31,7 +31,7 @@ struct RecentlyPlayedScrollView: View {
                                          withData: media)
                 }
                 .onAppear { homeVM.homeCachedImageURLs.append(media.imageURL) }
-                .onDisappear{
+                .onDisappear {
                   if homeVM.homeCachedImageURLs.count > 25 {
                     for _ in 0..<15 {
                       homeVM.deleteImageFromCache()

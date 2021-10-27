@@ -22,7 +22,7 @@ class APIFetchingEpisodes {
                   completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
 
     let baseUrl: String
-    var thisShowID: String? = nil
+    var thisShowID: String?
 
     switch endPoint {
     case .episodesFromShow(let showID):
@@ -91,9 +91,6 @@ class APIFetchingEpisodes {
         }
     }
 
-
-
-
     func parseEpisode(_ episode: Episode) -> SpotifyModel.MediaItem {
         let title = episode.name
         let imageURL = episode.images[0].url
@@ -106,6 +103,9 @@ class APIFetchingEpisodes {
         let durationInMs = episode.duration_ms
         let releaseDate = episode.release_date
 
+        let episodeDetails = SpotifyModel.EpisodeDetails(explicit: explicit, description: description, durationInMs: durationInMs,
+                                                         releaseDate: releaseDate, id: id, showId: thisShowID)
+
         let podcastItem = SpotifyModel.MediaItem(title: title,
                                                  previewURL: audioPreview,
                                                  imageURL: imageURL,
@@ -113,16 +113,10 @@ class APIFetchingEpisodes {
                                                  authorName: [""],
                                                  mediaType: .episode,
                                                  id: id,
-                                                 details: SpotifyModel.DetailTypes.episode(episodeDetails: SpotifyModel.EpisodeDetails(explicit: explicit,
-                                                                                                                                       description: description,
-                                                                                                                                       durationInMs: durationInMs,
-                                                                                                                                       releaseDate: releaseDate,
-                                                                                                                                       id: id,
-                                                                                                                                       showId: thisShowID)))
+                                                 details: SpotifyModel.DetailTypes.episode(episodeDetails: episodeDetails))
         return podcastItem
       }
   }
-
 
   func getEpisodeDetails(with accessToken: String,
                          episodeID: String,
@@ -157,23 +151,18 @@ class APIFetchingEpisodes {
         let showCoverImage = show.images
         let showId = show.id
 
+        let episodeDetails = SpotifyModel.EpisodeDetails(explicit: explicit, description: description,
+                                                         durationInMs: durationInMs, releaseDate: releaseDate,
+                                                         id: id, showId: showId)
+
           let podcastItem = SpotifyModel.MediaItem(title: name,
                                                    previewURL: previewUrl,
                                                    imageURL: imageURL,
                                                    authorName: [authorName],
-                                                   author: [Artist(name: authorName,
-                                                                   images: showCoverImage,
-                                                                   id: showId)],
+                                                   author: [Artist(name: authorName, images: showCoverImage, id: showId)],
                                                    mediaType: .episode,
                                                    id: id,
-                                                   details: SpotifyModel.DetailTypes.episode(episodeDetails:
-                                                                                              SpotifyModel.EpisodeDetails(explicit: explicit,
-                                                                                                                          description: description,
-                                                                                                                          durationInMs: durationInMs,
-                                                                                                                          releaseDate: releaseDate,
-                                                                                                                          id: id,
-                                                                                                                          showId: showId)))
-
+                                                   details: SpotifyModel.DetailTypes.episode(episodeDetails: episodeDetails))
 
         completionHandler(podcastItem)
       }

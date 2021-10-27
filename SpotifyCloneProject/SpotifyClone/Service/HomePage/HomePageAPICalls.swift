@@ -24,17 +24,17 @@ class HomePageAPICalls: ObservableObject {
                 limit: Int = 6,
                 offset: Int = 0,
                 completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
-    
+
     trackAPI.getTrack(using: endPoint, with: accessToken, limit: limit,
                       offset: offset, completionHandler: completionHandler)
   }
 
   // MARK: - SHOWS
   func getShow(using endPoint: APIFetchingShows.ShowsEndpointInAPI,
-              with accessToken: String,
-              limit: Int = 10,
-              offset: Int = 0,
-              completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
+               with accessToken: String,
+               limit: Int = 10,
+               offset: Int = 0,
+               completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
     showsAPI.getShow(using: endPoint, with: accessToken, limit: limit,
                      offset: offset, completionHandler: completionHandler)
   }
@@ -63,12 +63,11 @@ class HomePageAPICalls: ObservableObject {
 
   // MARK: - ARTISTS
   func getArtist(using endPoint: APIFetchingArtists.ArtistsEndpointInAPI,
-                   with accessToken: String,
-                   limit: Int = 10,
-                   completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
+                 with accessToken: String,
+                 limit: Int = 10,
+                 completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
     artistAPI.getArtist(using: endPoint, with: accessToken,
                           limit: limit, completionHandler: completionHandler)
   }
-  
-}
 
+}

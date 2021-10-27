@@ -26,10 +26,11 @@ class AuthViewModel: ObservableObject {
   static private var clientSecret = YourSensitiveData.clientSecret
 
   // To know more about what all those variables are, check APIAuthentication.swift
-  static private var scope = "\(AuthScope.userReadRecentlyPlayed.rawValue)+\(AuthScope.userTopRead.rawValue)+\(AuthScope.userReadPlaybackPosition.rawValue)+\(AuthScope.userLibraryRead.rawValue)+\(AuthScope.userFollowRead.rawValue)+\(AuthScope.userFollowModify.rawValue)+\(AuthScope.userLibraryModify.rawValue)+\(AuthScope.playlistModifyPublic.rawValue)+\(AuthScope.playlistModifyPrivate.rawValue)+\(AuthScope.playlistReadPrivate.rawValue)" // Don't forget to put .rawValue at the end
+  static private var scope = getScopesUsing([.userReadRecentlyPlayed, .userTopRead, .userReadPlaybackPosition,
+                                             .userLibraryRead, .userLibraryModify, .userFollowRead, .userFollowModify,
+                                             .playlistModifyPublic, .playlistModifyPrivate, .playlistReadPrivate])
   static private var redirectURI = "https://www.github.com"
   static var url = apiAuth.getAuthURL(clientID: clientID, scope: scope, redirectURI: redirectURI)
-
 
   func isSpotifyResponseCode(url: String) {
     DispatchQueue.main.async {
@@ -50,5 +51,10 @@ class AuthViewModel: ObservableObject {
         self.mainViewModel.finishAuthentication(authKey: self.authKey!)
       }
     }
+  }
+
+  private static func getScopesUsing(_ scopesList: [AuthScope]) -> String {
+    let scopesListRawValues = scopesList.map { $0.rawValue }
+    return scopesListRawValues.joined(separator: "+")
   }
 }

@@ -11,8 +11,8 @@ import Alamofire
 class APIFetchingBasicInfo {
 
   func getArtists(with accessToken: String,
-                 artistIDs: [String],
-                 completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
+                  artistIDs: [String],
+                  completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
 
     // %2c = comma
     let baseUrl = "https://api.spotify.com/v1/artists?ids=\(artistIDs.joined(separator: "%2c"))"
@@ -49,20 +49,18 @@ class APIFetchingBasicInfo {
         let popularity = artist.popularity
         let genres = artist.genres
 
+        let artistDetails = SpotifyModel.ArtistDetails(followers: followers, genres: genres!,
+                                                       popularity: popularity!, id: id)
+
         let artistItem = SpotifyModel.MediaItem(title: title,
                                                   previewURL: "",
                                                   imageURL: imageURL ,
                                                   authorName: [title],
                                                   mediaType: .artist,
                                                   id: id,
-                                                  details: SpotifyModel.DetailTypes.artists(artistDetails:
-                                                                                              SpotifyModel.ArtistDetails(followers: followers ,
-                                                                                                                         genres: genres!,
-                                                                                                                         popularity: popularity!,
-                                                                                                                         id: id)))
+                                                  details: SpotifyModel.DetailTypes.artists(artistDetails: artistDetails))
         artistItems.append(artistItem)
       }
-
 
       completionHandler(artistItems)
     }

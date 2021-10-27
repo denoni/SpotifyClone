@@ -19,9 +19,13 @@ struct BigSongItem: View {
 
   @ViewBuilder func buildCoverShape() -> some View {
     Group {
-      if mediaType == .artist { Circle() }
-      else if mediaType == .show { RoundedRectangle(cornerRadius: Constants.radiusStandard) }
-      else { Rectangle() }
+      if mediaType == .artist {
+        Circle()
+      } else if mediaType == .show {
+        RoundedRectangle(cornerRadius: Constants.radiusStandard)
+      } else {
+        Rectangle()
+      }
     }.foregroundColor(Color.spotifyDarkGray)
   }
 

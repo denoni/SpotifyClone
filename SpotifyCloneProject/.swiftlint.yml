@@ -1,0 +1,13 @@
+disabled_rules: # rule identifiers turned on by default to exclude from running
+  - force_cast
+  - identifier_name
+  - implicit_getter
+
+excluded:
+  - ${PWD}/Pods
+
+line_length:
+  warning: 140
+  error: 240
+  ignores_comments: true
+  ignores_urls: true

@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-// TODO: Add documentation
-
 extension ProgressView {
 
   @ViewBuilder func withSpotifyStyle(size: Int = 100, useDiscreetColors: Bool = false) -> some View {
@@ -16,7 +14,7 @@ extension ProgressView {
   }
 }
 
-fileprivate struct SpotifyProgressViewStyle: ProgressViewStyle {
+private struct SpotifyProgressViewStyle: ProgressViewStyle {
   var size: CGFloat
   var discreet: Bool
   private(set) var stroke: CGFloat = 2

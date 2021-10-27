@@ -30,7 +30,8 @@ struct ShowEpisodesScrollView: View {
 //              MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.episode, mediaDetailVM: mediaDetailVM, itemID: media.id)
 
               if mediaDetailVM.shouldFetchMoreData(basedOn: media, inRelationTo: medias) {
-                MediaDetailAPICalls.ShowsAPICalls.getEpisodesFromShows(mediaDetailVM: mediaDetailVM, loadMoreEnabled: true)
+                MediaDetailAPICalls.ShowsAPICalls.getEpisodesFromShows(mediaDetailVM: mediaDetailVM,
+                                                                       loadMoreEnabled: true)
               }
               currentCachedURLs.append(media.imageURL)
             }
@@ -51,8 +52,6 @@ struct ShowEpisodesScrollView: View {
     .padding(.top, Constants.paddingSmall)
   }
 }
-
-
 
 // MARK: - Episode Item
 struct EpisodeItem: View {

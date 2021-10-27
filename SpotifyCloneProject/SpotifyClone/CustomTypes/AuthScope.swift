@@ -8,7 +8,7 @@
 import Foundation
 
 enum AuthScope: String, CaseIterable {
-  
+
   case userReadPrivate = "user-read-private"
   case userReadEmail = "user-read-email"
 

@@ -30,7 +30,7 @@ enum MediaDetailSection: Hashable {
     case tracksFromAlbum
   }
 
-  enum ShowsSections: CaseIterable, MediaDetailSectionsProtocol{
+  enum ShowsSections: CaseIterable, MediaDetailSectionsProtocol {
     case episodesFromShow
   }
 

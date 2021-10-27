@@ -7,12 +7,10 @@
 
 import Foundation
 
-
 /// # Used in
 /// - `Featured Playlists`
 /// - Any playlist get using the search endpoint of the API with a selected type of playlist
 /// (e.g.  `Featured Playlists`,  `Playlist Year Rewind`, `Playlist This is X`)
-
 
 struct PlaylistResponse: Decodable {
   var message: String?
@@ -35,5 +33,3 @@ struct PlaylistResponse: Decodable {
     let items: [Playlist]
   }
 }
-
-

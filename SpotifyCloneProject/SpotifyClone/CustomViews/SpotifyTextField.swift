@@ -13,7 +13,7 @@ struct SpotifyTextField: View {
   var placeholder: String
 
   var body: some View {
-    HStack() {
+    HStack {
       leadingIcon
         .resizeToFit()
         .padding(5)

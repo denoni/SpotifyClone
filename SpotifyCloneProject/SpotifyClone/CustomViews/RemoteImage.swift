@@ -82,7 +82,6 @@ class RemoteImageModel: ObservableObject {
     task.resume()
   }
 
-
   private func getImageFromResponse(data: Data?, response: URLResponse?, error: Error?) {
     guard error == nil else {
       print("Error: \(error!)")

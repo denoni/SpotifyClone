@@ -22,7 +22,7 @@ struct MyLibraryScreen: View {
 
     case .likedSongs:
       LikedSongsScrollScreen()
-      
+
     case .yourEpisodes:
       YourEpisodesScrollScreen()
 
@@ -47,8 +47,6 @@ struct MyLibraryScreen: View {
     }
   }
 
-
-  
   struct MyLibraryScreenDefault: View {
     @EnvironmentObject var myLibraryVM: MyLibraryViewModel
 
@@ -75,8 +73,6 @@ struct MyLibraryScreen: View {
         }
       }
     }
-
-
 
     // MARK: - Auxiliary functions
 
@@ -113,6 +109,3 @@ struct MyLibraryScreen: View {
   }
 
 }
-
-
-

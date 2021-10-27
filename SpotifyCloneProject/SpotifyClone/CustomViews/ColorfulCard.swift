@@ -26,7 +26,7 @@ struct ColorfulCard: View {
   }
 
   @ViewBuilder var body: some View {
-    ZStack() {
+    ZStack {
       RoundedRectangle(cornerRadius: 5)
         .fill(color)
       Text(text)

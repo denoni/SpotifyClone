@@ -67,7 +67,4 @@ struct TopSearchSection: View {
     }
   }
 
-
-
 }
-

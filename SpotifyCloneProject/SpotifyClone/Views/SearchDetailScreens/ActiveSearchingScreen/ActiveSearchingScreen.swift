@@ -37,8 +37,6 @@ struct ActiveSearchingScreen: View {
   }
 }
 
-
-
 // MARK: - Preview
 
 struct ActiveSearchingScreen_Previews: PreviewProvider {

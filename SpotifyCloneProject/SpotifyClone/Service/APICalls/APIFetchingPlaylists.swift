@@ -33,7 +33,7 @@ class APIFetchingPlaylists {
       let keyWord = keyWord.replacingOccurrences(of: " ", with: "+")
       let type = "playlist"
       baseUrl = "https://api.spotify.com/v1/search?q=\(keyWord)&type=\(type)&market=\(country)&limit=\(limit)&offset=\(offset)"
-      
+
     case .currentUserPlaylists:
       baseUrl = "https://api.spotify.com/v1/me/playlists"
     }
@@ -77,19 +77,20 @@ class APIFetchingPlaylists {
         let playlistTracks = playlist.tracks
         let mediaOwner = playlist.owner
 
+        let infoAboutTracksInPlaylist = SpotifyModel.PlaylistTracks(numberOfSongs: playlistTracks.total, href: playlistTracks.href)
+        let playlistOwner = SpotifyModel.MediaOwner(displayName: mediaOwner.display_name, id: mediaOwner.id)
+        let playlistDetails = SpotifyModel.PlaylistDetails(description: description,
+                                                           playlistTracks: infoAboutTracksInPlaylist,
+                                                           owner: playlistOwner,
+                                                           id: id)
+
         let playlistItem = SpotifyModel.MediaItem(title: title,
                                                   previewURL: sectionTitle ?? "You Might Like",
                                                   imageURL: imageURL,
                                                   authorName: [mediaOwner.display_name],
                                                   mediaType: .playlist,
                                                   id: id,
-                                                  details: SpotifyModel.DetailTypes.playlists(
-                                                    playlistDetails: SpotifyModel.PlaylistDetails(description: description,
-                                                                                                  playlistTracks: SpotifyModel.PlaylistTracks(numberOfSongs: playlistTracks.total,
-                                                                                                                                              href: playlistTracks.href),
-                                                                                                  owner: SpotifyModel.MediaOwner(displayName: mediaOwner.display_name,
-                                                                                                                                 id: mediaOwner.id),
-                                                                                                  id: id)))
+                                                  details: SpotifyModel.DetailTypes.playlists(playlistDetails: playlistDetails))
         trackItems.append(playlistItem)
       }
       completionHandler(trackItems)

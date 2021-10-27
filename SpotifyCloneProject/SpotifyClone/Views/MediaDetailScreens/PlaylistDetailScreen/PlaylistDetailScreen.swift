@@ -41,11 +41,9 @@ struct PlaylistDetailScreen: View {
   }
 }
 
-
-
 // MARK: - Detail Content
 
-fileprivate struct PlaylistDetailContent: View {
+private struct PlaylistDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @Binding var scrollViewPosition: CGFloat
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
@@ -102,8 +100,6 @@ fileprivate struct PlaylistDetailContent: View {
   }
 }
 
-
-
 // MARK: - Preview
 
 struct MediaDetailScreen_Previews: PreviewProvider {
@@ -112,7 +108,8 @@ struct MediaDetailScreen_Previews: PreviewProvider {
   static var previews: some View {
     ZStack {
       // `detailScreenOrigin` doesn't matter on preview.
-      PlaylistDetailScreen(detailScreenOrigin: .home(homeVM: HomeViewModel(mainViewModel: mainVM)), mediaDetailVM: MediaDetailViewModel(mainVM: mainVM))
+      PlaylistDetailScreen(detailScreenOrigin: .home(homeVM: HomeViewModel(mainViewModel: mainVM)),
+                           mediaDetailVM: MediaDetailViewModel(mainVM: mainVM))
       VStack {
         Spacer()
         BottomBar(mainVM: mainVM, showMediaPlayer: true)

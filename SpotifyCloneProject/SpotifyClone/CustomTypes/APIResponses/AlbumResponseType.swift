@@ -30,5 +30,3 @@ struct AlbumResponse: Decodable {
     let items: [Album]
   }
 }
-
-

@@ -41,7 +41,7 @@ struct SearchResponsesScrollView: View {
     ZStack {
       Color.clear
       ReadableScrollView(currentPosition: $activeSearchVM.currentScrollPosition) {
-        LazyVStack() {
+        LazyVStack {
           ForEach(medias) { media in
             SearchResponseItem(imageURL: media.imageURL,
                                title: media.title,
@@ -52,7 +52,7 @@ struct SearchResponsesScrollView: View {
               }
           }
         }
-        .padding(.top,  100 + Constants.paddingLarge)
+        .padding(.top, 100 + Constants.paddingLarge)
         .padding(.bottom, Constants.paddingBottomSection)
         // Closes keyboard when user scrolls
         .onChange(of: activeSearchVM.currentScrollPosition) { _ in
@@ -62,5 +62,5 @@ struct SearchResponsesScrollView: View {
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
   }
-  
+
 }

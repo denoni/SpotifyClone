@@ -37,14 +37,13 @@ struct BigSongCoversScrollView: View {
     }
   }
 
-  
   var body: some View {
     if !medias.isEmpty {
       VStack(spacing: Constants.spacingSmall) {
         Text(sectionTitle.isEmpty ? section.rawValue : sectionTitle)
           .spotifyTitle(withPadding: true)
         ScrollView(.horizontal, showsIndicators: false) {
-          LazyHStack(alignment: .top,spacing: Constants.spacingLarge) {
+          LazyHStack(alignment: .top, spacing: Constants.spacingLarge) {
             ForEach(medias) { media in
               BigSongItem(imageURL: media.imageURL,
                           title: media.title,
@@ -57,7 +56,7 @@ struct BigSongCoversScrollView: View {
 
                   homeVM.homeCachedImageURLs.append(media.imageURL)
                 }
-                .onDisappear{
+                .onDisappear {
                   if homeVM.homeCachedImageURLs.count > 25 {
                     for _ in 0..<15 {
                       homeVM.deleteImageFromCache()

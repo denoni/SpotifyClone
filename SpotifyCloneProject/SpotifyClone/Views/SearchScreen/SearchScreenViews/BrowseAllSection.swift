@@ -28,4 +28,3 @@ struct BrowseAllSection: View {
     .padding(.horizontal, Constants.paddingStandard)
   }
 }
-

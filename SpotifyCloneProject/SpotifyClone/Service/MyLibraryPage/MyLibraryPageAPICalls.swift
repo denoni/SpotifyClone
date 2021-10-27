@@ -16,7 +16,6 @@ class MyLibraryPageAPICalls: ObservableObject {
   private var albumAPI = APIFetchingAlbums()
   private var artistAPI = APIFetchingArtists()
 
-
   // MARK: - PLAYLISTs
   func getCurrentUserPlaylists(with accessToken: String,
                                completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {

@@ -8,7 +8,6 @@
 import SwiftUI
 import AVKit
 
-
 import Alamofire
 
 struct PlayerControllerSection: View {
@@ -50,14 +49,15 @@ struct PlayerControllerSection: View {
     var isSmallDisplay: Bool = false
 
     var body: some View {
-      Button(action: { audioManager.changePlayingRate(audioManager: audioManager) }) {
+      Button(action: { audioManager.changePlayingRate(audioManager: audioManager) },
+             label: {
         Rectangle()
           .fill(Color.clear)
           .overlay(Text(audioManager.currentRateString)
                     .font(.avenir(.medium, size: isSmallDisplay ? 15 : 18))
                     .fixedSize())
           .frame(width: isSmallDisplay ? 20 : 25)
-      }
+      })
       .buttonStyle(PlainButtonStyle())
       .disabled(audioManager.state != .active)
     }
@@ -69,11 +69,12 @@ struct PlayerControllerSection: View {
     var isSmallDisplay: Bool = false
 
     var body: some View {
-      Button(action: { audioManager.forwardFiveSeconds() }) {
+      Button(action: { audioManager.forwardFiveSeconds() },
+             label: {
         Image("next")
           .resizeToFit()
           .frame(width: isSmallDisplay ? 25 : 30)
-      }
+      })
       .buttonStyle(PlainButtonStyle())
       .disabled(audioManager.state != .active)
     }
@@ -85,11 +86,12 @@ struct PlayerControllerSection: View {
     var isSmallDisplay: Bool = false
 
     var body: some View {
-      Button(action: { audioManager.backwardFiveSeconds() }) {
+      Button(action: { audioManager.backwardFiveSeconds() },
+             label: {
         Image("previous")
           .resizeToFit()
           .frame(width: isSmallDisplay ? 25 : 30)
-      }
+      })
       .buttonStyle(PlainButtonStyle())
       .disabled(audioManager.state != .active)
     }

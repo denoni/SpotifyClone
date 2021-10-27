@@ -66,5 +66,3 @@ struct SmallSongCardsGrid: View {
   }
 
 }
-
-

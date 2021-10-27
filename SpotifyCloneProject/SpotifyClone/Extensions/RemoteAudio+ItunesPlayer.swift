@@ -65,14 +65,13 @@ extension RemoteAudio {
 
   private struct ItunesTrackResponse: Decodable {
     var results: [TrackResult]
-
-    struct TrackResult: Decodable {
-      var previewUrl: String
-    }
+  }
+  private struct TrackResult: Decodable {
+    var previewUrl: String
   }
 }
 
-fileprivate func checkAndRemoveEverythingAfter(unwantedCharacter: Character, in inputString: String) -> String {
+private func checkAndRemoveEverythingAfter(unwantedCharacter: Character, in inputString: String) -> String {
   var strippedString = inputString
   if strippedString.contains(unwantedCharacter) {
     let firstOccurrenceIndex = inputString.firstIndex(of: unwantedCharacter)!

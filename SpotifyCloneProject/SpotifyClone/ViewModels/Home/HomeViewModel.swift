@@ -5,22 +5,17 @@
 //  Created by Gabriel on 9/6/21.
 //
 
-/// Because of API constraints, we can't have scrolls that fetch data progressively in all sections.
-/// **Sections that support that:**
-/// - Top Podcasts
-/// - New Releases
-/// - Playlist This is X
-
-// TODO: Access Control
+// Because of API constraints, we can't have scrolls that fetch data progressively in all sections.
+// Sections that support that: Top Podcasts, New Releases, Playlist This is X
 
 import SwiftUI
 
 class HomeViewModel: ObservableObject {
   private var api = HomePageAPICalls()
   private(set) var mainVM: MainViewModel
-  @Published private(set) var isLoading = [Section:Bool]()
-  @Published private(set) var mediaCollection = [Section:[SpotifyModel.MediaItem]]()
-  @Published private(set) var numberOfLoadedItemsInSection = [Section:Int]()
+  @Published private(set) var isLoading = [Section: Bool]()
+  @Published private(set) var mediaCollection = [Section: [SpotifyModel.MediaItem]]()
+  @Published private(set) var numberOfLoadedItemsInSection = [Section: Int]()
   @Published var currentSubPage: HomeSubpage = .none
   // Subpage navigation history
   @Published private(set) var pageHistory = [(subPage: HomeSubpage, data: SpotifyModel.MediaItem, mediaDetailVM: MediaDetailViewModel)]()
@@ -35,7 +30,7 @@ class HomeViewModel: ObservableObject {
   enum HomeSubpage {
     case none
     case transitionScreen
-    
+
     case playlistDetail
     case trackDetail
     case albumDetail
@@ -43,7 +38,7 @@ class HomeViewModel: ObservableObject {
     case artistDetail
     case episodeDetail
   }
-  
+
   init(mainViewModel: MainViewModel) {
     self.mainVM = mainViewModel
     // Populate isLoading and medias with all possible section keys
@@ -52,10 +47,10 @@ class HomeViewModel: ObservableObject {
       mediaCollection[section] = []
       numberOfLoadedItemsInSection[section] = 0
     }
-    
+
     fetchHomeData()
   }
-  
+
   enum Section: String, CaseIterable {
     case smallSongCards = "Small Song Card Items"
     case userFavoriteTracks = "Songs You Love"
@@ -73,13 +68,12 @@ class HomeViewModel: ObservableObject {
     case playlistRewind2010s = "2010s Rewind"
   }
 
-
   func fetchHomeData() {
     for dictKey in isLoading.keys { isLoading[dictKey] = true }
-    
+
     if mainVM.authKey != nil {
       let accessToken = mainVM.authKey!.accessToken
-      
+
       fetchDataFor(.smallSongCards, with: accessToken)
       fetchDataFor(.newReleases, with: accessToken)
       fetchDataFor(.topPodcasts, with: accessToken)
@@ -97,24 +91,22 @@ class HomeViewModel: ObservableObject {
     }
   }
 
-  
-  
   // MARK: - Fetch Data From API
-  
+
   func fetchDataFor(_ section: Section, with accessToken: String) {
     let numberOfItemsInEachLoad = 10
     let currentNumberOfLoadedItems = getNumberOfLoadedItems(for: section)
     increaseNumberOfLoadedItems(for: section, by: numberOfItemsInEachLoad)
-    
+
     guard numberOfLoadedItemsInSection[section]! <= 50 else {
       return
     }
-    
+
     DispatchQueue.main.async { [unowned self] in
       switch section {
-      
+
       // MARK: - Track Responses
-      
+
       // MARK: Small Song Card Items
       case .smallSongCards:
         api.getTrack(using: .userFavoriteTracks, with: accessToken) { tracks in
@@ -122,8 +114,8 @@ class HomeViewModel: ObservableObject {
           if tracks.isEmpty {
             // If userFavoriteTracks returns empty, fetch tracks from Spotify's today top hits playlist.
             // Otherwise, the home screen UI won't look good.
-            let todayTopHitsPlaylistID = "37i9dQZF1DXcBWIGoYBM5M"
-            api.getTrack(using: .tracksFromPlaylist(playlistID: todayTopHitsPlaylistID), with: accessToken) { topTracks in
+            let todayHitsPlaylistID = "37i9dQZF1DXcBWIGoYBM5M"
+            api.getTrack(using: .tracksFromPlaylist(playlistID: todayHitsPlaylistID), with: accessToken) { topTracks in
               trimAndCommunicateResult(section: section, medias: topTracks)
               setImageColorModelBasedOn(topTracks[0].imageURL)
             }
@@ -133,13 +125,13 @@ class HomeViewModel: ObservableObject {
             setImageColorModelBasedOn(tracks[0].imageURL)
           }
         }
-        
+
       // MARK: Recently Played
       case .recentlyPlayed:
         api.getTrack(using: .userRecentlyPlayed, with: accessToken) { tracks in
           trimAndCommunicateResult(section: section, medias: tracks)
         }
-        
+
       // MARK: User Favorite Tracks
       case .userFavoriteTracks:
         api.getTrack(using: .userFavoriteTracks,
@@ -148,16 +140,15 @@ class HomeViewModel: ObservableObject {
                      offset: currentNumberOfLoadedItems) { tracks in
           trimAndCommunicateResult(section: section, medias: tracks, loadMoreEnabled: true)
         }
-        
-        
+
       // MARK: - Artist Responses
-      
+
       // MARK: User Favorite Artists
       case .userFavoriteArtists:
         api.getArtist(using: .userFavoriteArtists, with: accessToken) { artists in
           trimAndCommunicateResult(section: section, medias: artists)
         }
-        
+
       // MARK: New Releases
       case .newReleases:
         api.getAlbum(using: .newReleases,
@@ -166,7 +157,7 @@ class HomeViewModel: ObservableObject {
                      offset: currentNumberOfLoadedItems) { albums in
           trimAndCommunicateResult(section: section, medias: albums, loadMoreEnabled: true)
         }
-        
+
       // MARK: Top Podcasts
       case .topPodcasts:
         api.getShow(using: .topPodcasts,
@@ -175,13 +166,13 @@ class HomeViewModel: ObservableObject {
                     offset: currentNumberOfLoadedItems) { podcasts in
           trimAndCommunicateResult(section: section, medias: podcasts, loadMoreEnabled: true)
         }
-        
+
       // MARK: Featured Playlists
       case .featuredPlaylists:
         api.getPlaylist(using: .featuredPlaylists, with: accessToken, limit: 20) { playlists in
           trimAndCommunicateResult(section: section, medias: playlists)
         }
-        
+
       // MARK: Playlist This is X
       case .playlistThisIsX:
         let keyWord = "this is"
@@ -191,11 +182,11 @@ class HomeViewModel: ObservableObject {
                         offset: currentNumberOfLoadedItems) { playlists in
           trimAndCommunicateResult(section: section, medias: playlists, loadMoreEnabled: true)
         }
-        
+
       // MARK: Playlist Year Rewinds
       case .playlistRewind2010s, .playlistRewind2000s, .playlistRewind90s,
            .playlistRewind80s, .playlistRewind70s :
-        
+
         var keyWord = "top hits of "
         switch section {
         case .playlistRewind2010s:
@@ -211,11 +202,11 @@ class HomeViewModel: ObservableObject {
         default:
           fatalError("Year not defined or the section is not a year.")
         }
-        
+
         api.getPlaylist(using: .playlistWithKeyword(keyWord: keyWord), with: accessToken) { playlists in
           trimAndCommunicateResult(section: section, medias: playlists)
         }
-        
+
       // MARK: Artist's Top Tracks
       case .artistTopTracks:
         var artistID = ""
@@ -236,48 +227,46 @@ class HomeViewModel: ObservableObject {
         }
       default:
         fatalError("Tried to fetch data for a type not specified in the function declaration(fetchDataFor).")
-        
+
       }
     }
   }
-  
-  
-  
+
   // MARK: - Auxiliary Functions
-  
+
   private func getNumberOfLoadedItems(for section: Section) -> Int {
     return numberOfLoadedItemsInSection[section]!
   }
-  
+
   private func increaseNumberOfLoadedItems(for section: Section, by amount: Int) {
     if numberOfLoadedItemsInSection[section]! <= 50 {
       numberOfLoadedItemsInSection[section]! += amount
     }
   }
-  
-  private func trimAndCommunicateResult(section: Section, medias: [SpotifyModel.MediaItem], loadMoreEnabled: Bool = false) {
+
+  private func trimAndCommunicateResult(section: Section, medias: [SpotifyModel.MediaItem],
+                                        loadMoreEnabled: Bool = false) {
     var noDuplicateMedias = [SpotifyModel.MediaItem]()
     var mediaIDs = [String]()
-    
+
     for media in medias {
       if !mediaIDs.contains(media.id) {
         mediaIDs.append(media.id)
         noDuplicateMedias.append(media)
       }
     }
-    
+
     if loadMoreEnabled {
       mediaCollection[section]! += noDuplicateMedias
     } else {
       mediaCollection[section] = noDuplicateMedias
     }
-    
+
     isLoading[section] = false
   }
-  
-  
+
   // MARK: - Non-api Related Functions
-  
+
   func goToNoneSubpage() {
     pageHistory.removeAll()
     currentSubPage = .none
@@ -301,7 +290,7 @@ class HomeViewModel: ObservableObject {
     }
 
   }
-  
+
   func changeSubpageTo(_ subPage: HomeSubpage,
                        mediaDetailVM: MediaDetailViewModel,
                        withData data: SpotifyModel.MediaItem) {
@@ -323,12 +312,10 @@ class HomeViewModel: ObservableObject {
     }
 
   }
-  
+
   func setImageColorModelBasedOn(_ firstImageURL: String) {
     imageColorModel = RemoteImageModel(urlString: firstImageURL)
   }
-
-
 
   // MARK: - Cache related functions
 
@@ -349,7 +336,6 @@ class HomeViewModel: ObservableObject {
         return
       }
 
-
       ImageCache.deleteImageFromCache(imageURL: imageURLThatWillBeDeleted)
       self.objectWillChange.send()
     }
@@ -361,5 +347,5 @@ class HomeViewModel: ObservableObject {
         deleteImageFromCache()
       }
     }
-  
+
 }

@@ -14,12 +14,13 @@ struct FollowButton: View {
 
   private var followingState: MediaDetailViewModel.CurrentFollowingState {
     Utility.checkIfIsFollowingItem(itemID, mediaDetailVM: mediaDetailVM)
-  } 
+  }
 
   var body: some View {
     Button(action: { MediaDetailAPICalls.UserInfoAPICalls.changeFollowingState(to: followingState == .isFollowing ? .unfollow : .follow,
-                                                                                in: itemType, mediaDetailVM: mediaDetailVM,
-                                                                                itemID: itemID) }) {
+                                                                               in: itemType, mediaDetailVM: mediaDetailVM,
+                                                                               itemID: itemID) },
+           label: {
       RoundedRectangle(cornerRadius: Constants.radiusSmall)
         .strokeBorder(Color.white.opacity(Constants.opacityStandard), lineWidth: 1)
         .foregroundColor(.clear)
@@ -39,7 +40,7 @@ struct FollowButton: View {
         .frame(height: 35)
         .aspectRatio(followingState == .isFollowing ? 4.5 : 3.5 / 1, contentMode: .fit)
         .redacted(reason: mediaDetailVM.followedIDs[itemID] == nil ? .placeholder : [])
-    }
+    })
     .buttonStyle(PlainButtonStyle())
   }
 }

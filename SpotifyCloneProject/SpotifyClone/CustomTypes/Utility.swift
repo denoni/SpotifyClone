@@ -57,7 +57,6 @@ struct Utility {
     }
   }
 
-
   // MARK: - Data formatter
   static func getSpelledOutDate(from dateString: String) -> String {
     let formatter = DateFormatter()
@@ -86,8 +85,6 @@ struct Utility {
 
     return formatter.string(from: releaseDate)
   }
-
-
 
   // MARK: - Media Detail Utility
   static func didEverySectionLoaded(in subPage: HomeViewModel.HomeSubpage, mediaDetailVM: MediaDetailViewModel) -> Bool {
@@ -145,8 +142,6 @@ struct Utility {
     guard mediaDetailVM.followedIDs[itemID] != nil else { return .isNotFollowing }
     return mediaDetailVM.followedIDs[itemID]!
   }
-
-
 
   // MARK: - Navigation helper functions
 
@@ -231,5 +226,5 @@ struct Utility {
       break
     }
   }
-  
+
 }

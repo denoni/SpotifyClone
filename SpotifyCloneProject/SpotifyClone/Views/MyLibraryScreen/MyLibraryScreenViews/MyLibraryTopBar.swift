@@ -10,7 +10,7 @@ import SwiftUI
 struct MyLibraryTopBar: View {
   @EnvironmentObject var myLibraryVM: MyLibraryViewModel
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
-  
+
   var body: some View {
     VStack(spacing: 0) {
       VStack {
@@ -36,17 +36,17 @@ struct MyLibraryTopBar: View {
     .background(Color.spotifyMediumGray.shadow(color: .black, radius: 10).ignoresSafeArea())
     Spacer()
   }
-  
+
   private struct MyLibraryProfileImageAndTitle: View {
     @EnvironmentObject var myLibraryVM: MyLibraryViewModel
-    
+
     var body: some View {
       Circle()
         .fill(Color.spotifyMediumGray)
         .overlay(Group {
           let userName = myLibraryVM.mainVM.currentUserProfileInfo?.displayName ?? ""
           let userProfileImageURL = myLibraryVM.mainVM.currentUserProfileInfo?.imageURL ?? "S"
-          
+
           if userProfileImageURL != "" {
             RemoteImage(urlString: userProfileImageURL)
           } else {
@@ -62,5 +62,3 @@ struct MyLibraryTopBar: View {
     }
   }
 }
-
-

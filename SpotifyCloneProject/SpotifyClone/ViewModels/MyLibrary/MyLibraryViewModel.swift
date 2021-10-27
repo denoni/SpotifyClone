@@ -11,13 +11,13 @@ import SwiftUI
 class MyLibraryViewModel: ObservableObject & FilterableViewModelProtocol {
   var api = MyLibraryPageAPICalls()
   @Published var mainVM: MainViewModel
-  @Published var isLoading = [Section:Bool]()
-  @Published var mediaCollection = [Section:[SpotifyModel.MediaItem]]()
+  @Published var isLoading = [Section: Bool]()
+  @Published var mediaCollection = [Section: [SpotifyModel.MediaItem]]()
   @Published var currentSubPage: MyLibrarySubpage = .none
   // Subpage navigation history
   @Published var pageHistory = [(subPage: MyLibrarySubpage, data: SpotifyModel.MediaItem, mediaDetailVM: MediaDetailViewModel)]()
   // Filter options that the user can tap to show only shows, playlists, etc...
-  @Published var selectedMediaTypeFilter: SpotifyModel.MediaTypes? = nil
+  @Published var selectedMediaTypeFilter: SpotifyModel.MediaTypes?
   @Published var currentScrollPosition: CGFloat = 0
 
   enum MyLibrarySubpage {
@@ -68,8 +68,6 @@ class MyLibraryViewModel: ObservableObject & FilterableViewModelProtocol {
     }
   }
 
-
-
   // MARK: - API Calls
 
   func getCurrentUserPlaylists(accessToken: String) {
@@ -89,8 +87,6 @@ class MyLibraryViewModel: ObservableObject & FilterableViewModelProtocol {
       self.trimAndCommunicateResult(section: .userShows, medias: shows)
     }
   }
-
-
 
   // MARK: - Auxiliary Functions
 
@@ -116,8 +112,6 @@ class MyLibraryViewModel: ObservableObject & FilterableViewModelProtocol {
 
     isLoading[section] = false
   }
-
-
 
   // MARK: - Non-api Related Functions
 

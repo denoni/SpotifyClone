@@ -25,7 +25,7 @@ struct MainView: View {
     _searchVM = StateObject(wrappedValue: SearchViewModel(mainVM: mainViewModel))
     _mediaDetailVM = StateObject(wrappedValue: MediaDetailViewModel(mainVM: mainViewModel))
   }
-  
+
   var body: some View {
     if mainVM.homeScreenIsReady {
       ZStack {

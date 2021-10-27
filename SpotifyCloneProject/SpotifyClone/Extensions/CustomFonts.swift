@@ -58,6 +58,3 @@ extension UIFont {
     return UIFont(name: type.value, size: size)!
   }
 }
-
-
-

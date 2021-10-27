@@ -22,8 +22,6 @@ struct RecommendedArtistScrollView: View {
 
     return mediasWithoutArtist
   }
-  
-
 
   var body: some View {
     if !medias.isEmpty {
@@ -32,14 +30,14 @@ struct RecommendedArtistScrollView: View {
 
         // Horizontal scroll view of artist's songs
         ScrollView(.horizontal, showsIndicators: false) {
-          LazyHStack(alignment: .top,spacing: Constants.spacingLarge) {
+          LazyHStack(alignment: .top, spacing: Constants.spacingLarge) {
             ForEach(getArtistSongs()) { media in
               BigSongItem(imageURL: media.imageURL, title: media.title, mediaType: media.mediaType)
                 .onTapGesture {
                   homeVM.changeSubpageTo(.trackDetail, mediaDetailVM: mediaDetailVM, withData: media)
                 }
                 .onAppear { homeVM.homeCachedImageURLs.append(media.imageURL) }
-                .onDisappear{
+                .onDisappear {
                   if homeVM.homeCachedImageURLs.count > 25 {
                     for _ in 0..<15 {
                       homeVM.deleteImageFromCache()
@@ -83,6 +81,3 @@ struct RecommendedArtistScrollView: View {
     }
   }
 }
-
-
-

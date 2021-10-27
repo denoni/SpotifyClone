@@ -12,7 +12,7 @@ struct LoadingView<Content>: View where Content: View {
   var content: () -> Content
 
   var body: some View {
-    GeometryReader { geometry in
+    GeometryReader { _ in
       ZStack {
         self.content()
         Group {
@@ -29,4 +29,3 @@ struct LoadingView<Content>: View where Content: View {
     }
   }
 }
-

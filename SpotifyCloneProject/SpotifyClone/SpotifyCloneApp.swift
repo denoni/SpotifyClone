@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-// TODO: Add documentation following Apple's Markup Formatting Reference
-
 @main
 struct SpotifyCloneApp: App {
     var body: some Scene {

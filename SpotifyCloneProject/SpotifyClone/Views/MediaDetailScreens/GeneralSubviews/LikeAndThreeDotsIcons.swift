@@ -21,8 +21,6 @@ struct LikeAndThreeDotsIcons: View {
     }
   }
 
-
-
   var body: some View {
     HStack(spacing: 30) {
       HeartButton(mediaDetailVM: mediaDetailVM,

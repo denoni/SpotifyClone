@@ -10,7 +10,7 @@ import SwiftUI
 struct AuthScreen: View {
   @StateObject var authViewModel: AuthViewModel
   @State var isShowingAuthWebView = false
-  
+
   var body: some View {
     GeometryReader { geometry in
       ZStack {

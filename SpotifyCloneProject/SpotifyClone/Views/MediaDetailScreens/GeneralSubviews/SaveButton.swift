@@ -14,29 +14,31 @@ struct SaveButton: View {
 
   private var followingState: MediaDetailViewModel.CurrentFollowingState {
     Utility.checkIfIsFollowingItem(itemID, mediaDetailVM: mediaDetailVM)
-  } 
+  }
 
   var body: some View {
     if followingState == .isFollowing {
       Button(action: { MediaDetailAPICalls.UserInfoAPICalls.changeFollowingState(to: .unfollow,
-                                                                                  in: itemType,
-                                                                                  mediaDetailVM: mediaDetailVM,
-                                                                                  itemID: itemID) }) {
+                                                                                 in: itemType,
+                                                                                 mediaDetailVM: mediaDetailVM,
+                                                                                 itemID: itemID) },
+             label: {
         Image(systemName: "checkmark.circle.fill")
           .resizable()
           .foregroundColor(.spotifyGreen)
           .frame(width: 25, height: 25)
-      }
+      })
     } else {
       Button(action: { MediaDetailAPICalls.UserInfoAPICalls.changeFollowingState(to: .follow,
-                                                                                  in: itemType,
-                                                                                  mediaDetailVM: mediaDetailVM,
-                                                                                  itemID: itemID) }) {
+                                                                                 in: itemType,
+                                                                                 mediaDetailVM: mediaDetailVM,
+                                                                                 itemID: itemID) },
+             label: {
         Image("plus-circle")
           .resizable()
           .frame(width: 25, height: 25)
-      }
+      })
     }
   }
-  
+
 }

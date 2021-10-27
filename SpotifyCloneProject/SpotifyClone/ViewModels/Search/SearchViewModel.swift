@@ -53,8 +53,6 @@ class SearchViewModel: ObservableObject {
     }
   }
 
-
-
   // MARK: - Non-api Related Functions
 
   func goToNoneSubpage() {
@@ -71,7 +69,7 @@ class SearchViewModel: ObservableObject {
 
       // removes the page that we just returned to
       pageHistory.removeLast()
-      
+
     } else {
       goToNoneSubpage()
     }

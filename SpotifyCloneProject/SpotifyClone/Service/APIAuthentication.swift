@@ -14,7 +14,8 @@ struct APIAuthentication {
 
   // SCOPE = Check available scopes on  https://developer.spotify.com/documentation/general/guides/scopes/
   // CLIENT_ID = Get yours on https://developer.spotify.com/dashboard/applications
-  // REDIRECT_URI = A random website to redirect(we'll cut the connection before loading this site into the user screen) - IMPORTANT: This should be exactly equal to what you typed on your api project on spotify developer website.
+  // REDIRECT_URI = A random website to redirect(we'll cut the connection before loading this site into the user screen)
+  // IMPORTANT: 'REDIRECT_URI' should be exactly equal to what you typed on your api project on spotify developer website.
 
   func getAuthURL(clientID: String,
                   scope: String,
@@ -48,7 +49,7 @@ struct APIAuthentication {
       "code": code,
       "redirect_uri": redirectURI,
       "client_id": clientID,
-      "client_secret": clientSecret,
+      "client_secret": clientSecret
     ]
 
     let encoder = URLEncodedFormParameterEncoder(encoder: URLEncodedFormEncoder(spaceEncoding: .percentEscaped))
@@ -60,7 +61,11 @@ struct APIAuthentication {
                headers: headers)
       .responseDecodable(of: AuthKey.self) { response in
         guard let key = response.value else {
-          fatalError("Error receiving access keys from API. Check if your ApiKey and Secret are correct in YourSensitiveData. If you tried to log in using Google, Apple or Facebook, this may be the error cause (in some cases this type of authentication is resulting in errors)") // TODO: Fix it
+          fatalError("""
+                     Error receiving access keys from API. Check if your ApiKey/Secret are correct in YourSensitiveData.
+                     If you tried to log in using Google, Apple or Facebook, this may be the error cause
+                     (in some cases this type of authentication is resulting in errors)
+                     """) // TODO: Fix it
         }
         completionHandler(key)
       }

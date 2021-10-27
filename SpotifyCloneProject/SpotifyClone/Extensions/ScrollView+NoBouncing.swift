@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 extension ScrollView {
   func disabledBouncing() -> some View {
     self

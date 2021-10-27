@@ -52,8 +52,6 @@ struct TracksVerticalScrollView: View {
     .padding(.bottom, Constants.paddingStandard)
   }
 
-
-
   // MARK: - Album Item
 
   fileprivate struct AlbumItem: View {
@@ -90,8 +88,6 @@ struct TracksVerticalScrollView: View {
       .padding(.leading, -Constants.paddingSmall)
     }
   }
-
-
 
   // MARK: - Playlist Item
 
@@ -163,12 +159,9 @@ struct TracksVerticalScrollView: View {
           }
         }
       }
-      .onChange(of: isPlaying) { response in
+      .onChange(of: isPlaying) { _ in
         if !isPlaying { isTapped = false }
       }
     }
   }
 }
-
-
-

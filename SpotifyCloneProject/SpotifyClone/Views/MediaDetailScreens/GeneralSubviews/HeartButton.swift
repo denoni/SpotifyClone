@@ -20,7 +20,8 @@ struct HeartButton: View {
     Button(action: {  MediaDetailAPICalls.UserInfoAPICalls.changeFollowingState(to: followingState == .isFollowing ? .unfollow : .follow,
                                                                                 in: itemType,
                                                                                 mediaDetailVM: mediaDetailVM,
-                                                                                itemID: itemID) }) {
+                                                                                itemID: itemID) },
+           label: {
       if mediaDetailVM.followedIDs[itemID] == .error {
         Image(systemName: "xmark.octagon.fill")
           .resizable()
@@ -43,7 +44,7 @@ struct HeartButton: View {
             }
             .scaledToFit())
       }
-    }
+    })
   }
-  
+
 }

@@ -39,11 +39,9 @@ struct ShowsDetailScreen: View {
   }
 }
 
-
-
 // MARK: - Detail Content
 
-fileprivate struct ShowsDetailContent: View {
+private struct ShowsDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
   @Binding var scrollViewPosition: CGFloat
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
@@ -59,7 +57,7 @@ fileprivate struct ShowsDetailContent: View {
     VStack(alignment: .leading, spacing: Constants.spacingMedium) {
       HStack(alignment: .center, spacing: Constants.spacingMedium) {
         SmallMediaCover(imageURL: mediaDetailVM.mainItem!.imageURL)
-        VStack (alignment: .leading) {
+        VStack(alignment: .leading) {
           MediaTitle(mediaTitle: mediaDetailVM.mainItem!.title, lineLimit: 2)
             .padding(.bottom, 5)
           ShowAuthor(authorName: mediaDetailVM.mainItem!.authorName.first!)
@@ -73,7 +71,6 @@ fileprivate struct ShowsDetailContent: View {
       // (originated from the current position of the scroll view)
       .scaleEffect(1 / (scale + 1))
       .opacity(1 - Double(scale * 2 > 0.8 ? 0.8 : scale * 2))
-      
 
       MediaDescription(description: details.description)
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -126,8 +123,6 @@ fileprivate struct ShowsDetailContent: View {
   }
 }
 
-
-
 // MARK: - Preview
 
 struct ShowsDetailScreen_Previews: PreviewProvider {
@@ -136,7 +131,8 @@ struct ShowsDetailScreen_Previews: PreviewProvider {
   static var previews: some View {
     ZStack {
       // `detailScreenOrigin` doesn't matter on preview.
-      ShowsDetailScreen(detailScreenOrigin: .home(homeVM: HomeViewModel(mainViewModel: mainVM)), mediaDetailVM: MediaDetailViewModel(mainVM: mainVM))
+      ShowsDetailScreen(detailScreenOrigin: .home(homeVM: HomeViewModel(mainViewModel: mainVM)),
+                        mediaDetailVM: MediaDetailViewModel(mainVM: mainVM))
       VStack {
         Spacer()
         BottomBar(mainVM: mainVM, showMediaPlayer: true)

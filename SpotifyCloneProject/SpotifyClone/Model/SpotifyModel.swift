@@ -32,7 +32,7 @@ struct SpotifyModel {
     var imageURL: String
     var id: String
   }
-  
+
   struct MediaItem: Identifiable {
 
     var title: String
@@ -47,30 +47,27 @@ struct SpotifyModel {
 
     fileprivate func getDetails() -> DetailTypes {
       switch details {
-        case .playlists(let playlistDetails):
-          return DetailTypes.playlists(playlistDetails: playlistDetails)
+      case .playlists(let playlistDetails):
+        return DetailTypes.playlists(playlistDetails: playlistDetails)
 
-        case .artists(let artistDetails):
-          return DetailTypes.artists(artistDetails: artistDetails)
+      case .artists(let artistDetails):
+        return DetailTypes.artists(artistDetails: artistDetails)
 
-        case .shows(let showDetails):
-          return DetailTypes.shows(showDetails: showDetails)
+      case .shows(let showDetails):
+        return DetailTypes.shows(showDetails: showDetails)
 
-        case .tracks(let trackDetails):
-          return DetailTypes.tracks(trackDetails: trackDetails)
+      case .tracks(let trackDetails):
+        return DetailTypes.tracks(trackDetails: trackDetails)
 
-        case .album(let albumDetails):
-          return DetailTypes.album(albumDetails: albumDetails)
+      case .album(let albumDetails):
+        return DetailTypes.album(albumDetails: albumDetails)
 
-        case .episode(let episodeDetails):
-          return DetailTypes.episode(episodeDetails: episodeDetails)
+      case .episode(let episodeDetails):
+        return DetailTypes.episode(episodeDetails: episodeDetails)
       }
     }
 
-
   }
-
-
 
   // MARK: - Detail Structs
   enum DetailTypes {
@@ -82,7 +79,6 @@ struct SpotifyModel {
     case episode(episodeDetails: EpisodeDetails)
   }
 
-  
   struct ShowDetails {
     var description: String
     var explicit: Bool
@@ -129,8 +125,6 @@ struct SpotifyModel {
     var showId: String?
   }
 
-
-
   // MARK: - Sub structs
   struct PlaylistTracks {
     var numberOfSongs: Int
@@ -141,8 +135,6 @@ struct SpotifyModel {
     var displayName: String
     var id: String
   }
-
-  
 
   // MARK: - Auxiliary functions
 

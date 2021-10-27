@@ -33,8 +33,6 @@ struct LikedSongsScrollScreen: View {
   }
 }
 
-
-
 // MARK: - Detail Content
 struct LikedSongsDetailContent: View {
   @Environment(\.topSafeAreaSize) var topSafeAreaSize

@@ -12,13 +12,17 @@ struct MediaDetailAPICalls {
   struct ArtistAPICalls {
 
     static func getTopTracksFromArtist(mediaDetailVM: MediaDetailViewModel) {
-      mediaDetailVM.api.getTopTracksFromArtist(with: mediaDetailVM.accessToken!, artistID: mediaDetailVM.mainItem!.id) { tracks in
+      mediaDetailVM.api.getTopTracksFromArtist(with: mediaDetailVM.accessToken!,
+                                               artistID: mediaDetailVM.mainItem!.id) { tracks in
+
         mediaDetailVM.trimAndCommunicateResult(medias: tracks, section: .artist(.topTracksFromArtist), limit: 5)
       }
     }
 
     static func getAlbumsFromArtist(mediaDetailVM: MediaDetailViewModel) {
-      mediaDetailVM.api.getAlbumsFromArtist(with: mediaDetailVM.accessToken!, artistID: mediaDetailVM.mainItem!.id) { albums in
+      mediaDetailVM.api.getAlbumsFromArtist(with: mediaDetailVM.accessToken!,
+                                            artistID: mediaDetailVM.mainItem!.id) { albums in
+
         mediaDetailVM.trimAndCommunicateResult(medias: albums, section: .artist(.albumsFromArtist), limit: 5)
       }
     }
@@ -28,12 +32,12 @@ struct MediaDetailAPICalls {
       let keyWord: String = mediaDetailVM.mainItem!.title.folding(options: .diacriticInsensitive, locale: .current)
 
       mediaDetailVM.api.getPlaylistsFromArtist(with: mediaDetailVM.accessToken!, keyWord: keyWord) { playlists in
+
         mediaDetailVM.trimAndCommunicateResult(medias: playlists, section: .artist(.playlistsFromArtist))
       }
     }
 
   }
-
 
   struct PlaylistAPICalls {
 
@@ -42,15 +46,19 @@ struct MediaDetailAPICalls {
       let offset = mediaDetailVM.getNumberOfLoadedItems(for: .playlist(.tracksFromPlaylist))
       mediaDetailVM.increaseNumberOfLoadedItems(for: .playlist(.tracksFromPlaylist), by: 10)
 
+      let playlistID = SpotifyModel.getPlaylistDetails(for: mediaDetailVM.mainItem!).id
+
       mediaDetailVM.api.getTracksFromPlaylist(with: mediaDetailVM.accessToken!,
-                                              playlistID: SpotifyModel.getPlaylistDetails(for: mediaDetailVM.mainItem!).id,
+                                              playlistID: playlistID,
                                               offset: offset) { tracks in
-        mediaDetailVM.trimAndCommunicateResult(medias: tracks, section: .playlist(.tracksFromPlaylist), loadMoreEnabled: loadMoreEnabled)
+
+        mediaDetailVM.trimAndCommunicateResult(medias: tracks,
+                                               section: .playlist(.tracksFromPlaylist),
+                                               loadMoreEnabled: loadMoreEnabled)
       }
     }
 
   }
-
 
   struct AlbumAPICalls {
 
@@ -62,13 +70,13 @@ struct MediaDetailAPICalls {
       mediaDetailVM.api.getTracksFromAlbum(with: mediaDetailVM.accessToken!,
                                            albumID: SpotifyModel.getAlbumDetails(for: mediaDetailVM.mainItem!).id,
                                            offset: offset) { tracks in
+
         mediaDetailVM.trimAndCommunicateResult(medias: tracks, section: .album(.tracksFromAlbum),
                                                loadMoreEnabled: loadMoreEnabled)
       }
     }
 
   }
-
 
   struct ShowsAPICalls {
 
@@ -80,6 +88,7 @@ struct MediaDetailAPICalls {
       mediaDetailVM.api.getEpisodesFromShow(with: mediaDetailVM.accessToken!,
                                             showID: SpotifyModel.getShowDetails(for: mediaDetailVM.mainItem!).id,
                                             offset: offset) { episodes in
+
         mediaDetailVM.trimAndCommunicateResult(medias: episodes, section: .shows(.episodesFromShow),
                                                loadMoreEnabled: loadMoreEnabled)
       }
@@ -87,17 +96,17 @@ struct MediaDetailAPICalls {
 
   }
 
-
   struct EpisodeAPICalls {
 
     static func getEpisodeDetails(mediaDetailVM: MediaDetailViewModel,
                                   loadMoreEnabled: Bool = false) {
-      mediaDetailVM.api.getEpisodeDetails(with: mediaDetailVM.accessToken!, episodeID: mediaDetailVM.mainItem!.id) { episode in
+      mediaDetailVM.api.getEpisodeDetails(with: mediaDetailVM.accessToken!,
+                                          episodeID: mediaDetailVM.mainItem!.id) { episode in
+
         mediaDetailVM.trimAndCommunicateResult(medias: [episode], section: .episodes(.episodeDetails))
       }
     }
   }
-
 
   struct UserInfoAPICalls {
     static func checksIfUserFollows(_ mediaType: APIFetchingUserInfo.ValidMediaType,
@@ -119,7 +128,10 @@ struct MediaDetailAPICalls {
                                      in mediaType: APIFetchingUserInfo.ValidMediaType,
                                      mediaDetailVM: MediaDetailViewModel,
                                      itemID: String) {
-      mediaDetailVM.api.changeFollowingState(to: followingState, in: mediaType, with: mediaDetailVM.accessToken!, mediaID: itemID) { errorOccurred in
+      mediaDetailVM.api.changeFollowingState(to: followingState,
+                                             in: mediaType,
+                                             with: mediaDetailVM.accessToken!,
+                                             mediaID: itemID) { errorOccurred in
         if !errorOccurred {
           if followingState == .follow {
             mediaDetailVM.followedIDs[itemID] = .isFollowing
@@ -150,8 +162,14 @@ struct MediaDetailAPICalls {
       let offset = mediaDetailVM.getNumberOfLoadedItems(for: .userLikedFollowedMedia(.userLikedSongs))
       mediaDetailVM.increaseNumberOfLoadedItems(for: .userLikedFollowedMedia(.userLikedSongs), by: 10)
 
-      mediaDetailVM.api.trackAPI.getTrack(using: .userLikedTracks, with: mediaDetailVM.accessToken!, limit: 10, offset: offset) { tracks in
-        mediaDetailVM.trimAndCommunicateResult(medias: tracks, section: .userLikedFollowedMedia(.userLikedSongs), loadMoreEnabled: true)
+      mediaDetailVM.api.trackAPI.getTrack(using: .userLikedTracks,
+                                          with: mediaDetailVM.accessToken!,
+                                          limit: 10,
+                                          offset: offset) { tracks in
+
+        mediaDetailVM.trimAndCommunicateResult(medias: tracks,
+                                               section: .userLikedFollowedMedia(.userLikedSongs),
+                                               loadMoreEnabled: true)
       }
     }
 
@@ -159,8 +177,14 @@ struct MediaDetailAPICalls {
       let offset = mediaDetailVM.getNumberOfLoadedItems(for: .userLikedFollowedMedia(.userSavedEpisodes))
       mediaDetailVM.increaseNumberOfLoadedItems(for: .userLikedFollowedMedia(.userSavedEpisodes), by: 10)
 
-      mediaDetailVM.api.episodeAPI.getEpisode(using: .userSavedEpisodes, with: mediaDetailVM.accessToken!, limit: 10, offset: offset) { episodes in
-        mediaDetailVM.trimAndCommunicateResult(medias: episodes, section: .userLikedFollowedMedia(.userSavedEpisodes), loadMoreEnabled: true)
+      mediaDetailVM.api.episodeAPI.getEpisode(using: .userSavedEpisodes,
+                                              with: mediaDetailVM.accessToken!,
+                                              limit: 10,
+                                              offset: offset) { episodes in
+
+        mediaDetailVM.trimAndCommunicateResult(medias: episodes,
+                                               section: .userLikedFollowedMedia(.userSavedEpisodes),
+                                               loadMoreEnabled: true)
       }
     }
   }

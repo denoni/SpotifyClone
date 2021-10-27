@@ -63,7 +63,7 @@ struct TopBarWithTitle: View {
           Spacer()
         }
         .padding(.top, topSafeAreaSize)
-        .padding(.top, 10)        
+        .padding(.top, 10)
       }
       Spacer()
     }
