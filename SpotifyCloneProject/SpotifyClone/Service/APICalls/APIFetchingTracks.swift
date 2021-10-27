@@ -42,78 +42,60 @@ class APIFetchingTracks {
       baseUrl = "https://api.spotify.com/v1/albums/\(albumID)/tracks?limit=\(limit)&offset=\(offset)"
     }
 
-    var urlRequest = URLRequest(url: URL(string: baseUrl)!)
-    urlRequest.httpMethod = "GET"
-    urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-    urlRequest.cachePolicy = NSURLRequest.CachePolicy.returnCacheDataElseLoad
-
-    var trackItems = [SpotifyModel.MediaItem]()
+    let urlRequest = Utility.createStandardURLRequest(url: baseUrl, accessToken: accessToken)
 
     AF.request(urlRequest)
       .validate()
       .responseDecodable(of: TrackResponse.self) { response in
-        parseResponse(response)
+
+        let responseStatus = Utility.getResponseStatusCode(forValue: response.value, responseItemsCount: response.value?.tracks.count)
+        guard responseStatus != .empty else { return completionHandler( [SpotifyModel.MediaItem]() ) }
+
+        completionHandler(self.parseResponse(response))
+      }
+  }
+
+  private func parseResponse(_ response: DataResponse<TrackResponse, AFError>) -> [SpotifyModel.MediaItem] {
+
+    var trackItems = [SpotifyModel.MediaItem]()
+    let numberOfItems = response.value!.tracks.count
+
+    for trackIndex in 0 ..< numberOfItems {
+      let track = response.value!.tracks[trackIndex]
+
+      let title = track.name
+      let previewURL = track.preview_url
+      let author = track.artists
+      let id = track.id
+      var authorName = [String]()
+
+      let popularity = track.popularity
+      let explicit = track.explicit
+      let durationInMs = track.duration_ms
+
+      let imageURL = track.album?.images?[0].url
+      let lowResImageURL = track.album?.images?.last?.url
+      let albumName = track.album?.name
+      let albumID = track.album?.id
+      let numberOfTracks = track.album?.total_tracks
+      let releaseDate = track.album?.release_date
+
+      for artistIndex in track.artists.indices {
+        authorName.append(track.artists[artistIndex].name)
       }
 
-    func parseResponse(_ response: DataResponse<TrackResponse, AFError>) {
+      let albumDetails = SpotifyModel.AlbumDetails(name: albumName ?? "", numberOfTracks: numberOfTracks ?? 0,
+                                                   releaseDate: releaseDate ?? "0", id: albumID ?? "")
+      let trackDetails = SpotifyModel.TrackDetails(popularity: popularity ?? 0, explicit: explicit,
+                                                   durationInMs: durationInMs, id: id, album: albumDetails)
 
-      guard let data = response.value else {
-        fatalError("Error receiving tracks from API.")
-      }
+      let trackItem = SpotifyModel
+        .MediaItem(title: title, previewURL: previewURL ?? "", imageURL: imageURL ?? "",
+                   lowResImageURL: lowResImageURL ?? "", authorName: authorName, author: author,
+                   mediaType: .track, id: id, details: SpotifyModel.DetailTypes.tracks( trackDetails: trackDetails))
 
-      let numberOfItems = data.tracks.count
-
-      guard numberOfItems != 0 else {
-        completionHandler(trackItems)
-        print("The API response was corrects but empty. We'll just return []")
-        return
-      }
-
-      for trackIndex in 0 ..< numberOfItems {
-        let track = data.tracks[trackIndex]
-
-        let title = track.name
-        let previewURL = track.preview_url
-        let author = track.artists
-        let id = track.id
-        var authorName = [String]()
-
-        let popularity = track.popularity
-        let explicit = track.explicit
-        let durationInMs = track.duration_ms
-
-        let imageURL = track.album?.images?[0].url
-        let lowResImageURL = track.album?.images?.last?.url
-        let albumName = track.album?.name
-        let albumID = track.album?.id
-        let numberOfTracks = track.album?.total_tracks
-        let releaseDate = track.album?.release_date
-
-        for artistIndex in track.artists.indices {
-          authorName.append(track.artists[artistIndex].name)
-        }
-
-        let trackItem = SpotifyModel
-          .MediaItem(title: title,
-                     previewURL: previewURL ?? "",
-                     imageURL: imageURL ?? "",
-                     lowResImageURL: lowResImageURL ?? "",
-                     authorName: authorName,
-                     author: author,
-                     mediaType: .track,
-                     id: id,
-                     details: SpotifyModel.DetailTypes.tracks(
-                      trackDetails: SpotifyModel.TrackDetails(popularity: popularity ?? 0,
-                                                              explicit: explicit,
-                                                              durationInMs: durationInMs,
-                                                              id: id,
-                                                              album: SpotifyModel.AlbumDetails(name: albumName ?? "",
-                                                                                               numberOfTracks: numberOfTracks ?? 0,
-                                                                                               releaseDate: releaseDate ?? "0",
-                                                                                               id: albumID ?? ""))))
-        trackItems.append(trackItem)
-      }
-      completionHandler(trackItems)
+      trackItems.append(trackItem)
     }
+    return trackItems
   }
 }

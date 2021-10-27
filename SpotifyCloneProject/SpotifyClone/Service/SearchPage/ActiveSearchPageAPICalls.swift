@@ -18,10 +18,7 @@ class ActiveSearchPageAPICalls: ObservableObject {
     let type = "track,playlist,album,artist,show,episode"
     let baseUrl = "https://api.spotify.com/v1/search?q=\(searchTerm)&type=\(type)&limit=\(limit)"
 
-    var urlRequest = URLRequest(url: URL(string: baseUrl)!)
-    urlRequest.httpMethod = "GET"
-    urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-    urlRequest.cachePolicy = NSURLRequest.CachePolicy.returnCacheDataElseLoad
+    let urlRequest = Utility.createStandardURLRequest(url: baseUrl, accessToken: accessToken)
 
     var mediaItems = [SpotifyModel.MediaItem]()
 

@@ -12,12 +12,9 @@ class MainViewModelAPICalls {
   func getCurrentUserInfo(with accessToken: String,
                           completionHandler: @escaping (SpotifyModel.CurrentUserProfileInfo) -> Void) {
 
-    let baseURL = "https://api.spotify.com/v1/me"
+    let baseUrl = "https://api.spotify.com/v1/me"
 
-    var urlRequest = URLRequest(url: URL(string: baseURL)!)
-    urlRequest.httpMethod = "GET"
-    urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-    urlRequest.cachePolicy = NSURLRequest.CachePolicy.returnCacheDataElseLoad
+    let urlRequest = Utility.createStandardURLRequest(url: baseUrl, accessToken: accessToken)
 
     AF.request(urlRequest)
       .validate()

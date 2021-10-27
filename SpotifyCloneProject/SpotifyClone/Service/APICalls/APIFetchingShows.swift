@@ -30,29 +30,22 @@ class APIFetchingShows {
       let market = "US"
       baseUrl = "https://api.spotify.com/v1/search?q=\(termSearch)&type=\(type)&market=\(market)&limit=\(limit)&offset=\(offset)"
 
-      var urlRequest = URLRequest(url: URL(string: baseUrl)!)
-      urlRequest.httpMethod = "GET"
-      urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-      urlRequest.cachePolicy = NSURLRequest.CachePolicy.returnCacheDataElseLoad
+      let urlRequest = Utility.createStandardURLRequest(url: baseUrl, accessToken: accessToken)
 
       AF.request(urlRequest)
         .validate()
         .responseDecodable(of: ShowResponse.self) { response in
-          guard let data = response.value else {
-            fatalError("Error receiving tracks from API.")
-          }
 
           var podcastItems = [SpotifyModel.MediaItem]()
-          let numberOfItems = data.shows.items.count
 
-          guard numberOfItems != 0 else {
-            completionHandler(podcastItems)
-            print("The API response was corrects but empty. We'll just return []")
-            return
-          }
+          let responseStatus = Utility.getResponseStatusCode(forValue: response.value,
+                                                             responseItemsCount: response.value?.shows.items.count)
+          guard responseStatus != .empty else { return completionHandler(podcastItems) }
+
+          let numberOfItems = response.value!.shows.items.count
 
           for showIndex in 0 ..< numberOfItems {
-            let show = data.shows.items[showIndex]
+            let show = response.value!.shows.items[showIndex]
             podcastItems.append(self.parseShowData(show))
           }
 
@@ -62,29 +55,21 @@ class APIFetchingShows {
     case .followedPodcasts:
       baseUrl = "https://api.spotify.com/v1/me/shows"
 
-      var urlRequest = URLRequest(url: URL(string: baseUrl)!)
-      urlRequest.httpMethod = "GET"
-      urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-      urlRequest.cachePolicy = NSURLRequest.CachePolicy.returnCacheDataElseLoad
+      let urlRequest = Utility.createStandardURLRequest(url: baseUrl, accessToken: accessToken)
 
       AF.request(urlRequest)
         .validate()
         .responseDecodable(of: FollowedShowResponse.self) { response in
-          guard let data = response.value else {
-            fatalError("Error receiving tracks from API.")
-          }
 
           var podcastItems = [SpotifyModel.MediaItem]()
-          let numberOfItems = data.items.count
 
-          guard numberOfItems != 0 else {
-            completionHandler(podcastItems)
-            print("The API response was corrects but empty. We'll just return []")
-            return
-          }
+          let responseStatus = Utility.getResponseStatusCode(forValue: response.value, responseItemsCount: response.value?.items.count)
+          guard responseStatus != .empty else { return completionHandler(podcastItems) }
+
+          let numberOfItems = response.value!.items.count
 
           for showIndex in 0 ..< numberOfItems {
-            let show = data.items[showIndex].show
+            let show = response.value!.items[showIndex].show
             podcastItems.append(self.parseShowData(show))
           }
 

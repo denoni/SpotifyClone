@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Alamofire
 
 struct Utility {
 
@@ -88,11 +89,10 @@ struct Utility {
 
   // MARK: - Media Detail Utility
   static func didEverySectionLoaded(in subPage: HomeViewModel.HomeSubpage, mediaDetailVM: MediaDetailViewModel) -> Bool {
-
+    // If any section is loading return true, else return false
     switch subPage {
     case .albumDetail:
       for section in MediaDetailSection.AlbumSections.allCases {
-        // If any section still loading, return false
         guard mediaDetailVM.isLoading[.album(section)] != true else {
           return false
         }
@@ -125,15 +125,16 @@ struct Utility {
       fatalError("Didn't implement `didEverySectionLoaded` for \(subPage)")
     }
 
-    // in playlist/show/episode's detail screen we have no interest in the playlist author.
-    if subPage != .playlistDetail && subPage != .showDetail && subPage != .episodeDetail {
+    let subPagesThatAuthorCanBeIgnored: [HomeViewModel.HomeSubpage] = [.playlistDetail, .showDetail, .episodeDetail]
+
+    // If the current subPage is not one of the subpages where artist(author) can be ignored
+    if subPagesThatAuthorCanBeIgnored.contains(subPage) == false {
       // Checks if artist basic info is still loading
       guard mediaDetailVM.isLoading[.artistBasicInfo(.artistBasicInfo)] != true else {
         return false
       }
     }
 
-    // else, return true
     return true
   }
 
@@ -184,16 +185,11 @@ struct Utility {
 
     switch mediaDetailVM.detailScreenOrigin {
     case .home(let homeVM):
-      homeVM.changeSubpageTo(homeVMDestinySubpage,
-                             mediaDetailVM: mediaDetailVM,
-                             withData: data)
+      homeVM.changeSubpageTo(homeVMDestinySubpage, mediaDetailVM: mediaDetailVM, withData: data)
     case .search(let searchVM):
-      searchVM.changeSubpageTo(searchVMDestinySubpage, subPageType: .detail(mediaDetailVM: mediaDetailVM,
-                                                                            data: data))
+      searchVM.changeSubpageTo(searchVMDestinySubpage, subPageType: .detail(mediaDetailVM: mediaDetailVM, data: data))
     case .myLibrary(let myLibraryVM):
-      myLibraryVM.changeSubpageTo(myLibraryVMDestinySubpage,
-                                  mediaDetailVM: mediaDetailVM,
-                                  withData: data)
+      myLibraryVM.changeSubpageTo(myLibraryVMDestinySubpage, mediaDetailVM: mediaDetailVM, withData: data)
     default:
       fatalError("Missing detail screen origin.")
     }
@@ -225,6 +221,39 @@ struct Utility {
     default:
       break
     }
+  }
+
+  // MARK: - API Helper functions
+
+  // MARK: Standard URL request
+  static func createStandardURLRequest(url: String, accessToken: String) -> URLRequest {
+    var urlRequest = URLRequest(url: URL(string: url)!)
+    urlRequest.httpMethod = "GET"
+    urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+    urlRequest.cachePolicy = NSURLRequest.CachePolicy.returnCacheDataElseLoad
+
+    return urlRequest
+  }
+
+  // MARK: Check error or empty API Response
+
+  enum ResponseStatus {
+    case success
+    case empty
+  }
+
+  static func getResponseStatusCode<AnyDecodable: Decodable>(forValue: AnyDecodable?, responseItemsCount: Int?) -> ResponseStatus {
+
+    guard forValue != nil else {
+      fatalError("Error receiving tracks from API.")
+    }
+
+    guard responseItemsCount != 0 else {
+      print("The API response was corrects but empty. We'll just return []")
+      return .empty
+    }
+
+    return .success
   }
 
 }

@@ -2,6 +2,7 @@ disabled_rules: # rule identifiers turned on by default to exclude from running
   - force_cast
   - identifier_name
   - implicit_getter
+  - function_body_length
 
 excluded:
   - ${PWD}/Pods
@@ -11,3 +12,8 @@ line_length:
   error: 240
   ignores_comments: true
   ignores_urls: true
+
+cyclomatic_complexity:
+  warning: 15
+  error: 30
+  ignores_case_statements: true

@@ -17,10 +17,7 @@ class APIFetchingBasicInfo {
     // %2c = comma
     let baseUrl = "https://api.spotify.com/v1/artists?ids=\(artistIDs.joined(separator: "%2c"))"
 
-    var urlRequest = URLRequest(url: URL(string: baseUrl)!)
-    urlRequest.httpMethod = "GET"
-    urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-    urlRequest.cachePolicy = NSURLRequest.CachePolicy.returnCacheDataElseLoad
+    let urlRequest = Utility.createStandardURLRequest(url: baseUrl, accessToken: accessToken)
 
     var artistItems = [SpotifyModel.MediaItem]()
 

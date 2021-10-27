@@ -32,10 +32,7 @@ class APIFetchingEpisodes {
       baseUrl = "https://api.spotify.com/v1/me/episodes?limit=\(limit)&offset=\(offset)"
     }
 
-    var urlRequest = URLRequest(url: URL(string: baseUrl)!)
-    urlRequest.httpMethod = "GET"
-    urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-    urlRequest.cachePolicy = NSURLRequest.CachePolicy.returnCacheDataElseLoad
+    let urlRequest = Utility.createStandardURLRequest(url: baseUrl, accessToken: accessToken)
 
     switch endPoint {
     case .episodesFromShow:
@@ -43,21 +40,15 @@ class APIFetchingEpisodes {
         .validate()
         .responseDecodable(of: EpisodeResponse.self) { response in
 
-          guard let data = response.value else {
-            fatalError("Error receiving tracks from API.")
-          }
-
           var episodeItems = [SpotifyModel.MediaItem]()
-          let numberOfEpisodes = data.items.count
 
-          guard numberOfEpisodes != 0 else {
-            completionHandler(episodeItems)
-            print("The API response was corrects but empty. We'll just return []")
-            return
-          }
+          let responseStatus = Utility.getResponseStatusCode(forValue: response.value, responseItemsCount: response.value?.items.count)
+          guard responseStatus != .empty else { return completionHandler(episodeItems) }
+
+          let numberOfEpisodes = response.value!.items.count
 
           for episodeIndex in 0 ..< numberOfEpisodes {
-            let episode = data.items[episodeIndex]
+            let episode = response.value!.items[episodeIndex]
             episodeItems.append(parseEpisode(episode))
           }
 
@@ -69,21 +60,15 @@ class APIFetchingEpisodes {
         .validate()
         .responseDecodable(of: SavedEpisodeResponse.self) { response in
 
-          guard let data = response.value else {
-            fatalError("Error receiving tracks from API.")
-          }
-
           var episodeItems = [SpotifyModel.MediaItem]()
-          let numberOfEpisodes = data.items.count
 
-          guard numberOfEpisodes != 0 else {
-            completionHandler(episodeItems)
-            print("The API response was corrects but empty. We'll just return []")
-            return
-          }
+          let responseStatus = Utility.getResponseStatusCode(forValue: response.value, responseItemsCount: response.value?.items.count)
+          guard responseStatus != .empty else { return completionHandler(episodeItems) }
+
+          let numberOfEpisodes = response.value!.items.count
 
           for episodeIndex in 0 ..< numberOfEpisodes {
-            let episode = data.items[episodeIndex].episode
+            let episode = response.value!.items[episodeIndex].episode
             episodeItems.append(parseEpisode(episode))
           }
 
@@ -124,10 +109,7 @@ class APIFetchingEpisodes {
 
     let baseUrl = "https://api.spotify.com/v1/episodes/\(episodeID)"
 
-    var urlRequest = URLRequest(url: URL(string: baseUrl)!)
-    urlRequest.httpMethod = "GET"
-    urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-    urlRequest.cachePolicy = NSURLRequest.CachePolicy.returnCacheDataElseLoad
+    let urlRequest = Utility.createStandardURLRequest(url: baseUrl, accessToken: accessToken)
 
     AF.request(urlRequest)
       .validate()

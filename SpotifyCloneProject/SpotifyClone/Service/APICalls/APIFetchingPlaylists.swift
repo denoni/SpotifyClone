@@ -38,64 +38,53 @@ class APIFetchingPlaylists {
       baseUrl = "https://api.spotify.com/v1/me/playlists"
     }
 
-    var urlRequest = URLRequest(url: URL(string: baseUrl)!)
-    urlRequest.httpMethod = "GET"
-    urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-    urlRequest.cachePolicy = NSURLRequest.CachePolicy.returnCacheDataElseLoad
-
-    var trackItems = [SpotifyModel.MediaItem]()
+    let urlRequest = Utility.createStandardURLRequest(url: baseUrl, accessToken: accessToken)
 
     AF.request(urlRequest)
       .validate()
       .responseDecodable(of: PlaylistResponse.self) { response in
-        parseResponse(response)
+
+        let responseStatus = Utility.getResponseStatusCode(forValue: response.value, responseItemsCount: response.value?.playlists.count)
+        guard responseStatus != .empty else { return completionHandler( [SpotifyModel.MediaItem]() ) }
+
+        completionHandler(self.parseResponse(response))
       }
+  }
 
-    func parseResponse(_ response: DataResponse<PlaylistResponse, AFError>) {
+  private func parseResponse(_ response: DataResponse<PlaylistResponse, AFError>) -> [SpotifyModel.MediaItem] {
 
-      guard let data = response.value else {
-        fatalError("Error receiving playlists from API.")
-      }
+    var playlists = [SpotifyModel.MediaItem]()
+    let numberOfPlaylists = response.value!.playlists.count
 
-      let numberOfPlaylists = data.playlists.count
+    for playlistIndex in 0 ..< numberOfPlaylists {
+      let playlist = response.value!.playlists[playlistIndex]
 
-      guard numberOfPlaylists != 0 else {
-        completionHandler(trackItems)
-        print("The API response was corrects but empty. We'll just return []")
-        return
-      }
+      let sectionTitle = response.value!.message
+      let title = playlist.name
+      let imageURL = playlist.images[0].url
+      let id = playlist.id
 
-      for playlistIndex in 0 ..< numberOfPlaylists {
-        let playlist = data.playlists[playlistIndex]
+      let description = playlist.description
+      let playlistTracks = playlist.tracks
+      let mediaOwner = playlist.owner
 
-        let sectionTitle = data.message
-        let title = playlist.name
-        let imageURL = playlist.images[0].url
-        let id = playlist.id
+      let infoAboutTracksInPlaylist = SpotifyModel.PlaylistTracks(numberOfSongs: playlistTracks.total, href: playlistTracks.href)
+      let playlistOwner = SpotifyModel.MediaOwner(displayName: mediaOwner.display_name, id: mediaOwner.id)
+      let playlistDetails = SpotifyModel.PlaylistDetails(description: description,
+                                                         playlistTracks: infoAboutTracksInPlaylist,
+                                                         owner: playlistOwner,
+                                                         id: id)
 
-        let description = playlist.description
-        let playlistTracks = playlist.tracks
-        let mediaOwner = playlist.owner
-
-        let infoAboutTracksInPlaylist = SpotifyModel.PlaylistTracks(numberOfSongs: playlistTracks.total, href: playlistTracks.href)
-        let playlistOwner = SpotifyModel.MediaOwner(displayName: mediaOwner.display_name, id: mediaOwner.id)
-        let playlistDetails = SpotifyModel.PlaylistDetails(description: description,
-                                                           playlistTracks: infoAboutTracksInPlaylist,
-                                                           owner: playlistOwner,
-                                                           id: id)
-
-        let playlistItem = SpotifyModel.MediaItem(title: title,
-                                                  previewURL: sectionTitle ?? "You Might Like",
-                                                  imageURL: imageURL,
-                                                  authorName: [mediaOwner.display_name],
-                                                  mediaType: .playlist,
-                                                  id: id,
-                                                  details: SpotifyModel.DetailTypes.playlists(playlistDetails: playlistDetails))
-        trackItems.append(playlistItem)
-      }
-      completionHandler(trackItems)
+      let playlistItem = SpotifyModel.MediaItem(title: title,
+                                                previewURL: sectionTitle ?? "You Might Like",
+                                                imageURL: imageURL,
+                                                authorName: [mediaOwner.display_name],
+                                                mediaType: .playlist,
+                                                id: id,
+                                                details: SpotifyModel.DetailTypes.playlists(playlistDetails: playlistDetails))
+      playlists.append(playlistItem)
     }
-
+    return playlists
   }
 
 }

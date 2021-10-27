@@ -30,31 +30,23 @@ class APIFetchingArtists {
       baseUrl = "https://api.spotify.com/v1/me/following?type=artist"
     }
 
-    var urlRequest = URLRequest(url: URL(string: baseUrl)!)
-    urlRequest.httpMethod = "GET"
-    urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-    urlRequest.cachePolicy = NSURLRequest.CachePolicy.returnCacheDataElseLoad
+    let urlRequest = Utility.createStandardURLRequest(url: baseUrl, accessToken: accessToken)
 
     switch endPoint {
     case .userFavoriteArtists:
       AF.request(urlRequest)
         .validate()
         .responseDecodable(of: ArtistResponse.self) { response in
-          guard let data = response.value else {
-            fatalError("Error receiving tracks from API.")
-          }
 
-          let numberOfArtists = data.items.count
           var artists = [SpotifyModel.MediaItem]()
 
-          guard numberOfArtists != 0 else {
-            completionHandler(artists)
-            print("The API response was corrects but empty. We'll just return []")
-            return
-          }
+          let responseStatus = Utility.getResponseStatusCode(forValue: response.value, responseItemsCount: response.value?.items.count)
+          guard responseStatus != .empty else { return completionHandler(artists) }
+
+          let numberOfArtists = response.value!.items.count
 
           for artistIndex in 0 ..< numberOfArtists {
-            let artist = data.items[artistIndex]
+            let artist = response.value!.items[artistIndex]
             artists.append(self.parseArtistData(for: artist))
           }
 
@@ -65,21 +57,17 @@ class APIFetchingArtists {
       AF.request(urlRequest)
         .validate()
         .responseDecodable(of: FollowedArtistResponse.self) { response in
-          guard let data = response.value else {
-            fatalError("Error receiving tracks from API.")
-          }
 
-          let numberOfArtists = data.artists.items.count
           var artists = [SpotifyModel.MediaItem]()
 
-          guard numberOfArtists != 0 else {
-            completionHandler(artists)
-            print("The API response was corrects but empty. We'll just return []")
-            return
-          }
+          let responseStatus = Utility.getResponseStatusCode(forValue: response.value,
+                                                             responseItemsCount: response.value?.artists.items.count)
+          guard responseStatus != .empty else { return completionHandler(artists) }
+
+          let numberOfArtists = response.value!.artists.items.count
 
           for artistIndex in 0 ..< numberOfArtists {
-            let artist = data.artists.items[artistIndex]
+            let artist = response.value!.artists.items[artistIndex]
             artists.append(self.parseArtistData(for: artist))
           }
 

@@ -8,8 +8,6 @@
 import Foundation
 import Alamofire
 
-// TODO: Handle empty responses and errors
-
 class HomePageAPICalls: ObservableObject {
 
   private var trackAPI = APIFetchingTracks()

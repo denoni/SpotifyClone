@@ -18,31 +18,26 @@ class SearchPageAPICalls: ObservableObject {
 
       let baseUrl = "https://api.spotify.com/v1/browse/featured-playlists?country=\(country)&limit=\(limit)"
 
-      var urlRequest = URLRequest(url: URL(string: baseUrl)!)
-      urlRequest.httpMethod = "GET"
-      urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-      urlRequest.cachePolicy = NSURLRequest.CachePolicy.returnCacheDataElseLoad
+    let urlRequest = Utility.createStandardURLRequest(url: baseUrl, accessToken: accessToken)
 
       AF.request(urlRequest)
         .validate()
         .responseDecodable(of: PlaylistResponse.self) { response in
-          guard let data = response.value else {
-            fatalError("Error receiving playlists from API.")
-          }
-
-          let numberOfPlaylists = data.playlists.count
 
           var playlists = [SpotifyModel.PlaylistItem]()
 
-          guard numberOfPlaylists != 0 else {
-            fatalError("The API response was corrects but empty. We don't have a way to handle this yet.")
-          }
+          let responseStatus = Utility.getResponseStatusCode(forValue: response.value, responseItemsCount: response.value?.playlists.count)
+          guard responseStatus != .empty else { return completionHandler(playlists) }
+
+          let numberOfPlaylists = response.value!.playlists.count
 
           for index in 0 ..< numberOfPlaylists {
-            let sectionTitle = data.message
-            let name = data.playlists[index].name
-            let imageURL = data.playlists[index].images[0].url
-            let id = data.playlists[index].id
+            let playlist = response.value!.playlists
+
+            let sectionTitle = response.value!.message
+            let name = playlist[index].name
+            let imageURL = playlist[index].images[0].url
+            let id = playlist[index].id
 
             let playlistItem = SpotifyModel.PlaylistItem(sectionTitle: sectionTitle ?? "Playlist",
                                                          name: name,

@@ -134,10 +134,8 @@ class HomeViewModel: ObservableObject {
 
       // MARK: User Favorite Tracks
       case .userFavoriteTracks:
-        api.getTrack(using: .userFavoriteTracks,
-                     with: accessToken,
-                     limit: numberOfItemsInEachLoad,
-                     offset: currentNumberOfLoadedItems) { tracks in
+        api.getTrack(using: .userFavoriteTracks, with: accessToken,
+                     limit: numberOfItemsInEachLoad, offset: currentNumberOfLoadedItems) { tracks in
           trimAndCommunicateResult(section: section, medias: tracks, loadMoreEnabled: true)
         }
 
@@ -151,18 +149,14 @@ class HomeViewModel: ObservableObject {
 
       // MARK: New Releases
       case .newReleases:
-        api.getAlbum(using: .newReleases,
-                     with: accessToken,
-                     limit: numberOfItemsInEachLoad,
+        api.getAlbum(using: .newReleases, with: accessToken, limit: numberOfItemsInEachLoad,
                      offset: currentNumberOfLoadedItems) { albums in
           trimAndCommunicateResult(section: section, medias: albums, loadMoreEnabled: true)
         }
 
       // MARK: Top Podcasts
       case .topPodcasts:
-        api.getShow(using: .topPodcasts,
-                    with: accessToken,
-                    limit: numberOfItemsInEachLoad,
+        api.getShow(using: .topPodcasts, with: accessToken, limit: numberOfItemsInEachLoad,
                     offset: currentNumberOfLoadedItems) { podcasts in
           trimAndCommunicateResult(section: section, medias: podcasts, loadMoreEnabled: true)
         }
@@ -176,10 +170,8 @@ class HomeViewModel: ObservableObject {
       // MARK: Playlist This is X
       case .playlistThisIsX:
         let keyWord = "this is"
-        api.getPlaylist(using: .playlistWithKeyword(keyWord: keyWord),
-                        with: accessToken,
-                        limit: numberOfItemsInEachLoad,
-                        offset: currentNumberOfLoadedItems) { playlists in
+        api.getPlaylist(using: .playlistWithKeyword(keyWord: keyWord), with: accessToken,
+                        limit: numberOfItemsInEachLoad, offset: currentNumberOfLoadedItems) { playlists in
           trimAndCommunicateResult(section: section, medias: playlists, loadMoreEnabled: true)
         }
 

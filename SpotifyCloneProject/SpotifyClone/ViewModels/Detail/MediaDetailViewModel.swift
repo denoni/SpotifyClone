@@ -268,26 +268,29 @@ class MediaDetailViewModel: ObservableObject {
         }
         trimmedMedias.append(trimmedMedia)
       }
+    }
+    return getNonDuplicateMedias(for: trimmedMedias)
+  }
 
-      var noDuplicateMedias = [SpotifyModel.MediaItem]()
+  private func getNonDuplicateMedias(for medias: [SpotifyModel.MediaItem]) -> [SpotifyModel.MediaItem] {
+    var nonDuplicateMedias = [SpotifyModel.MediaItem]()
 
-      for media in trimmedMedias {
-        var containsDuplicate = false
+    for media in medias {
+      var containsDuplicate = false
 
-        if noDuplicateMedias.isEmpty {
-          noDuplicateMedias.append(media)
-        } else {
-          for noDuplicateMedia in noDuplicateMedias {
-            // .lowercased to compare only the letters, ignoring upper/lower case
-            if media.title.lowercased() == noDuplicateMedia.title.lowercased() {
-              containsDuplicate = true
-            }
+      if nonDuplicateMedias.isEmpty {
+        nonDuplicateMedias.append(media)
+      } else {
+        for nonDuplicateMedia in nonDuplicateMedias {
+          // .lowercased to compare only the letters, ignoring upper/lower case
+          if media.title.lowercased() == nonDuplicateMedia.title.lowercased() {
+            containsDuplicate = true
           }
-          if !containsDuplicate { noDuplicateMedias.append(media) }
         }
+        if !containsDuplicate { nonDuplicateMedias.append(media) }
       }
     }
-    return noDuplicateMedias
+    return nonDuplicateMedias
   }
 
 }
