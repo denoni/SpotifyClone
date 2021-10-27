@@ -24,6 +24,12 @@ class MediaDetailViewModel: ObservableObject {
 
   var detailScreenOrigin: DetailScreenOrigin?
   @Published var followedIDs = [String: CurrentFollowingState]()
+  @Published var userLibraryInfo = [UserLibraryInfoSections: Int?]()
+
+  enum UserLibraryInfoSections: CaseIterable {
+    case numberOfLikedSongs
+    case numberOfSavedEpisodes
+  }
 
   enum CurrentFollowingState {
     case isFollowing
@@ -86,10 +92,12 @@ class MediaDetailViewModel: ObservableObject {
 
   func getUserLikedSongsScreenData() {
     MediaDetailAPICalls.UserLikedFollowedMediaAPICalls.getLikedSongs(mediaDetailVM: self)
+    MediaDetailAPICalls.UserLibraryInfoAPICalls.getNumberOfLikedSongs(mediaDetailVM: self)
   }
 
   func getUserSavedEpisodesScreenData() {
     MediaDetailAPICalls.UserLikedFollowedMediaAPICalls.getUserSavedEpisodes(mediaDetailVM: self)
+    MediaDetailAPICalls.UserLibraryInfoAPICalls.getNumberOfSavedEpisodes(mediaDetailVM: self)
   }
 
   // MARK: - API Auxiliary Functions
@@ -101,7 +109,6 @@ class MediaDetailViewModel: ObservableObject {
                                 deleteAlmostDuplicateResults: Bool = false) {
 
     let noDuplicateMedias = getNonDuplicateItems(for: medias, deleteAlmostDuplicateResults: deleteAlmostDuplicateResults)
-
     // If the api got more than `limit` items, return just the elements within the `limit`
     let mediasWithinTheLimit = noDuplicateMedias.count >= limit ? Array(noDuplicateMedias.prefix(limit)) : noDuplicateMedias
 
@@ -188,6 +195,10 @@ class MediaDetailViewModel: ObservableObject {
     cleanSection(MediaDetailSection.ArtistSections.self)
     cleanSection(MediaDetailSection.ArtistBasicInfo.self)
     cleanSection(MediaDetailSection.UserLikedFollowedMedia.self)
+
+    for section in UserLibraryInfoSections.allCases {
+      userLibraryInfo[section] = nil
+    }
   }
 
   private func cleanSection<DetailSection: MediaDetailSectionsProtocol & CaseIterable>(_ section: DetailSection.Type) {
@@ -277,7 +288,6 @@ class MediaDetailViewModel: ObservableObject {
 
     for media in medias {
       var containsDuplicate = false
-
       if nonDuplicateMedias.isEmpty {
         nonDuplicateMedias.append(media)
       } else {

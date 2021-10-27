@@ -16,6 +16,7 @@ class MediaDetailsPageAPICalls: ObservableObject {
   var episodeAPI =  APIFetchingEpisodes()
   var basicInfoAPI = APIFetchingBasicInfo()
   var userInfoAPI = APIFetchingUserInfo()
+  var userLibraryInfoAPI = APIFetchingUserLibraryInfo()
 
   // MARK: - Artist Screen
 
@@ -132,6 +133,16 @@ class MediaDetailsPageAPICalls: ObservableObject {
   func getUserLikedSongs(with accessToken: String,
                          completionHandler: @escaping ([SpotifyModel.MediaItem]) -> Void) {
     trackAPI.getTrack(using: .userLikedTracks, with: accessToken, completionHandler: completionHandler)
+  }
+
+  // MARK: - User Liked/Followed Media
+
+  func getNumberOfLikedSongs(with accessToken: String, completionHandler: @escaping (Int) -> Void) {
+    userLibraryInfoAPI.getNumberOfLikedSongs(with: accessToken, completionHandler: completionHandler)
+  }
+
+  func getNumberOfSavedEpisodes(with accessToken: String, completionHandler: @escaping (Int) -> Void) {
+    userLibraryInfoAPI.getNumberOfSavedEpisodes(with: accessToken, completionHandler: completionHandler)
   }
 
 }

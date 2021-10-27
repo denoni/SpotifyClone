@@ -13,7 +13,7 @@ enum MediaDetailSection: Hashable {
   case album(_ albumSection: AlbumSections)
   case shows(_ showSection: ShowsSections)
   case episodes(_ episodeSection: EpisodeSections)
-  case artistBasicInfo(_ basicSection: ArtistBasicInfo)
+  case artistBasicInfo(_ artistBasicSection: ArtistBasicInfo)
   case userLikedFollowedMedia(_ userLikedFollowedMedia: UserLikedFollowedMedia)
 
   enum ArtistSections: CaseIterable, MediaDetailSectionsProtocol {

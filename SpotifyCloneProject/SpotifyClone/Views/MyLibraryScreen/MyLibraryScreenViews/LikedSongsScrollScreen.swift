@@ -44,11 +44,17 @@ struct LikedSongsDetailContent: View {
       Text("Liked Songs")
         .spotifyTitle()
         .padding(.top, topSafeAreaSize + 60)
-      Text("30 songs") // TODO: Add real data
-        .font(.avenir(.medium, size: Constants.fontSmall))
-        .opacity(Constants.opacityStandard)
 
-      if mediaDetailVM.isLoading[.userLikedFollowedMedia(.userLikedSongs)]! == false {
+      if mediaDetailVM.isLoading[.userLikedFollowedMedia(.userLikedSongs)]! == false
+          && mediaDetailVM.userLibraryInfo[.numberOfLikedSongs] != nil {
+
+        Group {
+          let numberOfLikedSongs = mediaDetailVM.userLibraryInfo[.numberOfLikedSongs]!
+          Text("\(numberOfLikedSongs!) songs")
+            .font(.avenir(.medium, size: Constants.fontSmall))
+            .opacity(Constants.opacityStandard)
+        }
+
         TracksPreviewVerticalScrollView()
       } else {
         HStack {

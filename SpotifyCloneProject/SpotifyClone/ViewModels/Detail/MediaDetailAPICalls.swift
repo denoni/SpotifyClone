@@ -70,7 +70,7 @@ struct MediaDetailAPICalls {
       mediaDetailVM.api.getTracksFromAlbum(with: mediaDetailVM.accessToken!,
                                            albumID: SpotifyModel.getAlbumDetails(for: mediaDetailVM.mainItem!).id,
                                            offset: offset) { tracks in
-
+        
         mediaDetailVM.trimAndCommunicateResult(medias: tracks, section: .album(.tracksFromAlbum),
                                                loadMoreEnabled: loadMoreEnabled)
       }
@@ -185,6 +185,20 @@ struct MediaDetailAPICalls {
         mediaDetailVM.trimAndCommunicateResult(medias: episodes,
                                                section: .userLikedFollowedMedia(.userSavedEpisodes),
                                                loadMoreEnabled: true)
+      }
+    }
+  }
+
+  struct UserLibraryInfoAPICalls {
+    static func getNumberOfLikedSongs(mediaDetailVM: MediaDetailViewModel) {
+      mediaDetailVM.api.userLibraryInfoAPI.getNumberOfLikedSongs(with: mediaDetailVM.accessToken!) { response in
+        mediaDetailVM.userLibraryInfo[.numberOfLikedSongs] = response
+      }
+    }
+
+    static func getNumberOfSavedEpisodes(mediaDetailVM: MediaDetailViewModel) {
+      mediaDetailVM.api.userLibraryInfoAPI.getNumberOfSavedEpisodes(with: mediaDetailVM.accessToken!) { response in
+        mediaDetailVM.userLibraryInfo[.numberOfSavedEpisodes] = response
       }
     }
   }

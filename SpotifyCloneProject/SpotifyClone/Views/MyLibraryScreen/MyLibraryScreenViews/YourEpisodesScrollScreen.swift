@@ -45,12 +45,18 @@ struct YourEpisodesDetailContent: View {
     VStack(alignment: .leading, spacing: Constants.spacingMedium) {
       Text("Your Episodes")
         .spotifyTitle()
-        .padding(.top, topSafeAreaSize + 60)
-      Text("10 episodes") // TODO: Add real data
-        .font(.avenir(.medium, size: Constants.fontSmall))
-        .opacity(Constants.opacityStandard)
+        .padding(.top, topSafeAreaSize + 60)      
 
-      if mediaDetailVM.isLoading[.userLikedFollowedMedia(.userSavedEpisodes)]! == false {
+      if mediaDetailVM.isLoading[.userLikedFollowedMedia(.userSavedEpisodes)]! == false
+          && mediaDetailVM.userLibraryInfo[.numberOfSavedEpisodes] != nil {
+
+        Group {
+          let numberOfSavedEpisodes = mediaDetailVM.userLibraryInfo[.numberOfSavedEpisodes]!
+          Text("\(numberOfSavedEpisodes!) episodes")
+            .font(.avenir(.medium, size: Constants.fontSmall))
+            .opacity(Constants.opacityStandard)
+        }
+
         LazyVStack {
           ForEach(medias) { media in
             Group {
