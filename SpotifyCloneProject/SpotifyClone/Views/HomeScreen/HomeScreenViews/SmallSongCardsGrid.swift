@@ -14,8 +14,7 @@ struct SmallSongCardsGrid: View {
   var body: some View {
     VStack(spacing: Constants.spacingSmall) {
       HStack {
-        // TODO: Change based on user time
-        Text("Good Evening")
+        Text(Utility.getGreetingForCurrentTime())
           .spotifyTitle()
         Image("settings")
           .resizeToFit()

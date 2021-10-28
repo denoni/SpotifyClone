@@ -24,10 +24,14 @@ struct ArtistTracks: View {
               .font(.avenir(.medium, size: Constants.fontSmall))
               .lineLimit(1)
               .padding(.trailing, Constants.paddingLarge)
-            Text("Single • 2020") // TODO: Show real data
-              .font(.avenir(.medium, size: Constants.fontXSmall))
-              .opacity(Constants.opacityHigh)
-              .lineLimit(1)
+            Group {
+              let releaseDate = SpotifyModel.getTrackDetails(for: media).album?.releaseDate
+              let spelledOutDate = releaseDate != nil ? Utility.getSpelledOutDate(from: releaseDate!) : "Track"
+              Text("Single • \(spelledOutDate.isEmpty == false ? spelledOutDate : "Track")")
+                .font(.avenir(.medium, size: Constants.fontXSmall))
+                .opacity(Constants.opacityHigh)
+                .lineLimit(1)
+            }
           }
           Spacer()
         }

@@ -45,7 +45,7 @@ struct YourEpisodesDetailContent: View {
     VStack(alignment: .leading, spacing: Constants.spacingMedium) {
       Text("Your Episodes")
         .spotifyTitle()
-        .padding(.top, topSafeAreaSize + 60)      
+        .padding(.top, topSafeAreaSize + 60)
 
       if mediaDetailVM.isLoading[.userLikedFollowedMedia(.userSavedEpisodes)]! == false
           && mediaDetailVM.userLibraryInfo[.numberOfSavedEpisodes] != nil {

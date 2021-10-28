@@ -73,7 +73,6 @@ struct MediaDetailAPICalls {
       mediaDetailVM.api.getTracksFromAlbum(with: mediaDetailVM.accessToken!,
                                            albumID: SpotifyModel.getAlbumDetails(for: mediaDetailVM.mainItem!).id,
                                            offset: offset) { tracks in
-        
         mediaDetailVM.trimAndCommunicateResult(medias: tracks, section: .album(.tracksFromAlbum),
                                                loadMoreEnabled: loadMoreEnabled)
       }

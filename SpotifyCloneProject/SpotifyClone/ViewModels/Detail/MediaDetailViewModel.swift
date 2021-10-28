@@ -264,7 +264,6 @@ class MediaDetailViewModel: ObservableObject {
     } else {
 
       for media in medias {
-        print(media.title)
         var trimmedMedia = media
 
         if media.title.contains("(") {

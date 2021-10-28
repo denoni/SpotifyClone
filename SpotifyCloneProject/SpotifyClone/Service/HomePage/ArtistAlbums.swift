@@ -20,10 +20,15 @@ struct ArtistAlbums: View {
               .font(.avenir(.medium, size: Constants.fontSmall))
               .lineLimit(1)
               .padding(.trailing, Constants.paddingLarge)
-            Text("Album • 2020") // TODO: Add real data
-              .font(.avenir(.medium, size: Constants.fontXSmall))
-              .lineLimit(1)
-              .opacity(Constants.opacityHigh)
+            Group {
+              let releaseDate = Utility.getSpelledOutDate(from: SpotifyModel.getAlbumDetails(for: media).releaseDate,
+                                                          onlyYear: true)
+              let numberOfTracks = "\(SpotifyModel.getAlbumDetails(for: media).numberOfTracks) tracks"
+              Text("Album • \(releaseDate != "" ? releaseDate : numberOfTracks)")
+                .font(.avenir(.medium, size: Constants.fontXSmall))
+                .lineLimit(1)
+                .opacity(Constants.opacityHigh)
+            }
           }
           Spacer()
         }

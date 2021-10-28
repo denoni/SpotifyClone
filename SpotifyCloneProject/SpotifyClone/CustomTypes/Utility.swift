@@ -59,12 +59,16 @@ struct Utility {
   }
 
   // MARK: - Data formatter
-  static func getSpelledOutDate(from dateString: String) -> String {
+  static func getSpelledOutDate(from dateString: String, onlyYear: Bool = false) -> String {
     let formatter = DateFormatter()
 
     formatter.dateFormat = "yyyy-MM-dd"
     guard let releaseDate = formatter.date(from: dateString) else {
       return ""
+    }
+
+    guard onlyYear == false else {
+      return String(Calendar.current.component(.year, from: releaseDate))
     }
 
     // Checks if the date is today/yesterday or not
@@ -85,6 +89,16 @@ struct Utility {
     formatter.timeStyle = .none
 
     return formatter.string(from: releaseDate)
+  }
+
+  // MARK: - Right greeting for the current user time
+
+  static func getGreetingForCurrentTime() -> String {
+    let hour = Calendar.current.component(.hour, from: Date())
+
+    if 5 <= hour && hour <= 12 { return "Good Morning" }
+    if 12 <= hour && hour <= 18 { return "Good Afternoon" }
+    return "Good Evening"
   }
 
   // MARK: - Media Detail Utility
