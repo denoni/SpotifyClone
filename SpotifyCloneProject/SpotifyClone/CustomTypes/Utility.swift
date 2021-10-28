@@ -96,7 +96,7 @@ struct Utility {
   static func getGreetingForCurrentTime() -> String {
     let hour = Calendar.current.component(.hour, from: Date())
 
-    if 5 <= hour && hour <= 12 { return "Good Morning" }
+    if 5 <= hour && hour <= 11 { return "Good Morning" }
     if 12 <= hour && hour <= 18 { return "Good Afternoon" }
     return "Good Evening"
   }
