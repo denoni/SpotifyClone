@@ -19,6 +19,23 @@ I hope you enjoy the app. Feel free to hit me up! <br>
 ![Screen Shot 2021-10-11 at 12 00 11 PM](https://user-images.githubusercontent.com/62707916/136813737-86d94816-901d-435f-9811-a3febb308024.png) | ![Screen Shot 2021-10-11 at 12 01 16 PM](https://user-images.githubusercontent.com/62707916/136813754-be65c94e-8c5e-4f47-b868-9bc861e8508e.png) | ![Screen Shot 2021-10-11 at 11 59 43 AM](https://user-images.githubusercontent.com/62707916/136813855-1a6a621d-96b9-45c3-b046-bc55c2eea414.png) | ![Screen Shot 2021-10-11 at 12 01 01 PM](https://user-images.githubusercontent.com/62707916/136819824-dfe87231-459f-42e3-a356-133b8503d6d2.png)
 
 <br> <br>
+<br> <br>
+
+# How to set up (>5 min)
+
+1. Fork this project and `git clone ...`
+2. Create/login with your Spotify Account in the [Spotify for Developers](https://developer.spotify.com) website.
+3. Go to [dashboard](https://developer.spotify.com/dashboard/applications) and select '**Create an app**'.
+4. Give the name and description that you want and in the dashboard select the app that you've just created.
+5. Go to your local clone of the project in your machine and open '**YourSensitiveData.swift**' (./SpotifyClone/SpotifyCloneProject/YourSensitiveData).
+6. Back in your application page of the dashboard, copy the '**Client ID**' and '**Client Secret**' and paste them in '**YourSensitiveData.swift**'.
+7. Again in the dashboard select '**Users and access**' an then click in '**Add new user**'*(if you try to log-in into an account in the app without adding it here, your app will crash with error 403 because Spotify's API doesn't allow that)*. 
+8. **Great! Now you just need to run the app!**
+
+If you have any problem, feel free to contact me on [github](https://github.com/gabrieldenoni)
+
+<br> <br>
+<br> <br>
 
 ## Concepts & Technologies Used
  - Swift
@@ -27,15 +44,16 @@ I hope you enjoy the app. Feel free to hit me up! <br>
  - AVFoundation to play and control audio
  - Combine *(minor use)*
  - SwiftUI
+ - XCode Instruments
+ - Memory Management and Cache Cleaning
  - Grand Central Dispatch
  - Dependency Injection
  - CocoaPods
 
-
- 
  **External Dependencies:**
  - Alamofire
  - Introspect *(really small use)*
+ - SwiftLint
 
 
 <br> <br>
@@ -83,15 +101,19 @@ I hope you enjoy the app. Feel free to hit me up! <br>
 ² The viewmodel for when the user just opened the SearchScreen, it's similar to a discover screen.
 
 
-## To be done
+## Things to do/improve
   
-- [ ] Better performance by cleaning up cache
-- [ ] MyLibraryScreen
-- [ ] Make the follow and like buttons work
-- [ ] XCode Instruments and LLDB to find memory leaks
+- [ ] Use protocols to reduce code duplication.
+- [ ] Add more animations(like, follow, navigation, etc)
 - [ ] Play playlists(one song after another)
+- [ ] Use navigation link for navigation
+- [ ] Save that the user is already logged
 - [ ] Unit testing
-- [ ] Add a simple diagram of the project architecture in the README
+- [ ] Solve animation hitches when scrolling in the playlist tracks.
+- [ ] Better code architecture
+- [ ] Make the currently playing track bottom bar work
+- [ ] Make the three dots work to open more options
+
 
 <br> <br> <br>
   
