@@ -104,15 +104,15 @@ If you have any problem, feel free to contact me on [github](https://github.com/
 ## Things to do/improve
   
 - [ ] Use protocols to reduce code duplication.
-- [ ] Add more animations(like, follow, navigation, etc)
-- [ ] Play playlists(one song after another)
-- [ ] Use navigation link for navigation
-- [ ] Save that the user is already logged
-- [ ] Unit testing
+- [ ] Add more animations(like, follow, navigation, etc).
+- [ ] Play playlists(one song after another).
+- [ ] Use navigation link for navigation.
+- [ ] Save that the user is already logged.
+- [ ] Unit testing.
 - [ ] Solve animation hitches when scrolling in the playlist tracks.
-- [ ] Better code architecture
-- [ ] Make the currently playing track bottom bar work
-- [ ] Make the three dots work to open more options
+- [ ] Better project architecture.
+- [ ] Make the currently playing track bottom bar work.
+- [ ] Make the three dots work to open more options.
 
 
 <br> <br> <br>
