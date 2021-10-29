@@ -21,7 +21,7 @@ struct MyLibraryTopBar: View {
             .resizeToFit()
             .padding(8)
             .opacity(Constants.opacityLow)
-          Image(systemName: "plus") // TODO: Use the real icon from Spotify
+          Image("plus")
             .resizeToFit()
             .padding(8)
             .opacity(Constants.opacityLow)
