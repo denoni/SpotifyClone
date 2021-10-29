@@ -1,11 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "Spotify_Logo_RGB_White.png",
+      "filename" : "spotify-full-logo.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "spotify-full-logo2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
