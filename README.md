@@ -30,7 +30,8 @@ I hope you enjoy the app. Feel free to hit me up! <br>
 5. Go to your local clone of the project in your machine and open '**YourSensitiveData.swift**' (./SpotifyClone/SpotifyCloneProject/YourSensitiveData).
 6. Back in your application page of the dashboard, copy the '**Client ID**' and '**Client Secret**' and paste them in '**YourSensitiveData.swift**'.
 7. Again in the dashboard select '**Users and access**' an then click in '**Add new user**'*(if you try to log-in into an account in the app without adding it here, your app will crash with error 403 because Spotify's API doesn't allow that)*. 
-8. **Great! Now you just need to run the app!**
+8. In the dashboard select 'EDIT SETTINGS', in the field `redirect_uri` paste `https://www.github.com` (can be any website, but needs to match the `redirect_uri` set in `AuthViewModel.swift`, that by default was set to `https://www.github.com`)
+9. **Great! Now you just need to run the app!**
 
 If you have any problem, feel free to contact me on [github](https://github.com/gabrieldenoni)
 
