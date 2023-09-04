@@ -12,7 +12,6 @@ import SwiftUI
 struct BottomBar: View {
   @StateObject var mainVM: MainViewModel
   @StateObject var audioManager = RemoteAudio()
-  //private var medias: SpotifyModel.MediaItem]
   var showMediaPlayer = false
   var mediaDetailVM: MediaDetailViewModel
 
@@ -20,10 +19,10 @@ struct BottomBar: View {
     VStack(spacing: 0) {
       Spacer()
       Group {
+        // If there is a selected media object, show the player
         if showMediaPlayer && mediaDetailVM.mainItem != nil {
           BottomMediaPlayerBar(songName: mediaDetailVM.mainItem!.title,
                                artist: mediaDetailVM.mainItem!.authorName,
-                               //cover: Image(mediaDetailVM.mainItem!.imageURL))
                                cover: SmallMediaCover(imageURL: mediaDetailVM.mainItem!.imageURL),
                                audioManager: audioManager,
                                id: mediaDetailVM.mainItem!.id,
@@ -56,8 +55,6 @@ private struct BottomMediaPlayerBar: View {
         HStack {
           HStack {
             cover
-              //.resizeToFit()
-              //.scaledToFit()
               .frame(width: 50, height: 50)
             VStack(alignment: .leading) {
               Text(songName).font(.avenir(.medium, size: Constants.fontSmall))
