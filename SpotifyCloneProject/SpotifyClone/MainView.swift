@@ -45,7 +45,7 @@ struct MainView: View {
             .environmentObject(myLibraryVM)
             .environmentObject(mediaDetailVM)
         }
-        BottomBar(mainVM: mainVM, showMediaPlayer: mainVM.showBottomMediaPlayer)
+        BottomBar(mainVM: mainVM, showMediaPlayer: mainVM.showBottomMediaPlayer, mediaDetailVM: mediaDetailVM)
       }
       .onAppear { mainVM.getCurrentUserInfo() }
       .onChange(of: mainVM.currentPage) { _ in cleanAllPages() }

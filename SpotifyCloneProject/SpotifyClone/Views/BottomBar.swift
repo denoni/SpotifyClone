@@ -11,16 +11,22 @@ import SwiftUI
 
 struct BottomBar: View {
   @StateObject var mainVM: MainViewModel
+  @StateObject var audioManager = RemoteAudio()
   var showMediaPlayer = false
+  var mediaDetailVM: MediaDetailViewModel
 
   var body: some View {
     VStack(spacing: 0) {
       Spacer()
       Group {
-        if showMediaPlayer {
-          BottomMediaPlayerBar(songName: "Nothing But The Beat",
-                               artist: "Ed Sheeran",
-                               cover: Image("nothing-but-the-beat-cover"))
+        // If there is a selected media object, show the player
+        if showMediaPlayer && mediaDetailVM.mainItem != nil {
+          BottomMediaPlayerBar(songName: mediaDetailVM.mainItem!.title,
+                               artist: mediaDetailVM.mainItem!.authorName,
+                               cover: SmallMediaCover(imageURL: mediaDetailVM.mainItem!.imageURL),
+                               audioManager: audioManager,
+                               id: mediaDetailVM.mainItem!.id,
+                               previewURl: mediaDetailVM.mainItem!.previewURL)
         }
         BottomNavigationBar(mainVM: mainVM)
       }
@@ -32,8 +38,13 @@ struct BottomBar: View {
 
 private struct BottomMediaPlayerBar: View {
   var songName: String
-  var artist: String
-  var cover: Image
+  var artist: [String]
+  var cover: SmallMediaCover
+  @StateObject var audioManager: RemoteAudio
+  let id: String
+  let previewURl: String
+
+  var isPlaying: Bool { audioManager.showPauseButton && audioManager.lastItemPlayedID == id }
 
   var body: some View {
     ZStack {
@@ -44,12 +55,11 @@ private struct BottomMediaPlayerBar: View {
         HStack {
           HStack {
             cover
-              .resizeToFit()
-              .frame(width: 60)
+              .frame(width: 50, height: 50)
             VStack(alignment: .leading) {
               Text(songName).font(.avenir(.medium, size: Constants.fontSmall))
                 .frame(maxWidth: .infinity, alignment: .topLeading)
-              Text(artist).font(.avenir(.medium, size: Constants.fontXSmall))
+              Text(artist.joined(separator: ", ")).font(.avenir(.medium, size: Constants.fontXSmall))
                 .frame(maxWidth: .infinity, alignment: .topLeading)
                 .opacity(Constants.opacityStandard)
             }
@@ -61,10 +71,30 @@ private struct BottomMediaPlayerBar: View {
               .resizeToFit()
               .frame(width: 25, height: 25)
               .opacity(Constants.opacityStandard)
-            Image("play")
+            if audioManager.showPauseButton && !audioManager.lastPlayedURL.isEmpty {
+              Image("stop")
+                .resizeToFit()
+                .frame(width: 25, height: 25)
+                .padding(.trailing, Constants.paddingStandard)
+                .onTapGesture {
+                  if isPlaying {
+                    audioManager.pause()
+                  }
+                }
+            } else {
+              Image("play")
               .resizeToFit()
               .frame(width: 25, height: 25)
               .padding(.trailing, Constants.paddingStandard)
+              .onTapGesture {
+                if isPlaying {
+                  audioManager.pause()
+                } else {
+                  audioManager.pause()
+                  audioManager.play(previewURl, audioID: id)
+                }
+              }
+            }
           }
         }
         .frame(height: 60)

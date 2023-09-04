@@ -135,7 +135,7 @@ struct ShowsDetailScreen_Previews: PreviewProvider {
                         mediaDetailVM: MediaDetailViewModel(mainVM: mainVM))
       VStack {
         Spacer()
-        BottomBar(mainVM: mainVM, showMediaPlayer: true)
+        BottomBar(mainVM: mainVM, showMediaPlayer: true, mediaDetailVM: MediaDetailViewModel(mainVM: mainVM))
       }
     }
   }

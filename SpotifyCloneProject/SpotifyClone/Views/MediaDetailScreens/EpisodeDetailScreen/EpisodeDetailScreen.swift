@@ -159,7 +159,7 @@ struct EpisodeDetailScreen_Previews: PreviewProvider {
       VStack {
         Spacer()
         BottomBar(mainVM: mainVM,
-                  showMediaPlayer: true)
+                  showMediaPlayer: true, mediaDetailVM: MediaDetailViewModel(mainVM: mainVM))
       }
     }
   }
