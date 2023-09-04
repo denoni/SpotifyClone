@@ -31,7 +31,7 @@ struct ActiveSearchingScreen: View {
           .onChange(of: searchInput) { _ in
             activeSearchVM.search(for: searchInput)
           }
-        BottomBar(mainVM: mediaDetailVM.mainVM)
+        BottomBar(mainVM: mediaDetailVM.mainVM, mediaDetailVM: mediaDetailVM)
       }
     }
   }
@@ -41,9 +41,10 @@ struct ActiveSearchingScreen: View {
 
 struct ActiveSearchingScreen_Previews: PreviewProvider {
   static var previews: some View {
+
     ZStack {
       ActiveSearchingScreen()
-      BottomBar(mainVM: MainViewModel())
+      BottomBar(mainVM: MainViewModel(), mediaDetailVM: MediaDetailViewModel(mainVM: MainViewModel()))
     }
   }
 }
